@@ -27,7 +27,7 @@ What we plan to run on this card, in rough order — status updates as they're m
 |---|---|---|---|---|
 | 1 | Qwen3.5-4B / 9B MTP Q4_K_M | chat · coding · tools | unsloth MTP GGUFs, pinned revisions | ✅ [tested](#tested-so-far) · registry-validated |
 | 2 | Ternary Bonsai-2 27B (PTQ1_0 / PQ2_0) + MTP drafters | ternary 27B experiment | on NVMe | 🧪 queued |
-| 3 | low-bpw 27B MoE cram (IQ2_XS-class) | what a 27B costs on 8 GB | on archive drive | 🧪 queued |
+| 3 | Qwen3.8-27B dense, IQ2_XS ≈2.5 bpw cram (7.9 GB file on archive) | what a 27B costs on 8 GB — prior Windows-lab runs were ~5.4–6.9 tok/s | on archive drive | 🧪 queued |
 | 4 | Gemma 4 E4B QAT + matching MTP drafter | edge-class agentic | needs download (~4 GB) | 🧪 queued |
 | 5 | OCR/vision: Q8/Q4 OCR models + mmproj adapters | document OCR | on archive drive | 🧪 queued |
 | 6 | Qwen2.5-Coder 7B Instruct Q4_K_M | code-specific legacy retest | in HF cache backup | 📋 backlog |
