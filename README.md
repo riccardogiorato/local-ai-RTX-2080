@@ -21,21 +21,27 @@ acceptance contract); that pipeline is one downstream of this lab, not its purpo
 
 ## Test queue
 
-What we plan to run on this card, in rough order — status updates as they're measured:
+What we plan to run on this card, in order — status updates as they're measured. Everything not
+listed here is parked with reasons in [NEXT-IDEAS.md](NEXT-IDEAS.md).
 
 | # | Model / variant | Class | Weights | Status |
 |---|---|---|---|---|
 | 1 | Qwen3.5-4B / 9B MTP Q4_K_M | chat · coding · tools | unsloth MTP GGUFs, pinned revisions | ✅ [tested](#tested-so-far) · registry-validated |
-| 2 | Ternary Bonsai-2 27B (PTQ1_0 / PQ2_0) + MTP drafters | ternary 27B experiment | on NVMe | 🧪 queued |
-| 3 | Qwen3.8-27B dense, IQ2_XS ≈2.5 bpw cram (7.9 GB file on archive) | what a 27B costs on 8 GB — prior Windows-lab runs were ~5.4–6.9 tok/s | on archive drive | 🧪 queued |
-| 4 | Gemma 4 E4B QAT + matching MTP drafter | edge-class agentic | needs download (~4 GB) | 🧪 queued |
-| 5 | OCR/vision: Q8/Q4 OCR models + mmproj adapters | document OCR | on archive drive | 🧪 queued |
-| 6 | Qwen2.5-Coder 7B Instruct Q4_K_M | code-specific legacy retest | in HF cache backup | 📋 backlog |
-| 7 | MiniCPM5-2B DSpark | tiny-class sanity | in HF cache backup | 📋 backlog |
+| 2 | Qwen3.8-27B dense, IQ2_XS ≈2.5 bpw cram (7.9 GB GSQ-RCO on archive; embedded-MTP Draw-Things profile as control) | what a 27B costs on 8 GB — prior Windows-lab: ~5.4–6.9 tok/s | on archive drive | 🔨 testing |
+| 3 | ThinkingCap-Qwen3.8-27B (thinking-verbosity finetune, self-MTP) — f16 GGUF → self-quantized IQ2_XS-class | 27B smartes-and-quieter cram | 54.7 GB f16 (gated) → ~8.4 GB quant | 🔨 testing |
+| 4 | GLM-OCR Q4_K_M + mmproj Q8_0 (the [local-ocr](https://github.com/riccardogiorato/local-ocr) stack, ported to Linux docker) | document OCR, vision | on archive drive | 🧪 queued |
+| 5 | Gemma 4 E4B QAT + matching MTP drafter (~4 GB) | edge-class agentic — prior Windows-lab: ~145 tok/s MTP d2 | needs download | 🧪 queued |
+| 6 | MiMo-V2.6-Distill-Qwen-9B (Qwen3.5-9B finetune, MIT) | agentic distill vs our 9B baseline | needs download (Q4_K_M) | 🧪 queued |
+| 7 | kev-0.5b ([jaredpalmer/kev](https://github.com/jaredpalmer/kev)) — decision model, Python runtime, CUDA untested upstream | typed-decision, single forward pass | needs download | 🧪 queued |
+| 8 | laya (convaiinnovations, 421M) — non-autoregressive multilingual decision model | typed-decision, `pip install laya` | needs download | 🧪 queued |
 
 New candidates get added here before they're downloaded; each becomes a `recipes/` file the day
 it runs. Retests of retired entries also live in the queue — engines move fast and a "won't fit"
 from three months ago is worth re-measuring.
+
+**Storage rotation:** the SSD is a workbench, not an archive. Once a model is tested and its
+recipe + evidence are committed, its weights move off the SSD to the archive drive (HDD) —
+recorded in the recipe — so the workbench never fills up.
 
 ## Tested so far
 
