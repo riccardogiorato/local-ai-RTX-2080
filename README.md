@@ -1,151 +1,110 @@
-# Qwen3.5 4B / 9B MTP on llama.cpp for the RTX 2080 8 GB
+# RTX 2080 Local AI Lab — every model tested on one 8 GB Turing card
 
-![llama.cpp](https://img.shields.io/badge/llama.cpp-b11118-blue) ![model](https://img.shields.io/badge/model-Qwen3.5--4B%20%2F%209B%20Q4__K__M-informational) ![arch](https://img.shields.io/badge/GPU-TU104%20%C2%B7%208%20GB-lightgrey)
+![GPU](https://img.shields.io/badge/GPU-TU104%20%C2%B7%208%20GB%20%C2%B7%20448%20GB%2Fs-lightgrey) ![method](https://img.shields.io/badge/measurements-reproducible-blue) ![status](https://img.shields.io/badge/recipes-docker%20digest--pinned-informational)
 
-Every number in this repo was measured on this exact card — no ports from other GPUs, no vendor
-specs, no unbenched claims. Both recipes are **validated** in
-[0xsero/local-ai-registry](https://github.com/0xSero/local-ai-registry) (`rtx-2080-8gb`, the first
-Turing card there) and re-derived here with the lab context ceilings the registry contract does
-not carry. Raw JSONL for every run is in [`evidence/`](evidence/); the fixed benchmark prompt is
-[`prompts/code-continuation.txt`](prompts/code-continuation.txt).
+An archive of local LLM experiments on a single known GPU: for every model we try, this repo
+records **the model variant, the exact OpenWeights source and revision, the runtime and its
+version, the launch settings (context, KV cache, sampler, speculative/decoding options), the
+measured results, raw evidence, and a copy-paste command that reproduces it.** Failures and
+resource boundaries are recorded with the same care as wins — the OOM map of an 8 GB card is
+half the value.
 
-> **Rule of thumb:** treat decode deltas < 15% between unaligned prompt classes as noise.
-> On this card decode speed is dominated by MTP draft acceptance (1.00 on repetitive
-> continuation, 0.5–0.75 on novel prose), so compare only on the same prompt file. See
-> [notes/findings-2026-09-23.md](notes/findings-2026-09-23.md).
+Public benchmarks chase new flagships on 24 GB+ cards. This ledger answers the opposite
+question: **what can a 2018 Turing card actually run, today, with current runtimes — and where
+does each model stop?** Some results promote into
+[0xsero/local-ai-registry](https://github.com/0xsero/local-ai-registry) (recipes that pass its
+acceptance contract); that pipeline is one downstream of this lab, not its purpose.
 
-## Requirements
+> Method rules live in [hardware.md](hardware.md). Short version: server-reported rates only,
+> ranges over repeated runs (no best-of), speeds compared only on the same prompt file, thinking
+> off by default. Treat decode deltas < 15% across different prompt classes as noise.
+
+## Test queue
+
+What we plan to run on this card, in rough order — status updates as they're measured:
+
+| # | Model / variant | Class | Weights | Status |
+|---|---|---|---|---|
+| 1 | Qwen3.5-4B / 9B MTP Q4_K_M | chat · coding · tools | unsloth MTP GGUFs, pinned revisions | ✅ [tested](#tested-so-far) · registry-validated |
+| 2 | Ternary Bonsai-2 27B (PTQ1_0 / PQ2_0) + MTP drafters | ternary 27B experiment | on NVMe | 🧪 queued |
+| 3 | low-bpw 27B MoE cram (IQ2_XS-class) | what a 27B costs on 8 GB | on archive drive | 🧪 queued |
+| 4 | Gemma 4 E4B QAT + matching MTP drafter | edge-class agentic | needs download (~4 GB) | 🧪 queued |
+| 5 | OCR/vision: Q8/Q4 OCR models + mmproj adapters | document OCR | on archive drive | 🧪 queued |
+| 6 | Qwen2.5-Coder 7B Instruct Q4_K_M | code-specific legacy retest | in HF cache backup | 📋 backlog |
+| 7 | MiniCPM5-2B DSpark | tiny-class sanity | in HF cache backup | 📋 backlog |
+
+New candidates get added here before they're downloaded; each becomes a `recipes/` file the day
+it runs. Retests of retired entries also live in the queue — engines move fast and a "won't fit"
+from three months ago is worth re-measuring.
+
+## Tested so far
+
+| Recipe | Runtime | Context | Decode (short-fill) | Prefill | Status |
+|---|---|---|---|---|---|
+| [recipes/qwen35-4b-mtp-q4km-llamacpp.md](recipes/qwen35-4b-mtp-q4km-llamacpp.md) | llama.cpp (docker) | up to 128K | ~182 tok/s | ~2.3K tok/s | ✅ registry-validated · recommended |
+| [recipes/qwen35-9b-mtp-q4km-llamacpp.md](recipes/qwen35-9b-mtp-q4km-llamacpp.md) | llama.cpp (docker) | up to 64K (q4_0 KV) | ~124 tok/s | ~1.6K tok/s | ✅ registry-validated · alternate |
+
+Every recipe file records: the exact OpenWeights artifact (repository, revision, SHA-256), the
+runtime image digest, full launch settings (context size, KV precision, batch/ubatch, sampler
+constraints, speculative decoding), measured decode/prefill/TTFT/VRAM at each configuration,
+capability probe results, and raw evidence links.
+
+## Why the details matter to someone with a different card
+
+- **Reproduction is exact.** Pinned revisions + digest-pinned images + literal command = same
+  compute for anyone, anywhere. Nothing is measured against a moving target.
+- **Boundaries generalize better than speeds.** The context ceilings, OOM maps, and
+  KV-precision trade-offs on a known GPU inform every 8 GB card; raw tok/s only transfers to
+  your clock speeds.
+- **Honest attribution.** When a number moves, the repo records *why* — prompt class, engine
+  build, thinking mode — not just the delta. See
+  [notes/findings-2026-09-23.md](notes/findings-2026-09-23.md) for worked examples.
+
+## Requirements (per recipe, checked before any run)
 
 | Component | Detail |
 |---|---|
 | Hardware | NVIDIA GeForce RTX 2080 — TU104, Turing SM75, 8 GB GDDR6, 448 GB/s ([fingerprint](hardware.md)) |
-| Host | Any Linux with Docker; host RAM ≥ 16 GB is enough (peak host usage is the mmap'd weights) |
-| Docker | NVIDIA Container Toolkit installed, GPU passthrough working (`nvidia-smi` visible in a container) |
-| Model files | `Qwen3.5-{4B,9B}-Q4_K_M.gguf` from the pinned revisions in the recipe — SHA-256 verified before load |
-| Engine image | `ghcr.io/ggml-org/llama.cpp:server-cuda12-b11118@sha256:bfb3264f…f7bbced3` (digest-pinned) |
+| Host | Linux with Docker; host RAM ≥ 16 GB is sufficient (weights are mmap'd) |
+| Docker | NVIDIA Container Toolkit, GPU passthrough verified in a container |
+| Model files | Pinned OpenWeights revisions, SHA-256 verified before load |
+| Runtime image | Digest-pinned per recipe (engine images vary by recipe — never a mutable tag) |
 | CLI tools | `docker`, `curl` |
-| Hugging Face token | `HF_TOKEN` in `~/.bashrc` for rate limits — the pinned revisions are public, so it is optional |
-
-## Quick start (9B, 64K context — what we run on this box daily)
-
-```bash
-# 1. fetch the exact pinned artifact and verify it (must print e8dd94817e95…232841fe)
-hf download unsloth/Qwen3.5-9B-MTP-GGUF Qwen3.5-9B-Q4_K_M.gguf \
-   --revision 9716a636ee4bddc3fed678220b7a33dd2a4160ae --local-dir ~/models/qwen35-9b-mtp
-sha256sum ~/models/qwen35-9b-mtp/Qwen3.5-9B-Q4_K_M.gguf
-
-# 2. start the server (fully GPU-resident, 7.27 GB, MTP depth 4)
-sudo docker run --gpus all -p 8080:8080 -v ~/models/qwen35-9b-mtp:/models:ro -d \
-  ghcr.io/ggml-org/llama.cpp:server-cuda12-b11118@sha256:bfb3264fc2166e01e2b4f9b537e45d7006d87c75021b911f132ef607f5bbced3 \
-  --model /models/Qwen3.5-9B-Q4_K_M.gguf --alias Qwen3.5-9B-MTP-Q4_K_M \
-  --host 0.0.0.0 --port 8080 --ctx-size 65536 --parallel 1 --n-gpu-layers 999 \
-  --flash-attn on --batch-size 512 --ubatch-size 512 \
-  --cache-type-k q4_0 --cache-type-v q4_0 --jinja \
-  --spec-type draft-mtp --spec-draft-n-max 4
-
-# 3. confirm the model is served (~60 s cold start, then ~124 tok/s short fill)
-curl -s http://127.0.0.1:8080/v1/models | jq '.data[0].id'
-
-# 4. stop
-sudo docker rm -f $(sudo docker ps -q --filter ancestor=ghcr.io/ggml-org/llama.cpp:server-cuda12-b11118@sha256:bfb3264fc2166e01e2b4f9b537e45d7006d87c75021b911f132ef607f5bbced3)
-```
-
-The 4B recipe and every alternative configuration (32K/128K, q8_0 KV) are in
-[recipes/](recipes/) as full copy-paste commands.
-
-## Which one to use
-
-| You want | Recipe | Context | Short-fill decode | Residency |
-|---|---|---|---|---|
-| Fast chat, light coding, huge context | [4B](recipes/qwen35-4b-mtp-q4km-llamacpp.md) | up to **128K** q8_0 KV | **182 tok/s** | 7.15 GB |
-| Reasoning, real coding, tools | [9B](recipes/qwen35-9b-mtp-q4km-llamacpp.md) | up to **64K** q4_0 KV | **124 tok/s** | 7.27 GB |
-
-Registry equivalents: the 4B is `recommended` for `rtx-2080-8gb`, the 9B is the plugin alternate —
-the same split we run ourselves.
-
-## Configuration
-
-| Variable | Default | Notes |
-|---|---|---|
-| `--ctx-size` | 65536 (9B) / 32768 (4B) | Allocation is free at short fill — measured identical decode at 32K/64K/128K. What you allocate costs VRAM only. |
-| `--cache-type-k/-v` | q4_0 (9B@64K) / q8_0 | **9B at 64K only fits with q4_0 KV** — q8_0 OOMs at load. Zero measured decode penalty from q4_0 under flash attention. |
-| `--spec-type draft-mtp --spec-draft-n-max 4` | on | Embedded nextn MTP head, no separate drafter model. Acceptance is prompt-class dependent (see rule of thumb). |
-| `--flash-attn` | on | Required for the KV-precision games above. |
-| `--batch-size/--ubatch-size` | 512/512 | Does **not** change decode (measured 112.8 vs 113.7 tok/s); trims TTFT 100→71 ms. Kept for lab convention. |
-| `--parallel` | 1 | Default 4 slots quadruples the KV allocation; always pin to 1 on this card. |
-| Thinking | ON (template default) | Send `chat_template_kwargs {"enable_thinking": false}` for deterministic coding/agent use. The 4B fails a multi-fact reasoning check with it off; the 9B passes. |
-
-## Measured on this box
-
-Decode (tok/s, server-reported `timings.predicted_per_second`, 2–3 runs, ranges not best-of;
-fixed 1,987-token continuation prompt, thinking off):
-
-| Model | CTX | KV | Short-fill | Filled |
-|---|---|---|---|---|
-| 4B | 32K | q8_0 | **181.8–182.2** | — |
-| 4B | 128K | q8_0 | **181.7–181.9** | 76.7 @94K |
-| 9B | 32K | q8_0 | **124.5–124.8** | — |
-| 9B | 64K | q4_0 | **124.2–124.4** | 78.8 @37K |
-| 9B | 64K | q8_0 | ⚠️ OOM at load | — |
-
-Prefill (fresh prompts): 4B 2,327 → 2,241 t/s @2.8K→11.7K; 9B 1,578 → 1,529.
-Cold start: 51.6 s (4B) / 56.8 s (9B) to "model loaded"; first request pays CUDA-graph compile
-(17 tok/s in logs) before steady state — report warmed numbers for speed claims.
-
-**Windows-parity 1:1** (same card previously ran the Windows lab; same flags, same prompt,
-era-matched build `b10481`): Linux 173.3–173.6 vs Windows 172.3–173.5 tok/s — **tie at ±0.1%**,
-no docker penalty. Current `b11118` is the real upgrade: **+5%** (4B → 182) to **+7%** (9B →
-117→125 across builds).
-
-Method notes: single boot, warmup request discarded, ranges over 2–3 runs, `chat_template_kwargs`
-thinking-off for comparability. Full matrix with per-run provenance:
-[measurements/2026-09-23-qwen35-mtp-linux-matrix.md](measurements/2026-09-23-qwen35-mtp-linux-matrix.md).
-
-## Thinking & tool calling
-
-Chat template ships thinking ON. For coding/agents disable it per request (see Configuration).
-Tool calls are plain OpenAI `tools`: both models were probed with a real
-`get_weather("Turin")` call round-tripped to a correct natural-language answer, and the 9B
-additionally drove opencode's build agent (bash tools executing) through this exact server.
-Capability evidence: [evidence/](evidence/) — 9B passes a multi-fact reasoning check the 4B fails.
-
-## Using the API
-
-```bash
-curl -s http://127.0.0.1:8080/v1/chat/completions -H 'Content-Type: application/json' -d '{
-  "model": "Qwen3.5-9B-MTP-Q4_K_M",
-  "messages": [{"role": "user", "content": "Reply OK."}],
-  "max_tokens": 64, "temperature": 0,
-  "chat_template_kwargs": {"enable_thinking": false}
-}' | jq '.choices[0].message.content'
-```
-
-Works as a custom model in opencode / T3 Code via an `@ai-sdk/openai-compatible` provider pointed
-at `http://127.0.0.1:8080/v1` — that is how it runs on this machine.
+| Hugging Face token | Optional — pinned public revisions; `HF_TOKEN` helps with rate limits |
 
 ## Repository layout
 
 ```text
-recipes/         one file per model+quant+runtime, with copy-paste docker launches
-measurements/    dated raw matrices with per-run provenance
-prompts/         the fixed benchmark prompt — compare only on the same file
-evidence/        raw JSONL: acceptance harness output, capability probes
-notes/           empirical rules and open questions
-registry/        cross-links to the local-ai-registry records
+recipes/         one file per model+variant+runtime: identity, settings, results, reproduce commands
+measurements/    dated matrices with per-run provenance
+prompts/         fixed benchmark prompts — speeds are only comparable within the same file
+evidence/        raw JSONL: acceptance harness output, capability probes, timing logs
+notes/           empirical rules, attributions, open questions
+registry/        cross-links for the subset that promotes into local-ai-registry
+hardware.md      the one machine behind every number
 ```
+
+## How a recipe is born
+
+1. Add the candidate to the queue above (with the exact weights source and why it's interesting).
+2. Fetch pinned revision, verify the SHA-256, pick the runtime image by digest.
+3. Probe the resource boundary first (ctx × KV precision × VRAM), then measure speed and
+   capabilities on fixed prompts, thinking off.
+4. Write `recipes/<model>.md` with the full settings table, results, evidence links — including
+   what failed.
+5. If the launch satisfies the registry contract, run its acceptance harness and cross-link from
+   `registry/`.
 
 ## Notes
 
-- Cache-hit prefill numbers are worthless: llama.cpp logs `prompt_per_second` over only the
-  non-cached tokens; every prefill number here used a fresh prompt.
-- The 4B at 128K fits because its KV is GQA-small; don't generalize to other 8 GB cards without
-  running their ceiling probes.
-- Future models (Gemma 4 E4B QAT + drafter, Bonsai 2, GLM-OCR) land in `recipes/` as
-  `lab-verified` entries — including the ones that can never qualify for the registry.
+- Prefill numbers always come from fresh prompts — cache-hit `prompt_per_second` reads are garbage.
+- Engine choice is per-model and recorded per-recipe: llama.cpp is not assumed, and non-registry
+  runtimes (custom forks, host builds, OCR pipelines) get the same rigor as `lab-verified` entries.
+- Retests beat reputation: "too slow" verdicts age badly when engines ship +5% per month.
 
 ## Credits
 
-- GGUFs by [unsloth](https://huggingface.co/unsloth) (Qwen3.5 MTP builds with the embedded nextn head)
-- Engine by [ggml-org/llama.cpp](https://github.com/ggml-org/llama.cpp), upstream docker images
-- Registry contract and validation by [0xsero/local-ai-registry](https://github.com/0xsero/local-ai-registry)
-- Benchmark prompt inherited from the prior Windows lab on this same card
+- OpenWeights model authors and quantizers, credited per recipe (unsloth, and the model orgs).
+- Runtimes by their upstream projects (llama.cpp and friends), always pinned by digest.
+- Acceptance contract and validation: [0xsero/local-ai-registry](https://github.com/0xsero/local-ai-registry).
+- Benchmark prompts inherited from the prior Windows lab on this same card.
