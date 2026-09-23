@@ -1,0 +1,8 @@
+{"event": "request", "at": "2026-09-23T19:59:55.996165Z", "test": "chat", "model": "Qwen3.5-4B-MTP-Q4_K_M"}
+{"event": "result", "at": "2026-09-23T19:59:56.447440Z", "test": "chat", "ok": false, "expected": "less", "elapsed_ms": 451, "completion_tokens": 42, "prompt_tokens": 111, "content": "The train that left Florence spends more time in transit because its travel duration is 1 hour and 30 minutes, whereas the train from Rome only travels for 1 hour and 31 minutes.", "reasoning_len": 0}
+{"event": "request", "at": "2026-09-23T19:59:56.447481Z", "test": "coding", "model": "Qwen3.5-4B-MTP-Q4_K_M"}
+{"event": "result", "at": "2026-09-23T19:59:56.775172Z", "test": "coding", "ok": true, "executed": true, "error": null, "elapsed_ms": 328, "completion_tokens": 46, "content": "def dist(a, b):\n    total = 0\n    for x, y in zip(a, b):\n        total += (x - y) ** 2\n    return total\n"}
+{"event": "request", "at": "2026-09-23T19:59:56.775210Z", "test": "tools", "model": "Qwen3.5-4B-MTP-Q4_K_M", "continuation": true}
+{"event": "tool_call", "at": "2026-09-23T19:59:57.204875Z", "test": "tools", "name": "get_weather", "arguments": {"city": "Turin"}, "finish_reason": "tool_calls", "call_ms": 430}
+{"event": "result", "at": "2026-09-23T19:59:57.483234Z", "test": "tools", "ok": true, "stage": "continuation", "content": "The weather in Turin right now is light rain, with a temperature of 17°C.", "elapsed_ms": 278}
+{"event": "summary", "at": "2026-09-23T19:59:57.483287Z", "recipe": "qwen35-4b-q4km-mtp-rtx-2080-8gb-llamacpp-tp1", "chat": false, "coding": true, "tools": true}
