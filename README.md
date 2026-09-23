@@ -1,4 +1,4 @@
-# local-ai-rtx2080
+# local-ai-RTX-2080
 
 Measured local LLM recipes for the **NVIDIA GeForce RTX 2080 8 GB (TU104, Turing SM75)** on Linux.
 
