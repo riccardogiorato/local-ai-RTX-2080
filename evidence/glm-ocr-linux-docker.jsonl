@@ -1,0 +1,3 @@
+{"tag": "receipt-cold", "wall_ms": 37056, "completion_tokens": 170, "decode_tok_s": 391.0, "prompt_per_s": 47.5, "note": "first-image init: clip+graph compile on Q4_K_M decoder + mmproj-Q8_0, i5-9600K host"}
+{"tag": "receipt-warm", "wall_ms": 455, "completion_tokens": 170, "decode_tok_s": 409.8, "prompt_per_s": 340.5, "note": "identical request repeated; output identical"}
+{"tag": "dense-label", "wall_ms": 2129, "completion_tokens": 282, "decode_tok_s": 374.9, "prompt_per_s": 2174.5, "note": "no degeneration at this prompt; correct Italian ingredient list extracted"}

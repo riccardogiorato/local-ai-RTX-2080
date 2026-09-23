@@ -29,7 +29,7 @@ listed here is parked with reasons in [NEXT-IDEAS.md](NEXT-IDEAS.md).
 | 1 | Qwen3.5-4B / 9B MTP Q4_K_M | chat · coding · tools | unsloth MTP GGUFs, pinned revisions | ✅ [tested](#tested-so-far) · registry-validated |
 | 2 | Qwen3.8-27B dense, IQ2_XS ≈2.5 bpw cram + embedded-MTP DT control | measured 4.2–5.3 tok/s, all capability probes pass, partial-offload boundary mapped ✅ [recipe](recipes/qwen38-27b-iq2-llamacpp.md) (weights on archive drive) | ✅ tested |
 | 3 | ThinkingCap-Qwen3.8-27B — no sub-11 GB build exists; awaiting a low-bpw community quant or quantize-from-Q8 decision | 27B thinking-verbosity finetune | pending owner decision (⏸ deferred 2026-09-23, big-download hold) |
-| 4 | GLM-OCR Q4_K_M + mmproj Q8_0 (the [local-ocr](https://github.com/riccardogiorato/local-ocr) stack, ported to Linux docker) | document OCR, vision | on archive drive | 🧪 queued |
+| 4 | GLM-OCR Q4_K_M + mmproj Q8_0 (the [local-ocr](https://github.com/riccardogiorato/local-ocr) stack, ported to Linux docker) | measured: receipt 0.455 s warm (410 tok/s decode), 100% GT extraction, 2.86 GB VRAM ✅ [recipe](recipes/glm-ocr-q4km-llamacpp.md) | ✅ tested |
 | 5 | Gemma 4 E4B QAT + matching MTP drafter (~4 GB) | edge-class agentic — prior Windows-lab: ~145 tok/s MTP d2 | needs download | 🧪 queued |
 | 6 | MiMo-V2.6-Distill-Qwen-9B (Qwen3.5-9B finetune, MIT) | agentic distill vs our 9B baseline | needs download (Q4_K_M) | 🧪 queued |
 | 7 | kev-0.5b ([jaredpalmer/kev](https://github.com/jaredpalmer/kev)) — decision model, Python runtime, CUDA untested upstream | typed-decision, single forward pass | needs download | 🧪 queued |
@@ -49,6 +49,8 @@ recorded in the recipe — so the workbench never fills up.
 |---|---|---|---|---|---|
 | [recipes/qwen35-4b-mtp-q4km-llamacpp.md](recipes/qwen35-4b-mtp-q4km-llamacpp.md) | llama.cpp (docker) | up to 128K | ~182 tok/s | ~2.3K tok/s | ✅ registry-validated · recommended |
 | [recipes/qwen35-9b-mtp-q4km-llamacpp.md](recipes/qwen35-9b-mtp-q4km-llamacpp.md) | llama.cpp (docker) | up to 64K (q4_0 KV) | ~124 tok/s | ~1.6K tok/s | ✅ registry-validated · alternate |
+| [recipes/qwen38-27b-iq2-llamacpp.md](recipes/qwen38-27b-iq2-llamacpp.md) | llama.cpp (docker, partial offload ngl 48/42) | 8K | ~4.2–5.3 tok/s | ~275–280 tok/s | 🔬 lab-verified · slow-smart slot |
+| [recipes/glm-ocr-q4km-llamacpp.md](recipes/glm-ocr-q4km-llamacpp.md) | llama.cpp (docker · vision) | 12K | 375–410 tok/s (OCR decode) | image prefill 340–2,175 tok/s | 🔬 lab-verified · OCR stack |
 
 Every recipe file records: the exact OpenWeights artifact (repository, revision, SHA-256), the
 runtime image digest, full launch settings (context size, KV precision, batch/ubatch, sampler
