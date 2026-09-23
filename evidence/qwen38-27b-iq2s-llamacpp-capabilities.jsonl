@@ -1,0 +1,8 @@
+{"event": "request", "at": "2026-09-23T21:59:08.583421Z", "test": "chat", "model": "Qwen3.8-27B-IQ2S-MTP"}
+{"event": "result", "at": "2026-09-23T21:59:10.080015Z", "test": "chat", "ok": true, "expected": "less", "elapsed_ms": 1497, "completion_tokens": 2, "prompt_tokens": 111, "content": "less", "reasoning_len": 0}
+{"event": "request", "at": "2026-09-23T21:59:10.080052Z", "test": "coding", "model": "Qwen3.8-27B-IQ2S-MTP"}
+{"event": "result", "at": "2026-09-23T21:59:17.538522Z", "test": "coding", "ok": true, "executed": true, "error": null, "elapsed_ms": 7458, "completion_tokens": 46, "content": "def dist(a, b):\n    total = 0\n    for x, y in zip(a, b):\n        total += (x - y) ** 2\n    return total\n"}
+{"event": "request", "at": "2026-09-23T21:59:17.538559Z", "test": "tools", "model": "Qwen3.8-27B-IQ2S-MTP", "continuation": true}
+{"event": "tool_call", "at": "2026-09-23T21:59:24.891672Z", "test": "tools", "name": "get_weather", "arguments": {"city": "Turin"}, "finish_reason": "tool_calls", "call_ms": 7353}
+{"event": "result", "at": "2026-09-23T21:59:29.133882Z", "test": "tools", "ok": true, "stage": "continuation", "content": "The current weather in Turin is light rain with a temperature of 17°C.", "elapsed_ms": 4242}
+{"event": "summary", "at": "2026-09-23T21:59:29.133949Z", "recipe": "qwen38-27b-iq2s-llamacpp", "chat": true, "coding": true, "tools": true}

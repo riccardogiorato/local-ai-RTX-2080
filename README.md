@@ -27,8 +27,8 @@ listed here is parked with reasons in [NEXT-IDEAS.md](NEXT-IDEAS.md).
 | # | Model / variant | Class | Weights | Status |
 |---|---|---|---|---|
 | 1 | Qwen3.5-4B / 9B MTP Q4_K_M | chat · coding · tools | unsloth MTP GGUFs, pinned revisions | ✅ [tested](#tested-so-far) · registry-validated |
-| 2 | Qwen3.8-27B dense, IQ2_XS ≈2.5 bpw cram (7.9 GB GSQ-RCO on archive; embedded-MTP Draw-Things profile as control) | what a 27B costs on 8 GB — prior Windows-lab: ~5.4–6.9 tok/s | on archive drive | 🔨 testing |
-| 3 | ThinkingCap-Qwen3.8-27B (thinking-verbosity finetune, self-MTP) — f16 GGUF → self-quantized IQ2_XS-class | 27B smartes-and-quieter cram | 54.7 GB f16 (gated) → ~8.4 GB quant | 🔨 testing |
+| 2 | Qwen3.8-27B dense, IQ2_XS ≈2.5 bpw cram + embedded-MTP DT control | measured 4.2–5.3 tok/s, all capability probes pass, partial-offload boundary mapped ✅ [recipe](recipes/qwen38-27b-iq2-llamacpp.md) (weights on archive drive) | ✅ tested |
+| 3 | ThinkingCap-Qwen3.8-27B — no sub-11 GB build exists; awaiting a low-bpw community quant or quantize-from-Q8 decision | 27B thinking-verbosity finetune | pending owner decision (⏸ deferred 2026-09-23, big-download hold) |
 | 4 | GLM-OCR Q4_K_M + mmproj Q8_0 (the [local-ocr](https://github.com/riccardogiorato/local-ocr) stack, ported to Linux docker) | document OCR, vision | on archive drive | 🧪 queued |
 | 5 | Gemma 4 E4B QAT + matching MTP drafter (~4 GB) | edge-class agentic — prior Windows-lab: ~145 tok/s MTP d2 | needs download | 🧪 queued |
 | 6 | MiMo-V2.6-Distill-Qwen-9B (Qwen3.5-9B finetune, MIT) | agentic distill vs our 9B baseline | needs download (Q4_K_M) | 🧪 queued |
