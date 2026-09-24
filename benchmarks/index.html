@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Benchmarking AI Models</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --canvas: #050505;
+    --surface-1: #0f0f0f;
+    --surface-2: #1a1a1a;
+    --surface-3: #1a3b2b;
+    --border: #262626;
+    --ink: #ffffff;
+    --ink-muted: #8a8a8a;
+    --voltage: #d4ff00;
+    --font: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 100%;
+    height: 100%;
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: var(--font);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .app {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* ---------- Sidebar ---------- */
+  .sidebar {
+    position: relative;
+    width: 80px;
+    background: var(--canvas);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 0;
+    gap: 32px;
+  }
+
+  .brand {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--voltage);
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+    align-items: center;
+  }
+
+  .nav-item {
+    position: relative;
+    width: 100%;
+    padding: 12px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--ink-muted);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.2;
+    text-align: center;
+    cursor: pointer;
+    transition: color 150ms ease;
+  }
+
+  .nav-item svg { width: 20px; height: 20px; display: block; }
+
+  .nav-item:hover { color: var(--ink); }
+
+  .nav-item.active { color: var(--ink); }
+
+  .nav-item.active::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 24px;
+    background: var(--voltage);
+  }
+
+  .sidebar-foot {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    width: 100%;
+  }
+
+  .version {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--ink-muted);
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--voltage);
+    display: block;
+  }
+
+  /* ---------- Main ---------- */
+  .main {
+    padding: 32px 40px 28px 40px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  .page-title {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-top: 8px;
+  }
+
+  .page-sub {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--ink-muted);
+    margin-top: 8px;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-top: 1px solid var(--voltage);
+    height: 290px;
+    padding: 24px;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .hero-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  .live-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--voltage);
+    display: block;
+  }
+
+  .hero h1 {
+    font-size: 48px;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-top: 12px;
+  }
+
+  .hero p {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--ink-muted);
+    margin-top: 12px;
+    max-width: 520px;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-top: 16px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--voltage);
+    color: var(--canvas);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: opacity 150ms ease;
+  }
+
+  .btn:hover { opacity: 0.88; }
+
+  .btn svg { width: 14px; height: 14px; display: block; }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--border);
+    padding: 12px 20px;
+  }
+
+  .btn-ghost:hover { border-color: var(--ink-muted); }
+
+  /* ---------- Metric stack ---------- */
+  .metrics {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--border);
+  }
+
+  .metric {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .metric-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-muted);
+  }
+
+  .metric-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--voltage);
+    letter-spacing: 0.02em;
+  }
+
+  /* ---------- Panels ---------- */
+  .panels {
+    display: grid;
+    grid-template-columns: 760px 440px;
+    gap: 40px;
+  }
+
+  .panel {
+    height: 280px;
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    padding: 24px;
+  }
+
+  .panel-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+
+  .panel-title {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .panel-sub {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--ink-muted);
+    margin-top: 8px;
+  }
+
+  .status-list {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .status-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .status-row:last-child { border-bottom: none; }
+
+  .status-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .status-meta {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--ink-muted);
+    margin-top: 2px;
+  }
+
+  .status-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--voltage);
+  }
+
+  .status-value.muted { color: var(--ink-muted); }
+
+  .panel-foot {
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--ink-muted);
+  }
+
+  .panel-sub {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--ink-muted);
+    margin-top: 8px;
+  }
+
+  .chart {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .bar-row {
+    display: grid;
+    grid-template-columns: 180px 1fr 64px;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .bar-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .bar-track {
+    height: 8px;
+    background: var(--surface-2);
+    position: relative;
+  }
+
+  .bar-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: var(--border);
+  }
+
+  .bar-fill.hot { background: var(--voltage); }
+
+  .bar-score {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--voltage);
+    text-align: right;
+  }
+
+  /* ---------- System status ---------- */
+  .status-list {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .status-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .status-row:last-child { border-bottom: none; }
+
+  .status-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .status-meta {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--ink-muted);
+    margin-top: 4px;
+  }
+
+  .status-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--voltage);
+  }
+
+  .status-value.muted { color: var(--ink-muted); }
+
+  .panel-foot {
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--ink-muted);
+  }
+
+  /* ---------- Footer ---------- */
+  .footer {
+    height: 80px;
+    background: var(--surface-3);
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+  }
+
+  .footer-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  .footer-note {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--ink-muted);
+  }
+
+  .footer-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .footer-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .footer-right .footer-note { color: var(--ink-muted); }
+
+  @media (max-width: 1100px) {
+    .hero { grid-template-columns: 1fr; }
+    .panels { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+  <div class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">B</div>
+
+      <nav class="nav">
+        <div class="nav-item active">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="2.5" y="2.5" width="6" height="6"/>
+            <rect x="11.5" y="2.5" width="6" height="6"/>
+            <rect x="2.5" y="11.5" width="6" height="6"/>
+            <rect x="11.5" y="11.5" width="6" height="6"/>
+          </svg>
+          <span>Overview</span>
+        </div>
+        <div class="nav-item">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M2.5 17.5V9M7.5 17.5V4M12.5 17.5V12M17.5 17.5V6.5"/>
+          </svg>
+          <span>Models</span>
+        </div>
+        <div class="nav-item">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M2.5 12.5L7 7.5L11 11.5L17.5 4"/>
+            <path d="M17.5 4H11M17.5 4V10"/>
+          </svg>
+          <span>Runs</span>
+        </div>
+        <div class="nav-item">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="10" cy="10" r="7.5"/>
+            <path d="M10 5.5V10L13.5 12.5"/>
+          </svg>
+          <span>Settings</span>
+        </div>
+      </nav>
+
+      <div class="sidebar-foot">
+        <span class="version">v2.4.0</span>
+        <span class="status-dot"></span>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+      <header>
+        <div class="eyebrow">Evaluation Console</div>
+        <h2 class="page-title">Benchmarking AI Models</h2>
+        <p class="page-sub">Live comparison across reasoning, coding and retrieval workloads.</p>
+      </header>
+
+      <!-- Hero -->
+      <section class="hero">
+        <div>
+          <div class="hero-head">
+            <span class="live-dot"></span>
+            <span>Live capture</span>
+          </div>
+          <h1>Measure what<br>actually matters.</h1>
+          <p>Run controlled evaluations against a fixed prompt set and compare models on the metrics that define your workload.</p>
+          <div class="hero-actions">
+            <button class="btn">
+              Start benchmark
+              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M2 7H12M8 3L12 7L8 11"/>
+              </svg>
+            </button>
+            <button class="btn btn-ghost">View methodology</button>
+          </div>
+        </div>
+
+        <div class="metrics">
+          <div class="metric">
+            <span class="metric-label">Models evaluated</span>
+            <span class="metric-value">12</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Total runs</span>
+            <span class="metric-value">4,812</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Median latency</span>
+            <span class="metric-value">1.84s</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Pass rate</span>
+            <span class="metric-value">94.2%</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Panels -->
+      <section class="panels">
+        <div class="panel">
+          <div class="panel-head">
+            <h3 class="panel-title">Model Performance</h3>
+            <span class="eyebrow">Reasoning</span>
+          </div>
+          <p class="panel-sub">Composite score across 240 evaluation tasks.</p>
+
+          <div class="chart">
+            <div class="bar-row">
+              <span class="bar-name">Frontier-1</span>
+              <div class="bar-track"><div class="bar-fill hot" style="width:96%"></div></div>
+              <span class="bar-score">96.4</span>
+            </div>
+            <div class="bar-row">
+              <span class="bar-name">Frontier-2</span>
+              <div class="bar-track"><div class="bar-fill hot" style="width:91%"></div></div>
+              <span class="bar-score">91.8</span>
+            </div>
+            <div class="bar-row">
+              <span class="bar-name">Open-Reason</span>
+              <div class="bar-track"><div class="bar-fill" style="width:84%"></div></div>
+              <span class="bar-score">84.2</span>
+            </div>
+            <div class="bar-row">
+              <span class="bar-name">Code-Large</span>
+              <div class="bar-track"><div class="bar-fill" style="width:72%"></div></div>
+              <span class="bar-score">72.6</span>
+            </div>
+            <div class="bar-row">
+              <span class="bar-name">Compact-3</span>
+              <div class="bar-track"><div class="bar-fill" style="width:58%"></div></div>
+              <span class="bar-score">58.1</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h3 class="panel-title">System Status</h3>
+            <span class="eyebrow">Runtime</span>
+          </div>
+          <p class="panel-sub">Infrastructure health across the evaluation cluster.</p>
+
+          <div class="status-list">
+            <div class="status-row">
+              <div>
+                <div class="status-name">GPU Cluster</div>
+                <div class="status-meta">8 / 8 nodes online</div>
+              </div>
+              <span class="status-value">Healthy</span>
+            </div>
+            <div class="status-row">
+              <div>
+                <div class="status-name">Prompt Cache</div>
+                <div class="status-meta">12.4 GB allocated</div>
+              </div>
+              <span class="status-value">98.1%</span>
+            </div>
+            <div class="status-row">
+              <div>
+                <div class="status-name">Queue Depth</div>
+                <div class="status-meta">Current run backlog</div>
+              </div>
+              <span class="status-value muted">03</span>
+            </div>
+            <div class="status-row">
+              <div>
+                <div class="status-name">Data Pipeline</div>
+                <div class="status-meta">Last sync 2m ago</div>
+              </div>
+              <span class="status-value">Live</span>
+            </div>
+          </div>
+
+          <div class="panel-foot">All systems operational</div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <span class="footer-label">Benchmarking AI Models</span>
+      <span class="footer-note">© 2025 Evaluation Console</span>
+      <div class="footer-right">
+        <span class="footer-note">Built for evaluation</span>
+        <span class="status-dot"></span>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
