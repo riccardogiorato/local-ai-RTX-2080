@@ -28,7 +28,7 @@ listed here is parked with reasons in [NEXT-IDEAS.md](NEXT-IDEAS.md).
 |---|---|---|---|---|
 | 1 | Qwen3.5-4B / 9B MTP Q4_K_M | chat · coding · tools | unsloth MTP GGUFs, pinned revisions | ✅ [tested](#tested-so-far) · registry-validated |
 | 2 | Qwen3.8-27B dense, IQ2_XS ≈2.5 bpw cram + embedded-MTP DT control | measured 4.2–5.3 tok/s, all capability probes pass, partial-offload boundary mapped ✅ [recipe](recipes/qwen38-27b-iq2-llamacpp.md) (weights on archive drive) | ✅ tested |
-| 3 | ThinkingCap-Qwen3.8-27B · Q2_K 10.12 GB (holooo community quant — community options appeared 2026-09-24; owner picked Q2_K over IQ4_XS-MIX 12.5 GB and the abliterated i1 build) | 27B thinking-verbosity finetune, dense (non-ternary) | ⏬ downloading 10.86 GB |
+| 3 | ThinkingCap-Qwen3.8-27B · Q2_K (holooo) — measured: **9.57 tok/s** with embedded MTP d2 (2× the old IQ2_S cram), acceptance 0.995, capability 3/3 thinking-off AND thinking-on ✅ [recipe](recipes/thinkingcap-27b-q2k-llamacpp.md) | 27B thinking-verbosity finetune, dense (non-ternary) | ✅ tested |
 | 4 | GLM-OCR Q4_K_M + mmproj Q8_0 (the [local-ocr](https://github.com/riccardogiorato/local-ocr) stack, ported to Linux docker) | measured: receipt 0.455 s warm (410 tok/s decode), 100% GT extraction, 2.86 GB VRAM ✅ [recipe](recipes/glm-ocr-q4km-llamacpp.md) | ✅ tested |
 | 5 | Gemma 4 E4B QAT + matching MTP drafter (~4 GB) — measured: **181 tok/s MTP d2** (vs Windows-lab 145), 2.7K tok/s prefill, **128K ctx fully resident** ✅ [recipe](recipes/gemma-4-e4b-qat-llamacpp.md) | edge-class agentic — thinking model | ✅ tested |
 | 6 | MiMo-V2.6-Distill-Qwen-9B (Qwen3.5-9B finetune, MIT) — 61 tok/s; MTP head dropped by the distill, speed-identical to parent no-draft ✅ [recipe](recipes/mimo-9b-distill-q4km-llamacpp.md) | agentic distill vs our 9B baseline | ✅ tested |
@@ -49,7 +49,8 @@ recorded in the recipe — so the workbench never fills up.
 |---|---|---|---|---|---|
 | [recipes/qwen35-4b-mtp-q4km-llamacpp.md](recipes/qwen35-4b-mtp-q4km-llamacpp.md) | llama.cpp (docker) | up to 128K | ~182 tok/s | ~2.3K tok/s | ✅ registry-validated · recommended |
 | [recipes/qwen35-9b-mtp-q4km-llamacpp.md](recipes/qwen35-9b-mtp-q4km-llamacpp.md) | llama.cpp (docker) | up to 64K (q4_0 KV) | ~124 tok/s | ~1.6K tok/s | ✅ registry-validated · alternate |
-| [recipes/qwen38-27b-iq2-llamacpp.md](recipes/qwen38-27b-iq2-llamacpp.md) | llama.cpp (docker, partial offload ngl 48/42) | 8K | ~4.2–5.3 tok/s | ~275–280 tok/s | 🔬 lab-verified · slow-smart slot |
+| [recipes/qwen38-27b-iq2-llamacpp.md](recipes/qwen38-27b-iq2-llamacpp.md) | llama.cpp (docker, partial offload ngl 48/42) | 8K | ~4.2–5.3 tok/s | ~275–280 tok/s | 🔬 lab-verified · prior slow-smart slot |
+| [recipes/thinkingcap-27b-q2k-llamacpp.md](recipes/thinkingcap-27b-q2k-llamacpp.md) | llama.cpp (docker · partial offload ngl 40/ub 128 · embedded MTP d2) | 8K | **9.57 tok/s** (acceptance 0.995) | 239 tok/s (no-draft) | 🔬 lab-verified · slow-smart slot champion |
 | [recipes/glm-ocr-q4km-llamacpp.md](recipes/glm-ocr-q4km-llamacpp.md) | llama.cpp (docker · vision) | 12K | 375–410 tok/s (OCR decode) | image prefill 340–2,175 tok/s | 🔬 lab-verified · OCR stack |
 | [recipes/gemma-4-e4b-qat-llamacpp.md](recipes/gemma-4-e4b-qat-llamacpp.md) | llama.cpp (docker · external MTP drafter d2) | up to **128K** | **181 tok/s** (2.04× no-draft) | ~2.8K tok/s | 🔬 lab-verified · fast-resident slot · thinking model |
 | [recipes/mimo-9b-distill-q4km-llamacpp.md](recipes/mimo-9b-distill-q4km-llamacpp.md) | llama.cpp (docker, no MTP — head dropped by distill) | 32K | 61 tok/s | ~1.7K tok/s | 🔬 lab-verified · parent-dominated |
