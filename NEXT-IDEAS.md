@@ -1,5 +1,15 @@
 # NEXT-IDEAS — not in the current test queue
 
+## OrcaSAQ-2-27B (orcarouter, 2026-09-24)
+
+Dense Qwen3.8-27B at 3.21 bpw via a proprietary "SAQ2" mixed-precision quant (12.3 GB,
++0.02% perplexity claim, MTP head included, 90 tok/s @ 16 GB, SWE-bench 70.0 /
+Terminal-Bench 58.4). Not runnable here as shipped: **safetensors-only for vLLM +
+custom kernel; vLLM has no SM75/Turing support**; their envelope is 16 GB. A GGUF
+conversion would re-quantize away the mixed-precision design anyway (→ lands in the
+class our ThinkingCap Q2_K recipe already measures). Retry trigger: orcarouter
+publishes GGUF or the SAQ2 spec, or a llama.cpp port appears.
+
 Models and experiments that are interesting but deliberately **not queued right now**.
 They move into the README queue only when they're actually going to be tested:
 
