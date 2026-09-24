@@ -68,3 +68,19 @@ Readings:
   after container swaps — kept as `INVALID-*` files; the runner now warm-up gates.
 - Temperature is NOT pinned by the runner (pi default); one task (Gemma cart)
   flipped pass→fail across runs. Pin it before treating ranks as final.
+
+### Final leaderboard (2026-09-24 evening, first round)
+
+| Rank | Model | Pass | Style |
+|---|---|---|---|
+| 1 | Qwen3.5-9B MTP d4 | **5/6** | methodical iterating |
+| 2= | Qwen3.5-4B MTP d4 | 4/6 | fast + solid; best value at ~20 s/task |
+| 2= | ThinkingCap-Qwen3.8-27B Q2_K | 4/6 | slow-smart survives the loop |
+| 2= | MiMo-V2.6-9B distill | 4/6 | hybrid failure modes |
+| 5 | Gemma 4 E4B QAT | 3/6 | fast-tokens, early exits |
+
+Harness resolutions this round: `PI_OFFLINE=1` eliminates pi's startup-network hang
+(cancelled two whole batches before its discovery); warm-up gate env-tunable;
+`--temperature 0 --seed 42` server-side for the last two runs (first three ran on
+pi defaults — noted above). Caveats: thinking mode = pi default for all (models
+vary in reasoning verbosity); tool_calls counter still overcounts streaming events.
