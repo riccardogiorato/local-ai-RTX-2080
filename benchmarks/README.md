@@ -96,3 +96,12 @@ roughly 2× the wall time (4.6–5.3 tok/s vs the finetune's 9.6): the Q2_K-choi
 from decode tests carries over to agent loops — pick the finetune's Q2_K build, not the
 IQ2_S one, when the file class is available. SSD copy of the DT file deleted after the
 bench (archive original SHA 993c276e… stands).
+
+### Overnight additions (2026-09-25): Bonsai unparked, legacy retried
+
+| Model | Pass | Wall s/task (passing) |
+|---|---|---|
+| Ternary-Bonsai-2-27B PTQ1_0+MTP (fork @ 285542d, full offload 8K) | **4/6** | 14–95 |
+
+Ties the 27B family (same React/TS failures) at 5–6× their speed — the "ternary too dumb"
+verdict is refuted on this bench.

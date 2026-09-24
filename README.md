@@ -35,6 +35,8 @@ listed here is parked with reasons in [NEXT-IDEAS.md](NEXT-IDEAS.md).
 | 7 | kev-0.5b ([jaredpalmer/kev](https://github.com/jaredpalmer/kev)) — CUDA-on-SM75 works first-try, 146 MiB VRAM, 240 ms/3 questions ✅ [recipe](recipes/kev-05b-serve.md) | typed-decision, single forward pass | ✅ tested |
 | 8 | laya (convaiinnovations, 421M) — 27 ms/3 questions (fastest on this card) but 2.66 GB VRAM; routing trails kev on both probes ✅ [recipe](recipes/laya-serve.md) | typed-decision, `pip install laya` | ✅ tested |
 
+| 9 | Bonsai-2 27B ternary PTQ1_0 + MTP graft — measured: **59.3/49.9 tok/s fully resident** (5–6× the other 27Bs), 3/3 probes thinking-off, AG-Bench 4/6 ✅ [recipe](recipes/ternary-bonsai2-27b-ptq1_0-llamacpp-fork.md) | 1.75 bpw ternary of dense Qwen3.8-27B, fork runtime | ✅ tested |
+
 New candidates get added here before they're downloaded; each becomes a `recipes/` file the day
 it runs. Retests of retired entries also live in the queue — engines move fast and a "won't fit"
 from three months ago is worth re-measuring.
@@ -56,6 +58,7 @@ recorded in the recipe — so the workbench never fills up.
 | [recipes/mimo-9b-distill-q4km-llamacpp.md](recipes/mimo-9b-distill-q4km-llamacpp.md) | llama.cpp (docker, no MTP — head dropped by distill) | 32K | 61 tok/s | ~1.7K tok/s | 🔬 lab-verified · parent-dominated |
 | [recipes/kev-05b-serve.md](recipes/kev-05b-serve.md) | Python/torch serve (CUDA on SM75) | n/a | 240–256 ms / 3 questions | — | 🔬 lab-verified · 146 MiB router |
 | [recipes/laya-serve.md](recipes/laya-serve.md) | Python/torch serve (ModernBERT-large) | n/a | **27 ms** / 3 questions | — | 🔬 lab-verified · 2.66 GB router |
+| [recipes/ternary-bonsai2-27b-ptq1_0-llamacpp-fork.md](recipes/ternary-bonsai2-27b-ptq1_0-llamacpp-fork.md) | llama.cpp fork host build (PrismML/sudoingX @ 285542d) | 8K | **59.3 / 49.9 tok/s** (MTP d1, full offload) | — | 🔬 lab-verified · fast-27B slot champion |
 
 Every recipe file records: the exact OpenWeights artifact (repository, revision, SHA-256), the
 runtime image digest, full launch settings (context size, KV precision, batch/ubatch, sampler
