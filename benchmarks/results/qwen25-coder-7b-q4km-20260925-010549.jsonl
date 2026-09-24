@@ -1,0 +1,6 @@
+{"model": "qwen25-coder-7b-q4km", "task": "task1-js-bugfix", "passed": false, "wall_s": 43, "tool_calls": 0, "finish": "unknown"}
+{"model": "qwen25-coder-7b-q4km", "task": "task2-react-fix", "passed": false, "wall_s": 2, "tool_calls": 0, "finish": "unknown"}
+{"model": "qwen25-coder-7b-q4km", "task": "task3-dep-upgrade", "passed": false, "wall_s": 2, "tool_calls": 0, "finish": "unknown"}
+{"model": "qwen25-coder-7b-q4km", "task": "task4-python-bugfix", "passed": false, "wall_s": 2, "tool_calls": 0, "finish": "unknown"}
+{"model": "qwen25-coder-7b-q4km", "task": "task5-js-to-ts", "passed": false, "wall_s": 2, "tool_calls": 0, "finish": "unknown"}
+{"model": "qwen25-coder-7b-q4km", "task": "task6-extra-code-task", "passed": false, "wall_s": 1, "tool_calls": 0, "finish": "unknown"}
