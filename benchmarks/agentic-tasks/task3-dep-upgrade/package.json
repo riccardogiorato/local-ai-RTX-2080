@@ -1,0 +1,11 @@
+{
+  "name": "posted-at-upgrade",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/"
+  },
+  "dependencies": {
+    "date-fns": "^2.30.0"
+  }
+}
