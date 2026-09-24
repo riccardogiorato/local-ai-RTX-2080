@@ -51,9 +51,12 @@ echo "AG-Bench model=$LABEL cap=${CAP}s"
 # Warm-up gate: a trivial pi invocation must complete before the batch runs.
 # Empirically, the first pi batch launched right after a container swap can hang
 # client-side with zero-byte sessions; a successful warm-up clears it.
+# WARM_TIMEOUT can be raised for thinking-mode models that spend minutes of
+# reasoning tokens on a trivial turn (observed: MiMo ~3.7K tokens on "say OK").
+WARM_TIMEOUT="${WARM_TIMEOUT:-90}"
 WARM_OK=""
 for attempt in 1 2 3; do
-  if timeout 90 pi --provider llamacpp-local --model local-model \
+  if timeout "$WARM_TIMEOUT" pi --provider llamacpp-local --model local-model \
       --mode json --no-session -p "Reply with the single word OK." \
       > /tmp/agentic-warmup.jsonl 2>/dev/null; then
     WARM_OK="yes"; echo "warm-up attempt $attempt: ok"; break

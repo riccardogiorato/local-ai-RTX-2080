@@ -1,0 +1,6 @@
+{"model": "mimo-9b-distill", "task": "task1-js-bugfix", "passed": true, "wall_s": 17, "tool_calls": 18, "finish": "unknown"}
+{"model": "mimo-9b-distill", "task": "task2-react-fix", "passed": false, "wall_s": 340, "tool_calls": 33, "finish": "unknown"}
+{"model": "mimo-9b-distill", "task": "task3-dep-upgrade", "passed": true, "wall_s": 480, "tool_calls": 362, "finish": "unknown"}
+{"model": "mimo-9b-distill", "task": "task4-python-bugfix", "passed": true, "wall_s": 11, "tool_calls": 15, "finish": "unknown"}
+{"model": "mimo-9b-distill", "task": "task5-js-to-ts", "passed": false, "wall_s": 22, "tool_calls": 40, "finish": "unknown"}
+{"model": "mimo-9b-distill", "task": "task6-extra-code-task", "passed": true, "wall_s": 18, "tool_calls": 25, "finish": "unknown"}

@@ -1,0 +1,238 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" role="img" aria-label="Benchmarking AI Models — Evaluation Console dashboard">
+  <title>Benchmarking AI Models — Evaluation Console</title>
+
+  <defs>
+    <style>
+      text {
+        font-family: 'Inter', 'Helvetica Neue', system-ui, -apple-system, 'Segoe UI', sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      .display   { font-size: 48px; font-weight: 600; letter-spacing: -0.02em; fill: #ffffff; }
+      .heading   { font-size: 24px; font-weight: 600; letter-spacing: -0.01em; fill: #ffffff; }
+      .body      { font-size: 16px; font-weight: 400; fill: #8a8a8a; }
+      .label     { font-size: 14px; font-weight: 500; fill: #ffffff; }
+      .label-mut { font-size: 14px; font-weight: 500; fill: #8a8a8a; }
+      .micro     { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; fill: #8a8a8a; }
+      .micro-ink { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; fill: #ffffff; }
+      .value     { font-size: 14px; font-weight: 600; fill: #d4ff00; letter-spacing: 0.02em; }
+      .value-mut { font-size: 14px; font-weight: 600; fill: #8a8a8a; letter-spacing: 0.02em; }
+      .score     { font-size: 14px; font-weight: 600; fill: #d4ff00; }
+      .brand     { font-size: 18px; font-weight: 600; letter-spacing: -0.02em; fill: #d4ff00; }
+      .btn       { font-size: 14px; font-weight: 500; fill: #050505; }
+      .btn-ghost { font-size: 14px; font-weight: 500; fill: #ffffff; }
+      .icon      { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: square; stroke-linejoin: miter; }
+    </style>
+
+    <symbol id="ico-overview" viewBox="0 0 20 20">
+      <g class="icon">
+        <rect x="2.5" y="2.5" width="6" height="6"/>
+        <rect x="11.5" y="2.5" width="6" height="6"/>
+        <rect x="2.5" y="11.5" width="6" height="6"/>
+        <rect x="11.5" y="11.5" width="6" height="6"/>
+      </g>
+    </symbol>
+
+    <symbol id="ico-models" viewBox="0 0 20 20">
+      <g class="icon">
+        <path d="M2.5 17.5V9M7.5 17.5V4M12.5 17.5V12M17.5 17.5V6.5"/>
+      </g>
+    </symbol>
+
+    <symbol id="ico-runs" viewBox="0 0 20 20">
+      <g class="icon">
+        <path d="M2.5 12.5L7 7.5L11 11.5L17.5 4"/>
+        <path d="M17.5 4H11M17.5 4V10"/>
+      </g>
+    </symbol>
+
+    <symbol id="ico-settings" viewBox="0 0 20 20">
+      <g class="icon">
+        <circle cx="10" cy="10" r="7.5"/>
+        <path d="M10 5.5V10L13.5 12.5"/>
+      </g>
+    </symbol>
+  </defs>
+
+  <!-- ================= CANVAS ================= -->
+  <rect x="0" y="0" width="1440" height="900" fill="#050505"/>
+
+  <!-- ================= SIDEBAR ================= -->
+  <g id="sidebar">
+    <rect x="0" y="0" width="80" height="900" fill="#050505"/>
+    <line x1="80" y1="0" x2="80" y2="900" stroke="#262626" stroke-width="1"/>
+
+    <!-- brand -->
+    <text class="brand" x="40" y="56" text-anchor="middle">B</text>
+
+    <!-- nav -->
+    <g>
+      <!-- active -->
+      <rect x="0" y="152" width="4" height="24" fill="#d4ff00"/>
+      <use href="#ico-overview" x="20" y="140" width="20" height="20" color="#ffffff"/>
+      <text class="label" x="40" y="176" text-anchor="middle">Overview</text>
+
+      <use href="#ico-models" x="20" y="192" width="20" height="20" color="#8a8a8a"/>
+      <text class="label-mut" x="40" y="228" text-anchor="middle">Models</text>
+
+      <use href="#ico-runs" x="20" y="244" width="20" height="20" color="#8a8a8a"/>
+      <text class="label-mut" x="40" y="280" text-anchor="middle">Runs</text>
+
+      <use href="#ico-settings" x="20" y="296" width="20" height="20" color="#8a8a8a"/>
+      <text class="label-mut" x="40" y="332" text-anchor="middle">Settings</text>
+    </g>
+
+    <!-- sidebar foot -->
+    <line x1="0" y1="700" x2="80" y2="700" stroke="#262626" stroke-width="1"/>
+    <text class="micro" x="40" y="730" text-anchor="middle">v2.4.0</text>
+    <rect x="37" y="744" width="6" height="6" fill="#d4ff00"/>
+  </g>
+
+  <!-- ================= MAIN ================= -->
+  <g id="main">
+
+    <!-- header -->
+    <text class="micro" x="120" y="56">EVALUATION CONSOLE</text>
+    <text class="heading" x="120" y="92">Benchmarking AI Models</text>
+    <text class="body" x="120" y="120">Live comparison across reasoning, coding and retrieval workloads.</text>
+
+    <!-- ================= HERO ================= -->
+    <g id="hero">
+      <rect x="120" y="160" width="1240" height="300" fill="#1a1a1a"/>
+      <rect x="120" y="160" width="1240" height="1" fill="#d4ff00"/>
+      <rect x="120" y="161" width="1240" height="299" fill="none" stroke="#262626" stroke-width="1"/>
+
+      <!-- left: copy -->
+      <g>
+        <rect x="144" y="192" width="8" height="8" fill="#d4ff00"/>
+        <text class="micro" x="164" y="200">LIVE CAPTURE</text>
+
+        <text class="display" x="144" y="268">Measure what</text>
+        <text class="display" x="144" y="321">actually matters.</text>
+
+        <text class="body" x="144" y="356">Run controlled evaluations against a fixed prompt set and</text>
+        <text class="body" x="144" y="380">compare models on the metrics that define your workload.</text>
+
+        <!-- actions -->
+        <g>
+          <rect x="144" y="404" width="184" height="40" rx="9999" fill="#d4ff00"/>
+          <text class="btn" x="168" y="429">Start benchmark</text>
+          <path d="M284 424H300M294 418L300 424L294 430" fill="none" stroke="#050505" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"/>
+
+          <rect x="344" y="404" width="160" height="40" fill="none" stroke="#262626" stroke-width="1"/>
+          <text class="btn-ghost" x="368" y="429">View methodology</text>
+        </g>
+      </g>
+
+      <!-- right: metric stack -->
+      <g id="metrics">
+        <line x1="840" y1="184" x2="1336" y2="184" stroke="#262626" stroke-width="1"/>
+        <text class="label-mut" x="840" y="219">Models evaluated</text>
+        <text class="value" x="1336" y="219" text-anchor="end">12</text>
+
+        <line x1="840" y1="247" x2="1336" y2="247" stroke="#262626" stroke-width="1"/>
+        <text class="label-mut" x="840" y="282">Total runs</text>
+        <text class="value" x="1336" y="282" text-anchor="end">4,812</text>
+
+        <line x1="840" y1="310" x2="1336" y2="310" stroke="#262626" stroke-width="1"/>
+        <text class="label-mut" x="840" y="345">Median latency</text>
+        <text class="value" x="1336" y="345" text-anchor="end">1.84s</text>
+
+        <line x1="840" y1="373" x2="1336" y2="373" stroke="#262626" stroke-width="1"/>
+        <text class="label-mut" x="840" y="408">Pass rate</text>
+        <text class="value" x="1336" y="408" text-anchor="end">94.2%</text>
+
+        <line x1="840" y1="436" x2="1336" y2="436" stroke="#262626" stroke-width="1"/>
+      </g>
+    </g>
+
+    <!-- ================= PANELS ================= -->
+    <g id="panels">
+
+      <!-- performance -->
+      <g id="performance">
+        <rect x="120" y="500" width="760" height="300" fill="#0f0f0f"/>
+        <rect x="120" y="500" width="760" height="299" fill="none" stroke="#262626" stroke-width="1"/>
+
+        <text class="heading" x="144" y="548">Model Performance</text>
+        <text class="micro" x="856" y="548" text-anchor="end">REASONING</text>
+        <text class="label-mut" x="144" y="576">Composite score across 240 evaluation tasks.</text>
+
+        <!-- chart -->
+        <g id="chart">
+          <text class="label" x="144" y="612">Frontier-1</text>
+          <rect x="240" y="608" width="616" height="8" fill="#262626"/>
+          <rect x="240" y="608" width="591" height="8" fill="#d4ff00"/>
+          <text class="score" x="856" y="612" text-anchor="end">96.4</text>
+
+          <text class="label" x="144" y="648">Frontier-2</text>
+          <rect x="240" y="644" width="616" height="8" fill="#262626"/>
+          <rect x="240" y="644" width="561" height="8" fill="#d4ff00"/>
+          <text class="score" x="856" y="648" text-anchor="end">91.8</text>
+
+          <text class="label" x="144" y="684">Open-Reason</text>
+          <rect x="240" y="680" width="616" height="8" fill="#262626"/>
+          <rect x="240" y="680" width="517" height="8" fill="#262626"/>
+          <text class="score" x="856" y="684" text-anchor="end">84.2</text>
+
+          <text class="label" x="144" y="720">Code-Large</text>
+          <rect x="240" y="716" width="616" height="8" fill="#262626"/>
+          <rect x="240" y="716" width="444" height="8" fill="#262626"/>
+          <text class="score" x="856" y="720" text-anchor="end">72.6</text>
+
+          <text class="label" x="144" y="756">Compact-3</text>
+          <rect x="240" y="752" width="616" height="8" fill="#262626"/>
+          <rect x="240" y="752" width="357" height="8" fill="#262626"/>
+          <text class="score" x="856" y="756" text-anchor="end">58.1</text>
+        </g>
+      </g>
+
+      <!-- system status -->
+      <g id="system-status">
+        <rect x="920" y="500" width="440" height="300" fill="#0f0f0f"/>
+        <rect x="920" y="500" width="440" height="299" fill="none" stroke="#262626" stroke-width="1"/>
+
+        <text class="heading" x="944" y="548">System Status</text>
+        <text class="micro" x="1336" y="548" text-anchor="end">RUNTIME</text>
+        <text class="label-mut" x="944" y="576">Infrastructure health across the evaluation cluster.</text>
+
+        <g id="status-list">
+          <line x1="944" y1="596" x2="1336" y2="596" stroke="#262626" stroke-width="1"/>
+          <text class="label" x="944" y="618">GPU Cluster</text>
+          <text class="micro" x="944" y="636">8 / 8 nodes online</text>
+          <text class="value" x="1336" y="622" text-anchor="end">Healthy</text>
+
+          <line x1="944" y1="638" x2="1336" y2="638" stroke="#262626" stroke-width="1"/>
+          <text class="label" x="944" y="660">Prompt Cache</text>
+          <text class="micro" x="944" y="678">12.4 GB allocated</text>
+          <text class="value" x="1336" y="664" text-anchor="end">98.1%</text>
+
+          <line x1="944" y1="680" x2="1336" y2="680" stroke="#262626" stroke-width="1"/>
+          <text class="label" x="944" y="702">Queue Depth</text>
+          <text class="micro" x="944" y="720">Current run backlog</text>
+          <text class="value-mut" x="1336" y="706" text-anchor="end">03</text>
+
+          <line x1="944" y1="722" x2="1336" y2="722" stroke="#262626" stroke-width="1"/>
+          <text class="label" x="944" y="744">Data Pipeline</text>
+          <text class="micro" x="944" y="762">Last sync 2m ago</text>
+          <text class="value" x="1336" y="748" text-anchor="end">Live</text>
+
+          <line x1="944" y1="764" x2="1336" y2="764" stroke="#262626" stroke-width="1"/>
+        </g>
+
+        <text class="micro" x="944" y="786">ALL SYSTEMS OPERATIONAL</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ================= FOOTER ================= -->
+  <g id="footer">
+    <rect x="0" y="800" width="1440" height="100" fill="#1a3b2b"/>
+    <line x1="0" y1="800" x2="1440" y2="800" stroke="#262626" stroke-width="1"/>
+
+    <text class="micro-ink" x="120" y="846">BENCHMARKING AI MODELS</text>
+    <text class="label-mut" x="720" y="846" text-anchor="middle">© 2025 Evaluation Console</text>
+
+    <rect x="1288" y="840" width="6" height="6" fill="#d4ff00"/>
+    <text class="micro" x="1360" y="846" text-anchor="end">BUILT FOR EVALUATION</text>
+  </g>
+</svg>
