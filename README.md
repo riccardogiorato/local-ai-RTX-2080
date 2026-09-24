@@ -28,7 +28,7 @@ listed here is parked with reasons in [NEXT-IDEAS.md](NEXT-IDEAS.md).
 |---|---|---|---|---|
 | 1 | Qwen3.5-4B / 9B MTP Q4_K_M | chat · coding · tools | unsloth MTP GGUFs, pinned revisions | ✅ [tested](#tested-so-far) · registry-validated |
 | 2 | Qwen3.8-27B dense, IQ2_XS ≈2.5 bpw cram + embedded-MTP DT control | measured 4.2–5.3 tok/s, all capability probes pass, partial-offload boundary mapped ✅ [recipe](recipes/qwen38-27b-iq2-llamacpp.md) (weights on archive drive) | ✅ tested |
-| 3 | ThinkingCap-Qwen3.8-27B — no sub-11 GB build exists; awaiting a low-bpw community quant or quantize-from-Q8 decision | 27B thinking-verbosity finetune | pending owner decision (⏸ deferred 2026-09-23, big-download hold) |
+| 3 | ThinkingCap-Qwen3.8-27B · Q2_K 10.12 GB (holooo community quant — community options appeared 2026-09-24; owner picked Q2_K over IQ4_XS-MIX 12.5 GB and the abliterated i1 build) | 27B thinking-verbosity finetune, dense (non-ternary) | ⏬ downloading 10.86 GB |
 | 4 | GLM-OCR Q4_K_M + mmproj Q8_0 (the [local-ocr](https://github.com/riccardogiorato/local-ocr) stack, ported to Linux docker) | measured: receipt 0.455 s warm (410 tok/s decode), 100% GT extraction, 2.86 GB VRAM ✅ [recipe](recipes/glm-ocr-q4km-llamacpp.md) | ✅ tested |
 | 5 | Gemma 4 E4B QAT + matching MTP drafter (~4 GB) — measured: **181 tok/s MTP d2** (vs Windows-lab 145), 2.7K tok/s prefill, **128K ctx fully resident** ✅ [recipe](recipes/gemma-4-e4b-qat-llamacpp.md) | edge-class agentic — thinking model | ✅ tested |
 | 6 | MiMo-V2.6-Distill-Qwen-9B (Qwen3.5-9B finetune, MIT) — 61 tok/s; MTP head dropped by the distill, speed-identical to parent no-draft ✅ [recipe](recipes/mimo-9b-distill-q4km-llamacpp.md) | agentic distill vs our 9B baseline | ✅ tested |
