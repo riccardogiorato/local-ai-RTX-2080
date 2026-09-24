@@ -48,6 +48,20 @@ EOF
 }
 
 echo "AG-Bench model=$LABEL cap=${CAP}s"
+# Warm-up gate: a trivial pi invocation must complete before the batch runs.
+# Empirically, the first pi batch launched right after a container swap can hang
+# client-side with zero-byte sessions; a successful warm-up clears it.
+WARM_OK=""
+for attempt in 1 2 3; do
+  if timeout 90 pi --provider llamacpp-local --model local-model \
+      --mode json --no-session -p "Reply with the single word OK." \
+      > /tmp/agentic-warmup.jsonl 2>/dev/null; then
+    WARM_OK="yes"; echo "warm-up attempt $attempt: ok"; break
+  else
+    echo "warm-up attempt $attempt: failed/timed out (90s) — retrying"; sleep 5
+  fi
+done
+[ -n "$WARM_OK" ] || { echo "AG-BENCH model=$LABEL ABORTED: warm-up never passed, refusing to burn the task batch in silence"; exit 2; }
 for entry in "$TASKS_DIR"/task*/; do
   run_task "$entry"
 done
