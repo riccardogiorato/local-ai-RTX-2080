@@ -21,7 +21,7 @@ run_task() {
   # copy sources but not node_modules/locks — deps install on demand
   rsync -a --exclude node_modules --exclude package-lock.json --exclude .build "$task_dir/" "$work/"
   local t0=$SECONDS
-  ( cd "$work" && timeout "$CAP" pi --provider llamacpp-local --model local-model \
+  ( cd "$work" && PI_OFFLINE=1 timeout "$CAP" pi --provider llamacpp-local --model local-model \
       --mode json --no-session \
       -p "$(cat "$work/TASK.md")" ) > "$work/pi-session.jsonl" 2>"$work/pi-errors.log"
   local wall=$((SECONDS - t0))
@@ -56,7 +56,7 @@ echo "AG-Bench model=$LABEL cap=${CAP}s"
 WARM_TIMEOUT="${WARM_TIMEOUT:-90}"
 WARM_OK=""
 for attempt in 1 2 3; do
-  if timeout "$WARM_TIMEOUT" pi --provider llamacpp-local --model local-model \
+  if PI_OFFLINE=1 timeout "$WARM_TIMEOUT" pi --provider llamacpp-local --model local-model \
       --mode json --no-session -p "Reply with the single word OK." \
       > /tmp/agentic-warmup.jsonl 2>/dev/null; then
     WARM_OK="yes"; echo "warm-up attempt $attempt: ok"; break
