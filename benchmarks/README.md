@@ -84,3 +84,15 @@ Harness resolutions this round: `PI_OFFLINE=1` eliminates pi's startup-network h
 `--temperature 0 --seed 42` server-side for the last two runs (first three ran on
 pi defaults — noted above). Caveats: thinking mode = pi default for all (models
 vary in reasoning verbosity); tool_calls counter still overcounts streaming events.
+
+### Late addition: dense Qwen3.8-27B baseline (2026-09-24 night)
+
+| Model | Pass | Wall s/task (passing) |
+|---|---|---|
+| Qwen3.8-27B-DT-IQ2_S MTP d2 (8K cram, ngl 48) | **4/6** | 85–620 |
+
+Fails the same two tasks as its ThinkingCap finetune (React contract, TS migration) at
+roughly 2× the wall time (4.6–5.3 tok/s vs the finetune's 9.6): the Q2_K-choice finding
+from decode tests carries over to agent loops — pick the finetune's Q2_K build, not the
+IQ2_S one, when the file class is available. SSD copy of the DT file deleted after the
+bench (archive original SHA 993c276e… stands).
