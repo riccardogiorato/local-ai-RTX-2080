@@ -27,11 +27,14 @@ They move into the README queue only when they're actually going to be tested:
 
 - being tested → see [README queue](README.md#test-queue)
 
-## Ternary Bonsai-2 27B (PTQ1_0 / PQ2_0 + MTP drafters)
+## Ternary Bonsai-2 27B — ✅ TESTED 2026-09-25, verdict overturned
 
-Weights already on NVMe. On hold: community reports on the ternary family question its
-generation quality in open-ended user tests, and the PrismML runtime is not a registry contract.
-Retest trigger: a mainstream-quality eval showing ternary parity, or a rainy weekend.
+Unparked by owner directive and measured (see
+[recipe](recipes/ternary-bonsai2-27b-ptq1_0-llamacpp-fork.md)): 3/3 capability probes
+thinking-off, AG-Bench 4/6 with the same two family failures as its dense Qwen3.8-27B
+siblings, at 59.3/49.9 tok/s fully resident (5–6× every other 27B here). The "community
+says ternary is too dumb" hold is empirically refuted on this bench. Residual costs:
+fork-only runtime (PTQ1_0 = enum 143; upstream refuses the file) and 8K ctx with MTP.
 
 ## Qwen2.5-Coder 7B Instruct Q4_K_M
 
