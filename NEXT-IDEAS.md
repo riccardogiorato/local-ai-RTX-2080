@@ -36,10 +36,13 @@ siblings, at 59.3/49.9 tok/s fully resident (5–6× every other 27B here). The 
 says ternary is too dumb" hold is empirically refuted on this bench. Residual costs:
 fork-only runtime (PTQ1_0 = enum 143; upstream refuses the file) and 8K ctx with MTP.
 
-## Qwen2.5-Coder 7B Instruct Q4_K_M
+## Qwen2.5-Coder-7B — ✅ TESTED 2026-09-25, old verdict CONFIRMED with mechanism
 
-In the HF cache backup. Legacy retest candidate (Windows lab: ~72 tok/s, 0/3 short agent tasks)
-— engines moved since; the verdict probably hasn't changed, but it would be cheap to re-run.
+Re-fetched fresh (the "HF cache backup" entry was an empty skeleton), retested on the
+modern engine: 73/78 tok/s (matches Windows ~72 to the digit), chat+coding probes pass,
+**AG-Bench 0/6** — identical to the Windows 0/3, now with the cause documented: it emits
+tool calls as literal JSON text instead of structured tool_calls, so it never engages a
+single real tool in an agent loop (evidence/qwen25-coder-7b-q4km.jsonl).
 
 ## MiniCPM5-2B DSpark
 
