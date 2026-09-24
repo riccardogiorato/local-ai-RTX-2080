@@ -76,5 +76,6 @@ container capabilities, `--prio 1` is the working value.
 
 ## Storage
 
-10.86 GB on the SSD workbench until tested-and-committed — then rotates to the archive
-drive per the storage rule (blocked only by the read-only mount, pending owner decision).
+Rotated 2026-09-24 to /mnt/archive/local-models/rtx2080-tested-2026-09/thinkingcap-27b/
+(SHA 06063b16… verified). Two 27B sets remain deliberately on SSD: the DT-IQ2_S file
+(active bench) and the live Qwen3.5 pair.

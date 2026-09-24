@@ -72,5 +72,5 @@ sudo docker run --gpus all -p 8080:8080 -v ~/models/gemma-4-e4b-qat:/models:ro -
 
 ## Storage
 
-Both GGUFs stay on the SSD workbench for now (4.22 GB + 98.7 MB — the active fast-slot
-model); they rotate to the archive drive per the storage rule if the slot is reassigned.
+Rotated 2026-09-24 to /mnt/archive/local-models/rtx2080-tested-2026-09/gemma-4-e4b-qat/
+(SHA-verified per file; SSD workbench copy deleted after the recipe was committed).
