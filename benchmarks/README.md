@@ -51,3 +51,20 @@ bash benchmarks/agentic-bench.sh <model-label> [seconds-cap]
 - Ranking by pass rate alone is incomplete: report wall time alongside, and remember
   decode class matters (novel-prose speeds in `prompts/decode-isolation.txt` runs are the
   realistic agent-workload class, not the repetitive best case).
+## Results (2026-09-24, RTX 2080 8GB, pi 0.87.1, llama.cpp b11118)
+
+| Model | Pass | Wall s/task (passing) | Failure style |
+|---|---|---|---|
+| Qwen3.5-9B MTP d4 (32K, registry config) | **5/6** | 14–199 | one flail (220 s React, overrun) |
+| ThinkingCap-Qwen3.8-27B Q2_K MTP d2 (8K cram) | **4/6** | 115–295 | flails on the two template-heavy tasks |
+| Gemma 4 E4B QAT MTP d2 (8K) | **3/6** | 18–33 | premature stop: narrates fixes, quits mid-task |
+
+Readings:
+- Slow-smart wins agent loops more than raw speed: the 27B at ~10 tok/s beats the
+  181 tok/s Gemma because it keeps working until verify passes.
+- Micro-probe capability (3/3 for all three) does not predict agent survival;
+  the split is in loop discipline, per-task iteration and early termination.
+- Two zero-byte-silent batches (one Gemma, one ThinkingCap) were pi-side transients
+  after container swaps — kept as `INVALID-*` files; the runner now warm-up gates.
+- Temperature is NOT pinned by the runner (pi default); one task (Gemma cart)
+  flipped pass→fail across runs. Pin it before treating ranks as final.
