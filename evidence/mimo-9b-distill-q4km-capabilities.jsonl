@@ -1,0 +1,8 @@
+{"event": "request", "at": "2026-09-24T09:29:05.967055Z", "test": "chat", "model": "MiMo-9B-Distill-Q4_K_M"}
+{"event": "result", "at": "2026-09-24T09:29:06.724093Z", "test": "chat", "ok": true, "expected": "less", "elapsed_ms": 757, "completion_tokens": 34, "prompt_tokens": 108, "content": "The train that left Florence spends less time in transit (1 hour 30 minutes) compared to the one that left Rome (1 hour 31 minutes).", "reasoning_len": 0}
+{"event": "request", "at": "2026-09-24T09:29:06.724156Z", "test": "coding", "model": "MiMo-9B-Distill-Q4_K_M"}
+{"event": "result", "at": "2026-09-24T09:29:07.582113Z", "test": "coding", "ok": true, "executed": true, "error": null, "elapsed_ms": 858, "completion_tokens": 46, "content": "def dist(a, b):\n    total = 0\n    for x, y in zip(a, b):\n        total += (x - y) ** 2\n    return total\n"}
+{"event": "request", "at": "2026-09-24T09:29:07.582152Z", "test": "tools", "model": "MiMo-9B-Distill-Q4_K_M", "continuation": true}
+{"event": "tool_call", "at": "2026-09-24T09:29:08.035804Z", "test": "tools", "name": "get_weather", "arguments": {"city": "Turin"}, "finish_reason": "tool_calls", "call_ms": 454}
+{"event": "result", "at": "2026-09-24T09:29:08.460414Z", "test": "tools", "ok": true, "stage": "continuation", "content": "It's **17°C with light rain** in Turin right now.", "elapsed_ms": 425}
+{"event": "summary", "at": "2026-09-24T09:29:08.460495Z", "recipe": "mimo-9b-distill-q4km", "chat": true, "coding": true, "tools": true}

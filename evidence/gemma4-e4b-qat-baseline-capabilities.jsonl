@@ -1,0 +1,8 @@
+{"event": "request", "at": "2026-09-24T09:19:13.296976Z", "test": "chat", "model": "Gemma4-E4B-QAT"}
+{"event": "result", "at": "2026-09-24T09:19:16.655115Z", "test": "chat", "ok": false, "expected": "less", "elapsed_ms": 3358, "completion_tokens": 300, "prompt_tokens": 115, "content": "", "reasoning_len": 906}
+{"event": "request", "at": "2026-09-24T09:19:16.655152Z", "test": "coding", "model": "Gemma4-E4B-QAT"}
+{"event": "result", "at": "2026-09-24T09:19:20.210299Z", "test": "coding", "ok": true, "executed": true, "error": null, "elapsed_ms": 3555, "completion_tokens": 322, "content": "def dist(a, b):\n    total = 0\n    for x, y in zip(a, b):\n        total += (x - y)**2\n    return total\n"}
+{"event": "request", "at": "2026-09-24T09:19:20.210351Z", "test": "tools", "model": "Gemma4-E4B-QAT", "continuation": true}
+{"event": "tool_call", "at": "2026-09-24T09:19:21.244169Z", "test": "tools", "name": "get_weather", "arguments": {"city": "Turin"}, "finish_reason": "tool_calls", "call_ms": 1034}
+{"event": "result", "at": "2026-09-24T09:19:22.204655Z", "test": "tools", "ok": true, "stage": "continuation", "content": "The weather in Turin right now is light rain with a temperature of 17°C.", "elapsed_ms": 960}
+{"event": "summary", "at": "2026-09-24T09:19:22.204742Z", "recipe": "gemma4-e4b-qat-baseline", "chat": false, "coding": true, "tools": true}
