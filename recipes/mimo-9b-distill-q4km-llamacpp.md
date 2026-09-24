@@ -65,5 +65,5 @@ runtime can't speculate anyway.
 
 ## Storage
 
-Per the rotation rule the 5.4 GB Q4_K_M moves to the archive drive after this recipe was
-committed (its parent stays live as the recommended 9B).
+Rotated 2026-09-24 to /mnt/archive/local-models/rtx2080-tested-2026-09/mimo-9b/
+(SHA 4bca6f18… verified; the parent 9B remains the live recommendation).
