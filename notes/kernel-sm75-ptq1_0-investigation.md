@@ -39,3 +39,36 @@ ratio is the highest-value kernel target on this card (serve 59 → 65–70 tok/
 more than chasing the last 37% at n=1.
 
 Next: measure the exact n-slope (b=1,2,3,5), then attack the batch path.
+
+## Resolution (2026-09-25 morning)
+
+**The goal's INT8-tensor-core kernel already exists in the fork and runs on this card.**
+Proof: `cuobjdump -sass libggml-cuda.so | grep -c IMMA` = **173,049 sites** in our sm_75
+build — the PTQ1_0 tile loader (branch-free trit decode feeding `TURING_MMA_AVAILABLE`
+mma.sync fragments) and the guarded edge tiles ARE the ternary tensor-core kernel;
+`TURING_MMA_AVAILABLE` is defined for `__CUDA_ARCH__ >= 750`.
+
+**Evaluation of the tensor-core path on SM75:**
+| path | pp512 | note |
+|---|---|---|
+| INT8-MMA tiles (fork default) | 580.65 tok/s | accuracy-correct; fork's default validated |
+| cuBLAS fp16-dequant (env knob) | 596.05 tok/s | +2.5% at the documented accuracy loss — the fork's accuracy choice holds on SM75 |
+
+**kn-4: SM75 retune of the batch-crossover cap (fork constant was RTX-3060-tuned):**
+| n | PT mat-vec (ppN tok/s) | MMQ tiles (ppN tok/s) | winner |
+|---|---|---|---|
+| 2 | 67.29 | 35.34 | PT 1.9x |
+| 3 | 88.51 | 55.52 | PT 1.6x |
+| 4 | 85.33 | 74.48 | PT 1.15x |
+| 5 (control, both take tiles) | 90.24 | 90.79 | equal — sanity check |
+
+The MMQ tile pass has a flat ~55–56 ms floor (n-independent through 8) vs the mat-vec's
+22.2 ms single-token cost: tiles need ≥5 columns to amortize on TU104. **The fork's
+cap=4 is correct for SM75** — no change warranted; fork defaults validated on this card
+and the kn-sm75-tune branch returned clean to upstream 285542d.
+
+**Serve implications:** Bonsai/Swift MTP d1 (n=2) pays 29.8 ms/pass — 1.34× a single
+token, better than the serve-era 1.52× estimate implied; d4 (n=5) rides the tiles at
+11.1 ms/token. The d1 serving choice (graft README default) is optimal on this card.
+
+Artifacts: `notes/roofline_probe_sm75.cu` (from-scratch calibration kernel).
