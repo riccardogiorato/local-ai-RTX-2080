@@ -142,3 +142,9 @@ treat unseen-final-score runs with one extra `git status` on the repo.
 | Model | Pass | Decode | Note |
 |---|---|---|---|
 | Gemma-4-12B QAT Q4_K_XL + Q4_0 MTP head d2 (ngl 45, 6.70 GB pair) | **3/6** | 29.4 tok/s (acc 0.92) | one-size-up E4B does not fit: even the Q4 head forces 2 layers off GPU; differs from E4B by additionally failing pagination |
+
+### Qwen3.5-35B-A3B experts-on-CPU (2026-09-25): the first 35B on this card
+
+| Model | Pass | Decode | Note |
+|---|---|---|---|
+| Qwen3.5-35B-A3B UD-Q3_K_M + MTP-ONLY head d4, `--override-tensor exps=CPU` (4.57 GB GPU) | **3/6** (@ cap 900) | 9.3 / 8.5 steady → **1.5 in deep turns** | acc 0.77/0.61 (mean 3.4-4.1); 16GB-RAM handicap vs the recipe's 28-32 GB baseline; becomes the smart-slot champion if this box grows RAM |
