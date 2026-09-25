@@ -61,6 +61,7 @@ recorded in the recipe — so the workbench never fills up.
 | [recipes/ternary-bonsai2-27b-ptq1_0-llamacpp-fork.md](recipes/ternary-bonsai2-27b-ptq1_0-llamacpp-fork.md) | llama.cpp fork host build (PrismML/sudoingX @ 285542d) | 8K | **59.3 / 49.9 tok/s** (MTP d1, full offload) | — | 🔬 lab-verified · fast-27B slot champion |
 | [recipes/swift15-27b-iq2xs-mtp-llamacpp.md](recipes/swift15-27b-iq2xs-mtp-llamacpp.md) | llama.cpp (docker · cram ngl 40 · MTP d2) | 8K | 4.4 / 4.3 tok/s (acc 0.745) | 275 tok/s class | 🔬 lab-verified · quant-bound (IQ2_XS tax) |
 | [recipes/lfm25-8b-a1b-dspark-llamacpp.md](recipes/lfm25-8b-a1b-dspark-llamacpp.md) | llama.cpp (docker · resident MoE · DSpark sidecar d4) | 32K | **221 / 200 tok/s** (fastest on card) | ~500 tok/s | 🔬 lab-verified · speed-slot record · AG-Bench 0/6 |
+| [recipes/qwen35-35b-a3b-cpuexperts-llamacpp.md](recipes/qwen35-35b-a3b-cpuexperts-llamacpp.md) | llama.cpp (docker · MoE, experts in RAM · MTP head d4) | 8K | 9.3 / 8.5 tok/s steady (1.5 in deep agent turns) | 3.65–6.47 tok/s | 🔬 lab-verified · first 35B on card (4.57 GB!) · AG-Bench 3/6 @ cap 900 |
 | [evidence only, no recipe](evidence/gemma12b-qat-mtp.jsonl) | llama.cpp (docker · 6.70 GB pair → ngl 45 + Q4 MTP head) | 8K | 29.4 / 43.5 tok/s (acc 0.92/0.70) | ~90 tok/s | 🔬 lab-verified · 12 GB-class model wanting 8 GB · AG-Bench 3/6 |
 
 Every recipe file records: the exact OpenWeights artifact (repository, revision, SHA-256), the
