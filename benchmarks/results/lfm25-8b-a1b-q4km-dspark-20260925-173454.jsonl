@@ -1,0 +1,6 @@
+{"model": "lfm25-8b-a1b-q4km-dspark", "task": "task1-js-bugfix", "passed": false, "wall_s": 2, "tool_calls": 0, "finish": "unknown"}
+{"model": "lfm25-8b-a1b-q4km-dspark", "task": "task2-react-fix", "passed": false, "wall_s": 87, "tool_calls": 22, "finish": "unknown"}
+{"model": "lfm25-8b-a1b-q4km-dspark", "task": "task3-dep-upgrade", "passed": false, "wall_s": 3, "tool_calls": 0, "finish": "unknown"}
+{"model": "lfm25-8b-a1b-q4km-dspark", "task": "task4-python-bugfix", "passed": false, "wall_s": 9, "tool_calls": 8, "finish": "unknown"}
+{"model": "lfm25-8b-a1b-q4km-dspark", "task": "task5-js-to-ts", "passed": false, "wall_s": 2, "tool_calls": 0, "finish": "unknown"}
+{"model": "lfm25-8b-a1b-q4km-dspark", "task": "task6-extra-code-task", "passed": false, "wall_s": 42, "tool_calls": 54, "finish": "unknown"}

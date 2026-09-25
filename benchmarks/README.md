@@ -125,3 +125,14 @@ under its true name after verification.
 |---|---|---|---|
 | Swift-1.5-27B GSQ-RCO IQ2_XS-mtp (cram ngl 40) | **3/6** | 4.4/4.3 tok/s, acc 0.745 | unique family failure: python task; IQ2_XS-on-CPU is the limiter |
 | ThinkingCap Q2K @32K KV-RAM (ngl 41) | 4/6 | — | identical fail set to its 8K profile: family failures are reasoning-style, not context limits |
+
+### LFM2.5-8B-A1B + DSpark (2026-09-25): speed-record 0/6
+
+| Model | Pass | Decode | Note |
+|---|---|---|---|
+| LFM2.5-8B-A1B Q4_K_M + DSpark d4 (32K, full offload) | **0/6** | **221/200 tok/s** | record decode AND record-low bench — 3 tasks engaged zero tools |
+
+**Harness hazard (standing):** this batch's task6 run escaped the work dir and edited the
+master task source in the repo (git-reverted; nothing committed). The runner now restores
+task sources from git before each task. Workdir isolation is NOT enforced by the harness —
+treat unseen-final-score runs with one extra `git status` on the repo.

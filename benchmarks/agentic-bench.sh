@@ -14,6 +14,7 @@ OUT="$BENCH_DIR/results/${LABEL}-$(date +%Y%m%d-%H%M%S).jsonl"
 mkdir -p "$BENCH_DIR/results" /tmp/agentic-run
 
 run_task() {
+  restore_master_if_dirty
   local task_dir="$1" task_name
   task_name=$(basename "$task_dir")
   local work="/tmp/agentic-run/${LABEL}/${task_name}"
@@ -48,6 +49,17 @@ EOF
 }
 
 echo "AG-Bench model=$LABEL cap=${CAP}s"
+# master-source integrity: heard from the LFM run — models can escape the work dir and
+# edit task sources in the repo. Hash everything now; re-check BEFORE each task and restore
+# from git if a previous run trampled them.
+MASTER_INTEGRITY=/tmp/agentic-master-hashes.$$.txt
+(cd "$TASKS_DIR" && find task* -type f ! -path '*/node_modules/*' | sort | xargs sha256sum) > "$MASTER_INTEGRITY" 2>/dev/null
+restore_master_if_dirty() {
+  (cd "$(dirname "$TASKS_DIR")" && git diff --quiet -- benchmarks/agentic-tasks/ 2>/dev/null) && return 0
+  echo "WARN: master task sources were modified during the bench — restoring from git" >&2
+  (cd "$(dirname "$TASKS_DIR")" && git checkout -- benchmarks/agentic-tasks/ 2>/dev/null)
+  (cd "$TASKS_DIR" && find task* -type f ! -path '*/node_modules/*' | sort | xargs sha256sum) > "$MASTER_INTEGRITY" 2>/dev/null
+}
 # slots-readiness gate (see NOTE above)
 for i in $(seq 1 90); do
   curl -s --max-time 3 localhost:8080/slots 2>/dev/null | grep -q '"id"' && { echo "slots ready after $((i*2))s"; break; }
