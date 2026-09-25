@@ -118,3 +118,10 @@ Infra truth found in the small hours: a draft-context server answers /health dur
 The runner now gates on /slots readiness. One batch of results (mislabeled
 swift-bonsai2-katana, actually measured MiniCPM due to a port hijack) was re-adopted
 under its true name after verification.
+
+### Sprint additions (2026-09-25): Swift1.5-27B + backlog runs
+
+| Model | Pass | Decode | Note |
+|---|---|---|---|
+| Swift-1.5-27B GSQ-RCO IQ2_XS-mtp (cram ngl 40) | **3/6** | 4.4/4.3 tok/s, acc 0.745 | unique family failure: python task; IQ2_XS-on-CPU is the limiter |
+| ThinkingCap Q2K @32K KV-RAM (ngl 41) | 4/6 | — | identical fail set to its 8K profile: family failures are reasoning-style, not context limits |

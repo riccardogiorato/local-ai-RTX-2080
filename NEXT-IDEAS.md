@@ -7,7 +7,6 @@ README queue the moment they're actually going to be run.
 - being tested → see [README queue](README.md#test-queue)
 - already tested → see [recipes/](recipes/) and the [AG-Bench leaderboard](benchmarks/README.md)
 
-## Swift1.5-27B GSQ-RCO IQ2_XS-mtp — ✅ TESTED 2026-09-25, see recipes
 
 ## Swift Flash Next (UkisAI) — blocked, cannot run on this card
 
