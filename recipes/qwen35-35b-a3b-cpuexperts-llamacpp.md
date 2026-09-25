@@ -72,8 +72,9 @@ Evidence: [evidence/qwen35-35b-a3b-mtp.jsonl](../evidence/qwen35-35b-a3b-mtp.jso
 
 ## Storage
 
-Both files stay on SSD for now (the 17.4 GB pair is tonight's active experiment); rotates
-per the storage rule when its slot is not current.
+Rotated 2026-09-26 to `/mnt/archive/local-models/rtx2080-tested-2026-09/qwen35-35b-a3b/`
+— both SHAs re-verified post-move against the recipe pins (c2d46cfa… / 14639932…).
+Re-fetch at the pinned revision if the slot returns.
 
 ## Notes
 
