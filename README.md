@@ -59,6 +59,7 @@ recorded in the recipe — so the workbench never fills up.
 | [recipes/kev-05b-serve.md](recipes/kev-05b-serve.md) | Python/torch serve (CUDA on SM75) | n/a | 240–256 ms / 3 questions | — | 🔬 lab-verified · 146 MiB router |
 | [recipes/laya-serve.md](recipes/laya-serve.md) | Python/torch serve (ModernBERT-large) | n/a | **27 ms** / 3 questions | — | 🔬 lab-verified · 2.66 GB router |
 | [recipes/ternary-bonsai2-27b-ptq1_0-llamacpp-fork.md](recipes/ternary-bonsai2-27b-ptq1_0-llamacpp-fork.md) | llama.cpp fork host build (PrismML/sudoingX @ 285542d) | 8K | **59.3 / 49.9 tok/s** (MTP d1, full offload) | — | 🔬 lab-verified · fast-27B slot champion |
+| [recipes/swift15-27b-iq2xs-mtp-llamacpp.md](recipes/swift15-27b-iq2xs-mtp-llamacpp.md) | llama.cpp (docker · cram ngl 40 · MTP d2) | 8K | 4.4 / 4.3 tok/s (acc 0.745) | 275 tok/s class | 🔬 lab-verified · quant-bound (IQ2_XS tax) |
 
 Every recipe file records: the exact OpenWeights artifact (repository, revision, SHA-256), the
 runtime image digest, full launch settings (context size, KV precision, batch/ubatch, sampler
