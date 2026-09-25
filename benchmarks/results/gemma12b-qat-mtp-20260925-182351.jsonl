@@ -1,0 +1,6 @@
+{"model": "gemma12b-qat-mtp", "task": "task1-js-bugfix", "passed": true, "wall_s": 62, "tool_calls": 24, "finish": "unknown"}
+{"model": "gemma12b-qat-mtp", "task": "task2-react-fix", "passed": false, "wall_s": 167, "tool_calls": 10, "finish": "unknown"}
+{"model": "gemma12b-qat-mtp", "task": "task3-dep-upgrade", "passed": true, "wall_s": 183, "tool_calls": 36, "finish": "unknown"}
+{"model": "gemma12b-qat-mtp", "task": "task4-python-bugfix", "passed": true, "wall_s": 44, "tool_calls": 18, "finish": "unknown"}
+{"model": "gemma12b-qat-mtp", "task": "task5-js-to-ts", "passed": false, "wall_s": 226, "tool_calls": 58, "finish": "unknown"}
+{"model": "gemma12b-qat-mtp", "task": "task6-extra-code-task", "passed": false, "wall_s": 115, "tool_calls": 13, "finish": "unknown"}
