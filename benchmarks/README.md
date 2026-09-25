@@ -136,3 +136,9 @@ under its true name after verification.
 master task source in the repo (git-reverted; nothing committed). The runner now restores
 task sources from git before each task. Workdir isolation is NOT enforced by the harness —
 treat unseen-final-score runs with one extra `git status` on the repo.
+
+### Gemma-4-12B QAT + MTP head (2026-09-25)
+
+| Model | Pass | Decode | Note |
+|---|---|---|---|
+| Gemma-4-12B QAT Q4_K_XL + Q4_0 MTP head d2 (ngl 45, 6.70 GB pair) | **3/6** | 29.4 tok/s (acc 0.92) | one-size-up E4B does not fit: even the Q4 head forces 2 layers off GPU; differs from E4B by additionally failing pagination |
