@@ -58,3 +58,18 @@ numbers are directly comparable with public tables. CPU-only effort, zero risk.
 Recipe tested typed-decisions only; `LAYA_MODELS=multilingual` (the generative 421M
 variant) is untested. Low priority: 2.66 GB VRAM for a router whose typed-decision
 sibling already trails kev on our probes.
+
+## trymirai Qwen3.8-27B-S-experimental (Mirai S codec, 2026-09-25) — blocked, triggers recorded
+
+The "27B in 8.45 GB at 60 tok/s on a 3090" tweet model. Same graveyard as OrcaSAQ, three
+doors and all closed on this card: (1) uzu runtime is Apple-silicon-only; (2) the vLLM
+`mirai_s` plugin explicitly requires compute capability **8.0+** (README-documented — our
+sm_75 Turing is below the floor, and vLLM 0.30 itself has no Turing support); (3) **no GGUF
+and no llama.cpp path** — the codec is QTIP/trellis-family (the uzu branch is
+`ryan/qtip-s-agent`), so a conversion would have to dequantize it, which destroys the whole
+size point. Also 8.45 GB > 8 GB VRAM — even a hypothetical GGUF would be a partial-offload
+cram like ThinkingCap. The whole trymirai family (Qwen3.5-4B/9B-M/L included) is tagged
+uzu/safetensors/mirai only. Retry triggers: trymirai ships a llama.cpp/GGUF path, a Turing
+build of the plugin (unlikely — the trellis kernels use sm_80+ ops by design), or an Ampere+
+box dequantizes it once like castkit would for OrcaSAQ. Until one lands: our dense Qwen3.8-27B
+rows already record the "slow-smart 27B" experience this model family promises.
