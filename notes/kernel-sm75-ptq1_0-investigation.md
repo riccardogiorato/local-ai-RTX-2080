@@ -72,3 +72,10 @@ token, better than the serve-era 1.52× estimate implied; d4 (n=5) rides the til
 11.1 ms/token. The d1 serving choice (graft README default) is optimal on this card.
 
 Artifacts: `notes/roofline_probe_sm75.cu` (from-scratch calibration kernel).
+
+## Postscript: TC-32K KV-RAM AG-Bench (2026-09-25, experiment #2 of the backlog sprint)
+
+thinkingcap-27b-q2k-32k-kvram: 4/6 — same pass-set as its 8K profile (React and
+JS→TS both fail at the 480 s cap, not from truncation). Conclusion: the family's two
+standing failures are reasoning-style, not context-window, limits; the KV-in-RAM
+profile (4x context, ~15% decode cost) changes nothing in agent-loop outcomes.
