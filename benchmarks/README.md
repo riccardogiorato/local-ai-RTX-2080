@@ -105,3 +105,16 @@ bench (archive original SHA 993c276e… stands).
 
 Ties the 27B family (same React/TS failures) at 5–6× their speed — the "ternary too dumb"
 verdict is refuted on this bench.
+
+### Night-final additions (2026-09-25 morning): Swift Bonsai 2 + MiniCPM-DSpark
+
+| Model | Pass | Decode (rep/novel) | Notes |
+|---|---|---|---|
+| Swift-Bonsai-2-27B Katana MTP (owner-approved; UkisAI reasoning-efficiency finetune) | **4/6** | 57 / 48 tok/s | identical pass-set + failures to vanilla Bonsai-2 — the efficiency finetune costs nothing on this scaffold; walls 17–105 s |
+| MiniCPM5-2B + DSpark drafter (d4) | 2/6 | ~60 / 180.5 tok/s | DSpark works: acceptance 0.43–0.71, mean 2.7–3.8; novel-class at 180 tok/s is the fastest tiny-model decode measured here — the Windows-era "DSpark made it slower" inverts on b11118 for novel text |
+
+Infra truth found in the small hours: a draft-context server answers /health during
+"Loading model" and 503s completions for 30–60 s — every prior 'wedge' was this window.
+The runner now gates on /slots readiness. One batch of results (mislabeled
+swift-bonsai2-katana, actually measured MiniCPM due to a port hijack) was re-adopted
+under its true name after verification.

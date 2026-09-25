@@ -48,6 +48,14 @@ EOF
 }
 
 echo "AG-Bench model=$LABEL cap=${CAP}s"
+# slots-readiness gate (see NOTE above)
+for i in $(seq 1 90); do
+  curl -s --max-time 3 localhost:8080/slots 2>/dev/null | grep -q '"id"' && { echo "slots ready after $((i*2))s"; break; }
+  sleep 2
+done
+# NOTE: gate readiness on /slots, not /health — draft-context models (DSpark etc.)
+# answer /health while still in "Loading model" and 503 every completion for ~30-60s.
+
 # Warm-up gate: a trivial pi invocation must complete before the batch runs.
 # Empirically, the first pi batch launched right after a container swap can hang
 # client-side with zero-byte sessions; a successful warm-up clears it.
