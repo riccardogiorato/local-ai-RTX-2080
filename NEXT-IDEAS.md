@@ -7,20 +7,13 @@ README queue the moment they're actually going to be run.
 - being tested → see [README queue](README.md#test-queue)
 - already tested → see [recipes/](recipes/) and the [AG-Bench leaderboard](benchmarks/README.md)
 
-## Qwen3.8-27B + DFlash2 drafter (unblocked by the 2026-09-25 MiniCPM-DSpark run)
+## Swift1.5-27B GSQ-RCO IQ2_XS-mtp — ✅ TESTED 2026-09-25, see recipes
 
-The DFlash2 ~1.1 GB sidecar drafters exist as public GGUFs (incoai Q4_K_M;
-andrew-paul Q3_K_M/Q2_K calibrations, claimed acceptance 64–66%). We now know how
-to serve `--spec-type draft-dflash -md` on this engine (proven with MiniCPM's DSpark).
-Test: dense Qwen3.8-27B and/or ThinkingCap with the DFlash2 drafter vs their
-embedded-MTP profiles — the drafter family the earlier lab never de-blocked.
-Owner approval needed for the ~0.7–1.1 GB download.
+## Swift Flash Next (UkisAI) — blocked, cannot run on this card
 
-## Swift1.5-27B and Swift Flash Next (UkisAI)
-
-The rest of the Swift family (owner approved only Swift Bonsai 2 so far). Swift1.5-27B
-claims −58.5% thinking tokens with better Terminal-Bench 2.1; Flash Next −63.4%.
-GSQ-RCO quants announced for both. Test after owner approval + quant landed.
+~250 GB-class model; the smallest public quant (IQ1_S, 65 GB split) exceeds any
+mmap/RAM path on this machine (16 GB RAM). Same verdict family as Diffusion Gemma.
+Retry trigger: an ultra-low-bpw sub-8 GB build appears or a much larger machine.
 
 ## OrcaSAQ-2-27B (orcarouter) — blocked, triggers recorded
 
