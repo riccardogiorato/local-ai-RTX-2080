@@ -124,7 +124,8 @@ under its true name after verification.
 | Model | Pass | Decode | Note |
 |---|---|---|---|
 | Swift-1.5-27B GSQ-RCO IQ2_XS-mtp (cram ngl 40) | **3/6** | 4.4/4.3 tok/s, acc 0.745 | unique family failure: python task; IQ2_XS-on-CPU is the limiter |
-| ThinkingCap Q2K @32K KV-RAM (ngl 41) | 4/6 | — | identical fail set to its 8K profile: family failures are reasoning-style, not context limits |
+| ThinkingCap Q2K @32K KV-RAM (ngl 41, cap 480) | 4/6 | 7.6/6.0 tok/s (decode) | identical fail set to its 8K profile: family failures are reasoning-style, not context limits |
+| ↳ reproduced 2026-09-26 @ngl 38 / cap 600 | **4/6** | same four passes, same two failures (js 600s-cap/27 calls, React ❌, date-fns 600s-cap/43, python 131s, TS ❌, pagination 292s) | double-confirmed. Serving boundary learned: ngl 41 fits at load (7646 MiB) but its agent-context graph recapture can CUDA-OOM when ambient desktop VRAM is high — first attempt crashed after task1 (kept as INVALID); ngl 38 (7236 MiB) survives soak at 12K-token fills. ngl 41 is a morning-config, ngl 38 is the safe default |
 
 ### LFM2.5-8B-A1B + DSpark (2026-09-25): speed-record 0/6
 

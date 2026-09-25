@@ -77,8 +77,19 @@ per the storage rule when its slot is not current.
 
 ## Notes
 
-- Loader warns mmap + tensor overrides recommend `--load-mode none` — parking that for a
-  possible +few-% follow-up if the slot is revisited.
-- `--threads 6` matches physical cores; oversubscription experiments (4/8) not tried.
+- **`--load-mode none` is BANNED on 16 GB RAM — it froze the whole machine**
+  (2026-09-26): it disables mmap and force-reads the entire 17.4 GB pair into RAM;
+  systemd-oomd hit 89.67% pressure and the kernel page-fault-stormed into a hard
+  lockup requiring a reboot. The loader warning that "recommends" it alongside
+  tensor overrides is wrong for this box — mmap (default) is the only safe load mode
+  here (evidence row `boundary_load_mode_none`). Every serve of a >12 GB model on
+  this machine now runs with a `--memory 13g` cgroup guard so a bad config dies in
+  its container instead of the desktop.
+- **Threads sweep (4/6/8): indistinguishable in steady state** (±5% noise,
+  evidence row `followup_threads_sweep`). The sweep's real discovery:
+  fully-warmed short-context decode is **~20 tok/s on both prompt classes** —
+  2.3× the 9.29/8.52 recorded mid-bench-session (that figure was measured under
+  real memory pressure; the deep-agent collapse to 1.5 tok/s sits under it).
+  Recipe keeps `--threads 6`.
 - The 900 s cap reveals what the 480 s cap hides: this model class *can* complete
   agent tasks, just 13+ minutes at a time.

@@ -10,6 +10,28 @@ IQ4_XS-MIX (12.5 GB, more CPU offload) and the abliterated i1 builds.
 - **The quant kept the embedded MTP head** (blk.64/nextn) — unlike Xiaomi MiMo's dropped head,
   draft-mtp works here
 
+## The 32K KV-in-RAM serving profile
+
+`--no-kv-offload`: KV lives in system RAM (host RSS +1.0 GiB), trading ~10–20%
+decode for 4× context. Decode measured **7.6/6.0 tok/s** (novel acceptance actually
+*improved* vs GPU-KV: 0.595 vs 0.437).
+
+| AG-Bench at 32K | Result |
+|---|---|
+| 2026-09-25 (ngl 41, cap 480) | **4/6** — identical pass/fail set to the 8K profile |
+| 2026-09-26 (ngl 38, cap 600) | **4/6** — independent reproduction, same four passes |
+
+**Answer to the profile's open question: context does not flip the family failures.**
+React contract and TS migration fail at both 8K and 32K — reasoning-style limits, not
+context-window limits. Verdict: the 32K profile is a *serving* option for real
+long-context work, not a bench upgrade.
+
+**Serving boundary (2026-09-26):** ngl 41 = 7646 MiB *fits at load*, but
+agent-context graph recapture can CUDA-OOM and segfault the server under high ambient
+desktop VRAM (crashed after task1 on the first attempt — kept as an INVALID batch).
+ngl 38 = 7236 MiB survives soak at 12K-token fills. **Use ngl 38 as the default for
+this profile.**
+
 ## Residency boundary (busy desktop, 8 GB)
 
 | Config | ngl | ubatch | VRAM | Result |
@@ -31,6 +53,23 @@ IQ4_XS-MIX (12.5 GB, more CPU offload) and the abliterated i1 builds.
 (4.6–5.3 tok/s).** Attribution: Q2_K's structured dequant is far cheaper on the CPU band
 than IQ2_S bit-unpacking; on this box, where 24 of 64 layers live on CPU, that dominates.
 MTP acceptance 0.995 on the repetitive prompt (d2 cap ≈ 3.0 mean) doubles it further.
+
+## Thinking-verbosity claim — validated (2026-09-26)
+
+The finetune's design says thinking verbosity should scale with difficulty. Probed
+(temp 0, budget 4000, 32K profile):
+
+| Probe | Reasoning spent | Result |
+|---|---|---|
+| trains riddle (easy — original probe) | **93 tokens** | ✅ short-tracked |
+| factory cum-output month-chain | ~350 tok | ✅ correct (month 17) |
+| 3-speaker knights & knaves | ~250 tok | ✅ unique correct solution |
+| 4-liter jug minimal plan | ~600 tok | ✅ correct 6-step sequence |
+| trains *ill-posed paraphrase* (no times) | **16.2K chars, budget exhausted** | ❌ no answer — and no give-up short-circuit |
+
+**Verbosity scales with difficulty as claimed** — and the degenerate case is its own
+finding: on an unanswerable problem it burns the whole budget silently. Agent
+deployments should always cap thinking.
 
 ## Capabilities
 

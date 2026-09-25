@@ -29,19 +29,6 @@ ThinkingCap Q2_K / Bonsai-2.
 No GGUF, vLLM has no SM75, 26B MoE exceeds 8 GB even at extreme low-bpw. Retry if
 Google ships an E2B/E4B-class diffusion variant or a GGUF appears.
 
-## ThinkingCap / dense-27B: 32K KV-in-RAM profile through the AG-Bench
-
-The KV-in-RAM profile (32K, ngl 41, owner experiment) is decode-measured but never
-agent-benched: do long-context tasks flip any of the family's two standing failures
-(React contract, TS migration)? Cheap: one serve + one bench run.
-
-## Hard-reasoning probe for ThinkingCap's verbosity claim
-
-The finetune short-tracks easy problems (trains riddle in 93 tokens); its
-thinking-verbosity design should only engage at difficulty. Pending: a hard
-reasoning probe (multi-step math/logic) to see whether verbosity scales with
-difficulty as claimed — micro-probe tier, no download.
-
 ## GLM-OCR: real-photo GT regression set
 
 The prior campaign's KFC/CIAO GT sets did not survive the migration; recipes run on
@@ -59,7 +46,54 @@ Recipe tested typed-decisions only; `LAYA_MODELS=multilingual` (the generative 4
 variant) is untested. Low priority: 2.66 GB VRAM for a router whose typed-decision
 sibling already trails kev on our probes.
 
-## trymirai Qwen3.8-27B-S-experimental (Mirai S codec, 2026-09-25) — blocked, triggers recorded
+## Xing4.0-29B-A4B (China Telecom / TeleAI, 2026-09-25) — runnable on fork, candidate
+
+The TeleChat successor: 29B total / 4B active MoE (top-4 of 64 routed + 1 shared),
+MLA (q_lora 768 / kv_lora 512 — near-zero KV pressure on our 8 GB), mHC 4-channel
+hyper-connections, MTP head, 40 layers, 256K native ctx (YARN → 512K), Apache-2.0,
+Chinese-centric, agent-oriented (explicit Claude Code / OpenCode adaptation).
+Verdict: **runnable, same profile class as qwen35-35b-a3b-cpuexperts** — smaller than
+the 35B we already fit, MLA shrinks KV, fork includes MTP (acceptance likely lands in
+the 0.7+ family range, a decode lifeline under zram dips). Runtime is fork-only
+today: `shuxiaoqiong/llama.cpp @ xing4_0-port` (upstream PR #29012 open, awaiting
+2 approvals; cleanup draft #29141), new GGML ops XING4_0_HC_{PRE,COMB,POST}, dual
+CPU/GPU MoE path, nothing SM80+-specific cited — same fork precedent as Bonsai2.
+Artifact: official GGUF is IQ4_NL 20.1 GB — too heavy; use jmarceno's 12.04 GiB
+dynamic DIQ4XS/IQ2_XXS build (imatrix + exact quantize recipe published, MTP block
+quantized) — tight-but-workable in 16 GB RAM + zram, expect the deep-agent-turn
+decode collapse. With 48 GB RAM the whole ladder fits resident instead (official
+IQ4_NL 20.1 GB → Q6_K 23.9 → Q8_0 30.9, no zram cliff at all) — but decode ceiling
+becomes pure CPU arithmetic: 9600K dual-channel ≈ 35 GB/s over ~2.1 B active params
+per token, so ~10-25 tok/s steady *that stays steady*. Unknowns: mHC CUDA path on
+SM75 is brand-new and Turing-unbenched; merge state of #29012 when we get to it.
+
+## Bonsai-2: draft-depth A/B on PTQ1_0 (d2/d3) — cheap retest, flag-flip only
+
+The 2026-09-25 evening 1080 Ti post (86/98/75 tok/s, PQ2_0-MTP + trained head d2)
+confirmed our runtime is already at the #218 kernel head (`285542d` — literally the
+PR `pr-ptq1-mmv` tip we pinned). But our serve inherited `--spec-draft-n-max 1` from
+pre-#218 economics: #218 cut 3-token verify to ~1.55x single on Ampere (3060: pp1 37
+→ pp3 72), so d2/d3 may now pay on OUR card too (we measured 59.3/49.9 at d1; 3060
+Ampere runs ~50 speculative on the same file — we're not behind, but draft depth was
+never A/B'd here). One flag, same weights, re-run both prompt classes + AG-Bench.
+
+## Bonsai-2: trained-head-on-PTQ1_0 graft — needs conversion work
+
+ProCreations published their head *trained against frozen Bonsai 2 hidden states*
+(`model_mtp.safetensors`, BF16, 849 MB, "for conversion or further work") — but only
+combined into the **PQ2_0** 7.66 GB file, which cannot fit an 8 GB card. Grafting the
+trained head onto our PTQ1_0 base (same block-64 splice method as the current graft)
+would give the 1.75 bpw pack a better drafter exactly where the raw graft is weakest
+(novel prose acceptance). Blocked on: doing the splice + verifying acceptance beats
+the raw graft; no download of the model needed beyond the 849 MB head.
+
+## PQ2_0-MTP tier — blocked on card size, direct unlock if a bigger card lands
+
+PQ2_0 (2.13 bpw, 7.66 GB, BoldingBuilds-measured MTP ~37% faster at identical
+weights vs PTQ1_0's pack) + trained head = the artifact the 1080 Ti post measured
+86/98/75 tok/s on (11 GB Pascal). On 8 GB it cannot go resident with useful context.
+Retry triggers: an 11 GB+ card lands in this lab (the giveaway 1080 Ti would be
+exactly that), or a sub-8 GB PQ2_0 derivative appears.
 
 The "27B in 8.45 GB at 60 tok/s on a 3090" tweet model. Same graveyard as OrcaSAQ, three
 doors and all closed on this card: (1) uzu runtime is Apple-silicon-only; (2) the vLLM
