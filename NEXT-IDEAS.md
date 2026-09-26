@@ -67,33 +67,17 @@ becomes pure CPU arithmetic: 9600K dual-channel ≈ 35 GB/s over ~2.1 B active p
 per token, so ~10-25 tok/s steady *that stays steady*. Unknowns: mHC CUDA path on
 SM75 is brand-new and Turing-unbenched; merge state of #29012 when we get to it.
 
-## Bonsai-2: draft-depth A/B on PTQ1_0 (d2/d3) — cheap retest, flag-flip only
-
-The 2026-09-25 evening 1080 Ti post (86/98/75 tok/s, PQ2_0-MTP + trained head d2)
-confirmed our runtime is already at the #218 kernel head (`285542d` — literally the
-PR `pr-ptq1-mmv` tip we pinned). But our serve inherited `--spec-draft-n-max 1` from
-pre-#218 economics: #218 cut 3-token verify to ~1.55x single on Ampere (3060: pp1 37
-→ pp3 72), so d2/d3 may now pay on OUR card too (we measured 59.3/49.9 at d1; 3060
-Ampere runs ~50 speculative on the same file — we're not behind, but draft depth was
-never A/B'd here). One flag, same weights, re-run both prompt classes + AG-Bench.
-
-## Bonsai-2: trained-head-on-PTQ1_0 graft — needs conversion work
-
-ProCreations published their head *trained against frozen Bonsai 2 hidden states*
-(`model_mtp.safetensors`, BF16, 849 MB, "for conversion or further work") — but only
-combined into the **PQ2_0** 7.66 GB file, which cannot fit an 8 GB card. Grafting the
-trained head onto our PTQ1_0 base (same block-64 splice method as the current graft)
-would give the 1.75 bpw pack a better drafter exactly where the raw graft is weakest
-(novel prose acceptance). Blocked on: doing the splice + verifying acceptance beats
-the raw graft; no download of the model needed beyond the 849 MB head.
-
 ## PQ2_0-MTP tier — blocked on card size, direct unlock if a bigger card lands
 
-PQ2_0 (2.13 bpw, 7.66 GB, BoldingBuilds-measured MTP ~37% faster at identical
-weights vs PTQ1_0's pack) + trained head = the artifact the 1080 Ti post measured
+PQ2_0 (2.13 bpw, 7.66 GB) + trained head = the artifact the 1080 Ti post measured
 86/98/75 tok/s on (11 GB Pascal). On 8 GB it cannot go resident with useful context.
-Retry triggers: an 11 GB+ card lands in this lab (the giveaway 1080 Ti would be
-exactly that), or a sub-8 GB PQ2_0 derivative appears.
+**2026-09-26 measured boundary** (while falsifying the trained-head-onto-PTQ1_0
+graft, see the Bonsai-2 recipe): partial offload at ngl 46 / ctx 4096 loads but
+decodes at **2.2 tok/s** — worse than every 27B cram on the ledger; ngl 60 OOMs
+at load. Also proven there: the trained head accepts 0.717/0.585 on our fork via
+their PQ2_0-MTP file (runtime fully compatible). Retry triggers: an 11 GB+ card
+lands in this lab (the giveaway 1080 Ti would be exactly that), or a sub-8 GB
+PQ2_0 derivative appears.
 
 The "27B in 8.45 GB at 60 tok/s on a 3090" tweet model. Same graveyard as OrcaSAQ, three
 doors and all closed on this card: (1) uzu runtime is Apple-silicon-only; (2) the vLLM
@@ -107,3 +91,19 @@ uzu/safetensors/mirai only. Retry triggers: trymirai ships a llama.cpp/GGUF path
 build of the plugin (unlikely — the trellis kernels use sm_80+ ops by design), or an Ampere+
 box dequantizes it once like castkit would for OrcaSAQ. Until one lands: our dense Qwen3.8-27B
 rows already record the "slow-smart 27B" experience this model family promises.
+
+## fafastmobel / Cinference (satellitedown, 2026-09-26) — blocked, triggers recorded
+
+"Qwen3.8-27B delta-transplant (Huihui−Qwen onto UkisAI Swift) in NVFP4/FP8, single
+23.8 GB NInfer v3 file with embedded MTP + z-lab DFlash2 drafter; Cinference fork
+claims rewritten DFlash2 verify kernels +21–37% (8K–131K ctx) and verify-trees +
+prompt lookup up to 895 tok/s, 262K ctx + vision." Four closed doors for this lab:
+(1) kernels compile for **sm_120a only** (Blackwell; README: only 5090 32 GB
+validated, nothing below); (2) NVFP4/FP8 are Ada/Blackwell-native tensor formats —
+SM75 has no hardware path; (3) custom NInfer format, **no GGUF/llama.cpp route** —
+dequant-to-GGUF would destroy the size point (same argument as trymirai); (4) 23.8 GB
+artifact cannot fit 8 GB VRAM under any cram. Design leads (verify trees, prompt
+lookup, in-file DFlash2) join the David19p watch-list — no code adoption. Retry
+triggers: cinference ships a Turing kernel build, a sub-8 GB artifact class, or an
+Ampere+ box dequants once — none likely; our own DFlash2 sidecar trigger (~600 MB
+Q2/Q4 drafter for llama.cpp) remains the live one from this announcement.
