@@ -35,37 +35,11 @@ The prior campaign's KFC/CIAO GT sets did not survive the migration; recipes run
 synthetic images. Pending: a new photographed GT set for the receipt/label class
 (regression-grade, human-verifiable).
 
-## llama-bench micro-tier (internet-comparable numbers)
-
-Optional: add llama-bench pp/tg rows alongside the server-class measurements so our
-numbers are directly comparable with public tables. CPU-only effort, zero risk.
-
 ## laya multilingual checkpoint
 
 Recipe tested typed-decisions only; `LAYA_MODELS=multilingual` (the generative 421M
 variant) is untested. Low priority: 2.66 GB VRAM for a router whose typed-decision
 sibling already trails kev on our probes.
-
-## Xing4.0-29B-A4B (China Telecom / TeleAI, 2026-09-25) — runnable on fork, candidate
-
-The TeleChat successor: 29B total / 4B active MoE (top-4 of 64 routed + 1 shared),
-MLA (q_lora 768 / kv_lora 512 — near-zero KV pressure on our 8 GB), mHC 4-channel
-hyper-connections, MTP head, 40 layers, 256K native ctx (YARN → 512K), Apache-2.0,
-Chinese-centric, agent-oriented (explicit Claude Code / OpenCode adaptation).
-Verdict: **runnable, same profile class as qwen35-35b-a3b-cpuexperts** — smaller than
-the 35B we already fit, MLA shrinks KV, fork includes MTP (acceptance likely lands in
-the 0.7+ family range, a decode lifeline under zram dips). Runtime is fork-only
-today: `shuxiaoqiong/llama.cpp @ xing4_0-port` (upstream PR #29012 open, awaiting
-2 approvals; cleanup draft #29141), new GGML ops XING4_0_HC_{PRE,COMB,POST}, dual
-CPU/GPU MoE path, nothing SM80+-specific cited — same fork precedent as Bonsai2.
-Artifact: official GGUF is IQ4_NL 20.1 GB — too heavy; use jmarceno's 12.04 GiB
-dynamic DIQ4XS/IQ2_XXS build (imatrix + exact quantize recipe published, MTP block
-quantized) — tight-but-workable in 16 GB RAM + zram, expect the deep-agent-turn
-decode collapse. With 48 GB RAM the whole ladder fits resident instead (official
-IQ4_NL 20.1 GB → Q6_K 23.9 → Q8_0 30.9, no zram cliff at all) — but decode ceiling
-becomes pure CPU arithmetic: 9600K dual-channel ≈ 35 GB/s over ~2.1 B active params
-per token, so ~10-25 tok/s steady *that stays steady*. Unknowns: mHC CUDA path on
-SM75 is brand-new and Turing-unbenched; merge state of #29012 when we get to it.
 
 ## PQ2_0-MTP tier — blocked on card size, direct unlock if a bigger card lands
 

@@ -35,7 +35,7 @@ listed here is parked with reasons in [NEXT-IDEAS.md](NEXT-IDEAS.md).
 | 7 | kev-0.5b ([jaredpalmer/kev](https://github.com/jaredpalmer/kev)) — CUDA-on-SM75 works first-try, 146 MiB VRAM, 240 ms/3 questions ✅ [recipe](recipes/kev-05b-serve.md) | typed-decision, single forward pass | ✅ tested |
 | 8 | laya (convaiinnovations, 421M) — 27 ms/3 questions (fastest on this card) but 2.66 GB VRAM; routing trails kev on both probes ✅ [recipe](recipes/laya-serve.md) | typed-decision, `pip install laya` | ✅ tested |
 | 10 | GLiNER 2.5 multi-v1 (fastino, 287M) — measured: **21.8 ms GPU / 78.3 ms CPU** per extraction, 7 structural passes (en+it NER, zero-shot labels, relations, records), 1650 MiB VRAM ✅ [recipe](recipes/gliner25-multi-v1-serve.md) | typed-extraction (non-LLM utility tier, kev/laya class) | ✅ tested |
-| 11 | Xing4.0-29B-A4B (TeleAI) — jmarceno DYN-DIQ4XS-GU2XXS 12.04 GiB @ `6d745c62` · shuxiaoqiong/llama.cpp xing4_0-port fork — 29B/A4B MLA MoE, mHC hyper-connections, MTP; experts-on-CPU class | big-MoE candidate (A3B-class recipe, second 30B-class run) | ⏳ queued |
+| 11 | Xing4.0-29B-A4B (TeleAI) — measured: **4.0 GB VRAM for a 29B** (per-GB record), decode 6.8/5.4–6.3, acceptance 0.91/0.73, prefill 346 tok/s (12× A3B), 4/4 probes incl. thinking-off reasoning, AG-Bench 3/6 fast-exit style ✅ [recipe](recipes/xing4-29b-a4b-dyn-llamacpp-fork.md) | big-MoE candidate (A3B-class recipe, second 30B-class run) | ✅ tested |
 
 | 9 | Bonsai-2 27B ternary PTQ1_0 + MTP graft — measured: **59.3/49.9 tok/s fully resident** (5–6× the other 27Bs), 3/3 probes thinking-off, AG-Bench 4/6 ✅ [recipe](recipes/ternary-bonsai2-27b-ptq1_0-llamacpp-fork.md) | 1.75 bpw ternary of dense Qwen3.8-27B, fork runtime | ✅ tested |
 
@@ -66,6 +66,7 @@ recorded in the recipe — so the workbench never fills up.
 | [recipes/qwen35-35b-a3b-cpuexperts-llamacpp.md](recipes/qwen35-35b-a3b-cpuexperts-llamacpp.md) | llama.cpp (docker · MoE, experts in RAM · MTP head d4) | 8K | 9.3 / 8.5 tok/s steady (1.5 in deep agent turns) | 3.65–6.47 tok/s | 🔬 lab-verified · first 35B on card (4.57 GB!) · AG-Bench 3/6 @ cap 900 |
 | [evidence only, no recipe](evidence/gemma12b-qat-mtp.jsonl) | llama.cpp (docker · 6.70 GB pair → ngl 45 + Q4 MTP head) | 8K | 29.4 / 43.5 tok/s (acc 0.92/0.70) | ~90 tok/s | 🔬 lab-verified · 12 GB-class model wanting 8 GB · AG-Bench 3/6 |
 | [recipes/gliner25-multi-v1-serve.md](recipes/gliner25-multi-v1-serve.md) | gliner2 2.0.0 + torch 2.14 (venv, CUDA) | 4K window | **21.8 ms / extraction** (GPU fp16) | — | 🔬 lab-verified · schema-extraction tier · en+it passes |
+| [recipes/xing4-29b-a4b-dyn-llamacpp-fork.md](recipes/xing4-29b-a4b-dyn-llamacpp-fork.md) | llama.cpp fork host build (shuxiaoqiong xing4_0-port @ 63c16fb) | 8K | 6.8 / 5.4–6.3 tok/s (acc 0.91/0.73) | **346 tok/s** (12× A3B class) | 🔬 lab-verified · 4 GB-for-a-29B record · AG-Bench 3/6 fast-exit |
 
 Every recipe file records: the exact OpenWeights artifact (repository, revision, SHA-256), the
 runtime image digest, full launch settings (context size, KV precision, batch/ubatch, sampler
