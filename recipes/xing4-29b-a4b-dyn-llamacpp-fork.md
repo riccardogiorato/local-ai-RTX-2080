@@ -28,6 +28,7 @@ systemd-run --user --scope -p MemoryMax=12G \
   --model Xing4.0-29B-A4B-DYN-DIQ4XS-GU2XXS-Q8_0.gguf --alias local-model \
   --host 0.0.0.0 --port 8080 -c 8192 -np 1 -ngl 999 \
   --override-tensor "exps=CPU" --threads 6 --jinja \
+  --batch-size 4096 --ubatch-size 4096 \
   --spec-type draft-mtp --spec-draft-n-max 2 --metrics
 ```
 
@@ -70,6 +71,14 @@ Same fail set as the A3B-class (React/TS/pagination) but opposite failure style:
 the A3B *grinds* into the 900 s cap; Xing *declares early*. Passes are 2–17×
 faster than the A3B's (the MLA prefill advantage made real). Score ties
 Gemma-12B / the Qwen3.5-35B-A3B at 3/6.
+
+## Prefill tuning (2026-09-26) — one flag, 2.4×
+
+`--batch-size 4096 --ubatch-size 4096` on the serve line: **386 → 933 tok/s**
+prefill, decode unchanged (~25 warm). Cleanest monotone result of the UBBoost
+investigation — sweep in
+[evidence/ubatch-prefill-sweep.jsonl](../evidence/ubatch-prefill-sweep.jsonl).
+Serve line in the recipe block above updated to carry it.
 
 ## Storage
 

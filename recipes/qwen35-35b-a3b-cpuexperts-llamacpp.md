@@ -76,6 +76,19 @@ Rotated 2026-09-26 to `/mnt/archive/local-models/rtx2080-tested-2026-09/qwen35-3
 — both SHAs re-verified post-move against the recipe pins (c2d46cfa… / 14639932…).
 Re-fetch at the pinned revision if the slot returns.
 
+## Prefill tuning (2026-09-26) — one flag, 2.4× prompt speed
+
+`--batch-size 4096 --ubatch-size 4096` added to the serve line: **380 → 930 tok/s**
+prefill with decode unchanged. From the UBBoost investigation (PR #23239's claim
+reproduced via the plain ubatch lever — no runtime swap needed on this card because
+the expert band is already CPU-side so activation VRAM absorbs ub 4096). Full sweep
+in [evidence/ubatch-prefill-sweep.jsonl](../evidence/ubatch-prefill-sweep.jsonl).
+
+Also re-learned during the sweep: warm short-ctx decode on a quiet box is
+**~39 tok/s** — the 9.3 figure in the table above was measured under real memory
+pressure (page-in of the 17 GB mmap dominates this model; the "deep agent turns
+collapse to 1.5" survives, the steady-state number doesn't).
+
 ## Notes
 
 - **`--load-mode none` is BANNED on 16 GB RAM — it froze the whole machine**
