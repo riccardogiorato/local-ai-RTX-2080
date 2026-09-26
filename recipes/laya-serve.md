@@ -54,6 +54,27 @@ curl localhost:8000/v1/systemone -H 'content-type: application/json' -d '{
 curl localhost:8000/health
 ```
 
+## Multilingual checkpoint (2026-09-26) — the best laya, tested in Italian
+
+`LAYA_MODELS=multilingual` (convaiinnovations/laya subfolder, auto-downloaded at
+first serve): **22 ms warm median** (vs 27 for typed-decisions), **1660 MiB
+process VRAM** (vs 2.66 GB), byte-identical deterministic warm responses — and
+it **beats typed-decisions on the exact probes that sibling flunked**, in
+Italian:
+
+| State (Italian text) | laya multilingual | laya typed-decisions (English) | kev |
+|---|---|---|---|
+| shoes: late + wrong size + double charge | **returns 0.956** (conf 0.82) | 0.47 coinflip (conf 0.04) | returns 0.95 |
+| double charge + refund never arrived | **billing 0.733** (conf 0.73) | 0.44 ≈ 0.42 near-tie | billing 0.86 |
+| same billing state in English | billing **0.997** | — | — |
+
+**Verdict: multilingual replaces typed-decisions as the recommended laya
+checkpoint** — non-English routing works, at lower latency and less VRAM. The
+router tier choice stays task-shaped: kev for tiniest footprint, laya
+multilingual for sub-30 ms + non-English. Startup gotcha extends to every
+subcommand: `laya-serve --version` also triggers the full 3-checkpoint default
+preload (~5.2 GB GPU) — never launch without `LAYA_MODELS` set.
+
 ## Notes
 
 - `laya-serve --help` blocks indefinitely (no output): startup preloads/download checkpoints
