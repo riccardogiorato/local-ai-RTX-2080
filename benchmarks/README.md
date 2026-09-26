@@ -156,3 +156,10 @@ treat unseen-final-score runs with one extra `git status` on the repo.
 |---|---|---|---|
 | Ternary-Bonsai-2-27B PTQ1_0+MTP **@ d2** | **4/6** | 55.3 / 49.1 tok/s (acc 0.74/0.55) | the d-depth A/B's winner; identical pass set to d1 — pure speed upgrade (+13% repetitive) |
 | Xing4.0-29B-A4B DYN 3.31 bpw (xing4_0-port fork, experts-on-CPU) | **3/6** | 6.8 / 5.4–6.3 tok/s (acc 0.91/0.73) | 4.0 GB VRAM; **fast-exit failure style** (opposite of A3B's cap-grinding); passes 2–17× faster than A3B's — date-fns in 46 s |
+
+### UBBoost-arc re-runs (2026-09-26): prefill boost flips a task outcome
+
+| Model | Config | Pass | Pass walls | Reading |
+|---|---|---|---|---|
+| Xing4.0-29B-A4B | -b/-ub 4096 (2.4× prefill) | 3/6 (same) | 477→264 s (−45%) | faster, not smarter; date-fns slower on strategy variance (45 vs 23 calls) |
+| **Qwen3.5-35B-A3B** | -b/-ub 4096 (2.4× prefill) | **4/6 (up from 3/6)** | 2199→1254 s (−43%) | **pagination FLIPPED** — first 35B 4/6; freed time-budget bought the first pagination pass |

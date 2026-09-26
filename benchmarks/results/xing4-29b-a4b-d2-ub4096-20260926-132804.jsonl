@@ -1,0 +1,6 @@
+{"model": "xing4-29b-a4b-d2-ub4096", "task": "task1-js-bugfix", "passed": true, "wall_s": 116, "tool_calls": 15, "finish": "unknown"}
+{"model": "xing4-29b-a4b-d2-ub4096", "task": "task2-react-fix", "passed": false, "wall_s": 228, "tool_calls": 6, "finish": "unknown"}
+{"model": "xing4-29b-a4b-d2-ub4096", "task": "task3-dep-upgrade", "passed": true, "wall_s": 93, "tool_calls": 45, "finish": "unknown"}
+{"model": "xing4-29b-a4b-d2-ub4096", "task": "task4-python-bugfix", "passed": true, "wall_s": 55, "tool_calls": 11, "finish": "unknown"}
+{"model": "xing4-29b-a4b-d2-ub4096", "task": "task5-js-to-ts", "passed": false, "wall_s": 264, "tool_calls": 20, "finish": "unknown"}
+{"model": "xing4-29b-a4b-d2-ub4096", "task": "task6-extra-code-task", "passed": false, "wall_s": 221, "tool_calls": 17, "finish": "unknown"}

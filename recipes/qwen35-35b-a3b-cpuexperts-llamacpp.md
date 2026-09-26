@@ -40,7 +40,7 @@ on the standalone head. The family's drafting scales fine. **What doesn't scale 
 expert band on 16 GB RAM**: context growth + tool results make the paging path the
 dominant term, and decode collapses 6× inside agent turns.
 
-## AG-Bench: **3/6** at cap 900 s (raised from 480 for this decode class)
+## AG-Bench: **4/6** at cap 900 s after the prefill boost (was 3/6; raised from 480 for this decode class)
 
 | Task | Result |
 |---|---|
@@ -49,7 +49,7 @@ dominant term, and decode collapses 6× inside agent turns.
 | python bugfix | ✅ 516 s (11 calls) |
 | React contract | ❌ cap |
 | TS migration | ❌ cap |
-| pagination | ❌ cap — unique: every other passing model finishes it in 14–65 s |
+| pagination | ✅ **PASS at the 900 s boundary** (ub4096 config; was fail — every other passing model finishes in 14–65 s) |
 
 ## Capabilities
 
