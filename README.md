@@ -35,6 +35,7 @@ listed here is parked with reasons in [NEXT-IDEAS.md](NEXT-IDEAS.md).
 | 7 | kev-0.5b ([jaredpalmer/kev](https://github.com/jaredpalmer/kev)) — CUDA-on-SM75 works first-try, 146 MiB VRAM, 240 ms/3 questions ✅ [recipe](recipes/kev-05b-serve.md) | typed-decision, single forward pass | ✅ tested |
 | 8 | laya (convaiinnovations, 421M) — 27 ms/3 questions (fastest on this card) but 2.66 GB VRAM; routing trails kev on both probes ✅ [recipe](recipes/laya-serve.md) | typed-decision, `pip install laya` | ✅ tested |
 | 10 | GLiNER 2.5 multi-v1 (fastino, 287M) — measured: **21.8 ms GPU / 78.3 ms CPU** per extraction, 7 structural passes (en+it NER, zero-shot labels, relations, records), 1650 MiB VRAM ✅ [recipe](recipes/gliner25-multi-v1-serve.md) | typed-extraction (non-LLM utility tier, kev/laya class) | ✅ tested |
+| 11 | Xing4.0-29B-A4B (TeleAI) — jmarceno DYN-DIQ4XS-GU2XXS 12.04 GiB @ `6d745c62` · shuxiaoqiong/llama.cpp xing4_0-port fork — 29B/A4B MLA MoE, mHC hyper-connections, MTP; experts-on-CPU class | big-MoE candidate (A3B-class recipe, second 30B-class run) | ⏳ queued |
 
 | 9 | Bonsai-2 27B ternary PTQ1_0 + MTP graft — measured: **59.3/49.9 tok/s fully resident** (5–6× the other 27Bs), 3/3 probes thinking-off, AG-Bench 4/6 ✅ [recipe](recipes/ternary-bonsai2-27b-ptq1_0-llamacpp-fork.md) | 1.75 bpw ternary of dense Qwen3.8-27B, fork runtime | ✅ tested |
 
@@ -59,7 +60,7 @@ recorded in the recipe — so the workbench never fills up.
 | [recipes/mimo-9b-distill-q4km-llamacpp.md](recipes/mimo-9b-distill-q4km-llamacpp.md) | llama.cpp (docker, no MTP — head dropped by distill) | 32K | 61 tok/s | ~1.7K tok/s | 🔬 lab-verified · parent-dominated |
 | [recipes/kev-05b-serve.md](recipes/kev-05b-serve.md) | Python/torch serve (CUDA on SM75) | n/a | 240–256 ms / 3 questions | — | 🔬 lab-verified · 146 MiB router |
 | [recipes/laya-serve.md](recipes/laya-serve.md) | Python/torch serve (ModernBERT-large) | n/a | **27 ms** / 3 questions | — | 🔬 lab-verified · 2.66 GB router |
-| [recipes/ternary-bonsai2-27b-ptq1_0-llamacpp-fork.md](recipes/ternary-bonsai2-27b-ptq1_0-llamacpp-fork.md) | llama.cpp fork host build (PrismML/sudoingX @ 285542d) | 8K | **59.3 / 49.9 tok/s** (MTP d1, full offload) | — | 🔬 lab-verified · fast-27B slot champion |
+| [recipes/ternary-bonsai2-27b-ptq1_0-llamacpp-fork.md](recipes/ternary-bonsai2-27b-ptq1_0-llamacpp-fork.md) | llama.cpp fork host build (PrismML/sudoingX @ 285542d) | 8K | **55.3 / 49.1 tok/s** (MTP **d2** after the d-depth A/B; full offload) | — | 🔬 lab-verified · fast-27B slot champion |
 | [recipes/swift15-27b-iq2xs-mtp-llamacpp.md](recipes/swift15-27b-iq2xs-mtp-llamacpp.md) | llama.cpp (docker · cram ngl 40 · MTP d2) | 8K | 4.4 / 4.3 tok/s (acc 0.745) | 275 tok/s class | 🔬 lab-verified · quant-bound (IQ2_XS tax) |
 | [recipes/lfm25-8b-a1b-dspark-llamacpp.md](recipes/lfm25-8b-a1b-dspark-llamacpp.md) | llama.cpp (docker · resident MoE · DSpark sidecar d4) | 32K | **221 / 200 tok/s** (fastest on card) | ~500 tok/s | 🔬 lab-verified · speed-slot record · AG-Bench 0/6 |
 | [recipes/qwen35-35b-a3b-cpuexperts-llamacpp.md](recipes/qwen35-35b-a3b-cpuexperts-llamacpp.md) | llama.cpp (docker · MoE, experts in RAM · MTP head d4) | 8K | 9.3 / 8.5 tok/s steady (1.5 in deep agent turns) | 3.65–6.47 tok/s | 🔬 lab-verified · first 35B on card (4.57 GB!) · AG-Bench 3/6 @ cap 900 |

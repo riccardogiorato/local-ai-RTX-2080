@@ -1,0 +1,6 @@
+{"model": "bonsai2-ptq10-d2", "task": "task1-js-bugfix", "passed": true, "wall_s": 33, "tool_calls": 24, "finish": "unknown"}
+{"model": "bonsai2-ptq10-d2", "task": "task2-react-fix", "passed": false, "wall_s": 87, "tool_calls": 9, "finish": "unknown"}
+{"model": "bonsai2-ptq10-d2", "task": "task3-dep-upgrade", "passed": true, "wall_s": 70, "tool_calls": 39, "finish": "unknown"}
+{"model": "bonsai2-ptq10-d2", "task": "task4-python-bugfix", "passed": true, "wall_s": 16, "tool_calls": 11, "finish": "unknown"}
+{"model": "bonsai2-ptq10-d2", "task": "task5-js-to-ts", "passed": false, "wall_s": 98, "tool_calls": 31, "finish": "unknown"}
+{"model": "bonsai2-ptq10-d2", "task": "task6-extra-code-task", "passed": true, "wall_s": 67, "tool_calls": 19, "finish": "unknown"}
