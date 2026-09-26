@@ -75,3 +75,18 @@ lookup, in-file DFlash2) join the David19p watch-list — no code adoption. Retr
 triggers: cinference ships a Turing kernel build, a sub-8 GB artifact class, or an
 Ampere+ box dequants once — none likely; our own DFlash2 sidecar trigger (~600 MB
 Q2/Q4 drafter for llama.cpp) remains the live one from this announcement.
+
+## UBBoost cherry-pick build — 2x prefill claimed on our EXACT hardware class (PR #23239)
+
+DavidAngeloBen's llama.cpp PR #23239 / discussion #23262: RTX 2080 8GB + Qwen
+35B-A3B + MTP, the same VRAM-constrained CPU-experts recipe as our A3B/Xing
+serves. A second prompt-processing runtime (--promptprocessing-ubatchboost-size
++ -n-cpu-moe + -gpu-layers) runs the prefill with big ubatch (2048-3200) and
+extreme CPU-MoE offload (his 389->539 tok/s = ~1.4-2x on the 35B-A3B class).
+NOT in any release we run (checked: bonsai2 @285542d, xing4_0-port @63c16fb,
+docker b11118 — none carry the flag; closed draft, merge commit a4c31c6).
+Getting it = cherry-pick a4c31c6 into a build of the xing4 fork (it touches
+server/libllama plumbing, not arch code — should port cleanly) and re-measure
+the A3B/Xing prefill classes. Our Bonsai is already GEMM-saturated at ~29% of
+the int8 ceiling, so this lever only matters for the CPU-band models — where
+Xing's 346 tok/s could double and the A3B's 3.7-6.5 might triple.
