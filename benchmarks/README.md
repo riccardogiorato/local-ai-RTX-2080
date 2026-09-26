@@ -149,3 +149,10 @@ treat unseen-final-score runs with one extra `git status` on the repo.
 | Model | Pass | Decode | Note |
 |---|---|---|---|
 | Qwen3.5-35B-A3B UD-Q3_K_M + MTP-ONLY head d4, `--override-tensor exps=CPU` (4.57 GB GPU) | **3/6** (@ cap 900) | 9.3 / 8.5 steady → **1.5 in deep turns** | acc 0.77/0.61 (mean 3.4-4.1); 16GB-RAM handicap vs the recipe's 28-32 GB baseline; becomes the smart-slot champion if this box grows RAM |
+
+### Morning additions (2026-09-26): Xing4.0-29B-A4B + Bonsai-2 d2
+
+| Model | Pass | Decode | Note |
+|---|---|---|---|
+| Ternary-Bonsai-2-27B PTQ1_0+MTP **@ d2** | **4/6** | 55.3 / 49.1 tok/s (acc 0.74/0.55) | the d-depth A/B's winner; identical pass set to d1 — pure speed upgrade (+13% repetitive) |
+| Xing4.0-29B-A4B DYN 3.31 bpw (xing4_0-port fork, experts-on-CPU) | **3/6** | 6.8 / 5.4–6.3 tok/s (acc 0.91/0.73) | 4.0 GB VRAM; **fast-exit failure style** (opposite of A3B's cap-grinding); passes 2–17× faster than A3B's — date-fns in 46 s |

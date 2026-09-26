@@ -55,9 +55,21 @@ freeze lesson — never serve >12 GB models on this box without it.
 Budget trap: ≤64-token chats return empty content (thinking eats it) — the
 E4B/A3B budget class.
 
-## AG-Bench
+## AG-Bench: **3/6** at cap 900 s
 
-<!-- filled after the cap-900 run completes -->
+| Task | Result | Style |
+|---|---|---|
+| js-bugfix | ✅ 349 s / 30 calls | methodical |
+| React contract | ❌ 627 s / 4 calls | **fast-exit** — flails and stops, not cap-ground |
+| date-fns upgrade | ✅ **46 s** / 23 calls | fastest dep-upgrade pass on this ledger below 50 tok/s decode |
+| python bugfix | ✅ 82 s / 11 calls | surgical |
+| TS migration | ❌ 275 s / 8 calls | fast-exit |
+| pagination | ❌ 223 s / 18 calls | fast-exit (the A3B ground this to the cap; Xing quits early) |
+
+Same fail set as the A3B-class (React/TS/pagination) but opposite failure style:
+the A3B *grinds* into the 900 s cap; Xing *declares early*. Passes are 2–17×
+faster than the A3B's (the MLA prefill advantage made real). Score ties
+Gemma-12B / the Qwen3.5-35B-A3B at 3/6.
 
 ## Storage
 
