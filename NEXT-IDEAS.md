@@ -35,12 +35,6 @@ The prior campaign's KFC/CIAO GT sets did not survive the migration; recipes run
 synthetic images. Pending: a new photographed GT set for the receipt/label class
 (regression-grade, human-verifiable).
 
-## laya multilingual checkpoint
-
-Recipe tested typed-decisions only; `LAYA_MODELS=multilingual` (the generative 421M
-variant) is untested. Low priority: 2.66 GB VRAM for a router whose typed-decision
-sibling already trails kev on our probes.
-
 ## PQ2_0-MTP tier — blocked on card size, direct unlock if a bigger card lands
 
 PQ2_0 (2.13 bpw, 7.66 GB) + trained head = the artifact the 1080 Ti post measured
