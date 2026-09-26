@@ -54,6 +54,28 @@ this profile.**
 than IQ2_S bit-unpacking; on this box, where 24 of 64 layers live on CPU, that dominates.
 MTP acceptance 0.995 on the repetitive prompt (d2 cap ≈ 3.0 mean) doubles it further.
 
+## Prefill tuning (2026-09-26) — ubatch wall + the cold-prefill profile
+
+The dense cram's story is two-part (UBBoost investigation,
+[evidence/ubatch-prefill-sweep.jsonl](../evidence/ubatch-prefill-sweep.jsonl)):
+
+- **The 8K best config (ngl 40) cannot grow ubatch on this card**: ub 512 loads then
+  dies at first request, ub 1024 fails at load. Its prefill tuning ceiling stays at
+  the recipe's `-b 256 -ub 128` (~140–240 tok/s class).
+- **The ngl-38 profile (both the 2×-decode fallback and the 32K KV-RAM serve) CAN**:
+  `--batch-size 1024 --ubatch-size 1024` → **140 → 271 tok/s** prefill (+93%), decode
+  unchanged 9.4. Recommended for any ngl-38 serve.
+- The wall: **ub 2048 at ngl 38 fails at load** ("failed to allocate compute pp
+  buffers") — activation VRAM, not KV. This is exactly the constraint UBBoost's
+  runtime swap (PR #23239) exists to route around.
+- The manual workaround, measured: a **cold-prefill profile** at ngl 18 + ub 4096
+  (deep offload buys the activation VRAM) — **301 tok/s** and loads fine. For
+  prompt-heavy sessions: prefill on that profile, then swap to the decode profile
+  IN-PROCESS. Stock slot save/restore transfers the state in ~33-57 ms across
+  different ngl/ubatch but does NOT rehydrate the prompt-cache matcher (next request
+  re-prefills) — the cache-preserving swap is the one thing that still needs
+  UBBoost's unmerged plumbing.
+
 ## Thinking-verbosity claim — validated (2026-09-26)
 
 The finetune's design says thinking verbosity should scale with difficulty. Probed
