@@ -80,6 +80,12 @@ investigation — sweep in
 [evidence/ubatch-prefill-sweep.jsonl](../evidence/ubatch-prefill-sweep.jsonl).
 Serve line in the recipe block above updated to carry it.
 
+**Agent-level validation:** AG-Bench re-run at ub 4096 — same **3/6** score, but
+pass walls collapse: js-bugfix 349→116 s, python 82→55 s; passes total 477→264 s
+(−45%). One task (date-fns) ran slower on a different strategy path (45 vs 23
+calls) — agent variance, not prefill. Prefill boost speeds agents up, doesn't
+flip outcomes.
+
 ## Storage
 
 On SSD while active; rotates per the storage rule once benched.
