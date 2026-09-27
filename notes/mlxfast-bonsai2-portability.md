@@ -120,6 +120,17 @@ stricter than the contest's own.
 
 ## Ranked plan (each step gated by the previous)
 
+**Primary port target: the Ternary-Bonsai-2-27B-PTQ1_0 MTP-graft serve** (5.96 GB,
+`recipes/ternary-bonsai2-27b-ptq1_0-llamacpp-fork.md`, 55–59 tok/s), on the `sudoingX/llama.cpp`
+bonsai2 fork — the same model the contest runs (Qwen3.8-27B base, 16 attention + 48 GDN layers,
+same drafter class), and the only local model on the fork's IMMA batch-invariant path where the
+cap=4 crossover, 71.6 tok/s ceiling and every kernel-level item were measured. Caveats: their pack
+is 2-bit Hadamard-folded, ours is PTQ1_0 ternary — we take structural experiments, not kernel
+source (their rotation kernels don't apply); their 3.85 GB DFlash2 sidecar stays falsified here,
+so the depth rider is OUR grafted MTP head (acceptance curve = step 1). The logic-level A-family
+items (lookup proposals/skip, depth declaration) are model-agnostic and spill over to every
+spec-decode serve (Gemma E4B + Q8_0 MTP pair, ThinkingCap d2, Xing4).
+
 1. **(free)** Acceptance-vs-depth curve, graft head d1→d8, `measure-decode.sh`, evidence →
    `evidence/mtp-graft-depth-curve.jsonl`. Decides item 1's entire value. Success shape:
    mean-accepted still rising at d4, ideally toward ×4 tokens/weight-pass (their board proves
