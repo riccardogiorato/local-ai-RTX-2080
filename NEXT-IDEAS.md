@@ -234,3 +234,16 @@ serial + all verify widths share one kernel path per op class, re-run the drift 
 target 6/6 drafted==serial; then exploit the flat tile floor with d4-d8 windows (
 serve 59 → 65-70 tok/s target from the kn note, with bytes as the acceptance criterion).
 Blocked on: nothing — this is pure fork/patch work.
+
+### TensorFold queue-opener status (same night)
+
+(1) Drift survey DONE — all upstream-docker MTP recipes drift (qwen35-4b 3/6,
+qwen35-9b 1/6, g12b 2/6), while Bonsai fork + GGML_CUDA_BATCH_INVARIANT=1 is 6/6
+drafted==serial at zero cost (59.2/43.0 tok/s; env unset drops it to 2/6).
+(2) keyed-Gumbel sampler module DONE+validated (notes/keyed_gumbel_sampler.h, 16/16
+test classes), llama.cpp splice plan written (notes/keyed-gumbel-llamacpp-integration.md),
+OPEN: patched build + repro/drift rerun. (3) fork audit DONE; deployment rule active:
+Bonsai serve draft depth ≤3 (envelope = 1-4 columns); OPEN: MMQ ≥5-col invariance
+patch before d4+. The Bonsai recipe already
+serves within the envelope (it pins GGML_CUDA_BATCH_INVARIANT=1 via env-prefixed
+launch) — its 59 tok/s row now reads "byte-exact serve" retroactively.

@@ -141,22 +141,23 @@ speedup with non-reproducible agent transcripts. Prime suspects given P1: f16 ti
 kernels in the verify batch (fattn tile / any M-mma op) and atomics/geometry that depends
 on batch shape; attribution needs a fork-level kernel A/B, not argued here.
 
-## What we can actually take, ranked by value-per-effort
+## What we can actually take, ranked by value-per-effort (status updated after the survey)
 
-1. **The drift harness — DONE, in-tree** (`notes/spec-drift-test-llamacpp.sh`). Every
-   spec-decode recipe here should get an A/B drift row: serial vs drafted hashes on a
-   fixed prompt set. This is TensorFold's `draft:false`-sha protocol, 100 lines of shell.
-2. **Exact keyed sampling (port `exact_sampling.py`)** — splitmix64 Gumbel-max keyed
-   (seed, position, token-id), ties by id, into llama.cpp's sampling layer. ~1-2 days of
-   C++. Makes temp>0 decode reproducible and turns spec acceptance into equality for
-   sampled runs — independent of matmul exactness.
-3. **Bonsai/PTQ1_0 full-lane audit** — the ternary matmul is integer-exact ALREADY
-   (P1 + fork IMMA); the remaining drift surface is attention + sampling + launch
-   geometry. Patch the fork so both serial and every verify width share one kernel path
-   per op class, then re-run P3 on Bonsai: target ≥ 6/6 drafted==serial greedy. If
-   the 55-56 ms flat tile floor is exploited (windows ≥ 5), d4-d8 drafting becomes
-   nearly free passes — the "serve 59 → 65-70 tok/s" target from the kn note, now with
-   byte-exactness as the acceptance criterion instead of acceptance-rate photonics.
+1. **The drift harness — DONE and RUN** (`notes/spec-drift-test-llamacpp.sh` + the
+   five-config survey above). Rule adopted: every spec-decode recipe carries a drift
+   row (serial vs drafted bytes on a fixed prompt set) — TensorFold's `draft:false`-sha
+   protocol as 100 lines of shell.
+2. **Exact keyed sampling (port `exact_sampling.py`) — module DONE, 16/16 test classes
+   green** (`notes/keyed_gumbel_sampler.h`, `notes/keyed_gumbel_sampler_test.cpp`,
+   300k-draw distribution matches softmax to 4 decimals). Integration plan against the
+   local tree in `notes/keyed-gumbel-llamacpp-integration.md` (5 hunks, position
+   bookkeeping falls out of accept ordering). OPEN: patched build + repro + drift rerun.
+3. **Bonsai/PTQ1_0 full-lane audit — DONE, the positive result of the night**:
+   `GGML_CUDA_BATCH_INVARIANT=1` gives 6/6 drafted==serial at zero speed cost. OPEN:
+   the MMQ ≥5-column invariance patch (geography-pinned split-K for the tile path)
+   would extend the envelope to d4-d8 windows — the "serve 59 → 65-70 tok/s" target
+   from the kn note, with bytes as the acceptance criterion instead of
+   acceptance-rate photonics.
 4. **Attention discipline** ( TensorFold's absolute-position chunking + trim-don't-pad
    rollback) — medium effort in a fork; do it after 2-3 prove insufficient.
 5. **Perf items, non-blocking:** `tile_weight`-style weight regroup for the PTQ1_0 tile
@@ -166,6 +167,57 @@ on batch shape; attribution needs a fork-level kernel A/B, not argued here.
 6. **No-go for this card:** all MLX/Metal paths (specifications only), Triton bf16
    `tl.dot` and `mma.m16n8k16.f32-acc` (sm_80 floor — probe P1), EXL3 trellis (format),
    DFlash2 vendored MLX code (pattern only), second-GPU NCCL tricks (need a second GPU).
+
+## Postscript (2026-09-27, later): the drift survey — five configs, one answer
+
+Same 6-prompt greedy suite as the E4B run, every config run drafted twice + serial twice:
+
+| config | runtime | drafted self-repeat | serial self-repeat | **drafted == serial** | speed (draft/serial tok/s) |
+|---|---|---|---|---|---|
+| **bonsai-e1** PTQ1_0+MTP d2 | fork @285542d, `GGML_CUDA_BATCH_INVARIANT=1` | 6/6 | 6/6 | **6/6 — byte-exact** | 59.2 / 43.0 |
+| bonsai-e0, env unset | same fork | 6/6 | 6/6 | 2/6 | 58.8 / 42.9 |
+| qwen35-4b, MTP d4 | docker b11118 (upstream) | 6/6 | 6/6 | 3/6 | 126.4 / 40.7 |
+| qwen35-9b, MTP d4 | docker b11118 (upstream) | 6/6 | 6/6 | 1/6 | 40.5 / 32.9 |
+| g12b, MTP head d2, ngl 45 | docker b11118 (upstream) | 6/6 | 6/6 | 2/6 | 16.9 / 13.2 |
+| (E4B, prior evening) | docker b11118 (upstream) | **4/6** | 6/6 | 1/6 | 150 / 91 |
+
+Read: **every upstream-docker config drifts (1-3/6).** The fork with the invariant flag
+does not, and the flag costs ≈ nothing (draft 58.8 without vs 59.2 with, within the
+±0.4 tok/s noise band). The lone drafted-self-nondeterminism case remains E4B's
+assistant-MTP config from the previous evening — one-off, cheap to re-run with the
+same harness. All raw outputs on /tmp/drift2; script generalized in
+`notes/spec-drift-test-llamacpp.sh` lineage.
+
+**Operating conclusions, in force now:**
+1. Byte-exact spec-decode serving on this card exists TODAY and costs nothing:
+   Bonsai fork + `GGML_CUDA_BATCH_INVARIANT=1` + draft depth ≤3 (inside the 1-4-column
+   envelope; d4+ enters the ≥5-column MMQ tile path the flag does not cover).
+2. Every upstream-docker MTP recipe (qwen35-4b/9b, E4B, g12b) serves drifting bytes at
+   1.3-3.1× speed — the recipes should carry a drift row until they're forked or
+   upstream gains the invariance path.
+3. The recipe acceptance criterion gains a new column: *bytes*, not just acceptance
+   rate.
+
+## Fork machinery (2026-09-27, audit)
+
+`llama.cpp-bonsai2` @ 285542d (`common.cuh:176-185`) has TensorFold-style machinery
+fork-only (zero matches upstream, and the docker b11118 image is upstream — which is
+exactly why the E4B drift test above drifts): `GGML_CUDA_BATCH_INVARIANT=1` picks
+"kernels whose per-column arithmetic does not depend on the column count on the paths
+this flag covers: the F16 and BF16 mat-vec paths … the PTQ1_0 mat-vec (1 to 4 columns;
+5 and above take the MMQ tile path, which this flag does not touch), and flash attention
+up to 8 queries. On those paths **a token decoded alone and a token verified inside a
+speculative batch see the same logits bit for bit**." The fork author also honestly
+scoped it: "not a whole-model guarantee. Costs some throughput at 2 to 4 columns."
+Plus a position-fixed KV split for attention (`fattn-common.cuh:1157-1159`) — the same
+rule as TensorFold's absolute-position chunking.
+
+So the practical ladder on this card already half-exists: E4B/Qwen recipes run on
+upstream docker (no invariant machinery → measured drift), Bonsai runs on a fork with
+invariant routing opt-in. The open measurement (running tonight): does e1 hit 6/6
+drafted==serial on the ternary target, and does e0 drift? Coverage leaks to watch in
+the results: the Q8_0 MTP head inside the grafted GGUF, any GDN/conv-SSM layers of the
+Qwen3.8 architecture not named in the docstring, and any ≥5-column detour.
 
 ## Model-by-model
 
