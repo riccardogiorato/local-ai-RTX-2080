@@ -36,6 +36,7 @@ listed here is parked with reasons in [NEXT-IDEAS.md](NEXT-IDEAS.md).
 | 8 | laya (convaiinnovations, 421M) — typed-decisions: 27 ms/3 questions but routing trails kev; **multilingual (2026-09-26): 22 ms, 1.66 GB, beats kev-aligned picks in Italian — new recommended laya checkpoint** ✅ [recipe](recipes/laya-serve.md) | typed-decision, `pip install laya` | ✅ tested |
 | 10 | GLiNER 2.5 multi-v1 (fastino, 287M) — measured: **21.8 ms GPU / 78.3 ms CPU** per extraction, 7 structural passes (en+it NER, zero-shot labels, relations, records), 1650 MiB VRAM ✅ [recipe](recipes/gliner25-multi-v1-serve.md) | typed-extraction (non-LLM utility tier, kev/laya class) | ✅ tested |
 | 11 | Xing4.0-29B-A4B (TeleAI) — measured: **4.0 GB VRAM for a 29B** (per-GB record), decode 6.8/5.4–6.3, acceptance 0.91/0.73, prefill 346 tok/s (12× A3B), 4/4 probes incl. thinking-off reasoning, AG-Bench 3/6 fast-exit style ✅ [recipe](recipes/xing4-29b-a4b-dyn-llamacpp-fork.md) | big-MoE candidate (A3B-class recipe, second 30B-class run) | ✅ tested |
+| 12 | Qwen3.8-27B UD-IQ1_S — measured: 19.7 tok/s no-draft, 3/4 probes, but REASONING BROKEN at 1.84 bpw (thinking-mode burns budgets to empty answers); vs Bonsai-2 ternary at the same bitrate: 2.8x slower, no thinking. Same-bitrate verdict: ternary dominates — [evidence](evidence/qwen38-27b-udiq1s.jsonl) | resident-dense low-bit A/B | ✅ tested (evidence-only) |
 
 | 9 | Bonsai-2 27B ternary PTQ1_0 + MTP graft — measured: **59.3/49.9 tok/s fully resident** (5–6× the other 27Bs), 3/3 probes thinking-off, AG-Bench 4/6 ✅ [recipe](recipes/ternary-bonsai2-27b-ptq1_0-llamacpp-fork.md) | 1.75 bpw ternary of dense Qwen3.8-27B, fork runtime | ✅ tested |
 
@@ -86,6 +87,7 @@ capability probe results, and raw evidence links.
 
 ## Requirements (per recipe, checked before any run)
 
+| [evidence only, no recipe](evidence/qwen38-27b-udiq1s.jsonl) | llama.cpp (docker b11118 · full resident, no draft head in file) | 8K | **19.7 tok/s** no-draft | ~505 tok/s | 🔬 lab-verified · 1-bit wall: reasoning broken, surface intact |
 | Component | Detail |
 |---|---|
 | Hardware | NVIDIA GeForce RTX 2080 — TU104, Turing SM75, 8 GB GDDR6, 448 GB/s ([fingerprint](hardware.md)) |
