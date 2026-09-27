@@ -1,0 +1,2 @@
+[ -f "$WORK/task12-service.pid" ] && kill "$(cat "$WORK/task12-service.pid")" 2>/dev/null
+rm -f "$WORK/task12-service.pid"

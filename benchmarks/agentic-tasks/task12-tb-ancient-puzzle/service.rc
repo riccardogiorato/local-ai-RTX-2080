@@ -1,0 +1,7 @@
+# Runner bootstrap contract (sourced by agentic-bench.sh from the MASTER task
+# dir before the agent starts; everything here stays OUTSIDE the rsynced
+# workdir — that is the point). Env: $WORK = agent workdir.
+TASK_ROOT="$WORK" python3 "$TASKS_DIR/_ancient-puzzle-service/decryptor.py" &
+T12_SERVICE_PID=$!
+echo "$T12_SERVICE_PID" > "$WORK/task12-service.pid"
+echo "task12: decryptor up on :8912 (pid $T12_SERVICE_PID)"
