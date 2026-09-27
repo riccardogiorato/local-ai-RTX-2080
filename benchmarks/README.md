@@ -169,3 +169,57 @@ treat unseen-final-score runs with one extra `git status` on the repo.
 | Model | Config | Pass | Headline |
 |---|---|---|---|
 | **Qwen3.5-35B-A3B** | ctx 32K · 2400 MT/s · threads 6 · ub 4096 | **5/6** — ties the Qwen 9B for #1 | **React passes for the first time in the family history** (742 s / 60 calls); js 819→63 s across three configs; TS remains the lone family failure (fast-exit). Also: the 2400 four-DIMM retrain passed the full previous-crash gauntlet (bench + 31K fill + concurrent 25 GB download, zero MCE/reboots) |
+
+## AG-Bench v2 scoring (2026-09-28) — retroactive, no re-runs
+
+Response to the ledger's own critique: pass-count alone ignores time-to-complete,
+and 6 tasks is a thin sample. v2 adds two computed-over-existing-results columns
+(both derivable from the same rows, so every historical result stays comparable):
+
+- **Total wall** — sum of wall_s across the whole suite, failed tasks counted
+  at their cap. "Time to complete the suite, made explicit."
+- **Efficiency** — passes per hour of suite wall. Normalizes for decode class:
+  slow-smart and fast-slob each get one honest number.
+
+Retro-v2 table (best run per model per the original-6):
+
+| Model | Pass | Total wall | Efficiency |
+|---|---|---|---|
+| qwen35-9b-mtp | 5/6 | **8.5 min** | 35.2 pass/h |
+| qwen35-35b-a3b @32K/2400 | 5/6 | 20.6 min | 14.6 pass/h |
+| qwen35-4b-mtp | 4/6 | 6.1 min | **39.5 pass/h** |
+| bonsai2-ptq10-d2 | 4/6 | 6.2 min | 38.8 pass/h |
+| ternary-bonsai2-27b (d1 era) | 4/6 | 6.7 min | 35.8 pass/h |
+| swift-bonsai2-katana | 4/6 | 7.5 min | 32.2 pass/h |
+| mimo-9b-distill | 4/6 | 14.8 min | 16.2 pass/h |
+| thinkingcap-27b-q2k (8K profile) | 4/6 | 33.6–37.5 min | ~6.4 pass/h |
+| qwen38-27b-dt-iq2s | 4/6 | 42.4 min | 5.7 pass/h |
+| a3b @ub4096 (8K era) | 4/6 | 64.8 min | 3.7 pass/h |
+| gemma4-e4b-qat-mtp | 3/6 | **2.6 min** | **69.7 pass/h** (fails fastest) |
+| gemma12b-qat-mtp | 3/6 | 13.3 min | 13.6 pass/h |
+| xing4 @ub4096 | 3/6 | 16.3 min | 11.1 pass/h |
+| swift15-27b-iq2xs | 3/6 | 40.1 min | 4.5 pass/h |
+| a3b first run (16GB era) | 3/6 | 81.7 min | 2.2 pass/h |
+| minicpm5-2b-dspark | 2/6 | 2.4 min | 50.3 pass/h(?— tiny set bias) |
+
+Readings: the 9B completes the full suite in less time than the A3B spends on
+TWO tasks — total-wall makes the "co-leader" relationship honest (same score,
+2.4x the time). The 4B is the efficiency king among 4-passers. Gemma-E4B is
+the fastest per anything but caps early. The 48 GB/32K era quadrupled A3B
+efficiency (2.2 → 14.6) — the single largest config-driven efficiency gain in
+the ledger.
+
+### Task-set expansion (v2.1, in progress)
+
+Six new task classes to double sample breadth, staged as task7–12:
+7. **long-context agent task** — a requirement buried deep in a repo's docs
+   must be found AND applied (the class the 6-task set never measures; the
+   A3B@32K's differentiator)
+8. multi-file refactor (API rename across modules)
+9. failing-test triage ("make it green, don't touch tests")
+10. git-workflow (bisect-style: revert the offending change, fix forward)
+11. API-integration against a local mock server
+12. config/library migration (e.g. eslint flat-config)
+
+Scoring for v2.1 runs: the same three columns over 12 tasks; original-6 subset
+reported alongside for continuity with every historical row.
