@@ -163,3 +163,9 @@ treat unseen-final-score runs with one extra `git status` on the repo.
 |---|---|---|---|---|
 | Xing4.0-29B-A4B | -b/-ub 4096 (2.4× prefill) | 3/6 (same) | 477→264 s (−45%) | faster, not smarter; date-fns slower on strategy variance (45 vs 23 calls) |
 | **Qwen3.5-35B-A3B** | -b/-ub 4096 (2.4× prefill) | **4/6 (up from 3/6)** | 2199→1254 s (−43%) | **pagination FLIPPED** — first 35B 4/6; freed time-budget bought the first pagination pass |
+
+### 48 GB RAM era (2026-09-27): context, not reasoning, was the family limit
+
+| Model | Config | Pass | Headline |
+|---|---|---|---|
+| **Qwen3.5-35B-A3B** | ctx 32K · 2400 MT/s · threads 6 · ub 4096 | **5/6** — ties the Qwen 9B for #1 | **React passes for the first time in the family history** (742 s / 60 calls); js 819→63 s across three configs; TS remains the lone family failure (fast-exit). Also: the 2400 four-DIMM retrain passed the full previous-crash gauntlet (bench + 31K fill + concurrent 25 GB download, zero MCE/reboots) |
