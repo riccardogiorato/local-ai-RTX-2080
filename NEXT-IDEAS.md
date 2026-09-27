@@ -8,12 +8,16 @@ README queue the moment they're actually going to be run.
 - already tested → see [recipes/](recipes/) and the [AG-Bench leaderboard](benchmarks/README.md)
 
 
-## Swift Flash Next (UkisAI) — blocked, cannot run on this card
+## Swift Flash Next / Qwen3.8-Flash-Next — RESOLVED 2026-09-27 (partial): UltraLite 37GiB SERVED (12.5 tok/s, first 125B here)
 
-~250 GB-class model; the smallest public quant (IQ1_S, 65 GB split) exceeds any
-mmap/RAM path on this machine (16 GB RAM). Same verdict family as Diffusion Gemma.
-Retry trigger: an ultra-low-bpw sub-8 GB build appears or a much larger machine.
-
+The original 65 GB IQ1_S verdict stands superseded for the low end: the 0xKitkat
+UltraLite 37GiB (1.80 bpw) was downloaded, SHA-verified, served on the patched
+qwen4exp runtime — first 125B-class on the card. Boundary learned: sub-2 bpw
+BREAKS THE REASONING CHAIN (EOS-at-reasoning-close; same wall as IQ1_S), so the
+frontier scores stay unreachable at this compression. Remaining blockers for a
+USABLE Flash-Next slot: a sub-40GB artifact at >=2.2bpw with MTP + intact
+reasoning (none exists today); Strata's Q2_0-GSQ-RCO tier needs sm_80+.
+See recipes/flashnext-ultralite-125b-llamacpp-fork.md and evidence/flashnext-ultralite-125b.jsonl.
 ## OrcaSAQ-2-27B (orcarouter) — blocked, triggers recorded
 
 SAQ2 = exl3 v1.5.1 (QTIP-class). Cannot run here as shipped: exllamav3 requires
@@ -91,20 +95,41 @@ the A3B/Xing prefill classes. Our Bonsai is already GEMM-saturated at ~29% of
 the int8 ceiling, so this lever only matters for the CPU-band models — where
 Xing's 346 tok/s could double and the A3B's 3.7-6.5 might triple.
 
-## Strata engine (Niko1221, 2026-09-27) — blocked, needs sm_80+ (TF32 MMA)
+## Strata engine (Niko1221, 2026-09-27) — sm_80 gate is SOFT, port is feasible (2026-09-27 source survey)
 
 Custom inference engine for Qwen3.8-Flash-Next on single consumer GPU + RAM:
 65 tok/s @128K ctx / 95 short-chat / 539 pp with Q2_0-GSQ-RCO on RTX 5070 12GB
 + 64GB DDR5-5600 (thread post). Linux one-click, OpenAI+Anthropic-compatible
 endpoints, PLE n-gram table stays on SSD (RAM need = shard1 + ~10GB):
 48GB covers its Q2_0/IQ2_XS tiers — our 46GB qualifies only for Q2_0.
-BLOCKED on this card: kernels need sm_80+ (tf32 mma; CMakeLists documents
-sm_120 dev target) — Turing sm_75 below the floor, same graveyard family as
-OrcaSAQ/trymirai/exl3. Interesting for any future rig: their DDR5-5600 rig
-suggests our DDR4-2400 would cap realistic Strata-class throughput at
-roughly a third of their numbers if the card ever allowed it anyway.
-Retry trigger: an Ampere+ GPU lands in this lab (also unlocks PQ2_0 Bonsai
-tier, exl3, DFlash2 windows at a stroke).
+
+Source survey (shallow clone of the repo, later discarded) overturned the sm_80+ BLOCKED verdict:
+- Single hard sm_80 instr in the whole tree: mma.sync.m16n8k8.tf32 in
+  native_qsa_score.cu (151 lines, attention scorer only; its ldmatrix loads
+  ARE sm_75-legal — Turing introduced ldmatrix). f16 twin m16n8k8.f16.f16.f32
+  runs on sm_75 tensor cores: ~30-line cast-the-tiles patch.
+- bf16 math: VERIFIED on this box — CUDA 13.3 cudart's cuda_bf16.h
+  software-emulates bf16 on sm_75 via fp32 round-trips (nvcc -arch=sm_75,
+  compiled + correct results on the 2080). Perf cost in bf16-hot inner
+  loops, numerics correct. Fallback to fp16 conversion for ~10 bf16-hot
+  kernels (ple, gr, fused_gr, elementwise, bf16_gemv, shared_expert...) if
+  it shows.
+- No cp.async, no redux.sync, no accessPolicyWindow anywhere. Expert GEMV
+  hot path (s_gemv/s2_gemv/i-quants) is llama.cpp-derived fp16 — sm_75-native.
+- CMake sm_80 FATAL_ERROR is a plain version check; gate removal trivial.
+- Parity tests with oracle vectors for ~every kernel → kernel-by-kernel
+  numerics validation built in.
+Port shape: patch CMake + scorer, build sm_75, run parity suite, bench Q2_0
+(37.6GB model + 29GB PLE on the 110GB free disk — fits). Estimate ~2-3
+sessions + downloads. KILL if bench lands ≤15 tok/s (llama.cpp parity).
+Perf physics unchanged: DDR4-2400 (~38GB/s vs their ~90) CPU expert path
+~2.3x slower; 8GB VRAM = ~half their expert cache (~2800 vs ~5600
+resident) → higher miss rate; i5-9600K = AVX2 only (their CPU path has an
+AVX2 tier, OK). Realistic cap ~1/3 of their numbers: ~20 tok/s @128K /
+~30 short-chat / ~180 pp — still 2-4x the UltraLite llama.cpp expectation
+if the cache holds. Worth trying BEFORE any Ampere purchase; an Ampere+
+GPU landing here remains the bigger unlock anyway (native bf16/tf32, plus
+PQ2_0 Bonsai tier, exl3, DFlash2 windows at a stroke).
 
 Our own Flash-Next attempt continues via UltraLite 37GiB + patched
 llama.cpp @250b61446 (generic kernels, sm_75-safe) — every expectation
