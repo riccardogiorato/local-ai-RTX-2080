@@ -90,3 +90,23 @@ server/libllama plumbing, not arch code — should port cleanly) and re-measure
 the A3B/Xing prefill classes. Our Bonsai is already GEMM-saturated at ~29% of
 the int8 ceiling, so this lever only matters for the CPU-band models — where
 Xing's 346 tok/s could double and the A3B's 3.7-6.5 might triple.
+
+## Strata engine (Niko1221, 2026-09-27) — blocked, needs sm_80+ (TF32 MMA)
+
+Custom inference engine for Qwen3.8-Flash-Next on single consumer GPU + RAM:
+65 tok/s @128K ctx / 95 short-chat / 539 pp with Q2_0-GSQ-RCO on RTX 5070 12GB
++ 64GB DDR5-5600 (thread post). Linux one-click, OpenAI+Anthropic-compatible
+endpoints, PLE n-gram table stays on SSD (RAM need = shard1 + ~10GB):
+48GB covers its Q2_0/IQ2_XS tiers — our 46GB qualifies only for Q2_0.
+BLOCKED on this card: kernels need sm_80+ (tf32 mma; CMakeLists documents
+sm_120 dev target) — Turing sm_75 below the floor, same graveyard family as
+OrcaSAQ/trymirai/exl3. Interesting for any future rig: their DDR5-5600 rig
+suggests our DDR4-2400 would cap realistic Strata-class throughput at
+roughly a third of their numbers if the card ever allowed it anyway.
+Retry trigger: an Ampere+ GPU lands in this lab (also unlocks PQ2_0 Bonsai
+tier, exl3, DFlash2 windows at a stroke).
+
+Our own Flash-Next attempt continues via UltraLite 37GiB + patched
+llama.cpp @250b61446 (generic kernels, sm_75-safe) — every expectation
+revised to the honest 5-15 tok/s class; even that = first 125B-class
+model on the card.
