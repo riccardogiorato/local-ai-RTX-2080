@@ -40,7 +40,7 @@ on the standalone head. The family's drafting scales fine. **What doesn't scale 
 expert band on 16 GB RAM**: context growth + tool results make the paging path the
 dominant term, and decode collapses 6× inside agent turns.
 
-## AG-Bench: **4/6** at cap 900 s after the prefill boost (was 3/6; raised from 480 for this decode class)
+## AG-Bench: **5/6** at 32K ctx / 48 GB / 2400 MT/s (was 4/6 at 8K, 3/6 at 16 GB-era)
 
 | Task | Result |
 |---|---|

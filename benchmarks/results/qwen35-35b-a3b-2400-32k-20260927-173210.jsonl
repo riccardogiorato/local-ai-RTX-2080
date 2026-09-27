@@ -1,0 +1,6 @@
+{"model": "qwen35-35b-a3b-2400-32k", "task": "task1-js-bugfix", "passed": true, "wall_s": 63, "tool_calls": 14, "finish": "unknown"}
+{"model": "qwen35-35b-a3b-2400-32k", "task": "task2-react-fix", "passed": true, "wall_s": 742, "tool_calls": 60, "finish": "unknown"}
+{"model": "qwen35-35b-a3b-2400-32k", "task": "task3-dep-upgrade", "passed": true, "wall_s": 47, "tool_calls": 36, "finish": "unknown"}
+{"model": "qwen35-35b-a3b-2400-32k", "task": "task4-python-bugfix", "passed": true, "wall_s": 47, "tool_calls": 19, "finish": "unknown"}
+{"model": "qwen35-35b-a3b-2400-32k", "task": "task5-js-to-ts", "passed": false, "wall_s": 98, "tool_calls": 31, "finish": "unknown"}
+{"model": "qwen35-35b-a3b-2400-32k", "task": "task6-extra-code-task", "passed": true, "wall_s": 238, "tool_calls": 28, "finish": "unknown"}
