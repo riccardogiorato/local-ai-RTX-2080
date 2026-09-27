@@ -198,6 +198,32 @@ same harness. All raw outputs on /tmp/drift2; script generalized in
 3. The recipe acceptance criterion gains a new column: *bytes*, not just acceptance
    rate.
 
+## Depth sweep (2026-09-28): the envelope measured end-to-end, d4-d8 unlock falsified
+
+Bonsai PTQ1_0+MTP serve with the invariant env, depths 1/2/3/4 (verify size n =
+d+1), same 6-prompt greedy suite, drafted twice vs the serial reference:
+
+| depth | n | self-repeat | drafted==serial | speed (tok/s, prompt 3) | acceptance |
+|---|---|---|---|---|---|
+| d1 | 2 | 6/6 | **6/6** | 53.8 | 0.845 |
+| d2 (recipe) | 3 | 6/6 | **6/6** | **58.1** | 0.726 |
+| d3 | 4 | 6/6 | **6/6** | 54.2 | 0.588 |
+| d4 | 5 | 6/6 | **4/6 — drifts** | 45.7 | 0.540 |
+
+The fork's documented envelope (PT mat-vec invariance = 1-4 columns) is confirmed
+to the boundary: d1-d3 byte-exact, d4 (first tile-path verify size) drifts — and
+it is *slower* than d2 despite tile passes amortizing weight streaming, because
+the graft MTP head's acceptance decays ~0.13/depth. d4/d6 are also VRAM-blocked
+at the recipe context (compute-buffer OOM; d4 only boots at ctx 3072).
+
+**Verdict: the kn-note's d4-d8 window target (59 → 65-70 tok/s via the tile
+floor) is falsified for this drafter** — deeper windows ride free passes into a
+decaying acceptance rate and serve slower while drifting. The MMQ ≥5-col
+invariance patch stays parked (no speed payoff at this acceptance profile).
+Live speed paths on this card remain: the n=2..4 pass-ratio (1.34× → ~1.0) from
+the kn note, or a higher-acceptance drafter class (VRAM-bound). The recipe's
+d2 default is optimal: fastest *and* byte-exact.
+
 ## Fork machinery (2026-09-27, audit)
 
 `llama.cpp-bonsai2` @ 285542d (`common.cuh:176-185`) has TensorFold-style machinery

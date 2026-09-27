@@ -243,10 +243,15 @@ drafted==serial at zero cost (59.2/43.0 tok/s; env unset drops it to 2/6).
 (2) keyed-Gumbel sampler module DONE+validated (notes/keyed_gumbel_sampler.h, 16/16
 test classes), llama.cpp splice plan written (notes/keyed-gumbel-llamacpp-integration.md),
 OPEN: patched build + repro/drift rerun. (3) fork audit DONE; deployment rule active:
-Bonsai serve draft depth ≤3 (envelope = 1-4 columns); OPEN: MMQ ≥5-col invariance
-patch before d4+. The Bonsai recipe already
+Bonsai serve draft depth ≤3 (envelope = 1-4 columns, confirmed to the boundary by
+the 2026-09-28 depth sweep: d1-d3 6/6 drafted==serial; d4 drifts 4/6 AND is
+slower — acceptance decays 0.845/0.726/0.588/0.540, so the MMQ ≥5-col invariance
+patch is PARKED with no speed payoff at this acceptance profile). The Bonsai
+recipe already
 serves within the envelope (it pins GGML_CUDA_BATCH_INVARIANT=1 via env-prefixed
-launch) — its 59 tok/s row now reads "byte-exact serve" retroactively.
+launch) — its 59 tok/s row now reads "byte-exact serve" retroactively. Sampler
+built+validated on-served the same night (cross-restart replay 2/2; stock 2/2 →
+keyed 1/2 drafted-vs-serial on upstream kernels — residual = logits-bits).
 
 ### Lane coordination (2026-09-28, main session -> local-ai-rtx2080-05)
 
