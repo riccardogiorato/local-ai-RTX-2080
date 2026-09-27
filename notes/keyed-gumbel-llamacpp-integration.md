@@ -1,11 +1,50 @@
-# Keyed-Gumbel exact sampling — llama.cpp integration plan (2026-09-27)
+# Keyed-Gumbel exact sampling — llama.cpp integration (2026-09-27/28) — BUILT & VALIDATED
 
 Grounded against the LOCAL tree `~/Desktop/github/llama.cpp-upstream` @
-`e6ab7c1a4` (`common/sampling.{h,cpp}`, `tools/server/server.cpp`). The module
-(`notes/keyed_gumbel_sampler.h`) is validated — 16/16 test classes green
-(`notes/keyed_gumbel_sampler_test.cpp`), 300k-draw distribution matches softmax
-to 4 decimals. This plan is written but **not yet built/served** — that + a drift
-re-run is the follow-up item and needs a patched host or docker build.
+`e6ab7c1a4` (`common/sampling.{h,cpp}`, `tools/server/server-schema.cpp`), built
+at `/tmp/llama-upstream-keyed` (clean clone + patch; the donor tree has pruned
+build files, see `hardware.md` ops traps). Module `notes/keyed_gumbel_sampler.h`
+validated 17/17 test classes (incl. min_p filter); served and measured on the
+card tonight.
+
+## Validation results (Qwen3.5-4B Q4_K_M, upstream kernels = KNOWN logits-drifter, temp 0.8, seed 42, 2 prompts)
+
+| comparison | stock sampler | keyed sampler |
+|---|---|---|
+| drafted self-repeat (same server) | 2/2 identical | 2/2 identical |
+| serial self-repeat | (serial is deterministic without drafts) | 2/2 identical |
+| **cross-RESTART replay** (fresh server, same prompt+seed) | n/a (RNG state is per-request) | **2/2 byte-identical** |
+| **drafted vs serial** | **2/2 DIFFER** | **1/2 differs — logits-bits only** |
+
+Read: keyed sampling removes every drift term except kernel logits-bits. The
+stock 2/2 vs keyed 1/2 difference IS the sampler-order term measured directly;
+the residual 1/2 is the batch-dependent-kernels term that
+`GGML_CUDA_BATCH_INVARIANT`-style invariance removes (already proven live on
+the B bonsai fork at greedy). Cross-restart replay works — the property stock
+cannot offer when a chain RNG's position depends on draw count.
+
+## Integration deltas from the original plan (found during validation)
+
+- Upstream's **default sampler list** carries `top_n_sigma` (disabled) and
+  `min_p` (enabled at 0.05) — policy refined to llama.cpp stage semantics:
+  replicate top_k / top_p / **min_p** / temperature in the module; skip disabled
+  stages silently; throw only on enabled-and-unreplicatable ones (xtc>0,
+  typ_p≠1, top_n_sigma≥0, infill, mirostat, adaptive_p), and refuse
+  `backend_sampling`.
+- `min_p` implemented in the module as an order-independent probability
+  threshold after top_p (llama.cpp semantics, ties pass/fail together).
+- JSON field is `"keyed_exact": true|false` (bool — the schema rejects numbers).
+- **Position bookkeeping ended up zero-server-wiring**: `init_sampler`
+  re-accepts the full prompt per request, so a total-accepted-tokens counter in
+  `common_sampler` (advanced in `accept`, cleared in `reset`) IS the absolute
+  position. No server changes beyond the schema field.
+
+## Remaining open
+
+- Upstream the patch (or carry it in the fork lineage): the residual logits-bits
+  drift on upstream kernels is already solved for PTQ1_0/Bonsai by the fork's
+  invariant routing; combining keyed sampling + invariant kernels on the fork
+  gives the full TensorFold guarantee at temp>0. That pairing is untested.
 
 ## What it buys, honestly
 

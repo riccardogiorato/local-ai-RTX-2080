@@ -24,6 +24,12 @@ All recipes in this repo run on this machine. If a number here is cited elsewher
 | Desktop baseline VRAM | ~520 MiB (Hyprland + shell) — subtracted from residency numbers |
 | Container runtime | Docker via sudo; nvidia-container-toolkit (CDI mode) installed 2026-09-23 |
 
+## Host ops traps (2026-09-28)
+
+- **Never overlap heavy CUDA compilation (`nvcc -j6`) with a serving GPU session.** Depth-sweep serve runs died mid-suite (graceful llama-server shutdown, no errors) while a parallel `cmake --build` ran elsewhere; `systemd-oomd` is active on this machine. The earlier 24-request surveys that ran with no concurrent build never hit it. Sequence heavy jobs.
+- `pkill -f llama-server` inside a compound command kills the invoking shell itself (its own command line matches the pattern). Use `pkill -x llama-server`.
+- `/tmp` is tmpfs (24 GiB, RAM-backed): large clones/build trees there spend RAM twice.
+
 ## Measurement conventions
 
 - Decode/prefill rates are **server-reported** (`timings.predicted_per_second`, `timings.prompt_per_second` from llama.cpp streaming responses), not client wall-clock.

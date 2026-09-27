@@ -76,9 +76,11 @@ struct Cand {
 //   temp:   temperature (<=0 or std::isnan -> greedy)
 //   top_k:  0 = keep all
 //   top_p:  1.0 = keep all after top_k
+//   min_p:  0.0 = keep all after top_p; else keep i where p_i >= min_p * p_max
+// Filters apply in llama.cpp's chain order: top_k -> top_p -> min_p.
 template <typename T>
 uint32_t choose(uint64_t seed, uint64_t pos, const T* logits, size_t n,
-                float temp, int top_k, float top_p) {
+                float temp, int top_k, float top_p, float min_p = 0.0f) {
   if (n == 0) return 0;
   if (n == 1) return 0;
   if (n <= std::numeric_limits<uint32_t>::max() && n > (1u << 24))
@@ -122,6 +124,22 @@ uint32_t choose(uint64_t seed, uint64_t pos, const T* logits, size_t n,
       acc += std::exp((double)cands[i].logit / temp - m) / sum;
       if (acc >= top_p) { keep = i + 1; break; }
       keep = i + 2;                                // always keep at least the next
+    }
+    cands.resize(keep);
+  }
+
+  // min_p on the same temperature-scaled distribution: keep candidates whose
+  // probability >= min_p * the top candidate's probability (llama.cpp semantics:
+  // a per-token threshold on the softmax, not a rank cutoff — ties on the same
+  // logit value pass or fail together, so no id tie-break is needed here)
+  if (min_p > 0.0f) {
+    float mx = cands[0].logit;                          // max over remaining candidates
+    for (const auto& c : cands) if (c.logit > mx) mx = c.logit;
+    const double scale = (double)mx / (double)temp;
+    size_t keep = 0;
+    for (size_t i = 0; i < cands.size(); ++i) {
+      const double p = std::exp((double)cands[i].logit / (double)temp - scale);
+      if (p >= (double)min_p) cands[keep++] = cands[i];
     }
     cands.resize(keep);
   }
