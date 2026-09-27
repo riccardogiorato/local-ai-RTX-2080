@@ -111,6 +111,22 @@ int main() {
     CHECK_T(f2 == 1, "T5 top_p=0.99 includes the 4% token", "");
   }
 
+  // ---- T5b min_p: threshold on the temperature-scaled distribution ----
+  {
+    // logits (0.4, 0.0, -6.0): p = (0.5993, 0.4007, 0.00015); min_p=0.05 drops token 2
+    float lgs[3] = {0.4f, 0.0f, -6.0f};
+    long appeared = 0;
+    for (int p = 0; p < 100000; ++p)
+      if (choose(SEED, p, lgs, 3, 1.0f, 0, 1.0f, 0.05f) == 2) ++appeared;
+    CHECK_T(appeared == 0, "T5b min_p=0.05 excludes the 0.015% token", "");
+    // min_p=0.0001 keeps it (p2 = 0.00015 >= 0.0001)
+    appeared = 0;
+    for (int p = 0; p < 100000; ++p)
+      if (choose(SEED, p, lgs, 3, 1.0f, 0, 1.0f, 0.0001f) == 2) ++appeared;
+    CHECK_T(appeared > 0 && appeared < 200,
+            "T5b min_p=0.0001 keeps it at ~0.015% (15 expected in 100k)", "");
+  }
+
   // ---- T6 greedy ties break by smaller id ----
   {
     float logits[4] = {1.0f, 1.0f, 1.0f, 1.0f};
