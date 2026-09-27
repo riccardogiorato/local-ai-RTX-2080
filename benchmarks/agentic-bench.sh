@@ -36,6 +36,19 @@ run_task() {
   local wall=$((SECONDS - t0))
   local passed=false
   if ( cd "$work" && bash verify.sh >/dev/null 2>&1 ); then passed=true; fi
+  # PROTECTED-CHECK: rule violations = fail regardless of verify (models edit tests/protected)
+  if ( cd "$work" && git diff --quiet -- tests/ 2>/dev/null &&        [ -z "$(find protected -newer verify.sh -type f 2>/dev/null | head -1)" ] ); then :; else
+    if [ -d "$work/tests" ] || [ -d "$work/protected" ]; then
+      ( cd "$work" && sha_check="$( (git -C "$task_dir" rev-parse 2>/dev/null || echo x) )" ; true )
+      # simpler + deterministic: compare against the pristine master copies
+      bad=0
+      for pd in tests protected; do
+        [ -d "$work/$pd" ] || continue
+        if ! diff -r --brief "$task_dir/$pd" "$work/$pd" >/dev/null 2>&1; then bad=1; fi
+      done
+      [ "$bad" = "1" ] && { passed=false; echo "NOTE: $task_name FAILED the protected-paths check (tests/or protected modified)"; }
+    fi
+  fi
   AG_OUT="$OUT" python3 - "$task_name" "$LABEL" "$wall" "$passed" "$work" <<'EOF'
 import json, sys, os
 task, label, wall, passed, work = sys.argv[1], sys.argv[2], int(sys.argv[3]), sys.argv[4] == 'true', sys.argv[5]
