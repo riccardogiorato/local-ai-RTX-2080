@@ -189,3 +189,15 @@ byte-identical requantize output (COPY + token-embedding-type q4_0 → same
 size). E4B re-measure unnecessary (its 181 tok/s row already includes the
 effect); Gemma-12B promotion stays blocked on the ngl-45 layer floor, not on
 embedding VRAM.
+
+## DFlash2 sidecar — acceptance VALIDATED, economics falsified at 8 GB (2026-09-28)
+
+Experiment complete (evidence/dflash2-iqi-27b.jsonl): DFlash2-Q4_K_M-swa (1.14 GB)
+on the head-less IQ1_S target accepts at 0.92/mean 3.76 — the sidecar class is
+quant-agnostic and WORKS on this card (Supsurface prism-dflash2 runtime built
+and ran first try). But hosting any >1GB drafter forces the dense target into
+the CPU band (ngl 44) where decode collapses 19.7→6.2 despite the acceptance.
+REMAINING LIVE TRIGGER, now precise: a ≤600 MB Q2-class DFlash2 sidecar could
+host beside a FULL-OFFLOAD target (6.70+0.6+ctx_other~0.4 ≈ 8.0 with desktop —
+borderline; needs -c 4096 and possibly one shed layer). Watch jmarceno/z-lab
+for a Q2_K_XS-swa conversion.
