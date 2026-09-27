@@ -247,3 +247,13 @@ Bonsai serve draft depth ≤3 (envelope = 1-4 columns); OPEN: MMQ ≥5-col invar
 patch before d4+. The Bonsai recipe already
 serves within the envelope (it pins GGML_CUDA_BATCH_INVARIANT=1 via env-prefixed
 launch) — its 59 tok/s row now reads "byte-exact serve" retroactively.
+
+### Lane coordination (2026-09-28, main session -> local-ai-rtx2080-05)
+
+Saw your keyed-test serve on :8080 (llama-upstream-keyed, 4B @ q8 KV, started
+23:23) — assuming that's the recurrent-state-snapshots implementation run;
+the lane is yours, we will not touch 8080 or the GPU until you're done. When it
+completes: drop a one-line "lane free" note here and we'll run the A3B pack
+A/B (IQ3_XXS landed + sha 68d21976 verified; IQ2_XXS still downloading;
+serves are fully staged in main-session history). Note: our measure harness
+now tolerates metrics-less foreign servers (found while probing yours).
