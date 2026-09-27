@@ -20,11 +20,19 @@ run_task() {
   local work="/tmp/agentic-run/${LABEL}/${task_name}"
   rm -rf "$work"; mkdir -p "$work"
   # copy sources but not node_modules/locks — deps install on demand
-  rsync -a --exclude node_modules --exclude package-lock.json --exclude .build "$task_dir/" "$work/"
+  rsync -a --exclude node_modules --exclude package-lock.json --exclude .build --exclude "service*.rc" "$task_dir/" "$work/"
+  # task-side service bootstrap (e.g. ancient-puzzle decryptor): sourced from
+  # the MASTER dir so secrets/infra stay out of the agent's workdir.
+  if [ -f "$task_dir/service.rc" ]; then
+    ( . "$task_dir/service.rc" ) || echo "WARN: service.rc failed for $task_name"
+  fi
   local t0=$SECONDS
   ( cd "$work" && PI_OFFLINE=1 timeout "$CAP" pi --provider llamacpp-local --model local-model \
       --mode json --no-session \
       -p "$(cat "$work/TASK.md")" ) > "$work/pi-session.jsonl" 2>"$work/pi-errors.log"
+  if [ -f "$task_dir/service-cleanup.rc" ]; then
+    ( . "$task_dir/service-cleanup.rc" ) || true
+  fi
   local wall=$((SECONDS - t0))
   local passed=false
   if ( cd "$work" && bash verify.sh >/dev/null 2>&1 ); then passed=true; fi
