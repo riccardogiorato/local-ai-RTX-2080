@@ -78,7 +78,36 @@ Verdict scale: ✅ COPY (logic-level, no kernels) · 🔧 PORT (needs CUDA/fork 
 - **Cumulative-union tickets with co-author attribution** — how the top turned into a shared ladder (winglock's 505.4% record credits four other solvers byte-for-byte). Not directly portable; the reference-worthy part is that every item is independently switch-gated and exact, so unions can't regress each other.
 - **Their published negative results are free information for us:** prompt-forward concurrency, command-buffer batching (100→5 buffers/round), and fused FP32 attention all measured 1.000× or slower — **CUDA-graph batching of decode rounds is known-dead, don't spend on it.** Also their toolchain probe pattern (compile-check a kernel at init, fall back on error) is the VRAM-safe way to try risky fork patches.
 
-## Constraints (already learned, must hold in any port)
+## How the contest tests accuracy (read from TASK.md + docs/participant-contract.md)
+
+Two levels, and the difference matters for us:
+
+- **Official gate: 10% token TOLERANCE, not equality.** A per-stream token-tolerance gate with
+  a 10% budget; the contract states it "accepts similar output. It does not certify lossless
+  output," explicitly because a multi-row speculative forward rounds differently from a
+  single-row one at near-tie argmax. The candidate at depth D is checked against `live_golden_speculative{D}`
+  — a per-depth oracle taped by the organizer, staged out of band (never in git) — not
+  against the serial trajectory. Golden shape: one prompt, `(512 prompt_tokens,
+  129 expected_tokens)`, 128 checked decode steps, single stream. All gating is done by
+  `benchd`, a pinned prebuilt binary; verification/measurement code is outside the editable
+  surface. Target quantization is frozen ("a lossier target substitutes a degraded model").
+  Paired serial-control leg on the same box, quiescence + thermal gates on timing.
+  (Track currently unarmed: `official_scoring_enabled: false`, pending-organizer sentinel.)
+- **Solver culture: far stricter, self-enforced.** Every promoted PR claims emitted tokens =
+  the target's greedy tokens, acceptance trace identical to base, and **every kernel variant
+  load-time self-tested bitwise against stock with automatic fallback on any single-bit
+  mismatch**; in-situ trials adopt only bit-identical forms. Motivation (winglock #621): union
+  tickets stack strangers' changes, so bit-identical forms guarantee "a different pick costs
+  microseconds, never tokens."
+
+Consequences for this port program: their speed numbers do not depend on the loose gate
+(their big wins are exactness-neutral constructions), but their 14.2 tok/round was never held
+to drafted==serial bytes — byte-exactness at depth is ours to prove alone. This is why the
+ranked plan puts the split-K invariance patch BEFORE depth (GGML_CUDA_BATCH_INVARIANT coverage
+at d5-d8), gates every depth step at 6/6 on `spec-drift-test-llamacpp.sh`, and why their
+load-time-bisect + stock-fallback + in-situ-trial pattern (§D) is the one accuracy mechanism
+to copy wholesale — safe-by-construction kernel variants fit our exactness bar, which is
+stricter than the contest's own.
 
 1. sm_75 exact arithmetic lives **only** on dp4a/IMMA (measured, `mma_bitslice_probe_sm75.cu`).
 2. ptxas accepts but misdecodes sm_80 `mma.sync` forms on Turing — never trust the compile.
