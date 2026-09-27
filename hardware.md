@@ -19,7 +19,7 @@ All recipes in this repo run on this machine. If a number here is cited elsewher
 | Field | Value |
 |---|---|
 | CPU | Intel Core i5-9600K — 6 cores / 6 threads @ 3.70 GHz |
-| RAM | 16 GB (zram swap 15.5 GB) |
+| RAM | 48 GB (46 GiB; 4-DIMM 2×8+2×16 DDR4, currently retrained at 2400 MT/s after XMP failed on the mixed population — 2026-09-27; 16 GB prior era numbers stay in recipes as measured) |
 | OS | Arch Linux / Omarchy (kernel 7.2.3-arch1-3), Wayland |
 | Desktop baseline VRAM | ~520 MiB (Hyprland + shell) — subtracted from residency numbers |
 | Container runtime | Docker via sudo; nvidia-container-toolkit (CDI mode) installed 2026-09-23 |

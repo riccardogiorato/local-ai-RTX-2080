@@ -76,7 +76,7 @@ triggers: cinference ships a Turing kernel build, a sub-8 GB artifact class, or 
 Ampere+ box dequants once — none likely; our own DFlash2 sidecar trigger (~600 MB
 Q2/Q4 drafter for llama.cpp) remains the live one from this announcement.
 
-## UBBoost cherry-pick build — 2x prefill claimed on our EXACT hardware class (PR #23239)
+## UBBoost cherry-pick build — RESOLVED 2026-09-26 via c9df0ee (claim reproduced 2.4× with plain ubatch on all 3 CPU-offload models; port not needed — kept for the dense-cram cold-prefill profile reference)
 
 DavidAngeloBen's llama.cpp PR #23239 / discussion #23262: RTX 2080 8GB + Qwen
 35B-A3B + MTP, the same VRAM-constrained CPU-experts recipe as our A3B/Xing
@@ -121,3 +121,36 @@ cheap re-measure toward their 200-class claim; (b) the more interesting one:
 Gemma-12B (evidence-only, ngl 45, 29.4/43.5 tok/s, AG-Bench 3/6) — the freed
 VRAM could buy 1-2 more GPU layers and might promote it from "12GB-class
 wanting 8GB" to a full recipe. Requires llama-quantize on the host build.
+
+## Handoff additions (from sibling session local-ai-rtx2080-05, 2026-09-27) — run after the current queue
+
+Two performance levers still open after the current queue (UBBoost resolved
+via c9df0ee; Bonsai d-depth crowns d2 via d8574bb; token_embd trim already
+queued above). Not GPU-urgent — sequence them after Flash-Next/row-12.
+
+### 1. DFlash2 sidecar on the dense 27B crams — the live decode lever
+
+The NEXT-IDEAS live trigger from the Cinference post: a ~600 MB Q2/Q4 drafter
+for llama.cpp, applied to the dense-27B crams. DSpark on LFM2.5-8B-A1B proved
+the 0.19 GB sidecar class works on this card (221 tok/s record, fully
+resident). The untested application is a mid-size drafter accelerating
+ThinkingCap-27B Q2_K (9.57 tok/s, acc 0.995, ngl 40) and the IQ1_S row-12
+serve once measured. Steps: pick drafter candidate (~600 MB class, checked
+against the target's tokenizer), rotate the pair back from the archive drive
+if needed, measure acceptance + fixed-prompt decode per house method
+(2-3 repeats, ranges, thinking off).
+
+### 2. Recurrent-state snapshots for DeltaNet-class hybrids
+
+The portable idea from
+[notes/research-david19p-turing-kernel.md](notes/research-david19p-turing-kernel.md)
+§"adoption-worthy ideas": explicit SSM/conv/target_feat snapshots (direct
+`lcp=N reused=N`) instead of KV seq-id manipulation for the recurrent-state
+part of Qwen3.5/3.8-hybrid multi-turn flows. Pure C++/GGML — b11118 docker or
+the bonsai2 fork are candidate hosts. Payoff is per-turn latency on hybrid
+chains, not raw tok/s; low risk, no GPU needed to draft the patch.
+
+Housekeeping when convenient: the UBBoost section above (`## UBBoost
+cherry-pick build…`) is resolved — plain-ubatch reproduction 2.4× on all 3
+CPU-offload models (c9df0ee), port not needed; hardware.md still lists
+16 GB RAM — the machine is 48 GB since 9f220a2.
