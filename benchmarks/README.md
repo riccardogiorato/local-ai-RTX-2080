@@ -223,3 +223,25 @@ Six new task classes to double sample breadth, staged as task7–12:
 
 Scoring for v2.1 runs: the same three columns over 12 tasks; original-6 subset
 reported alongside for continuity with every historical row.
+
+## Canary calibration run (2026-09-28): strong-model passability confirmed 6/6
+
+Full 6-task v2.1 suite solved by GLM-5.3 subagents, one per task, with
+oracle-blind rules (no tests/ reads, no service-source reads), judged only
+by verify.sh from the parent session:
+
+| # | Task | Verdict | Solve time | Notes |
+|---|---|---|---|---|
+| 7 | long-context-agent | ✅ ALL OK | 77 s | found the ADR-0014.md file titled ADR-0042 — the positioning-vs-naming trap resolved correctly |
+| 8 | tb-broken-python | ✅ ALL OK | 40 s | root cause + intended repair (ensurepip) + self-imposed install round-trip |
+| 9 | tb-analyze-access-logs | ✅ ALL OK | 16 s | GT match, zero ambiguity |
+| 10 | tb-bank-trans-filter | ✅ ALL OK | 33 s | 9-row GT cluster incl. account-typo row; decoy companies rejected |
+| 11 | tb-assign-seats | ✅ ALL OK | 77 s | matched the port-time brute-force CSP result exactly |
+| 12 | tb-ancient-puzzle | ✅ ALL OK | ~10.5 min | FULL decode chain (glyph filter → weight-sum 819 → AES zip passcode 00819 → ECHOES-OF-CYPRESS → service); decryptor isolation held; agent derived the passcode via PBKDF2 verification bytes when 7z wasn't installed — genuine puzzle-solving under constraint |
+
+Protected-paths integrity held on all six. Interpretation: the suite is a
+calibrated measurement instrument — any candidate model score is a real
+capability measurement, not a harness artifact. Reference frame: the canary
+operates with full-frontier compute and no token budget; the 8 GB fleet
+works at 5-90 tok/s under fixed caps, so cross-class comparisons are honest
+apples-to-oranges, never apples-to-harness-bugs.
