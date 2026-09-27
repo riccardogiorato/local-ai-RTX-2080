@@ -208,3 +208,29 @@ for a Q2_K_XS-swa conversion. CAVEAT on tonight's falsification: it ran the
 the conclusion likely survives (ngl-54 OOM math implies IQ1_S full-offload
 alone leaves no room for any drafter + compute buffers), but the 600 MB
 point remains an open measurement, not a closed one.
+
+## TensorFold exact-spec-decode port — technique extracted, sm_75 probed, queue-opener (2026-09-27)
+
+TensorFold (ashhart, MIT) serves byte-identical drafted decode ("drafts change speed
+only") via lane-batched verify windows up to 32 rows. Full technique extraction and our
+own GPU probes: `notes/tensorfold-analysis.md`, evidence
+`evidence/tensorfold-exactness-probe.jsonl`. Ground measured on this card:
+
+- wmma fp16 lanes are slot-dependent (bits depend on which tile slot a row occupies,
+  both axes) → fp16-HMMA lanes are a dead end for exactness on sm_75; dp4a/IMMA
+  integer lanes are exact by construction (0/1M mismatches).
+- **our own stack already violates today**: E4B+MTP recipe greedy — serial is 6/6
+  self-reproducible, drafted is 4/6, drafted-vs-serial only **1/6 byte-identical**
+  (near-tie single-token flips, then divergence; 150 vs 91 tok/s is what the drift
+  "buys"). Harness: `notes/spec-drift-test-llamacpp.sh` — should become a standard
+  column for every spec-decode recipe.
+- crossover economics favorable: rows_free ≈ 24-48 ideal (measured peaks @425 GB/s);
+  fork-measured tile floor flat through n=8 — 16-32-row windows would ride nearly free.
+
+Queue order (value/effort): (1) drift-test all existing MTP recipes (30 min each, shell);
+(2) keyed-Gumbel exact sampling port to llama.cpp sampling layer ();
+(3) Bonsai-PTQ1_0 full-lane audit — integer matmul already exact-class, patch the fork so
+serial + all verify widths share one kernel path per op class, re-run the drift harness,
+target 6/6 drafted==serial; then exploit the flat tile floor with d4-d8 windows (
+serve 59 → 65-70 tok/s target from the kn note, with bytes as the acceptance criterion).
+Blocked on: nothing — this is pure fork/patch work.
