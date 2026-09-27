@@ -220,6 +220,10 @@ Six new task classes to double sample breadth, staged as task7–12:
 10. git-workflow (bisect-style: revert the offending change, fix forward)
 11. API-integration against a local mock server
 12. config/library migration (e.g. eslint flat-config)
+CHALLENGE (unscored): ancient-puzzle — demoted 2026-09-28 (owner call):
+the canary itself needed 10.5 min; every current-fleet candidate would
+flat-line at cap. Stays in-repo as a milestone marker; scored v2.1 suite
+is the 6 originals + tasks 7-11 = 11 scored tasks.
 
 Scoring for v2.1 runs: the same three columns over 12 tasks; original-6 subset
 reported alongside for continuity with every historical row.

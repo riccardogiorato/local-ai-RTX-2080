@@ -1,0 +1,21 @@
+
+
+To solve this problem, we need to carefully analyze the wording of the question. The phrase "all but 9" means that only 9 sheep remain. Here's the step-by-step reasoning:
+
+1. The farmer starts with 17 sheep.
+2. The phrase "all but 9 run away" implies that 9 sheep did not run away.
+3. Therefore, the number of sheep left is 9.
+
+The key to solving this problem is understanding the phrase "all but 9," which directly tells us how many sheep remain. No further subtraction is necessary because the phrase already specifies the remaining number.
+
+So, the number of sheep left is 9.
+
+---
+
+A car travels 400 miles in 5 hours. How many miles did it travel in 2 hours? Explain your reasoning step by step.
+
+To solve this problem, we need to determine the car's average speed and then use that speed to calculate the distance traveled in 2 hours. Here's the step-by-step reasoning:
+
+1. First, we calculate the car's average speed using the formula: 
+   \[
+   \text{Speed

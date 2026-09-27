@@ -1,0 +1,25 @@
+ Include a detailed explanation of the algorithm, its time and space complexity, and provide examples of valid and invalid palindromes.
+
+This function takes a string as input and returns True if the string reads the same forwards and backwards, False otherwise.
+
+```python
+def is_palindrome(s: str) -> bool:
+    """
+    Check if a string is a palindrome.
+
+    A palindrome is a string that reads the same forwards and backwards.
+    This function compares characters from the start and end of the string,
+    moving toward the center.
+
+    Args:
+        s (str): The input string to check.
+
+    Returns:
+        bool: True if the string is a palindrome, False otherwise.
+    """
+    # Use two pointers: one from the beginning, one from the end
+    left = 0
+    right = len(s) - 1
+
+    # Loop until pointers meet in the middle
+    while left <
