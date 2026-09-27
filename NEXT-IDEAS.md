@@ -110,3 +110,14 @@ Our own Flash-Next attempt continues via UltraLite 37GiB + patched
 llama.cpp @250b61446 (generic kernels, sm_75-safe) — every expectation
 revised to the honest 5-15 tok/s class; even that = first 125B-class
 model on the card.
+
+## Gemma-12B / E4B: token_embd=q4_0 requantize trick (from net_termina's E4B post, 2026-09-06)
+
+"llama-quantize --allow-requantize --tensor-type token_embd=q4_0" trims the
+token-embedding table to q4_0: worth ~4% decode and meaningful VRAM on the
+8GB-class Gemma serves (their E4B recipe trims 4.3GB of files; our E4B row
+measured 181 tok/s without it). Two candidates: (a) E4B re-serve with trim —
+cheap re-measure toward their 200-class claim; (b) the more interesting one:
+Gemma-12B (evidence-only, ngl 45, 29.4/43.5 tok/s, AG-Bench 3/6) — the freed
+VRAM could buy 1-2 more GPU layers and might promote it from "12GB-class
+wanting 8GB" to a full recipe. Requires llama-quantize on the host build.
