@@ -10,7 +10,8 @@ REPO="$(cd "$(dirname "$0")/.." && pwd)"
 PORT="${PORT:-8080}"
 N_PREDICT="${N_PREDICT:-256}"
 
-mval() { curl -s "http://127.0.0.1:$PORT/metrics" | awk -v k="llamacpp:$1" '$1==k {print $2}'; }
+mval() { curl -s --max-time 3 "http://127.0.0.1:$PORT/metrics" | awk -v k="llamacpp:$1" '$1==k {print $2+0}'; }
+# graceful when /metrics is absent (foreign server): emit decode-only rows
 
 measure() { # <prompt-file>
   local f="$1"
