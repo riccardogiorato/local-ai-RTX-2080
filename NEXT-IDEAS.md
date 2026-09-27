@@ -16,7 +16,10 @@ qwen4exp runtime — first 125B-class on the card. Boundary learned: sub-2 bpw
 BREAKS THE REASONING CHAIN (EOS-at-reasoning-close; same wall as IQ1_S), so the
 frontier scores stay unreachable at this compression. Remaining blockers for a
 USABLE Flash-Next slot: a sub-40GB artifact at >=2.2bpw with MTP + intact
-reasoning (none exists today); Strata's Q2_0-GSQ-RCO tier needs sm_80+.
+reasoning (none exists today); Strata's Q2_0 tier is now sm_75-portable per
+the source survey below (soft gate — one tf32 mma + bf16 emulation) — its
+remaining blocker is the port work itself plus RAM/bandwidth economics, not
+the instruction floor.
 See recipes/flashnext-ultralite-125b-llamacpp-fork.md and evidence/flashnext-ultralite-125b.jsonl.
 ## OrcaSAQ-2-27B (orcarouter) — blocked, triggers recorded
 
@@ -200,4 +203,8 @@ the CPU band (ngl 44) where decode collapses 19.7→6.2 despite the acceptance.
 REMAINING LIVE TRIGGER, now precise: a ≤600 MB Q2-class DFlash2 sidecar could
 host beside a FULL-OFFLOAD target (6.70+0.6+ctx_other~0.4 ≈ 8.0 with desktop —
 borderline; needs -c 4096 and possibly one shed layer). Watch jmarceno/z-lab
-for a Q2_K_XS-swa conversion.
+for a Q2_K_XS-swa conversion. CAVEAT on tonight's falsification: it ran the
+1.14 GB Q4_K_M-swa drafter — the ~600 MB class itself was never tested;
+the conclusion likely survives (ngl-54 OOM math implies IQ1_S full-offload
+alone leaves no room for any drafter + compute buffers), but the 600 MB
+point remains an open measurement, not a closed one.
