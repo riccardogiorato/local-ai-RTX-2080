@@ -179,3 +179,13 @@ Housekeeping when convenient: the UBBoost section above (`## UBBoost
 cherry-pick build…`) is resolved — plain-ubatch reproduction 2.4× on all 3
 CPU-offload models (c9df0ee), port not needed; hardware.md still lists
 16 GB RAM — the machine is 48 GB since 9f220a2.
+
+## RESOLVED 2026-09-27: token_embd trim — no-op on our artifact family
+
+net_termina's ~4% trick (token_embd=q4_0 requantize) applies to the OFFICIAL
+ggml-org Gemma GGUFs (which carry big F16 embeddings). Our unsloth UD-Q4_K_XL
+conversions of the QAT models already ship q4 embeddings — verified by
+byte-identical requantize output (COPY + token-embedding-type q4_0 → same
+size). E4B re-measure unnecessary (its 181 tok/s row already includes the
+effect); Gemma-12B promotion stays blocked on the ngl-45 layer floor, not on
+embedding VRAM.
