@@ -20,17 +20,17 @@ with the same care as wins.
 Ranked by AG-Bench v2.1 score (11 canary-verified tasks), then by efficiency.
 
 | Rank | Model | Score | Decode / Prefill | Context | VRAM / RAM | Spec decoder |
-|---|---|---|---|---|---|---|---|
-| **1** | [🤗](https://huggingface.co/bartowski/MiMo-V2.6-Distill-Qwen-9B-GGUF) **MiMo-9B** distill | **9/11** | 52 t/s / 1.7K | 32K | 5.5 GB / 1 GB | none |
-| **1** | [🤗](https://huggingface.co/Qwen/Qwen3.5-9B) **Qwen3.5-9B** d4 | **9/11** | 100 t/s / 1.6K | 64K | 5.5 GB / 1 GB | MTP d4 |
-| **3** | [🤗](https://huggingface.co/Qwen/Qwen3.5-4B) **Qwen3.5-4B** d4 | **8/11** | 150 t/s / 2.3K | **128K** | 2.6 GB / 1 GB | MTP d4 |
-| **4** | [🤗](https://huggingface.co/Qwen/Qwen3.5-35B-A3B) **A3B** IQ2_XXS | **8/11** | 40 t/s / 1K | 32K+ | 4.6 GB / 12 GB | MTP d4 ext |
-| **5** | [🤗](https://huggingface.co/sudoingx/Ternary-Bonsai-2-27B-PTQ1_0-MTP-GGUF) **Bonsai-64K** tern. | **8/11** | 17 t/s / 520 | 64K | 6.0 GB / 2 GB | graft d2 |
-| **5** | [🤗](https://huggingface.co/XingChen-AGI/Xing4.0-29B-A4B) **Xing-29B** ub4K | **8/11** | 25 t/s / 346 | 8K | 4.0 GB / 12 GB | MTP d2 |
-| **5** | [🤗](https://huggingface.co/sudoingx/Ternary-Bonsai-2-27B-PTQ1_0-MTP-GGUF) **Bonsai-8K** tern. | **5/11** | **55 t/s** / 520 | 8K | 7.3 GB / 1 GB | graft d2 |
-| **8** | [🤗](https://huggingface.co/google/gemma-4-E4B-it-qat-q4_0-unquantized) **Gemma-E4B** d2 | n/a* | **181 t/s** / 2.8K | **128K** | 4.3 GB / 1 GB | MTP d2 ext |
-| **9** | [🤗](https://huggingface.co/LiquidAI/LFM2.5-8B-A1B) **LFM2.5** DSpark | 0/11 | **221 t/s** / 500 | 32K | resident | DSpark d4 |
-| **10** | [🤗](https://huggingface.co/holooo/ThinkingCap-Qwen3.8-27B-Q2_K-GGUF) **ThinkCap-27B** | 4/6 | 9.6 t/s / 239 | 32K | 7.4 GB / 6 GB | MTP d2 |
+|---|---|---|---|---|---|---|
+| 1 | [MiMo-9B](https://huggingface.co/bartowski/MiMo-V2.6-Distill-Qwen-9B-GGUF) | **9/11** | 52 t/s / 1.7K | 32K | 5.5 GB / 1 GB | none |
+| 1 | [Qwen3.5-9B](https://huggingface.co/Qwen/Qwen3.5-9B) | **9/11** | 100 t/s / 1.6K | 64K | 5.5 GB / 1 GB | MTP d4 |
+| 3 | [Qwen3.5-4B](https://huggingface.co/Qwen/Qwen3.5-4B) | **8/11** | 150 t/s / 2.3K | **128K** | 2.6 GB / 1 GB | MTP d4 |
+| 4 | [A3B IQ2_XXS](https://huggingface.co/Qwen/Qwen3.5-35B-A3B) | **8/11** | 40 t/s / 1K | 32K+ | 4.6 GB / 12 GB | MTP d4 ext |
+| 5 | [Bonsai-64K](https://huggingface.co/sudoingx/Ternary-Bonsai-2-27B-PTQ1_0-MTP-GGUF) | **8/11** | 17 t/s / 520 | 64K | 6.0 GB / 2 GB | graft d2 |
+| 5 | [Xing-29B](https://huggingface.co/XingChen-AGI/Xing4.0-29B-A4B) | **8/11** | 25 t/s / 346 | 8K | 4.0 GB / 12 GB | MTP d2 |
+| 5 | [Bonsai-8K](https://huggingface.co/sudoingx/Ternary-Bonsai-2-27B-PTQ1_0-MTP-GGUF) | **5/11** | **55 t/s** / 520 | 8K | 7.3 GB / 1 GB | graft d2 |
+| 8 | [Gemma-E4B](https://huggingface.co/google/gemma-4-E4B-it-qat-q4_0-unquantized) | n/a\* | **181 t/s** / 2.8K | **128K** | 4.3 GB / 1 GB | MTP d2 ext |
+| 9 | [LFM2.5 DSpark](https://huggingface.co/LiquidAI/LFM2.5-8B-A1B) | 0/11 | **221 t/s** / 500 | 32K | resident | DSpark d4 |
+| 10 | [ThinkCap-27B](https://huggingface.co/holooo/ThinkingCap-Qwen3.8-27B-Q2_K-GGUF) | 4/6 | 9.6 t/s / 239 | 32K | 7.4 GB / 6 GB | MTP d2 |
 
 *\*Gemma-E4B not yet benched on v2.1; scored 3/6 on the original suite.*
 
