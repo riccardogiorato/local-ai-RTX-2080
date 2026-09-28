@@ -1,0 +1,4 @@
+{"model": "mimo-serial-c32k-q4kv-thinkpin", "task": "task10-tb-bank-trans-filter", "passed": false, "wall_s": 600, "tool_calls": 0, "finish": "unknown"}
+{"model": "mimo-serial-c32k-q4kv-thinkpin", "task": "task11-tb-assign-seats", "passed": false, "wall_s": 600, "tool_calls": 0, "finish": "unknown"}
+{"model": "mimo-serial-c32k-q4kv-thinkpin", "task": "task1-js-bugfix", "passed": false, "wall_s": 600, "tool_calls": 0, "finish": "unknown"}
+{"model": "mimo-serial-c32k-q4kv-thinkpin", "task": "task2-react-fix", "passed": false, "wall_s": 600, "tool_calls": 0, "finish": "unknown"}
