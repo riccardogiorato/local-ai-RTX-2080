@@ -1,0 +1,11 @@
+{"model": "xing-v2-suite", "task": "task10-tb-bank-trans-filter", "passed": true, "wall_s": 132, "tool_calls": 19, "finish": "unknown"}
+{"model": "xing-v2-suite", "task": "task11-tb-assign-seats", "passed": true, "wall_s": 328, "tool_calls": 35, "finish": "unknown"}
+{"model": "xing-v2-suite", "task": "task1-js-bugfix", "passed": true, "wall_s": 101, "tool_calls": 26, "finish": "unknown"}
+{"model": "xing-v2-suite", "task": "task2-react-fix", "passed": false, "wall_s": 900, "tool_calls": 6, "finish": "unknown"}
+{"model": "xing-v2-suite", "task": "task3-dep-upgrade", "passed": true, "wall_s": 900, "tool_calls": 48, "finish": "unknown"}
+{"model": "xing-v2-suite", "task": "task4-python-bugfix", "passed": true, "wall_s": 37, "tool_calls": 15, "finish": "unknown"}
+{"model": "xing-v2-suite", "task": "task5-js-to-ts", "passed": false, "wall_s": 900, "tool_calls": 125, "finish": "unknown"}
+{"model": "xing-v2-suite", "task": "task6-extra-code-task", "passed": true, "wall_s": 189, "tool_calls": 19, "finish": "unknown"}
+{"model": "xing-v2-suite", "task": "task7-long-context-agent", "passed": true, "wall_s": 424, "tool_calls": 48, "finish": "unknown"}
+{"model": "xing-v2-suite", "task": "task8-tb-broken-python", "passed": false, "wall_s": 900, "tool_calls": 103, "finish": "unknown"}
+{"model": "xing-v2-suite", "task": "task9-tb-analyze-access-logs", "passed": true, "wall_s": 161, "tool_calls": 33, "finish": "unknown"}
