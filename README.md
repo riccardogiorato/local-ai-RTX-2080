@@ -19,20 +19,20 @@ with the same care as wins.
 
 Ranked by AG-Bench v2.1 score (11 canary-verified tasks), then by efficiency.
 
-| Rank | Model | Score | Decode / Prefill | Context | VRAM / RAM | Spec decoder |
-|---|---|---|---|---|---|---|
-| 1 | [MiMo-9B](https://huggingface.co/bartowski/MiMo-V2.6-Distill-Qwen-9B-GGUF) | **9/11** | 52 t/s / 1.7K | 32K (8K–16K +DFlash) | 5.5 GB / 1 GB | **DFlash d8 sidecar → 138 t/s @8K / 94 @16K; pinned pair: score preserved, 1.66× wall** (2026-09-28) |
-| 1 | [Qwen3.5-9B](https://huggingface.co/Qwen/Qwen3.5-9B) | **9/11** | 100 t/s / 1.6K | 64K | 5.5 GB / 1 GB | MTP d4 |
-| 3 | [Qwen3.5-4B](https://huggingface.co/Qwen/Qwen3.5-4B) | **8/11** | 150 t/s / 2.3K | **128K** | 2.6 GB / 1 GB | MTP d4 |
-| 4 | [A3B IQ2_XXS](https://huggingface.co/Qwen/Qwen3.5-35B-A3B) | **8/11** | 40 t/s / 1K | 32K+ | 4.6 GB / 12 GB | MTP d4 ext |
-| 5 | [Bonsai-64K](https://huggingface.co/sudoingx/Ternary-Bonsai-2-27B-PTQ1_0-MTP-GGUF) | **8/11** | 17 t/s / 520 | 64K | 6.0 GB / 2 GB | graft d2 |
-| 5 | [Xing-29B](https://huggingface.co/XingChen-AGI/Xing4.0-29B-A4B) | **8/11** | 25 t/s / 346 | 8K | 4.0 GB / 12 GB | MTP d2 |
-| 5 | [Bonsai-8K](https://huggingface.co/sudoingx/Ternary-Bonsai-2-27B-PTQ1_0-MTP-GGUF) | **5/11** | **55 t/s** / 520 | 8K | 7.3 GB / 1 GB | graft d2 |
-| 8 | [Gemma-E4B](https://huggingface.co/google/gemma-4-E4B-it-qat-q4_0-unquantized) | **7/11** @ **83.4 p/h** | **181 t/s** / 2.8K | **128K** | 4.3 GB / 1 GB | MTP d2 ext |
-| 9 | [LFM2.5 DSpark](https://huggingface.co/LiquidAI/LFM2.5-8B-A1B) | 0/11 | **221 t/s** / 500 | 32K | resident | DSpark d4 |
-| 10 | [ThinkCap-27B](https://huggingface.co/holooo/ThinkingCap-Qwen3.8-27B-Q2_K-GGUF) | 4/6 | 9.6 t/s / 239 | 32K | 7.4 GB / 6 GB | MTP d2 |
+| Rank | Model | Score | Efficiency | Decode / Prefill | Context | VRAM / RAM | Spec decoder |
+|---|---|---|---|---|---|---|---|
+| 1 | [MiMo-9B](https://huggingface.co/bartowski/MiMo-V2.6-Distill-Qwen-9B-GGUF) | **8–9/11** (band) | 42.5 p/h | 52 t/s / 1.7K | 32K (8K–16K +DFlash) | 5.5 GB / 1 GB | **DFlash d8 sidecar → 138 t/s @8K / 94 @16K; pinned pair: score preserved, 1.66× wall** (2026-09-28) |
+| 1 | [Qwen3.5-9B](https://huggingface.co/Qwen/Qwen3.5-9B) | **9/11** | 37.9 p/h | 100 t/s / 1.6K | 64K | 5.5 GB / 1 GB | MTP d4 |
+| 3 | [Qwen3.5-4B](https://huggingface.co/Qwen/Qwen3.5-4B) | **8/11** | 30.3 p/h | 150 t/s / 2.3K | **128K** | 2.6 GB / 1 GB | MTP d4 |
+| 3 | [A3B IQ2_XXS](https://huggingface.co/Qwen/Qwen3.5-35B-A3B) | **8/11** | ~8 p/h | 40 t/s / 1K | 32K+ | 4.6 GB / 12 GB | MTP d4 ext |
+| 3 | [Bonsai-64K](https://huggingface.co/sudoingx/Ternary-Bonsai-2-27B-PTQ1_0-MTP-GGUF) | **8/11** | 5.0 p/h | 17 t/s / 520 | 64K | 6.0 GB / 2 GB | graft d2 |
+| 3 | [Xing-29B](https://huggingface.co/XingChen-AGI/Xing4.0-29B-A4B) | **8/11** | 5.8 p/h | 25 t/s / 346 | 8K | 4.0 GB / 12 GB | MTP d2 |
+| 7 | [Gemma-E4B](https://huggingface.co/google/gemma-4-E4B-it-qat-q4_0-unquantized) | **7/11** | **83.4 p/h — record** | **181 t/s** / 2.8K | **128K** | 4.3 GB / 1 GB | MTP d2 ext |
+| 8 | [Bonsai-8K](https://huggingface.co/sudoingx/Ternary-Bonsai-2-27B-PTQ1_0-MTP-GGUF) | **5/11** | 29.7 p/h | **55 t/s** / 520 | 8K | 7.3 GB / 1 GB | graft d2 |
+| 9 | [LFM2.5 DSpark](https://huggingface.co/LiquidAI/LFM2.5-8B-A1B) | 0/11 | — | **221 t/s** / 500 | 32K | resident | DSpark d4 |
+| 10 | [ThinkCap-27B](https://huggingface.co/holooo/ThinkingCap-Qwen3.8-27B-Q2_K-GGUF) | 4/6 | — | 9.6 t/s / 239 | 32K | 7.4 GB / 6 GB | MTP d2 |
 
-*Gemma-E4B v2.1 bench (2026-09-28): 7/11, 302s — 83.4 pass/h, the card efficiency record (fastest task turnovers; task11 in 39s, task7 in 16s). Original-suite 3/6 superseded.*
+*Protocol notes (2026-09-28 evening): (1) MiMo's 9/11 replicated as 8/11 unpinned — scores on always-thinking distills move 1 task across runs; treat 1-task margins as bands, not ranks. (2) Greedy pinning (temp 0/seed 42) costs the heavy iterative tasks (task11 fails pinned, passes unpinned) — pinned A/Bs stay valid, absolute pinned scores understate. (3) Gemma-E4B v2.1: 7/11 in 302s = 83.4 pass/h, the card efficiency record (task11 in 39s, task7 in 16s); original-suite 3/6 superseded.*
 
 **Also on card:** GLM-OCR · kev · laya · GLiNER 2.5 (utility tier: vision, routing, schema extraction)
 
