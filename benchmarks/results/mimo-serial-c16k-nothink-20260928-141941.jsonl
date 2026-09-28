@@ -1,0 +1,11 @@
+{"model": "mimo-serial-c16k-nothink", "task": "task10-tb-bank-trans-filter", "passed": true, "wall_s": 14, "tool_calls": 27, "finish": "unknown"}
+{"model": "mimo-serial-c16k-nothink", "task": "task11-tb-assign-seats", "passed": false, "wall_s": 211, "tool_calls": 143, "finish": "unknown"}
+{"model": "mimo-serial-c16k-nothink", "task": "task1-js-bugfix", "passed": true, "wall_s": 19, "tool_calls": 20, "finish": "unknown"}
+{"model": "mimo-serial-c16k-nothink", "task": "task2-react-fix", "passed": false, "wall_s": 99, "tool_calls": 131, "finish": "unknown"}
+{"model": "mimo-serial-c16k-nothink", "task": "task3-dep-upgrade", "passed": true, "wall_s": 254, "tool_calls": 416, "finish": "unknown"}
+{"model": "mimo-serial-c16k-nothink", "task": "task4-python-bugfix", "passed": true, "wall_s": 9, "tool_calls": 15, "finish": "unknown"}
+{"model": "mimo-serial-c16k-nothink", "task": "task5-js-to-ts", "passed": false, "wall_s": 203, "tool_calls": 558, "finish": "unknown"}
+{"model": "mimo-serial-c16k-nothink", "task": "task6-extra-code-task", "passed": false, "wall_s": 212, "tool_calls": 76, "finish": "unknown"}
+{"model": "mimo-serial-c16k-nothink", "task": "task7-long-context-agent", "passed": true, "wall_s": 35, "tool_calls": 52, "finish": "unknown"}
+{"model": "mimo-serial-c16k-nothink", "task": "task8-tb-broken-python", "passed": false, "wall_s": 103, "tool_calls": 328, "finish": "unknown"}
+{"model": "mimo-serial-c16k-nothink", "task": "task9-tb-analyze-access-logs", "passed": true, "wall_s": 21, "tool_calls": 22, "finish": "unknown"}
