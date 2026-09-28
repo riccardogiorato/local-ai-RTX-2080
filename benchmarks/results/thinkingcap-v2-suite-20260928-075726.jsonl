@@ -1,0 +1,2 @@
+{"model": "thinkingcap-v2-suite", "task": "task10-tb-bank-trans-filter", "passed": true, "wall_s": 645, "tool_calls": 13, "finish": "unknown"}
+{"model": "thinkingcap-v2-suite", "task": "task11-tb-assign-seats", "passed": false, "wall_s": 900, "tool_calls": 15, "finish": "unknown"}
