@@ -218,10 +218,14 @@ first spec pair on this card with both models resident. Verdict + measurements:
    if a ≤400 MB high-acceptance drafter (Q1/IQ2_KS z-lab lineage) or a fork with a
    slimmer draft-pp buffer appears; otherwise 16K+Q2_K (1.66× wall, capability-neutral)
    is the recommended agent profile and 8K+Q4_K_M (2.4× decode) the speed profile.
-3. **Fork-exactness for draft-dflash** — bonsai2 @285542d carries the batch-invariance
-   patch; DFlash-v1 loader reportedly exists there (untested). Serve the pair on the
-   fork with GGML_CUDA_BATCH_INVARIANT=1 and rerun the 6-prompt drift column; target
-   6/6 drafted==serial. Pure fork/patch work, no GPU cost to prep.
+3. ~~**Fork-exactness for draft-dflash**~~ **FALSIFIED 2026-09-28 — the patch doesn't
+   extend to this pair**: bonsai2 @285542d serves draft-dflash natively but the drift
+   column stays 0/6 with GGML_CUDA_BATCH_INVARIANT=1 at BOTH n_max 8 and n_max 2 (the
+   latter inside the fork's documented 4-col envelope; both modes 6/6 self-deterministic).
+   The Bonsai 6/6 exactness is specific to the MTP/PTQ1_0 kernel profile. Byte-exact
+   DFlash on a Q4_K_M dense pair needs real kernel work (batch-invariant extensions to
+   the draft-dflash verify path). Reopen only if exactness becomes a requirement — the
+   measured capability cost of drift so far is 0 (16K pair) to +1 (32K pair).
 
 New findings recorded with this batch (evidence `mimo-9b-dflash-drafter.jsonl`):
 draft-side is a **steep nonmonotonic quant cliff** (Q4_K_M 0.794 / Q2_K 0.442 /
