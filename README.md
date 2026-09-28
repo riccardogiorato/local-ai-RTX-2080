@@ -28,11 +28,11 @@ Ranked by AG-Bench v2.1 score (11 canary-verified tasks), then by efficiency.
 | 5 | [Bonsai-64K](https://huggingface.co/sudoingx/Ternary-Bonsai-2-27B-PTQ1_0-MTP-GGUF) | **8/11** | 17 t/s / 520 | 64K | 6.0 GB / 2 GB | graft d2 |
 | 5 | [Xing-29B](https://huggingface.co/XingChen-AGI/Xing4.0-29B-A4B) | **8/11** | 25 t/s / 346 | 8K | 4.0 GB / 12 GB | MTP d2 |
 | 5 | [Bonsai-8K](https://huggingface.co/sudoingx/Ternary-Bonsai-2-27B-PTQ1_0-MTP-GGUF) | **5/11** | **55 t/s** / 520 | 8K | 7.3 GB / 1 GB | graft d2 |
-| 8 | [Gemma-E4B](https://huggingface.co/google/gemma-4-E4B-it-qat-q4_0-unquantized) | n/a\* | **181 t/s** / 2.8K | **128K** | 4.3 GB / 1 GB | MTP d2 ext |
+| 8 | [Gemma-E4B](https://huggingface.co/google/gemma-4-E4B-it-qat-q4_0-unquantized) | **7/11** @ **83.4 p/h** | **181 t/s** / 2.8K | **128K** | 4.3 GB / 1 GB | MTP d2 ext |
 | 9 | [LFM2.5 DSpark](https://huggingface.co/LiquidAI/LFM2.5-8B-A1B) | 0/11 | **221 t/s** / 500 | 32K | resident | DSpark d4 |
 | 10 | [ThinkCap-27B](https://huggingface.co/holooo/ThinkingCap-Qwen3.8-27B-Q2_K-GGUF) | 4/6 | 9.6 t/s / 239 | 32K | 7.4 GB / 6 GB | MTP d2 |
 
-*\*Gemma-E4B not yet benched on v2.1; scored 3/6 on the original suite.*
+*Gemma-E4B v2.1 bench (2026-09-28): 7/11, 302s — 83.4 pass/h, the card efficiency record (fastest task turnovers; task11 in 39s, task7 in 16s). Original-suite 3/6 superseded.*
 
 **Also on card:** GLM-OCR · kev · laya · GLiNER 2.5 (utility tier: vision, routing, schema extraction)
 
