@@ -249,3 +249,22 @@ capability measurement, not a harness artifact. Reference frame: the canary
 operates with full-frontier compute and no token budget; the 8 GB fleet
 works at 5-90 tok/s under fixed caps, so cross-class comparisons are honest
 apples-to-oranges, never apples-to-harness-bugs.
+
+### Tier-1 v2.1 sweep (2026-09-28): the new-suite leaderboard
+
+Final board on the 11-task canary-verified suite:
+
+| Model | Pass | Total wall | Efficiency |
+|---|---|---|---|
+| **Qwen3.5-9B d4** | **9/11** | **14.2 min** | **37.9 pass/h** |
+| Qwen3.5-4B d4 | 8/11 | 15.8 min | 30.3 pass/h |
+| **Qwen3.5-35B-A3B @32K** (Q3_K_M) | 8/11 | 21.0 min | 22.9 pass/h |
+| **Qwen3.5-35B-A3B @32K** (IQ2_XXS) | 8/11 | 37.1 min | 12.9 pass/h |
+| Bonsai-2 d2 | 5/11 | 10.1 min | 29.7 pass/h |
+
+Readings: the 4B ties the 35B-A3B on score at half the wall — the raw-
+capability class compresses. IQ2_XXS holds the same 8/11 as Q3_K_M on
+IQ2_XXS with +11% decode / +24% prefill and becomes the recommended pack.
+The A3B's long-context differentiator (task7) is matched by all three 32K+
+models (9B/A3B/4B) — it is the 8K ceiling of the fast tier (Bonsai) and
+the React/TS class that separates them, not deep retrieval alone.

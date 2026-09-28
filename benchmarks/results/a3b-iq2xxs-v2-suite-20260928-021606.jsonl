@@ -1,0 +1,11 @@
+{"model": "a3b-iq2xxs-v2-suite", "task": "task10-tb-bank-trans-filter", "passed": true, "wall_s": 174, "tool_calls": 16, "finish": "unknown"}
+{"model": "a3b-iq2xxs-v2-suite", "task": "task11-tb-assign-seats", "passed": false, "wall_s": 669, "tool_calls": 22, "finish": "unknown"}
+{"model": "a3b-iq2xxs-v2-suite", "task": "task1-js-bugfix", "passed": true, "wall_s": 45, "tool_calls": 15, "finish": "unknown"}
+{"model": "a3b-iq2xxs-v2-suite", "task": "task2-react-fix", "passed": true, "wall_s": 224, "tool_calls": 39, "finish": "unknown"}
+{"model": "a3b-iq2xxs-v2-suite", "task": "task3-dep-upgrade", "passed": true, "wall_s": 45, "tool_calls": 36, "finish": "unknown"}
+{"model": "a3b-iq2xxs-v2-suite", "task": "task4-python-bugfix", "passed": true, "wall_s": 32, "tool_calls": 16, "finish": "unknown"}
+{"model": "a3b-iq2xxs-v2-suite", "task": "task5-js-to-ts", "passed": false, "wall_s": 687, "tool_calls": 504, "finish": "unknown"}
+{"model": "a3b-iq2xxs-v2-suite", "task": "task6-extra-code-task", "passed": true, "wall_s": 106, "tool_calls": 21, "finish": "unknown"}
+{"model": "a3b-iq2xxs-v2-suite", "task": "task7-long-context-agent", "passed": true, "wall_s": 128, "tool_calls": 62, "finish": "unknown"}
+{"model": "a3b-iq2xxs-v2-suite", "task": "task8-tb-broken-python", "passed": false, "wall_s": 80, "tool_calls": 65, "finish": "unknown"}
+{"model": "a3b-iq2xxs-v2-suite", "task": "task9-tb-analyze-access-logs", "passed": true, "wall_s": 36, "tool_calls": 24, "finish": "unknown"}

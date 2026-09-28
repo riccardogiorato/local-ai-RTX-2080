@@ -5,7 +5,8 @@ Turing card, and the largest model (35B) ever measured here. Registry's 8 GB-cla
 class, reproduced per the SpecPicks-style serving pattern with the hard-of-this-machine
 caveat: their recipe assumes 28–32 GB system RAM; this box has 16 GB.
 
-- Main: `unsloth/Qwen3.5-35B-A3B-MTP-GGUF` **UD-Q3_K_M 15.90 GB** · sha256 `c2d46cfa78edb540…`
+- Main: `unsloth/Qwen3.5-35B-A3B-MTP-GGUF` **UD-IQ2_XXS 11.82 GB** · sha256 `3914ae7b550f0b32…` (NEW RECOMMENDED since 2026-09-28: same 8/11 AG-Bench as Q3_K_M at +11% decode / +24% prefill / 5.25 GB smaller — the speed lever without paying quality)
+- Prior pack: UD-Q3_K_M 17.07 GB · sha256 `c2d46cfa…` (remains a quality-first option)
   (verified)
 - Drafter: `a4lg/Qwen3.5-35B-A3B-MTP-ONLY-GGUF` **Q4_K_M 1.51 GB** · sha256
   `14639932a007d1fa` — the extracted standalone MTP head
