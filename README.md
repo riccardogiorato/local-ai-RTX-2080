@@ -1,137 +1,63 @@
-# RTX 2080 Local AI Lab — every model tested on one 8 GB Turing card
+# RTX 2080 Local AI Lab — 24 models tested on one 8 GB Turing card
 
-![GPU](https://img.shields.io/badge/GPU-TU104%20%C2%B7%208%20GB%20%C2%B7%20448%20GB%2Fs-lightgrey) ![method](https://img.shields.io/badge/measurements-reproducible-blue) ![status](https://img.shields.io/badge/recipes-docker%20digest--pinned-informational)
+![GPU](https://img.shields.io/badge/GPU-TU104%20%C2%B7%208%20GB%20%C2%B7%20448%20GB%2Fs-lightgrey) ![models](https://img.shields.io/badge/models_tested-24-blue) ![method](https://img.shields.io/badge/measurements-reproducible-blue) ![recipes](https://img.shields.io/badge/recipes-docker%20digest--pinned-informational)
 
-An archive of local LLM experiments on a single known GPU: for every model we try, this repo
-records **the model variant, the exact OpenWeights source and revision, the runtime and its
-version, the launch settings (context, KV cache, sampler, speculative/decoding options), the
-measured results, raw evidence, and a copy-paste command that reproduces it.** Failures and
-resource boundaries are recorded with the same care as wins — the OOM map of an 8 GB card is
-half the value.
+**What can a 2018 Turing card run today?** For every model we test, this repo records the
+exact artifact (repo, revision, SHA-256), the runtime (digest-pinned), the launch settings, the
+measured results, raw evidence, and a copy-paste reproduce command. Failures are recorded
+with the same care as wins.
 
-Public benchmarks chase new flagships on 24 GB+ cards. This ledger answers the opposite
-question: **what can a 2018 Turing card actually run, today, with current runtimes — and where
-does each model stop?** Some results promote into
-[0xsero/local-ai-registry](https://github.com/0xsero/local-ai-registry) (recipes that pass its
-acceptance contract); that pipeline is one downstream of this lab, not its purpose.
+**Full test history →** [TESTED.md](TESTED.md) (all 24 models, recipes, and details).
+**Untested backlog →** [NEXT-IDEAS.md](NEXT-IDEAS.md).
+**AG-Bench v2.1 suite (11 tasks, canary-verified) →** [benchmarks/README.md](benchmarks/README.md).
 
 > Method rules live in [hardware.md](hardware.md). Short version: server-reported rates only,
 > ranges over repeated runs (no best-of), speeds compared only on the same prompt file, thinking
-> off by default. Treat decode deltas < 15% across different prompt classes as noise.
+> off by default. Treat decode deltas < 15% across prompt classes as noise.
 
-## Test queue
+## Top 10 models on this card
 
-What we plan to run on this card, in order — status updates as they're measured. Everything not
-listed here is parked with reasons in [NEXT-IDEAS.md](NEXT-IDEAS.md).
+Ranked by AG-Bench v2.1 score (11 tasks, canary-calibrated), then by efficiency (passes/hour).
 
-| # | Model / variant | Class | Weights | Status |
-|---|---|---|---|---|
-| 1 | Qwen3.5-4B / 9B MTP Q4_K_M | chat · coding · tools | unsloth MTP GGUFs, pinned revisions | ✅ [tested](#tested-so-far) · registry-validated |
-| 2 | Qwen3.8-27B dense, IQ2_XS ≈2.5 bpw cram + embedded-MTP DT control | measured 4.2–5.3 tok/s, all capability probes pass, partial-offload boundary mapped ✅ [recipe](recipes/qwen38-27b-iq2-llamacpp.md) (weights on archive drive) | ✅ tested |
-| 3 | ThinkingCap-Qwen3.8-27B · Q2_K (holooo) — measured: **9.57 tok/s** with embedded MTP d2 (2× the old IQ2_S cram), acceptance 0.995, capability 3/3 thinking-off AND thinking-on ✅ [recipe](recipes/thinkingcap-27b-q2k-llamacpp.md) | 27B thinking-verbosity finetune, dense (non-ternary) | ✅ tested |
-| 4 | GLM-OCR Q4_K_M + mmproj Q8_0 (the [local-ocr](https://github.com/riccardogiorato/local-ocr) stack, ported to Linux docker) | measured: receipt 0.455 s warm (410 tok/s decode), 100% GT extraction, 2.86 GB VRAM ✅ [recipe](recipes/glm-ocr-q4km-llamacpp.md) | ✅ tested |
-| 5 | Gemma 4 E4B QAT + matching MTP drafter (~4 GB) — measured: **181 tok/s MTP d2** (vs Windows-lab 145), 2.7K tok/s prefill, **128K ctx fully resident** ✅ [recipe](recipes/gemma-4-e4b-qat-llamacpp.md) | edge-class agentic — thinking model | ✅ tested |
-| 6 | MiMo-V2.6-Distill-Qwen-9B (Qwen3.5-9B finetune, MIT) — 61 tok/s; MTP head dropped by the distill, speed-identical to parent no-draft ✅ [recipe](recipes/mimo-9b-distill-q4km-llamacpp.md) | agentic distill vs our 9B baseline | ✅ tested |
-| 7 | kev-0.5b ([jaredpalmer/kev](https://github.com/jaredpalmer/kev)) — CUDA-on-SM75 works first-try, 146 MiB VRAM, 240 ms/3 questions ✅ [recipe](recipes/kev-05b-serve.md) | typed-decision, single forward pass | ✅ tested |
-| 8 | laya (convaiinnovations, 421M) — typed-decisions: 27 ms/3 questions but routing trails kev; **multilingual (2026-09-26): 22 ms, 1.66 GB, beats kev-aligned picks in Italian — new recommended laya checkpoint** ✅ [recipe](recipes/laya-serve.md) | typed-decision, `pip install laya` | ✅ tested |
-| 10 | GLiNER 2.5 multi-v1 (fastino, 287M) — measured: **21.8 ms GPU / 78.3 ms CPU** per extraction, 7 structural passes (en+it NER, zero-shot labels, relations, records), 1650 MiB VRAM ✅ [recipe](recipes/gliner25-multi-v1-serve.md) | typed-extraction (non-LLM utility tier, kev/laya class) | ✅ tested |
-| 11 | Xing4.0-29B-A4B (TeleAI) — measured: **4.0 GB VRAM for a 29B** (per-GB record), decode 6.8/5.4–6.3, acceptance 0.91/0.73, prefill 346 tok/s (12× A3B), 4/4 probes incl. thinking-off reasoning, AG-Bench 3/6 fast-exit style ✅ [recipe](recipes/xing4-29b-a4b-dyn-llamacpp-fork.md) | big-MoE candidate (A3B-class recipe, second 30B-class run) | ✅ tested |
-| 12 | Qwen3.8-27B UD-IQ1_S — measured: 19.7 tok/s no-draft, 3/4 probes, but REASONING BROKEN at 1.84 bpw (thinking-mode burns budgets to empty answers); vs Bonsai-2 ternary at the same bitrate: 2.8x slower, no thinking. Same-bitrate verdict: ternary dominates — [evidence](evidence/qwen38-27b-udiq1s.jsonl) | resident-dense low-bit A/B | ✅ tested (evidence-only) |
-| 13 | Qwen3.8-Flash-Next-125B UltraLite ⚠️ first 125B-class serve on the card: **12.5 tok / 6.6 GB VRAM / 37 GiB in 46 GB RAM**; thinking-mode BROKEN at 1.8 bpw — frontier-shaped, mid-tier-behaving; AG-Bench deferred; sub-2 bpw wall mapped ✅ [recipe](recipes/flashnext-ultralite-125b-llamacpp-fork.md) | 125B/A6B MoE boundary record | ✅ tested |
+| # | Model | Score | Decode | Prefill | Context | VRAM | RAM | Spec decoder | The slot it holds |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | **MiMo-9B distill** | **9/11** | 52 tok/s | 1,700 t/s | 32 K | 5.5 GB | ~1 GB | none (head dropped) | 🏆 efficiency king — React in 155 s |
+| 1 | **Qwen3.5-9B** MTP d4 | **9/11** | 100 tok/s | 1,600 t/s | 64 K | 5.5 GB | ~1 GB | embedded MTP d4 | 🏆 ceiling-setter — the methodical agent |
+| 3 | **Qwen3.5-4B** MTP d4 | **8/11** | 150 tok/s | 2,300 t/s | **128 K** | **2.6 GB** | ~1 GB | embedded MTP d4 | value king — fastest agent, 128K in 2.6 GB |
+| 4 | **A3B IQ2_XXS** @32K | **8/11** | 40 tok/s | 1,040 t/s | 32 K (v-212 K) | 4.6 GB | 11.8 GB | external MTP d4 | deep-thinker — 35B for 4.6 GB VRAM |
+| 5 | **Bonsai-2 64K** ternary | **8/11** | 17 tok/s | ~520 t/s | 64 K | 6.0 GB | +2 GB KV | graft d2 | ternary compression proven intact |
+| 6 | **Xing4.0-29B** @ub4096 | **8/11** | 25 tok/s | 346 t/s | 8 K | **4.0 GB** | ~12 GB | embedded MTP d2 | dark horse MoE — 29B in 4 GB |
+| 7 | **Bonsai-2 8K** ternary | **5/11** | **55 tok/s** | ~520 t/s | 8 K | 7.3 GB | ~1 GB | graft d2 | fast-answer slot — quick, shallow |
+| 8 | **Gemma-E4B** QAT d2 | 3/6→8/11* | 181 tok/s | 2,800 t/s | **128 K** | 4.3 GB | ~1 GB | external MTP d2 | fast-resident + huge context |
+| 9 | **LFM2.5-8B** +DSpark | 0/6→0/11 | **221 tok/s** ⚡ | ~500 t/s | 32 K | full-res | ~1 GB | DSpark d4 | speed record — thinking-first, not agent |
+| 10 | **ThinkingCap-27B** Q2_K | 4/6 | 9.6 tok/s | 239 t/s | 8 / 32 K | 7.4 GB | ~6 GB | embedded MTP d2 | slow-smart — verified verbosity scaling |
 
-| 9 | Bonsai-2 27B ternary PTQ1_0 + MTP graft — measured: **59.3/49.9 tok/s fully resident** (5–6× the other 27Bs), 3/3 probes thinking-off, AG-Bench 4/6 ✅ [recipe](recipes/ternary-bonsai2-27b-ptq1_0-llamacpp-fork.md) | 1.75 bpw ternary of dense Qwen3.8-27B, fork runtime | ✅ tested |
+*\*Gemma-E4B scored 3/6 on the original suite; not yet benched on v2.1.*
 
-New candidates get added here before they're downloaded; each becomes a `recipes/` file the day
-it runs. Retests of retired entries also live in the queue — engines move fast and a "won't fit"
-from three months ago is worth re-measuring.
+**Also on card:** GLM-OCR (vision, 0.455 s receipts) · kev / laya (typed-decision routers, 22–240 ms) · GLiNER 2.5 (schema extraction, 21.8 ms) · Bonsai-2 8K fast-mode.
 
-**Storage rotation:** the SSD is a workbench, not an archive. Once a model is tested and its
-recipe + evidence are committed, its weights move off the SSD to the archive drive (HDD) —
-recorded in the recipe — so the workbench never fills up.
+## Key findings from 24 models
 
-## Tested so far
+- **The sub-2 bpw wall**: below ~2 bits-per-weight, LLM reasoning chains break (tested twice: IQ1_S loops-to-nothing, Flash-Next-125B thinks-to-EOS) while surface tasks survive. Curated ternary (Bonsai at 1.75 bpw) is the exception.
+- **Context ceiling > compression quality**: Bonsai's score jumped 5/11 → 8/11 just from context (8K→64K), no quant change. The "dumb model" was a smart model in a small room.
+- **MTP heads bind to their base's hidden-state distribution**: trained heads from one quant family score 0.000 acceptance on a different base (graft experiment). Native embedded heads scale cleanly.
+- **Bigger ubatch = faster prefill on RAM-bound models** (the UBBoost claim, reproduced): A3B +24% prefill at `-ub 4096` (measured on our card).
+- **The 4B ties the 35B** on the expanded suite — the raw-capability class compresses.
 
-| Recipe | Runtime | Context | Decode (short-fill) | Prefill | Status |
-|---|---|---|---|---|---|
-| [recipes/qwen35-4b-mtp-q4km-llamacpp.md](recipes/qwen35-4b-mtp-q4km-llamacpp.md) | llama.cpp (docker) | up to 128K | ~182 tok/s | ~2.3K tok/s | ✅ registry-validated · recommended |
-| [recipes/qwen35-9b-mtp-q4km-llamacpp.md](recipes/qwen35-9b-mtp-q4km-llamacpp.md) | llama.cpp (docker) | up to 64K (q4_0 KV) | ~124 tok/s | ~1.6K tok/s | ✅ registry-validated · alternate |
-| [recipes/qwen38-27b-iq2-llamacpp.md](recipes/qwen38-27b-iq2-llamacpp.md) | llama.cpp (docker, partial offload ngl 48/42) | 8K | ~4.2–5.3 tok/s | ~275–280 tok/s | 🔬 lab-verified · prior slow-smart slot |
-| [recipes/thinkingcap-27b-q2k-llamacpp.md](recipes/thinkingcap-27b-q2k-llamacpp.md) | llama.cpp (docker · partial offload ngl 40/ub 128 · embedded MTP d2) | 8K | **9.57 tok/s** (acceptance 0.995) | 239 tok/s (no-draft) | 🔬 lab-verified · slow-smart slot champion |
-| [recipes/glm-ocr-q4km-llamacpp.md](recipes/glm-ocr-q4km-llamacpp.md) | llama.cpp (docker · vision) | 12K | 375–410 tok/s (OCR decode) | image prefill 340–2,175 tok/s | 🔬 lab-verified · OCR stack |
-| [recipes/gemma-4-e4b-qat-llamacpp.md](recipes/gemma-4-e4b-qat-llamacpp.md) | llama.cpp (docker · external MTP drafter d2) | up to **128K** | **181 tok/s** (2.04× no-draft) | ~2.8K tok/s | 🔬 lab-verified · fast-resident slot · thinking model |
-| [recipes/mimo-9b-distill-q4km-llamacpp.md](recipes/mimo-9b-distill-q4km-llamacpp.md) | llama.cpp (docker, no MTP — head dropped by distill) | 32K | 61 tok/s | ~1.7K tok/s | 🔬 lab-verified · parent-dominated |
-| [recipes/kev-05b-serve.md](recipes/kev-05b-serve.md) | Python/torch serve (CUDA on SM75) | n/a | 240–256 ms / 3 questions | — | 🔬 lab-verified · 146 MiB router |
-| [recipes/laya-serve.md](recipes/laya-serve.md) | Python/torch serve (ModernBERT-large) | n/a | **27 ms** / 3 questions | — | 🔬 lab-verified · 2.66 GB router |
-| [recipes/ternary-bonsai2-27b-ptq1_0-llamacpp-fork.md](recipes/ternary-bonsai2-27b-ptq1_0-llamacpp-fork.md) | llama.cpp fork host build (PrismML/sudoingX @ 285542d) | 8K | **55.3 / 49.1 tok/s** (MTP **d2** after the d-depth A/B; full offload) | — | 🔬 lab-verified · fast-27B slot champion |
-| [recipes/swift15-27b-iq2xs-mtp-llamacpp.md](recipes/swift15-27b-iq2xs-mtp-llamacpp.md) | llama.cpp (docker · cram ngl 40 · MTP d2) | 8K | 4.4 / 4.3 tok/s (acc 0.745) | 275 tok/s class | 🔬 lab-verified · quant-bound (IQ2_XS tax) |
-| [recipes/lfm25-8b-a1b-dspark-llamacpp.md](recipes/lfm25-8b-a1b-dspark-llamacpp.md) | llama.cpp (docker · resident MoE · DSpark sidecar d4) | 32K | **221 / 200 tok/s** (fastest on card) | ~500 tok/s | 🔬 lab-verified · speed-slot record · AG-Bench 0/6 |
-| [recipes/qwen35-35b-a3b-cpuexperts-llamacpp.md](recipes/qwen35-35b-a3b-cpuexperts-llamacpp.md) | llama.cpp (docker · MoE, experts in RAM · MTP head d4) | 8K | 9.3 / 8.5 tok/s steady (1.5 in deep agent turns) | 3.65–6.47 tok/s | 🔬 lab-verified · first 35B on card (4.57 GB!) · AG-Bench 3/6 @ cap 900 |
-| [evidence only, no recipe](evidence/gemma12b-qat-mtp.jsonl) | llama.cpp (docker · 6.70 GB pair → ngl 45 + Q4 MTP head) | 8K | 29.4 / 43.5 tok/s (acc 0.92/0.70) | ~90 tok/s | 🔬 lab-verified · 12 GB-class model wanting 8 GB · AG-Bench 3/6 |
-| [recipes/gliner25-multi-v1-serve.md](recipes/gliner25-multi-v1-serve.md) | gliner2 2.0.0 + torch 2.14 (venv, CUDA) | 4K window | **21.8 ms / extraction** (GPU fp16) | — | 🔬 lab-verified · schema-extraction tier · en+it passes |
-| [recipes/xing4-29b-a4b-dyn-llamacpp-fork.md](recipes/xing4-29b-a4b-dyn-llamacpp-fork.md) | llama.cpp fork host build (shuxiaoqiong xing4_0-port @ 63c16fb) | 8K | 6.8 / 5.4–6.3 tok/s (acc 0.91/0.73) | **346 tok/s** (12× A3B class) | 🔬 lab-verified · 4 GB-for-a-29B record · AG-Bench 3/6 fast-exit |
-
-Every recipe file records: the exact OpenWeights artifact (repository, revision, SHA-256), the
-runtime image digest, full launch settings (context size, KV precision, batch/ubatch, sampler
-constraints, speculative decoding), measured decode/prefill/TTFT/VRAM at each configuration,
-capability probe results, and raw evidence links.
-
-## Why the details matter to someone with a different card
-
-- **Reproduction is exact.** Pinned revisions + digest-pinned images + literal command = same
-  compute for anyone, anywhere. Nothing is measured against a moving target.
-- **Boundaries generalize better than speeds.** The context ceilings, OOM maps, and
-  KV-precision trade-offs on a known GPU inform every 8 GB card; raw tok/s only transfers to
-  your clock speeds.
-- **Honest attribution.** When a number moves, the repo records *why* — prompt class, engine
-  build, thinking mode — not just the delta. See
-  [notes/findings-2026-09-23.md](notes/findings-2026-09-23.md) for worked examples.
-
-## Requirements (per recipe, checked before any run)
-
-| [evidence only, no recipe](evidence/qwen38-27b-udiq1s.jsonl) | llama.cpp (docker b11118 · full resident, no draft head in file) | 8K | **19.7 tok/s** no-draft | ~505 tok/s | 🔬 lab-verified · 1-bit wall: reasoning broken, surface intact |
-| Component | Detail |
-|---|---|
-| Hardware | NVIDIA GeForce RTX 2080 — TU104, Turing SM75, 8 GB GDDR6, 448 GB/s ([fingerprint](hardware.md)) |
-| Host | Linux with Docker; host RAM ≥ 16 GB is sufficient (weights are mmap'd) |
-| Docker | NVIDIA Container Toolkit, GPU passthrough verified in a container |
-| Model files | Pinned OpenWeights revisions, SHA-256 verified before load |
-| Runtime image | Digest-pinned per recipe (engine images vary by recipe — never a mutable tag) |
-| CLI tools | `docker`, `curl` |
-| Hugging Face token | Optional — pinned public revisions; `HF_TOKEN` helps with rate limits |
-
-## Repository layout
+## Repo structure
 
 ```text
-recipes/         one file per model+variant+runtime: identity, settings, results, reproduce commands
-measurements/    dated matrices with per-run provenance
-prompts/         fixed benchmark prompts — speeds are only comparable within the same file
-evidence/        raw JSONL: acceptance harness output, capability probes, timing logs
-notes/           empirical rules, attributions, open questions
-registry/        cross-links for the subset that promotes into local-ai-registry
-hardware.md      the one machine behind every number
+recipes/         one file per model: identity, settings, results, commands
+evidence/        raw JSONL per model
+benchmarks/      AG-Bench v2.1 suite (11 tasks, canary-calibrated) + results
+TESTED.md        every model tested, with full details
+NEXT-IDEAS.md    untested backlog + blocked-with-triggers
+hardware.md      the machine behind every number
 ```
-
-## How a recipe is born
-
-1. Add the candidate to the queue above (with the exact weights source and why it's interesting).
-2. Fetch pinned revision, verify the SHA-256, pick the runtime image by digest.
-3. Probe the resource boundary first (ctx × KV precision × VRAM), then measure speed and
-   capabilities on fixed prompts, thinking off.
-4. Write `recipes/<model>.md` with the full settings table, results, evidence links — including
-   what failed.
-5. If the launch satisfies the registry contract, run its acceptance harness and cross-link from
-   `registry/`.
-
-## Notes
-
-- Prefill numbers always come from fresh prompts — cache-hit `prompt_per_second` reads are garbage.
-- Engine choice is per-model and recorded per-recipe: llama.cpp is not assumed, and non-registry
-  runtimes (custom forks, host builds, OCR pipelines) get the same rigor as `lab-verified` entries.
-- Retests beat reputation: "too slow" verdicts age badly when engines ship +5% per month.
 
 ## Credits
 
-- OpenWeights model authors and quantizers, credited per recipe (unsloth, and the model orgs).
-- Runtimes by their upstream projects (llama.cpp and friends), always pinned by digest.
-- Acceptance contract and validation: [0xsero/local-ai-registry](https://github.com/0xsero/local-ai-registry).
-- Benchmark prompts inherited from the prior Windows lab on this same card.
+- OpenWeights model authors and quantizers — [unsloth](https://unsloth.ai), [PrismML](https://prism.ml), and the model orgs (Qwen, Google, LFM, Xiaomi, TeleAI, fastino, convaiinnovations, jaredpalmer)
+- Runtimes — [llama.cpp](https://github.com/ggml-org/llama.cpp) and the forks that made ternary/Xing4 runnable ([sudoingX](https://github.com/sudoingX/llama.cpp), [shuxiaoqiong](https://github.com/shuxiaoqiong/llama.cpp))
+- Terminal-bench tasks (MIT) — ported into our suite as tasks 8–12 ([laude-institute/terminal-bench](https://github.com/laude-institute/terminal-bench))
+- Acceptance contract — [0xsero/local-ai-registry](https://github.com/0xsero/local-ai-registry)
