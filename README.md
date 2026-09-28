@@ -21,7 +21,7 @@ Ranked by AG-Bench v2.1 score (11 canary-verified tasks), then by efficiency.
 
 | Rank | Model | Score | Decode / Prefill | Context | VRAM / RAM | Spec decoder |
 |---|---|---|---|---|---|---|
-| 1 | [MiMo-9B](https://huggingface.co/bartowski/MiMo-V2.6-Distill-Qwen-9B-GGUF) | **9/11** | 52 t/s / 1.7K | 32K | 5.5 GB / 1 GB | none |
+| 1 | [MiMo-9B](https://huggingface.co/bartowski/MiMo-V2.6-Distill-Qwen-9B-GGUF) | **9/11** | 52 t/s / 1.7K | 32K (8K +DFlash) | 5.5 GB / 1 GB | **DFlash d8 sidecar → 135–138 t/s code** (2026-09-28; bench re-run pending) |
 | 1 | [Qwen3.5-9B](https://huggingface.co/Qwen/Qwen3.5-9B) | **9/11** | 100 t/s / 1.6K | 64K | 5.5 GB / 1 GB | MTP d4 |
 | 3 | [Qwen3.5-4B](https://huggingface.co/Qwen/Qwen3.5-4B) | **8/11** | 150 t/s / 2.3K | **128K** | 2.6 GB / 1 GB | MTP d4 |
 | 4 | [A3B IQ2_XXS](https://huggingface.co/Qwen/Qwen3.5-35B-A3B) | **8/11** | 40 t/s / 1K | 32K+ | 4.6 GB / 12 GB | MTP d4 ext |

@@ -193,6 +193,27 @@ size). E4B re-measure unnecessary (its 181 tok/s row already includes the
 effect); Gemma-12B promotion stays blocked on the ngl-45 layer floor, not on
 embedding VRAM.
 
+## MiMo-9B + DFlash sidecar — VALIDATED 2026-09-28; follow-ups open
+
+The ≤600 MB-class trigger RESOLVED on the dense 9B: z-lab's Qwen3.5-9B-DFlash (retrained
+for the parent) at Q4_K_M 0.7 GB drafts for the distill at 0.794 acceptance / mean 7.31
+and 2.4× decode (56.7 → 134.6–138.3 tok/s code, n_max 8) beside a FULLY-RESIDENT target —
+first spec pair on this card with both models resident. Verdict + measurements:
+`evidence/mimo-9b-dflash-drafter.jsonl`, recipe
+`recipes/mimo-9b-distill-q4km-llamacpp.md` §"The DFlash fix". Open follow-ups, ranked:
+
+1. **AG-Bench v2.1 re-run with the drafter** — the drift (0/6 byte-identity vs serial,
+   near-tie flips) and the 8K ctx cap both need the 11-task suite to answer "does 42.5
+   pass/h scale with 2.4× decode or does 8K/drift cost tasks?" Cheapest high-value run.
+2. **16K/32K ctx recovery** — two candidate levers: requant the drafter to Q2_K/Q3
+   (~0.45 GB, acceptance cost unmeasured; house precedent: DFlash2 is quant-agnostic
+   vs target, drafter-quant is a separate question) or shed 1–2 main layers and race
+   the CPU-band penalty (~2.3%/layer slope) against the sidecar multiplier.
+3. **Fork-exactness for draft-dflash** — bonsai2 @285542d carries the batch-invariance
+   patch; DFlash-v1 loader reportedly exists there (untested). Serve the pair on the
+   fork with GGML_CUDA_BATCH_INVARIANT=1 and rerun the 6-prompt drift column; target
+   6/6 drafted==serial. Pure fork/patch work, no GPU cost to prep.
+
 ## DFlash2 sidecar — acceptance VALIDATED, economics falsified at 8 GB (2026-09-28)
 
 Experiment complete (evidence/dflash2-iqi-27b.jsonl): DFlash2-Q4_K_M-swa (1.14 GB)
