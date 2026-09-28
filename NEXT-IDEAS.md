@@ -210,10 +210,14 @@ first spec pair on this card with both models resident. Verdict + measurements:
    (16K ctx suffices for 9/11? unpinned sampling luck?). Open measurement: serial 32K
    pinned re-baseline to separate pin-vs-ctx — mid-value, only if ranking finality is
    needed.
-2. **32K ctx with drafter** — needs ~0.4-0.6 GB beyond what exists: candidate = Q2_K
-   drafter + q4_0 KV + 1-2 shed layers (novel-decode cost measured severe), or wait for
-   a ~400 MB Q1/IQ2_KS drafter class from the z-lab lineage. The 8K/138 and 16K/94
-   configs bracket this already.
+2. ~~**32K ctx with drafter**~~ **RESOLVED 2026-09-28 — serves, NET-NEGATIVE for agents**:
+   no ≤500 MB drafter exists (HF floor = Q2_K 482 MB); 32K fits only with q4_0 KV
+   (7.58 GB). Pinned pair at 32K: serial 7/11 @739 s vs drafted 8/11 @872 s — the
+   decode win loses to think-heavy acceptance collapse + unaclerated per-turn prefill
+   in tool loops + drift-inflated tool-call counts (task8 calls 77→151). Reopen only
+   if a ≤400 MB high-acceptance drafter (Q1/IQ2_KS z-lab lineage) or a fork with a
+   slimmer draft-pp buffer appears; otherwise 16K+Q2_K (1.66× wall, capability-neutral)
+   is the recommended agent profile and 8K+Q4_K_M (2.4× decode) the speed profile.
 3. **Fork-exactness for draft-dflash** — bonsai2 @285542d carries the batch-invariance
    patch; DFlash-v1 loader reportedly exists there (untested). Serve the pair on the
    fork with GGML_CUDA_BATCH_INVARIANT=1 and rerun the 6-prompt drift column; target
