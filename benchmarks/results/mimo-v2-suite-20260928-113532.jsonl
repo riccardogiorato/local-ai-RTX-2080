@@ -1,0 +1,11 @@
+{"model": "mimo-v2-suite", "task": "task10-tb-bank-trans-filter", "passed": true, "wall_s": 16, "tool_calls": 28, "finish": "unknown"}
+{"model": "mimo-v2-suite", "task": "task11-tb-assign-seats", "passed": true, "wall_s": 360, "tool_calls": 178, "finish": "unknown"}
+{"model": "mimo-v2-suite", "task": "task1-js-bugfix", "passed": true, "wall_s": 20, "tool_calls": 20, "finish": "unknown"}
+{"model": "mimo-v2-suite", "task": "task2-react-fix", "passed": true, "wall_s": 155, "tool_calls": 84, "finish": "unknown"}
+{"model": "mimo-v2-suite", "task": "task3-dep-upgrade", "passed": true, "wall_s": 41, "tool_calls": 52, "finish": "unknown"}
+{"model": "mimo-v2-suite", "task": "task4-python-bugfix", "passed": true, "wall_s": 9, "tool_calls": 16, "finish": "unknown"}
+{"model": "mimo-v2-suite", "task": "task5-js-to-ts", "passed": false, "wall_s": 51, "tool_calls": 63, "finish": "unknown"}
+{"model": "mimo-v2-suite", "task": "task6-extra-code-task", "passed": true, "wall_s": 20, "tool_calls": 27, "finish": "unknown"}
+{"model": "mimo-v2-suite", "task": "task7-long-context-agent", "passed": true, "wall_s": 35, "tool_calls": 40, "finish": "unknown"}
+{"model": "mimo-v2-suite", "task": "task8-tb-broken-python", "passed": false, "wall_s": 37, "tool_calls": 65, "finish": "unknown"}
+{"model": "mimo-v2-suite", "task": "task9-tb-analyze-access-logs", "passed": true, "wall_s": 19, "tool_calls": 29, "finish": "unknown"}
