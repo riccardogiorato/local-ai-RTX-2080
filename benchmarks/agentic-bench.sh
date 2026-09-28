@@ -94,7 +94,14 @@ done
 # client-side with zero-byte sessions; a successful warm-up clears it.
 # WARM_TIMEOUT can be raised for thinking-mode models that spend minutes of
 # reasoning tokens on a trivial turn (observed: MiMo ~3.7K tokens on "say OK").
+# WARM_BYPASS=1 skips the gate after the attempts fail: for always-thinking
+# agentic distills (MiMo), the trivial "say OK" turn can sample into a fabricated
+# whole-mission runaway (observed 2026-09-28: watch/audio brand pages, playwright
+# screenshots) that never terminates — a warm-up property, not a serve fault.
+# Only use it after verifying the serve directly (/v1/chat completions sane);
+# task outcomes are unaffected because real TASK.md prompts anchor the model.
 WARM_TIMEOUT="${WARM_TIMEOUT:-90}"
+WARM_BYPASS="${WARM_BYPASS:-0}"
 WARM_OK=""
 for attempt in 1 2 3; do
   if PI_OFFLINE=1 timeout "$WARM_TIMEOUT" pi --provider llamacpp-local --model local-model \
@@ -105,7 +112,13 @@ for attempt in 1 2 3; do
     echo "warm-up attempt $attempt: failed/timed out (90s) — retrying"; sleep 5
   fi
 done
-[ -n "$WARM_OK" ] || { echo "AG-BENCH model=$LABEL ABORTED: warm-up never passed, refusing to burn the task batch in silence"; exit 2; }
+if [ -z "$WARM_OK" ]; then
+  if [ "$WARM_BYPASS" = "1" ]; then
+    echo "WARM-UP GATE BYPASSED (WARM_BYPASS=1, model=$LABEL) — serve sanity must be verified by direct probe and recorded in evidence"
+  else
+    echo "AG-BENCH model=$LABEL ABORTED: warm-up never passed, refusing to burn the task batch in silence"; exit 2
+  fi
+fi
 for entry in "$TASKS_DIR"/task*/; do
   run_task "$entry"
 done

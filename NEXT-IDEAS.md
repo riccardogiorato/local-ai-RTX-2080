@@ -202,17 +202,30 @@ first spec pair on this card with both models resident. Verdict + measurements:
 `evidence/mimo-9b-dflash-drafter.jsonl`, recipe
 `recipes/mimo-9b-distill-q4km-llamacpp.md` §"The DFlash fix". Open follow-ups, ranked:
 
-1. **AG-Bench v2.1 re-run with the drafter** — the drift (0/6 byte-identity vs serial,
-   near-tie flips) and the 8K ctx cap both need the 11-task suite to answer "does 42.5
-   pass/h scale with 2.4× decode or does 8K/drift cost tasks?" Cheapest high-value run.
-2. **16K/32K ctx recovery** — two candidate levers: requant the drafter to Q2_K/Q3
-   (~0.45 GB, acceptance cost unmeasured; house precedent: DFlash2 is quant-agnostic
-   vs target, drafter-quant is a separate question) or shed 1–2 main layers and race
-   the CPU-band penalty (~2.3%/layer slope) against the sidecar multiplier.
+1. ~~AG-Bench v2.1 re-run with the drafter~~ **RESOLVED 2026-09-28** — pinned 16K pair
+   (identical flags, temp0/seed42, WARM_BYPASS=1): serial 7/11 @998 s vs drafted
+   **7/11 @601 s (1.66× wall, 25.3→41.9 pass/h), per-task outcomes IDENTICAL** — the
+   drift and the Q2_K drafter change no capability outcome. Remaining variant vs the
+   morning headline (9/11): 32K ctx + unpinned sampling; both drivers are unknown-ish
+   (16K ctx suffices for 9/11? unpinned sampling luck?). Open measurement: serial 32K
+   pinned re-baseline to separate pin-vs-ctx — mid-value, only if ranking finality is
+   needed.
+2. **32K ctx with drafter** — needs ~0.4-0.6 GB beyond what exists: candidate = Q2_K
+   drafter + q4_0 KV + 1-2 shed layers (novel-decode cost measured severe), or wait for
+   a ~400 MB Q1/IQ2_KS drafter class from the z-lab lineage. The 8K/138 and 16K/94
+   configs bracket this already.
 3. **Fork-exactness for draft-dflash** — bonsai2 @285542d carries the batch-invariance
    patch; DFlash-v1 loader reportedly exists there (untested). Serve the pair on the
    fork with GGML_CUDA_BATCH_INVARIANT=1 and rerun the 6-prompt drift column; target
    6/6 drafted==serial. Pure fork/patch work, no GPU cost to prep.
+
+New findings recorded with this batch (evidence `mimo-9b-dflash-drafter.jsonl`):
+draft-side is a **steep nonmonotonic quant cliff** (Q4_K_M 0.794 / Q2_K 0.442 /
+Q3_K_M 0.294 code acceptance — requant from BF16, never the Q4); q4_0 KV is
+code-neutral but perturbs novel-class trajectories; ONE main CPU layer collapses
+novel decode (27B lesson scales down); and the miMo warm-up gate derails are a
+stochastic always-thinking property under pi's no-params requests — harness now has
+WARM_BYPASS=1; **thinking-off is falsified as a fix (6/11 with tool thrash)**.
 
 ## DFlash2 sidecar — acceptance VALIDATED, economics falsified at 8 GB (2026-09-28)
 
