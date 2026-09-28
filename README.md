@@ -17,24 +17,24 @@ with the same care as wins.
 
 ## Top 10 models on this card
 
-Ranked by AG-Bench v2.1 score (11 tasks, canary-calibrated), then by efficiency (passes/hour).
+Ranked by AG-Bench v2.1 score (11 canary-verified tasks), then by efficiency.
 
-| # | Model | Score | Decode | Prefill | Context | VRAM | RAM | Spec decoder | The slot it holds |
-|---|---|---|---|---|---|---|---|---|---|
-| 1 | **MiMo-9B distill** | **9/11** | 52 tok/s | 1,700 t/s | 32 K | 5.5 GB | ~1 GB | none (head dropped) | 🏆 efficiency king — React in 155 s |
-| 1 | **Qwen3.5-9B** MTP d4 | **9/11** | 100 tok/s | 1,600 t/s | 64 K | 5.5 GB | ~1 GB | embedded MTP d4 | 🏆 ceiling-setter — the methodical agent |
-| 3 | **Qwen3.5-4B** MTP d4 | **8/11** | 150 tok/s | 2,300 t/s | **128 K** | **2.6 GB** | ~1 GB | embedded MTP d4 | value king — fastest agent, 128K in 2.6 GB |
-| 4 | **A3B IQ2_XXS** @32K | **8/11** | 40 tok/s | 1,040 t/s | 32 K (v-212 K) | 4.6 GB | 11.8 GB | external MTP d4 | deep-thinker — 35B for 4.6 GB VRAM |
-| 5 | **Bonsai-2 64K** ternary | **8/11** | 17 tok/s | ~520 t/s | 64 K | 6.0 GB | +2 GB KV | graft d2 | ternary compression proven intact |
-| 6 | **Xing4.0-29B** @ub4096 | **8/11** | 25 tok/s | 346 t/s | 8 K | **4.0 GB** | ~12 GB | embedded MTP d2 | dark horse MoE — 29B in 4 GB |
-| 7 | **Bonsai-2 8K** ternary | **5/11** | **55 tok/s** | ~520 t/s | 8 K | 7.3 GB | ~1 GB | graft d2 | fast-answer slot — quick, shallow |
-| 8 | **Gemma-E4B** QAT d2 | 3/6→8/11* | 181 tok/s | 2,800 t/s | **128 K** | 4.3 GB | ~1 GB | external MTP d2 | fast-resident + huge context |
-| 9 | **LFM2.5-8B** +DSpark | 0/6→0/11 | **221 tok/s** ⚡ | ~500 t/s | 32 K | full-res | ~1 GB | DSpark d4 | speed record — thinking-first, not agent |
-| 10 | **ThinkingCap-27B** Q2_K | 4/6 | 9.6 tok/s | 239 t/s | 8 / 32 K | 7.4 GB | ~6 GB | embedded MTP d2 | slow-smart — verified verbosity scaling |
+| Rank | Model | Score | Decode / Prefill | Context | VRAM / RAM | Spec decoder | Slot |
+|---|---|---|---|---|---|---|---|
+| **1** | **MiMo-9B** distill | **9/11** | 52 t/s / 1.7K | 32K | 5.5 GB / 1 GB | none | efficiency king |
+| **1** | **Qwen3.5-9B** d4 | **9/11** | 100 t/s / 1.6K | 64K | 5.5 GB / 1 GB | MTP d4 | ceiling-setter |
+| **3** | **Qwen3.5-4B** d4 | **8/11** | 150 t/s / 2.3K | **128K** | 2.6 GB / 1 GB | MTP d4 | value king |
+| **4** | **A3B** IQ2_XXS | **8/11** | 40 t/s / 1K | 32K+ | 4.6 GB / 12 GB | MTP d4 ext | deep-thinker |
+| **5** | **Bonsai-64K** tern. | **8/11** | 17 t/s / 520 | 64K | 6.0 GB / 2 GB | graft d2 | "slow but smart" |
+| **5** | **Xing-29B** ub4K | **8/11** | 25 t/s / 346 | 8K | 4.0 GB / 12 GB | MTP d2 | dark horse MoE |
+| **5** | **Bonsai-8K** tern. | **5/11** | **55 t/s** / 520 | 8K | 7.3 GB / 1 GB | graft d2 | fast-answer |
+| **8** | **Gemma-E4B** d2 | n/a* | **181 t/s** / 2.8K | **128K** | 4.3 GB / 1 GB | MTP d2 ext | fast + big ctx |
+| **9** | **LFM2.5** DSpark | 0/11 | **221 t/s** / 500 | 32K | resident | DSpark d4 | speed-only |
+| **10** | **ThinkCap-27B** | 4/6 | 9.6 t/s / 239 | 32K | 7.4 GB / 6 GB | MTP d2 | slow-smart |
 
-*\*Gemma-E4B scored 3/6 on the original suite; not yet benched on v2.1.*
+*\*Gemma-E4B not yet benched on v2.1; scored 3/6 on the original suite.*
 
-**Also on card:** GLM-OCR (vision, 0.455 s receipts) · kev / laya (typed-decision routers, 22–240 ms) · GLiNER 2.5 (schema extraction, 21.8 ms) · Bonsai-2 8K fast-mode.
+**Also on card:** GLM-OCR · kev · laya · GLiNER 2.5 (utility tier: vision, routing, schema extraction)
 
 ## Key findings from 24 models
 
