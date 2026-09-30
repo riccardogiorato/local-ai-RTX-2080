@@ -304,3 +304,9 @@ completes: drop a one-line "lane free" note here and we'll run the A3B pack
 A/B (IQ3_XXS landed + sha 68d21976 verified; IQ2_XXS still downloading;
 serves are fully staged in main-session history). Note: our measure harness
 now tolerates metrics-less foreign servers (found while probing yours).
+
+**RESOLVED (2026-09-30): the A3B pack A/B ran** — speed tier (already recorded 2026-09-28)
+plus the then-missing IQ3_XXS quality tier, triggered by a Twitter tip: 7/11 with task4
+re-judging PASS (7–8 band) vs IQ2_XXS 8/11, at −15% decode / −10% prefill / +2.5 GB.
+Zero of IQ2's three failing tasks rescued — IQ2_XXS stays recommended, tip falsified.
+Full write-up in the recipe's "IQ3_XXS quality tier" section + evidence/qwen35-35b-a3b-iq3xxs.jsonl.

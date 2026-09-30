@@ -90,6 +90,34 @@ Also re-learned during the sweep: warm short-ctx decode on a quiet box is
 pressure (page-in of the 17 GB mmap dominates this model; the "deep agent turns
 collapse to 1.5" survives, the steady-state number doesn't).
 
+## IQ3_XXS quality tier (2026-09-30, the A/B's missing half) — tip falsified
+
+A Twitter tip ("try A3B IQ3_XXS with heavy CPU MoE offload") triggered the quality half of the
+pack A/B; the speed half already existed (2026-09-28: IQ3_XXS decode_warm 34.7, prefill 926-938
+vs IQ2_XXS 40 / 1038-1044 — confirmed today at 33.2-33.5 / ~880-883 under identical flags,
+threads 6 + ub4096 + MTP d4). The heavy-CPU-MoE part was already the standing recipe; the only
+new variable was the pack.
+
+**v2.1 AG-Bench: 7/11** (results/qwen35-35b-a3b-iq3xxs-v2-suite-20260930-212312.jsonl,
+19.0 pass/h, 1323 s) vs **8/11 / 22.9 pass/h** for IQ2_XXS:
+
+| Comparison | Result |
+|---|---|
+| IQ2's three fails (task5/8/9) | **identical fails** — 0 tasks rescued by +0.35 bpw |
+| task4 python-bugfix | new FAIL in-run, but **re-judges PASS** post-bench (verifier network transient; workdir 6/6 green) → treat scores as a 7–8 band tie |
+| Speed | decode −15%, prefill −10%, +2.5 GB residency, suite wall +5% |
+
+The failing band is capability-class, not bpw-recoverable (both packs sit above the sub-2bpw
+wall). A tie at strictly worse speed = **IQ2_XXS stays the recommended pack**; the tip's denser
+quant buys nothing on this card. Evidence: [evidence/qwen35-35b-a3b-iq3xxs.jsonl](../evidence/qwen35-35b-a3b-iq3xxs.jsonl).
+
+Ops notes from this run: a same-day reboot had broken containerized CUDA silently (stale
+`/etc/cdi/nvidia.yaml` baked nvidia-uvm major 237; kernel re-registered uvm as 238 →
+`cuInit` error 999 in every `--gpus all` container, host CUDA fine, NVML fine inside). Fix:
+`nvidia-ctk cdi generate`. Also: the wrapper entrypoint needs `-s -m …` and an explicit
+`--host 0.0.0.0` (default binds container-loopback; `-p` forwards get RST), and `--metrics`
+is required for the acceptance harness.
+
 ## Notes
 
 - **`--load-mode none` is BANNED on 16 GB RAM — it froze the whole machine**

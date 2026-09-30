@@ -31,6 +31,7 @@ recipe and raw evidence. Failures are recorded with the same care as wins.
 | 15 | LFM2.5-8B-A1B + DSpark d4 | **221/200 tok/s** (speed record), 0/6 agent | ✅ [recipe](recipes/lfm25-8b-a1b-dspark-llamacpp.md) |
 | 16 | Qwen3.5-35B-A3B (Q3_K_M pack) | 8/11 on v2.1, 22.9 pass/h | ✅ [recipe](recipes/qwen35-35b-a3b-cpuexperts-llamacpp.md) |
 | 17 | Qwen3.5-35B-A3B (IQ2_XXS pack) ⭐ recommended | 8/11, **40 tok/s** (new: +11% decode, +24% prefill) | ✅ same recipe (updated) |
+| 17b | Qwen3.5-35B-A3B (IQ3_XXS pack) — Twitter-tip test | 7/11 (task4 re-judges PASS → 7–8 band tie with IQ2), 33 tok/s, −15% decode | ✅ same recipe (updated; tip falsified) |
 | 18 | Gemma-12B QAT + Q4 MTP head | 29.4/43.5 tok/s, 3/6 | ✅ evidence-only |
 | 19 | MiniCPM5-2B + DSpark drafter | 2/6 on original-6, 180 tok/s novel class | ✅ evidence-only |
 
