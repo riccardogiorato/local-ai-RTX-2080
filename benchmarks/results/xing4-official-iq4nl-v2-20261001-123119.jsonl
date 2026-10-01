@@ -1,0 +1,11 @@
+{"model": "xing4-official-iq4nl-v2", "task": "task10-tb-bank-trans-filter", "passed": false, "wall_s": 28, "tool_calls": 12, "finish": "unknown", "zero_byte_retry": false}
+{"model": "xing4-official-iq4nl-v2", "task": "task11-tb-assign-seats", "passed": false, "wall_s": 298, "tool_calls": 23, "finish": "unknown", "zero_byte_retry": false}
+{"model": "xing4-official-iq4nl-v2", "task": "task1-js-bugfix", "passed": true, "wall_s": 69, "tool_calls": 19, "finish": "unknown", "zero_byte_retry": false}
+{"model": "xing4-official-iq4nl-v2", "task": "task2-react-fix", "passed": false, "wall_s": 259, "tool_calls": 6, "finish": "unknown", "zero_byte_retry": false}
+{"model": "xing4-official-iq4nl-v2", "task": "task3-dep-upgrade", "passed": true, "wall_s": 242, "tool_calls": 60, "finish": "unknown", "zero_byte_retry": false}
+{"model": "xing4-official-iq4nl-v2", "task": "task4-python-bugfix", "passed": true, "wall_s": 52, "tool_calls": 11, "finish": "unknown", "zero_byte_retry": false}
+{"model": "xing4-official-iq4nl-v2", "task": "task5-js-to-ts", "passed": false, "wall_s": 387, "tool_calls": 39, "finish": "unknown", "zero_byte_retry": false}
+{"model": "xing4-official-iq4nl-v2", "task": "task6-extra-code-task", "passed": false, "wall_s": 224, "tool_calls": 21, "finish": "unknown", "zero_byte_retry": false}
+{"model": "xing4-official-iq4nl-v2", "task": "task7-long-context-agent", "passed": false, "wall_s": 130, "tool_calls": 32, "finish": "unknown", "zero_byte_retry": false}
+{"model": "xing4-official-iq4nl-v2", "task": "task8-tb-broken-python", "passed": true, "wall_s": 173, "tool_calls": 49, "finish": "unknown", "zero_byte_retry": false}
+{"model": "xing4-official-iq4nl-v2", "task": "task9-tb-analyze-access-logs", "passed": false, "wall_s": 63, "tool_calls": 22, "finish": "unknown", "zero_byte_retry": false}
