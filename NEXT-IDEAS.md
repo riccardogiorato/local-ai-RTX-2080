@@ -17,30 +17,43 @@ restructure.
 
 ## Tier 0 — record fixes & housekeeping (minutes, no GPU)
 
-1. **Zero-byte auto-retry in `agentic-bench.sh`** — detect a zero-byte task
-   result and retry that task once (removes the manual re-run tax; the pi
-   root-cause hunt in Tier 1 is the real fix). ~30 min. (MiMo thread.)
-2. **Amend `notes/mlxfast-bonsai2-portability.md`** — its ranked plan's item
-   (1) (depth expansion) has *run and was falsified*; reorder to (1)
-   prompt-span lookup, (2) drafter class, (3) fusion/census. (TernaryBonsai.)
-3. **`hardware.md` still lists 16 GB RAM** — the machine is 48 GB since
-   9f220a2. One-line fix.
-4. **Note the two unreported runs in `benchmarks/README.md`** — the
-   `qwen35-35b-a3b-mtp` partial (1 task passed, 819 s, interrupted) and the
-   invalid `qwen25-coder-7b` 503-window row; neither is on the leaderboard.
-   (Spark thread.)
-5. **Idle-serve sweep** — a llama-server was seen holding ~7 GB VRAM while
-   supposedly idle (pid 1244468, 2026-09-25); stale-check and kill.
-   (Spark thread.)
-6. **CPU governor still `powersave`** → performance: zero-risk, open since
-   the setup advisory. Owner-side in the same breath: XMP failed to train
-   at 3200 — settle 2933/2666 per the 48GB thread (~48–52 tok/s A3B
-   projection at 3200).
-7. ~~Stale "Strata Q2_0 tier needs sm_80+" lines~~ **RESOLVED 2026-09-30 by
-   this restructure** (soft-gate survey preserved verbatim in the Archive).
-8. ~~DFlash2 falsification caveat~~ **RESOLVED 2026-09-30 by this
-   restructure** — the 1.14 GB Q4_K_M-swa drafter was tested, the ~600 MB
-   class itself was not; the caveat now travels inside the Tier 2 sidecar
+**ALL RESOLVED 2026-10-01** — findings, including two where the item itself
+turned out stale:
+
+1. ✓ **Zero-byte auto-retry shipped in `agentic-bench.sh`** — each task
+   retries once on an empty `pi-session.jsonl` (the ~1/75 pre-header startup
+   stall; root-cause hunt stays open in Tier 1), rows carry a
+   `zero_byte_retry` flag, ceilings unchanged.
+2. ✓ **`notes/mlxfast-bonsai2-portability.md` amended** — ranked plan
+   reordered to (1) prompt-span lookup, (2) drafter class, (3) split-K
+   patch parked behind it, (4) fusion/census; item-1 table verdict now
+   records the 2026-09-28 falsification (acceptance 0.845→0.540 by d4,
+   d4 slower) instead of "biggest lever".
+3. ✓ **`hardware.md` was already correct** — the 48 GB line (with the
+   XMP-failed-at-2400 retrain note) landed with a sibling commit before
+   this checklist ran; no change needed.
+4. ✓ **Results-ledger reconciliation in `benchmarks/README.md`** — with a
+   correction to the claim that prompted it: `qwen35-35b-a3b-mtp` was NOT
+   an interrupted partial, it is the complete 3/6 "a3b first run (16GB
+   era)" retro-v2 row (walls sum 4899 s = 81.7 min) — the note now breaks
+   that label-swap trap. `qwen25-coder-7b-q4km-20260925` stays INVALID
+   with no leaderboard row (all 6 tasks dead in 1–43 s, 0 tool calls —
+   the pre-/slots-gate 503 window, not a model measurement;
+   Qwen2.5-Coder-7B has genuinely never been benched here).
+5. ✓ **Idle-serve sweep** — no llama processes on the box; GPU at 556 MiB
+   (desktop only). The 7 GB hold from 2026-09-25 is long gone.
+6. ✓ **CPU governor "powersave" — resolved as a NON-ISSUE** — measured
+   rather than blindly changed: this is intel_pstate active+HWP, where the
+   real knob is EPP = `performance` (set), power-profiles-daemon profile =
+   `performance` (active), and cores boost to ~4.5 GHz under the bench
+   load class. The governor string is cosmetic under HWP; forcing
+   `scaling_governor=performance` would change nothing and would fight
+   power-profiles-daemon. The setup advisory's flag is retired.
+7. ✓ ~~Stale "Strata Q2_0 tier needs sm_80+" lines~~ resolved 2026-09-30 by
+   the restructure (soft-gate survey preserved verbatim in the Archive).
+8. ✓ ~~DFlash2 falsification caveat~~ resolved 2026-09-30 by the
+   restructure — the 1.14 GB Q4_K_M-swa drafter was tested, the ~600 MB
+   class itself was not; the caveat travels inside the Tier 2 sidecar
    entry (and the original evidence file's numbers stand as measured).
 
 ## Tier 1 — measurements (hours, high value/effort)
