@@ -24,7 +24,7 @@ Ranked by AG-Bench v2.1 score (11 canary-verified tasks), then by efficiency.
 | 1 | [MiMo-9B](https://huggingface.co/bartowski/MiMo-V2.6-Distill-Qwen-9B-GGUF) | **8–9/11** ⁽¹⁾ | 42.5 | 52 / 1.7K | 32K | 5.5 / 1 | **DFlash d8** ⁽²⁾ |
 | 1 | [Qwen3.5-9B](https://huggingface.co/Qwen/Qwen3.5-9B) | **9/11** | 37.9 | 100 / 1.6K | 64K | 5.5 / 1 | MTP d4 |
 | 3 | [Qwen3.5-4B](https://huggingface.co/Qwen/Qwen3.5-4B) | **8/11** | 30.3 | 150 / 2.3K | **128K** | 2.6 / 1 | MTP d4 |
-| 3 | [A3B IQ2_XXS](https://huggingface.co/Qwen/Qwen3.5-35B-A3B) | **8/11** | ~8 | 40 / 1K | 32K+ | 4.6 / 12 | MTP d4 ext |
+| 3 | [A3B IQ2_XXS](https://huggingface.co/Qwen/Qwen3.5-35B-A3B) | **9/11** ⁽⁴⁾ | 14.9 | 40 / 1K | 32K+ | 4.6 / 12 | MTP d4 ext |
 | 3 | [Bonsai-64K](https://huggingface.co/sudoingx/Ternary-Bonsai-2-27B-PTQ1_0-MTP-GGUF) | **8/11** | 5.0 | 17 / 520 | 64K | 6.0 / 2 | graft d2 |
 | 3 | [Xing-29B](https://huggingface.co/XingChen-AGI/Xing4.0-29B-A4B) | **8/11** | 5.8 | 25 / 346 | 8K | 4.0 / 12 | MTP d2 |
 | 7 | [Gemma-E4B](https://huggingface.co/google/gemma-4-E4B-it-qat-q4_0-unquantized) | **7/11** | **93.3** ⁽³⁾ | **181** / 2.8K | **128K** | 4.3 / 1 | MTP d3 ext |
@@ -37,6 +37,7 @@ Units: decode/prefill = t/s / tok/s · p/h = AG-Bench passes per hour · V/R = V
 ⁽¹⁾ 9/11 replicated as 8/11 unpinned — always-thinking distills move ±1 task between runs; treat 1-task margins as bands. Pinned (temp 0/seed 42) runs cost the heavy iterative tasks (task11 fails pinned, passes unpinned).
 ⁽²⁾ [DFlash-Q2_K/Q4_K_M sidecar](recipes/mimo-9b-distill-q4km-llamacpp.md) → 138 t/s @8K, 94 @16K; 16K pair: score preserved, 1.66× wall. 32K+drafter net-negative for agents (q4_0-KV tax).
 ⁽³⁾ Card efficiency record: 270s for the full suite at **d3** (2026-10-01, identical pass set to the d2 era's 302s — depth crown from the MTP-depth sweep; d4 gains nothing). Original-suite 3/6 superseded.
+⁽⁴⁾ Pinned re-bench 2026-10-01 (temp0/seed42): 9/11 @ 2176 s, fails {task5-TS, task8}; 8–9 band (task9 flipped pass vs the unpinned 8/11 row; task2-React passed, second family occurrence). `--cache-ram 32G` variant measured −24% suite wall but −1 score → not adopted.
 
 **Also on card:** GLM-OCR · kev · laya · GLiNER 2.5 (utility tier: vision, routing, schema extraction)
 
