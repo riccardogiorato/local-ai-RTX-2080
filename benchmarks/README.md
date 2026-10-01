@@ -282,6 +282,20 @@ The A3B's long-context differentiator (task7) is matched by all three 32K+
 models (9B/A3B/4B) — it is the 8K ceiling of the fast tier (Bonsai) and
 the React/TS class that separates them, not deep retrieval alone.
 
+### Pinned-era rows (2026-10-01, temp0/seed42 + drift pins — new baseline rows, not deltas vs unpinned)
+
+| Model | Pass | Total wall | Efficiency | Notes |
+|---|---|---|---|---|
+| **A3B IQ2_XXS @32K** | **9/11** | 2176 s | 14.9 p/h | fleet-best tie; fails {task5, task8}; task9 flip + React pass vs 09-28 row |
+| A3B IQ2_XXS + `--cache-ram 32G` | 8/11 | 1657 s | — | −24% wall, −1 score (task9 fast-exit flip) → not adopted |
+| **Gemma-E4B d3** | **7/11** | 270 s | **93.3 p/h** | new card efficiency record; identical pass set to d2 |
+| **Bonsai-8K lookup-prompt,draft-mtp d2** | **7/11** (6-7 band) | 582 s | 43.4 p/h | 5/11 unpinned era → task8 passed in both lookup runs; task7/11 runs flip (tool-side variance) |
+| Xing4 official IQ4_NL | 4/11 | 1925 s | — | mHC-on-SM75 first-try record (0.933 code acc); task8 pass; long-grind style; community pack stays recommended |
+
+Run-order variance warning (measured today): same-config 5-task vs 11-task
+runs flipped task7 and task11 — the bench has tool-side nondeterminism
+beyond serve pins; single-run ±1 is the floor of certainty.
+
 ### Drift-pinned 5-task baseline (1.3, fresh 2026-10-01)
 
 The v2.1-subset (tasks 7–11) baselines with drift status stamped, per the
