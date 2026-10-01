@@ -61,9 +61,19 @@ bash benchmarks/agentic-bench.sh <model-label> [seconds-cap]
 - **Cached prefix-resumption is bit-neutral**: a growing conversation continued
   with `cache_prompt:true` produces byte-identical output to a fresh full prefill
   of the same prompt — AG-Bench agent-loop noise from prompt-cache reuse is
-  cleared on this stack.
+  cleared on this stack. (Amended late 2026-10-01: stable per pair, but repeated
+  cached re-requests on drafted E4B show ~1/6 flips across suites — 5/6 vs the
+  fresh class's 6/6.)
 - **Ubatch is a retired non-issue**: 128/512/2048 produce identical greedy bytes
   (TensorFold's MLX prefill-grid concern does not transfer to the CUDA build).
+- **⚠️ Server-side `--temperature 0 --seed 42` is an ANTI-PIN on upstream-docker
+  servers** (b1118 measured): it destroys same-prompt reproducibility (0/6 with
+  the flags vs 6/6 without, all configs, serial included — outputs differ at
+  style level). The bonsai2 FORK honors the same flags byte-exactly. Upstream
+  benches must pin at REQUEST level (temp 0, consistent cache_prompt) and pass
+  NO server temperature/seed flags. The 2026-10-01 upstream "pinned" rows
+  (E4B d3, A3B×2, Xing official) are valid samples but NOT greedy-deterministic
+  references — see evidence/e4b-selfrepro-attribution.jsonl.
 ## Results (2026-09-24, RTX 2080 8GB, pi 0.87.1, llama.cpp b11118)
 
 | Model | Pass | Wall s/task (passing) | Failure style |
