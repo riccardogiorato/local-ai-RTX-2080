@@ -1,0 +1,72 @@
+[17:21:52] === A: n_match sweep (ctx 8192, echo probe + measure-decode) ===
+[17:22:00] serve ready (c=8192 --spec-lookup-n-match 6 --spec-lookup-n-max 3) after 8s
+[17:22:00] --- n_match=6 echo probe run1/2:
+  {"decode_tps": 54.61, "prefill_tps": 366.45, "content_chars": 1237, "copy_fidelity": 0}
+  accepted_n=176, drafted_n=200, predicted=256, acceptance= 0.88
+  {"decode_tps": 55.37, "prefill_tps": 393.58, "content_chars": 1237, "copy_fidelity": 0}
+  accepted_n=176, drafted_n=200, predicted=256, acceptance= 0.88
+  {"label":"bonsai-lookup-nm6","prompt":"code-continuation.txt","run":1,{"decode_tps": 50.0, "decode_n": 256, "prefill_tps": 540.51},"acceptance":0.715,"mean_len":2.53}
+  {"label":"bonsai-lookup-nm6","prompt":"code-continuation.txt","run":2,{"decode_tps": 50.23, "decode_n": 256, "prefill_tps": 539.68},"acceptance":0.715,"mean_len":2.53}
+  {"label":"bonsai-lookup-nm6","prompt":"decode-isolation.txt","run":1,{"decode_tps": 49.55, "decode_n": 116, "prefill_tps": 77.16},"acceptance":0.545,"mean_len":2.11}
+  {"label":"bonsai-lookup-nm6","prompt":"decode-isolation.txt","run":2,{"decode_tps": 49.6, "decode_n": 116, "prefill_tps": 77.95},"acceptance":0.545,"mean_len":2.11}
+[17:22:40] serve ready (c=8192 --spec-lookup-n-match 8 --spec-lookup-n-max 3) after 6s
+[17:22:40] --- n_match=8 echo probe run1/2:
+  {"decode_tps": 54.14, "prefill_tps": 340.5, "content_chars": 1237, "copy_fidelity": 0}
+  accepted_n=176, drafted_n=200, predicted=256, acceptance= 0.88
+  {"decode_tps": 55.65, "prefill_tps": 388.78, "content_chars": 1237, "copy_fidelity": 0}
+  accepted_n=176, drafted_n=200, predicted=256, acceptance= 0.88
+  {"label":"bonsai-lookup-nm8","prompt":"code-continuation.txt","run":1,{"decode_tps": 56.88, "decode_n": 256, "prefill_tps": 536.66},"acceptance":0.779,"mean_len":2.56}
+  {"label":"bonsai-lookup-nm8","prompt":"code-continuation.txt","run":2,{"decode_tps": 56.87, "decode_n": 256, "prefill_tps": 534.83},"acceptance":0.779,"mean_len":2.56}
+  {"label":"bonsai-lookup-nm8","prompt":"decode-isolation.txt","run":1,{"decode_tps": 49.64, "decode_n": 116, "prefill_tps": 77.26},"acceptance":0.545,"mean_len":2.11}
+  {"label":"bonsai-lookup-nm8","prompt":"decode-isolation.txt","run":2,{"decode_tps": 49.63, "decode_n": 116, "prefill_tps": 76.79},"acceptance":0.545,"mean_len":2.11}
+[17:23:19] serve ready (c=8192 --spec-lookup-n-match 10 --spec-lookup-n-max 3) after 6s
+[17:23:19] --- n_match=10 echo probe run1/2:
+  {"decode_tps": 55.67, "prefill_tps": 343.29, "content_chars": 1237, "copy_fidelity": 0}
+  accepted_n=176, drafted_n=197, predicted=256, acceptance= 0.893
+  {"decode_tps": 56.25, "prefill_tps": 388.2, "content_chars": 1237, "copy_fidelity": 0}
+  accepted_n=176, drafted_n=197, predicted=256, acceptance= 0.893
+  {"label":"bonsai-lookup-nm10","prompt":"code-continuation.txt","run":1,{"decode_tps": 56.56, "decode_n": 256, "prefill_tps": 531.8},"acceptance":0.779,"mean_len":2.56}
+  {"label":"bonsai-lookup-nm10","prompt":"code-continuation.txt","run":2,{"decode_tps": 56.68, "decode_n": 256, "prefill_tps": 532.2},"acceptance":0.779,"mean_len":2.56}
+  {"label":"bonsai-lookup-nm10","prompt":"decode-isolation.txt","run":1,{"decode_tps": 49.39, "decode_n": 116, "prefill_tps": 76.56},"acceptance":0.545,"mean_len":2.11}
+  {"label":"bonsai-lookup-nm10","prompt":"decode-isolation.txt","run":2,{"decode_tps": 49.46, "decode_n": 116, "prefill_tps": 77.02},"acceptance":0.545,"mean_len":2.11}
+[17:23:57] serve ready (c=8192 --spec-lookup-n-match 12 --spec-lookup-n-max 3) after 6s
+[17:23:57] --- n_match=12 echo probe run1/2:
+  {"decode_tps": 55.51, "prefill_tps": 344.49, "content_chars": 1237, "copy_fidelity": 0}
+  accepted_n=175, drafted_n=196, predicted=256, acceptance= 0.893
+  {"decode_tps": 56.48, "prefill_tps": 385.62, "content_chars": 1237, "copy_fidelity": 0}
+  accepted_n=176, drafted_n=194, predicted=256, acceptance= 0.907
+  {"label":"bonsai-lookup-nm12","prompt":"code-continuation.txt","run":1,{"decode_tps": 56.38, "decode_n": 256, "prefill_tps": 529.98},"acceptance":0.779,"mean_len":2.56}
+  {"label":"bonsai-lookup-nm12","prompt":"code-continuation.txt","run":2,{"decode_tps": 56.39, "decode_n": 256, "prefill_tps": 529.59},"acceptance":0.779,"mean_len":2.56}
+  {"label":"bonsai-lookup-nm12","prompt":"decode-isolation.txt","run":1,{"decode_tps": 49.26, "decode_n": 116, "prefill_tps": 77.02},"acceptance":0.545,"mean_len":2.11}
+  {"label":"bonsai-lookup-nm12","prompt":"decode-isolation.txt","run":2,{"decode_tps": 49.23, "decode_n": 116, "prefill_tps": 77.32},"acceptance":0.545,"mean_len":2.11}
+[17:24:32] === B: Bonsai-64K + lookup, full 11-task ===
+[17:24:38] serve ready (c=65536 --no-kv-offload --spec-lookup-n-match 8 --spec-lookup-n-max 3) after 6s
+  {"label":"bonsai2-64k-lookup","prompt":"code-continuation.txt","run":1,{"decode_tps": 14.88, "decode_n": 106, "prefill_tps": 347.79},"acceptance":0.75,"mean_len":2.52}
+  {"label":"bonsai2-64k-lookup","prompt":"code-continuation.txt","run":2,{"decode_tps": 14.46, "decode_n": 106, "prefill_tps": 351.69},"acceptance":0.75,"mean_len":2.52}
+  {"label":"bonsai2-64k-lookup","prompt":"decode-isolation.txt","run":1,{"decode_tps": 13.73, "decode_n": 116, "prefill_tps": 21.75},"acceptance":0.565,"mean_len":2.15}
+  {"label":"bonsai2-64k-lookup","prompt":"decode-isolation.txt","run":2,{"decode_tps": 13.28, "decode_n": 116, "prefill_tps": 32.62},"acceptance":0.545,"mean_len":2.11}
+  warm-up attempt 1: ok
+  {"model": "bonsai2-64k-lookup-v2", "task": "task10-tb-bank-trans-filter", "passed": true, "wall_s": 220, "tool_calls": 29, "finish": "unknown", "zero_byte_retry": false}
+  {"model": "bonsai2-64k-lookup-v2", "task": "task11-tb-assign-seats", "passed": true, "wall_s": 514, "tool_calls": 37, "finish": "unknown", "zero_byte_retry": false}
+  {"model": "bonsai2-64k-lookup-v2", "task": "task1-js-bugfix", "passed": true, "wall_s": 121, "tool_calls": 27, "finish": "unknown", "zero_byte_retry": false}
+  {"model": "bonsai2-64k-lookup-v2", "task": "task2-react-fix", "passed": false, "wall_s": 600, "tool_calls": 9, "finish": "unknown", "zero_byte_retry": false}
+  {"model": "bonsai2-64k-lookup-v2", "task": "task3-dep-upgrade", "passed": true, "wall_s": 600, "tool_calls": 45, "finish": "unknown", "zero_byte_retry": false}
+  {"model": "bonsai2-64k-lookup-v2", "task": "task4-python-bugfix", "passed": true, "wall_s": 65, "tool_calls": 22, "finish": "unknown", "zero_byte_retry": false}
+  {"model": "bonsai2-64k-lookup-v2", "task": "task5-js-to-ts", "passed": false, "wall_s": 600, "tool_calls": 54, "finish": "unknown", "zero_byte_retry": false}
+  {"model": "bonsai2-64k-lookup-v2", "task": "task6-extra-code-task", "passed": true, "wall_s": 218, "tool_calls": 26, "finish": "unknown", "zero_byte_retry": false}
+  {"model": "bonsai2-64k-lookup-v2", "task": "task7-long-context-agent", "passed": true, "wall_s": 173, "tool_calls": 31, "finish": "unknown", "zero_byte_retry": false}
+  {"model": "bonsai2-64k-lookup-v2", "task": "task8-tb-broken-python", "passed": true, "wall_s": 600, "tool_calls": 57, "finish": "unknown", "zero_byte_retry": false}
+  {"model": "bonsai2-64k-lookup-v2", "task": "task9-tb-analyze-access-logs", "passed": true, "wall_s": 80, "tool_calls": 27, "finish": "unknown", "zero_byte_retry": false}
+  DONE — results in /home/riccardogiorato/Desktop/github/local-ai-rtx2080/benchmarks/results/bonsai2-64k-lookup-v2-20261001-172522.jsonl
+[18:30:18] === C: E4B d3 on the original-6 ===
+[18:31:17] e4b serve ready
+  slots ready after 2s
+  warm-up attempt 1: ok
+  {"model": "gemma-e4b-mtp-d3-orig6", "task": "task1-js-bugfix", "passed": true, "wall_s": 11, "tool_calls": 14, "finish": "unknown", "zero_byte_retry": false}
+  {"model": "gemma-e4b-mtp-d3-orig6", "task": "task2-react-fix", "passed": false, "wall_s": 54, "tool_calls": 46, "finish": "unknown", "zero_byte_retry": false}
+  {"model": "gemma-e4b-mtp-d3-orig6", "task": "task3-dep-upgrade", "passed": true, "wall_s": 15, "tool_calls": 26, "finish": "unknown", "zero_byte_retry": false}
+  {"model": "gemma-e4b-mtp-d3-orig6", "task": "task4-python-bugfix", "passed": true, "wall_s": 33, "tool_calls": 32, "finish": "unknown", "zero_byte_retry": false}
+  {"model": "gemma-e4b-mtp-d3-orig6", "task": "task5-js-to-ts", "passed": false, "wall_s": 23, "tool_calls": 34, "finish": "unknown", "zero_byte_retry": false}
+  {"model": "gemma-e4b-mtp-d3-orig6", "task": "task6-extra-code-task", "passed": true, "wall_s": 14, "tool_calls": 13, "finish": "unknown", "zero_byte_retry": false}
+  DONE — results in /home/riccardogiorato/Desktop/github/local-ai-rtx2080/benchmarks/results/gemma-e4b-mtp-d3-orig6-20261001-183117.jsonl
+[18:34:13] === follow-ups done ===
