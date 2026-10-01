@@ -27,9 +27,25 @@ run_task() {
     ( . "$task_dir/service.rc" ) || echo "WARN: service.rc failed for $task_name"
   fi
   local t0=$SECONDS
-  ( cd "$work" && PI_OFFLINE=1 timeout "$CAP" pi --provider llamacpp-local --model local-model \
-      --mode json --no-session \
-      -p "$(cat "$work/TASK.md")" ) > "$work/pi-session.jsonl" 2>"$work/pi-errors.log"
+  # zero-byte retry: a pi session can die pre-header with an empty pi-session.jsonl
+  # (startup stall observed ~1/75 manual rate, root cause still open — NEXT-IDEAS
+  # Tier 1 pi-hang item). Retry the task once; if the retry is also zero-byte,
+  # let it fall through to verify (honest fail) and flag it in the row.
+  local zero_byte_retry=0
+  for attempt in 1 2; do
+    ( cd "$work" && PI_OFFLINE=1 timeout "$CAP" pi --provider llamacpp-local --model local-model \
+        --mode json --no-session \
+        -p "$(cat "$work/TASK.md")" ) > "$work/pi-session.jsonl" 2>"$work/pi-errors.log"
+    [ -s "$work/pi-session.jsonl" ] && break
+    if [ "$attempt" = "1" ]; then
+      zero_byte_retry=1
+      echo "WARN: $task_name produced a ZERO-BYTE pi session — retrying task once" >&2
+      restore_master_if_dirty
+      sleep 5
+    else
+      echo "WARN: $task_name zero-byte after retry — recording as failed" >&2
+    fi
+  done
   if [ -f "$task_dir/service-cleanup.rc" ]; then
     ( . "$task_dir/service-cleanup.rc" ) || true
   fi
@@ -49,9 +65,9 @@ run_task() {
       [ "$bad" = "1" ] && { passed=false; echo "NOTE: $task_name FAILED the protected-paths check (tests/or protected modified)"; }
     fi
   fi
-  AG_OUT="$OUT" python3 - "$task_name" "$LABEL" "$wall" "$passed" "$work" <<'EOF'
+  AG_OUT="$OUT" python3 - "$task_name" "$LABEL" "$wall" "$passed" "$work" "$zero_byte_retry" <<'EOF'
 import json, sys, os
-task, label, wall, passed, work = sys.argv[1], sys.argv[2], int(sys.argv[3]), sys.argv[4] == 'true', sys.argv[5]
+task, label, wall, passed, work, zero_byte_retry = sys.argv[1], sys.argv[2], int(sys.argv[3]), sys.argv[4] == 'true', sys.argv[5], sys.argv[6] == '1'
 out = os.environ['AG_OUT']
 tool_calls = 0
 finish = "unknown"
@@ -63,7 +79,8 @@ with open(os.path.join(work, 'pi-session.jsonl')) as f:
         if 'tool' in str(t).lower(): tool_calls += 1
         if ev.get('stop') or ev.get('finish'): finish = ev.get('stop') or ev.get('finish')
 row = {"model": label, "task": task, "passed": passed, "wall_s": wall,
-      "tool_calls": tool_calls, "finish": str(finish)}
+      "tool_calls": tool_calls, "finish": str(finish),
+      "zero_byte_retry": zero_byte_retry}
 with open(out, 'a') as f: f.write(json.dumps(row) + '\n')
 print(json.dumps(row))
 EOF
