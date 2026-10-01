@@ -1,0 +1,22 @@
+# E4B MTP depth sweep — 2026-10-01T10:17:44+02:00 — serve per recipe, temp0, 2 runs/class
+=== depth 1 ===
+{"label":"e4b-mtp-d1","prompt":"code-continuation.txt","run":1,{"decode_tps": 107.61, "decode_n": 39, "prefill_tps": 115.58},"acceptance":0.81,"mean_len":1.86}
+{"label":"e4b-mtp-d1","prompt":"code-continuation.txt","run":2,{"decode_tps": 115.17, "decode_n": 39, "prefill_tps": 2973.03},"acceptance":0.81,"mean_len":1.86}
+{"label":"e4b-mtp-d1","prompt":"decode-isolation.txt","run":1,{"decode_tps": 103.9, "decode_n": 142, "prefill_tps": 449.07},"acceptance":0.527,"mean_len":1.53}
+{"label":"e4b-mtp-d1","prompt":"decode-isolation.txt","run":2,{"decode_tps": 103.71, "decode_n": 142, "prefill_tps": 394.51},"acceptance":0.527,"mean_len":1.53}
+=== depth 2 ===
+{"label":"e4b-mtp-d2","prompt":"code-continuation.txt","run":1,{"decode_tps": 113.56, "decode_n": 39, "prefill_tps": 117.88},"acceptance":0.647,"mean_len":2.29}
+{"label":"e4b-mtp-d2","prompt":"code-continuation.txt","run":2,{"decode_tps": 120.17, "decode_n": 39, "prefill_tps": 2955.99},"acceptance":0.719,"mean_len":2.44}
+{"label":"e4b-mtp-d2","prompt":"decode-isolation.txt","run":1,{"decode_tps": 98.23, "decode_n": 130, "prefill_tps": 439.25},"acceptance":0.333,"mean_len":1.67}
+{"label":"e4b-mtp-d2","prompt":"decode-isolation.txt","run":2,{"decode_tps": 98.72, "decode_n": 130, "prefill_tps": 394.99},"acceptance":0.333,"mean_len":1.67}
+=== depth 3 ===
+{"label":"e4b-mtp-d3","prompt":"code-continuation.txt","run":1,{"decode_tps": 140.56, "decode_n": 39, "prefill_tps": 122.66},"acceptance":0.818,"mean_len":3.55}
+{"label":"e4b-mtp-d3","prompt":"code-continuation.txt","run":2,{"decode_tps": 147.16, "decode_n": 39, "prefill_tps": 2965.38},"acceptance":0.818,"mean_len":3.55}
+{"label":"e4b-mtp-d3","prompt":"decode-isolation.txt","run":1,{"decode_tps": 93.58, "decode_n": 130, "prefill_tps": 449.87},"acceptance":0.282,"mean_len":1.83}
+{"label":"e4b-mtp-d3","prompt":"decode-isolation.txt","run":2,{"decode_tps": 93.82, "decode_n": 130, "prefill_tps": 393.25},"acceptance":0.282,"mean_len":1.83}
+=== depth 4 ===
+{"label":"e4b-mtp-d4","prompt":"code-continuation.txt","run":1,{"decode_tps": 138.2, "decode_n": 39, "prefill_tps": 122.62},"acceptance":0.725,"mean_len":3.9}
+{"label":"e4b-mtp-d4","prompt":"code-continuation.txt","run":2,{"decode_tps": 144.53, "decode_n": 39, "prefill_tps": 2971.3},"acceptance":0.725,"mean_len":3.9}
+{"label":"e4b-mtp-d4","prompt":"decode-isolation.txt","run":1,{"decode_tps": 91.88, "decode_n": 132, "prefill_tps": 452.6},"acceptance":0.254,"mean_len":2.0}
+{"label":"e4b-mtp-d4","prompt":"decode-isolation.txt","run":2,{"decode_tps": 91.11, "decode_n": 132, "prefill_tps": 391.12},"acceptance":0.254,"mean_len":2.0}
+=== sweep done ===
