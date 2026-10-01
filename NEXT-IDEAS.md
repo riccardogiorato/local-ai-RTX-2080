@@ -1,312 +1,293 @@
-# NEXT-IDEAS — not in the current test queue
+# NEXT-IDEAS — the prioritized open-work backlog
 
-Models and experiments that have **not been tested yet**. Tested models live in
-`recipes/` (with evidence); this file is only the untested backlog. They move into the
-README queue the moment they're actually going to be run.
+Everything open across the lab's task threads, handoffs, and research notes,
+merged into one ranked list. Restructured 2026-09-30 from the Strata,
+TensorFold, TernaryBonsai2-leaderboard, MiMo-9B-DFlash, setup-advisory, 48GB,
+Xing4, Splash, and Spark-X2.5 threads plus this file's previous backlog.
+Tested models live in `recipes/` (with evidence); this file is only
+unstarted work.
 
 - being tested → see [README queue](README.md#test-queue)
 - already tested → see [recipes/](recipes/) and the [AG-Bench leaderboard](benchmarks/README.md)
+- resolved → moved to the [Archive](#archive--resolved-verdicts) with evidence pointers
 
+Tier order = value/effort, top item first. When an item resolves, check it off
+with the date and a pointer, then compress it into the Archive on the next
+restructure.
 
-## Swift Flash Next / Qwen3.8-Flash-Next — RESOLVED 2026-09-27 (partial): UltraLite 37GiB SERVED (12.5 tok/s, first 125B here)
+## Tier 0 — record fixes & housekeeping (minutes, no GPU)
 
-The original 65 GB IQ1_S verdict stands superseded for the low end: the 0xKitkat
-UltraLite 37GiB (1.80 bpw) was downloaded, SHA-verified, served on the patched
-qwen4exp runtime — first 125B-class on the card. Boundary learned: sub-2 bpw
-BREAKS THE REASONING CHAIN (EOS-at-reasoning-close; same wall as IQ1_S), so the
-frontier scores stay unreachable at this compression. Remaining blockers for a
-USABLE Flash-Next slot: a sub-40GB artifact at >=2.2bpw with MTP + intact
-reasoning (none exists today); Strata's Q2_0 tier is now sm_75-portable per
-the source survey below (soft gate — one tf32 mma + bf16 emulation) — its
-remaining blocker is the port work itself plus RAM/bandwidth economics, not
-the instruction floor.
-See recipes/flashnext-ultralite-125b-llamacpp-fork.md and evidence/flashnext-ultralite-125b.jsonl.
-## OrcaSAQ-2-27B (orcarouter) — blocked, triggers recorded
+1. **Zero-byte auto-retry in `agentic-bench.sh`** — detect a zero-byte task
+   result and retry that task once (removes the manual re-run tax; the pi
+   root-cause hunt in Tier 1 is the real fix). ~30 min. (MiMo thread.)
+2. **Amend `notes/mlxfast-bonsai2-portability.md`** — its ranked plan's item
+   (1) (depth expansion) has *run and was falsified*; reorder to (1)
+   prompt-span lookup, (2) drafter class, (3) fusion/census. (TernaryBonsai.)
+3. **`hardware.md` still lists 16 GB RAM** — the machine is 48 GB since
+   9f220a2. One-line fix.
+4. **Note the two unreported runs in `benchmarks/README.md`** — the
+   `qwen35-35b-a3b-mtp` partial (1 task passed, 819 s, interrupted) and the
+   invalid `qwen25-coder-7b` 503-window row; neither is on the leaderboard.
+   (Spark thread.)
+5. **Idle-serve sweep** — a llama-server was seen holding ~7 GB VRAM while
+   supposedly idle (pid 1244468, 2026-09-25); stale-check and kill.
+   (Spark thread.)
+6. **CPU governor still `powersave`** → performance: zero-risk, open since
+   the setup advisory. Owner-side in the same breath: XMP failed to train
+   at 3200 — settle 2933/2666 per the 48GB thread (~48–52 tok/s A3B
+   projection at 3200).
+7. ~~Stale "Strata Q2_0 tier needs sm_80+" lines~~ **RESOLVED 2026-09-30 by
+   this restructure** (soft-gate survey preserved verbatim in the Archive).
+8. ~~DFlash2 falsification caveat~~ **RESOLVED 2026-09-30 by this
+   restructure** — the 1.14 GB Q4_K_M-swa drafter was tested, the ~600 MB
+   class itself was not; the caveat now travels inside the Tier 2 sidecar
+   entry (and the original evidence file's numbers stand as measured).
 
-SAQ2 = exl3 v1.5.1 (QTIP-class). Cannot run here as shipped: exllamav3 requires
-sm_80+ (ptxas-confirmed), no CPU dequant path, no public exl3→GGUF converter
-(castkit does FP16-decast conversion but its exl3 backend needs Ampere+;
-trellis-webgpu proves non-CUDA TCQ decoders are coming). Retry triggers (any one):
-orcarouter publishes GGUF; a community converter appears; an Ampere+ machine
-dequants once to fp16. The same base IS tested here via Qwen3.8-27B-DT-IQ2_S /
-ThinkingCap Q2_K / Bonsai-2.
+## Tier 1 — measurements (hours, high value/effort)
 
-## Diffusion Gemma (26B-A4B) — blocked, verdict: cannot run today
+1. **Pi zero-byte hang — catch with evidence.** Struck 3× in MiMo benches;
+   narrowed to a pre-header startup stall, ~1/75 manual rate, serve-state
+   correlation excluded, 150–210 clean no-serve iterations. The v2 hunt
+   (120 iterations, full syscall trace against a live MiMo serve) was
+   stopped by user request before catching one. Leave live: reproduce once
+   under full strace + kernel stacks, then fix root cause. Prereq for
+   trustworthy bench numbers on this host. (MiMo thread.)
+2. **E4B d3 draft A/B.** The card's efficiency record-holder (83.4 pass/h,
+   7/11 @ 302 s on v2.1) serves d2 at 181 tok/s; sweep the depth profile
+   first (the Bonsai decay was 0.845/0.726/0.588/0.540 for d1–d4; E4B's
+   profile is not yet measured) and take the depth that wins. Expect 181 →
+   ~200+ tok/s. Cheapest headline available. (setup advisory.)
+3. **Baseline recording for the 5-task bench with drift pins.** The new
+   5-task AG-Bench needs a baseline session with drift pins (invariant env
+   for Bonsai; re-run marginal tasks) so later rows are comparable.
+   (TensorFold.)
+4. **Prompt-cache/ubatch drift A/B** — fresh prefill vs cached resumption
+   vs different ubatch on the same question: same bytes? ~30 min; affects
+   AG-Bench noise interpretation for every recipe. (TensorFold.)
+5. **Prompt-span lookup proposals + lookup-round drafter skip on Bonsai**
+   — suffix-match committed tokens against the prompt; unique long-span
+   match rule mandatory; expected to hit hard on AG-Bench. "This is now
+   #1" per the leaderboard analysis. (TernaryBonsai.)
+6. **35B-A3B re-bench on 48 GB, verbatim recipe** — the "smart-slot
+   champion, agent turns hold ~7–9 tok/s" claim (deep-agent collapse
+   9.3/8.5 → 1.51 tok/s at 16 GB) is unmeasured since the RAM landed.
+   Same session: one `--cache-ram` run to quantify the prompt-cache
+   effect. (48GB thread.)
+7. **Xing4 build + bench on the fork with the official IQ4_NL ladder** —
+   48 GB now hosts the whole ladder (IQ4_NL 20.1 / Q6_K 23.9 / Q8_0
+   30.9 GB; Q8 MMLU-Δ only -3.1). The mHC (4-channel hyper-connections)
+   CUDA path on SM75 has never been benchmarked on any pre-Ampere card.
+   Caveat: Chinese-centric model, interpret AG-Bench accordingly. Probe
+   tier same as the Qwen3.5 campaign. (Xing4 thread.)
+8. **Strata Q2_0-GSQ-RCO quant test on our patched llama.cpp** — the
+   ≥2.2-bpw reasoning-slot test, no port required: if the Q2_0-GSQ-RCO
+   shard family serves with intact reasoning on the qwen4exp-patched
+   runtime, the sub-40 GB Flash-Next slot may be closer than "no artifact
+   exists today". The proposed "top-priority steal" from the Strata
+   thread, never queued until now. (Strata.)
 
-No GGUF, vLLM has no SM75, 26B MoE exceeds 8 GB even at extreme low-bpw. Retry if
-Google ships an E2B/E4B-class diffusion variant or a GGUF appears.
+## Tier 2 — engineering (sessions)
 
-## GLM-OCR: real-photo GT regression set
+1. **Strata sm_75 port — the big one.** 3 phases: (1) CMake guard patch +
+   f16-MMA twin for the single hard sm_80 instr (`mma.sync.m16n8k8.tf32`
+   in `src/kernels/cuda/native_qsa_score.cu`, ~30 lines; its ldmatrix
+   loads ARE sm_75-legal) + parity suite on the 2080; (2) Q2_0 bench
+   (37.6 GB model + 29 GB PLE on the 110 GB free disk — fits; our 46 GiB
+   RAM qualifies only for the Q2_0 tier) — **KILL if ≤15 tok/s**
+   (llama.cpp parity); (3) bf16→fp16 conversion for the ~10 bf16-hot
+   kernels (ple, gr, fused_gr, elementwise, bf16_gemv, shared_expert…) if
+   the fp32-round-trip emulation shows, + expert-cache tuning for 8 GB
+   (~2800 vs their ~5600 resident). Physics cap ~1/3 of the 5070
+   numbers: ~20 tok/s @128K / ~30 short-chat / ~180 pp — still 2–4× the
+   UltraLite llama.cpp expectation. **Run before any Ampere purchase.**
+   Full survey preserved in the Archive. (Strata thread.)
+2. **Keyed-Gumbel sampler port into the Bonsai fork** (flagship — full
+   byte-exactness at temp > 0). Module done and validated
+   (`notes/keyed_gumbel_sampler.h`, 16/16 test classes; cross-restart
+   replay 2/2; stock 2/2 → keyed 1/2, residual = logits-bits). Remaining:
+   llama.cpp splice per
+   `notes/keyed-gumbel-llamacpp-integration.md`, server-schema wiring,
+   patched build, repro/drift rerun (~half session). ⚠️ the previous
+   patched tree lived at `/tmp/llama-upstream-keyed` (tmpfs — gone on
+   reboot); rebuild from the notes, not /tmp. (TensorFold + MiMo.)
+3. **DFlash2 ≤600 MB Q2-class sidecar beside a full-offload IQ1_S
+   target** (6.70 + 0.6 + ctx_other ~0.4 ≈ 8.0 GB with desktop —
+   borderline; needs `-c 4096`, possibly one shed layer). CAVEAT
+   (2026-09-28 falsification): the 1.14 GB Q4_K_M-swa drafter forced ngl
+   44 and collapsed decode 19.7 → 6.2 tok/s *despite* 0.92/mean 3.76
+   acceptance; the ~600 MB class itself was never tested, and ngl-54 OOM
+   math suggests even it may not fit — this stays OPEN as a measurement,
+   not a closed verdict. Watch jmarceno/z-lab for a Q2_K_XS-swa
+   conversion. Same sidecar class on ThinkingCap-27B Q2_K (9.57 tok/s,
+   acc 0.995) also untested. Evidence `evidence/dflash2-iqi-27b.jsonl`.
+   (Splash + Strata + MiMo threads.)
+4. **Recurrent-state snapshots for DeltaNet-class hybrids** — design doc
+   done (`notes/design-recurrent-state-snapshots.md`), implementation
+   never committed. Explicit SSM/conv/target_feat snapshots (direct
+   `lcp=N reused=N`) instead of KV seq-id manipulation for
+   Qwen3.5/3.8-hybrid multi-turn. Pure C++/GGML, no GPU needed to draft;
+   b11118 docker or the bonsai2 fork as hosts. Payoff = per-turn latency
+   on hybrid chains. (setup advisory / David19p research,
+   `notes/research-david19p-turing-kernel.md`.)
+5. **E4B self-repro mystery** — the only model whose drafted fast mode
+   can't reproduce itself (serial 6/6, drafted 4/6, drafted-vs-serial
+   1/6 byte-identical; 150 vs 91 tok/s is what the drift buys).
+   Attribution rerun with flags toggled / flash-attn off. (TensorFold.)
+6. **Xing4 router-tie drift test** — weights on the archive drive;
+   acceptance 0.91 recorded but the drift column never measured.
+   (TensorFold.)
+7. **nsys copy/launch census of Bonsai verify rounds** — ~1 h profiling,
+   never run. Tile-path floor is 55 ms vs ~22 ms ideal single-pass;
+   register-weight/plane-copy layout only if a lane kernel is reopened
+   (blocked on the drafter class, see Tier 3). (TernaryBonsai.)
+8. **2-column pass-tax kernel patch** (1.34×→1.0 row-boundary tax, worth
+   ~10–15% serve) + fused norm/quant launches on the decode path. The
+   remaining pure-speed fusion items. (TensorFold + TernaryBonsai.)
 
-The prior campaign's KFC/CIAO GT sets did not survive the migration; recipes run on
-synthetic images. Pending: a new photographed GT set for the receipt/label class
-(regression-grade, human-verifiable).
+## Tier 3 — backlog (run when lanes free up)
 
-## PQ2_0-MTP tier — blocked on card size, direct unlock if a bigger card lands
+- **ThinkingCap 32K KV-in-RAM AG-Bench** — one bench; could flip the
+  family's two failures. (Splash advisory.)
+- **llama-bench pp/tg rows** for the serve recipes — makes our numbers
+  internet-comparable. (Splash advisory.)
+- **Swift-1.5 acceptance at Q2_K/Q4_K** on the same model (now 4.4 tok/s
+  at 0.745) — half a day. (Splash advisory.)
+- **Spark-X2.5-4B (XHToken) serve** — never tried; distinct from
+  LiquidAI's DSpark drafter. (Spark thread.)
+- **MiMo 32K pinned serial re-baseline** — separates pin-vs-ctx for the
+  morning 9/11 headline; mid-value, only if ranking finality is needed.
+  (MiMo thread.) Reopens the 32K+drafter door only if a ≤400 MB
+  high-acceptance z-lab drafter (Q1/IQ2_KS lineage) appears.
+- **Accuracy-coverage deepening for the Bonsai fork** — sweep the drift
+  harness across every declared depth (d1–d8) and both prompt files; add
+  a shape-complete load-time bitwise kernel self-test with stock fallback
+  (the contest's pattern). (TernaryBonsai.)
+- **Pre-commit the escape-hatch strictness rule** — for unpinned split-K
+  tuning: relax serial-equal to batch-invariant only if ≥X% speed win,
+  AG-Bench unchanged, drift harness compares drafted vs drafted-baseline.
+  (TernaryBonsai.)
+- **GLM-OCR real-photo GT regression set** — the KFC/CIAO GT sets did
+  not survive the migration; recipes run on synthetic images. New
+  photographed receipt/label GT set (regression-grade, human-verifiable).
+- **Tweet + PR the winning recipes to 0sero/local-ai-registry** —
+  promised in the Spark-X2.5 thread.
+- **Higher-acceptance drafter class for Bonsai** — a smaller DFlash2 or
+  any better head is the only path back to depth gains (d4–d8 dead with
+  the current grafted head: acceptance decays ~0.13/depth and d4 is
+  slower *and* drifts). Effectively watch-list grade. (TernaryBonsai.)
 
-PQ2_0 (2.13 bpw, 7.66 GB) + trained head = the artifact the 1080 Ti post measured
-86/98/75 tok/s on (11 GB Pascal). On 8 GB it cannot go resident with useful context.
-**2026-09-26 measured boundary** (while falsifying the trained-head-onto-PTQ1_0
-graft, see the Bonsai-2 recipe): partial offload at ngl 46 / ctx 4096 loads but
-decodes at **2.2 tok/s** — worse than every 27B cram on the ledger; ngl 60 OOMs
-at load. Also proven there: the trained head accepts 0.717/0.585 on our fork via
-their PQ2_0-MTP file (runtime fully compatible). Retry triggers: an 11 GB+ card
-lands in this lab (the giveaway 1080 Ti would be exactly that), or a sub-8 GB
-PQ2_0 derivative appears.
+## Watch-list — blocked, passive triggers (no action until one fires)
 
-The "27B in 8.45 GB at 60 tok/s on a 3090" tweet model. Same graveyard as OrcaSAQ, three
-doors and all closed on this card: (1) uzu runtime is Apple-silicon-only; (2) the vLLM
-`mirai_s` plugin explicitly requires compute capability **8.0+** (README-documented — our
-sm_75 Turing is below the floor, and vLLM 0.30 itself has no Turing support); (3) **no GGUF
-and no llama.cpp path** — the codec is QTIP/trellis-family (the uzu branch is
-`ryan/qtip-s-agent`), so a conversion would have to dequantize it, which destroys the whole
-size point. Also 8.45 GB > 8 GB VRAM — even a hypothetical GGUF would be a partial-offload
-cram like ThinkingCap. The whole trymirai family (Qwen3.5-4B/9B-M/L included) is tagged
-uzu/safetensors/mirai only. Retry triggers: trymirai ships a llama.cpp/GGUF path, a Turing
-build of the plugin (unlikely — the trellis kernels use sm_80+ ops by design), or an Ampere+
-box dequantizes it once like castkit would for OrcaSAQ. Until one lands: our dense Qwen3.8-27B
-rows already record the "slow-smart 27B" experience this model family promises.
+| Family | Blocked by | Reopens when |
+|---|---|---|
+| OrcaSAQ-2-27B (exl3 v1.5.1, QTIP-class) | exllamav3 requires sm_80+ (ptxas-confirmed), no CPU dequant, no public exl3→GGUF converter (castkit's exl3 backend needs Ampere+) | orcarouter ships GGUF; a community converter appears; an Ampere+ box dequants once to fp16. Same base IS tested here via IQ2_S / ThinkingCap Q2_K / Bonsai-2 |
+| trymirai Qwen3.8-27B-S ("27B in 8.45 GB at 60 tok/s on a 3090") | uzu runtime Apple-silicon-only; vLLM `mirai_s` plugin needs CC 8.0+ (and vLLM has no Turing); QTIP/trellis codec → conversion destroys the size point; 8.45 GB > 8 GB VRAM anyway | trymirai ships a GGUF/llama.cpp path or Turing kernels (unlikely by design); Ampere+ dequant. Our dense 27B rows already record the experience |
+| fafastmobel / Cinference (23.8 GB NVFP4/FP8, embedded MTP + DFlash2) | sm_120a-only kernels; NVFP4/FP8 Ada-native; custom NInfer format, no GGUF route | Turing kernel build / sub-8 GB class / one-shot Ampere+ dequant. Design leads (verify trees, prompt lookup, in-file DFlash2) already on the David19p watch-list |
+| Diffusion Gemma 26B-A4B | no GGUF, vLLM no SM75, exceeds 8 GB even at extreme bpw | Google ships an E2B/E4B-class diffusion variant or a GGUF appears |
+| PQ2_0-MTP tier (2.13 bpw, 7.66 GB + trained head; 86/98/75 tok/s on an 11 GB Pascal) | can't go resident with useful context on 8 GB — measured 2.2 tok/s at ngl 46 partial, ngl 60 OOMs at load; trained head proven compatible (0.717/0.585 acceptance via their PQ2_0-MTP file) | an 11 GB+ card lands here (the giveaway 1080 Ti is exactly that); a sub-8 GB PQ2_0 derivative appears |
+| MiMo 32K + drafter | no ≤400 MB drafter exists (HF floor = Q2_K 482 MB); drafted arm 0.85× slower (see Archive) | z-lab Q1/IQ2_KS lineage, or a fork with slimmer draft-pp buffer |
+| Flash-Next usable tier | 65 GB IQ1_S doesn't fit; sub-2 bpw breaks the reasoning chain (EOS-at-reasoning-close) | a sub-40 GB ≥2.2 bpw artifact with MTP + intact reasoning — Tier 1.8 now tests whether Q2_0-GSQ-RCO is it |
 
-## fafastmobel / Cinference (satellitedown, 2026-09-26) — blocked, triggers recorded
+**Standing note:** an Ampere+ GPU landing in this lab remains the single
+biggest unlock — native bf16/tf32, the PQ2_0 tier, exl3, and the DFlash2
+windows all open at a stroke. The Strata port (Tier 2.1) is the last big
+thing to try *before* buying one.
 
-"Qwen3.8-27B delta-transplant (Huihui−Qwen onto UkisAI Swift) in NVFP4/FP8, single
-23.8 GB NInfer v3 file with embedded MTP + z-lab DFlash2 drafter; Cinference fork
-claims rewritten DFlash2 verify kernels +21–37% (8K–131K ctx) and verify-trees +
-prompt lookup up to 895 tok/s, 262K ctx + vision." Four closed doors for this lab:
-(1) kernels compile for **sm_120a only** (Blackwell; README: only 5090 32 GB
-validated, nothing below); (2) NVFP4/FP8 are Ada/Blackwell-native tensor formats —
-SM75 has no hardware path; (3) custom NInfer format, **no GGUF/llama.cpp route** —
-dequant-to-GGUF would destroy the size point (same argument as trymirai); (4) 23.8 GB
-artifact cannot fit 8 GB VRAM under any cram. Design leads (verify trees, prompt
-lookup, in-file DFlash2) join the David19p watch-list — no code adoption. Retry
-triggers: cinference ships a Turing kernel build, a sub-8 GB artifact class, or an
-Ampere+ box dequants once — none likely; our own DFlash2 sidecar trigger (~600 MB
-Q2/Q4 drafter for llama.cpp) remains the live one from this announcement.
+## Archive — resolved verdicts
 
-## UBBoost cherry-pick build — RESOLVED 2026-09-26 via c9df0ee (claim reproduced 2.4× with plain ubatch on all 3 CPU-offload models; port not needed — kept for the dense-cram cold-prefill profile reference)
-
-DavidAngeloBen's llama.cpp PR #23239 / discussion #23262: RTX 2080 8GB + Qwen
-35B-A3B + MTP, the same VRAM-constrained CPU-experts recipe as our A3B/Xing
-serves. A second prompt-processing runtime (--promptprocessing-ubatchboost-size
-+ -n-cpu-moe + -gpu-layers) runs the prefill with big ubatch (2048-3200) and
-extreme CPU-MoE offload (his 389->539 tok/s = ~1.4-2x on the 35B-A3B class).
-NOT in any release we run (checked: bonsai2 @285542d, xing4_0-port @63c16fb,
-docker b11118 — none carry the flag; closed draft, merge commit a4c31c6).
-Getting it = cherry-pick a4c31c6 into a build of the xing4 fork (it touches
-server/libllama plumbing, not arch code — should port cleanly) and re-measure
-the A3B/Xing prefill classes. Our Bonsai is already GEMM-saturated at ~29% of
-the int8 ceiling, so this lever only matters for the CPU-band models — where
-Xing's 346 tok/s could double and the A3B's 3.7-6.5 might triple.
-
-## Strata engine (Niko1221, 2026-09-27) — sm_80 gate is SOFT, port is feasible (2026-09-27 source survey)
-
-Custom inference engine for Qwen3.8-Flash-Next on single consumer GPU + RAM:
-65 tok/s @128K ctx / 95 short-chat / 539 pp with Q2_0-GSQ-RCO on RTX 5070 12GB
-+ 64GB DDR5-5600 (thread post). Linux one-click, OpenAI+Anthropic-compatible
-endpoints, PLE n-gram table stays on SSD (RAM need = shard1 + ~10GB):
-48GB covers its Q2_0/IQ2_XS tiers — our 46GB qualifies only for Q2_0.
-
-Source survey (shallow clone of the repo, later discarded) overturned the sm_80+ BLOCKED verdict:
-- Single hard sm_80 instr in the whole tree: mma.sync.m16n8k8.tf32 in
-  native_qsa_score.cu (151 lines, attention scorer only; its ldmatrix loads
-  ARE sm_75-legal — Turing introduced ldmatrix). f16 twin m16n8k8.f16.f16.f32
-  runs on sm_75 tensor cores: ~30-line cast-the-tiles patch.
-- bf16 math: VERIFIED on this box — CUDA 13.3 cudart's cuda_bf16.h
-  software-emulates bf16 on sm_75 via fp32 round-trips (nvcc -arch=sm_75,
-  compiled + correct results on the 2080). Perf cost in bf16-hot inner
-  loops, numerics correct. Fallback to fp16 conversion for ~10 bf16-hot
-  kernels (ple, gr, fused_gr, elementwise, bf16_gemv, shared_expert...) if
-  it shows.
-- No cp.async, no redux.sync, no accessPolicyWindow anywhere. Expert GEMV
-  hot path (s_gemv/s2_gemv/i-quants) is llama.cpp-derived fp16 — sm_75-native.
-- CMake sm_80 FATAL_ERROR is a plain version check; gate removal trivial.
-- Parity tests with oracle vectors for ~every kernel → kernel-by-kernel
-  numerics validation built in.
-Port shape: patch CMake + scorer, build sm_75, run parity suite, bench Q2_0
-(37.6GB model + 29GB PLE on the 110GB free disk — fits). Estimate ~2-3
-sessions + downloads. KILL if bench lands ≤15 tok/s (llama.cpp parity).
-Perf physics unchanged: DDR4-2400 (~38GB/s vs their ~90) CPU expert path
-~2.3x slower; 8GB VRAM = ~half their expert cache (~2800 vs ~5600
-resident) → higher miss rate; i5-9600K = AVX2 only (their CPU path has an
-AVX2 tier, OK). Realistic cap ~1/3 of their numbers: ~20 tok/s @128K /
-~30 short-chat / ~180 pp — still 2-4x the UltraLite llama.cpp expectation
-if the cache holds. Worth trying BEFORE any Ampere purchase; an Ampere+
-GPU landing here remains the bigger unlock anyway (native bf16/tf32, plus
-PQ2_0 Bonsai tier, exl3, DFlash2 windows at a stroke).
-
-Our own Flash-Next attempt continues via UltraLite 37GiB + patched
-llama.cpp @250b61446 (generic kernels, sm_75-safe) — every expectation
-revised to the honest 5-15 tok/s class; even that = first 125B-class
-model on the card.
-
-## Gemma-12B / E4B: token_embd=q4_0 requantize trick (from net_termina's E4B post, 2026-09-06)
-
-"llama-quantize --allow-requantize --tensor-type token_embd=q4_0" trims the
-token-embedding table to q4_0: worth ~4% decode and meaningful VRAM on the
-8GB-class Gemma serves (their E4B recipe trims 4.3GB of files; our E4B row
-measured 181 tok/s without it). Two candidates: (a) E4B re-serve with trim —
-cheap re-measure toward their 200-class claim; (b) the more interesting one:
-Gemma-12B (evidence-only, ngl 45, 29.4/43.5 tok/s, AG-Bench 3/6) — the freed
-VRAM could buy 1-2 more GPU layers and might promote it from "12GB-class
-wanting 8GB" to a full recipe. Requires llama-quantize on the host build.
-
-## Handoff additions (from sibling session local-ai-rtx2080-05, 2026-09-27) — run after the current queue
-
-Two performance levers still open after the current queue (UBBoost resolved
-via c9df0ee; Bonsai d-depth crowns d2 via d8574bb; token_embd trim already
-queued above). Not GPU-urgent — sequence them after Flash-Next/row-12.
-
-### 1. DFlash2 sidecar on the dense 27B crams — the live decode lever
-
-The NEXT-IDEAS live trigger from the Cinference post: a ~600 MB Q2/Q4 drafter
-for llama.cpp, applied to the dense-27B crams. DSpark on LFM2.5-8B-A1B proved
-the 0.19 GB sidecar class works on this card (221 tok/s record, fully
-resident). The untested application is a mid-size drafter accelerating
-ThinkingCap-27B Q2_K (9.57 tok/s, acc 0.995, ngl 40) and the IQ1_S row-12
-serve once measured. Steps: pick drafter candidate (~600 MB class, checked
-against the target's tokenizer), rotate the pair back from the archive drive
-if needed, measure acceptance + fixed-prompt decode per house method
-(2-3 repeats, ranges, thinking off).
-
-### 2. Recurrent-state snapshots for DeltaNet-class hybrids
-
-The portable idea from
-[notes/research-david19p-turing-kernel.md](notes/research-david19p-turing-kernel.md)
-§"adoption-worthy ideas": explicit SSM/conv/target_feat snapshots (direct
-`lcp=N reused=N`) instead of KV seq-id manipulation for the recurrent-state
-part of Qwen3.5/3.8-hybrid multi-turn flows. Pure C++/GGML — b11118 docker or
-the bonsai2 fork are candidate hosts. Payoff is per-turn latency on hybrid
-chains, not raw tok/s; low risk, no GPU needed to draft the patch.
-
-Housekeeping when convenient: the UBBoost section above (`## UBBoost
-cherry-pick build…`) is resolved — plain-ubatch reproduction 2.4× on all 3
-CPU-offload models (c9df0ee), port not needed; hardware.md still lists
-16 GB RAM — the machine is 48 GB since 9f220a2.
-
-## RESOLVED 2026-09-27: token_embd trim — no-op on our artifact family
-
-net_termina's ~4% trick (token_embd=q4_0 requantize) applies to the OFFICIAL
-ggml-org Gemma GGUFs (which carry big F16 embeddings). Our unsloth UD-Q4_K_XL
-conversions of the QAT models already ship q4 embeddings — verified by
-byte-identical requantize output (COPY + token-embedding-type q4_0 → same
-size). E4B re-measure unnecessary (its 181 tok/s row already includes the
-effect); Gemma-12B promotion stays blocked on the ngl-45 layer floor, not on
-embedding VRAM.
-
-## MiMo-9B + DFlash sidecar — VALIDATED 2026-09-28; follow-ups open
-
-The ≤600 MB-class trigger RESOLVED on the dense 9B: z-lab's Qwen3.5-9B-DFlash (retrained
-for the parent) at Q4_K_M 0.7 GB drafts for the distill at 0.794 acceptance / mean 7.31
-and 2.4× decode (56.7 → 134.6–138.3 tok/s code, n_max 8) beside a FULLY-RESIDENT target —
-first spec pair on this card with both models resident. Verdict + measurements:
-`evidence/mimo-9b-dflash-drafter.jsonl`, recipe
-`recipes/mimo-9b-distill-q4km-llamacpp.md` §"The DFlash fix". Open follow-ups, ranked:
-
-1. ~~AG-Bench v2.1 re-run with the drafter~~ **RESOLVED 2026-09-28** — pinned 16K pair
-   (identical flags, temp0/seed42, WARM_BYPASS=1): serial 7/11 @998 s vs drafted
-   **7/11 @601 s (1.66× wall, 25.3→41.9 pass/h), per-task outcomes IDENTICAL** — the
-   drift and the Q2_K drafter change no capability outcome. Remaining variant vs the
-   morning headline (9/11): 32K ctx + unpinned sampling; both drivers are unknown-ish
-   (16K ctx suffices for 9/11? unpinned sampling luck?). Open measurement: serial 32K
-   pinned re-baseline to separate pin-vs-ctx — mid-value, only if ranking finality is
-   needed.
-2. ~~**32K ctx with drafter**~~ **RESOLVED 2026-09-28 — serves, NET-NEGATIVE for agents**:
-   no ≤500 MB drafter exists (HF floor = Q2_K 482 MB); 32K fits only with q4_0 KV
-   (7.58 GB). Pinned pair at 32K: serial 7/11 @739 s vs drafted 8/11 @872 s — the
-   decode win loses to think-heavy acceptance collapse + unaclerated per-turn prefill
-   in tool loops + drift-inflated tool-call counts (task8 calls 77→151). Reopen only
-   if a ≤400 MB high-acceptance drafter (Q1/IQ2_KS z-lab lineage) or a fork with a
-   slimmer draft-pp buffer appears; otherwise 16K+Q2_K (1.66× wall, capability-neutral)
-   is the recommended agent profile and 8K+Q4_K_M (2.4× decode) the speed profile.
-3. ~~**Fork-exactness for draft-dflash**~~ **FALSIFIED 2026-09-28 — the patch doesn't
-   extend to this pair**: bonsai2 @285542d serves draft-dflash natively but the drift
-   column stays 0/6 with GGML_CUDA_BATCH_INVARIANT=1 at BOTH n_max 8 and n_max 2 (the
-   latter inside the fork's documented 4-col envelope; both modes 6/6 self-deterministic).
-   The Bonsai 6/6 exactness is specific to the MTP/PTQ1_0 kernel profile. Byte-exact
-   DFlash on a Q4_K_M dense pair needs real kernel work (batch-invariant extensions to
-   the draft-dflash verify path). Reopen only if exactness becomes a requirement — the
-   measured capability cost of drift so far is 0 (16K pair) to +1 (32K pair).
-
-New findings recorded with this batch (evidence `mimo-9b-dflash-drafter.jsonl`):
-draft-side is a **steep nonmonotonic quant cliff** (Q4_K_M 0.794 / Q2_K 0.442 /
-Q3_K_M 0.294 code acceptance — requant from BF16, never the Q4); q4_0 KV is
-code-neutral but perturbs novel-class trajectories; ONE main CPU layer collapses
-novel decode (27B lesson scales down); and the miMo warm-up gate derails are a
-stochastic always-thinking property under pi's no-params requests — harness now has
-WARM_BYPASS=1; **thinking-off is falsified as a fix (6/11 with tool thrash)**.
-
-## DFlash2 sidecar — acceptance VALIDATED, economics falsified at 8 GB (2026-09-28)
-
-Experiment complete (evidence/dflash2-iqi-27b.jsonl): DFlash2-Q4_K_M-swa (1.14 GB)
-on the head-less IQ1_S target accepts at 0.92/mean 3.76 — the sidecar class is
-quant-agnostic and WORKS on this card (Supsurface prism-dflash2 runtime built
-and ran first try). But hosting any >1GB drafter forces the dense target into
-the CPU band (ngl 44) where decode collapses 19.7→6.2 despite the acceptance.
-REMAINING LIVE TRIGGER, now precise: a ≤600 MB Q2-class DFlash2 sidecar could
-host beside a FULL-OFFLOAD target (6.70+0.6+ctx_other~0.4 ≈ 8.0 with desktop —
-borderline; needs -c 4096 and possibly one shed layer). Watch jmarceno/z-lab
-for a Q2_K_XS-swa conversion. CAVEAT on tonight's falsification: it ran the
-1.14 GB Q4_K_M-swa drafter — the ~600 MB class itself was never tested;
-the conclusion likely survives (ngl-54 OOM math implies IQ1_S full-offload
-alone leaves no room for any drafter + compute buffers), but the 600 MB
-point remains an open measurement, not a closed one.
-
-## TensorFold exact-spec-decode port — technique extracted, sm_75 probed, queue-opener (2026-09-27)
-
-TensorFold (ashhart, MIT) serves byte-identical drafted decode ("drafts change speed
-only") via lane-batched verify windows up to 32 rows. Full technique extraction and our
-own GPU probes: `notes/tensorfold-analysis.md`, evidence
-`evidence/tensorfold-exactness-probe.jsonl`. Ground measured on this card:
-
-- wmma fp16 lanes are slot-dependent (bits depend on which tile slot a row occupies,
-  both axes) → fp16-HMMA lanes are a dead end for exactness on sm_75; dp4a/IMMA
-  integer lanes are exact by construction (0/1M mismatches).
-- **our own stack already violates today**: E4B+MTP recipe greedy — serial is 6/6
-  self-reproducible, drafted is 4/6, drafted-vs-serial only **1/6 byte-identical**
-  (near-tie single-token flips, then divergence; 150 vs 91 tok/s is what the drift
-  "buys"). Harness: `notes/spec-drift-test-llamacpp.sh` — should become a standard
-  column for every spec-decode recipe.
-- crossover economics favorable: rows_free ≈ 24-48 ideal (measured peaks @425 GB/s);
-  fork-measured tile floor flat through n=8 — 16-32-row windows would ride nearly free.
-
-Queue order (value/effort): (1) drift-test all existing MTP recipes (30 min each, shell);
-(2) keyed-Gumbel exact sampling port to llama.cpp sampling layer ();
-(3) Bonsai-PTQ1_0 full-lane audit — integer matmul already exact-class, patch the fork so
-serial + all verify widths share one kernel path per op class, re-run the drift harness,
-target 6/6 drafted==serial; then exploit the flat tile floor with d4-d8 windows (
-serve 59 → 65-70 tok/s target from the kn note, with bytes as the acceptance criterion).
-Blocked on: nothing — this is pure fork/patch work.
-
-### TensorFold queue-opener status (same night)
-
-(1) Drift survey DONE — all upstream-docker MTP recipes drift (qwen35-4b 3/6,
-qwen35-9b 1/6, g12b 2/6), while Bonsai fork + GGML_CUDA_BATCH_INVARIANT=1 is 6/6
-drafted==serial at zero cost (59.2/43.0 tok/s; env unset drops it to 2/6).
-(2) keyed-Gumbel sampler module DONE+validated (notes/keyed_gumbel_sampler.h, 16/16
-test classes), llama.cpp splice plan written (notes/keyed-gumbel-llamacpp-integration.md),
-OPEN: patched build + repro/drift rerun. (3) fork audit DONE; deployment rule active:
-Bonsai serve draft depth ≤3 (envelope = 1-4 columns, confirmed to the boundary by
-the 2026-09-28 depth sweep: d1-d3 6/6 drafted==serial; d4 drifts 4/6 AND is
-slower — acceptance decays 0.845/0.726/0.588/0.540, so the MMQ ≥5-col invariance
-patch is PARKED with no speed payoff at this acceptance profile). The Bonsai
-recipe already
-serves within the envelope (it pins GGML_CUDA_BATCH_INVARIANT=1 via env-prefixed
-launch) — its 59 tok/s row now reads "byte-exact serve" retroactively. Sampler
-built+validated on-served the same night (cross-restart replay 2/2; stock 2/2 →
-keyed 1/2 drafted-vs-serial on upstream kernels — residual = logits-bits).
-
-### Lane coordination (2026-09-28, main session -> local-ai-rtx2080-05)
-
-Saw your keyed-test serve on :8080 (llama-upstream-keyed, 4B @ q8 KV, started
-23:23) — assuming that's the recurrent-state-snapshots implementation run;
-the lane is yours, we will not touch 8080 or the GPU until you're done. When it
-completes: drop a one-line "lane free" note here and we'll run the A3B pack
-A/B (IQ3_XXS landed + sha 68d21976 verified; IQ2_XXS still downloading;
-serves are fully staged in main-session history). Note: our measure harness
-now tolerates metrics-less foreign servers (found while probing yours).
-
-**RESOLVED (2026-09-30): the A3B pack A/B ran** — speed tier (already recorded 2026-09-28)
-plus the then-missing IQ3_XXS quality tier, triggered by a Twitter tip: 7/11 with task4
-re-judging PASS (7–8 band) vs IQ2_XXS 8/11, at −15% decode / −10% prefill / +2.5 GB.
-Zero of IQ2's three failing tasks rescued — IQ2_XXS stays recommended, tip falsified.
-Full write-up in the recipe's "IQ3_XXS quality tier" section + evidence/qwen35-35b-a3b-iq3xxs.jsonl.
+- **Flash-Next UltraLite 37GiB (0xKitkat, 1.80 bpw) — boundary record
+  2026-09-27.** Served on patched qwen4exp @ 250b61446: 12.5 tok/s, 218–233
+  tok/s pp, first 125B-class on the card. Boundary learned: sub-2 bpw
+  BREAKS THE REASONING CHAIN (EOS-at-reasoning-close; same wall as IQ1_S).
+  Recipe `recipes/flashnext-ultralite-125b-llamacpp-fork.md`, evidence
+  `evidence/flashnext-ultralite-125b.jsonl`. Our own Flash-Next expectation
+  class: honest 5–15 tok/s at best.
+- **UBBoost cherry-pick — superseded 2026-09-26 via c9df0ee.** Claim
+  (llama.cpp PR #23239, RTX 2080 + 35B-A3B + MTP) reproduced 2.4× with
+  plain ubatch on all 3 CPU-offload models; port not needed. Kept as the
+  dense-cram cold-prefill profile reference. Our Bonsai is GEMM-saturated
+  at ~29% of the int8 ceiling — the lever only mattered for the CPU-band
+  models (Xing 346 tok/s pp, A3B).
+- **token_embd=q4_0 requantize trick — no-op on our artifacts 2026-09-27.**
+  net_termina's ~4% trims the OFFICIAL ggml-org F16-embedding GGUFs; our
+  unsloth UD-Q4_K_XL conversions already ship q4 embeddings (byte-identical
+  requantize output). E4B re-measure unnecessary (181 tok/s row already
+  includes the effect); Gemma-12B promotion stays blocked on the ngl-45
+  layer floor, not embedding VRAM.
+- **MiMo-9B + DFlash sidecar — VALIDATED 2026-09-28.** z-lab
+  Qwen3.5-9B-DFlash Q4_K_M (766 MB) drafts at 0.794 / mean 7.31 →
+  56.7 → 134.6–138.3 tok/s code (2.4×, 8K) beside a FULLY-RESIDENT target
+  — first spec pair on this card with both models resident. 16K pinned
+  pair AG-Bench: serial 7/11 @998 s vs drafted 7/11 @601 s — per-task
+  IDENTICAL, 1.66× wall, 25.3 → 41.9 pass/h. **32K + drafter =
+  net-negative for agents** (7/11 @739 s vs 8/11 @872 s; think-heavy
+  acceptance collapse + drift-inflated tool-call counts, task8 77→151).
+  **Fork-exactness for this pair FALSIFIED** (drift 0/6 at n_max 8 and 2,
+  inside the fork's 4-col envelope — Bonsai 6/6 exactness is specific to
+  the MTP/PTQ1_0 kernel profile; parity needs real kernel work; measured
+  capability cost of drift so far 0 to +1). New findings: draft-side is a
+  steep nonmonotonic quant cliff (Q4 0.794 / Q2 0.442 / Q3 0.294 — requant
+  from BF16, never the Q4); q4_0 KV is code-neutral but perturbs novel-class
+  trajectories; ONE main CPU layer collapses novel decode; MiMo warm-up
+  gate derails are stochastic always-thinking under no-params requests →
+  harness WARM_BYPASS=1; **thinking-off falsified as a fix (6/11, tool
+  thrash)**. Recommended profiles: 16K+Q2_K (agents, capability-neutral),
+  8K+Q4_K_M (speed). Evidence `evidence/mimo-9b-dflash-drafter.jsonl`.
+- **DFlash2-sidecar economics on 8 GB — falsified at 1.14 GB, open at
+  ~600 MB** (measurement preserved as Tier 2.3). Acceptance itself
+  validated: 0.92/mean 3.76 on the head-less IQ1_S target; the sidecar
+  class is quant-agnostic and works on this card (Supsurface
+  prism-dflash2 runtime built and ran first try). Evidence
+  `evidence/dflash2-iqi-27b.jsonl`.
+- **TensorFold queue-opener 2026-09-27/28 — three of four done.**
+  (1) Drift survey DONE: every upstream-docker MTP recipe drifts
+  (qwen35-4b 3/6, qwen35-9b 1/6, g12b 2/6), while Bonsai fork +
+  `GGML_CUDA_BATCH_INVARIANT=1` is 6/6 drafted==serial at zero cost
+  (59.2/43.0 tok/s; env unset drops to 2/6) — the 59 tok/s row reads
+  "byte-exact serve" retroactively. (2) keyed-Gumbel module DONE+validated,
+  splice remains (Tier 2.2). (3) Fork audit DONE; deployment rule active:
+  Bonsai draft depth ≤3 (d1–d3 6/6; d4 drifts 4/6 AND is slower — 45.7 vs
+  58.1 tok/s — acceptance decays 0.845/0.726/0.588/0.540, so the MMQ
+  ≥5-col invariance patch is PARKED, payoff-free at this acceptance
+  profile). Ground probes: fp16-HMMA wmma lanes are slot-dependent on
+  sm_75 (dead end for exactness); dp4a/IMMA integer lanes exact (0/1M
+  mismatches); crossover economics favorable (rows_free ≈ 24–48 ideal at
+  425 GB/s; tile floor flat through n=8). Harness
+  `notes/spec-drift-test-llamacpp.sh` is a standard column for every
+  spec-decode recipe. Notes `notes/tensorfold-analysis.md`, evidence
+  `evidence/tensorfold-exactness-probe.jsonl`.
+- **Strata source survey 2026-09-27 — sm_80 gate is SOFT, port feasible.**
+  Engine: Qwen3.8-Flash-Next on single consumer GPU (65 tok/s @128K / 95
+  short-chat / 539 pp with Q2_0-GSQ-RCO on a 5070 12 GB + 64 GB DDR5-5600;
+  OpenAI+Anthropic endpoints; PLE n-gram table on SSD). Survey (shallow
+  clone, later discarded): single hard sm_80 instr in the whole tree (tf32
+  `mma.sync.m16n8k8` in `native_qsa_score.cu`, 151 lines, attention
+  scorer only; ldmatrix IS sm_75-legal); f16 twin runs on Turing tensor
+  cores (~30-line patch). bf16 VERIFIED on this box — CUDA 13.3 cudart
+  software-emulates on sm_75 via fp32 round-trips (compiled + correct on
+  the 2080). No cp.async, no redux.sync, no accessPolicyWindow; expert GEMV
+  hot path llama.cpp-derived fp16 (sm_75-native). CMake gate a plain
+  version check. Parity tests with oracle vectors for ~every kernel. Desk
+  research feeding the port = Tier 2.1.
+- **Bonsai2 MLX.fast leaderboard analysis 2026-09-27.** Yukon contest:
+  record 505.4% / 580 decode / 1901 prefill tok/s (winglock); top-8 all
+  stock DFlash at 14.2 tok/round. Every row is a PR write-up in
+  `Layr-Labs/mlxfast-bonsai2-27b-engine`. The contest model IS our
+  served model; davidtai's M=13 qmv→qmm crossover ≡ our cap=4 IMMA-MMQ
+  crossover. Their strictness pattern (load-time bitwise self-tests,
+  stock fallback) validated our 6/6 bar but our coverage is thin (6
+  prompts × 2 repeats) → Tier 3 deepening. Notes
+  `notes/mlxfast-bonsai2-portability.md` (commits eeab971, b5d29c0,
+  664fe75).
+- **A3B pack A/B — RESOLVED 2026-09-30** (lane-coordinated with sibling
+  local-ai-rtx2080-05). Speed tier recorded 2026-09-28; the then-missing
+  IQ3_XXS quality tier ran after a Twitter tip: 7/11 with task4 re-judged
+  PASS (7–8 band) vs IQ2_XXS 8/11, at −15% decode / −10% prefill /
+  +2.5 GB — zero of IQ2's three failing tasks rescued, tip falsified,
+  **IQ2_XXS stays recommended**. Write-up in the recipe's "IQ3_XXS quality
+  tier" section, evidence `evidence/qwen35-35b-a3b-iq3xxs.jsonl`. The
+  measure harness now tolerates metrics-less foreign servers.
+- **Gemma-E4B v2.1 — 7/11 @ 302 s, 83.4 pass/h** (card efficiency record,
+  40e2c45). MiMo 9/11 headline survives as an 8–9 band (8/11 at 64K;
+  greedy pinning costs task11, 1de77db-era). Fork-exactness for DFlash
+  falsified (d91d553).
