@@ -1,0 +1,11 @@
+{"model": "a3b-iq2xxs-v2-rebaseline", "task": "task10-tb-bank-trans-filter", "passed": true, "wall_s": 140, "tool_calls": 15, "finish": "unknown", "zero_byte_retry": false}
+{"model": "a3b-iq2xxs-v2-rebaseline", "task": "task11-tb-assign-seats", "passed": true, "wall_s": 796, "tool_calls": 38, "finish": "unknown", "zero_byte_retry": false}
+{"model": "a3b-iq2xxs-v2-rebaseline", "task": "task1-js-bugfix", "passed": true, "wall_s": 57, "tool_calls": 16, "finish": "unknown", "zero_byte_retry": false}
+{"model": "a3b-iq2xxs-v2-rebaseline", "task": "task2-react-fix", "passed": true, "wall_s": 295, "tool_calls": 36, "finish": "unknown", "zero_byte_retry": false}
+{"model": "a3b-iq2xxs-v2-rebaseline", "task": "task3-dep-upgrade", "passed": true, "wall_s": 65, "tool_calls": 34, "finish": "unknown", "zero_byte_retry": false}
+{"model": "a3b-iq2xxs-v2-rebaseline", "task": "task4-python-bugfix", "passed": true, "wall_s": 37, "tool_calls": 11, "finish": "unknown", "zero_byte_retry": false}
+{"model": "a3b-iq2xxs-v2-rebaseline", "task": "task5-js-to-ts", "passed": false, "wall_s": 241, "tool_calls": 139, "finish": "unknown", "zero_byte_retry": false}
+{"model": "a3b-iq2xxs-v2-rebaseline", "task": "task6-extra-code-task", "passed": true, "wall_s": 87, "tool_calls": 21, "finish": "unknown", "zero_byte_retry": false}
+{"model": "a3b-iq2xxs-v2-rebaseline", "task": "task7-long-context-agent", "passed": true, "wall_s": 97, "tool_calls": 38, "finish": "unknown", "zero_byte_retry": false}
+{"model": "a3b-iq2xxs-v2-rebaseline", "task": "task8-tb-broken-python", "passed": false, "wall_s": 235, "tool_calls": 157, "finish": "unknown", "zero_byte_retry": false}
+{"model": "a3b-iq2xxs-v2-rebaseline", "task": "task9-tb-analyze-access-logs", "passed": true, "wall_s": 126, "tool_calls": 31, "finish": "unknown", "zero_byte_retry": false}

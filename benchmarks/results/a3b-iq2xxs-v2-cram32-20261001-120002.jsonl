@@ -1,0 +1,11 @@
+{"model": "a3b-iq2xxs-v2-cram32", "task": "task10-tb-bank-trans-filter", "passed": true, "wall_s": 246, "tool_calls": 29, "finish": "unknown", "zero_byte_retry": false}
+{"model": "a3b-iq2xxs-v2-cram32", "task": "task11-tb-assign-seats", "passed": true, "wall_s": 116, "tool_calls": 42, "finish": "unknown", "zero_byte_retry": false}
+{"model": "a3b-iq2xxs-v2-cram32", "task": "task1-js-bugfix", "passed": true, "wall_s": 38, "tool_calls": 16, "finish": "unknown", "zero_byte_retry": false}
+{"model": "a3b-iq2xxs-v2-cram32", "task": "task2-react-fix", "passed": true, "wall_s": 606, "tool_calls": 38, "finish": "unknown", "zero_byte_retry": false}
+{"model": "a3b-iq2xxs-v2-cram32", "task": "task3-dep-upgrade", "passed": true, "wall_s": 47, "tool_calls": 36, "finish": "unknown", "zero_byte_retry": false}
+{"model": "a3b-iq2xxs-v2-cram32", "task": "task4-python-bugfix", "passed": true, "wall_s": 44, "tool_calls": 11, "finish": "unknown", "zero_byte_retry": false}
+{"model": "a3b-iq2xxs-v2-cram32", "task": "task5-js-to-ts", "passed": false, "wall_s": 81, "tool_calls": 40, "finish": "unknown", "zero_byte_retry": false}
+{"model": "a3b-iq2xxs-v2-cram32", "task": "task6-extra-code-task", "passed": true, "wall_s": 97, "tool_calls": 30, "finish": "unknown", "zero_byte_retry": false}
+{"model": "a3b-iq2xxs-v2-cram32", "task": "task7-long-context-agent", "passed": true, "wall_s": 80, "tool_calls": 34, "finish": "unknown", "zero_byte_retry": false}
+{"model": "a3b-iq2xxs-v2-cram32", "task": "task8-tb-broken-python", "passed": false, "wall_s": 285, "tool_calls": 153, "finish": "unknown", "zero_byte_retry": false}
+{"model": "a3b-iq2xxs-v2-cram32", "task": "task9-tb-analyze-access-logs", "passed": false, "wall_s": 17, "tool_calls": 2, "finish": "unknown", "zero_byte_retry": false}
