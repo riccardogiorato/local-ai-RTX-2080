@@ -1,0 +1,6 @@
+{"model": "gemma-e4b-mtp-d3-orig6", "task": "task1-js-bugfix", "passed": true, "wall_s": 11, "tool_calls": 14, "finish": "unknown", "zero_byte_retry": false}
+{"model": "gemma-e4b-mtp-d3-orig6", "task": "task2-react-fix", "passed": false, "wall_s": 54, "tool_calls": 46, "finish": "unknown", "zero_byte_retry": false}
+{"model": "gemma-e4b-mtp-d3-orig6", "task": "task3-dep-upgrade", "passed": true, "wall_s": 15, "tool_calls": 26, "finish": "unknown", "zero_byte_retry": false}
+{"model": "gemma-e4b-mtp-d3-orig6", "task": "task4-python-bugfix", "passed": true, "wall_s": 33, "tool_calls": 32, "finish": "unknown", "zero_byte_retry": false}
+{"model": "gemma-e4b-mtp-d3-orig6", "task": "task5-js-to-ts", "passed": false, "wall_s": 23, "tool_calls": 34, "finish": "unknown", "zero_byte_retry": false}
+{"model": "gemma-e4b-mtp-d3-orig6", "task": "task6-extra-code-task", "passed": true, "wall_s": 14, "tool_calls": 13, "finish": "unknown", "zero_byte_retry": false}

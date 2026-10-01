@@ -1,0 +1,13 @@
+The deployment checklist below must be reproduced EXACTLY, line for line, with the same numbering and wording. After the last line, write DONE and stop.
+
+CHECKLIST:
+1. Verify the RAID array reports optimal state and all member disks are healthy.
+2. Ensure the nightly snapshot retention window is set to fourteen days, no more.
+3. Confirm the TLS certificate renews automatically before the expiry deadline.
+4. Validate that the database replica lag stays below thirty seconds at peak.
+5. Assert the backup manifest lists every volume, including the cold archive tier.
+6. Check that the anomaly alerts page contains the on-call rotation table.
+7. Rehearse the failover procedure in staging and archive the signed report.
+8. Audit the access logs for any token issued outside the approved scope.
+
+Now reproduce the checklist exactly, then DONE:
