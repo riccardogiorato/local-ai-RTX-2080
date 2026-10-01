@@ -58,23 +58,21 @@ turned out stale:
 
 ## Tier 1 — measurements (hours, high value/effort)
 
-**Progress 2026-10-01: items 2, 3, 4, 5, 6, 7, 8 ALL RESOLVED except 1.1
-(pi-hunt, RUNNING — the only one left).** 1.6: champion 9/11 pinned @
-14.9 p/h, cache-ram −24% wall but −1 score → not adopted. 1.7: mHC runs on
-SM75 first try (0.933 code acceptance, 22/18 decode), official 4/11 pinned
-with task8 pass — community pack stays. 1.8: reasoning chain INTACT at
-2.40 bpw GSQ-RCO (4/4 probes; UltraLite wall confirmed from both sides) —
-recipe `recipes/flashnext-gsqrc-q20-125b-llamacpp-fork.md`; MTP-head half
-stays open on the watch-list.
+**COMPLETE 2026-10-01: all 8 Tier-1 items resolved** (1.1 negative-with-triggers:
+120/120 clean strace'd hunt; 1.2 E4B d3 crown 93.3 p/h; 1.3 pinned baselines;
+1.4 cache determinism rules; 1.5 lookup-prompt byte-exact + Bonsai 7/11;
+1.6 A3B 9/11 tied fleet best; 1.7 mHC-on-SM75 works, official not adopted;
+1.8 Flash-Next reasoning intact at 2.40 bpw). Verdicts inline below.
 
-1. **Pi zero-byte hang — catch with evidence.** Struck 3× in MiMo benches;
-   narrowed to a pre-header startup stall, ~1/75 manual rate, serve-state
-   correlation excluded, 150–210 clean no-serve iterations. The v2 hunt
-   (120 iterations, full syscall trace against a live MiMo serve) was
-   stopped by user request before catching one. Harness now auto-retries
-   zero-byte tasks (Tier 0.1) but the ROOT CAUSE is still unknown.
-   STAGED: /tmp/pi-hang-hunt.sh (strace + kernel-stack sampler, 120 iters
-   against a live MiMo serve). Run when the GPU lane frees. (MiMo thread.)
+1. ✓ **RESOLVED 2026-10-01 (negative, triggers recorded) — pi zero-byte hunt.**
+   The surgical run the prior session was stopped before making: 120 strace'd
+   pi iterations + kernel-stack sampler against a live pinned MiMo serve —
+   120/120 clean (~3.2 s/iter, healthy thinking-mode sessions throughout);
+   the stall did NOT reproduce. Root cause remains unknown; caveats: bare-pi
+   environment ≠ the AG-Bench scaffolding where all 3 strikes happened, and
+   strace latency may mask a race. Operations covered by the harness
+   zero-byte auto-retry (Tier 0.1). REOPEN if a bench ever double-strikes
+   inside the auto-retry. Evidence `evidence/pi-hang-hunt-2026-10-01.jsonl`.
 2. ✓ **RESOLVED 2026-10-01 — d3 CROWNS E4B.** Depth sweep: code-class
    acceptance RISES at d3 (0.818/mean 3.55, +25% decode), novel peaks at
    d1; v2.1 bench: d3 7/11 @ 270 s vs d2 @ 302 s, identical pass set —
