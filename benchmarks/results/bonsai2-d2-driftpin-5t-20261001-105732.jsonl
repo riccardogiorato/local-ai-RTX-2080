@@ -1,0 +1,5 @@
+{"model": "bonsai2-d2-driftpin-5t", "task": "task10-tb-bank-trans-filter", "passed": false, "wall_s": 3, "tool_calls": 7, "finish": "unknown", "zero_byte_retry": false}
+{"model": "bonsai2-d2-driftpin-5t", "task": "task11-tb-assign-seats", "passed": false, "wall_s": 91, "tool_calls": 21, "finish": "unknown", "zero_byte_retry": false}
+{"model": "bonsai2-d2-driftpin-5t", "task": "task7-long-context-agent", "passed": false, "wall_s": 30, "tool_calls": 23, "finish": "unknown", "zero_byte_retry": false}
+{"model": "bonsai2-d2-driftpin-5t", "task": "task8-tb-broken-python", "passed": true, "wall_s": 56, "tool_calls": 42, "finish": "unknown", "zero_byte_retry": false}
+{"model": "bonsai2-d2-driftpin-5t", "task": "task9-tb-analyze-access-logs", "passed": true, "wall_s": 28, "tool_calls": 28, "finish": "unknown", "zero_byte_retry": false}

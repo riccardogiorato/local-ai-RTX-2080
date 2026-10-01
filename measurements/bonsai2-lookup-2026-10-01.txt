@@ -1,0 +1,39 @@
+[10:56:23] === PHASE A: 1.3 drift-pinned baseline ===
+[10:56:23] A1: serial reference serve (--spec-type none)
+[10:56:28] serve ready (--spec-type none) after 6s
+[10:56:53] A2: drafted pinned serve (draft-mtp d2, recipe verbatim)
+[10:56:58] serve ready (--spec-type draft-mtp --spec-draft-n-max 2) after 6s
+[10:57:32] A3: 5-task bench on the pinned drafted serve (hard reference)
+  slots ready after 2s
+  warm-up attempt 1: ok
+  {"model": "bonsai2-d2-driftpin-5t", "task": "task10-tb-bank-trans-filter", "passed": false, "wall_s": 3, "tool_calls": 7, "finish": "unknown", "zero_byte_retry": false}
+  {"model": "bonsai2-d2-driftpin-5t", "task": "task11-tb-assign-seats", "passed": false, "wall_s": 91, "tool_calls": 21, "finish": "unknown", "zero_byte_retry": false}
+  {"model": "bonsai2-d2-driftpin-5t", "task": "task7-long-context-agent", "passed": false, "wall_s": 30, "tool_calls": 23, "finish": "unknown", "zero_byte_retry": false}
+  {"model": "bonsai2-d2-driftpin-5t", "task": "task8-tb-broken-python", "passed": true, "wall_s": 56, "tool_calls": 42, "finish": "unknown", "zero_byte_retry": false}
+  {"model": "bonsai2-d2-driftpin-5t", "task": "task9-tb-analyze-access-logs", "passed": true, "wall_s": 28, "tool_calls": 28, "finish": "unknown", "zero_byte_retry": false}
+  DONE — results in /home/riccardogiorato/Desktop/github/local-ai-rtx2080/benchmarks/results/bonsai2-d2-driftpin-5t-20261001-105732.jsonl
+{"label":"bonsai2-driftpin-d2","prompt":"code-continuation.txt","run":1,{"decode_tps": 55.59, "decode_n": 256, "prefill_tps": 522.03},"acceptance":0.779,"mean_len":2.56}
+{"label":"bonsai2-driftpin-d2","prompt":"code-continuation.txt","run":2,{"decode_tps": 55.61, "decode_n": 256, "prefill_tps": 522.18},"acceptance":0.779,"mean_len":2.56}
+{"label":"bonsai2-driftpin-d2","prompt":"decode-isolation.txt","run":1,{"decode_tps": 48.67, "decode_n": 116, "prefill_tps": 75.87},"acceptance":0.545,"mean_len":2.11}
+{"label":"bonsai2-driftpin-d2","prompt":"decode-isolation.txt","run":2,{"decode_tps": 48.53, "decode_n": 116, "prefill_tps": 76.37},"acceptance":0.545,"mean_len":2.11}
+[11:01:32] === PHASE B: 1.5 lookup-prompt validation ===
+[11:01:32] B1: lookup-prompt,draft-mtp (n_match 8, lookup n_max 3 = envelope-safe)
+[11:01:37] serve ready (--spec-type lookup-prompt,draft-mtp --spec-draft-n-max 2) after 6s
+{"label":"bonsai2-lookup-d2","prompt":"code-continuation.txt","run":1,{"decode_tps": 55.72, "decode_n": 256, "prefill_tps": 521.22},"acceptance":0.779,"mean_len":2.56}
+{"label":"bonsai2-lookup-d2","prompt":"code-continuation.txt","run":2,{"decode_tps": 55.74, "decode_n": 256, "prefill_tps": 521.21},"acceptance":0.779,"mean_len":2.56}
+{"label":"bonsai2-lookup-d2","prompt":"decode-isolation.txt","run":1,{"decode_tps": 48.64, "decode_n": 116, "prefill_tps": 76.49},"acceptance":0.545,"mean_len":2.11}
+{"label":"bonsai2-lookup-d2","prompt":"decode-isolation.txt","run":2,{"decode_tps": 48.61, "decode_n": 116, "prefill_tps": 73.67},"acceptance":0.545,"mean_len":2.11}
+[11:02:34] B2: 5-task bench with lookup
+  slots ready after 2s
+  warm-up attempt 1: ok
+  {"model": "bonsai2-d2-lookup-5t", "task": "task10-tb-bank-trans-filter", "passed": false, "wall_s": 3, "tool_calls": 7, "finish": "unknown", "zero_byte_retry": false}
+  {"model": "bonsai2-d2-lookup-5t", "task": "task11-tb-assign-seats", "passed": false, "wall_s": 97, "tool_calls": 21, "finish": "unknown", "zero_byte_retry": false}
+  {"model": "bonsai2-d2-lookup-5t", "task": "task7-long-context-agent", "passed": true, "wall_s": 47, "tool_calls": 28, "finish": "unknown", "zero_byte_retry": false}
+  {"model": "bonsai2-d2-lookup-5t", "task": "task8-tb-broken-python", "passed": true, "wall_s": 19, "tool_calls": 34, "finish": "unknown", "zero_byte_retry": false}
+  {"model": "bonsai2-d2-lookup-5t", "task": "task9-tb-analyze-access-logs", "passed": true, "wall_s": 27, "tool_calls": 24, "finish": "unknown", "zero_byte_retry": false}
+  DONE — results in /home/riccardogiorato/Desktop/github/local-ai-rtx2080/benchmarks/results/bonsai2-d2-lookup-5t-20261001-110234.jsonl
+[11:05:55] === byte-comparison gates ===
+[11:05:55] look self-repro: 6/6 ; look vs serial: 6/6
+[11:05:55] draft self-repro: 6/6
+[11:05:55] draft vs serial (pinned re-confirmation of the 6/6 record): 6/6
+[11:05:55] === pair2 done ===

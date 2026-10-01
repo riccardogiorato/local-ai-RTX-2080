@@ -282,6 +282,36 @@ The A3B's long-context differentiator (task7) is matched by all three 32K+
 models (9B/A3B/4B) — it is the 8K ceiling of the fast tier (Bonsai) and
 the React/TS class that separates them, not deep retrieval alone.
 
+### Drift-pinned 5-task baseline (1.3, fresh 2026-10-01)
+
+The v2.1-subset (tasks 7–11) baselines with drift status stamped, per the
+TensorFold recommendation — recorded on the recipes as-served before any
+exactness work lands. Task-subset scores extracted from the v2.1 runs
+(TASK_RE filter now built into the runner):
+
+| Model (v2.1 era) | t7 | t8 | t9 | t10 | t11 | Drift status (survey + today) |
+|---|---|---|---|---|---|---|
+| MiMo-9B (serial-era row) | P | f | P | P | P | drifted with DFlash drafter; serial reproducible |
+| Qwen3.5-9B | P | f | P | P | P | drafted 1/6 byte-identical; serial reproducible |
+| Qwen3.5-4B | P | f | P | P | P | drafted 3/6 |
+| A3B IQ2_XXS @32K | P | f | P | P | P | not yet drift-tested |
+| A3B IQ3_XXS @32K | P | f | f | P | P | not yet drift-tested |
+| Bonsai-2 d2 (unpinned 09-28) | f | f | P | f | P | **6/6 byte-exact with BATCH_INVARIANT** (re-confirmed 10-01) |
+| Bonsai-64K | P | f | P | P | P | same fork+env → exact-class |
+| Xing-29B @ub4096 | P | f | P | P | P | not yet drift-tested (Tier 2 item) |
+| Gemma-E4B d2 | P | f | f | P | P | **non-self-reproducible drafted (4/6)** — treat single-run scores ±noise |
+
+Fresh hard reference (2026-10-01, temp0/seed42 + `GGML_CUDA_BATCH_INVARIANT=1`,
+cap 600): **bonsai2-d2-driftpin-5t: 2/5** (task8 56 s, task9 28 s) — with the
+pinning-flip caveat: pinned ≠ unpinned row (task11→fail, task7→fail, task8→pass
+vs the 2026-09-28 unpinned run) — a pinned run is its own baseline row. Drill
+rules: models marked "not yet Drift-tested" that sit near a task boundary
+should re-run marginal tasks before trusting pass/fail; E4B single-run scores
+are ±noise by construction.
+Task8 (tb-broken-python) fails across the entire 8 GB fleet while strong
+models solve it in ≤40 s — it is the suite's capability discriminator, like
+React/TS for the original 6.
+
 ### Results-ledger reconciliation (2026-10-01)
 
 Every batch in `results/` accounted for, or explicitly marked invalid:
