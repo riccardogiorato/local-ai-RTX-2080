@@ -51,6 +51,19 @@ bash benchmarks/agentic-bench.sh <model-label> [seconds-cap]
 - Ranking by pass rate alone is incomplete: report wall time alongside, and remember
   decode class matters (novel-prose speeds in `prompts/decode-isolation.txt` runs are the
   realistic agent-workload class, not the repetitive best case).
+
+### Determinism rules (measured 2026-10-01, see evidence/promptcache-ubatch-drift.jsonl)
+
+- **Pin `cache_prompt` for any same-prompt byte comparison** — the flag itself
+  perturbs the greedy trajectory (deterministically: 331 vs 584 bytes on the same
+  prompt, reproduced across independent serve sessions), even when the whole
+  prompt is re-prefilled either way.
+- **Cached prefix-resumption is bit-neutral**: a growing conversation continued
+  with `cache_prompt:true` produces byte-identical output to a fresh full prefill
+  of the same prompt — AG-Bench agent-loop noise from prompt-cache reuse is
+  cleared on this stack.
+- **Ubatch is a retired non-issue**: 128/512/2048 produce identical greedy bytes
+  (TensorFold's MLX prefill-grid concern does not transfer to the CUDA build).
 ## Results (2026-09-24, RTX 2080 8GB, pi 0.87.1, llama.cpp b11118)
 
 | Model | Pass | Wall s/task (passing) | Failure style |

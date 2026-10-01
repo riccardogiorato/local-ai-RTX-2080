@@ -60,6 +60,15 @@ sudo docker run --gpus all -p 8080:8080 -v ~/models/gemma-4-e4b-qat:/models:ro -
 
 ## Notes
 
+- **Depth (2026-10-01 sweep + v2.1 bench A/B): d3 crowns.** Code-class acceptance
+  *rises* at d3 (0.818, mean 3.55 — this external MTP head, unlike the Bonsai
+  graft, sustains depth on the repetitive class) while the novel class peaks at
+  d1 (0.527→0.254 by d4). v2.1: d3 = **7/11 @ 270 s (93.3 pass/h)** vs d2's
+  7/11 @ 302 s (83.4) — identical pass set, new card efficiency record.
+  Recommended serve depth is now **3** (`--spec-draft-n-max 3`). d4 buys nothing
+  (+decode but novel-class drift down). Evidence:
+  [evidence/gemma4-e4b-mtp-depth.jsonl](../evidence/gemma4-e4b-mtp-depth.jsonl).
+
 - External drafter flags: `--spec-draft-model` (`-md`) + `--spec-type draft-mtp`; the
   embedded-MTP style used for Qwen3.5 does not apply — Gemma's MTP head ships as a
   separate GGUF.

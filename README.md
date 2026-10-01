@@ -27,7 +27,7 @@ Ranked by AG-Bench v2.1 score (11 canary-verified tasks), then by efficiency.
 | 3 | [A3B IQ2_XXS](https://huggingface.co/Qwen/Qwen3.5-35B-A3B) | **8/11** | ~8 | 40 / 1K | 32K+ | 4.6 / 12 | MTP d4 ext |
 | 3 | [Bonsai-64K](https://huggingface.co/sudoingx/Ternary-Bonsai-2-27B-PTQ1_0-MTP-GGUF) | **8/11** | 5.0 | 17 / 520 | 64K | 6.0 / 2 | graft d2 |
 | 3 | [Xing-29B](https://huggingface.co/XingChen-AGI/Xing4.0-29B-A4B) | **8/11** | 5.8 | 25 / 346 | 8K | 4.0 / 12 | MTP d2 |
-| 7 | [Gemma-E4B](https://huggingface.co/google/gemma-4-E4B-it-qat-q4_0-unquantized) | **7/11** | **83.4** ⁽³⁾ | **181** / 2.8K | **128K** | 4.3 / 1 | MTP d2 ext |
+| 7 | [Gemma-E4B](https://huggingface.co/google/gemma-4-E4B-it-qat-q4_0-unquantized) | **7/11** | **93.3** ⁽³⁾ | **181** / 2.8K | **128K** | 4.3 / 1 | MTP d3 ext |
 | 8 | [Bonsai-8K](https://huggingface.co/sudoingx/Ternary-Bonsai-2-27B-PTQ1_0-MTP-GGUF) | **5/11** | 29.7 | **55** / 520 | 8K | 7.3 / 1 | graft d2 |
 | 9 | [LFM2.5 DSpark](https://huggingface.co/LiquidAI/LFM2.5-8B-A1B) | 0/11 | — | **221** / 500 | 32K | resident | DSpark d4 |
 | 10 | [ThinkCap-27B](https://huggingface.co/holooo/ThinkingCap-Qwen3.8-27B-Q2_K-GGUF) | 4/6 | — | 9.6 / 239 | 32K | 7.4 / 6 | MTP d2 |
@@ -36,7 +36,7 @@ Units: decode/prefill = t/s / tok/s · p/h = AG-Bench passes per hour · V/R = V
 
 ⁽¹⁾ 9/11 replicated as 8/11 unpinned — always-thinking distills move ±1 task between runs; treat 1-task margins as bands. Pinned (temp 0/seed 42) runs cost the heavy iterative tasks (task11 fails pinned, passes unpinned).
 ⁽²⁾ [DFlash-Q2_K/Q4_K_M sidecar](recipes/mimo-9b-distill-q4km-llamacpp.md) → 138 t/s @8K, 94 @16K; 16K pair: score preserved, 1.66× wall. 32K+drafter net-negative for agents (q4_0-KV tax).
-⁽³⁾ Card efficiency record: 302s for the full suite (task11 in 39s, task7 in 16s). Original-suite 3/6 superseded.
+⁽³⁾ Card efficiency record: 270s for the full suite at **d3** (2026-10-01, identical pass set to the d2 era's 302s — depth crown from the MTP-depth sweep; d4 gains nothing). Original-suite 3/6 superseded.
 
 **Also on card:** GLM-OCR · kev · laya · GLiNER 2.5 (utility tier: vision, routing, schema extraction)
 

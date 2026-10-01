@@ -136,7 +136,11 @@ if [ -z "$WARM_OK" ]; then
     echo "AG-BENCH model=$LABEL ABORTED: warm-up never passed, refusing to burn the task batch in silence"; exit 2
   fi
 fi
+# TASK_RE: optional bash-regex filter on task dir names (e.g. TASK_RE='task(7|8|9|10|11)'
+# to run only the v2.1 additions). Default runs the whole suite.
+TASK_RE="${TASK_RE:-task.*}"
 for entry in "$TASKS_DIR"/task*/; do
+  [[ "$(basename "$entry")" =~ $TASK_RE ]] || continue
   run_task "$entry"
 done
 echo "DONE — results in $OUT"
