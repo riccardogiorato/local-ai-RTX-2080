@@ -1,0 +1,28 @@
+slots ready after 26s
+# Flash-Next GSQ-RCO Q2_0 reasoning-slot test — 2026-10-01T13:04:37+02:00
+=== riddle (wall 7.9s, completion_tokens=43)
+**9 sheep are left.**
+
+**Explanation:**
+The phrase "all but 9" means that everything except 9 items remains. Therefore, 9 sheep did not run away and are still there.
+{"usage":{"completion_tokens":43,"prompt_tokens":37,"total_tokens":80,"prompt_tokens_details":{"cached_tokens":0}},"finish":"stop","model":"local-model"}
+=== code (wall 10.7s, completion_tokens=42)
+```python
+def is_palindrome(s):
+    return s == s[::-1]
+
+assert is_palindrome("racecar") == True
+assert is_palindrome("hello") == False
+```
+{"usage":{"completion_tokens":42,"prompt_tokens":29,"total_tokens":71,"prompt_tokens_details":{"cached_tokens":0}},"finish":"stop","model":"local-model"}
+=== retrieval (wall 3.9s, completion_tokens=16)
+According to the context provided, the **alpha** key must be quoted.
+{"usage":{"completion_tokens":16,"prompt_tokens":53,"total_tokens":69,"prompt_tokens_details":{"cached_tokens":0}},"finish":"stop","model":"local-model"}
+=== general (wall 9.1s, completion_tokens=53)
+The sky appears blue because sunlight interacts with the atmosphere, causing shorter wavelengths of light like blue to scatter more effectively than longer wavelengths like red. This phenomenon, known as Rayleigh scattering, directs the scattered blue light toward our eyes, making the sky look blue.
+{"usage":{"completion_tokens":53,"prompt_tokens":23,"total_tokens":76,"prompt_tokens_details":{"cached_tokens":0}},"finish":"stop","model":"local-model"}
+{"label":"flashnext-gsqrc-q20","prompt":"code-continuation.txt","run":1,{"decode_tps": 7.88, "decode_n": 256, "prefill_tps": 140.22},"acceptance":0,"mean_len":256.0}
+{"label":"flashnext-gsqrc-q20","prompt":"code-continuation.txt","run":2,{"decode_tps": 8.07, "decode_n": 256, "prefill_tps": 150.97},"acceptance":0,"mean_len":256.0}
+{"label":"flashnext-gsqrc-q20","prompt":"decode-isolation.txt","run":1,{"decode_tps": 8.07, "decode_n": 256, "prefill_tps": 8.82},"acceptance":0,"mean_len":256.0}
+{"label":"flashnext-gsqrc-q20","prompt":"decode-isolation.txt","run":2,{"decode_tps": 8.26, "decode_n": 256, "prefill_tps": 9.46},"acceptance":0,"mean_len":256.0}
+== gsq-rco test done ==
