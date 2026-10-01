@@ -58,46 +58,62 @@ turned out stale:
 
 ## Tier 1 — measurements (hours, high value/effort)
 
+**Progress 2026-10-01: items 2, 3, 4, 5 RESOLVED** (verdicts below);
+1.6 running, 1.7 awaiting download, 1.8 downloads chained, 1.1 staged to
+run when the GPU lane frees.
+
 1. **Pi zero-byte hang — catch with evidence.** Struck 3× in MiMo benches;
    narrowed to a pre-header startup stall, ~1/75 manual rate, serve-state
    correlation excluded, 150–210 clean no-serve iterations. The v2 hunt
    (120 iterations, full syscall trace against a live MiMo serve) was
-   stopped by user request before catching one. Leave live: reproduce once
-   under full strace + kernel stacks, then fix root cause. Prereq for
-   trustworthy bench numbers on this host. (MiMo thread.)
-2. **E4B d3 draft A/B.** The card's efficiency record-holder (83.4 pass/h,
-   7/11 @ 302 s on v2.1) serves d2 at 181 tok/s; sweep the depth profile
-   first (the Bonsai decay was 0.845/0.726/0.588/0.540 for d1–d4; E4B's
-   profile is not yet measured) and take the depth that wins. Expect 181 →
-   ~200+ tok/s. Cheapest headline available. (setup advisory.)
-3. **Baseline recording for the 5-task bench with drift pins.** The new
-   5-task AG-Bench needs a baseline session with drift pins (invariant env
-   for Bonsai; re-run marginal tasks) so later rows are comparable.
-   (TensorFold.)
-4. **Prompt-cache/ubatch drift A/B** — fresh prefill vs cached resumption
-   vs different ubatch on the same question: same bytes? ~30 min; affects
-   AG-Bench noise interpretation for every recipe. (TensorFold.)
-5. **Prompt-span lookup proposals + lookup-round drafter skip on Bonsai**
-   — suffix-match committed tokens against the prompt; unique long-span
-   match rule mandatory; expected to hit hard on AG-Bench. "This is now
-   #1" per the leaderboard analysis. (TernaryBonsai.)
+   stopped by user request before catching one. Harness now auto-retries
+   zero-byte tasks (Tier 0.1) but the ROOT CAUSE is still unknown.
+   STAGED: /tmp/pi-hang-hunt.sh (strace + kernel-stack sampler, 120 iters
+   against a live MiMo serve). Run when the GPU lane frees. (MiMo thread.)
+2. ✓ **RESOLVED 2026-10-01 — d3 CROWNS E4B.** Depth sweep: code-class
+   acceptance RISES at d3 (0.818/mean 3.55, +25% decode), novel peaks at
+   d1; v2.1 bench: d3 7/11 @ 270 s vs d2 @ 302 s, identical pass set —
+   NEW card efficiency record 93.3 pass/h. E4B serve depth is now 3.
+   Recipe updated. Evidence `evidence/gemma4-e4b-mtp-depth.jsonl`.
+3. ✓ **RESOLVED 2026-10-01 — pinned baselines recorded.** 5-task
+   drift-stamped task matrix + fresh Bonsai pinned hard reference in
+   benchmarks/README ("Drift-pinned 5-task baseline"). Side finding:
+   pinning itself flips Bonsai outcomes (task11→fail, task7→fail,
+   task8→pass) — pinned runs are their own baseline rows.
+4. ✓ **RESOLVED 2026-10-01 — cache determinism rules.** Turn-extension
+   cache reuse is bit-identical (agent-loop noise CLEARED); ubatch
+   128/512/2048 bit-neutral; cache_prompt=true vs false deterministically
+   perturbs identical-prompt bytes — pin it for same-prompt comparisons.
+   Determinism-rules section in benchmarks/README. Evidence
+   `evidence/promptcache-ubatch-drift.jsonl`.
+5. ✓ **RESOLVED 2026-10-01 — lookup-prompt IMPLEMENTED + VALIDATED.**
+   Fork branch `prompt-span-lookup` @aacb5ba: byte-exact vs serial (6/6)
+   at envelope-safe n_max 3, zero idle cost, task7 flip + task8 3× in the
+   pinned 5-task A/B; full pinned 11-task run: **Bonsai-8K 5/11 → 7/11
+   (6-7 band) @ 582 s, 43.4 pass/h**. Evidence
+   `evidence/bonsai2-lookup-prompt.jsonl`. Leaderboard row updated.
+   Follow-up now lives in Tier 2/3 (wider-than-4 lookup windows need the
+   MMQ ≥5-col invariance patch first).
 6. **35B-A3B re-bench on 48 GB, verbatim recipe** — the "smart-slot
    champion, agent turns hold ~7–9 tok/s" claim (deep-agent collapse
    9.3/8.5 → 1.51 tok/s at 16 GB) is unmeasured since the RAM landed.
-   Same session: one `--cache-ram` run to quantify the prompt-cache
-   effect. (48GB thread.)
+   Same session: one `--cache-ram 32768` run to quantify the prompt-cache
+   effect. RUNNING (2026-10-01, labels a3b-iq2xxs-v2-rebaseline /
+   -cram32). (48GB thread.)
 7. **Xing4 build + bench on the fork with the official IQ4_NL ladder** —
    48 GB now hosts the whole ladder (IQ4_NL 20.1 / Q6_K 23.9 / Q8_0
    30.9 GB; Q8 MMLU-Δ only -3.1). The mHC (4-channel hyper-connections)
    CUDA path on SM75 has never been benchmarked on any pre-Ampere card.
    Caveat: Chinese-centric model, interpret AG-Bench accordingly. Probe
-   tier same as the Qwen3.5 campaign. (Xing4 thread.)
-8. **Strata Q2_0-GSQ-RCO quant test on our patched llama.cpp** — the
-   ≥2.2-bpw reasoning-slot test, no port required: if the Q2_0-GSQ-RCO
-   shard family serves with intact reasoning on the qwen4exp-patched
-   runtime, the sub-40 GB Flash-Next slot may be closer than "no artifact
-   exists today". The proposed "top-priority steal" from the Strata
-   thread, never queued until now. (Strata.)
+   tier same as the Qwen3.5 campaign. OFFICIAL IQ4_NL downloading —
+   staged script `/tmp/xing4-official-bench.sh`. (Xing4 thread.)
+8. **Strata Q2_0-GSQ-RCO quant test on our patched llama.cpp** — RESOLVED
+   AS TESTABLE by research: ISTA-DASLab GSQ-RCO Q2_0 is a standard GGUF
+   (2.40 bpw backbone, 37.6 GB hot + 28.8 GB mmap PLE shard), loads
+   unchanged on the qwen4exp runtime; no MTP heads in the repo and a
+   community quality-degradation report temper expectations. Shards
+   downloading (chained); staged script `/tmp/strata-gsqrc-test.sh`.
+   (Strata thread.)
 
 ## Tier 2 — engineering (sessions)
 
