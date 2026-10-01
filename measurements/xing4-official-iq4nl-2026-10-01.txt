@@ -1,0 +1,4 @@
+{"label":"xing4-official-iq4nl-d2","prompt":"code-continuation.txt","run":1,{"decode_tps": 22.32, "decode_n": 256, "prefill_tps": 585.39},"acceptance":0.933,"mean_len":2.88}
+{"label":"xing4-official-iq4nl-d2","prompt":"code-continuation.txt","run":2,{"decode_tps": 22.6, "decode_n": 256, "prefill_tps": 596.52},"acceptance":0.933,"mean_len":2.88}
+{"label":"xing4-official-iq4nl-d2","prompt":"decode-isolation.txt","run":1,{"decode_tps": 18.23, "decode_n": 256, "prefill_tps": 34.17},"acceptance":0.69,"mean_len":2.39}
+{"label":"xing4-official-iq4nl-d2","prompt":"decode-isolation.txt","run":2,{"decode_tps": 18.44, "decode_n": 256, "prefill_tps": 35.53},"acceptance":0.69,"mean_len":2.39}
