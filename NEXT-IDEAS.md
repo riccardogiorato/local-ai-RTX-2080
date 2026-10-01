@@ -120,61 +120,51 @@ turned out stale:
 
 ## Tier 2 — engineering (sessions)
 
-1. **Strata sm_75 port — the big one.** 3 phases: (1) CMake guard patch +
-   f16-MMA twin for the single hard sm_80 instr (`mma.sync.m16n8k8.tf32`
-   in `src/kernels/cuda/native_qsa_score.cu`, ~30 lines; its ldmatrix
-   loads ARE sm_75-legal) + parity suite on the 2080; (2) Q2_0 bench
-   (37.6 GB model + 29 GB PLE on the 110 GB free disk — fits; our 46 GiB
-   RAM qualifies only for the Q2_0 tier) — **KILL if ≤15 tok/s**
-   (llama.cpp parity); (3) bf16→fp16 conversion for the ~10 bf16-hot
-   kernels (ple, gr, fused_gr, elementwise, bf16_gemv, shared_expert…) if
-   the fp32-round-trip emulation shows, + expert-cache tuning for 8 GB
-   (~2800 vs their ~5600 resident). Physics cap ~1/3 of the 5070
-   numbers: ~20 tok/s @128K / ~30 short-chat / ~180 pp — still 2–4× the
-   UltraLite llama.cpp expectation. **Run before any Ampere purchase.**
-   Full survey preserved in the Archive. (Strata thread.)
-2. **Keyed-Gumbel sampler port into the Bonsai fork** (flagship — full
-   byte-exactness at temp > 0). Module done and validated
-   (`notes/keyed_gumbel_sampler.h`, 16/16 test classes; cross-restart
-   replay 2/2; stock 2/2 → keyed 1/2, residual = logits-bits). Remaining:
-   llama.cpp splice per
-   `notes/keyed-gumbel-llamacpp-integration.md`, server-schema wiring,
-   patched build, repro/drift rerun (~half session). ⚠️ the previous
-   patched tree lived at `/tmp/llama-upstream-keyed` (tmpfs — gone on
-   reboot); rebuild from the notes, not /tmp. (TensorFold + MiMo.)
-3. **DFlash2 ≤600 MB Q2-class sidecar beside a full-offload IQ1_S
-   target** (6.70 + 0.6 + ctx_other ~0.4 ≈ 8.0 GB with desktop —
-   borderline; needs `-c 4096`, possibly one shed layer). CAVEAT
-   (2026-09-28 falsification): the 1.14 GB Q4_K_M-swa drafter forced ngl
-   44 and collapsed decode 19.7 → 6.2 tok/s *despite* 0.92/mean 3.76
-   acceptance; the ~600 MB class itself was never tested, and ngl-54 OOM
-   math suggests even it may not fit — this stays OPEN as a measurement,
-   not a closed verdict. Watch jmarceno/z-lab for a Q2_K_XS-swa
-   conversion. Same sidecar class on ThinkingCap-27B Q2_K (9.57 tok/s,
-   acc 0.995) also untested. Evidence `evidence/dflash2-iqi-27b.jsonl`.
-   (Splash + Strata + MiMo threads.)
-4. **Recurrent-state snapshots for DeltaNet-class hybrids** — design doc
-   done (`notes/design-recurrent-state-snapshots.md`), implementation
-   never committed. Explicit SSM/conv/target_feat snapshots (direct
-   `lcp=N reused=N`) instead of KV seq-id manipulation for
-   Qwen3.5/3.8-hybrid multi-turn. Pure C++/GGML, no GPU needed to draft;
-   b11118 docker or the bonsai2 fork as hosts. Payoff = per-turn latency
-   on hybrid chains. (setup advisory / David19p research,
-   `notes/research-david19p-turing-kernel.md`.)
-5. **E4B self-repro mystery** — the only model whose drafted fast mode
-   can't reproduce itself (serial 6/6, drafted 4/6, drafted-vs-serial
-   1/6 byte-identical; 150 vs 91 tok/s is what the drift buys).
-   Attribution rerun with flags toggled / flash-attn off. (TensorFold.)
-6. **Xing4 router-tie drift test** — weights on the archive drive;
-   acceptance 0.91 recorded but the drift column never measured.
-   (TensorFold.)
-7. **nsys copy/launch census of Bonsai verify rounds** — ~1 h profiling,
-   never run. Tile-path floor is 55 ms vs ~22 ms ideal single-pass;
-   register-weight/plane-copy layout only if a lane kernel is reopened
-   (blocked on the drafter class, see Tier 3). (TernaryBonsai.)
-8. **2-column pass-tax kernel patch** (1.34×→1.0 row-boundary tax, worth
-   ~10–15% serve) + fused norm/quant launches on the decode path. The
-   remaining pure-speed fusion items. (TensorFold + TernaryBonsai.)
+**Ledger 2026-10-02: 2.1 ✓ 2.2 ✓ 2.3 ✓(watch) 2.4 partial-open 2.5 ✓ 2.6 ✓
+2.7 ✓ — the only engineering item left is 2.8 (fusion/kernel work).**
+Verdicts inline below; evidence
+`strata-q20-sm75-port.jsonl` + `bonsai-followups-t2-2026-10-01.jsonl`.
+
+1. ✓ **2.1 RESOLVED 2026-10-02 — STRATA PORT LIVES, 22–24 tok/s.** Upstream
+   landed their own Turing port (v0.1.32, 09-29/30) so our patch plan
+   collapsed to build+parity+bench: 52/55 ctest (3 non-sm_75), pack via
+   iq_pack, clean-lane decode 22.0/23.9 tok/s on Q2_0-GSQ-RCO vs
+   llama.cpp's 7.9–8.3 — **~2.8×, fastest Flash-Next serve measured on
+   this card, kill-gate (>15) passed**. Physics wall: the AVX-2 CPU expert
+   pool (22.5 ms/token floor), not the port. Open: spec-4 warm pass,
+   strata-server AG-Bench row.
+2. ✓ **2.2 RESOLVED 2026-10-02 — keyed-Gumbel ON THE FORK (cf44169).**
+   Byte-identical temp>0 replay across serve restarts on the byte-exact
+   fork; zero regression at greedy; TensorFold's exactness program is 100%
+   transferred to this card. Flag: `--keyed-gumbel`/request `keyed_gumbel`.
+3. ✓ **2.3 checked 2026-10-01** — trigger untriggered (z-lab floor still
+   Q4_K_M 1.14 GB); stays on the watch-list.
+4. ◐ **2.4 PARTIAL (44c2d3e)** — `--recurrent-snapshots N` patched, built,
+   non-regressive (canary byte-identical, cached accounting unchanged);
+   **trigger-validation open**: the validation conversation reused an exact
+   prefix so the snapshot path never fired; needs a true divergent-tail
+   turn (agent-retry shape) to observe lcp/rollback/reused. VRAM law
+   learned: rs cache = (1+N) state planes — 38.5 GB @rsn256/ctx8K, only
+   small models or low-N fit 8 GB.
+5. ✓ **2.5 RESOLVED 2026-10-01** — E4B mystery attributed (cached-path
+   class 5/6, survey's 4/6) + the ANTI-PIN discovery: upstream-docker
+   server `--temperature/--seed` flags DESTROY same-prompt reproducibility
+   (0/6 vs 6/6 without); forks honor them. Protocol corrected in
+   benchmarks/README determinism rules.
+6. ✓ **2.6 RESOLVED 2026-10-02 (measured)** — Xing router-tie drift test:
+   serial 6/6 self-repro, drafted 6/6 self-repro, drafted-vs-serial
+   **6/6 mismatch** under the standard recipe — drift is real and total;
+   both forks are pins-stable within-mode (unlike upstream serves).
+   Router-tie isolation unseparated without a batch-invariant arm (open
+   refinement).
+7. ✓ **2.7 RESOLVED 2026-10-01 (nsys census)** — decode is GEMM/GDN-bound
+   (63.6% PTQ tiles + 11.2% GDN, avg mmq 1.5 ms); the 2.8 fusion target
+   quantified at **~9% small-kernel launch tax** (fwht 13k + quantize 13k +
+   silu + rms_norm); one 31-ms H2D memcpy stall flagged.
+8. **2.8 fusion + pass-tax — the remaining engineering item, now
+   evidence-backed:** fuse the norm/quant/fwht chain and hunt the 31-ms
+   H2D stall (census says ~9% ceiling; 2-column pass-tax ~10-15% on top);
+   single kernel-surgery session queue when picked up.
 
 ## Tier 3 — backlog (run when lanes free up)
 
