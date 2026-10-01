@@ -268,3 +268,19 @@ IQ2_XXS with +11% decode / +24% prefill and becomes the recommended pack.
 The A3B's long-context differentiator (task7) is matched by all three 32K+
 models (9B/A3B/4B) — it is the 8K ceiling of the fast tier (Bonsai) and
 the React/TS class that separates them, not deep retrieval alone.
+
+### Results-ledger reconciliation (2026-10-01)
+
+Every batch in `results/` accounted for, or explicitly marked invalid:
+
+- `qwen25-coder-7b-q4km-20260925-010549.jsonl` — **INVALID, no leaderboard
+  row by design.** The server never left its not-ready window (pre-/slots-gate
+  era): all 6 tasks failed in 1–43 s with 0 tool calls. The batch measures the
+  503 window, not the model. Qwen2.5-Coder-7B has never had a real AG-Bench row;
+  the /slots readiness gate (added 2026-09-25) prevents this batch class.
+- `qwen35-35b-a3b-mtp-20260925-194626.jsonl` — this IS the "a3b first run
+  (16GB era)" row of the retro-v2 table (3/6, walls sum 4899 s = 81.7 min,
+  2.2 pass/h): a complete 6-task run, not a partial. The 2026-09-25 A3B section
+  and the "js 819→63 s across three configs" note both reference it. Listed
+  here to break the label-swap trap: the `-mtp` suffix is the label, the run
+  is the section's Q3_K_M d4 experts-on-CPU first attempt.
