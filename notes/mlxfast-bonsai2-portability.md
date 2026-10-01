@@ -42,7 +42,7 @@ Verdict scale: ✅ COPY (logic-level, no kernels) · 🔧 PORT (needs CUDA/fork 
 
 | # | Technique (solver) | Verdict |
 |---|---|---|
-| 1 | **Verify width past the kernel crossover** (davidtai, i34-9) — push accepted/round 2→16 once extra rows are free | 🔧 **biggest lever.** Requires the already-open geography-pinned split-K invariance patch for ≥5-column MMQ tiles (extends `GGML_CUDA_BATCH_INVARIANT` to d5–d8). **Gate first: acceptance-vs-depth curve of the graft head, d1→d8** (`benchmarks/measure-decode.sh` + `/metrics` counters; evidence → `evidence/`). If acceptance dies past d2, this lever dies before any kernel work. Ceiling math if it doesn't: 71.6 × mean-accepted. |
+| 1 | **Verify width past the kernel crossover** (davidtai, i34-9) — push accepted/round 2→16 once extra rows are free | 🔧 ~~biggest lever~~ **GATE RESOLVED 2026-09-28 — falsified for the graft head**: acceptance decays 0.845/0.726/0.588/0.540 (d1→d4) and d4 is slower (45.7 vs 58.1 tok/s). The split-K invariance patch for ≥5-column MMQ tiles stays PARKED until a higher-acceptance drafter (ranked-plan item 3) reopens it. Ceiling math unchanged: 71.6 × mean-accepted. |
 | 2 | **Lookup-round drafter skip** (terrapinelf) — skip the draft forward when the proposal came from the prompt | ✅ COPY, pure scheduler logic. |
 | 3 | **Prompt-span lookup proposals** (newjordan) — suffix-match committed tokens against the prompt, propose the prompt's own continuation; **unique** long-span match only | ✅ COPY and expect it **stronger here**: AG-Bench decode constantly echoes repo files just read. Their failure mode is instructive — a false short match costs a whole round (winglock's lookup-opener rule: 5.0963 vs 5.3028 base). |
 | 4 | **Continued block along quoted prompt span** (DPZZxlz) | ✅ COPY, same family as 3. |
@@ -131,19 +131,27 @@ so the depth rider is OUR grafted MTP head (acceptance curve = step 1). The logi
 items (lookup proposals/skip, depth declaration) are model-agnostic and spill over to every
 spec-decode serve (Gemma E4B + Q8_0 MTP pair, ThinkingCap d2, Xing4).
 
-1. **(free)** Acceptance-vs-depth curve, graft head d1→d8, `measure-decode.sh`, evidence →
-   `evidence/mtp-graft-depth-curve.jsonl`. Decides item 1's entire value. Success shape:
-   mean-accepted still rising at d4, ideally toward ×4 tokens/weight-pass (their board proves
-   the *model family* sustains ~16/16 with the right drafter — on faster silicon).
-2. **(free)** Prompt-span lookup proposals + lookup-skip in the fork's spec path (items 2–4).
-   Expect high hit rates on AG-Bench decode. Uniqueness rule mandatory.
-3. **(the port)** The split-K invariance patch (already the open item), unlocking d5–d8
-   batch-verify on the MMQ path — davidtai's boundary trick transplanted one arch over.
-   Byte-exact gate: 6/6 drift harness at every depth step.
-4. **(medium)** Fused norm/quant launches on the decode path (item 12) + the one-nsys-pass
+1. **(free)** ~~Acceptance-vs-depth curve, graft head d1→d8~~ **RUN + FALSIFIED 2026-09-28**
+   (the depth sweep recorded in NEXT-IDEAS/TensorFold archive):
+   acceptance decays 0.845 / 0.726 / 0.588 / 0.540 for d1→d4, and d4 both drifts
+   (4/6) and is SLOWER (45.7 vs 58.1 tok/s) — item 1's verify-width lever is dead
+   for the current graft head. The ceiling math (71.6 × mean-accepted) has no
+   rising mean to ride.
+2. **(free, now #1)** Prompt-span lookup proposals + lookup-skip in the fork's spec path
+   (items 2–4). Expect high hit rates on AG-Bench decode. Uniqueness rule mandatory.
+3. **(new, from the falsification)** Higher-acceptance drafter class — a DFlash2-style
+   sidecar or any head with a flat acceptance curve is the only path back to the
+   depth lever of item 1 (their board proves the *model family* sustains ~16/16
+   with the right drafter — on faster silicon). Telegraphs into the NEXT-IDEAS
+   DFlash2 ≤600 MB sidecar item (8 GB economics caveat applies).
+4. **(parked)** Split-K invariance patch for d5–d8 batch-verify — the enabling kernel
+   work for item 1, but with the graft head's acceptance curve falsified there is
+   no speed payoff until item 3 lands a drafter that can use the width.
+   Byte-exact gate unchanged: 6/6 drift harness at every depth step.
+5. **(medium)** Fused norm/quant launches on the decode path (item 12) + the one-nsys-pass
    copy census (items 5, 17).
-5. **(gated)** Plane-copy / tile-layout work (items 9–10) only if the roofline probe shows the
-   fork's tile path below the 425 GB/s ceiling, and the acceptance curve justified depth in step 1.
+6. **(gated)** Plane-copy / tile-layout work (items 9–10) only if the roofline probe shows the
+   fork's tile path below the 425 GB/s ceiling.
 
 ## What we are deliberately NOT taking
 
