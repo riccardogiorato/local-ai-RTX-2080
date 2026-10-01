@@ -58,9 +58,14 @@ turned out stale:
 
 ## Tier 1 — measurements (hours, high value/effort)
 
-**Progress 2026-10-01: items 2, 3, 4, 5 RESOLVED** (verdicts below);
-1.6 running, 1.7 awaiting download, 1.8 downloads chained, 1.1 staged to
-run when the GPU lane frees.
+**Progress 2026-10-01: items 2, 3, 4, 5, 6, 7, 8 ALL RESOLVED except 1.1
+(pi-hunt, RUNNING — the only one left).** 1.6: champion 9/11 pinned @
+14.9 p/h, cache-ram −24% wall but −1 score → not adopted. 1.7: mHC runs on
+SM75 first try (0.933 code acceptance, 22/18 decode), official 4/11 pinned
+with task8 pass — community pack stays. 1.8: reasoning chain INTACT at
+2.40 bpw GSQ-RCO (4/4 probes; UltraLite wall confirmed from both sides) —
+recipe `recipes/flashnext-gsqrc-q20-125b-llamacpp-fork.md`; MTP-head half
+stays open on the watch-list.
 
 1. **Pi zero-byte hang — catch with evidence.** Struck 3× in MiMo benches;
    narrowed to a pre-header startup stall, ~1/75 manual rate, serve-state
@@ -215,7 +220,7 @@ run when the GPU lane frees.
 | Diffusion Gemma 26B-A4B | no GGUF, vLLM no SM75, exceeds 8 GB even at extreme bpw | Google ships an E2B/E4B-class diffusion variant or a GGUF appears |
 | PQ2_0-MTP tier (2.13 bpw, 7.66 GB + trained head; 86/98/75 tok/s on an 11 GB Pascal) | can't go resident with useful context on 8 GB — measured 2.2 tok/s at ngl 46 partial, ngl 60 OOMs at load; trained head proven compatible (0.717/0.585 acceptance via their PQ2_0-MTP file) | an 11 GB+ card lands here (the giveaway 1080 Ti is exactly that); a sub-8 GB PQ2_0 derivative appears |
 | MiMo 32K + drafter | no ≤400 MB drafter exists (HF floor = Q2_K 482 MB); drafted arm 0.85× slower (see Archive) | z-lab Q1/IQ2_KS lineage, or a fork with slimmer draft-pp buffer |
-| Flash-Next usable tier | 65 GB IQ1_S doesn't fit; sub-2 bpw breaks the reasoning chain (EOS-at-reasoning-close) | a sub-40 GB ≥2.2 bpw artifact with MTP + intact reasoning — Tier 1.8 now tests whether Q2_0-GSQ-RCO is it |
+| Flash-Next usable tier | ~~65 GB IQ1_S doesn't fit; sub-2 bpw breaks the reasoning chain~~ **RESOLVED 2026-10-01 (half)**: the ≥2.2 bpw artifact EXISTS and reasoning is INTACT (GSQ-RCO Q2_0, recipe `recipes/flashnext-gsqrc-q20-125b-llamacpp-fork.md`) — only the MTP-head half stays open | a Flash-Next MTP head GGUF (~4 GB class) appears; then the agentic tier math is RAM + the 9 t/s novel-prefill wall |
 
 **Standing note:** an Ampere+ GPU landing in this lab remains the single
 biggest unlock — native bf16/tf32, the PQ2_0 tier, exl3, and the DFlash2

@@ -34,6 +34,7 @@ recipe and raw evidence. Failures are recorded with the same care as wins.
 | 17b | Qwen3.5-35B-A3B (IQ3_XXS pack) — Twitter-tip test | 7/11 (task4 re-judges PASS → 7–8 band tie with IQ2), 33 tok/s, −15% decode | ✅ same recipe (updated; tip falsified) |
 | 18 | Gemma-12B QAT + Q4 MTP head | 29.4/43.5 tok/s, 3/6 | ✅ evidence-only |
 | 19 | MiniCPM5-2B + DSpark drafter | 2/6 on original-6, 180 tok/s novel class | ✅ evidence-only |
+| 20 | Qwen3.8-Flash-Next GSQ-RCO Q2_0 (2.40 bpw, official ISTA-DASLab) | reasoning chain **INTACT** (4/4 probes), 8.1–8.3 tok/s, novel-prefill 9 t/s | ✅ [recipe](recipes/flashnext-gsqrc-q20-125b-llamacpp-fork.md) · probe-tier |
 
 ## Full technical details
 
