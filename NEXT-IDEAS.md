@@ -208,6 +208,7 @@ Verdicts inline below; evidence
 | Diffusion Gemma 26B-A4B | no GGUF, vLLM no SM75, exceeds 8 GB even at extreme bpw | Google ships an E2B/E4B-class diffusion variant or a GGUF appears |
 | PQ2_0-MTP tier (2.13 bpw, 7.66 GB + trained head; 86/98/75 tok/s on an 11 GB Pascal) | can't go resident with useful context on 8 GB — measured 2.2 tok/s at ngl 46 partial, ngl 60 OOMs at load; trained head proven compatible (0.717/0.585 acceptance via their PQ2_0-MTP file) | an 11 GB+ card lands here (the giveaway 1080 Ti is exactly that); a sub-8 GB PQ2_0 derivative appears |
 | MiMo 32K + drafter | no ≤400 MB drafter exists (HF floor = Q2_K 482 MB); drafted arm 0.85× slower (see Archive) | z-lab Q1/IQ2_KS lineage, or a fork with slimmer draft-pp buffer |
+| DFlash2 sidecar ≤600 MB (2026-10-02 recheck) | closest yet: Anbeeld Q2_K 705 MB (new repo) — still over budget AND the MiMo quant-cliff data (Q2_K draft acceptance 0.44 vs 0.79 Q4) makes a Q2-class 27B head a poor bet; z-lab floor unchanged 1143 MB | a true ≤600 MB high-acceptance conversion, or IQ2_KS/Q1 lineage from z-lab |
 | Flash-Next usable tier | ~~65 GB IQ1_S doesn't fit; sub-2 bpw breaks the reasoning chain~~ **RESOLVED 2026-10-01 (half)**: the ≥2.2 bpw artifact EXISTS and reasoning is INTACT (GSQ-RCO Q2_0, recipe `recipes/flashnext-gsqrc-q20-125b-llamacpp-fork.md`) — only the MTP-head half stays open | a Flash-Next MTP head GGUF (~4 GB class) appears; then the agentic tier math is RAM + the 9 t/s novel-prefill wall |
 
 **Standing note:** an Ampere+ GPU landing in this lab remains the single
