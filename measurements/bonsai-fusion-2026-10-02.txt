@@ -1,0 +1,3 @@
+# fused rms_norm+quantize_mmq validation — 2026-10-02T17:44:38+02:00
+== serial (fused) ==
+== drafted stock (fused OFF, drift control) ==
