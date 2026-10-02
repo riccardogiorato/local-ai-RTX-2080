@@ -1,0 +1,28 @@
+# Untried menu items — 2026-10-02T08:09:39+02:00
+== A: baseline anchor ==
+base: riddle=29.96 tok/s code=32.64 tok/s 24576 slots
+== B: pcie-frac sweep (0.15 / 0.35 / 0.50) ==
+pcie15: riddle=27.79 tok/s code=32.19 tok/s 24576 slots
+pcie35: riddle=26.04 tok/s code=32.87 tok/s 24576 slots
+pcie50: riddle=25.70 tok/s code=26.87 tok/s 24576 slots
+== C: VRAM scavenge (--vram-reserve-mib 450) ==
+res450: riddle=30.14 tok/s code=30.68 tok/s 24576 slots
+== D: workload-scale routing dump (5 real task prompts) ==
+  task1 (task1-js-bugfix): 85 tokens
+  task2 (task2-react-fix): 151 tokens
+  task3 (task4-python-bugfix): 100 tokens
+  task4 (task7-long-context-agent): 127 tokens
+  task5 (task9-tb-analyze-access-logs): 203 tokens
+  dump1: rc=0 trace=549120 bytes
+  dump2: rc=0 trace=464640 bytes
+  dump3: rc=0 trace=578688 bytes
+  dump4: rc=0 trace=481536 bytes
+  dump5: rc=0 trace=595584 bytes
+== E: custom profile from the 5-trace workload ==
+  profile built
+custom-profile code: 28.87 tok/s
+task1 workload w/ profile: 
+task1 workload w/ stock  : 
+== F: combined best arm ==
+combined: riddle=31.68 tok/s code=33.69 tok/s 24576 slots
+UNTRIED-MENU-DONE
