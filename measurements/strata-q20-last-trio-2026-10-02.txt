@@ -1,0 +1,16 @@
+# Last cheap trio — 2026-10-02T13:45:36+02:00
+== baseline re-anchor ==
+base: riddle=30.82 tok/s code=31.75 tok/s 
+== memlock+arena-lock arm ==
+memlock: riddle= code= 
+== spec 8 arm ==
+spec8: riddle=23.58 tok/s code=24.59 tok/s 
+== kv-resident 20480 (bench ctx 16K int8) ==
+kvres: riddle=31.10 tok/s code=27.56 tok/s 
+TRIO-DONE
+memlock(prlimit): riddle= code=
+MEMLOCK-RETRY-DONE
+memlock(root prlimit): riddle=32.59 tok/s code=33.39 tok/s
+ROOTLOCK-DONE
+memlock(root prlimit): riddle=30.18 tok/s code=30.44 tok/s
+ROOTLOCK-DONE
