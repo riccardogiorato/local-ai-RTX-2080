@@ -1,0 +1,22 @@
+# Task-6 closing arms — 2026-10-02T07:13:24+02:00
+== rebuild 0.1.33 ==
+rebuild ok @ 9b06967 Port note: Phase 1 sm_75 verific
+== MTP-era baseline (0.1.33) ==
+-- t6-base:
+speculation              49 rounds of 6, drafts accepted 80 of 117 (0.684), 2.63 tokens per round
+decode                   128 tokens in 5684.4 ms  ->  22.52 tok/s
+== STRATA_GR_V3=1 arm ==
+-- grv3-on:
+speculation              49 rounds of 6, drafts accepted 80 of 115 (0.696), 2.63 tokens per round
+decode                   128 tokens in 3889.8 ms  ->  32.91 tok/s
+== custom expert profile (probe-scale trace, caveat) ==
+-- custom-profile:
+strata generate: expert cache auto: 2.49 GiB free, 700 MiB reserved (+184 MiB for the draft head) -> 1265 slots
+strata generate: expert cache 1265 slots, 1.63 GiB of VRAM; policy is
+decode                   128 tokens in 4004.5 ms  ->  31.96 tok/s
+== explicit --expert-cache 3000 ==
+-- cache3000:
+strata generate: expert cache 1405 slots, 1.81 GiB of VRAM; policy is
+decode                   128 tokens in 4092.2 ms  ->  31.28 tok/s
+  R4 expert-cache hits   27824 of 70611 = 0.3940      (0 admitted, 42787 refused, cache 100.0000% full)
+T6-CLOSING-DONE
