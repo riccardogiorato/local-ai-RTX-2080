@@ -1,3 +1,14 @@
 # fused rms_norm+quantize_mmq validation — 2026-10-02T17:44:38+02:00
 == serial (fused) ==
 == drafted stock (fused OFF, drift control) ==
+== drafted fused =
+{"label":"bonsai-fused-d2","prompt":"code-continuation.txt","run":1,{"decode_tps": 56.5, "decode_n": 256, "prefill_tps": 528.21},"acceptance":0.779,"mean_len":2.56}
+{"label":"bonsai-fused-d2","prompt":"code-continuation.txt","run":2,{"decode_tps": 56.53, "decode_n": 256, "prefill_tps": 528.4},"acceptance":0.779,"mean_len":2.56}
+{"label":"bonsai-fused-d2","prompt":"decode-isolation.txt","run":1,{"decode_tps": 49.3, "decode_n": 116, "prefill_tps": 76.97},"acceptance":0.545,"mean_len":2.11}
+{"label":"bonsai-fused-d2","prompt":"decode-isolation.txt","run":2,{"decode_tps": 49.37, "decode_n": 116, "prefill_tps": 77.1},"acceptance":0.545,"mean_len":2.11}
+{"label":"bonsai-stock-d2","prompt":"code-continuation.txt","run":1,{"decode_tps": 55.61, "decode_n": 256, "prefill_tps": 520.44},"acceptance":0.766,"mean_len":2.53}
+{"label":"bonsai-stock-d2","prompt":"code-continuation.txt","run":2,{"decode_tps": 56.5, "decode_n": 256, "prefill_tps": 527.9},"acceptance":0.779,"mean_len":2.56}
+{"label":"bonsai-stock-d2","prompt":"decode-isolation.txt","run":1,{"decode_tps": 49.35, "decode_n": 116, "prefill_tps": 76.57},"acceptance":0.545,"mean_len":2.11}
+{"label":"bonsai-stock-d2","prompt":"decode-isolation.txt","run":2,{"decode_tps": 49.39, "decode_n": 116, "prefill_tps": 77.26},"acceptance":0.545,"mean_len":2.11}
+FUSED GATE: drafted-fused vs serial 6/6 ; fused self 6/6 ; fused vs stock-drafted 6/6
+FUSION-VALIDATION-DONE
