@@ -1,0 +1,118 @@
+# Strata Q2_0 phases 4-6 — 2026-10-02T06:06:52+02:00
+phases4-6 start 06:06:52
+== PHASE 4: MTP runtime prep + spec ==
+MTP runtime prepped
+-- baseline arm (no mtp, spec2):
+-- mtp-base/riddle:
+strata generate: prefill 24 tokens in 1 chunks, 951.7 ms (25.2 tok/s); experts streamed 3597 (3597 by DMA, host 7.8 ms), resident 514; PLE 214.2 ms
+speculation              117 rounds of 4, drafts accepted 11 of 121 (0.091), 1.09 tokens per round
+decode                   128 tokens in 5223.6 ms  ->  24.50 tok/s
+prefill                  24 tokens in 974.3 ms  ->  24.63 tok/s  (time to first token 1644.1 ms)
+-- mtp-base/code:
+strata generate: prefill 16 tokens in 1 chunks, 857.9 ms (18.7 tok/s); experts streamed 2703 (2703 by DMA, host 5.6 ms), resident 428; PLE 227.2 ms
+speculation              124 rounds of 4, drafts accepted 4 of 126 (0.032), 1.03 tokens per round
+decode                   128 tokens in 5407.3 ms  ->  23.67 tok/s
+prefill                  16 tokens in 880.8 ms  ->  18.16 tok/s  (time to first token 1556.5 ms)
+-- mtp arm (--mtp mtp/rt, spec 4, spec-min-p 0.5):
+-- mtp-on/riddle:
+strata generate: prefill 24 tokens in 1 chunks, 992.6 ms (24.2 tok/s); experts streamed 3849 (3849 by DMA, host 7.9 ms), resident 262; PLE 209.9 ms
+speculation              50 rounds of 6, drafts accepted 79 of 119 (0.664), 2.58 tokens per round
+decode                   128 tokens in 4131.1 ms  ->  30.98 tok/s
+prefill                  24 tokens in 1015.5 ms  ->  23.63 tok/s  (time to first token 1694.1 ms)
+-- mtp-on/code:
+strata generate: prefill 16 tokens in 1 chunks, 860.2 ms (18.6 tok/s); experts streamed 2872 (2872 by DMA, host 6.2 ms), resident 259; PLE 209.5 ms
+speculation              49 rounds of 6, drafts accepted 80 of 115 (0.696), 2.63 tokens per round
+decode                   128 tokens in 4022.4 ms  ->  31.82 tok/s
+prefill                  16 tokens in 882.8 ms  ->  18.12 tok/s  (time to first token 1573.0 ms)
+-- mtp warm second pass (acceptance warms with expert cache):
+-- mtp-on-warm/riddle:
+strata generate: prefill 24 tokens in 1 chunks, 976.2 ms (24.6 tok/s); experts streamed 3849 (3849 by DMA, host 8.3 ms), resident 262; PLE 209.0 ms
+speculation              47 rounds of 6, drafts accepted 82 of 123 (0.667), 2.74 tokens per round
+decode                   128 tokens in 4060.8 ms  ->  31.52 tok/s
+prefill                  24 tokens in 999.5 ms  ->  24.01 tok/s  (time to first token 1678.5 ms)
+-- mtp-on-warm/code:
+strata generate: prefill 16 tokens in 1 chunks, 861.6 ms (18.6 tok/s); experts streamed 2872 (2872 by DMA, host 5.8 ms), resident 259; PLE 211.2 ms
+speculation              49 rounds of 6, drafts accepted 80 of 115 (0.696), 2.63 tokens per round
+decode                   128 tokens in 3885.9 ms  ->  32.94 tok/s
+prefill                  16 tokens in 884.3 ms  ->  18.09 tok/s  (time to first token 1587.3 ms)
+-- suffix-draft arm (--mtp mtp/rt --suffix-draft 5):
+-- mtp-suffix/riddle:
+strata generate: prefill 24 tokens in 1 chunks, 973.6 ms (24.7 tok/s); experts streamed 3849 (3849 by DMA, host 8.1 ms), resident 262; PLE 207.2 ms
+speculation              47 rounds of 6, drafts accepted 84 of 127 (0.661), 2.79 tokens per round
+decode                   128 tokens in 4146.2 ms  ->  30.87 tok/s
+prefill                  24 tokens in 996.2 ms  ->  24.09 tok/s  (time to first token 1678.2 ms)
+-- mtp-suffix/code:
+strata generate: prefill 16 tokens in 1 chunks, 859.1 ms (18.6 tok/s); experts streamed 2872 (2872 by DMA, host 6.2 ms), resident 259; PLE 207.7 ms
+speculation              49 rounds of 6, drafts accepted 80 of 111 (0.721), 2.63 tokens per round
+decode                   128 tokens in 3926.1 ms  ->  32.60 tok/s
+prefill                  16 tokens in 881.8 ms  ->  18.14 tok/s  (time to first token 1617.2 ms)
+PHASE-4-DONE
+== PHASE 5: KV types at ctx 32768 ==
+-- kv=fp16 at ctx 32768:
+strata generate: loaded 31.64 GiB at 1.11 GiB/s
+strata generate: expert cache auto: 2.57 GiB free, 700 MiB reserved (+0 MiB for the draft head) -> 1468 slots
+strata generate: expert cache 1468 slots, 1.89 GiB of VRAM; policy is
+strata generate: prompt path borrows 279 cache slots (0.36 GiB)
+strata verify: captured the 1-token window (upload no error, sync no error)
+strata verify: captured the 4-token window (upload no error, sync no error)
+   kv=fp16 riddle-quality saved to kv-fp16-riddle.log
+-- kv=int8 at ctx 32768:
+strata generate: loaded 31.64 GiB at 1.11 GiB/s
+strata generate: expert cache auto: 2.94 GiB free, 700 MiB reserved (+0 MiB for the draft head) -> 1750 slots
+strata generate: expert cache 1750 slots, 2.25 GiB of VRAM; policy is
+strata generate: prompt path borrows 279 cache slots (0.36 GiB)
+strata verify: captured the 1-token window (upload no error, sync no error)
+strata verify: captured the 4-token window (upload no error, sync no error)
+   kv=int8 riddle-quality saved to kv-int8-riddle.log
+-- kv=q4_0 at ctx 32768:
+strata generate: loaded 31.64 GiB at 1.10 GiB/s
+strata generate: expert cache auto: 3.11 GiB free, 700 MiB reserved (+0 MiB for the draft head) -> 1887 slots
+strata generate: expert cache 1887 slots, 2.43 GiB of VRAM; policy is
+strata generate: prompt path borrows 279 cache slots (0.36 GiB)
+strata verify: captured the 1-token window (upload no error, sync no error)
+strata verify: captured the 4-token window (upload no error, sync no error)
+   kv=q4_0 riddle-quality saved to kv-q4_0-riddle.log
+-- kv=k8v4 at ctx 32768:
+strata generate: loaded 31.64 GiB at 1.10 GiB/s
+strata generate: expert cache auto: 3.03 GiB free, 700 MiB reserved (+0 MiB for the draft head) -> 1819 slots
+strata generate: expert cache 1819 slots, 2.34 GiB of VRAM; policy is
+strata generate: prompt path borrows 279 cache slots (0.36 GiB)
+strata verify: captured the 1-token window (upload no error, sync no error)
+strata verify: captured the 4-token window (upload no error, sync no error)
+   kv=k8v4 riddle-quality saved to kv-k8v4-riddle.log
+PHASE-5-DONE
+== PHASE 6: optimization A/Bs from the menu ==
+-- git pull 0.1.33 + rebuild (STRATA_GR_V3 Turing fix)
+pull/rebuild skipped or failed: hint: Disable this message with "git config set advice.diverging false"
+fatal: Not possible to fast-forward, aborting.
+-- A: STRATA_GR_V3=1 arm:
+   GR_V3 off:
+decode                   128 tokens in 5114.0 ms  ->  25.03 tok/s
+   GR_V3 on: 
+decode                   128 tokens in 5395.4 ms  ->  23.72 tok/s
+-- B: expert-profile custom (dump-routing from a code probe -> make_profile):
+   make_profile failed:                        [traces ...]
+make_profile.py: error: unrecognized arguments: --routing
+-- C: VRAM scavenge (--expert-cache 3000 --vram-reserve-mib would apply if flag exists):
+   cache3000:
+strata generate: expert cache 2014 slots, 2.59 GiB of VRAM; policy is
+strata verify: captured the 1-token window (upload no error, sync no error)
+strata verify: captured the 2-token window (upload no error, sync no error)
+strata verify: captured the 3-token window (upload no error, sync no error)
+-- D: --ple-row-cache 256MiB:
+   ple-row-cache256M:
+strata generate: PLE on, table 320001536 rows of /home/riccardogiorato/models/flashnext-gsq-rco/Qwen3.8-Flash-Next-GSQ-RCO-Q2_0-00002-of-00002.gguf
+strata generate: prefill 16 tokens in 1 chunks, 860.1 ms (18.6 tok/s); experts streamed 2703 (2703 by DMA, host 6.0 ms), resident 428; PLE 231.3 ms
+decode                   128 tokens in 5361.5 ms  ->  23.87 tok/s
+-- E: --pool-workers 4 and 6:
+   pool-workers 4:
+decode                   128 tokens in 5675.3 ms  ->  22.55 tok/s
+  the CPU expert pool    23.875 ms/token over 48 layers (124 positions, 5952 dispatches)
+   pool-workers 6:
+decode                   128 tokens in 9091.1 ms  ->  14.08 tok/s
+  the CPU expert pool    38.664 ms/token over 48 layers (124 positions, 5952 dispatches)
+-- F: --prefill auto:16384 TTFT at 16K fill:
+   prefill auto:16384:
+strata generate: prefill 15999 tokens in 6 chunks, 21375.6 ms (748.5 tok/s); experts streamed 135330 (135330 by DMA, host 260.5 ms), resident 1308; PLE 17.5 ms
+prefill                  15999 tokens in 21543.1 ms  ->  742.65 tok/s  (time to first token 22222.6 ms)
+PHASE-6-DONE / ALL-STRATA-PHASES-DONE
