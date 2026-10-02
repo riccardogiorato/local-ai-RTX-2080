@@ -1,0 +1,42 @@
+# Strata Q2_0 ctx ladder — 2026-10-02T02:31:54+02:00 — 128-token decode at each ctx, prefill near-full
+== ladder ==
+--- ctx 4096 (3712-token prefill, ) ---
+strata generate: R4 hit path ON - resident experts are computed on the GPU
+strata generate: token graph hit path: 2008 resident experts, decided on the device
+strata generate: prefill 3711 tokens in 8 chunks, 14940.1 ms (248.4 tok/s); experts streamed 84310 (84310 by DMA, host 182.1 ms), resident 6910; PLE 586.1 ms
+decode                   128 tokens in 6746.1 ms  ->  18.97 tok/s
+prefill                  3711 tokens in 14972.3 ms  ->  247.86 tok/s  (time to first token 15945.4 ms)
+--- ctx 16384 (16000-token prefill, ) ---
+strata generate: R4 hit path ON - resident experts are computed on the GPU
+strata generate: token graph hit path: 1778 resident experts, decided on the device
+strata generate: prefill 15999 tokens in 32 chunks, 65310.6 ms (245.0 tok/s); experts streamed 391610 (391610 by DMA, host 879.2 ms), resident 24002; PLE 9.0 ms
+decode                   128 tokens in 6841.3 ms  ->  18.71 tok/s
+prefill                  15999 tokens in 65342.8 ms  ->  244.85 tok/s  (time to first token 66077.4 ms)
+--- ctx 32768 (32384-token prefill, ) ---
+strata generate: R4 hit path ON - resident experts are computed on the GPU
+strata generate: token graph hit path: 1466 resident experts, decided on the device
+strata generate: prefill 32383 tokens in 64 chunks, 139390.3 ms (232.3 tok/s); experts streamed 840314 (840314 by DMA, host 1782.0 ms), resident 40039; PLE 409.1 ms
+decode                   128 tokens in 6324.8 ms  ->  20.24 tok/s
+prefill                  32383 tokens in 139422.5 ms  ->  232.27 tok/s  (time to first token 140275.8 ms)
+--- ctx 65536 (65152-token prefill, ) ---
+strata generate: R4 hit path ON - resident experts are computed on the GPU
+strata generate: token graph hit path: 836 resident experts, decided on the device
+strata generate: prefill 65151 tokens in 128 chunks, 298107.2 ms (218.5 tok/s); experts streamed 1814434 (1814434 by DMA, host 3925.2 ms), resident 40642; PLE 62.0 ms
+decode                   128 tokens in 6366.3 ms  ->  20.11 tok/s
+prefill                  65151 tokens in 298139.6 ms  ->  218.53 tok/s  (time to first token 298907.0 ms)
+ctx 131072: FAILED — 
+--- ctx 65536 (65152-token prefill, --kv-resident 20480) ---
+strata generate: KV streaming: 20480 of 65536 cells per QSA layer in VRAM, the K/V in 1.50 GiB of pinned RAM
+strata generate: R4 hit path ON - resident experts are computed on the GPU
+strata generate: token graph hit path: 1641 resident experts, decided on the device
+strata generate: prefill 65151 tokens in 128 chunks, 300999.8 ms (216.4 tok/s); experts streamed 1764018 (1764018 by DMA, host 3781.5 ms), resident 91058; PLE 548.0 ms
+decode                   128 tokens in 5295.1 ms  ->  24.17 tok/s
+prefill                  65151 tokens in 301043.0 ms  ->  216.42 tok/s  (time to first token 301816.3 ms)
+--- ctx 131072 (130688-token prefill, --kv-resident 20480) ---
+strata generate: KV streaming: 20480 of 131072 cells per QSA layer in VRAM, the K/V in 3.00 GiB of pinned RAM
+strata generate: R4 hit path ON - resident experts are computed on the GPU
+strata generate: token graph hit path: 1551 resident experts, decided on the device
+strata generate: prefill 125867 tokens in 246 chunks, 624667.5 ms (201.5 tok/s); experts streamed 3510496 (3510496 by DMA, host 7256.1 ms), resident 154678; PLE 191.6 ms
+decode                   128 tokens in 6191.9 ms  ->  20.67 tok/s
+prefill                  125867 tokens in 624721.8 ms  ->  201.48 tok/s  (time to first token 625466.1 ms)
+LADDER-DONE
