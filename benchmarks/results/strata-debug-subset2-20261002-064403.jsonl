@@ -1,0 +1,2 @@
+{"model": "strata-debug-subset2", "task": "task10-tb-bank-trans-filter", "passed": false, "wall_s": 0, "tool_calls": 0, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-debug-subset2", "task": "task9-tb-analyze-access-logs", "passed": false, "wall_s": 0, "tool_calls": 0, "finish": "unknown", "zero_byte_retry": false}

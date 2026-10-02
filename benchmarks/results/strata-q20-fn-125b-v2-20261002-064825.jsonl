@@ -1,0 +1,11 @@
+{"model": "strata-q20-fn-125b-v2", "task": "task10-tb-bank-trans-filter", "passed": true, "wall_s": 125, "tool_calls": 40, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-q20-fn-125b-v2", "task": "task11-tb-assign-seats", "passed": true, "wall_s": 87, "tool_calls": 30, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-q20-fn-125b-v2", "task": "task1-js-bugfix", "passed": true, "wall_s": 64, "tool_calls": 27, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-q20-fn-125b-v2", "task": "task2-react-fix", "passed": false, "wall_s": 160, "tool_calls": 25, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-q20-fn-125b-v2", "task": "task3-dep-upgrade", "passed": true, "wall_s": 130, "tool_calls": 56, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-q20-fn-125b-v2", "task": "task4-python-bugfix", "passed": true, "wall_s": 36, "tool_calls": 16, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-q20-fn-125b-v2", "task": "task5-js-to-ts", "passed": false, "wall_s": 244, "tool_calls": 117, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-q20-fn-125b-v2", "task": "task6-extra-code-task", "passed": true, "wall_s": 71, "tool_calls": 16, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-q20-fn-125b-v2", "task": "task7-long-context-agent", "passed": true, "wall_s": 104, "tool_calls": 52, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-q20-fn-125b-v2", "task": "task8-tb-broken-python", "passed": false, "wall_s": 230, "tool_calls": 78, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-q20-fn-125b-v2", "task": "task9-tb-analyze-access-logs", "passed": true, "wall_s": 58, "tool_calls": 31, "finish": "unknown", "zero_byte_retry": false}

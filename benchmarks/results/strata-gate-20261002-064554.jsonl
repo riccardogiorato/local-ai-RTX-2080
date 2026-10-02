@@ -1,0 +1,2 @@
+{"model": "strata-gate", "task": "task10-tb-bank-trans-filter", "passed": true, "wall_s": 93, "tool_calls": 27, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-gate", "task": "task9-tb-analyze-access-logs", "passed": true, "wall_s": 49, "tool_calls": 22, "finish": "unknown", "zero_byte_retry": false}
