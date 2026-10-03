@@ -168,6 +168,49 @@ Verdicts inline below; evidence
 
 ## Tier 3 — backlog (run when lanes free up)
 
+**Intake 2026-10-03 (wide scan — Reddit + GitHub + HF, 3-week window):**
+
+- **Strata v0.1.38 bump + re-baseline** — IN PROGRESS (build running; 5
+  releases behind, Turing top-k +6.8% prefill, DeltaNet prompt 1.3-1.4x,
+  batched MTP draft 0.9s→0.07s @32K, PCIe-3.0 probe calibrates, 8 GB MMQ
+  no-fit fallback). v0.1.31 prompt attention is output-changing on RTX 20
+  → fresh golden set before any score comparison.
+- **v0.1.38 falsification probes** (official A/B switches, all cheap):
+  STRATA_TOPK_CAPACITY_GUARD, STRATA_ADAPT_NOWAIT, `--adapt-decay` sweep,
+  expert_profile_save warm-start, k8v4-vs-int8 at 16K/32K.
+- **FrogNano-4B-2609 Q4_K_M (2.8 GB)** — Microsoft RL-only post-train of
+  our own Qwen3.5-4B base; SWE-bench 39.4→61.5; direct RL-vs-base A/B on
+  the 11-task bench. Cheapest high-info download in the intake.
+- **Holo4-35B-A3B IQ2_XXS (10.8 GB)** — Qwen3.6-35B-A3B base, a
+  generation newer than our 9/11 A3B row; same budget class.
+- **Ling-3.0-flash-VL IQ2_XXS (36.7 GB)** — 124B/A5.1B hybrid
+  linear-attention record-row challenger in-pool; IQ1_S 28.1 GB doubles as
+  a sub-2bpw reasoning-wall probe. No native MTP.
+- **K2-Horizon-7B** — scores between Qwen3.6-27B and 35B-A3B on AA index;
+  KV is 18 GiB/128K → quantized-KV mandatory; GGUF ready.
+- **Ling Tiny 3.0 (8B/A1B)** — cheap free slot; plain llama.cpp.
+- **jadidbourbaki lookup-drafting port** (fork-only PRs): constmap +
+  sorted-vector n-grams, 165→1.18 µs/token drafting, 541 MB static cache
+  loads 0.23 s, acceptance unchanged — direct upgrade path for our
+  prompt-span-lookup fork; also closes on the ≤600 MB sidecar budget
+  question.
+- **sudoingX hybrid recurrent spec-rollback fix transplant** — spec
+  decoding over DeltaNet-class was falling back to whole-KV restores
+  (~15x drafter cost); not upstream yet; matches our
+  recurrent-snapshots finding.
+- **llama.cpp fork rebase (later session)** — onto post-#28549 base
+  (CUDA graphs for MTP); cherry-pick spec-correctness #29638/#29019;
+  expect churn from #29393 next to our Tier 2.8 fusion patch; upstream
+  #27694 probabilistic drafting is the closest external cousin to our
+  keyed-Gumbel work — worth an acceptance A/B after rebase.
+- **2080 power-limit sweep (owner-side)** — 2080 Ti data: 95% speed at
+  190 W, peak efficiency at 167 W; never benchmarked here.
+- **External negatives to keep honest:** Bonsai −2 logit bias
+  (44/50→43/50, Reddit-falsified 10-02); DFlash2 vs Flash-Next built-in
+  MTP on 27B (built-in drafter won 5/10 quality tests, 10-02).
+
+**Pre-existing Tier 3:**
+
 - **ThinkingCap 32K KV-in-RAM AG-Bench** — one bench; could flip the
   family's two failures. (Splash advisory.)
 - **llama-bench pp/tg rows** for the serve recipes — makes our numbers
@@ -208,7 +251,9 @@ Verdicts inline below; evidence
 | Diffusion Gemma 26B-A4B | no GGUF, vLLM no SM75, exceeds 8 GB even at extreme bpw | Google ships an E2B/E4B-class diffusion variant or a GGUF appears |
 | PQ2_0-MTP tier (2.13 bpw, 7.66 GB + trained head; 86/98/75 tok/s on an 11 GB Pascal) | can't go resident with useful context on 8 GB — measured 2.2 tok/s at ngl 46 partial, ngl 60 OOMs at load; trained head proven compatible (0.717/0.585 acceptance via their PQ2_0-MTP file) | an 11 GB+ card lands here (the giveaway 1080 Ti is exactly that); a sub-8 GB PQ2_0 derivative appears |
 | MiMo 32K + drafter | no ≤400 MB drafter exists (HF floor = Q2_K 482 MB); drafted arm 0.85× slower (see Archive) | z-lab Q1/IQ2_KS lineage, or a fork with slimmer draft-pp buffer |
-| DFlash2 sidecar ≤600 MB (2026-10-02 recheck) | closest yet: Anbeeld Q2_K 705 MB (new repo) — still over budget AND the MiMo quant-cliff data (Q2_K draft acceptance 0.44 vs 0.79 Q4) makes a Q2-class 27B head a poor bet; z-lab floor unchanged 1143 MB | a true ≤600 MB high-acceptance conversion, or IQ2_KS/Q1 lineage from z-lab |
+| DFlash2 sidecar ≤600 MB (2026-10-03 recheck) | closest yet: rasyosef/gemma-4-E2B-it-dflash2 **646 MB** (safetensors, NOT GGUF) — over budget and unconvertible-off-the-shelf; Anbeeld Q2_K 705 MB; rasyosef Qwen3.5-2B 708 MB; MiMo quant-cliff data unchanged | a true ≤600 MB high-acceptance GGUF, or a lab-side safetensors→GGUF conversion of the 646 MB E2B head (first self-trigger candidate) |
+| Aleph-Alpha Kolibri-1 (78.1B/A3.46B, 262K ctx, Apache-2.0, 2026-10-03) | FP8 weights only (~78 GB), no GGUF, no Strata pack support | any low-bpw GGUF or DASLab-class conversion lands in the 20-26 GB range; then it is a record-row aspirant (same 3.5B-active class as the 125B) |
+| MiMo-V2.6-Flash-MOPD (309B/A15B, native 5-layer DFlash-style MTP, MIT) | all quants ≥3 bpw = 116 GB+, far over the 46 GB pool | a ~1.5 bpw learned quant (GSQ-RCO-class) appears; then a legitimate 125B-row challenger with a native drafter |
 | Flash-Next usable tier | ~~65 GB IQ1_S doesn't fit; sub-2 bpw breaks the reasoning chain~~ **RESOLVED 2026-10-01 (half)**: the ≥2.2 bpw artifact EXISTS and reasoning is INTACT (GSQ-RCO Q2_0, recipe `recipes/flashnext-gsqrc-q20-125b-llamacpp-fork.md`) — only the MTP-head half stays open | a Flash-Next MTP head GGUF (~4 GB class) appears; then the agentic tier math is RAM + the 9 t/s novel-prefill wall |
 
 **Standing note:** an Ampere+ GPU landing in this lab remains the single
