@@ -23,7 +23,7 @@ Ranked by AG-Bench v2.1 score (11 canary-verified tasks), then by efficiency.
 |---|---|---|---|---|---|---|---|
 | 1 | [MiMo-9B](https://huggingface.co/bartowski/MiMo-V2.6-Distill-Qwen-9B-GGUF) | **8–9/11** ⁽¹⁾ | 42.5 | 52 / 1.7K | 32K | 5.5 / 1 | **DFlash d8** ⁽²⁾ |
 | 1 | [Qwen3.5-9B](https://huggingface.co/Qwen/Qwen3.5-9B) | **9/11** | 37.9 | 100 / 1.6K | 64K | 5.5 / 1 | MTP d4 |
-| 1 | **Strata-Q20 Flash-Next 125B** ⁽⁶⁾ | **8–10/11** | 28.4 | **31–33 / 740** | 16K (128K per ctx ladder) | 4.5 / 34 | Strata MTP d6 |
+| 1 | **Strata-Q20 Flash-Next 125B** ⁽⁶⁾ | **8–10/11** | 28.4 | **36–41 / 740** | 16K (128K per ctx ladder) | 4.5 / 34 | Strata MTP d6 |
 | 3 | [Qwen3.5-4B](https://huggingface.co/Qwen/Qwen3.5-4B) | **8/11** | 30.3 | 150 / 2.3K | **128K** | 2.6 / 1 | MTP d4 |
 | 3 | [A3B IQ2_XXS](https://huggingface.co/Qwen/Qwen3.5-35B-A3B) | **9/11** ⁽⁴⁾ | 14.9 | 40 / 1K | 32K+ | 4.6 / 12 | MTP d4 ext |
 | 3 | [Bonsai-64K](https://huggingface.co/sudoingx/Ternary-Bonsai-2-27B-PTQ1_0-MTP-GGUF) | **9/11** ⁽⁵⁾ | 8.5 | 15 / 350 | 64K | 6.0 / 2 | graft d2 + lookup |
@@ -40,7 +40,7 @@ Units: decode/prefill = t/s / tok/s · p/h = AG-Bench passes per hour · V/R = V
 ⁽³⁾ Card efficiency record: 270s for the full suite at **d3** (2026-10-01, identical pass set to the d2 era's 302s — depth crown from the MTP-depth sweep; d4 gains nothing). Original-suite 3/6 superseded.
 ⁽⁴⁾ Pinned re-bench 2026-10-01 (temp0/seed42): 9/11 @ 2176 s, fails {task5-TS, task8}; 8–9 band (task9 flipped pass vs the unpinned 8/11 row; task2-React passed, second family occurrence). `--cache-ram 32G` variant measured −24% suite wall but −1 score → not adopted.
 ⁽⁵⁾ 2026-10-01 pinned+lookup run (reconstructed 64K serve: `-c 65536 --no-kv-offload` + lookup-prompt,draft-mtp d2): 9/11 @ 3791 s — third fleet-tie score, the one on the byte-exact fork binary; fails {task2-React, task5-TS}; task8 cracked at a 600 s cap-grind. 8–9 band, single run; unpinned 64K row superseded.
-⁽⁶⁾ Qwen3.8-Flash-Next 125B on the Strata engine: band 8–10/11 (n=2 same-config runs, 2026-10-02) — the 10/11 run is the HIGHEST SCORE EVER MEASURED ON THIS CARD (only task5-TS failed; React and the fleet-discriminator task8 both solved). 22.0–28.4 p/h. Decode 31–33 tok/s with the engine MTP runtime (acceptance 0.66–0.72); int8 KV; prefill auto:16384 (740 t/s). Serve recipe: ~/Desktop/github/strata-port/strata-q20-gsq.json; evidence/strata-q20-sm75-port.jsonl.
+⁽⁶⁾ Qwen3.8-Flash-Next 125B on the Strata engine: band 8–10/11 (n=3 same-config runs, 2026-10-02/04) — the 10/11 run is the HIGHEST SCORE EVER MEASURED ON THIS CARD (only task5-TS failed; React and the fleet-discriminator task8 both solved). 2026-10-04 re-baseline on engine v0.1.38 (single-variable binary swap): 8/11, band confirmed, **decode 36–41 tok/s (was 31–33 on the 0.1.33-era build), MTP acceptance 0.75 (was 0.66–0.72)** — the engine bump is a keep. 22.0–28.4 p/h (0.1.33 era; 8-pass 0.1.38 run: 23.6 min suite). int8 KV; prefill auto:16384 (740 t/s). Serve recipe: ~/Desktop/github/strata-port/strata-q20-gsq-0138.json (v0.1.38 binary, worktree strata-0138); evidence/strata-q20-sm75-port.jsonl.
 
 **Also on card:** GLM-OCR · kev · laya · GLiNER 2.5 (utility tier: vision, routing, schema extraction)
 

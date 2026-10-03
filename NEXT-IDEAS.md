@@ -170,11 +170,12 @@ Verdicts inline below; evidence
 
 **Intake 2026-10-03 (wide scan — Reddit + GitHub + HF, 3-week window):**
 
-- **Strata v0.1.38 bump + re-baseline** — IN PROGRESS (build running; 5
-  releases behind, Turing top-k +6.8% prefill, DeltaNet prompt 1.3-1.4x,
-  batched MTP draft 0.9s→0.07s @32K, PCIe-3.0 probe calibrates, 8 GB MMQ
-  no-fit fallback). v0.1.31 prompt attention is output-changing on RTX 20
-  → fresh golden set before any score comparison.
+- ✓ **Strata v0.1.38 bump + re-baseline — RESOLVED 2026-10-04**: built
+  pinned v0.1.38 (worktree strata-0138, old binary kept for A/B),
+  single-variable 11-task re-baseline: **8/11 (band 8–10 held), decode
+  36–41 tok/s (was 31–33), MTP acceptance 0.75 (was 0.66–0.72)** — engine
+  bump kept; new config `strata-q20-gsq-0138.json`. Evidence:
+  evidence/strata-q20-sm75-port.jsonl (engine_0138_rebaseline).
 - **v0.1.38 falsification probes** (official A/B switches, all cheap):
   STRATA_TOPK_CAPACITY_GUARD, STRATA_ADAPT_NOWAIT, `--adapt-decay` sweep,
   expert_profile_save warm-start, k8v4-vs-int8 at 16K/32K.
