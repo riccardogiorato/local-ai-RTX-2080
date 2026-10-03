@@ -188,7 +188,6 @@ Verdicts inline below; evidence
   a sub-2bpw reasoning-wall probe. No native MTP.
 - **K2-Horizon-7B** — scores between Qwen3.6-27B and 35B-A3B on AA index;
   KV is 18 GiB/128K → quantized-KV mandatory; GGUF ready.
-- **Ling Tiny 3.0 (8B/A1B)** — cheap free slot; plain llama.cpp.
 - **jadidbourbaki lookup-drafting port** (fork-only PRs): constmap +
   sorted-vector n-grams, 165→1.18 µs/token drafting, 541 MB static cache
   loads 0.23 s, acceptance unchanged — direct upgrade path for our
