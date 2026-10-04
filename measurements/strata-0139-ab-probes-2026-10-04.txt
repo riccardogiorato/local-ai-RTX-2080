@@ -1,0 +1,18 @@
+# Strata v0.1.38 A/B falsification probes — 2026-10-04T15:54:29+02:00
+== prompt t1 (15:54:29)
+base-t1: decode=36.18 tok/s | accepted per round       0:14 1:10 2:6 3:35 4:0 5:0 | outsha=e3b0c44298fc
+ringoff-t1: decode=38.05 tok/s | accepted per round       0:14 1:10 2:6 3:35 4:0 5:0 | outsha=e3b0c44298fc
+guard-t1: decode=36.91 tok/s | accepted per round       0:13 1:9 2:8 3:28 4:5 5:0 | outsha=e3b0c44298fc
+nowait-t1: decode=35.23 tok/s | accepted per round       0:14 1:9 2:12 3:25 4:5 5:0 | outsha=e3b0c44298fc
+decay03-t1: decode=35.05 tok/s | accepted per round       0:10 1:7 2:8 3:29 4:1 5:4 | outsha=e3b0c44298fc
+decay09-t1: decode=30.18 tok/s | accepted per round       0:21 1:5 2:19 3:21 4:1 5:3 | outsha=e3b0c44298fc
+k8v4-t1: decode=28.30 tok/s | accepted per round       0:24 1:12 2:9 3:30 4:0 5:0 | outsha=e3b0c44298fc
+== prompt t2 (15:59:37)
+base-t2: decode=31.61 tok/s | accepted per round       0:13 1:15 2:4 3:30 4:1 5:2 | outsha=e3b0c44298fc
+ringoff-t2: decode=32.77 tok/s | accepted per round       0:10 1:11 2:2 3:29 4:1 5:6 | outsha=e3b0c44298fc
+guard-t2: decode=36.88 tok/s | accepted per round       0:10 1:7 2:4 3:34 4:2 5:2 | outsha=e3b0c44298fc
+nowait-t2: decode=33.18 tok/s | accepted per round       0:17 1:14 2:4 3:34 4:0 5:0 | outsha=e3b0c44298fc
+decay03-t2: decode=34.63 tok/s | accepted per round       0:15 1:15 2:4 3:34 4:0 5:0 | outsha=e3b0c44298fc
+decay09-t2: decode=28.61 tok/s | accepted per round       0:11 1:12 2:5 3:25 4:0 5:7 | outsha=e3b0c44298fc
+k8v4-t2: decode=32.20 tok/s | accepted per round       0:9 1:15 2:6 3:34 4:0 5:0 | outsha=e3b0c44298fc
+AB-PROBES-DONE
