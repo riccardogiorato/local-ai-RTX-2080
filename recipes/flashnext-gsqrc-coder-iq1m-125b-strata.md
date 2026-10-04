@@ -55,6 +55,7 @@ the record row. The one pruning win: hardware diversity (small machines that can
 ## Reproduce
 
 ```bash
+# config tracked verbatim: recipes/strata-configs/strata-coder-iq1m.json
 cd ~/Desktop/github/strata-port
 python3 -m serve.server --engine strata --config strata-coder-iq1m.json --port 8080
 bash ../local-ai-rtx2080/benchmarks/agentic-bench.sh strata-coder-iq1m-125b 600
