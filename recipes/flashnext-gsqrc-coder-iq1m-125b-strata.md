@@ -34,6 +34,20 @@ IQ1_M dequant cost). Neither quality NOR speed gained — the compressed-full mo
 the record row. The one pruning win: hardware diversity (small machines that can't host
 512-expert routing at all can host this).
 
+**Profile-retune falsification (2026-10-04):** the slower decode is NOT a tuning
+artifact. Rebuilt the expert profile from the Coder's own routing on 5 real task
+prompts (`make_profile --no-base --n-expert 256`) and A/B'd it against the shipped
+generic profile on the same prompt: 21.7 vs 22.2 tok/s — flat. The traces show why:
+routing is nearly UNIFORM across all 256 survivors (85% of (layer, expert) pairs ranked
+hot), so no VRAM-sized cache has a hot-set to hold. The deficit is structural to the
+pruned artifact. Evidence: `coder_profile_retune_falsified` in the evidence JSONL.
+
+Pruning half the experts and keeping survivors at IQ1_M scores like the full-quantized
+Q2_0-GSQ+RCO base but decodes a third slower in this serving (expert-cache economics +
+IQ1_M dequant cost). Neither quality NOR speed gained — the compressed-full model stays
+the record row. The one pruning win: hardware diversity (small machines that can't host
+512-expert routing at all can host this).
+
 ## Reproduce
 
 ```bash
