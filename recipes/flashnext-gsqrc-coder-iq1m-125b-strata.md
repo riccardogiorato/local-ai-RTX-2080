@@ -12,9 +12,13 @@ at this size class.**
   (1079 tensors, 302 native, 1.37 GiB arena), shipped `data/expert-profile-coder.bin`
   (48×256 — the base profile 48×512 is REJECTED at load), `--ple-io mmap`, kv int8,
   `--spec 4 --spec-min-p 0.5 --prefill auto:16384 --mtp mtp/rt`.
-- mmproj note: our copy of `mmproj-Qwen3.8-Flash-Next-BF16.gguf` (sha `19ef347e…`) does NOT
-  match either DASLab repo's current `b1a82259…` — the projector was re-uploaded after our
-  fetch (or the old v1-era copy is corrupt at same size). Vision probe pending a verified copy.
+- mmproj resolved: the projector was re-uploaded upstream after our first fetch — the verified
+  `b1a82259…` copy is now in place (old `19ef347e…` kept as `.bak`). **Vision probe result
+  (2026-10-04): pathway VIABLE end-to-end on the 8 GB card** — via llama.cpp-qwen4exp with
+  `--mmproj` (llama.cpp has no MTP here: ~11 tok/s probe tier): perception intact (pixel-accurate
+  atomic-logo description), but label knowledge wobbled (React→Python→Electron flip-flop) and
+  tiny-text OCR failed at 200 px — the sub-2 bpw pattern again: seeing survives, precise recall
+  doesn't. First vision-capable 100B-class artifact demonstrably running on this card.
 
 ## Measured (2026-10-04, single run, cap 600)
 
