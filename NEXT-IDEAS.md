@@ -179,11 +179,10 @@ Verdicts inline below; evidence
 - **v0.1.38 falsification probes** (official A/B switches, all cheap):
   STRATA_TOPK_CAPACITY_GUARD, STRATA_ADAPT_NOWAIT, `--adapt-decay` sweep,
   expert_profile_save warm-start, k8v4-vs-int8 at 16K/32K.
-- **FrogNano-4B-2609 Q4_K_M (2.8 GB)** — Microsoft RL-only post-train of
-  our own Qwen3.5-4B base; SWE-bench 39.4→61.5; direct RL-vs-base A/B on
-  the 11-task bench. Cheapest high-info download in the intake.
-- **Holo4-35B-A3B IQ2_XXS (10.8 GB)** — Qwen3.6-35B-A3B base, a
-  generation newer than our 9/11 A3B row; same budget class.
+- ~~**FrogNano-4B-2609 Q4_K_M (2.8 GB)**~~ — PARKED by owner call 2026-10-04
+  (no new small-model testing for now); unpark on request.
+- ~~**Holo4-35B-A3B IQ2_XXS (10.8 GB)**~~ — PARKED by owner call 2026-10-04,
+  same.
 - **Ling-3.0-flash-VL IQ2_XXS (36.7 GB)** — 124B/A5.1B hybrid
   linear-attention record-row challenger in-pool; IQ1_S 28.1 GB doubles as
   a sub-2bpw reasoning-wall probe. No native MTP.
