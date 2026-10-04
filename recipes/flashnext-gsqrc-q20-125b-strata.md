@@ -16,7 +16,7 @@ measured on this card (10/11 on AG-Bench v2.1), and the current 8–10/11 band r
 - Config (tracked verbatim): [recipes/strata-configs/strata-q20-gsq-0139.json](strata-configs/strata-q20-gsq-0139.json)
   (the v0.1.38-era one is kept beside it for A/B). Key engine args: `--pack
   packs/q2_0-gsq --native SHARD1 --ple-gguf SHARD2 --ple-io mmap --expert-profile
-  data/expert-profile.bin --expert-cache al --spec 4 --spec-min-p 0.5 --kv int8
+  data/expert-profile.bin --expert-cache auto --spec 4 --spec-min-p 0.5 --kv int8
   --prefill auto:16384 --mtp mtp/rt --max-context 16384`.
 
 ## Measured (2026-10-02 → 10-04, n=4 same-config runs, one engine variable at a time)
