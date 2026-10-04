@@ -188,11 +188,11 @@ Verdicts inline below; evidence
   a sub-2bpw reasoning-wall probe. No native MTP.
 - **K2-Horizon-7B** — scores between Qwen3.6-27B and 35B-A3B on AA index;
   KV is 18 GiB/128K → quantized-KV mandatory; GGUF ready.
-- **jadidbourbaki lookup-drafting port** (fork-only PRs): constmap +
-  sorted-vector n-grams, 165→1.18 µs/token drafting, 541 MB static cache
-  loads 0.23 s, acceptance unchanged — direct upgrade path for our
-  prompt-span-lookup fork; also closes on the ≤600 MB sidecar budget
-  question.
+- ~~**jadidbourbaki lookup-drafting port**~~ — PARKED by owner call 2026-10-04
+  (focus on Strata v0.1.39 for now). Recon report done + the five PR diffs
+  fetched to /tmp/port/; note from recon: their PRs rework the ngram-cache
+  drafter family, NOT our unique-span lookup-prompt matcher — the 165→1.18 µs
+  numbers apply to the -lcs static-cache path. Resume on request.
 - **sudoingX hybrid recurrent spec-rollback fix transplant** — spec
   decoding over DeltaNet-class was falling back to whole-KV restores
   (~15x drafter cost); not upstream yet; matches our
