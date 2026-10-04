@@ -1,13 +1,13 @@
-# RTX 2080 Local AI Lab — 24 models tested on one 8 GB Turing card
+# RTX 2080 Local AI Lab — 25 models tested on one 8 GB Turing card
 
-![GPU](https://img.shields.io/badge/GPU-TU104%20%C2%B7%208%20GB%20%C2%B7%20448%20GB%2Fs-lightgrey) ![models](https://img.shields.io/badge/models_tested-24-blue) ![method](https://img.shields.io/badge/measurements-reproducible-blue) ![recipes](https://img.shields.io/badge/recipes-docker%20digest--pinned-informational)
+![GPU](https://img.shields.io/badge/GPU-TU104%20%C2%B7%208%20GB%20%C2%B7%20448%20GB%2Fs-lightgrey) ![models](https://img.shields.io/badge/models_tested-25-blue) ![method](https://img.shields.io/badge/measurements-reproducible-blue) ![recipes](https://img.shields.io/badge/recipes-docker%20digest--pinned-informational)
 
 **What can a 2018 Turing card run today?** For every model we test, this repo records the
 exact artifact (repo, revision, SHA-256), the runtime (digest-pinned), the launch settings, the
 measured results, raw evidence, and a copy-paste reproduce command. Failures are recorded
 with the same care as wins.
 
-**Full test history →** [TESTED.md](TESTED.md) (all 24 models, recipes, and details).
+**Full test history →** [TESTED.md](TESTED.md) (all 25 models, recipes, and details).
 **Untested backlog →** [NEXT-IDEAS.md](NEXT-IDEAS.md).
 **AG-Bench v2.1 suite (11 tasks, canary-verified) →** [benchmarks/README.md](benchmarks/README.md).
 
@@ -23,6 +23,7 @@ Ranked by AG-Bench v2.1 score (11 canary-verified tasks), then by efficiency.
 |---|---|---|---|---|---|---|---|
 | 1 | [MiMo-9B](https://huggingface.co/bartowski/MiMo-V2.6-Distill-Qwen-9B-GGUF) | **8–9/11** ⁽¹⁾ | 42.5 | 52 / 1.7K | 32K | 5.5 / 1 | **DFlash d8** ⁽²⁾ |
 | 1 | [Qwen3.5-9B](https://huggingface.co/Qwen/Qwen3.5-9B) | **9/11** | 37.9 | 100 / 1.6K | 64K | 5.5 / 1 | MTP d4 |
+| 1 | **Flash-Next GSQ-RCO Coder 125B** ⁽⁷⁾ | **9/11** | 15.7 | 22–27 / 175 | 16K | 4.6 / 31 | Strata MTP d4 ⁽⁷⁾ |
 | 1 | **Strata-Q20 Flash-Next 125B** ⁽⁶⁾ | **8–10/11** | 28.4 | **36–41 / 740** | 16K (128K per ctx ladder) | 4.5 / 34 | Strata MTP d6 |
 | 3 | [Qwen3.5-4B](https://huggingface.co/Qwen/Qwen3.5-4B) | **8/11** | 30.3 | 150 / 2.3K | **128K** | 2.6 / 1 | MTP d4 |
 | 3 | [A3B IQ2_XXS](https://huggingface.co/Qwen/Qwen3.5-35B-A3B) | **9/11** ⁽⁴⁾ | 14.9 | 40 / 1K | 32K+ | 4.6 / 12 | MTP d4 ext |
@@ -41,6 +42,7 @@ Units: decode/prefill = t/s / tok/s · p/h = AG-Bench passes per hour · V/R = V
 ⁽⁴⁾ Pinned re-bench 2026-10-01 (temp0/seed42): 9/11 @ 2176 s, fails {task5-TS, task8}; 8–9 band (task9 flipped pass vs the unpinned 8/11 row; task2-React passed, second family occurrence). `--cache-ram 32G` variant measured −24% suite wall but −1 score → not adopted.
 ⁽⁵⁾ 2026-10-01 pinned+lookup run (reconstructed 64K serve: `-c 65536 --no-kv-offload` + lookup-prompt,draft-mtp d2): 9/11 @ 3791 s — third fleet-tie score, the one on the byte-exact fork binary; fails {task2-React, task5-TS}; task8 cracked at a 600 s cap-grind. 8–9 band, single run; unpinned 64K row superseded.
 ⁽⁶⁾ Qwen3.8-Flash-Next 125B on the Strata engine: band 8–10/11 (n=3 same-config runs, 2026-10-02/04) — the 10/11 run is the HIGHEST SCORE EVER MEASURED ON THIS CARD (only task5-TS failed; React and the fleet-discriminator task8 both solved). 2026-10-04 re-baseline on engine v0.1.38 (single-variable binary swap): 8/11, band confirmed, **decode 36–41 tok/s (was 31–33 on the 0.1.33-era build), MTP acceptance 0.75 (was 0.66–0.72)** — the engine bump is a keep. 22.0–28.4 p/h (0.1.33 era; 8-pass 0.1.38 run: 23.6 min suite). int8 KV; prefill auto:16384 (740 t/s). Serve recipe: ~/Desktop/github/strata-port/strata-q20-gsq-0138.json (v0.1.38 binary, worktree strata-0138); evidence/strata-q20-sm75-port.jsonl.
+⁽⁷⁾ The pruning-vs-quantization answer (2026-10-04, single run): the 50%-expert-pruned Coder (256/512 experts, ~1.89 bpw effective, survivors at IQ1_M, 58.4 GB) scores **9/11** — inside the full-quantized Q2_0 base's 8–10 band, first attempt. Same fails as the day's base run for react-fix/js-to-ts, and it PASSED task8, which that base run failed (band-internal flip). But it decodes **22–27 tok/s vs the base's 36–41** — equal quality, ~35–40% slower. **Verdict: at the same size class, squeeze-everything beats delete-half** — pruning bought neither quality nor speed on this card. Secondary finding: the base's Q2_0 MTP head survives expert-pruning intact (acceptance 0.70–0.80 on the pruned model — same-family heads tolerate the changed hidden states; recall cross-family grafts scored 0.000). Serve: packs/iq1m-coder (302 native tensors, 1.37 GiB arena) + upstream's expert-profile-coder.bin (48×256) + the shared PLE shard hardlink-deduped against the base (sha 316b46f, 28.8 GB). Vision probe pending (mmproj sha drifted upstream since our fetch). Evidence: evidence/strata-q20-sm75-port.jsonl (coder_iq1m_125b_chain); results/strata-coder-iq1m-125b-20261004-133816.jsonl.
 
 **Also on card:** GLM-OCR · kev · laya · GLiNER 2.5 (utility tier: vision, routing, schema extraction)
 
