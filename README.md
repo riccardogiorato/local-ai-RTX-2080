@@ -23,8 +23,8 @@ Ranked by AG-Bench v2.1 score (11 canary-verified tasks), then by efficiency.
 |---|---|---|---|---|---|---|---|
 | 1 | [MiMo-9B](https://huggingface.co/bartowski/MiMo-V2.6-Distill-Qwen-9B-GGUF) | **8–9/11** ⁽¹⁾ | 42.5 | 52 / 1.7K | 32K | 5.5 / 1 | **DFlash d8** ⁽²⁾ |
 | 1 | [Qwen3.5-9B](https://huggingface.co/Qwen/Qwen3.5-9B) | **9/11** | 37.9 | 100 / 1.6K | 64K | 5.5 / 1 | MTP d4 |
-| 1 | **Flash-Next GSQ-RCO Coder 125B** ⁽⁷⁾ | **9/11** | 15.7 | 22–27 / 175 | 16K | 4.6 / 31 | Strata MTP d4 ⁽⁷⁾ |
-| 1 | **Strata-Q20 Flash-Next 125B** ⁽⁶⁾ | **8–10/11** | 28.4 | **36–41 / 740** | 16K (128K per ctx ladder) | 4.5 / 34 | Strata MTP d6 |
+| 1 | [Qwen3.8-Flash-Next GSQ-RCO Q2_0 125B](https://huggingface.co/ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF) ⁽⁶⁾ | **8–10/11** | 28.4 | **36–41 / 280-620** | 16K (128K ladder) | 4.5 / 34 | Strata MTP d6 |
+| 1 | [Qwen3.8-Flash-Next GSQ-RCO Coder IQ1_M 125B](https://huggingface.co/ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-Coder-GGUF) ⁽⁷⁾ | **9/11** | 15.7 | 22–27 / 175 | 16K | 4.6 / 31 | Strata MTP d4 |
 | 3 | [Qwen3.5-4B](https://huggingface.co/Qwen/Qwen3.5-4B) | **8/11** | 30.3 | 150 / 2.3K | **128K** | 2.6 / 1 | MTP d4 |
 | 3 | [A3B IQ2_XXS](https://huggingface.co/Qwen/Qwen3.5-35B-A3B) | **9/11** ⁽⁴⁾ | 14.9 | 40 / 1K | 32K+ | 4.6 / 12 | MTP d4 ext |
 | 3 | [Bonsai-64K](https://huggingface.co/sudoingx/Ternary-Bonsai-2-27B-PTQ1_0-MTP-GGUF) | **9/11** ⁽⁵⁾ | 8.5 | 15 / 350 | 64K | 6.0 / 2 | graft d2 + lookup |
@@ -34,19 +34,19 @@ Ranked by AG-Bench v2.1 score (11 canary-verified tasks), then by efficiency.
 | 9 | [LFM2.5 DSpark](https://huggingface.co/LiquidAI/LFM2.5-8B-A1B) | 0/11 | — | **221** / 500 | 32K | resident | DSpark d4 |
 | 10 | [ThinkCap-27B](https://huggingface.co/holooo/ThinkingCap-Qwen3.8-27B-Q2_K-GGUF) | 4/6 | — | 9.6 / 239 | 32K | 7.4 / 6 | MTP d2 |
 
-Units: decode/prefill = t/s / tok/s · p/h = AG-Bench passes per hour · V/R = VRAM/DRAM GB.
+Units: decode/prefill = t/s / tok/s · p/h = AG-Bench passes per hour · V/R = VRAM/DRAM GB. Full details live in each model's recipe — footnotes here stay one line.
 
-⁽¹⁾ 9/11 replicated as 8/11 unpinned — always-thinking distills move ±1 task between runs; treat 1-task margins as bands. Pinned (temp 0/seed 42) runs cost the heavy iterative tasks (task11 fails pinned, passes unpinned).
-⁽²⁾ [DFlash-Q2_K/Q4_K_M sidecar](recipes/mimo-9b-distill-q4km-llamacpp.md) → 138 t/s @8K, 94 @16K; 16K pair: score preserved, 1.66× wall. 32K+drafter net-negative for agents (q4_0-KV tax).
-⁽³⁾ Card efficiency record: 270s for the full suite at **d3** (2026-10-01, identical pass set to the d2 era's 302s — depth crown from the MTP-depth sweep; d4 gains nothing). Original-suite 3/6 superseded.
-⁽⁴⁾ Pinned re-bench 2026-10-01 (temp0/seed42): 9/11 @ 2176 s, fails {task5-TS, task8}; 8–9 band (task9 flipped pass vs the unpinned 8/11 row; task2-React passed, second family occurrence). `--cache-ram 32G` variant measured −24% suite wall but −1 score → not adopted.
-⁽⁵⁾ 2026-10-01 pinned+lookup run (reconstructed 64K serve: `-c 65536 --no-kv-offload` + lookup-prompt,draft-mtp d2): 9/11 @ 3791 s — third fleet-tie score, the one on the byte-exact fork binary; fails {task2-React, task5-TS}; task8 cracked at a 600 s cap-grind. 8–9 band, single run; unpinned 64K row superseded.
-⁽⁶⁾ Qwen3.8-Flash-Next 125B on the Strata engine: band 8–10/11 (n=4 same-config runs, 2026-10-02/04) — the 10/11 run is the HIGHEST SCORE EVER MEASURED ON THIS CARD (only task5-TS failed; React and the fleet-discriminator task8 both solved). Engine progression 2026-10-04, one variable at a time: 0.1.33-era → v0.1.38 gave **decode 36–41 tok/s (was 31–33), acceptance 0.75** (8/11 @ 23.6 min); v0.1.39 (byte-budget ring + f-139b speedups) held the identical fail set {React, TS, broken-python} at 8/11, wall 22.9 min, acceptance 0.75–0.81 — adopted as the lab standard config. A/B probes (evidence: strata_0139_ab_probes) show the new knobs (ring, top-k guard, nowait, decay≠0.7, k8v4) are all flat-or-worse on this card: upstream defaults win for the third engine version running. Suffix-draft windows hit 43/43 and 63/63 acceptance in-bench. int8 KV; prefill auto:16384. Prefill speeds, honestly labeled: **738.8 t/s is the CLI chunk-fill ceiling** (16K fill, auto vs 512-chunk experiment, evidence `prefill_auto_16384_vs_512`); **in-bench real requests read big fresh prompts at 104–618.6 t/s (mean ~280, best 618.6 on a 7K-token task prompt)**; decode mean over the 2026-10-04 11-task runs: 34.0–34.9 tok/s. Serve config (tracked verbatim): recipes/strata-configs/strata-q20-gsq-0139.json (v0.1.39 binary, worktree strata-0139); full recipe: recipes/flashnext-gsqrc-q20-125b-strata.md; evidence/strata-q20-sm75-port.jsonl.
-⁽⁷⁾ The pruning-vs-quantization answer (2026-10-04, single run): the 50%-expert-pruned Coder (256/512 experts, ~1.89 bpw effective, survivors at IQ1_M, 58.4 GB) scores **9/11** — inside the full-quantized Q2_0 base's 8–10 band, first attempt. Same fails as the day's base run for react-fix/js-to-ts, and it PASSED task8, which that base run failed (band-internal flip). But it decodes **22–27 tok/s vs the base's 36–41** — equal quality, ~35–40% slower. **Verdict: at the same size class, squeeze-everything beats delete-half** — pruning bought neither quality nor speed on this card. Secondary finding: the base's Q2_0 MTP head survives expert-pruning intact (acceptance 0.70–0.80 on the pruned model — same-family heads tolerate the changed hidden states; recall cross-family grafts scored 0.000). Serve: packs/iq1m-coder (302 native tensors, 1.37 GiB arena) + upstream's expert-profile-coder.bin (48×256) + the shared PLE shard hardlink-deduped against the base (sha 316b46f, 28.8 GB). Vision probe pending (mmproj sha drifted upstream since our fetch). Evidence: evidence/strata-q20-sm75-port.jsonl (coder_iq1m_125b_chain); results/strata-coder-iq1m-125b-20261004-133816.jsonl.
+⁽¹⁾ 8–9 band: always-thinking distills move ±1 task per run. [Recipe](recipes/mimo-9b-distill-q4km-llamacpp.md).
+⁽²⁾ DFlash sidecar pairs at 8K/16K; 32K+drafter net-negative. [Recipe](recipes/mimo-9b-distill-q4km-llamacpp.md).
+⁽³⁾ Card efficiency record: full suite in 270s at d3. [Recipe](recipes/gemma-4-e4b-qat-llamacpp.md).
+⁽⁴⁾ Pinned re-bench 8–9 band; `--cache-ram 32G` faster but −1 score, not adopted. [Recipe](recipes/qwen35-35b-a3b-cpuexperts-llamacpp.md).
+⁽⁵⁾ Pinned+lookup 64K run on the byte-exact fork binary; task8 cracked at a 600s cap-grind. [Recipe](recipes/ternary-bonsai2-27b-ptq1_0-llamacpp-fork.md).
+⁽⁶⁾ Fleet-record row (10/11 once, band 8–10, n=4), engine v0.1.39, decode mean 34–35 bench-class; prefill here = real in-bench reads (the 738.8 t/s figure is the CLI chunk-fill ceiling, see recipe). Configs + full story: [recipe](recipes/flashnext-gsqrc-q20-125b-strata.md) and [recipes/strata-configs/](recipes/strata-configs/).
+⁽⁷⁾ Pruning-vs-quantization: half-pruned ties quality (9/11, first run) but decodes ~35–40% slower — squeeze-everything wins at this size class; base's MTP head survives pruning (acceptance 0.70–0.80); vision pathway viable. [Recipe](recipes/flashnext-gsqrc-coder-iq1m-125b-strata.md).
 
 **Also on card:** GLM-OCR · kev · laya · GLiNER 2.5 (utility tier: vision, routing, schema extraction)
 
-## Key findings from 24 models
+## Key findings from 25 models
 
 - **The sub-2 bpw wall**: below ~2 bits-per-weight, LLM reasoning chains break (tested twice: IQ1_S loops-to-nothing, Flash-Next-125B thinks-to-EOS) while surface tasks survive. Curated ternary (Bonsai at 1.75 bpw) is the exception.
 - **Context ceiling > compression quality**: Bonsai's score jumped 5/11 → 8/11 just from context (8K→64K), no quant change. The "dumb model" was a smart model in a small room.
