@@ -1,0 +1,10 @@
+# draft-vocab en A/B — 2026-10-06T09:20:51+02:00
+base-t1: decode=33.10 tok/s | draft-head=814 MiB
+2023 MiB | outsha=396817561e2023
+dv-en-t1: decode= | draft-head= | outsha=e3b0c44298fc1c
+base-t2: decode=31.60 tok/s | draft-head=814 MiB
+1861 MiB | outsha=127a3f8d2c633b
+dv-en-t2: decode= | draft-head= | outsha=e3b0c44298fc1c
+DV-AB-DONE
+en-t1: decode=33.62 tok/s | head=68.0 MiB (40525 ids) | mean base 32.35 -> EN 33.78 (+4.4%)
+en-t2: decode=33.93 tok/s | head=68.0 MiB | VRAM claim verifies: 178.4 -> 68.0 = 110.4 MiB saved
