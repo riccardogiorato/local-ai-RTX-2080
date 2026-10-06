@@ -14,9 +14,17 @@ expert bytes to VRAM or feeds the pool faster is the whole game.
    `--dump-routing trace.bin` → `tools/make_profile.py` → restart with the
    custom profile; keep `--adapt-every 4`. Byte-exact arms use
    `--adapt-swaps 0`. Evidence: bench/results/2026-09-29-layer-split.
-2. **VRAM scavenging**: `--vram-reserve-mib 500` + headless run; explicit
-   `--expert-cache 3000` to test auto's sizing. ~1 GB ≈ ~700 slots ≈ +34%
-   cache. Risk: desktop spikes (issue class #279).
+2. **VRAM scavenging** — MEASURED 2026-10-06 (headless + 2533 MT/s):
+   `--vram-reserve-mib 500` **adopted for the 16K bench class**: synth prefill
+   +55–65% (420→620–702 t/s, reproduced on a second boot), real-text
+   540→732–838 t/s, decode flat; auto's own sizing stays optimal, explicit N
+   not needed. Floor found: r300/r400 trip the engine's LOW warning (<200 MiB
+   free, gen-160 rejected at 94 MiB), r200 kills the MTP head (-6 MiB).
+   **Falsified at 128K chat class**: the prompt chunk is pinned at 512 by
+   design (prompt buffers must fit in every expert cache; explicit 1024 is
+   clamped down), so no VRAM-side knob moves 128K prefill at kv-int8. 128K
+   levers that would work all trade quality or context: `--kv q4_0` (#9) or a
+   lower `--max-context`. Evidence: `vram_scavenge_headless_ab`.
 3. **`--ple-row-cache 268435456`** (256 MiB vs 1 MiB default): the tail-stall
    shave; PLE idle stalls of 50-150 ms documented (ple_reader.hpp).
 4. **`--prefill auto:16384`** — TTFT lever (PR #282 +15% on 32K prompts).
