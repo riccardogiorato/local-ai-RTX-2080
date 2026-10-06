@@ -1,0 +1,6 @@
+# v0.1.40 + draft-vocab EN stack test — 2026-10-06T11:40:05+02:00
+full-1: 36.38 tok/s | head=4 MiB
+full-2: 34.38 tok/s | head=4 MiB
+en-1: 36.79 tok/s | head=0 MiB
+en-2: 36.58 tok/s | head=0 MiB
+DVEN-BENCH: 8/11 wall 1139s
