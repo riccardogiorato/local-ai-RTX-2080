@@ -1,0 +1,6 @@
+# STRATA_BF16_TC=1 A/B (prefill-focused) — 2026-10-06T12:16:29+02:00
+base1: prefill=409.64 tok/s | ttt=3548.5 | decode=35.43 tok/s
+base2: prefill=408.59 tok/s | ttt=3571.7 | decode=35.20 tok/s
+tc1: prefill=352.56 tok/s | ttt=4121.6 | decode=35.63 tok/s
+tc2: prefill=411.74 tok/s | ttt=3552.6 | decode=38.64 tok/s
+BF16TC-BENCH: 8/11 wall 1226s
