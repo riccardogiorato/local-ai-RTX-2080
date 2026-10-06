@@ -24,7 +24,9 @@
     "--mtp",
     "mtp/rt",
     "--max-context",
-    "16384"
+    "16384",
+    "--vram-reserve-mib",
+    "500"
   ],
   "cwd": ".",
   "tokenizer": "packs/q2_0-gsq/tokenizer",

@@ -30,6 +30,7 @@ measured on this card (10/11 on AG-Bench v2.1), and the current 8–10/11 band r
 | Context ladder | 16K config native; 128K measured (see the ctx-ladder evidence event) |
 | Footprints | ~4.5 GB VRAM / ~34 GB DRAM-class (37.6 hot + PLE mmap) |
 | v0.1.39 knobs | A/B-probed: ring/guard/nowait flat, decay≠0.7 and k8v4 WORSE — upstream defaults optimal |
+| VRAM scavenge (headless 2533 era) | **Adopted `--vram-reserve-mib 500` for the 16K bench class (2026-10-06)**: synth prefill 420→620–702 t/s (+55–65%, two boots), real-text 540–740→732–838 t/s, decode flat. Falsified at 128K chat class: prompt chunk is pinned at 512 by design ("buffers fit in every expert cache"), r500/1024-chunk both flat; r300/r400 flagged LOW, r200 kills the MTP draft head (-6 MiB). Details: evidence `vram_scavenge_headless_ab` |
 
 ## Reproduce
 
