@@ -21,28 +21,21 @@ Ranked by AG-Bench v2.1 score (11 canary-verified tasks), then by efficiency.
 
 | Rank | Model | Score | p/h | Decode / Prefill | Ctx | V/R GB | Spec |
 |---|---|---|---|---|---|---|---|
-| 1 | [MiMo-9B](https://huggingface.co/bartowski/MiMo-V2.6-Distill-Qwen-9B-GGUF) | **8–9/11** ⁽¹⁾ | 42.5 | 52 / 1.7K | 32K | 5.5 / 1 | **DFlash d8** ⁽²⁾ |
+| 1 | [MiMo-9B](https://huggingface.co/bartowski/MiMo-V2.6-Distill-Qwen-9B-GGUF) | **8–9/11** | 42.5 | 52 / 1.7K | 32K | 5.5 / 1 | **DFlash d8** |
 | 1 | [Qwen3.5-9B](https://huggingface.co/Qwen/Qwen3.5-9B) | **9/11** | 37.9 | 100 / 1.6K | 64K | 5.5 / 1 | MTP d4 |
-| 1 | [Qwen3.8-Flash-Next GSQ-RCO Q2_0 125B](https://huggingface.co/ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF) ⁽⁶⁾ | **8–10/11** | 28.4 | **36–41 / 280-620** | 16K (128K ladder) | 4.5 / 34 | Strata MTP d6 |
-| 1 | [Qwen3.8-Flash-Next GSQ-RCO Coder IQ1_M 125B](https://huggingface.co/ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-Coder-GGUF) ⁽⁷⁾ | **9/11** | 15.7 | 22–27 / 175 | 16K | 4.6 / 31 | Strata MTP d4 |
+| 1 | [Qwen3.8-Flash-Next GSQ-RCO Q2_0 125B](https://huggingface.co/ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF) | **8–10/11** | 28.4 | **36–41 / 280-620** | 16K (128K ladder) | 4.5 / 34 | Strata MTP d6 |
+| 1 | [Qwen3.8-Flash-Next GSQ-RCO Coder IQ1_M 125B](https://huggingface.co/ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-Coder-GGUF) | **9/11** | 15.7 | 22–27 / 175 | 16K | 4.6 / 31 | Strata MTP d4 |
 | 3 | [Qwen3.5-4B](https://huggingface.co/Qwen/Qwen3.5-4B) | **8/11** | 30.3 | 150 / 2.3K | **128K** | 2.6 / 1 | MTP d4 |
-| 3 | [A3B IQ2_XXS](https://huggingface.co/Qwen/Qwen3.5-35B-A3B) | **9/11** ⁽⁴⁾ | 14.9 | 40 / 1K | 32K+ | 4.6 / 12 | MTP d4 ext |
-| 3 | [Bonsai-64K](https://huggingface.co/sudoingx/Ternary-Bonsai-2-27B-PTQ1_0-MTP-GGUF) | **9/11** ⁽⁵⁾ | 8.5 | 15 / 350 | 64K | 6.0 / 2 | graft d2 + lookup |
+| 3 | [A3B IQ2_XXS](https://huggingface.co/Qwen/Qwen3.5-35B-A3B) | **9/11** | 14.9 | 40 / 1K | 32K+ | 4.6 / 12 | MTP d4 ext |
+| 3 | [Bonsai-64K](https://huggingface.co/sudoingx/Ternary-Bonsai-2-27B-PTQ1_0-MTP-GGUF) | **9/11** | 8.5 | 15 / 350 | 64K | 6.0 / 2 | graft d2 + lookup |
 | 3 | [Xing-29B](https://huggingface.co/XingChen-AGI/Xing4.0-29B-A4B) | **8/11** | 5.8 | 25 / 346 | 8K | 4.0 / 12 | MTP d2 |
-| 7 | [Gemma-E4B](https://huggingface.co/google/gemma-4-E4B-it-qat-q4_0-unquantized) | **7/11** | **93.3** ⁽³⁾ | **181** / 2.8K | **128K** | 4.3 / 1 | MTP d3 ext |
+| 7 | [Gemma-E4B](https://huggingface.co/google/gemma-4-E4B-it-qat-q4_0-unquantized) | **7/11** | **93.3** | **181** / 2.8K | **128K** | 4.3 / 1 | MTP d3 ext |
 | 8 | [Bonsai-8K](https://huggingface.co/sudoingx/Ternary-Bonsai-2-27B-PTQ1_0-MTP-GGUF) | **5/11** | 29.7 | **55** / 520 | 8K | 7.3 / 1 | graft d2 |
 | 9 | [LFM2.5 DSpark](https://huggingface.co/LiquidAI/LFM2.5-8B-A1B) | 0/11 | — | **221** / 500 | 32K | resident | DSpark d4 |
 | 10 | [ThinkCap-27B](https://huggingface.co/holooo/ThinkingCap-Qwen3.8-27B-Q2_K-GGUF) | 4/6 | — | 9.6 / 239 | 32K | 7.4 / 6 | MTP d2 |
 
 Units: decode/prefill = t/s / tok/s · p/h = AG-Bench passes per hour · V/R = VRAM/DRAM GB. Full details live in each model's recipe — footnotes here stay one line.
 
-⁽¹⁾ 8–9 band: always-thinking distills move ±1 task per run. [Recipe](recipes/mimo-9b-distill-q4km-llamacpp.md).
-⁽²⁾ DFlash sidecar pairs at 8K/16K; 32K+drafter net-negative. [Recipe](recipes/mimo-9b-distill-q4km-llamacpp.md).
-⁽³⁾ Card efficiency record: full suite in 270s at d3. [Recipe](recipes/gemma-4-e4b-qat-llamacpp.md).
-⁽⁴⁾ Pinned re-bench 8–9 band; `--cache-ram 32G` faster but −1 score, not adopted. [Recipe](recipes/qwen35-35b-a3b-cpuexperts-llamacpp.md).
-⁽⁵⁾ Pinned+lookup 64K run on the byte-exact fork binary; task8 cracked at a 600s cap-grind. [Recipe](recipes/ternary-bonsai2-27b-ptq1_0-llamacpp-fork.md).
-⁽⁶⁾ Fleet-record row (10/11 once, band 8–10, n=4), engine v0.1.39, decode mean 34–35 bench-class; prefill here = real in-bench reads (the 738.8 t/s figure is the CLI chunk-fill ceiling, see recipe). Configs + full story: [recipe](recipes/flashnext-gsqrc-q20-125b-strata.md) and [recipes/strata-configs/](recipes/strata-configs/).
-⁽⁷⁾ Pruning-vs-quantization: half-pruned ties quality (9/11, first run) but decodes ~35–40% slower — squeeze-everything wins at this size class; base's MTP head survives pruning (acceptance 0.70–0.80); vision pathway viable. [Recipe](recipes/flashnext-gsqrc-coder-iq1m-125b-strata.md).
 
 **Also on card:** GLM-OCR · kev · laya · GLiNER 2.5 (utility tier: vision, routing, schema extraction)
 
