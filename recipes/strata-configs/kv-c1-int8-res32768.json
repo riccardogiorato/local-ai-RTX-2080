@@ -31,7 +31,7 @@
   "cwd": "/home/riccardogiorato/Desktop/github/strata-port",
   "tokenizer": "/home/riccardogiorato/Desktop/github/strata-port/packs/q2_0-gsq/tokenizer",
   "model_name": "local-model",
-  "log": "chat-tailnet.log",
+  "log": "kv-c1-int8-res32768.log",
   "host": "100.110.49.114",
   "port": 8080,
   "fit_max_tokens": true
