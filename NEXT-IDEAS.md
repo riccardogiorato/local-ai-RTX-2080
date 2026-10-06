@@ -168,6 +168,30 @@ Verdicts inline below; evidence
 
 ## Tier 3 — backlog (run when lanes free up)
 
+**Intake 2026-10-07 (owner tip, HF):**
+
+- **EmbeddingGemma-2 (GGUF 176–310 MB, Apache-2.0)**:
+  google/embeddinggemma-2, Google's first multimodal embedder: 740M
+  total (130M text backbone + 140M embedder + optional vision 170M /
+  audio 300M encoders), one unified 768-d space across text/image/video/
+  audio, Matryoshka (MRL) truncation at 128/256/512/768 dims, 8K ctx
+  shared across modalities. NOT an agentic-decode candidate (mean-pooled
+  embedder, no generation role). The niche here is a local
+  RAG/embedding side-service, and at this size it sits beside any
+  resident serve with zero VRAM planning. Quants
+  (unsloth/embeddinggemma-2-GGUF, arch `gemma-embedding2`):
+  UD-Q4_K_XL 176 MB, UD-Q5_K_XL 210 MB, UD-Q6_K_XL 249 MB, Q8_0 310 MB,
+  BF16 558 MB (ggml-org/embeddinggemma-2-GGUF mirror also live; ONNX
+  + MLX-community 4/5/6/8-bit variants exist but are off-lab-runtime).
+  Caveats before benching: new `gemma-embedding2` arch: needs a llama.cpp
+  recent enough to parse it, so check the fork FIRST; upstream says run
+  bf16/fp32 and "do not use float16". The quant tiers dodge the
+  fp16 pitfall entirely but per-quant retrieval quality is untested
+  fp16 pitfall entirely but per-quant retrieval quality is untested
+  (bench Q8_0 vs UD-Q4_K_XL against whatever retrieval GT we trust);
+  llama-server embeddings endpoint + `--pooling mean` is the serve
+  shape. Tiny footprint, so this is a half-session item, not a lane.
+
 **Intake 2026-10-03 (wide scan — Reddit + GitHub + HF, 3-week window):**
 
 - ✓ **Strata v0.1.38 bump + re-baseline — RESOLVED 2026-10-04**: built
