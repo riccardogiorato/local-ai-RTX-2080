@@ -26,7 +26,7 @@ measured on this card (10/11 on AG-Bench v2.1), and the current 8–10/11 band r
 | AG-Bench v2.1 | **band 8–10/11** (8, 9, 10, 8) — 10/11 = fleet record (only task5-TS failed) |
 | Decode (v0.1.38/39) | **36–41 tok/s** (was 31–33 on the 0.1.33-era build) |
 | MTP acceptance | 0.75–0.81 (was 0.66–0.72); suffix-draft windows 43/43, 63/63 in-bench |
-| Suite wall (8-pass runs) | 23.6 min (0.1.38) → 22.9 min (0.1.39) |
+| Suite wall | 23.6 min (0.1.38, 8/11) → 22.9 (0.1.39, 8/11) → **20.6 (0.1.40, 9/11 @ 1238s — fastest suite ever on this card)** |
 | Context ladder | 16K config native; 128K measured (see the ctx-ladder evidence event) |
 | Footprints | ~4.5 GB VRAM / ~34 GB DRAM-class (37.6 hot + PLE mmap) |
 | v0.1.39 knobs | A/B-probed: ring/guard/nowait flat, decay≠0.7 and k8v4 WORSE — upstream defaults optimal |
@@ -52,3 +52,15 @@ re-baselines, A/B probe sets) · baseline history: the llama.cpp-fork path in
 SSD: `~/models/flashnext-gsq-rco/` (66.4 GB pair + sha.txt); archive copies on
 `/mnt/archive/local-models/`. The Coder's PLE shard is hardlink-deduped against
 this copy (sha `316b46f` identical).
+## v0.1.40 (2026-10-06): adopted
+
+307 commits over 0.1.39 — the PR #783 series (A-K: batched verify-window K/V, multi-token
+router + k=10 combine, drafter catch-up skipping rejected rows, sub-warp expert kernels,
+fused per-head RMSNorm+RoPE in the verify window/drafter; sm_120-only defaults we inherit
+as opt-in). Same-protocol bench: **9/11 @ 1238s** (prev 8/11 @ 1374/1413s), fails
+{task2-React, task5-TS} (the model-scope fail pair, not task8 this time), decode windows
+34.1-41.7, **acceptance 0.79-0.86** (prev 0.75-0.81), first probe run after boot reads
+~13 tok/s cold (page-cache warmup artifact, bench unaffected). Configs:
+`recipes/strata-configs/strata-q20-gsq-0140.json` (+ `-tailnet` variant for the
+standing chat; the tailnet config's engine log field renamed to `chat-tailnet.log`,
+which also fixes the bench/chat telemetry mixing from 2026-10-04).

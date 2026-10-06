@@ -17,13 +17,13 @@ with the same care as wins.
 
 ## Top 10 models on this card
 
-Ranked by AG-Bench v2.1 score (11 canary-verified tasks), then by efficiency.
+Ranked by AG-Bench v2.1 score (11 canary-verified tasks), then by efficiency. Engine: stock Strata, tag-pinned (v0.1.40).
 
 | Rank | Model | Score | p/h | Decode / Prefill | Ctx | V/R GB | Spec |
 |---|---|---|---|---|---|---|---|
 | 1 | [MiMo-9B](https://huggingface.co/bartowski/MiMo-V2.6-Distill-Qwen-9B-GGUF) | **8–9/11** | 42.5 | 52 / 1.7K | 32K | 5.5 / 1 | **DFlash d8** |
 | 1 | [Qwen3.5-9B](https://huggingface.co/Qwen/Qwen3.5-9B) | **9/11** | 37.9 | 100 / 1.6K | 64K | 5.5 / 1 | MTP d4 |
-| 1 | [Qwen3.8-Flash-Next GSQ-RCO Q2_0 125B](https://huggingface.co/ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF) | **8–10/11** | 28.4 | **36–41 / 280-620** | 16K (128K ladder) | 4.5 / 34 | Strata MTP d6 |
+| 1 | [Qwen3.8-Flash-Next GSQ-RCO Q2_0 125B](https://huggingface.co/ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF) | **8–10/11** | 28.4 | **34–42 / 280-620** | 16K (128K ladder) | 4.5 / 34 | Strata MTP d6 |
 | 1 | [Qwen3.8-Flash-Next GSQ-RCO Coder IQ1_M 125B](https://huggingface.co/ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-Coder-GGUF) | **9/11** | 15.7 | 22–27 / 175 | 16K | 4.6 / 31 | Strata MTP d4 |
 | 3 | [Qwen3.5-4B](https://huggingface.co/Qwen/Qwen3.5-4B) | **8/11** | 30.3 | 150 / 2.3K | **128K** | 2.6 / 1 | MTP d4 |
 | 3 | [A3B IQ2_XXS](https://huggingface.co/Qwen/Qwen3.5-35B-A3B) | **9/11** | 14.9 | 40 / 1K | 32K+ | 4.6 / 12 | MTP d4 ext |
