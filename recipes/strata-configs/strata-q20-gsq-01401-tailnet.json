@@ -24,7 +24,9 @@
     "--mtp",
     "mtp/rt",
     "--max-context",
-    "131072"
+    "131072",
+    "--kv-resident",
+    "32768"
   ],
   "cwd": "/home/riccardogiorato/Desktop/github/strata-port",
   "tokenizer": "/home/riccardogiorato/Desktop/github/strata-port/packs/q2_0-gsq/tokenizer",

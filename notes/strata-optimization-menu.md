@@ -36,9 +36,15 @@ expert bytes to VRAM or feeds the pool faster is the whole game.
 8. **Turing kernel variants**: `git pull` to 0.1.33 (`a1eb951`) — `0bea892`
    fixes the fused-GR two-half split ON TURING (`STRATA_GR_V3=1`);
    `STRATA_HC_SPLIT=0/1`; `--no-fused-gr`; `--shared-late`; `--no-token-graph`.
-9. **`--kv q4_0` at 64K+ only**: +8% decode at 128K (67.4 vs 62.4 tok/s, +146
-   slots) but perplexity +8-12% on long docs; irrelevant at ctx 4096. (Also
-   feeds the KV-types experiment.)
+9. **`--kv q4_0` at 64K+ only**: MEASURED 2026-10-07 (128K class, with KV
+   streaming on): **falsified** — no prefill gain over int8 streaming
+   (561-564 vs 558-583 t/s) despite freeing the most VRAM, so its +8-12%
+   long-doc perplexity buys nothing here. The winning KV lever is
+   **`--kv-resident 32768` streaming itself** (adopted: chunk 512→2048,
+   real prefill ~2.8×, outputs bit-identical, ~1.7 GB RAM), and
+   **`--kv k8v4` + streaming** is the measured optional next +8-15%
+   (two boots, needles pass; value rounding — user's call). 16K-class
+   context: irrelevant at ctx 4096. (Also feeds the KV-types experiment.)
 10. **Measured negative — do not spend**: TC-GEMV on sm_75 (1.3-2.2x SLOWER,
     their own tc-gemv-sm75 bench, PR #343); `--gpu-only-full` is a floor probe
     not a mode; STRATA_KQ256 dead; `--native-bf16*` are diagnostics;

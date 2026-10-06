@@ -31,6 +31,7 @@ measured on this card (10/11 on AG-Bench v2.1), and the current 8–10/11 band r
 | Footprints | ~4.5 GB VRAM / ~34 GB DRAM-class (37.6 hot + PLE mmap) |
 | v0.1.39 knobs | A/B-probed: ring/guard/nowait flat, decay≠0.7 and k8v4 WORSE — upstream defaults optimal |
 | VRAM scavenge (headless 2533 era) | **Adopted `--vram-reserve-mib 500` for the 16K bench class (2026-10-06)**: synth prefill 420→620–702 t/s (+55–65%, two boots), real-text 540–740→732–838 t/s, decode flat. Falsified at 128K chat class: prompt chunk is pinned at 512 by design ("buffers fit in every expert cache"), r500/1024-chunk both flat; r300/r400 flagged LOW, r200 kills the MTP draft head (-6 MiB). Details: evidence `vram_scavenge_headless_ab` |
+| KV streaming at 128K (2026-10-07) | **Adopted `--kv-resident 32768` for the chat config**: real 30K-token prefill 202→558–583 t/s (**~2.8×**), chunk 512→2048, slots 403→1389, ~1.7 GB RAM cost, outputs bit-identical. k8v4 variant measured +8–15% on top (615–656 t/s, two boots, needles pass) but not adopted (value rounding); q4_0 falsified (no gain over int8-streaming, keeps its perplexity tax); 64K-ctx falsified (dominated). Details: evidence `kv_streaming_128k_arms` |
 
 ## Reproduce
 
