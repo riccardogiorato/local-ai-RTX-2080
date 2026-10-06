@@ -1,0 +1,10 @@
+# v0.1.40 probes — 2026-10-06T11:10:41+02:00
+t1: decode=12.68 tok/s | acc=accepted per round 0:13 1:10 2:25 3:21 4:0 5:0 | outsha=bb00d07e357299
+t2: decode=35.34 tok/s | acc=accepted per round 0:6 1:12 2:8 3:35 4:0 5:0 | outsha=bac4747e1808e9
+RESULT: 9/11 wall 1238s
+strata serve: prompt 4833 tokens = 4786 reused + 47 read in 1062 ms (44.3 tok/s), 107 generated in 2748 ms (38.9 tok/s), drafts accepted 76 of 88, 6 checkpoints
+strata serve: decode expert cache hit rate: 46.5% (22547 hits / 48525 lookups); 9555 more read by the GPU over PCIe or from another GPU (16.5% of all 58080 routed)
+strata serve: prompt 5197 tokens = 4941 reused + 256 read in 2033 ms (125.9 tok/s), 192 generated in 4603 ms (41.7 tok/s), drafts accepted 133 of 154, 6 checkpoints
+strata serve: decode expert cache hit rate: 54.3% (47621 hits / 87745 lookups); 14495 more read by the GPU over PCIe or from another GPU (14.2% of all 102240 routed)
+strata serve: prompt 5549 tokens = 5388 reused + 161 read in 1721 ms (93.6 tok/s), 306 generated in 8963 ms (34.1 tok/s), drafts accepted 204 of 257, 6 checkpoints
+strata serve: decode expert cache hit rate: 39.9% (56485 hits / 141560 lookups); 31240 more read by the GPU over PCIe or from another GPU (18.1% of all 172800 routed)
