@@ -34,8 +34,7 @@ Ranked by AG-Bench v2.1 score (11 canary-verified tasks), then by efficiency.
 | 9 | [LFM2.5 DSpark](https://huggingface.co/LiquidAI/LFM2.5-8B-A1B) | 0/11 | — | **221** / 500 | 32K | resident | DSpark d4 |
 | 10 | [ThinkCap-27B](https://huggingface.co/holooo/ThinkingCap-Qwen3.8-27B-Q2_K-GGUF) | 4/6 | — | 9.6 / 239 | 32K | 7.4 / 6 | MTP d2 |
 
-Units: decode/prefill = t/s / tok/s · p/h = AG-Bench passes per hour · V/R = VRAM/DRAM GB. Full details live in each model's recipe — footnotes here stay one line.
-
+Units: decode/prefill = t/s / tok/s · p/h = AG-Bench passes per hour · V/R = VRAM/DRAM GB. Full details, caveats and configs live in each model's recipe.
 
 **Also on card:** GLM-OCR · kev · laya · GLiNER 2.5 (utility tier: vision, routing, schema extraction)
 
