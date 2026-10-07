@@ -35,7 +35,7 @@ run_task() {
   for attempt in 1 2; do
     ( cd "$work" && PI_OFFLINE=${PI_OFFLINE:-1} timeout "$CAP" pi --provider llamacpp-local --model local-model \
         --mode json --no-session \
-        -p "$(cat "$work/TASK.md")" ) > "$work/pi-session.jsonl" 2>"$work/pi-errors.log"
+        -p "$(cat "$work/TASK.md")" < /dev/null ) > "$work/pi-session.jsonl" 2>"$work/pi-errors.log"
     [ -s "$work/pi-session.jsonl" ] && break
     if [ "$attempt" = "1" ]; then
       zero_byte_retry=1
@@ -129,7 +129,7 @@ WARM_BYPASS="${WARM_BYPASS:-0}"
 WARM_OK=""
 for attempt in 1 2 3; do
   if PI_OFFLINE=${PI_OFFLINE:-1} timeout "$WARM_TIMEOUT" pi --provider llamacpp-local --model local-model \
-      --mode json --no-session -p "Reply with the single word OK." \
+      --mode json --no-session -p "Reply with the single word OK." < /dev/null \
       > /tmp/agentic-warmup.jsonl 2>/dev/null; then
     if grep -q '"stopReason":"stop"' /tmp/agentic-warmup.jsonl 2>/dev/null; then
       WARM_OK="yes"; echo "warm-up attempt $attempt: ok (model replied)"; break
