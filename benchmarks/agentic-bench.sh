@@ -78,7 +78,8 @@ with open(os.path.join(work, 'pi-session.jsonl')) as f:
         t = ev.get('type') or ev.get('event') or ''
         if 'tool' in str(t).lower(): tool_calls += 1
         if ev.get('stop') or ev.get('finish'): finish = ev.get('stop') or ev.get('finish')
-row = {"model": label, "task": task, "passed": passed, "wall_s": wall,
+suspect = passed and tool_calls == 0 and wall < 30
+row = {"model": label, "task": task, "passed": passed, "wall_s": wall, "suspect_garbage_pass": suspect,
       "tool_calls": tool_calls, "finish": str(finish),
       "zero_byte_retry": zero_byte_retry}
 with open(out, 'a') as f: f.write(json.dumps(row) + '\n')
@@ -117,6 +118,12 @@ done
 # screenshots) that never terminates — a warm-up property, not a serve fault.
 # Only use it after verifying the serve directly (/v1/chat completions sane);
 # task outcomes are unaffected because real TASK.md prompts anchor the model.
+# PREFLIGHT (2026-10-07): pi exits 0 even on connection errors, so a dead serve
+# produces garbage rows (one even "passed" a lenient verifier). Refuse to run.
+if ! curl -s -m 10 http://127.0.0.1:8080/health >/dev/null 2>&1; then
+  echo "AG-BENCH ABORTED: no serve on 127.0.0.1:8080/health (preflight) - not burning the batch"
+  exit 3
+fi
 WARM_TIMEOUT="${WARM_TIMEOUT:-90}"
 WARM_BYPASS="${WARM_BYPASS:-0}"
 WARM_OK=""
@@ -124,7 +131,11 @@ for attempt in 1 2 3; do
   if PI_OFFLINE=${PI_OFFLINE:-1} timeout "$WARM_TIMEOUT" pi --provider llamacpp-local --model local-model \
       --mode json --no-session -p "Reply with the single word OK." \
       > /tmp/agentic-warmup.jsonl 2>/dev/null; then
-    WARM_OK="yes"; echo "warm-up attempt $attempt: ok"; break
+    if grep -q '"stopReason":"stop"' /tmp/agentic-warmup.jsonl 2>/dev/null; then
+      WARM_OK="yes"; echo "warm-up attempt $attempt: ok (model replied)"; break
+    else
+      echo "warm-up attempt $attempt: pi exited but NO model reply (connection error class) - retrying"
+    fi
   else
     echo "warm-up attempt $attempt: failed/timed out (90s) — retrying"; sleep 5
   fi
