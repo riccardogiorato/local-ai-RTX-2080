@@ -9,11 +9,22 @@ expert bytes to VRAM or feeds the pool faster is the whole game.
 
 ## Ranked A/B deltas (on top of the working serve line)
 
+0. **KV upload prefetch** — ADOPTED 2026-10-07 (`STRATA_KV_PREFETCH=1` in the
+   chat config's env): overlaps the streamed-KV RAM→VRAM uploads with prefill
+   compute. Deep 90K fill 534→602-603 t/s on two independent boots (+13%),
+   real 30K 558-583→608-625, deep decode stabilized 35-38 (was wobbly to 20.8).
+   Quality-neutral (scheduling only). The one surviving knob of the 2026-10-07
+   full-repo inventory sweep; the rest measured flat or false — see below.
+
 1. **Custom expert profile + warm adaptive cache** (biggest; upstream measured
    88.0 → 105.2 tok/s code decode on a 5080 from warm/adaptive). Run once with
    `--dump-routing trace.bin` → `tools/make_profile.py` → restart with the
    custom profile; keep `--adapt-every 4`. Byte-exact arms use
    `--adapt-swaps 0`. Evidence: bench/results/2026-09-29-layer-split.
+   (2026-10-07 update: `--adapt-every 4 --adapt-async 1` +
+   `STRATA_EXCHANGE_ROTATE=1` probed FLAT on short probes, sizing unchanged —
+   its claim is in-session routing drift; only a full suite gate can judge.
+   SUITE-ONLY CANDIDATE, not adopted.)
 2. **VRAM scavenging** — MEASURED 2026-10-06 (headless + 2533 MT/s):
    `--vram-reserve-mib 500` **adopted for the 16K bench class**: synth prefill
    +55–65% (420→620–702 t/s, reproduced on a second boot), real-text

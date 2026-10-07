@@ -34,5 +34,8 @@
   "log": "chat-tailnet.log",
   "host": "100.110.49.114",
   "port": 8080,
-  "fit_max_tokens": true
+  "fit_max_tokens": true,
+  "env": {
+    "STRATA_KV_PREFETCH": "1"
+  }
 }
