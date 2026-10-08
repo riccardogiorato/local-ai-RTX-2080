@@ -36,7 +36,7 @@ Ranked by AG-Bench v2.1 score (11 canary-verified tasks), then by efficiency. En
 
 Units: decode/prefill = t/s / tok/s · p/h = AG-Bench passes per hour · V/R = VRAM/DRAM GB. Full details, caveats and configs live in each model's recipe.
 
-**Also on card:** GLM-OCR · kev · laya · GLiNER 2.5 (utility tier: vision, routing, schema extraction)
+**Also on card:** GLM-OCR · kev · laya · GLiNER 2.5 · [d1-3B](recipes/d1-3b-decision-llamacpp.md) · [EmbeddingGemma-2](recipes/embeddinggemma-2-llamacpp.md) (utility tier: vision, routing, schema extraction, decisions, embeddings)
 
 ## AG-Bench v2.2 re-rank (2026-10-08)
 
