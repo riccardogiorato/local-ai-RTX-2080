@@ -13,7 +13,9 @@ file, and iterate until `verify.sh` passes — inside a real coding-agent harnes
   launched with `--alias local-model`; Pi provider `llamacpp-local` in
   `~/.pi/agent/models.json`. **No fallback model** — if the local model fails, the task fails.
 - Same task dirs for every model (rsync copy, deps reinstall on demand), same wall-clock cap
-  (default 600 s/task), temperature 0.
+  (default 600 s/task; v2.2 runs use 900 s), temperature 0.
+- v2.2 (2026-10-08): task2's expected total corrected to 17.50 EUR (18.00 was impossible) and task5's
+  checker fixed to `npx -p typescript@5 tsc` (the old form never ran on npm 10). Rows before v2.2 carry both bugs.
 
 ## Task set (6, all deterministic verifiers)
 

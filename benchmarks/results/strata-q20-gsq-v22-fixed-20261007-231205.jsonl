@@ -1,0 +1,11 @@
+{"model": "strata-q20-gsq-v22", "task": "task10-tb-bank-trans-filter", "passed": true, "wall_s": 107, "suspect_garbage_pass": false, "tool_calls": 36, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-q20-gsq-v22", "task": "task11-tb-assign-seats", "passed": true, "wall_s": 110, "suspect_garbage_pass": false, "tool_calls": 39, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-q20-gsq-v22", "task": "task1-js-bugfix", "passed": true, "wall_s": 74, "suspect_garbage_pass": false, "tool_calls": 36, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-q20-gsq-v22", "task": "task2-react-fix", "passed": true, "wall_s": 210, "suspect_garbage_pass": false, "tool_calls": 40, "finish": "unknown", "zero_byte_retry": false, "passed_raw_v21_checker": false, "reverified_fixed_checker": true}
+{"model": "strata-q20-gsq-v22", "task": "task3-dep-upgrade", "passed": true, "wall_s": 247, "suspect_garbage_pass": false, "tool_calls": 97, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-q20-gsq-v22", "task": "task4-python-bugfix", "passed": true, "wall_s": 24, "suspect_garbage_pass": false, "tool_calls": 12, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-q20-gsq-v22", "task": "task5-js-to-ts", "passed": true, "wall_s": 270, "suspect_garbage_pass": false, "tool_calls": 90, "finish": "unknown", "zero_byte_retry": false, "passed_raw_v21_checker": false, "reverified_fixed_checker": true}
+{"model": "strata-q20-gsq-v22", "task": "task6-extra-code-task", "passed": true, "wall_s": 92, "suspect_garbage_pass": false, "tool_calls": 27, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-q20-gsq-v22", "task": "task7-long-context-agent", "passed": true, "wall_s": 73, "suspect_garbage_pass": false, "tool_calls": 37, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-q20-gsq-v22", "task": "task8-tb-broken-python", "passed": true, "wall_s": 20, "suspect_garbage_pass": false, "tool_calls": 28, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-q20-gsq-v22", "task": "task9-tb-analyze-access-logs", "passed": true, "wall_s": 53, "suspect_garbage_pass": false, "tool_calls": 24, "finish": "unknown", "zero_byte_retry": false}

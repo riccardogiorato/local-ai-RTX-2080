@@ -1,0 +1,11 @@
+{"model": "strata-coder-iq1m-v22", "task": "task10-tb-bank-trans-filter", "passed": false, "wall_s": 343, "suspect_garbage_pass": false, "tool_calls": 59, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-coder-iq1m-v22", "task": "task11-tb-assign-seats", "passed": true, "wall_s": 177, "suspect_garbage_pass": false, "tool_calls": 47, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-coder-iq1m-v22", "task": "task1-js-bugfix", "passed": true, "wall_s": 151, "suspect_garbage_pass": false, "tool_calls": 30, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-coder-iq1m-v22", "task": "task2-react-fix", "passed": false, "wall_s": 524, "suspect_garbage_pass": false, "tool_calls": 40, "finish": "unknown", "zero_byte_retry": false, "passed_raw_v21_checker": false, "reverified_fixed_checker": true}
+{"model": "strata-coder-iq1m-v22", "task": "task3-dep-upgrade", "passed": true, "wall_s": 219, "suspect_garbage_pass": false, "tool_calls": 66, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-coder-iq1m-v22", "task": "task4-python-bugfix", "passed": true, "wall_s": 37, "suspect_garbage_pass": false, "tool_calls": 12, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-coder-iq1m-v22", "task": "task5-js-to-ts", "passed": true, "wall_s": 387, "suspect_garbage_pass": false, "tool_calls": 78, "finish": "unknown", "zero_byte_retry": false, "passed_raw_v21_checker": false, "reverified_fixed_checker": true}
+{"model": "strata-coder-iq1m-v22", "task": "task6-extra-code-task", "passed": true, "wall_s": 82, "suspect_garbage_pass": false, "tool_calls": 17, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-coder-iq1m-v22", "task": "task7-long-context-agent", "passed": true, "wall_s": 157, "suspect_garbage_pass": false, "tool_calls": 39, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-coder-iq1m-v22", "task": "task8-tb-broken-python", "passed": true, "wall_s": 167, "suspect_garbage_pass": false, "tool_calls": 56, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-coder-iq1m-v22", "task": "task9-tb-analyze-access-logs", "passed": true, "wall_s": 85, "suspect_garbage_pass": false, "tool_calls": 22, "finish": "unknown", "zero_byte_retry": false}

@@ -38,6 +38,19 @@ Units: decode/prefill = t/s / tok/s · p/h = AG-Bench passes per hour · V/R = V
 
 **Also on card:** GLM-OCR · kev · laya · GLiNER 2.5 (utility tier: vision, routing, schema extraction)
 
+## AG-Bench v2.2 re-rank (2026-10-08)
+
+v2.2 = 900 s per task (was 600) plus two fixed checkers: task2 expected an impossible total (18.00 EUR; the inputs sum to 17.50) and task5's TypeScript check never ran on current npm (1 pass in 64 runs). Both bugs had been failing every model since September. Same pi harness, same 11 tasks, the four rank-1 models one after another.
+
+| Model | Runtime | v2.2 score | Suite wall | Misses |
+|---|---|---|---|---|
+| [Qwen3.8-Flash-Next GSQ-RCO Q2_0 125B](https://huggingface.co/ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF) | Strata 0.1.40.3 | **11/11** | 1280 s | none |
+| [MiMo-9B](https://huggingface.co/bartowski/MiMo-V2.6-Distill-Qwen-9B-GGUF) (32K, no draft) | llama.cpp b11459 | **9/11** | 1695 s | task2 line prices, task8 |
+| [Qwen3.8-Flash-Next GSQ-RCO Coder IQ1_M 125B](https://huggingface.co/ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-Coder-GGUF) | Strata 0.1.38 | **9/11** | 2329 s | task2 total, task10 |
+| [Qwen3.5-9B](https://huggingface.co/Qwen/Qwen3.5-9B) (32K, MTP d4) | llama.cpp b11459 | **8/11** | 1571 s | task2 line prices, task8, task9 (prompt grew past 32K) |
+
+The longer cap changed no outcome for the two Strata models: every miss ended well before 600 s. The checker fixes are what moved scores. Raw and corrected rows are both in `benchmarks/results/` (`*-v22-*` and `*-v22-fixed-*`).
+
 ## Key findings from 25 models
 
 - **The sub-2 bpw wall**: below ~2 bits-per-weight, LLM reasoning chains break (tested twice: IQ1_S loops-to-nothing, Flash-Next-125B thinks-to-EOS) while surface tasks survive. Curated ternary (Bonsai at 1.75 bpw) is the exception.

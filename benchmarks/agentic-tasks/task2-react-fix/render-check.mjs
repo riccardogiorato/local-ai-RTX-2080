@@ -27,7 +27,7 @@ assert.match(html, /Espresso[\s\S]*?Cappuccino/, "rows keep input order");
 assert.match(html, />\s*3\.00\s*EUR\s*</, "Espresso line price 2 x 1.50 = 3.00 EUR, currency after amount, two decimals");
 assert.match(html, />\s*12\.00\s*EUR\s*</, "Cappuccino line price 3 x 4.00 = 12.00 EUR");
 assert.match(html, />\s*2\.50\s*EUR\s*</, "Brioche line price 1 x 2.50 = 2.50 EUR");
-assert.match(html, /Total:\s*18\.00\s*EUR/, "correct grand total 18.00 EUR (qty x price summed)");
+assert.match(html, /Total:\s*17\.50\s*EUR/, "correct grand total 17.50 EUR (qty x price summed)");
 
 console.log("RENDER_CHECK_OK");
 
