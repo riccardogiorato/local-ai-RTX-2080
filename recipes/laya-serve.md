@@ -92,3 +92,26 @@ Checkpoint lives in the HF hub cache (~2.3 GB on SSD after the typed-decisions p
 rotation rule it should move to the HDD archive once tested — but the HF cache layout makes
 moving single repos brittle, so it stays until the next cache sweep (recorded here as the
 deviation from the rule).
+## Update 2026-10-09: laya GGUF on llama.cpp vs d1-3B (same tests, same server)
+
+`ggml-org/Laya-GGUF` (converted 2026-10-04): `Laya-Q8_0.gguf` 449 MB sha256 `c06528c5…`, `Laya-BF16.gguf`
+844 MB `edeea949…` (both verified). Served by llama.cpp b11514 (`/v1/systemone`, decision model type `laya`),
+the same build and settings as [d1-3B](d1-3b-decision-llamacpp.md).
+
+| | laya Q8_0 | laya BF16 | d1-3B Q4_K_M |
+|---|---|---|---|
+| VRAM | 1.1 GB | 1.5 GB | 3.5 GB |
+| 1 question / 3 questions | **10.0 / 18.9 ms** | | 14.4 / 55 ms |
+| MASSIVE intent (2,974 rows, 59 options) | 44.2% (45.3% with readable labels) | 44.4% | **84.7%** |
+| MASSIVE ECE | 0.49 (mean confidence 0.94) | 0.49 | **0.016** |
+| 30 labeled small-choice decisions | 21/30 | | **28/30** |
+| Throughput, 8 clients | 52 rows/s | 27 rows/s | 15 rows/s |
+
+- laya is the fastest decision model here (10 ms, and multi-question requests are cheap), but it is far
+  less accurate and badly overconfident: on MASSIVE it piles onto a few labels (`calendar_query` 569 times)
+  while claiming 94% average confidence. Its errors do not depend on option position, so this is not
+  llama.cpp's option-truncation limit.
+- Misses on the small set include an obvious positive review, all three language-ID items and neutral
+  messages scored as urgent or negative.
+- Verdict unchanged and now measured at scale: use d1-3B (or d1-omni-600M at 1.2 GB) for decisions you act
+  on; laya only where 10 ms matters more than being right.
