@@ -37,7 +37,30 @@ curl http://127.0.0.1:8080/v1/systemone -H 'Content-Type: application/json' \
   were low-confidence calls, so the probabilities flagged them.
 - Q4_K_M vs Q8_0: mean |ΔP(gold)| 0.010 (max 0.13) over the 30 items, identical answers, so Q4_K_M is
   the tier to run here: 1.1 GB less VRAM, slightly faster on short states.
-- llama.cpp answers the 3 questions of one request one after another (about 3x the single-question
-  time), unlike the HF `system_one` path that answers them in one pass.
+- Multiple questions in one request: each question is its own pass (~13 ms fixed cost each on a
+  short state), but **the state is reused across them**: on a 2,971-token state, 1 question took 575 ms
+  and 3 questions 595 ms. Pack questions about the same long state into one request.
+
+## MASSIVE intent, full English test set (2,974 rows, 59 intents, one `choice` question each)
+
+| Tier | VRAM | Accuracy | ECE | Speed (8 clients) |
+|---|---|---|---|---|
+| Q4_K_M | 3.5 GB | **84.7%** | 0.016 | 14.9 rows/s |
+| Q8_0 | 4.6 GB | 84.6% | 0.016 | 15.8 rows/s |
+| F16 | 7.3 GB | 84.7% | 0.015 | 17.4 rows/s |
+| BF16 | 7.3 GB | 84.7% | 0.014 | **4.8 rows/s** |
+
+- Calibration is real: at 90-100% confidence the pick is right 96.4% of the time (1,994 of 2,974
+  rows), at 50-60% about 52-57%. Quantization changes neither accuracy nor calibration.
+- Liquid reports 87.3 on MASSIVE intent; we get 84.6-84.7 with raw label names and the same with
+  readable names (`alarm set`), so naming is not the gap. Most likely their score comes from the HF
+  `system_one` prompt path rather than llama.cpp's endpoint (not verified).
+- BF16 is 3.6x slower than F16 on Turing (no native BF16) for identical results: never use BF16 here.
+
+## Server settings (Q4_K_M, A/B one change at a time)
+
+The recipe settings are the best measured: ubatch 512 is slower on long states (599 vs 567 ms),
+1 slot cuts throughput to 69/s (from 98/s), flash attention off costs 29% on long states and 22% on
+throughput, 4 slots ~= 8. No setting moves single-call latency (14.2-14.8 ms).
 
 Evidence: [evidence/d1-3b.jsonl](../evidence/d1-3b.jsonl)
