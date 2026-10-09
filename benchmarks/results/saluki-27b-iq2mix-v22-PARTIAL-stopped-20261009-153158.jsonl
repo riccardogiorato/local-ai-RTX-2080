@@ -1,0 +1,2 @@
+{"model": "saluki-27b-iq2mix-v22", "task": "task10-tb-bank-trans-filter", "passed": false, "wall_s": 43, "suspect_garbage_pass": false, "tool_calls": 5, "finish": "unknown", "zero_byte_retry": false}
+{"model": "saluki-27b-iq2mix-v22", "task": "task11-tb-assign-seats", "passed": false, "wall_s": 900, "suspect_garbage_pass": false, "tool_calls": 30, "finish": "unknown", "zero_byte_retry": false}
