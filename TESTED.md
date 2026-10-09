@@ -66,7 +66,7 @@ recipe and raw evidence. Failures are recorded with the same care as wins.
 | Swift Flash-Next 65 GB | 65 GB doesn't fit 46 GB RAM |
 | OrcaSAQ 2-bit | exl3 needs sm_80+ |
 | Diffusion Gemma 26B | no GGUF, exceeds 8 GB |
-| trymirai Qwen3.8-27B-S | uzu Mac-only, vLLM needs sm_80+, no GGUF |
+| trymirai Qwen3.8-27B-S | GGUF + llama.cpp port now exist (alesha-pro, professorpalmer/mirai-s-ada, 2026-10-09) but the codec's CUDA kernels use `mma.sync` m16n8k32 u8.s8 and m16n8k16 f16 (sm_80+, no Turing fallback), and the file is 11.2 GB > 8 GB VRAM |
 | PQ2_0-MTP tier | needs 11 GB+ VRAM (or 76 GB->8GB sub-GGUF) |
 | fafastmobel 23.8 GB | sm_120a-only kernels, NVFP4 Ada/Blackwell |
 | Strata engine | sm_80+ (TF32 MMA; soft gate per survey — port work is the blocker) |
