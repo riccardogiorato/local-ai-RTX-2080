@@ -57,6 +57,26 @@ curl http://127.0.0.1:8080/v1/systemone -H 'Content-Type: application/json' \
   `system_one` prompt path rather than llama.cpp's endpoint (not verified).
 - BF16 is 3.6x slower than F16 on Turing (no native BF16) for identical results: never use BF16 here.
 
+## Third-party quants and the 600M sibling (same MASSIVE test, 2,974 rows)
+
+| Model | VRAM | Accuracy | ECE | Top-1 agreement with d1-3B BF16 | Speed |
+|---|---|---|---|---|---|
+| Liquid d1-3B Q4_K_M | 3.5 GB | 84.7% | 0.016 | 97.1% | 14.9 rows/s |
+| AtomicChat d1-3B AD-Q4_K_M | 3.5 GB | 84.6% | 0.017 | 97.8% | 15.4 rows/s |
+| AtomicChat d1-omni-600M Q8_0 | 1.3 GB | 83.3% | 0.058 | 84.4% | 42.8 rows/s |
+| AtomicChat d1-omni-600M AD-Q4_K_M | 1.2 GB | 82.9% | 0.057 | 83.8% | 40.5 rows/s |
+
+- AtomicChat's "97.1% top-1 vs BF16" claim for AD-Q4_K_M: Liquid's own Q4_K_M already hits 97.1% on
+  this test; AD-Q4_K_M is a little more faithful (97.8%), with the same accuracy, VRAM and speed. A tie in
+  practice; either works.
+- d1-omni-600M gives up only ~1.5 points of accuracy for 1/3 the VRAM and 2.7x the throughput, but its
+  confidence is about 4x less calibrated (ECE 0.057). Use it when speed or VRAM matters more than trusting
+  the probabilities. Its AD-Q4 agrees with its Q8 on 96.6% of rows.
+- Files: `AtomicChat/d1-3B-GGUF` `d1-3B-AD-Q4_K_M.gguf` 1,657,859,872 B sha256 `20757eaa…46399`;
+  `AtomicChat/d1-omni-600M-GGUF` `d1-omni-600M-AD-Q4_K_M.gguf` `3119cf3b…d23`, `d1-omni-600M-Q8_0.gguf`
+  `309d97a4…eb1`, `mmproj-d1-omni-600M-Q8_0.gguf` `d6637f35…89e` (all match the HF manifest). Audio input
+  for omni not tested yet.
+
 ## Server settings (Q4_K_M, A/B one change at a time)
 
 The recipe settings are the best measured: ubatch 512 is slower on long states (599 vs 567 ms),
