@@ -1,6 +1,15 @@
 # Qwen3.8-Flash-Next GSQ-RCO Q2_0 125B · Strata engine — the fleet-record row
 
-## Current runtime: v0.1.42 (2026-10-10)
+## Current runtime: v0.1.43 (2026-10-11)
+
+Stock tag `v0.1.43` built for sm_75 (`strata-0143/build-turing-0143/strata`), serve from the `strata-0143`
+worktree; [chat config](strata-configs/strata-q20-gsq-0143-tailnet.json) is the 0.1.42 one with the new engine.
+Same-night ABBA probe on the chat config, short decode median: 0.1.42 **49.8**, 0.1.43 **52.5** tok/s, 0.1.43
+with tail skip off 39.9 (the tail skip is worth ~30% on this card); 32K prefill unchanged (643-648). Full v2.2
+suite: **11/11 at 1009 s** (0.1.42: 10/11 at 815 s); the longer wall is more agent work (105 vs 91 requests,
++28% tokens generated) at a faster per-token decode (44.6 vs 43.8 tok/s).
+
+## Previous runtime: v0.1.42 (2026-10-10)
 
 Built the stock tag `v0.1.42` (`61b3fb5d`) for CUDA sm_75 with native experts,
 MMQ kquants off and ggml pinned at `3cf03257`. Source worktree: `strata-0142`;
