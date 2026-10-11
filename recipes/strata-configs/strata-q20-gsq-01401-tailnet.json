@@ -1,5 +1,5 @@
 {
-  "exe": "/home/riccardogiorato/Desktop/github/strata-0141/build-turing-0141/strata",
+  "exe": "/home/riccardogiorato/Desktop/github/strata-0142/build-turing-0142/strata",
   "args": [
     "--pack",
     "packs/q2_0-gsq",
@@ -44,6 +44,7 @@
   "port": 8080,
   "fit_max_tokens": true,
   "env": {
-    "STRATA_KV_PREFETCH": "1"
+    "STRATA_KV_PREFETCH": "1",
+    "STRATA_ROUTE_TAIL_SKIP": "7"
   }
 }

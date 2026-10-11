@@ -1,0 +1,1 @@
+{"model": "strata-0141-bank-repeat-20261010", "task": "task10-tb-bank-trans-filter", "passed": true, "wall_s": 113, "suspect_garbage_pass": false, "tool_calls": 46, "finish": "unknown", "zero_byte_retry": false}

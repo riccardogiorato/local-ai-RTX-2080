@@ -1,0 +1,20 @@
+{
+  "health": {
+    "status": "ok",
+    "max_context": 131072,
+    "model": "local-model",
+    "images": false,
+    "api_key": false,
+    "loaded": true,
+    "service": "strata"
+  },
+  "answer": "STRATA_UPDATE_OK",
+  "usage": {
+    "prompt_tokens": 23,
+    "completion_tokens": 5,
+    "total_tokens": 28,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  }
+}

@@ -1,5 +1,49 @@
 # Qwen3.8-Flash-Next GSQ-RCO Q2_0 125B · Strata engine — the fleet-record row
 
+## Current runtime: v0.1.42 (2026-10-10)
+
+Built the stock tag `v0.1.42` (`61b3fb5d`) for CUDA sm_75 with native experts,
+MMQ kquants off and ggml pinned at `3cf03257`. Source worktree: `strata-0142`;
+binary: `build-turing-0142/strata`. The standing `strata-port` checkout now uses
+that tag's Python server too; its previous source remains on branch `main`.
+
+Adopted for chat after repeated short probes, the full AG-Bench comparison and
+diagnostic repeats. [Chat config](strata-configs/strata-q20-gsq-0142-tailnet.json)
+retains the calibrated PCIe share **0.20**, draft floor **0.70**, adaptive cache,
+128K context, 32K KV-resident window and KV prefetch. Tail skipping is explicitly
+set to **7**, the new CUDA default; it changes answers. Set
+`STRATA_ROUTE_TAIL_SKIP=0` to disable that approximation. The standing older-named
+`strata-q20-gsq-01401-tailnet.json` also points to the new engine so existing
+launch commands pick it up.
+
+Full same-day v2.2 bench: 0.1.41 **11/11 at 871 s** after a documented guard
+correction; 0.1.42 **10/11 at 815 s**, aggregate decode **37.0 → 43.8 tok/s**.
+The bank-task miss passed on a fresh repeat with PCIe share pinned at 0.34.
+There is insufficient repetition to call the miss a quality regression or to
+claim quality parity. See the [full comparison and caveats](../benchmarks/README.md#strata-0141-vs-0142-2026-10-10).
+
+Same 43,244-token prompt on the calibrated chat settings, one run per engine:
+both recalled `violet-harbor-731`; decode **35.0 → 41.3 tok/s (+18%)**,
+prefill **68.48 → 68.85 s (flat)**. Evidence:
+[streaming probe](../benchmarks/results/strata-0142-streamed-probe-20261010.jsonl).
+Short probes had two boots per engine in ABBA order, plus a tail-off control;
+the control returned to the old speed range. One baseline sample coincided with
+the hung Pi wrapper, so the full suite and streaming results are the cleaner
+performance evidence.
+
+The new automatic PCIe share adjustment did run on this native Q2_0 pack in
+the bench (0.34 → 0.30); the chat's explicit 0.20 overrides it.
+The established 16K bench launch config also points to v0.1.42; its historical
+settings remain unchanged. The exact 0.1.41 reference is saved separately as
+`strata-q20-gsq-0141-bench-reference.json`.
+
+Rollback chat engine: restore
+`strata-port/strata-q20-gsq-01401-tailnet.pre-0142.json` over the standing config.
+The pinned 0.1.41 binary remains installed. To restore the original Python
+server as well, switch the `strata-port` checkout back to branch `main`.
+The server was stopped before the upgrade and is left stopped after local API
+verification. The historical measurements below are retained as recorded.
+
 **Status: 🧪 lab-tested (bench tier)** — the highest-scoring configuration ever
 measured on this card (10/11 on AG-Bench v2.1), and the current 8–10/11 band row.
 
