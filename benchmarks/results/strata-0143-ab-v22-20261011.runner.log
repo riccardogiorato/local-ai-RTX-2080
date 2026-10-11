@@ -1,0 +1,15 @@
+AG-Bench model=strata-0143-ab-v22-20261011 cap=900s
+slots ready after 2s
+warm-up attempt 1: ok (model replied)
+{"model": "strata-0143-ab-v22-20261011", "task": "task10-tb-bank-trans-filter", "passed": true, "wall_s": 131, "suspect_garbage_pass": false, "tool_calls": 55, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0143-ab-v22-20261011", "task": "task11-tb-assign-seats", "passed": true, "wall_s": 162, "suspect_garbage_pass": false, "tool_calls": 42, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0143-ab-v22-20261011", "task": "task1-js-bugfix", "passed": true, "wall_s": 43, "suspect_garbage_pass": false, "tool_calls": 25, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0143-ab-v22-20261011", "task": "task2-react-fix", "passed": true, "wall_s": 90, "suspect_garbage_pass": false, "tool_calls": 38, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0143-ab-v22-20261011", "task": "task3-dep-upgrade", "passed": true, "wall_s": 141, "suspect_garbage_pass": false, "tool_calls": 73, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0143-ab-v22-20261011", "task": "task4-python-bugfix", "passed": true, "wall_s": 20, "suspect_garbage_pass": false, "tool_calls": 12, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0143-ab-v22-20261011", "task": "task5-js-to-ts", "passed": true, "wall_s": 54, "suspect_garbage_pass": false, "tool_calls": 26, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0143-ab-v22-20261011", "task": "task6-extra-code-task", "passed": true, "wall_s": 73, "suspect_garbage_pass": false, "tool_calls": 23, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0143-ab-v22-20261011", "task": "task7-long-context-agent", "passed": true, "wall_s": 76, "suspect_garbage_pass": false, "tool_calls": 45, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0143-ab-v22-20261011", "task": "task8-tb-broken-python", "passed": true, "wall_s": 155, "suspect_garbage_pass": false, "tool_calls": 74, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0143-ab-v22-20261011", "task": "task9-tb-analyze-access-logs", "passed": true, "wall_s": 64, "suspect_garbage_pass": false, "tool_calls": 40, "finish": "unknown", "zero_byte_retry": false}
+DONE — results in /home/riccardogiorato/Desktop/github/local-ai-rtx2080/benchmarks/results/strata-0143-ab-v22-20261011-20261011-214010.jsonl
