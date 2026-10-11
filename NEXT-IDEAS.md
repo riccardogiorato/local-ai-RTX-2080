@@ -243,8 +243,9 @@ Verdicts inline below; evidence
   expect churn from #29393 next to our Tier 2.8 fusion patch; upstream
   #27694 probabilistic drafting is the closest external cousin to our
   keyed-Gumbel work — worth an acceptance A/B after rebase.
-- **2080 power-limit sweep (owner-side)** — 2080 Ti data: 95% speed at
-  190 W, peak efficiency at 167 W; never benchmarked here.
+- **2080 power-limit sweep** — DONE 2026-10-12 (Strata 0.1.43 chat config, see hardware.md): decode is flat
+  down to the 125 W minimum, prefill -3% at 145 W for -30% GPU power. Still open: a true undervolt (locked
+  clock + positive VF offset via NVML) and whole-system wall-power measurement.
 - **External negatives to keep honest:** Bonsai −2 logit bias
   (44/50→43/50, Reddit-falsified 10-02); DFlash2 vs Flash-Next built-in
   MTP on 27B (built-in drafter won 5/10 quality tests, 10-02).
