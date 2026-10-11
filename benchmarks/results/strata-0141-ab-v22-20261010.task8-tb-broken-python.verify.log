@@ -1,0 +1,4 @@
+ok pip_version
+ok pip_install
+ok import_six
+ALL OK

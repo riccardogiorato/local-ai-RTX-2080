@@ -58,11 +58,15 @@ run_task() {
       ( cd "$work" && sha_check="$( (git -C "$task_dir" rev-parse 2>/dev/null || echo x) )" ; true )
       # simpler + deterministic: compare against the pristine master copies
       bad=0
-      for pd in tests protected; do
+      # task8 explicitly asks for an in-place repair of protected/venv.
+      # Its immutable paths are tests/ and wheels/, per its TASK.md.
+      local protected_dirs=(tests protected)
+      [ "$task_name" = "task8-tb-broken-python" ] && protected_dirs=(tests wheels)
+      for pd in "${protected_dirs[@]}"; do
         [ -d "$work/$pd" ] || continue
         if ! diff -r --brief "$task_dir/$pd" "$work/$pd" >/dev/null 2>&1; then bad=1; fi
       done
-      [ "$bad" = "1" ] && { passed=false; echo "NOTE: $task_name FAILED the protected-paths check (tests/or protected modified)"; }
+      [ "$bad" = "1" ] && { passed=false; echo "NOTE: $task_name FAILED the protected-paths check (${protected_dirs[*]} modified)"; }
     fi
   fi
   AG_OUT="$OUT" python3 - "$task_name" "$LABEL" "$wall" "$passed" "$work" "$zero_byte_retry" <<'EOF'

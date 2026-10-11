@@ -1,0 +1,16 @@
+AG-Bench model=strata-0142-ab-v22-20261010 cap=900s
+slots ready after 2s
+warm-up attempt 1: ok (model replied)
+{"model": "strata-0142-ab-v22-20261010", "task": "task1-js-bugfix", "passed": true, "wall_s": 46, "suspect_garbage_pass": false, "tool_calls": 26, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0142-ab-v22-20261010", "task": "task10-tb-bank-trans-filter", "passed": false, "wall_s": 81, "suspect_garbage_pass": false, "tool_calls": 29, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0142-ab-v22-20261010", "task": "task11-tb-assign-seats", "passed": true, "wall_s": 107, "suspect_garbage_pass": false, "tool_calls": 45, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0142-ab-v22-20261010", "task": "task2-react-fix", "passed": true, "wall_s": 66, "suspect_garbage_pass": false, "tool_calls": 26, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0142-ab-v22-20261010", "task": "task3-dep-upgrade", "passed": true, "wall_s": 133, "suspect_garbage_pass": false, "tool_calls": 74, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0142-ab-v22-20261010", "task": "task4-python-bugfix", "passed": true, "wall_s": 21, "suspect_garbage_pass": false, "tool_calls": 12, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0142-ab-v22-20261010", "task": "task5-js-to-ts", "passed": true, "wall_s": 51, "suspect_garbage_pass": false, "tool_calls": 25, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0142-ab-v22-20261010", "task": "task6-extra-code-task", "passed": true, "wall_s": 58, "suspect_garbage_pass": false, "tool_calls": 24, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0142-ab-v22-20261010", "task": "task7-long-context-agent", "passed": true, "wall_s": 61, "suspect_garbage_pass": false, "tool_calls": 38, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0142-ab-v22-20261010", "task": "task8-tb-broken-python", "passed": true, "wall_s": 153, "suspect_garbage_pass": false, "tool_calls": 66, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0142-ab-v22-20261010", "task": "task9-tb-analyze-access-logs", "passed": true, "wall_s": 38, "suspect_garbage_pass": false, "tool_calls": 30, "finish": "unknown", "zero_byte_retry": false}
+/home/riccardogiorato/Desktop/github/local-ai-rtx2080/benchmarks/agentic-bench.sh: line 157: syntax error near unexpected token `('
+/home/riccardogiorato/Desktop/github/local-ai-rtx2080/benchmarks/agentic-bench.sh: line 157: `h-regex filter on task dir names (e.g. TASK_RE='task(7|8|9|10|11)''

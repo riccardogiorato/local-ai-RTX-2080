@@ -1,0 +1,16 @@
+✔ page 1 returns the first perPage items (0.846341ms)
+✔ page 2 returns the next perPage items (3.90704ms)
+✔ last partial page returns the remainder (0.12896ms)
+✔ hasPrev/hasPrev flags (0.140356ms)
+✔ out-of-range page is empty but well-formed (0.585017ms)
+✔ sortKey sorts ascending before paginating (0.243829ms)
+✔ per-item contract on tiny inputs (0.130082ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 64.671803
+VERIFY_TASK6: PASS

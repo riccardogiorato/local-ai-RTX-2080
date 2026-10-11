@@ -1,0 +1,222 @@
+[
+  {
+    "version": "0141",
+    "task": "task1-js-bugfix",
+    "verifier_passed": true,
+    "immutable_paths": [
+      "tests",
+      "protected"
+    ],
+    "immutable_paths_unchanged": true
+  },
+  {
+    "version": "0141",
+    "task": "task10-tb-bank-trans-filter",
+    "verifier_passed": true,
+    "immutable_paths": [
+      "tests",
+      "protected"
+    ],
+    "immutable_paths_unchanged": true
+  },
+  {
+    "version": "0141",
+    "task": "task11-tb-assign-seats",
+    "verifier_passed": true,
+    "immutable_paths": [
+      "tests",
+      "protected"
+    ],
+    "immutable_paths_unchanged": true
+  },
+  {
+    "version": "0141",
+    "task": "task2-react-fix",
+    "verifier_passed": true,
+    "immutable_paths": [
+      "tests",
+      "protected"
+    ],
+    "immutable_paths_unchanged": true
+  },
+  {
+    "version": "0141",
+    "task": "task3-dep-upgrade",
+    "verifier_passed": true,
+    "immutable_paths": [
+      "tests",
+      "protected"
+    ],
+    "immutable_paths_unchanged": true
+  },
+  {
+    "version": "0141",
+    "task": "task4-python-bugfix",
+    "verifier_passed": true,
+    "immutable_paths": [
+      "tests",
+      "protected"
+    ],
+    "immutable_paths_unchanged": true
+  },
+  {
+    "version": "0141",
+    "task": "task5-js-to-ts",
+    "verifier_passed": true,
+    "immutable_paths": [
+      "tests",
+      "protected"
+    ],
+    "immutable_paths_unchanged": true
+  },
+  {
+    "version": "0141",
+    "task": "task6-extra-code-task",
+    "verifier_passed": true,
+    "immutable_paths": [
+      "tests",
+      "protected"
+    ],
+    "immutable_paths_unchanged": true
+  },
+  {
+    "version": "0141",
+    "task": "task7-long-context-agent",
+    "verifier_passed": true,
+    "immutable_paths": [
+      "tests",
+      "protected"
+    ],
+    "immutable_paths_unchanged": true
+  },
+  {
+    "version": "0141",
+    "task": "task8-tb-broken-python",
+    "verifier_passed": true,
+    "immutable_paths": [
+      "tests",
+      "wheels"
+    ],
+    "immutable_paths_unchanged": true
+  },
+  {
+    "version": "0141",
+    "task": "task9-tb-analyze-access-logs",
+    "verifier_passed": true,
+    "immutable_paths": [
+      "tests",
+      "protected"
+    ],
+    "immutable_paths_unchanged": true
+  },
+  {
+    "version": "0142",
+    "task": "task1-js-bugfix",
+    "verifier_passed": true,
+    "immutable_paths": [
+      "tests",
+      "protected"
+    ],
+    "immutable_paths_unchanged": true
+  },
+  {
+    "version": "0142",
+    "task": "task10-tb-bank-trans-filter",
+    "verifier_passed": false,
+    "immutable_paths": [
+      "tests",
+      "protected"
+    ],
+    "immutable_paths_unchanged": true
+  },
+  {
+    "version": "0142",
+    "task": "task11-tb-assign-seats",
+    "verifier_passed": true,
+    "immutable_paths": [
+      "tests",
+      "protected"
+    ],
+    "immutable_paths_unchanged": true
+  },
+  {
+    "version": "0142",
+    "task": "task2-react-fix",
+    "verifier_passed": true,
+    "immutable_paths": [
+      "tests",
+      "protected"
+    ],
+    "immutable_paths_unchanged": true
+  },
+  {
+    "version": "0142",
+    "task": "task3-dep-upgrade",
+    "verifier_passed": true,
+    "immutable_paths": [
+      "tests",
+      "protected"
+    ],
+    "immutable_paths_unchanged": true
+  },
+  {
+    "version": "0142",
+    "task": "task4-python-bugfix",
+    "verifier_passed": true,
+    "immutable_paths": [
+      "tests",
+      "protected"
+    ],
+    "immutable_paths_unchanged": true
+  },
+  {
+    "version": "0142",
+    "task": "task5-js-to-ts",
+    "verifier_passed": true,
+    "immutable_paths": [
+      "tests",
+      "protected"
+    ],
+    "immutable_paths_unchanged": true
+  },
+  {
+    "version": "0142",
+    "task": "task6-extra-code-task",
+    "verifier_passed": true,
+    "immutable_paths": [
+      "tests",
+      "protected"
+    ],
+    "immutable_paths_unchanged": true
+  },
+  {
+    "version": "0142",
+    "task": "task7-long-context-agent",
+    "verifier_passed": true,
+    "immutable_paths": [
+      "tests",
+      "protected"
+    ],
+    "immutable_paths_unchanged": true
+  },
+  {
+    "version": "0142",
+    "task": "task8-tb-broken-python",
+    "verifier_passed": true,
+    "immutable_paths": [
+      "tests",
+      "wheels"
+    ],
+    "immutable_paths_unchanged": true
+  },
+  {
+    "version": "0142",
+    "task": "task9-tb-analyze-access-logs",
+    "verifier_passed": true,
+    "immutable_paths": [
+      "tests",
+      "protected"
+    ],
+    "immutable_paths_unchanged": true
+  }
+]

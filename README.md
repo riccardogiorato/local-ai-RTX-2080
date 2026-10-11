@@ -11,6 +11,11 @@ with the same care as wins.
 **Untested backlog →** [NEXT-IDEAS.md](NEXT-IDEAS.md).
 **AG-Bench v2.1 suite (11 tasks, canary-verified) →** [benchmarks/README.md](benchmarks/README.md).
 
+**Strata update (2026-10-10):** v0.1.42 adopted with the existing calibrated
+chat settings. Full same-day v2.2 comparison: v0.1.41 11/11 at 871 s,
+v0.1.42 10/11 at 815 s; aggregate decode 37 → 44 tok/s. The missed bank task
+passed a controlled repeat. [Results, scoring correction and limits](benchmarks/README.md#strata-0141-vs-0142-2026-10-10).
+
 > Method rules live in [hardware.md](hardware.md). Short version: server-reported rates only,
 > ranges over repeated runs (no best-of), speeds compared only on the same prompt file, thinking
 > off by default. Treat decode deltas < 15% across prompt classes as noise.

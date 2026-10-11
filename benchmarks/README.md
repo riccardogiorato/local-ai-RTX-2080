@@ -6,6 +6,75 @@ file, and iterate until `verify.sh` passes — inside a real coding-agent harnes
 
 ## Harness
 
+### Strata 0.1.41 vs 0.1.42 (2026-10-10)
+
+Same-day full 11-task v2.2 runs, 900 s/task, Pi 1.0.4, the same v0.1.42 Python
+server for both engines, and identical 16K/r500 engine arguments. Both use the
+same model pack, MTP vocabulary and expert profile. Only the engine executable
+and log path differ. These bench settings differ from the calibrated 128K chat
+settings used by the short and streamed-context probes.
+
+| Engine | Audited score | Task wall total | Aggregate decode |
+|---|---|---|---|
+| 0.1.41 | **11/11** | **871 s** | 37.0 tok/s |
+| 0.1.42, new defaults | **10/11** | **815 s** | 43.8 tok/s |
+
+Aggregate decode = generated tokens divided by engine-reported decode time across
+the suite. It measures different agent trajectories, not identical generated text.
+The new version decoded about 18% faster; total task time fell 6.4%, including a
+failed task, so this is not a demonstrated 6.4% improvement at equal success.
+
+0.1.42's bank-filter task made an incorrect filter; the failed verifier's large
+output then pushed the prompt to 28,084 tokens, beyond the 16K context. Fresh
+diagnostic bank-task runs all passed: 0.1.41 **113 s**, 0.1.42 tail skip on
+**108 s**, tail skip off **99 s**. The 0.1.41 repeat probed PCIe share 0.34;
+both 0.1.42 diagnostic arms explicitly pinned 0.34. The full default 0.1.42
+suite had adjusted it from 0.34 to 0.30. Thus the repeats do not isolate ordinary
+variance from the PCIe default's effect, and one attempt per arm does not prove
+quality parity or a regression. Tail skipping itself changes token choices.
+
+**Scoring correction:** the raw 0.1.41 row was 10/11 because the generic guard
+forbade changes anywhere under `protected/`, including task8's virtualenv. Its
+TASK.md explicitly permits repairing that environment in place. Only compiled
+six cache files differed; its verifier passed and its immutable `tests/` and
+`wheels/` matched the master. The guard now checks those two paths for task8.
+Raw rows remain intact; `*-scored.jsonl` and the integrity audit record the
+correction. All 22 task verifiers were rerun; the only genuine failure was
+0.1.42's bank task, and all immutable paths remained intact.
+
+The second runner also reported a shell parse error **after saving all 11 task
+rows**, because its source was edited while Bash was still reading it. No task
+row was lost. Diagnostic runs now use a frozen script copy and exited cleanly.
+
+Evidence: [0.1.41 audited results](results/strata-0141-ab-v22-20261010-20261010-183135-scored.jsonl),
+[0.1.42 results](results/strata-0142-ab-v22-20261010-20261010-184657-scored.jsonl),
+[integrity audit](results/strata-0142-ab-v22-20261010.integrity-audit.json).
+Exact configs and health responses are in the matching `.metadata.json` files;
+engine logs, verifier logs and compressed Pi traces are alongside them.
+
+Reproduce the full comparison (both pinned builds must exist):
+
+```bash
+python benchmarks/strata-release-suite.py --suffix ab-v22-repeat
+# Controlled bank-task diagnostic:
+python benchmarks/strata-release-suite.py --task-re '^task10-' \
+  --arms 0141,0142,0142-tail-off --pcie-frac 0.34 --suffix bank-repeat
+```
+
+The runner uses the installed Pi binary directly, bypassing the mise wrapper
+that hung in the version check. It serves only on localhost and stops each
+engine after its run.
+
+![Measured time versus input context, fixed 192-token output](results/strata-0141-vs-0142-context-time.png)
+
+At 43,244 input tokens, generation took 5.48 → 4.65 s, while prompt plus
+generation took 73.97 → 73.49 s. The +18% decode-throughput gain therefore
+shortened this full response by only 0.6%, because prompt reading was unchanged.
+Only 34 and 43,244 input tokens have comparable 192-token-output measurements;
+there is no measured context curve between them. The [CSV](results/strata-0141-vs-0142-context-time.csv)
+contains the plotted values. Reproduce with
+`uv run --with matplotlib python benchmarks/plot-strata-context-time.py`.
+
 - **Pi Coding Agent** (`@earendil-works/pi-coding-agent`, pinned by `pi --version` in each
   result header) — minimal agent with `read`/`write`/`edit`/`bash` tools, headless
   `--mode json --print`, `--no-session` (every run starts clean).
