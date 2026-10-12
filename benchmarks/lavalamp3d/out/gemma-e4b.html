@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lava Lamp Screensaver</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #1a0a2a; /* Deep Plum Purple Background */
+        }
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <script type="module">
+        import * as THREE from 'https://unpkg.com/three@0.170.0/build/three.module.js';
+        import { OrbitControls } from 'https://unpkg.com/three@0.170.0/examples/jsm/controls/OrbitControls.js';
+
+        // --- Scene Setup ---
+        let scene, camera, renderer, controls;
+        let blobs = [];
+        const NUM_BLOBS = 15;
+
+        function init() {
+            // Scene
+            scene = new THREE.Scene();
+            
+            // Camera
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.set(0, 2, 8);
+
+            // Renderer
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setClearColor(0x1a0a2a); // Deep Plum
+            document.body.appendChild(renderer.domElement);
+
+            // Lighting
+            const ambientLight = new THREE.AmbientLight(0x400040, 1.5); // Soft purple ambient light
+            scene.add(ambientLight);
+
+            // Key Light (Simulating the glow)
+            const pointLight = new THREE.PointLight(0xff8c00, 2, 50); // Warm Orange/Red source
+            pointLight.position.set(5, 5, 5);
+            scene.add(pointLight);
+
+            // Controls (for initial setup, will be disabled for screensaver mode)
+            controls = new OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+            controls.enableZoom = false;
+            controls.enablePan = false;
+            controls.autoRotate = true; // Gentle ambient motion
+
+            // Create Blobs
+            for (let i = 0; i < NUM_BLOBS; i++) {
+                const blob = createBlob(i);
+                scene.add(blob.mesh);
+                blobs.push(blob);
+            }
+
+            // Event Listeners
+            window.addEventListener('resize', onWindowResize, false);
+        }
+
+        /**
+         * Creates a single glossy, warm blob entity.
+         * @param {number} index - Unique index for initial positioning/animation.
+         * @returns {{mesh: THREE.Mesh, material: THREE.MeshStandardMaterial}}
+         */
+        function createBlob(index) {
+            // Geometry: Use a sphere as a base, but the material handles the "soft" look via lighting/shininess
+            const geometry = new THREE.SphereGeometry(1 + Math.random() * 0.8, 32, 32);
+            
+            // Material: Standard material with high shininess to simulate glossy wax
+            const material = new THREE.MeshStandardMaterial({
+                color: new THREE.Color().setHSL(Math.random() * 0.1 + 0.05, 1, 0.6), // Warm hues: Orange/Coral/Red
+                roughness: 0.1, // Very smooth
+                metalness: 0.1,
+                emissive: new THREE.Color(0xff4500).multiplyScalar(0.1) // Gentle inner glow
+            });
+
+            const mesh = new THREE.Mesh(geometry, material);
+            
+            // Initial random positioning and scale
+            mesh.position.set(
+                (Math.random() - 0.5) * 10,
+                Math.random() * 5 + 1, // Start somewhat above the base
+                (Math.random() - 0.5) * 10
+            );
+            mesh.userData = {
+                velocity: new THREE.Vector3(
+                    (Math.random() - 0.5) * 0.005,
+                    (Math.random() - 0.5) * 0.005,
+                    (Math.random() - 0.5) * 0.005
+                ),
+                driftFactor: Math.random() * 0.01 + 0.001,
+                initialY: mesh.position.y
+            };
+
+            return { mesh, material };
+        }
+
+        // --- Animation Loop ---
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            const time = Date.now() * 0.0001;
+
+            // 1. Update Blobs (Drift, Rise/Fall, Subtle Merging Simulation)
+            blobs.forEach(blob => {
+                const { mesh, material, userData } = blob;
+                const speed = userData.driftFactor;
+
+                // Organic movement: Drift + slow sinusoidal vertical movement
+                mesh.position.x += userData.velocity.x * speed;
+                mesh.position.z += userData.velocity.z * speed;
+                
+                // Slow vertical oscillation (Simulates rising/sinking)
+                const yOffset = Math.sin(time * 1.5 + blob.mesh.uuid.charCodeAt(0)) * 0.5;
+                mesh.position.y = blob.mesh.userData.initialY + yOffset;
+
+                // Rotation for visual interest
+                mesh.rotation.y += 0.001;
+                mesh.rotation.x += 0.0005;
+
+                // Simulate color shift over time (Lava effect)
+                const colorShift = Math.sin(time * 0.5 + blob.mesh.uuid.charCodeAt(0) * 0.1) * 0.1;
+                
+                // Slightly modulate the emissive color based on position/time
+                const r = 1.0 + Math.sin(time * 0.8 + blob.mesh.uuid.charCodeAt(0) * 0.2) * 0.1;
+                const g = 0.5 + Math.sin(time * 0.7 + blob.mesh.uuid.charCodeAt(0) * 0.3) * 0.1;
+                const b = 0.2 + Math.sin(time * 0.6 + blob.mesh.uuid.charCodeAt(0) * 0.4) * 0.1;
+                
+                material.emissive.setRGB(r, g, b);
+            });
+
+            // 2. Camera Motion (Gentle Ambient Sway)
+            controls.update(); // Updates autoRotate
+
+            // 3. Render
+            renderer.render(scene, camera);
+        }
+
+        // --- Utilities ---
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        // --- Start Application ---
+        init();
+        animate();
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Lava Lamp Screensaver</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #2a0a18; /* Deep Plum Purple Fallback */
+        }
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <!-- Import Map for Three.js -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.170.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.170.0/examples/jsm/"
+        }
+    }
+    </script>
+</head>
+<body>
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+        // --- Configuration ---
+        const CONFIG = {
+            blobCount: 15,
+            background: 0x2a0a18, // Deep Plum
+            blobColors: [0xff6600, 0xffaa00, 0xff4400, 0xff3300], // Orange, Coral, Red
+            cameraSpeed: 0.0005,
+            autoRotate: true
+        };
+
+        // --- Scene Setup ---
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(CONFIG.background);
+        scene.fog = new THREE.FogExp2(CONFIG.background, 0.02);
+
+        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
+        camera.position.z = 12;
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        document.body.appendChild(renderer.domElement);
+
+        // --- Lighting ---
+        const ambientLight = new THREE.AmbientLight(0x404040, 2); // Soft white light
+        scene.add(ambientLight);
+
+        const dirLight = new THREE.DirectionalLight(0xffffff, 1.5);
+        dirLight.position.set(5, 10, 7);
+        dirLight.castShadow = true;
+        dirLight.shadow.mapSize.width = 2048;
+        dirLight.shadow.mapSize.height = 2048;
+        scene.add(dirLight);
+
+        const pointLight = new THREE.PointLight(0xffaa00, 2, 50);
+        pointLight.position.set(-2, 2, 4);
+        scene.add(pointLight);
+
+        // --- Material ---
+        // Using MeshStandardMaterial for realistic wax wax-like interaction with light
+        const waxMaterial = new THREE.MeshStandardMaterial({
+            color: 0xffaa00,
+            roughness: 0.1,
+            metalness: 0.0,
+            emissive: 0x442200,
+            emissiveIntensity: 0.2,
+            envMapIntensity: 1.0,
+            flatShading: false
+        });
+
+        // --- Geometry Generation ---
+        // Using IcosahedronGeometry with high detail for soft, rounded blobs
+        const geometry = new THREE.IcosahedronGeometry(1.5, 6);
+
+        const blobs = [];
+        const blobPositions = [];
+
+        for (let i = 0; i < CONFIG.blobCount; i++) {
+            const mesh = new THREE.Mesh(geometry, waxMaterial.clone());
+            
+            // Random positions
+            const radius = 10;
+            mesh.position.set(
+                (Math.random() - 0.5) * radius,
+                (Math.random() - 0.5) * radius,
+                (Math.random() - 0.5) * radius
+            );
+
+            // Random velocity
+            const speed = Math.random() * 0.02 + 0.005;
+            const direction = new THREE.Vector3(
+                (Math.random() - 0.5) * speed,
+                (Math.random() - 0.5) * speed,
+                (Math.random() - 0.5) * speed
+            );
+            
+            // Rotation speed
+            const rotSpeed = Math.random() * 0.05;
+            
+            // Initial random rotation
+            mesh.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
+
+            // Custom properties for animation
+            mesh.userData = {
+                velocity: direction,
+                rotSpeed: rotSpeed,
+                color: CONFIG.blobColors[Math.floor(Math.random() * CONFIG.blobColors.length)],
+                id: i
+            };
+
+            scene.add(mesh);
+            blobs.push(mesh);
+        }
+
+        // --- Post Processing / Effects ---
+        // Add a subtle bloom to simulate the "glow" of the wax
+        const effectComposer = new THREE.EffectComposer(renderer);
+        const renderScene = new THREE.WebGLRenderer({ antialias: false });
+        renderScene.setSize(window.innerWidth, window.innerHeight);
+        renderScene.shadowMap.enabled = false;
+        effectComposer.addRenderPass(new THREE.RenderPass(scene, camera));
+        effectComposer.addPass(new THREE.UnrealBloomPass(
+            new THREE.Vector2(window.innerWidth, window.innerHeight),
+            1.5, 0.4, 0.85 // Strength, Radius, Threshold
+        ));
+        effectComposer.render();
+
+        // --- Resize Handler ---
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderScene.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // --- Animation Loop ---
+        const clock = new THREE.Clock();
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.autoRotate = CONFIG.autoRotate;
+        controls.autoRotateSpeed = 0.5;
+        controls.enableZoom = false; // Screensaver usually doesn't need zoom
+        controls.minDistance = 8;
+        controls.maxDistance = 25;
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            const time = clock.getElapsedTime();
+
+            // Animate Blobs
+            blobs.forEach(blob => {
+                // Move
+                blob.position.add(blob.userData.velocity);
+
+                // Boundary check (bounce gently)
+                const limit = 10;
+                if (Math.abs(blob.position.x) > limit) blob.userData.velocity.x *= -1;
+                if (Math.abs(blob.position.z) > limit) blob.userData.velocity.z *= -1;
+                // Vertical movement is often free-falling or rising, so we don't strictly bounce Y, 
+                // but we clamp it to keep it within view mostly.
+                if (blob.position.y > 8) {
+                    blob.userData.velocity.y = -0.01; // Sink slowly
+                } else if (blob.position.y < -8) {
+                    blob.userData.velocity.y = 0.01; // Rise slowly
+                }
+
+                // Rotate
+                blob.rotation.x += blob.userData.rotSpeed;
+                blob.rotation.y += blob.userData.rotSpeed;
+
+                // Subtle pulsing scale
+                const scale = 1 + Math.sin(time * 2 + blob.userData.id) * 0.1;
+                blob.scale.set(scale, scale, scale);
+            });
+
+            // Slow Camera Drift
+            const targetX = Math.sin(time * 0.1) * 2;
+            const targetY = Math.cos(time * 0.1) * 1;
+            camera.position.x += (targetX - camera.position.x) * 0.01;
+            camera.position.y += (targetY - camera.position.y) * 0.01;
+
+            // Update Controls (optional, but ensures rotation aligns with camera drift)
+            controls.update();
+
+            // Render via Composer for Bloom
+            effectComposer.render();
+        }
+
+        animate();
+    </script>
+</body>
+</html>

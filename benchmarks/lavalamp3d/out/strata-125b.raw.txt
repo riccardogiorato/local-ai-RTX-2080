@@ -1,0 +1,198 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lava Lamp</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #170712; }
+  canvas { display: block; width: 100%; height: 100%; }
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.170.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.170.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<script type="module">
+import * as THREE from 'three';
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.1;
+document.body.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+
+const vertexShader = /* glsl */`
+  void main() {
+    gl_Position = vec4(position, 1.0);
+  }
+`;
+
+const fragmentShader = /* glsl */`
+precision highp float;
+
+uniform vec2 uRes;
+uniform float uTime;
+uniform float uRadius;
+
+const int NUM_BALLS = 8;
+
+vec3 smoothMax(vec3 a, vec3 b) {
+  vec3 d = b - a;
+  float dist = max(length(d), 1e-5);
+  float k = 0.5 * (1.0 - clamp(dist / uRadius, 0.0, 1.0));
+  return a + k * d;
+}
+
+float field(vec3 p) {
+  float d = 0.0;
+  for (int i = 0; i < NUM_BALLS; i++) {
+    float fi = float(i);
+    float ph = fi * 1.13 + 0.4;
+    float amp = 1.3 + 0.3 * sin(fi * 2.1);
+    float spd = 0.30 + 0.05 * sin(fi * 3.7);
+    float y = sin(uTime * spd + ph) * amp;
+    float x = sin(uTime * spd * 0.72 + ph * 1.31) * 0.85;
+    float z = cos(uTime * spd * 0.61 + ph * 0.87) * 0.85;
+    vec3 c = vec3(x, y, z);
+    float r = 0.34 + 0.16 * sin(uTime * 0.45 + fi * 2.3);
+    vec3 s = p - c;
+    d = smoothMax(d, s / max(length(s), 1e-5) * r);
+  }
+  return d;
+}
+
+vec3 normalAt(vec3 p, float d) {
+  float e = 0.012;
+  vec3 n = vec3(
+    field(p + vec3(e, 0.0, 0.0)) - d,
+    field(p + vec3(0.0, e, 0.0)) - d,
+    field(p + vec3(0.0, 0.0, e)) - d
+  );
+  return normalize(n + 1e-6);
+}
+
+vec3 shade(vec3 p, vec3 n, vec3 rd) {
+  vec3 col = vec3(0.0);
+  vec3 L1 = normalize(vec3(0.5, 0.9, 0.6));
+  vec3 L2 = normalize(vec3(-0.7, -0.3, 0.5));
+  float d1 = max(dot(n, L1), 0.0);
+  float d2 = max(dot(n, L2), 0.0);
+  float base = 0.30 + 0.70 * d1 + 0.20 * d2;
+  col = vec3(1.0, 0.36, 0.22) * base;
+
+  vec3 h = normalize(L1 - rd);
+  float spec = pow(max(dot(n, h), 0.0), 48.0);
+  col += vec3(1.0, 0.80, 0.62) * spec * 0.8;
+
+  float fres = pow(1.0 - max(dot(n, -rd), 0.0), 2.0);
+  col += vec3(1.0, 0.45, 0.30) * fres * 0.40;
+
+  float inner = clamp(1.0 - d1, 0.0, 1.0);
+  col += vec3(0.85, 0.15, 0.10) * inner * 0.25;
+  return col;
+}
+
+vec3 background(vec3 rd) {
+  float t = 0.5 + 0.5 * rd.y;
+  vec3 top = vec3(0.34, 0.14, 0.30);
+  vec3 bot = vec3(0.05, 0.02, 0.06);
+  vec3 c = mix(bot, top, t);
+  float halo = pow(max(rd.y, 0.0), 1.5);
+  c += vec3(0.16, 0.03, 0.09) * halo;
+  return c;
+}
+
+vec3 render(vec3 ro, vec3 rd) {
+  float t = 0.0;
+  float hit = -1.0;
+  for (int i = 0; i < 60; i++) {
+    vec3 p = ro + rd * t;
+    float d = field(p);
+    if (d < 0.012) { hit = t; break; }
+    t += d;
+    if (t > 6.0) break;
+  }
+  if (hit < 0.0) return background(rd);
+  vec3 p = ro + rd * hit;
+  vec3 d = field(p);
+  vec3 n = normalAt(p, d);
+  vec3 c = shade(p, n, rd);
+  float fog = 1.0 - exp(-hit * 0.25);
+  vec3 bg = background(rd);
+  c = mix(c, bg, fog * 0.5);
+  return c;
+}
+
+void main() {
+  vec2 uv = (gl_FragCoord.xy - 0.5 * uRes) / uRes.y;
+  vec3 ro = vec3(0.0, 0.0, 3.6);
+  vec3 rd = normalize(vec3(uv, -1.0));
+
+  float yaw = 0.30 * sin(uTime * 0.12);
+  float pitch = 0.16 * sin(uTime * 0.09);
+  float ca = cos(yaw), sa = sin(yaw);
+  float cb = cos(pitch), sb = sin(pitch);
+
+  vec3 ro2 = vec3(ro.x * ca + ro.z * sa, ro.y, -ro.x * sa + ro.z * ca);
+  ro2 = vec3(ro2.x, ro2.y * cb - ro2.z * sb, ro2.y * sb + ro2.z * cb);
+  vec3 rd2 = vec3(rd.x * ca + rd.z * sa, rd.y, -rd.x * sa + rd.z * ca);
+  rd2 = vec3(rd2.x, rd2.y * cb - rd2.z * sb, rd2.y * sb + rd2.z * cb);
+
+  vec3 col = render(ro2, rd2);
+
+  vec2 uvw = gl_FragCoord.xy / uRes;
+  float vig = 1.0 - 0.55 * dot(uvw - 0.5, uvw - 0.5);
+  col *= vig;
+
+  float grain = fract(sin(dot(gl_FragCoord.xy, vec2(12.9898, 78.233))) * 43758.5453);
+  col += (grain - 0.5) * 0.015;
+
+  col = max(col, 0.0);
+  col = pow(col, vec3(1.0 / 2.2));
+  gl_FragColor = vec4(col, 1.0);
+}
+`;
+
+const material = new THREE.ShaderMaterial({
+  vertexShader,
+  fragmentShader,
+  uniforms: {
+    uRes: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+    uTime: { value: 0.0 },
+    uRadius: { value: 0.5 }
+  }
+});
+
+const quad = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material);
+scene.add(quad);
+
+function resize() {
+  const w = window.innerWidth, h = window.innerHeight;
+  renderer.setSize(w, h);
+  material.uniforms.uRes.value.set(w * renderer.getPixelRatio(), h * renderer.getPixelRatio());
+}
+resize();
+window.addEventListener('resize', resize);
+
+const clock = new THREE.Clock();
+function loop() {
+  material.uniforms.uTime.value = clock.getElapsedTime();
+  renderer.render(scene, new THREE.Camera());
+  requestAnimationFrame(loop);
+}
+loop();
+</script>
+</body>
+</html>
+```
