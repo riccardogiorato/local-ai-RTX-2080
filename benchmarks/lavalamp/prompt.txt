@@ -1,0 +1,8 @@
+Generate a single self-contained HTML file that renders an animated lava lamp.
+Requirements:
+- All HTML, CSS, and JavaScript inline (no external assets or CDNs)
+- Realistic glass vessel with base, neck, and cap
+- Multiple metaball-style wax blobs that slowly rise, fall, merge, and split
+- Warm lighting from the base bulb with glow and subtle glass reflections
+- Smooth 60fps animation on a dark background
+- Output only the complete HTML file

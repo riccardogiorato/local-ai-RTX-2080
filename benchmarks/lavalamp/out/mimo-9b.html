@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lava Lamp</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #05060a;
+  }
+  body {
+    display: grid;
+    place-items: center;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+  canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+</style>
+</head>
+<body>
+<canvas id="lamp"></canvas>
+
+<script>
+(() => {
+  "use strict";
+
+  const canvas = document.getElementById("lamp");
+  const ctx = canvas.getContext("2d", { alpha: false });
+
+  let W = 0, H = 0, DPR = 1;
+
+  function resize() {
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width = Math.round(W * DPR);
+    canvas.height = Math.round(H * DPR);
+    canvas.style.width = W + "px";
+    canvas.style.height = H + "px";
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+  window.addEventListener("resize", resize);
+  resize();
+
+  const cx = () => W * 0.5;
+  const cy = () => H * 0.5;
+  const R = () => Math.min(W, H) * 0.115;
+
+  // ---- Wax blobs -----------------------------------------------------------
+  // Each blob has its own phase, radius and speed. The sine field lets them
+  // rise, stall, sink and rise again in a natural lava-lamp rhythm.
+  const blobs = [];
+  const BLOB_COUNT = 9;
+
+  for (let i = 0; i < BLOB_COUNT; i++) {
+    const seed = Math.random();
+    blobs.push({
+      phase: Math.random() * Math.PI * 2,
+      speed: 0.055 + seed * 0.085,
+      radius: (0.24 + Math.random() * 0.20) * R(),
+      wobble: 0.10 + Math.random() * 0.16,
+      wobblePhase: Math.random() * Math.PI * 2,
+      wobbleSpeed: 0.10 + Math.random() * 0.18,
+      drift: (Math.random() - 0.5) * 0.10,
+      depth: 0.80 + Math.random() * 0.30,
+      tint: 0.75 + Math.random() * 0.30
+    });
+  }
+
+  function blobPos(b, t) {
+    const p = b.phase + t * b.speed;
+    const y = cy() - R() * 1.05 + Math.sin(p) * R() * 1.45;
+    const x = cx() + Math.sin(p * 1.7 + b.wobblePhase) * b.radius * b.wobble;
+    const r = b.radius * (0.78 + 0.22 * Math.sin(p * 0.63 + 1.1));
+    return { x, y, r };
+  }
+
+  // ---- Glass vessel geometry -----------------------------------------------
+  function vesselPath() {
+    const r = R();
+    const neck = r * 0.235;
+    const shoulder = r * 0.47;
+    const body = r * 0.60;
+    const baseY = cy() + r * 0.78;
+    const topY = cy() - r * 1.18;
+    const capY = cy() - r * 1.42;
+
+    ctx.beginPath();
+    ctx.moveTo(cx() - neck, baseY);
+    ctx.lineTo(cx() - neck, baseY - r * 0.05);
+    ctx.quadraticCurveTo(cx() - body, baseY - r * 0.05, cx() - body, baseY - r * 0.20);
+    ctx.quadraticCurveTo(cx() - body * 1.06, baseY - r * 0.55, cx() - shoulder, baseY - r * 0.78);
+    ctx.quadraticCurveTo(cx() - shoulder * 0.72, topY + r * 0.10, cx() - neck, topY);
+    ctx.lineTo(cx() + neck, topY);
+    ctx.quadraticCurveTo(cx() + neck, topY, cx() + shoulder, topY);
+    ctx.quadraticCurveTo(cx() + shoulder * 0.72, topY + r * 0.10, cx() + body, baseY - r * 0.78);
+    ctx.quadraticCurveTo(cx() + body * 1.06, baseY - r * 0.55, cx() + body, baseY - r * 0.20);
+    ctx.lineTo(cx() + neck, baseY - r * 0.05);
+    ctx.lineTo(cx() + neck, baseY);
+    ctx.closePath();
+  }
+
+  function shadePath() {
+    const r = R();
+    const neck = r * 0.235;
+    const capY = cy() - r * 1.42;
+    ctx.beginPath();
+    ctx.moveTo(cx() - neck, capY);
+    ctx.lineTo(cx() - neck * 1.08, capY - r * 0.10);
+    ctx.quadraticCurveTo(cx() - neck * 1.35, capY - r * 0.22, cx() - neck * 1.45, capY - r * 0.40);
+    ctx.quadraticCurveTo(cx() - neck * 1.55, capY - r * 0.80, cx() - neck * 1.30, capY - r * 0.92);
+    ctx.quadraticCurveTo(cx() - neck * 1.05, capY - r * 1.00, cx() - neck * 0.80, capY - r * 0.92);
+    ctx.quadraticCurveTo(cx() - neck * 0.55, capY - r * 0.84, cx() - neck * 0.35, capY - r * 0.72);
+    ctx.quadraticCurveTo(cx() - neck * 0.25, capY - r * 0.60, cx() - neck * 0.25, capY - r * 0.45);
+    ctx.lineTo(cx() + neck * 0.25, capY - r * 0.45);
+    ctx.quadraticCurveTo(cx() + neck * 0.25, capY - r * 0.60, cx() + neck * 0.35, capY - r * 0.72);
+    ctx.quadraticCurveTo(cx() + neck * 0.55, capY - r * 0.84, cx() + neck * 0.80, capY - r * 0.92);
+    ctx.quadraticCurveTo(cx() + neck * 1.05, capY - r * 1.00, cx() + neck * 1.30, capY - r * 0.92);
+    ctx.quadraticCurveTo(cx() + neck * 1.55, capY - r * 0.80, cx() + neck * 1.45, capY - r * 0.40);
+    ctx.quadraticCurveTo(cx() + neck * 1.35, capY - r * 0.22, cx() + neck * 1.08, capY - r * 0.10);
+    ctx.lineTo(cx() + neck, capY);
+    ctx.closePath();
+  }
+
+  // ---- Main render loop ----------------------------------------------------
+  let t = 0;
+  let last = performance.now();
+
+  function frame(now) {
+    const dt = Math.min((now - last) / 1000, 0.05);
+    last = now;
+    t += dt;
+
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+
+    const cxm = cx(), cym = cy(), r = R();
+
+    // ---- Background --------------------------------------------------------
+    const bg = ctx.createRadialGradient(cxm, cym, r * 0.2, cxm, cym, Math.max(W, H) * 0.75);
+    bg.addColorStop(0, "#16120c");
+    bg.addColorStop(0.35, "#0a0a0d");
+    bg.addColorStop(1, "#030407");
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, H);
+
+    // ---- Base --------------------------------------------------------------
+    const baseTop = cym + r * 0.80;
+    const baseBottom = cym + r * 1.24;
+    const baseW = r * 1.42;
+
+    const baseGrad = ctx.createLinearGradient(0, baseTop, 0, baseBottom);
+    baseGrad.addColorStop(0, "#f2c07a");
+    baseGrad.addColorStop(0.10, "#d89a4c");
+    baseGrad.addColorStop(0.45, "#7a4418");
+    baseGrad.addColorStop(0.75, "#3a1c07");
+    baseGrad.addColorStop(1, "#170a03");
+
+    ctx.save();
+    ctx.shadowColor = "rgba(255,150,50,0.45)";
+    ctx.shadowBlur = r * 0.35;
+    ctx.fillStyle = baseGrad;
+    ctx.beginPath();
+    ctx.moveTo(cxm - baseW * 0.62, baseTop);
+    ctx.lineTo(cxm - baseW, baseTop + r * 0.06);
+    ctx.quadraticCurveTo(cxm, baseBottom + r * 0.10, cxm + baseW, baseTop + r * 0.06);
+    ctx.lineTo(cxm + baseW * 0.62, baseTop);
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+
+    // Bulb glow
+    const glow = ctx.createRadialGradient(cxm, baseTop + r * 0.18, r * 0.02, cxm, baseTop + r * 0.18, r * 1.05);
+    glow.addColorStop(0, "rgba(255,236,170,0.95)");
+    glow.addColorStop(0.25, "rgba(255,190,90,0.55)");
+    glow.addColorStop(0.6, "rgba(255,120,30,0.18)");
+    glow.addColorStop(1, "rgba(255,90,10,0)");
+    ctx.fillStyle = glow;
+    ctx.beginPath();
+    ctx.arc(cxm, baseTop + r * 0.18, r * 1.05, 0, Math.PI * 2);
+    ctx.fill();
+
+    // ---- Wax blobs ---------------------------------------------------------
+    const blobField = ctx.createRadialGradient(cxm, baseTop + r * 0.15, 0, cxm, baseTop + r * 0.15, r * 1.05);
+    blobField.addColorStop(0, "rgba(255,225,150,0.30)");
+    blobField.addColorStop(0.5, "rgba(255,150,45,0.14)");
+    blobField.addColorStop(1, "rgba(255,100,20,0)");
+    ctx.fillStyle = blobField;
+    ctx.fillRect(cxm - r * 1.3, cym - r * 1.3, r * 2.6, r * 2.6);
+
+    ctx.save();
+    ctx.globalCompositeOperation = "screen";
+
+    for (const b of blobs) {
+      const p = blobPos(b, t);
+      const x = cxm + p.x, y = cym + p.y;
+
+      const g = ctx.createRadialGradient(x - p.r * 0.35, y - p.r * 0.45, 0, x, y, p.r);
+      g.addColorStop(0, `rgba(255,240,180,${0.92 * b.tint})`);
+      g.addColorStop(0.35, `rgba(255,190,90,${0.72 * b.tint})`);
+      g.addColorStop(0.75, `rgba(255,110,25,${0.55 * b.tint})`);
+      g.addColorStop(1, `rgba(255,70,10,0)`);
+
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(x, y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.restore();
+
+    // ---- Glass body --------------------------------------------------------
+    const glass = ctx.createLinearGradient(cxm - r, cym, cxm + r, cym);
+    glass.addColorStop(0, "rgba(255,255,255,0.28)");
+    glass.addColorStop(0.18, "rgba(255,255,255,0.05)");
+    glass.addColorStop(0.5, "rgba(255,255,255,0.02)");
+    glass.addColorStop(0.82, "rgba(255,255,255,0.07)");
+    glass.addColorStop(1, "rgba(255,255,255,0.24)");
+
+    ctx.save();
+    ctx.shadowColor = "rgba(255,200,110,0.20)";
+    ctx.shadowBlur = r * 0.30;
+    ctx.strokeStyle = glass;
+    ctx.lineWidth = Math.max(1.5, r * 0.022);
+    vesselPath();
+    ctx.stroke();
+    ctx.restore();
+
+    // Inner fluid tint
+    const fluid = ctx.createLinearGradient(cxm - r, cym, cxm + r, cym);
+    fluid.addColorStop(0, "rgba(255,215,130,0.05)");
+    fluid.addColorStop(0.5, "rgba(255,150,40,0.03)");
+    fluid.addColorStop(1, "rgba(255,200,120,0.05)");
+    ctx.fillStyle = fluid;
+    vesselPath();
+    ctx.fill();
+
+    // Vertical glass highlights
+    ctx.save();
+    ctx.globalAlpha = 0.35;
+    ctx.strokeStyle = "rgba(255,255,255,0.9)";
+    ctx.lineWidth = Math.max(1, r * 0.012);
+    ctx.beginPath();
+    ctx.moveTo(cxm - r * 0.46, cym - r * 0.95);
+    ctx.lineTo(cxm - r * 0.52, cym + r * 0.78);
+    ctx.moveTo(cxm - r * 0.16, cym - r * 0.90);
+    ctx.lineTo(cxm - r * 0.21, cym + r * 0.82);
+    ctx.moveTo(cxm + r * 0.40, cym - r * 0.88);
+    ctx.lineTo(cxm + r * 0.46, cym + r * 0.76);
+    ctx.stroke();
+    ctx.restore();
+
+    // Bottom reflection
+    ctx.save();
+    ctx.globalAlpha = 0.18;
+    const refl = ctx.createLinearGradient(0, baseTop + r * 0.15, 0, baseTop + r * 0.65);
+    refl.addColorStop(0, "rgba(255,255,255,0.55)");
+    refl.addColorStop(1, "rgba(255,255,255,0)");
+    ctx.fillStyle = refl;
+    ctx.beginPath();
+    ctx.ellipse(cxm, baseTop + r * 0.15, r * 0.52, r * 0.34, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+
+    // ---- Cap ---------------------------------------------------------------
+    const capGrad = ctx.createLinearGradient(0, capY - r * 0.45, 0, capY + r * 0.15);
+    capGrad.addColorStop(0, "#3a3a42");
+    capGrad.addColorStop(0.5, "#17171d");
+    capGrad.addColorStop(1, "#0b0b0f");
+
+    ctx.save();
+    ctx.shadowColor = "rgba(0,0,0,0.6)";
+    ctx.shadowBlur = r * 0.12;
+    ctx.shadowOffsetY = r * 0.03;
+    ctx.fillStyle = capGrad;
+    shadePath();
+    ctx.fill();
+    ctx.restore();
+
+    // Cap rim highlight
+    ctx.save();
+    ctx.globalAlpha = 0.5;
+    ctx.strokeStyle = "rgba(255,255,255,0.7)";
+    ctx.lineWidth = Math.max(1, r * 0.014);
+    ctx.beginPath();
+    ctx.moveTo(cxm - r * 0.235, capY);
+    ctx.lineTo(cxm + r * 0.235, capY);
+    ctx.stroke();
+    ctx.restore();
+
+    // ---- Ground shadow -----------------------------------------------------
+    ctx.save();
+    ctx.globalAlpha = 0.5;
+    const shadow = ctx.createRadialGradient(cxm, baseBottom + r * 0.06, 0, cxm, baseBottom + r * 0.06, r * 0.95);
+    shadow.addColorStop(0, "rgba(0,0,0,0.75)");
+    shadow.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.fillStyle = shadow;
+    ctx.beginPath();
+    ctx.ellipse(cxm, baseBottom + r * 0.06, r * 0.82, r * 0.22, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function loop(now) {
+    frame(now);
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

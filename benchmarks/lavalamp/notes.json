@@ -1,0 +1,9 @@
+{
+  "a3b-35b":     {"score": 6, "note": "Best overall: glowing wax blobs rise and fall continuously, cap, base and a warm bulb glow under the glass. Blobs are blurred circles that overlap rather than true merging metaballs; the vessel is a plain rectangle."},
+  "strata-coder":{"score": 5, "note": "Best-looking lamp by far: tapered glass, metal cap and neck, stepped base, bulb glow and glass highlights. But its WebGL shader fails to set up (attachShader error), so the wax shows as sliding rectangles instead of blobs."},
+  "gemma-e4b":   {"score": 4, "note": "Moves smoothly with plenty of blobs and a glowing bulb, but it reads as dots in a box: no real vessel shape, no merging. Fastest by far."},
+  "strata-125b": {"score": 4, "note": "The only true metaball merge/split (SVG goo filter) plus heat/gravity/viscosity controls. But the lamp is small and jar-shaped, and a flipped buoyancy sign pushes hot wax down, so it mostly sits at the bottom."},
+  "qwen35-9b":   {"score": 3, "note": "Pill-shaped glass with a cap and a wax pool at the bottom, but almost nothing moves."},
+  "qwen35-4b":   {"score": 2, "note": "Broken script (SyntaxError: 'data' declared twice): empty glass and a glowing bulb, no wax."},
+  "mimo-9b":     {"score": 0, "note": "Black screen: the script crashes on start (ReferenceError: capY is not defined)."}
+}

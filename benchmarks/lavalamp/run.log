@@ -1,0 +1,17 @@
+===== strata-125b 23:00:16
+Running as unit: ctx-lava-champ.service; invocation ID: 963e687e32ef40df8116e7bbae284d11
+{"label": "strata-125b", "engine": "Strata 0.1.43", "wall_s": 162.8, "completion_tokens": 7638, "prompt_tokens": 112, "finish": "stop", "fenced": true, "html_bytes": 18902, "has_closing_html": true}
+===== qwen35-9b 23:04:04
+{"label": "qwen35-9b", "engine": "llama.cpp b11562", "wall_s": 26.4, "completion_tokens": 2721, "prompt_tokens": 112, "finish": "stop", "fenced": true, "html_bytes": 8849, "has_closing_html": true}
+===== a3b-35b 23:05:39
+{"label": "a3b-35b", "engine": "llama.cpp b11562", "wall_s": 147.1, "completion_tokens": 4344, "prompt_tokens": 112, "finish": "stop", "fenced": true, "html_bytes": 16473, "has_closing_html": true}
+===== qwen35-4b 23:10:25
+{"label": "qwen35-4b", "engine": "llama.cpp b11562", "wall_s": 51.0, "completion_tokens": 6592, "prompt_tokens": 112, "finish": "stop", "fenced": true, "html_bytes": 25416, "has_closing_html": true}
+===== gemma-e4b 23:11:54
+{"label": "gemma-e4b", "engine": "llama.cpp b11562", "wall_s": 14.0, "completion_tokens": 2595, "prompt_tokens": 110, "finish": "stop", "fenced": true, "html_bytes": 8903, "has_closing_html": true}
+===== mimo-9b 23:13:02
+{"label": "mimo-9b", "engine": "llama.cpp b11562", "wall_s": 74.8, "completion_tokens": 4588, "prompt_tokens": 110, "finish": "stop", "fenced": true, "html_bytes": 11184, "has_closing_html": true}
+===== strata-coder 23:15:21
+Running as unit: ctx-lava-coder.service; invocation ID: 1f46cfb581f74421a6dc0a96494989c5
+{"label": "strata-coder", "engine": "Strata 0.1.38", "wall_s": 207.4, "completion_tokens": 5856, "prompt_tokens": 112, "finish": "stop", "fenced": true, "html_bytes": 12255, "has_closing_html": true}
+LAVA-DONE
