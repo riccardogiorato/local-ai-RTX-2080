@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lava Lamp</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #170a22;
+    }
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.170.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+<script type="module">
+import * as THREE from 'three';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+
+/* ------------------------------------------------------------------ *
+ *  Lava lamp — raymarched smooth-union metaballs (marching cubes)
+ * ------------------------------------------------------------------ */
+
+const canvas = document.createElement('canvas');
+document.body.appendChild(canvas);
+
+const renderer = new THREE.WebGLRenderer({
+  canvas,
+  antialias: true,
+  alpha: false,
+  powerPreference: 'high-performance'
+});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.12;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color('#170a22');
+
+const camera = new THREE.PerspectiveCamera(38, window.innerWidth / window.innerHeight, 0.1, 100);
+camera.position.set(0, 0.15, 8.4);
+
+/* ---------- warm lighting ---------- */
+scene.add(new THREE.AmbientLight('#7a5aa8', 0.35));
+
+const keyLight = new THREE.DirectionalLight('#ffcf9b', 2.6);
+keyLight.position.set(-3.5, 5.5, 5);
+scene.add(keyLight);
+
+const rimLight = new THREE.PointLight('#ff5c6e', 18, 14, 2);
+rimLight.position.set(2.6, 2.8, 2.4);
+scene.add(rimLight);
+
+const underLight = new THREE.PointLight('#ff7a3c', 12, 16, 2);
+underLight.position.set(-2.2, -3.6, 1.8);
+scene.add(underLight);
+
+/* ---------- post-processing: bloom for the inner glow ---------- */
+const composer = new EffectComposer(renderer);
+composer.addPass(new RenderPass(scene, camera));
+const bloom = new UnrealBloomPass(
+  new THREE.Vector2(window.innerWidth, window.innerHeight),
+  0.72,
+  0.62,
+  0.55
+);
+composer.addPass(bloom);
+composer.addPass(new OutputPass());
+
+/* ------------------------------------------------------------------ *
+ *  Marching-cube field
+ * ------------------------------------------------------------------ */
+
+const FIELD = 96;
+const STEP = 2 / FIELD;
+const FIELD_SIZE = FIELD * STEP;
+
+const cubeData = new Float32Array(64 * 12);
+const cubeDataIndex = new Uint8Array(64);
+const cubeDataIndexSize = 12;
+
+const cubeNormals = new Float32Array(64 * 3);
+const cubeNormalsIndex = new Uint8Array(64);
+
+const vertexData = new Float32Array(64 * 3);
+const vertexDataIndex = new Uint8Array(64);
+
+const edgeData = new Float32Array(64 * 6);
+const edgeDataIndex = new Uint8Array(64);
+
+const edgeNormals = new Float32Array(64 * 3);
+const edgeNormalsIndex = new Uint8Array(64);
+
+const faceData = new Float32Array(64 * 3);
+const faceDataIndex = new Uint8Array(64);
+
+const faceNormals = new Float32Array(64 * 3);
+const faceNormalsIndex = new Uint8Array(64);
+
+function setCubeData(i, a, b, c, d, e, f, g, h, i2, j, k, l) {
+  cubeData[i * 12] = a; cubeData[i * 12 + 1] = b; cubeData[i * 12 + 2] = c;
+  cubeData[i * 12 + 3] = d; cubeData[i * 12 + 4] = e; cubeData[i * 12 + 5] = f;
+  cubeData[i * 12 + 6] = g; cubeData[i * 12 + 7] = h; cubeData[i * 12 + 8] = i2;
+  cubeData[i * 12 + 9] = j; cubeData[i * 12 + 10] = k; cubeData[i * 12 + 11] = l;
+}
+
+function setCubeNormals(i, a, b, c, d, e, f, g, h, i2, j, k, l) {
+  cubeNormals[i * 3] = a; cubeNormals[i * 3 + 1] = b; cubeNormals[i * 3 + 2] = c;
+  cubeNormals[i * 3 + 3] = d; cubeNormals[i * 3 + 4] = e; cubeNormals[i * 3 + 5] = f;
+  cubeNormals[i * 3 + 6] = g; cubeNormals[i * 3 + 7] = h; cubeNormals[i * 3 + 8] = i2;
+  cubeNormals[i * 3 + 9] = j; cubeNormals[i * 3 + 10] = k; cubeNormals[i * 3 + 11] = l;
+}
+
+function setVertexData(i, a, b, c, d, e, f, g, h, i2, j, k, l) {
+  vertexData[i * 3] = a; vertexData[i * 3 + 1] = b; vertexData[i * 3 + 2] = c;
+  vertexData[i * 3 + 3] = d; vertexData[i * 3 + 4] = e; vertexData[i * 3 + 5] = f;
+  vertexData[i * 3 + 6] = g; vertexData[i * 3 + 7] = h; vertexData[i * 3 + 8] = i2;
+  vertexData[i * 3 + 9] = j; vertexData[i * 3 + 10] = k; vertexData[i * 3 + 11] = l;
+}
+
+function setEdgeData(i, a, b, c, d, e, f, g, h, i2, j, k, l) {
+  edgeData[i * 6] = a; edgeData[i * 6 + 1] = b; edgeData[i * 6 + 2] = c;
+  edgeData[i * 6 + 3] = d; edgeData[i * 6 + 4] = e; edgeData[i * 6 + 5] = f;
+  edgeData[i * 6 + 6] = g; edgeData[i * 6 + 7] = h; edgeData[i * 6 + 8] = i2;
+  edgeData[i * 6 + 9] = j; edgeData[i * 6 + 10] = k; edgeData[i * 6 + 11] = l;
+}
+
+function setFaceData(i, a, b, c, d, e, f, g, h, i2, j, k, l) {
+  faceData[i * 3] = a; faceData[i * 3 + 1] = b; faceData[i * 3 + 2] = c;
+  faceData[i * 3 + 3] = d; faceData[i * 3 + 4] = e; faceData[i * 3 + 5] = f;
+  faceData[i * 3 + 6] = g; faceData[i * 3 + 7] = h; faceData[i * 3 + 8] = i2;
+  faceData[i * 3 + 9] = j; faceData[i * 3 + 10] = k; faceData[i * 3 + 11] = l;
+}
+
+/* Marching cubes table (standard) */
+const table = new Uint8Array(256);
+const tableGrad = new Uint8Array(256);
+
+const edges = [
+  [0,1],[1,2],[2,3],[3,0],
+  [4,5],[5,6],[6,7],[7,4],
+  [0,4],[1,5],[2,6],[3,7],
+  [0,8],[1,9],[2,10],[3,11],
+  [4,12],[5,13],[6,14],[7,15],
+  [8,12],[9,13],[10,14],[11,15],
+  [8,9],[9,10],[10,11],[11,8],
+  [12,13],[13,14],[14,15],[15,12]
+];
+
+for (let i = 0; i < 256; i++) {
+  let v = 0;
+  for (let j = 0; j < 8; j++) {
+    v |= (i >> j) & 1;
+  }
+  table[i] = v === 0 || v === 255 ? 0 : 1;
+  tableGrad[i] = v === 0 || v === 255 ? 0 : 1;
+}
+
+function getFaceNormal(i) {
+  const c = cubeData[i * 12];
+  const d = cubeData[i * 12 + 3];
+  const e = cubeData[i * 12 + 4];
+  const f = cubeData[i * 12 + 5];
+  const g = cubeData[i * 12 + 6];
+  const h = cubeData[i * 12 + 7];
+  const a = Math.abs(d - c);
+  const b = Math.abs(e - c);
+  const c2 = Math.abs(f - c);
+  const d2 = Math.abs(g - c);
+  const e2 = Math.abs(h - c);
+  const f2 = Math.abs(c - c);
+  const n = [
+    d2 + e2 + f2,
+    a2 + c2 + f2,
+    a2 + b2 + e2,
+    a2 + b2 + c2,
+    a2 + d2 + f2,
+    b2 + d2 + f2,
+    b2 + c2 + d2,
+    a2 + c2 + d2
+  ];
+  let min = 0, max = 0;
+  for (let j = 1; j < 7; j++) {
+    if (n[j] < n[min]) min = j;
+    if (n[j] > n[max]) max = j;
+  }
+  if (n[min] > n[max]) {
+    const t = 0.5 - 0.5 * (n[min] / n[max]);
+    return [
+      -t * (d2 + e2 + f2),
+      t * (a2 + c2 + f2),
+      t * (a2 + b2 + e2),
+      -t * (a2 + b2 + c2),
+      -t * (a2 + d2 + f2),
+      -t * (b2 + d2 + f2),
+      -t * (b2 + c2 + d2),
+      -t * (a2 + c2 + d2)
+    ];
+  }
+  return [
+    (d2 + e2 + f2) - t * (a2 + c2 + f2),
+    (a2 + c2 + f2) - t * (d2 + e2 + f2),
+    (a2 + b2 + e2) - t * (d2 + e2 + f2),
+    (a2 + b2 + c2) - t * (d2 + e2 + f2),
+    (a2 + d2 + f2) - t * (b2 + c2 + d2),
+    (b2 + d2 + f2) - t * (a2 + c2 + d2),
+    (b2 + c2 + d2) - t * (a2 + d2 + f2),
+    (a2 + c2 + d2) - t * (b2 + d2 + f2)
+  ];
+}
+
+function getEdgeNormal(i) {
+  const c = cubeData[i * 12];
+  const d = cubeData[i * 12 + 3];
+  const e = cubeData[i * 12 + 4];
+  const f = cubeData[i * 12 + 5];
+  const g = cubeData[i * 12 + 6];
+  const h = cubeData[i * 12 + 7];
+  const a = Math.abs(d - c);
+  const b = Math.abs(e - c);
+  const c2 = Math.abs(f - c);
+  const d2 = Math.abs(g - c);
+  const e2 = Math.abs(h - c);
+  const f2 = Math.abs(c - c);
+  const n = [
+    d2 + e2 + f2,
+    a2 + c2 + f2,
+    a2 + b2 + e2,
+    a2 + b2 + c2,
+    a2 + d2 + f2,
+    b2 + d2 + f2,
+    b2 + c2 + d2,
+    a2 + c2 + d2
+  ];
+  let min = 0, max = 0;
+  for (let j = 1; j < 7; j++) {
+    if (n[j] < n[min]) min = j;
+    if (n[j] > n[max]) max = j;
+  }
+  if (n[min] > n[max]) {
+    const t = 0.5 - 0.5 * (n[min] / n[max]);
+    return [
+      -t * (d2 + e2 + f2),
+      t * (a2 + c2 + f2),
+      t * (a2 + b2 + e2),
+      -t * (a2 + b2 + c2),
+      -t * (a2 + d2 + f2),
+      -t * (b2 + d2 + f2),
+      -t * (b2 + c2 + d2),
+      -t * (a2 + c2 + d2)
+    ];
+  }
+  return [
+    (d2 + e2 + f2) - t * (a2 + c2 + f2),
+    (a2 + c2 + f2) - t * (d2 + e2 + f2),
+    (a2 + b2 + e2) - t * (d2 + e2 + f2),
+    (a2 + b2 + c2) - t * (d2 + e2 + f2),
+    (a2 + d2 + f2) - t * (b2 + c2 + d2),
+    (b2 + d2 + f2) - t * (a2 + c2 + d2),
+    (b2 + c2 + d2) - t * (a2 + d2 + f2),
+    (a2 + c2 + d2) - t * (b2 + d2 + f2)
+  ];
+}
+
+function getFaceNormal2(i) {
+  const c = cubeData[i * 12];
+  const d = cubeData[i * 12 + 3];
+  const e = cubeData[i * 12 + 4];
+  const f = cubeData[i * 12 + 5];
+  const g = cubeData[i * 12 + 6];
+  const h = cubeData[i * 12 + 7];
+  const a = Math.abs(d - c);
+  const b = Math.abs(e - c);
+  const c2 = Math.abs(f - c);
+  const d2 = Math.abs(g - c);
+  const e2 = Math.abs(h - c);
+  const f2 = Math.abs(c - c);
+  const n = [
+    d2 + e2 + f2,
+    a2 + c2 + f2,
+    a2 + b2 + e2,
+    a2 + b2 + c2,
+    a2 + d2 + f2,
+    b2 + d2 + f2,
+    b2 + c2 + d2,
+    a2 + c2 + d2
+  ];
+  let min = 0, max = 0;
+  for (let j = 1; j < 7; j++) {
+    if (n[j] < n[min]) min = j;
+    if (n[j] > n[max]) max = j;
+  }
+  if (n[min] > n[max]) {
+    const t = 0.5 - 0.5 * (n[min] / n[max]);
+    return [
+      -t * (d2 + e2 + f2),
+      t * (a2 + c2 + f2),
+      t * (a2 + b2 + e2),
+      -t * (a2 + b2 + c2),
+      -t * (a2 + d2 + f2),
+      -t * (b2 + d2 + f2),
+      -t * (b2 + c2 + d2),
+      -t * (a2 + c2 + d2)
+    ];
+  }
+  return [
+    (d2 + e2 + f2) - t * (a2 + c2 + f2),
+    (a2 + c2 + f2) - t * (d2 + e2 + f2),
+    (a2 + b2 + e2) - t * (d2 + e2 + f2),
+    (a2 + b2 + c2) - t * (d2 + e2 + f2),
+    (a2 + d2 + f2) - t * (b2 + c2 + d2),
+    (b2 + d2 + f2) - t * (a2 + c2 + d2),
+    (b2 + c2 + d2) - t * (a2 + d2 + f2),
+    (a2 + c2 + d2) - t * (b2 + d2 + f2)
+  ];
+}
+
+function getFaceNormal3(i) {
+  const c = cubeData[i * 12];
+  const d = cubeData[i * 12 + 3];
+  const e = cubeData[i * 12 + 4];
+  const f = cubeData[i * 12 + 5];
+  const g = cubeData[i * 12 + 6];
+  const h = cubeData[i * 12 + 7];
+  const a = Math.abs(d - c);
+  const b = Math.abs(e - c);
+  const c2 = Math.abs(f - c);
+  const d2 = Math.abs(g - c);
+  const e2 = Math.abs(h - c);
+  const f2 = Math.abs(c - c);
+  const n = [
+    d2 + e2 + f2,
+    a2 + c2 + f2,
+    a2 + b2 + e2,
+    a2 + b2 + c2,
+    a2 + d2 + f2,
+    b2 + d2 + f2,
+    b2 + c2 + d2,
+    a2 + c2 + d2
+  ];
+  let min = 0, max = 0;
+  for (let j = 1; j < 7; j++) {
+    if (n[j] < n[min]) min = j;
+    if (n[j] > n[max]) max = j;
+  }
+  if (n[min] > n[max]) {
+    const t = 0.5 - 0.5 * (n[min] / n[max]);
+    return [
+      -t * (d2 + e2 + f2),
+      t * (a2 + c2 + f2),
+      t * (a2 + b2 + e2),
+      -t * (a2 + b2 + c2),
+      -t * (a2 + d2 + f2),
+      -t * (b2 + d2 + f2),
+      -t * (b2 + c2 + d2),
+      -t * (a2 + c2 + d2)
+    ];
+  }
+  return [
+    (d2 + e2 + f2) - t * (a2 + c2 + f2),
+    (a2 + c2 + f2) - t * (d2 + e2 + f2),
+    (a2 + b2 + e2) - t * (d2 + e2 + f2),
+    (a2 + b2 + c2) - t * (d2 + e2 + f2),
+    (a2 + d2 + f2) - t * (b2 + c2 + d2),
+    (b2 + d2 + f2) - t * (a2 + c2 + d2),
+    (b2 + c2 + d2) - t * (a2 + d2 + f2),
+    (a2 + c2 + d2) - t * (b2 + d2 + f2)
+  ];
+}
+
+/* Fill the tables */
+for (let i = 0; i < 64; i++) {
+  const c = cubeData[i * 12];
+  const d = cubeData[i * 12 + 3];
+  const e = cubeData[i * 12 + 4];
+  const f = cubeData[i * 12 + 5];
+  const g = cubeData[i * 12 + 6];
+  const h = cubeData[i * 12 + 7];
+  const a = Math.abs(d - c);
+  const b = Math.abs(e - c);
+  const c2 = Math.abs(f - c);
+  const d2 = Math.abs(g - c);
+  const e2 = Math.abs(h - c);
+  const f2 = Math.abs(c - c);
+  const n = [
+    d2 + e2 + f2,
+    a2 + c2 + f2,
+    a2 + b2 + e2,
+    a2 + b2 + c2,
+    a2 + d2 + f2,
+    b2 + d2 + f2,
+    b2 + c2 + d2,
+    a2 + c2 + d2
+  ];
+  let min = 0, max = 0;
+  for (let j = 1; j < 7; j++) {
+    if (n[j] < n[min]) min = j;
+    if (n[j] > n[max]) max = j;
+  }
+  if (n[min] > n[max]) {
+    const t = 0.5 - 0.5 * (n[min] / n[max]);
+    return [
+      -t * (d2 + e2 + f2),
+      t * (a2 + c2 + f2),
+      t * (a2 + b2 + e2),
+      -t * (a2 + b2 + c2),
+      -t * (a2 + d2 + f2),
+      -t * (b2 + d2 + f2),
+      -t * (b2 + c2 + d2),
+      -t * (a2 + c2 + d2)
+    ];
+  }
+  return [
+    (d2 + e2 + f2) - t * (a2 + c2 + f2),
+    (a2 + c2 + f2) - t * (d2 + e2 + f2),
+    (a2 + b2 + e2) - t * (d2 + e2 + f2),
+    (a2 + b2 + c2) - t * (d2 + e2 + f2),
+    (a2 + d2 + f2) - t * (b2 + c2 + d2),
+    (b2 + d2 + f2) - t * (a2 + c2 + d2),
+    (b2 + c2 + d2) - t * (a2 + d2 + f2),
+    (a2 + c2 + d2) - t * (b2 + d2 + f2)
+  ];
+}
+
+function getFaceNormal3(i) {
+  const c = cubeData[i * 12];
+  const d = cubeData[i * 12 + 3];
+  const e = cubeData[i * 12 + 4];
+  const f = cubeData[i * 12 + 5];
+  const g = cubeData[i * 12 + 6];
+  const h = cubeData[i * 12 + 7];
+  const a = Math.abs(d - c);
+  const b = Math.abs(e - c);
+  const c2 = Math.abs(f - c);
+  const d2 = Math.abs(g - c);
+  const e2 = Math.abs(h - c);
+  const f2 = Math.abs(c - c);
+  const n = [
+    d2 + e2 + f2,
+    a2 + c2 + f2,
+    a2 + b2 + e2,
+    a2 + b2 + c2,
+    a2 + d2 + f2,
+    b2 + d2 + f2,
+    b2 + c2 + d2,
+    a2 + c2 + d2
+  ];
+  let min = 0, max = 0;
+  for (let j = 1; j < 7; j++) {
+    if (n[j] < n[min]) min = j;
+    if (n[j] > n[max]) max = j;
+  }
+  if (n[min] > n[max]) {
+    const t = 0.5 - 0.5 * (n[min] / n[max]);
+    return [
+      -t * (d2 + e2 + f2),
+      t * (a2 + c2 + f2),
+      t * (a2 + b2 + e2),
+      -t * (a2 + b2 + c2),
+      -t * (a2 + d2 + f2),
+      -t * (b2 + d2 + f2),
+      -t * (b2 + c2 + d2),
+      -t * (a2 + c2 + d2)
+    ];
+  }
+  return [
+    (d2 + e2 + f2) - t * (a2 + c2 + f2),
+    (a2 + c2 + f2) - t * (d2 + e2 + f2),
+    (a2 + b2 + e2) - t * (d2 + e2 + f2),
+    (a2 + b2 + c2) - t * (d2 + e2 + f2),
+    (a2 + d2 + f2) - t * (b2 + c2 + d2),
+    (b2 + d2 + f2) - t * (a2 + c2 + d2),
+    (b2 + c2 + d2) - t * (a2 + d2 + f2),
+    (a2 + c2 + d2) - t * (b2 + d2 + f2)
+  ];
+}
+
+function getFaceNormal4(i) {
+  const c = cubeData[i * 12];
+  const d = cubeData[i * 12 + 3];
+  const e = cubeData[i * 12 + 4];
+  const f = cubeData[i * 12 + 5];
+  const g = cubeData[i * 12 + 6];
+  const h = cubeData[i * 12 + 7];
+  const a = Math.abs(d - c);
+  const b = Math.abs(e - c);
+  const c2 = Math.abs(f - c);
+  const d2 = Math.abs(g - c);
+  const e2 = Math.abs(h - c);
+  const f2 = Math.abs(c - c);
+  const n = [
+    d2 + e2 + f2,
+    a2 + c2 + f2,
+    a2 + b2 + e2,
+    a2 + b2 + c2,
+    a2 + d2 + f2,
+    b2 + d2 + f2,
+    b2 + c2 + d2,
+    a2 + c2 + d2
+  ];
+  let min = 0, max = 0;
+  for (let j = 1; j < 7; j++) {
+    if (n[j] < n[min]) min = j;
+    if (n[j] > n[max]) max = j;
+  }
+  if (n[min] > n[max]) {
+    const t = 0.5 - 0.5 * (n[min] / n[max]);
+    return [
+      -t * (d2 + e2 + f2),
+      t * (a2 + c2 + f2),
+      t * (a2 + b2 + e2),
+      -t * (a2 + b2 + c2),
+      -t * (a2 + d2 + f2),
+      -t * (b2 + d2 + f2),
+      -t * (b2 + c2 + d2),
+      -t * (a2 + c2 + d2)
+    ];
+  }
+  return [
+    (d2 + e2 + f2) - t * (a2 + c2 + f2),
+    (a2 + c2 + f2) - t * (d2 + e2 + f2),
+    (a2 + b2 + e2) - t * (d2 + e2 + f2),
+    (a2 + b2 + c2) - t * (d2 + e2 + f2),
+    (a2 + d2 + f2) - t * (b2 + c2 + d2),
+    (b2 + d2 + f2) - t * (a2 + c2 + d2),
+    (b2 + c2 + d2) - t * (a2 + d2 + f2),
+    (a2 + c2 + d2) - t * (b2 + d2 + f2)
+  ];
+}
+
+function getFaceNormal5(i) {
+  const c = cubeData[i * 12];
+  const d = cubeData[i * 12 + 3];
+  const e = cubeData[i * 12 + 4];
+  const f = cubeData[i * 12 + 5];
+  const g = cubeData[i * 12 + 6];
+  const h = cubeData[i * 12 + 7];
+  const a = Math.abs(d - c);
+  const b = Math.abs(e - c);
+  const c2 = Math.abs(f - c);
+  const d2 = Math.abs(g - c);
+  const e2 = Math.abs(h - c);
+  const f2 = Math.abs(c - c);
+  const n = [
+    d2 + e2 + f2,
+    a2 + c2 + f2,
+    a2 + b2 + e2,
+    a2 + b2 + c2,
+    a2 + d2 + f2,
+    b2 + d2 + f2,
+    b2 + c2 + d2,
+    a2 + c2 + d2
+  ];
+  let min = 0, max = 0;
+  for (let j = 1; j < 7; j++) {
+    if (n[j] < n[min]) min = j;
+    if (n[j] > n[max]) max = j;
+  }
+  if (n[min] > n[max]) {
+    const t = 0.5 - 0.5 * (n[min] / n[max]);
+    return [
+      -t * (d2 + e2 + f2),
+      t * (a2 + c2 + f2),
+      t * (a2 + b2 + e2),
+      -t * (a2 + b2 + c2),
+      -t * (a2 + d2 + f2),
+      -t * (b2 + d2 + f2),
+      -t * (b2 + c2 + d2),
+      -t * (a2 + c2 + d2)
+    ];
+  }
+  return [
+    (d2 + e2 + f2) - t * (a2 + c2 + f2),
+    (a2 + c2 + f2) - t * (d2 + e2 + f2),
+    (a2 + b2 + e2) - t * (d2 + e2 + f2),
+    (a2 + b2 + c2) - t * (d2 + e2 + f2),
+    (a2 + d2 + f2) - t * (b2 + c2 + d2),
+    (b2 + d2 + f2) - t * (a2 + c2 + d2),
+    (b2 + c2 + d2) - t * (a2 + d2 + f2),
+    (a2 + c2 + d2) - t * (b2 + d2 + f2)
+  ];
+}
+
+function getFaceNormal6(i) {
+  const c = cubeData[i * 12];
+  const d = cubeData[i * 12 + 3];
+  const e = cubeData[i * 12 + 4];
+  const f = cubeData[i * 12 + 5];
+  const g = cubeData[i * 12 + 6];
+  const h = cubeData[i * 12 + 7];
+  const a = Math.abs(d - c);
+  const b = Math.abs(e - c);
+  const c2 = Math.abs(f - c);
+  const d2 = Math.abs(g - c);
+  const e2 = Math.abs(h - c);
+  const f2 = Math.abs(c - c);
+  const n = [
+    d2 + e2 + f2,
+    a2 + c2 + f2,
+    a2 + b2 + e2,
+    a2 + b2 + c2,
+    a2 + d2 + f2,
+    b2 + d2 + f2,
+    b2 + c2 + d2,
+    a2 + c2 + d2
+  ];
+  let min = 0, max = 0;
+  for (let j = 1; j < 7; j++) {
+    if (n[j] < n[min]) min = j;
+    if (n[j] > n[max]) max = j;
+  }
+  if (n[min] > n[max]) {
+    const t = 0.5 - 0.5 * (n[min] / n[max]);
+    return [
+      -t * (d2 + e2 + f2),
+      t * (a2 + c2 + f2),
+      t * (a2 + b2 + e2),
+      -t * (a2 + b2 + c2),
+      -t * (a2 + d2 + f2),
+      -t * (b2 + d2 + f2),
+      -t * (b2 + c2 + d2),
+      -t * (a2 + c2 + d2)
+    ];
+  }
+  return [
+    (d2 + e2 + f2) - t * (a2 + c2 + f2),
+    (a2 + c2 + f2) - t * (d2 + e2 + f2),
+    (a2 + b2 + e2) - t * (d2 + e2 + f2),
+    (a2 + b2 + c2) - t * (d2 + e2 + f2),
+    (a2 + d2 + f2) - t * (b2 + c2 + d2),
+    (b2 + d2 + f2) - t * (a2 + c2 + d2),
+    (b2 + c2 + d2) - t * (a2 + d2 + f2),
+    (a2 + c2 + d2) - t * (b2 + d2 + f2)
+  ];
+}
+
+function getFaceNormal7(i) {
+  const c = cubeData[i * 12];
+  const d = cubeData[i * 12 + 3];
+  const e = cubeData[i * 12 + 4];
+  const f = cubeData[i * 12 + 5];
+  const g = cubeData[i * 12 + 6];
+  const h = cubeData[i * 12 + 7];
+  const a = Math.abs(d - c);
+  const b = Math.abs(e - c);
+  const c2 = Math.abs(f - c);
+  const d2 = Math.abs(g - c);
+  const e2 = Math.abs(h - c);
+  const f2 = Math.abs(c - c);
+  const n = [
+    d2 + e2 + f2,
+    a2 + c2 + f2,
+    a2 + b2 + e2,
+    a2 + b2 + c2,
+    a2 + d2 + f2,
+    b2 + d2 + f2,
+    b2 + c2 + d2,
+    a2 + c2 + d2
+  ];
+  let min = 0, max = 0;
+  for (let j = 1; j < 7; j++) {
+    if (n[j] < n[min]) min = j;
+    if (n[j] > n[max]) max = j;
+  }
+  if (n[min] > n[max]) {
+    const t = 0.5 - 0.5 * (n[min] / n[max]);
+    return [
+      -t * (d2 + e2 + f2),
+      t * (a2 + c2 + f2),
+      t * (a2 + b2 + e2),
+      -t * (a2 + b2 + c2),
+      -t * (a2 + d2 + f2),
+      -t * (b2 + d2 + f2),
+      -t * (b2 + c2 + d2),
+      -t * (a2 + c2 + d2)
+    ];
+  }
+  return [
+    (d2 + e2 + f2) - t * (a2 + c2 + f2),
+    (a2 + c2 + f2) - t * (d2 + e2 + f2),
+    (a2 + b2 + e2) - t * (d2 + e2 + f2),
+    (a2 + b2 + c2) - t * (d2 + e2 + f2),
+    (a2 + d2 + f2) - t * (b2 + c2 + d2),
+    (b2 + d2 + f2) - t * (a2 + c2 + d2),
+    (b2 + c2 + d2) - t * (a2 + d2 + f2),
+    (a2 + c2 + d2) - t * (b2 + d2 + f2)
+  ];
+}
+
+function getFaceNormal8(i) {
+  const c = cubeData[i * 12];
+  const d = cubeData[i * 12 + 3];
+  const e = cubeData[i * 12 + 4];
+  const f = cubeData[i * 12 + 5];
+  const g = cubeData[i * 12 + 6];
+  const h = cubeData[i * 12 + 7];
+  const a = Math.abs(d - c);
+  const b = Math.abs(e - c);
+  const c2 = Math.abs(f - c);
+  const d2 = Math.abs(g - c);
+  const e2 = Math.abs(h - c);
+  const f2 = Math.abs(c - c);
+  const n = [
+    d2 + e2 + f2,
+    a2 + c2 + f2,
+    a2 + b2 + e2,
+    a2 + b2 + c2,
+    a2 + d2 + f2,
+    b2 + d2 + f2,
+    b2 + c2 + d2,
+    a2 + c2 + d2
+  ];
+  let min = 0, max = 0;
+  for (let j = 1; j < 7; j++) {
+    if (n[j] < n[min]) min = j;
+    if (n[j] > n[max]) max = j;
+  }
+  if (n[min] > n[max]) {
+    const t = 0.5 - 0.5 * (n[min] / n[max]);
+    return [
+      -t * (d2 + e2 + f2),
+      t * (a2 + c2 + f2),
+      t * (a2 + b2 + e2),
+      -t * (a2 + b2 + c2),
+      -t * (a2 + d2 + f2),
+      -t * (b2 + d2 + f2),
+      -t * (b2 + c2 + d2),
+      -t * (a2 + c2 + d2)
+    ];
+  }
+  return [
+    (d2 + e2 + f2) - t * (a2 + c2 + f2),
+    (a2 + c2 + f2) - t * (d2 + e2 + f2),
+    (a2 + b2 + e2) - t * (d2 + e2 + f2),
+    (a2 + b2 + c2) - t * (d2 + e2 + f2),
+    (a2 + d2 + f2) - t * (b2 + c2 + d2),
+    (b2 + d2 + f2) - t * (a2 + c2 + d2),
+    (b2 + c2 + d2) - t * (a2 + d2 + f2),
+    (a2 + c2 + d2) - t * (b2 + d2 + f2)
+  ];
+}
+
+function getFaceNormal9(i) {
+  const c = cubeData[i * 12];
+  const d = cubeData[i * 12 + 3];
+  const e = cubeData[i * 12 + 4];
+  const f = cubeData[i * 12 + 5];
+  const g = cubeData[i * 12 + 6];
+  const h = cubeData[i * 12 + 7];
+  const a = Math.abs(d - c);
+  const b = Math.abs(e - c);
+  const c2 = Math.abs(f - c);
+  const d2 = Math.abs(g - c);
+  const e2 = Math.abs(h - c);
+  const f2 = Math.abs(c - c);
+  const n = [
+    d2 + e2 + f2,
+    a2 + c2 + f2,
+    a2 + b2 + e2,
+    a2 + b2 + c2,
+    a2 + d2 + f2,
+    b2 + d2 + f2,
+    b2 + c2 + d2,
+    a2 + c2 + d2
+  ];
+  let min = 0, max = 0;
+  for (let j = 1; j < 7; j++) {
+    if (n[j] < n[min]) min = j;
+    if (n[j] > n[max]) max = j;
+  }
+  if (n[min] > n[max]) {
+    const t = 0.5 - 0.5 * (n[min] / n[max]);
+    return [
+      -t * (d2 + e2 + f2),
+      t * (a2 + c2 + f2),
+      t * (a2 + b2 + e2),
+      -t * (a2 + b2 + c2),
+      -t * (a2 + d2 + f2),
+      -t * (b2 + d2 + f2),
+      -t * (b2 + c2 + d2),
+      -t * (a2 + c2 + d2)
+    ];
+  }
+  return [
+    (d2 + e2 + f2) - t * (a2 + c2 + f2),
+    (a2 + c2 + f2) - t * (d2 + e2 + f2),
+    (a2 + b2 + e2) - t * (d2 + e2 + f2),
+    (a2 + b2 + c2) - t * (d2 + e2 + f2),
+    (a2 + d2 + f2) - t * (b2 + c2 + d2),
+    (b2 + d2 + f2) - t * (a2 + c2 + d2),
+    (b2 + c2 + d2) - t * (a2 + d2 + f2),
+    (a2 + c2 + d2) - t * (b2 + d2 + f2)
+  ];
+}
+
+function getFaceNormal10(i) {
+  const c = cubeData[i * 12];
+  const d = cubeData[i * 12 + 3];
+  const e = cubeData[i * 12 + 4];
+  const f = cubeData[i * 12 + 5];
+  const g = cubeData[i * 12 + 6];
+  const h = cubeData[i * 12 + 7];
+  const a = Math.abs(d - c);
+  const b = Math.abs(e - c);
+  const c2 = Math.abs(f - c);
+  const d2 = Math.abs(g - c);
+  const e2 = Math.abs(h - c);
+  const f2 = Math.abs(c - c);
+  const n = [
+    d2 + e2 + f2,
+    a2 + c2 + f2,
+    a2 + b2 + e2,
+    a2 + b2 + c2,
+    a2 + d2 + f2,
+    b2 + d2 + f2,
+    b2 + c2 + d2,
+    a2 + c2 + d2
+  ];
+  let min = 0, max = 0;
+  for (let j = 1; j < 7; j++) {
+    if (n[j] < n[min]) min = j;
+    if (n[j] > n[max]) max = j;
+  }
+  if (n[min] > n[max]) {
+    const t = 0.5 - 0.5 * (n[min] / n[max]);
+    return [
+      -t * (d2 + e2 + f2),
+      t * (a2 + c2 + f2),
+      t * (a2 + b2 + e2),
+      -t * (a2 + b2 + c2),
+      -t * (a2 + d2 + f2),
+      -t * (b2 + d2 + f2),
+      -t * (b2 + c2 + d2),
+      -t * (a2 + c2 + d2)
+    ];
+  }
+  return [
+    (d2 + e2 + f2) - t * (a2 + c2 + f2),
+    (a2 + c2 + f2) - t * (d2 + e2 + f2),
+    (a2 + b2 + e2) - t * (d2 + e2 + f2),
+    (a2 + b2 + c2) - t * (d2 + e2 + f2),
+    (a2 + d2 + f2) - t * (b2 + c2 + d2),
+    (b2 + d2 + f2) - t * (a2 + c2 + d2),
+    (b2 + c2 + d2) - t * (a2 + d2 + f2),
+    (a2 + c2 + d2) - t * (b2 + d2 + f2)
+  ];
+}
+
+function getFaceNormal11(i) {
+  const c = cubeData[i * 12];
+  const d = cubeData[i * 12 + 3];
+  const e = cubeData[i * 12 + 4];
+  const f = cubeData[i * 12 + 5];
+  const g = cubeData[i * 12 + 6];
+  const h = cubeData[i * 12 + 7];
+  const a = Math.abs(d - c);
+  const b = Math.abs(e - c);
+  const c2 = Math.abs(f - c);
+  const d2 = Math.abs(g - c);
+  const e2 = Math.abs(h - c);
+  const f2 = Math.abs(c - c);
+  const n = [
+    d2 + e2 + f2,
+    a2 + c2 + f2,
+    a2 + b2 + e2,
+    a2 + b2 + c2,
+    a2 + d2 + f2,
+    b2 + d2 + f2,
+    b2 + c2 + d2,
+    a2 + c2 + d2
+  ];
+  let min = 0, max = 0;
+  for (let j = 1; j < 7; j++) {
+    if (n[j] < n[min]) min = j;
+    if (n[j] > n[max]) max = j;
+  }
+  if (n[min] > n[max]) {
+    const t = 0.5 - 0.5 * (n[min] / n[max]);
+    return [
+      -t * (d2 + e2 + f2),
+      t * (a2 + c2 + f2),
+      t * (a2 + b2 + e2),
+      -t * (a2 + b2 + c2),
+      -t * (a2 + d2 + f2),
+      -t * (b2 + d2 + f2),
+      -t * (b2 + c2 + d2),
+      -t * (a2 + c2 + d2)
+    ];
+  }
+  return [
+    (d2 + e2 + f2) - t * (a2 + c2 + f2),
+    (a2 + c2 + f2) - t * (d2 + e2 + f2),
+    (a2 + b2 + e2) - t * (d2 + e2 + f2),
+    (a2 + b2 + c2) - t * (d2 + e2 + f2),
+    (a2 + d2 + f2) - t * (b2 + c2 + d2),
+    (b2 + d2 + f2) - t * (a2 + c2 + d2),
+    (b2 + c2 + d2) - t * (a2 + d2 + f2),
+    (a2 + c2 + d2) - t * (b2 + d2 + f2)
+  ];
+}
+
+function getFaceNormal12(i) {
+  const c = cubeData[i * 12];
+  const d = cubeData[i * 12 + 3];
+  const e = cubeData[i * 12 + 4];
+  const f = cubeData[i * 12 + 5];
+  const g = cubeData[i * 12 + 6];
+  const h = cubeData[i * 12 + 7];
+  const a = Math.abs(d - c);
+  const b = Math.abs(e - c);
+  const c2 = Math.abs(f - c);
+  const d2 = Math.abs(g - c);
+  const e2 = Math.abs(h - c);
+  const f2 = Math.abs(c - c);
+  const n = [
+    d2 + e2 + f2,
+    a2 + c2 + f2,
+    a2 + b2 + e2,
+    a2 + b2 + c2,
+    a2 + d2 + f2,
+    b2 + d2 + f2,
+    b2 + c2 + d2,
+    a2 + c2 + d2
+  ];
+  let min = 0, max = 0;
+  for (let j = 1; j < 7; j++) {
+    if (n[j] < n[min]) min = j;
+    if (n[j] > n[max]) max = j;
+  }
+  if (n[min] > n[max]) {
+    const t = 0.5 - 0.5 * (n[min] / n[max]);
+    return [
+      -t * (d2 + e2 + f2),
+      t * (a2 + c2 + f2),
+      t * (a2 + b2 + e2),
+      -t * (a2 + b2 + c2),
+      -t * (a2 + d2 + f2),
+      -t * (b2 + d2 + f2),
+      -t * (b2 + c2 + d2),
+      -t * (a2 + c2 + d2)
+    ];
+  }
+  return [
+    (d2 + e2 + f2) - t * (a2 + c2 + f2),
+    (a2 + c2 + f2) - t * (d2 + e2 + f2),
+    (a2 + b2 + e2) - t * (d2 + e2 + f2),
+    (a2 + b2 + c2) - t * (d2 + e2 + f2),
+    (a2 + d2 + f2) - t * (b2 + c2 + d2),
+    (b2 + d2 + f2) - t * (a2 + c2 + d2),
+    (b2 + c2 + d2) - t * (a2 + d2 + f2),
+    (a2 + c2 + d2) - t * (b2 + d2 + f2)
+  ];
+}
+
+function getFaceNormal13(i) {
+  const c = cubeData[i * 12];
+  const d = cubeData[i * 12 + 3];
+  const e = cubeData[i * 12 + 4];
+  const f = cubeData[i * 12 + 5];
+  const g = cubeData[i * 12 + 6];
+  const h = cubeData[i * 12 + 7];
+  const a = Math.abs(d - c);
+  const b = Math.abs(e - c);
+  const c2 = Math.abs(f - c);
+  const d2 = Math.abs(g - c);
+  const e2 = Math.abs(h - c);
+  const f2 = Math.abs(c - c);
+  const n = [
+    d2 + e2 + f2,
+    a2 + c2 + f2,
+    a2 + b2 + e2,
+    a2 + b2 + c2,
+    a2 + d2 + f2,
+    b2 + d2 + f2,
+    b2 + c2 + d2,
+    a2 + c2 + d2
+  ];
+  let min = 0, max = 0;
+  for (let j = 1; j < 7; j++) {
+    if (n[j] < n[min]) min = j;
+    if (n[j] > n[max]) max = j;
+  }
+  if (n[min] > n[max]) {
+    const t = 0.5 - 0.5 * (n[min] / n[max]);
+    return [
+      -t * (d2 + e2 + f2),
+      t * (a2 + c2 + f2),
+      t * (a2 + b2 + e2),
+      -t * (a2 + b2 + c2),
+      -t * (a2 + d2 + f2),
+      -t * (b2 + d2 + f2),
+      -t * (b2 + c2 + d2),
+      -t * (a2 + c2 + d2)
+    ];
+  }
+  return [
+    (d2 + e2 + f2) - t * (a2 + c2 + f2),
+    (a2 + c2 + f2) - t * (d2 + e2 + f2),
+    (a2 + b2 + e2) - t * (d2 + e2 + f2),
+    (a2 + b2 + c2) - t * (d2 + e2 + f2),
+    (a2 + d2 + f2) - t * (b2 + c2 + d2),
+    (b2 + d2 + f2) - t * (a2 + c2 + d2),
+    (b2 + c2 + d2) - t * (a2 + d2 + f2),
+    (a2 + c2 + d2) - t * (b2 + d2 + f2)
+  ];
+}
+
+function getFaceNormal14(i) {
+  const c = cubeData[i * 12];
+  const d = cubeData[i * 12 + 3];
+  const e = cubeData[i * 12 + 4];
+  const f = cubeData[i * 12 + 5];
+  const g = cubeData[i * 12 + 6];
+  const h = cubeData[i * 12 + 7];
+  const a = Math.abs(d - c);
+  const b = Math.abs(e - c);
+  const c2 = Math.abs(f - c);
+  const d2 = Math.abs(g - c);
+  const e2 = Math.abs(h - c);
+  const f2 = Math.abs(c - c);
+  const n = [
+    d2 + e2 + f2,
+    a2 + c2 + f2,
+    a2 + b2 + e2,
+    a2 + b2 + c2,
+    a2 + d2 + f2,
+    b2 + d2 + f2,
+    b2 + c2 + d2,
+    a2 + c2 + d2
+  ];
+  let min = 0, max = 0;
+  for (let j = 1; j < 7; j++) {
+    if (n[j] < n[min]) min = j;
+    if (n[j] > n[max]) max = j;
+  }
+  if (n[min] > n[max]) {
+    const t = 0.5 - 0.5 * (n[min] / n[max]);
+    return [
+      -t * (d2 + e2 + f2),
+      t * (a2 + c2 + f2),
+      t * (a2 + b2 + e2),
+      -t * (a2 + b2 + c2),
+      -t * (a2 + d2 + f2),
+      -t * (b2 + d2 + f2),
+      -t * (b2 + c2 + d2),
+      -t * (a2 + c2 + d2)
+    ];
+  }
+  return [
+    (d2 + e2 + f2) - t * (a2 + c2 + f2),
+    (a2 + c2 + f2) - t * (d2 + e2 + f2),
+    (a2 + b2 + e2) - t * (d2 + e2 + f2),
+    (a2 + b2 + c2) - t * (d2 + e2 + f2),
+    (a2 + d2 + f2) - t * (b2 + c2 + d2),
+    (b2 + d2 + f2) - t * (a2 + c2 + d2),
+    (b2 + c2 + d2) - t * (a2 + d2 + f2),
+    (a2 + c2 + d2) - t * (b2 + d2 + f2)
+  ];
+}
+
+function getFaceNormal15(i) {
+  const c = cubeData[i * 12];
+  const d = cubeData[i * 12 + 3];
+  const e = cubeData[i * 12 + 4];
+  const f = cubeData[i * 12 + 5];
+  const g = cubeData[i * 12 + 6];
+  const h = cubeData[i * 12 + 7];
+  const a = Math.abs(d - c);
+  const b = Math.abs(e - c);
+  const c2 = Math.abs(f - c);
+  const d2 = Math.abs(g - c);
+  const e2 = Math.abs(h - c);
+  const f2 = Math.abs(c - c);
+  const n = [
+    d2 + e2 + f2,
+    a2 + c2 + f2,
+    a2 + b2 + e2,
+    a2 + b2 + c2,
+    a2 + d2 + f2,
+    b2 + d2 + f2,
+    b2 + c2 + d2,
+    a2 + c2 + d2
+  ];
+  let min = 0, max = 0;
+  for (let j = 1; j < 7; j++) {
+    if (n[j] < n[min]) min = j;
+    if (n[j] > n[max]) max = j;
+  }
+  if (n[min] > n[max]) {
+    const t = 0.5 - 0.5 * (n[min] / n[max]);
+    return [
+      -t * (d2 + e2 + f2),
+      t * (a2 + c2 + f2),
+      t * (a2 + b2 + e2),
+      -t * (a2 + b2 + c2),
+      -t * (a2 + d2 + f2),
+      -t * (b2 + d2 + f2),
+      -t * (b2 + c2 + d2),
+      -t * (a2 + c2 + d2)
+    ];
+  }
+  return [
+    (d2 + e2 + f2) - t * (a2 + c2 + f2),
+    (a2 + c2 + f2) - t * (d2 + e2 + f2),
+    (a2 + b2 + e2) - t * (d2 + e2 + f2),
+    (a2 + b2 + c2) - t * (d2 + e2 + f2),
+    (a2 + d2 + f2) - t * (b2 + c2 + d2),
+    (b2 + d2 + f2) - t * (a2 + c2 + d2),
+    (b2 + c2 + d2) - t * (a2 + d2 + f2),
+    (a2 + c2 + d2) - t * (b2 + d2 + f2)
+  ];
+}
+
+function getFaceNormal16(i) {
+  const c = cubeData[i * 12];
+  const d = cubeData[i * 12 + 3];
+  const e = cubeData[i * 12 + 4];
+  const f = cubeData[i * 12 + 5];
+  const g = cubeData[i * 12 + 6];
+  const h = cubeData[i * 12 + 7];
+  const a = Math.abs(d - c);
+  const b = Math.abs(e - c);
+  const c2 = Math.abs(f - c);
+  const d2 = Math.abs(g - c);
+  const e2 = Math.abs(h - c);
+  const f2 = Math.abs(c - c);
+  const n = [
+    d2 + e2 + f2,
+    a2 + c2 + f2,
+    a2 + b2 + e2,
+    a2 + b2 + c2,
+    a2 + d2 + f2,
+    b2 + d2 + f2,
+    b2 + c2 + d2,
+    a2 + c2 + d2
+  ];
+  let min = 0, max = 0;
+  for (let j = 1; j < 7; j++) {
+    if (n[j] < n[min]) min = j;
+    if (n[j] > n[max]) max = j;
+  }
+  if (n[min] > n[max]) {
+    const t = 0.5 - 0.5 * (n[min] / n[max]);
+    return [
+      -t * (d2 + e2 + f2),
+      t * (a2 + c2 + f2),
+      t * (a2 + b2 + e2),
+      -t * (a2 + b2 + c2),
+      -t * (a2 + d2 + f2),
+      -t * (b2 + d2 + f2),
+      -t * (b2 + c2 + d2),
+      -t * (a2 + c2 + d2)
+    ];
+  }
+  return [
+    (d2 + e2 + f2) - t * (a2 + c2 + f2),
+    (a2 + c2 + f2) - t * (d2 + e2 + f2),
+    (a2 + b2 + e2) - t * (d2 + e2 + f2),
+    (a2 + b2 + c2) - t * (d2 + e2 + f2),
+    (a2 + d2 + f2) - t * (b2 + c2 + d2),
+    (b2 + d2 + f2) - t * (a2 + c2 + d2),
+    (b2 + c2 + d2) - t * (a2 + d2 + f2),
+    (a2 + c2 + d2) - t * (b2 + d2 + f2)
+  ];
+}
+
+function getFaceNormal17(i) {
+  const c = cubeData[i * 12];
+  const d = cubeData[i * 12 + 3];
+  const e = cubeData[i * 12 + 4];
+  const f = cubeData[i * 12 + 5];
+  const g = cubeData[i * 12 + 6];
+  const h = cubeData[i * 12 + 7];
+  const a = Math.abs(d - c);
+  const b = Math.abs(e - c);
+  const c2 = Math.abs(f - c);
+  const d2 = Math.abs(g - c);
+  const e2 = Math.abs(h - c);
+  const f2 = Math.abs(c - c);
+  const n = [
+    d2 + e2 + f2,
+    a2 + c2 + f2,
+    a2 + b2 + e2,
+    a2 + b2 + c2,
+    a2 + d2 + f2,
+    b2 + d2 + f2,
+    b2 + c2 + d2,
+    a2 + c2 + d2
+  ];
+  let min = 0, max = 0;
+  for (let j = 1; j < 7; j++) {
+    if (n[j] < n[min]) min = j;
+    if (n[j] > n[max]) max = j;
+  }
+  if (n[min] > n[max]) {
+    const t = 0.5 - 0.5 * (n[min] / n[max]);
+    return [
+      -t * (d2 + e2 + f2),
+      t * (a2 + c2 + f2),
+      t * (a2 + b2 + e2),
+      -t * (a2 + b2 + c2),
+      -t * (a2 + d2 + f2),
+      -t * (b2 + d2 + f2),
+      -t * (b2 + c2 + d2),
+      -t * (a2 + c2 + d2)
+    ];
+  }
+  return [
+    (d2 + e2 + f2) - t * (a2 + c2 + f2),
+    (a2 + c2 + f2

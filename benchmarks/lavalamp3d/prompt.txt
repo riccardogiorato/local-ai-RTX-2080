@@ -1,0 +1,8 @@
+Generate a single self-contained HTML file that renders a full-screen 3D lava lamp screensaver with Three.js.
+Requirements:
+- Load Three.js and any addons as ES modules from a CDN using an import map (for example https://unpkg.com/three@0.170.0/build/three.module.js and https://unpkg.com/three@0.170.0/examples/jsm/); no other external assets
+- Real 3D metaballs: soft, glossy, rounded wax blobs that slowly drift, rise, fall, merge and split organically (for example with MarchingCubes or a raymarched signed distance field with smooth union)
+- Warm palette: orange, coral and red blobs on a deep plum purple background, soft lighting with smooth shading and a gentle inner glow
+- Fills the whole window, handles resize, slow ambient camera motion, smooth 60fps
+- No text, UI or controls: it is a screensaver
+- Output only the complete HTML file

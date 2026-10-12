@@ -1,0 +1,9 @@
+{
+  "strata-125b": {"score": 1, "note": "Right idea (a raymarched signed distance field shader with smooth union, the technique the prompt hinted at) and no script errors, but the shader renders solid black: the rays never hit a blob."},
+  "qwen35-9b":   {"score": 1, "note": "Runs without errors but fills the screen with flat orange: the camera ends up inside the wax."},
+  "a3b-35b":     {"score": 1, "note": "Crashes every frame: calls THREE.Clock.getElapsedTime() on the class instead of a clock instance. Only the plum background shows."},
+  "qwen35-4b":   {"score": 1, "note": "Crashes on start: uses THREE.EffectComposer, which lives in the addons and was never imported."},
+  "gemma-e4b":   {"score": 1, "note": "Crashes on start: imports 'three' without writing the import map the prompt asked for. Fastest again (12 s)."},
+  "mimo-9b":     {"score": 0, "note": "Ran into the 16K token limit without finishing the file."},
+  "strata-coder":{"score": 0, "note": "Ran into the 16K token limit after 531 s without finishing the file."}
+}
