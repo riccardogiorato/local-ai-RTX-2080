@@ -7,6 +7,11 @@ recipe and raw evidence. Failures are recorded with the same care as wins.
 
 ## Test queue (historical — all resolved)
 
+> **Score-protocol note:** the leaderboard moved to **AG-Bench v2.2** (900 s per task, two broken
+> checkers fixed: task2's expected total, task5's TypeScript check). This file keeps every v2.1-era
+> score as measured; the v2.2 table lives in [README.md](README.md#top-models-on-this-card).
+
+
 | # | Model / variant | Class | Result | Status |
 |---|---|---|---|---|
 | 1 | Qwen3.5-4B / 9B MTP Q4_K_M | chat · coding · tools | ✅ tested | ✅ [tested](#tested-so-far) · registry-validated |
