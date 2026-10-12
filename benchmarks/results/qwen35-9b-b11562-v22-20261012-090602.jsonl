@@ -1,0 +1,11 @@
+{"model": "qwen35-9b-b11562-v22", "task": "task10-tb-bank-trans-filter", "passed": true, "wall_s": 51, "suspect_garbage_pass": false, "tool_calls": 27, "finish": "unknown", "zero_byte_retry": false}
+{"model": "qwen35-9b-b11562-v22", "task": "task11-tb-assign-seats", "passed": true, "wall_s": 100, "suspect_garbage_pass": false, "tool_calls": 58, "finish": "unknown", "zero_byte_retry": false}
+{"model": "qwen35-9b-b11562-v22", "task": "task1-js-bugfix", "passed": true, "wall_s": 19, "suspect_garbage_pass": false, "tool_calls": 26, "finish": "unknown", "zero_byte_retry": false}
+{"model": "qwen35-9b-b11562-v22", "task": "task2-react-fix", "passed": true, "wall_s": 110, "suspect_garbage_pass": false, "tool_calls": 64, "finish": "unknown", "zero_byte_retry": false}
+{"model": "qwen35-9b-b11562-v22", "task": "task3-dep-upgrade", "passed": true, "wall_s": 18, "suspect_garbage_pass": false, "tool_calls": 42, "finish": "unknown", "zero_byte_retry": false}
+{"model": "qwen35-9b-b11562-v22", "task": "task4-python-bugfix", "passed": true, "wall_s": 10, "suspect_garbage_pass": false, "tool_calls": 11, "finish": "unknown", "zero_byte_retry": false}
+{"model": "qwen35-9b-b11562-v22", "task": "task5-js-to-ts", "passed": true, "wall_s": 25, "suspect_garbage_pass": false, "tool_calls": 40, "finish": "unknown", "zero_byte_retry": false}
+{"model": "qwen35-9b-b11562-v22", "task": "task6-extra-code-task", "passed": true, "wall_s": 21, "suspect_garbage_pass": false, "tool_calls": 15, "finish": "unknown", "zero_byte_retry": false}
+{"model": "qwen35-9b-b11562-v22", "task": "task7-long-context-agent", "passed": true, "wall_s": 26, "suspect_garbage_pass": false, "tool_calls": 29, "finish": "unknown", "zero_byte_retry": false}
+{"model": "qwen35-9b-b11562-v22", "task": "task8-tb-broken-python", "passed": true, "wall_s": 132, "suspect_garbage_pass": false, "tool_calls": 240, "finish": "unknown", "zero_byte_retry": false}
+{"model": "qwen35-9b-b11562-v22", "task": "task9-tb-analyze-access-logs", "passed": false, "wall_s": 3, "suspect_garbage_pass": false, "tool_calls": 2, "finish": "unknown", "zero_byte_retry": false}
