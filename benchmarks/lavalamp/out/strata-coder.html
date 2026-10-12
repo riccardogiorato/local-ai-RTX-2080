@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lava Lamp</title>
+<style>
+  html,body{margin:0;height:100vh;overflow:hidden;background:#0a0908;}
+  canvas{position:fixed;inset:0;width:100vw;height:100vh;display:block;}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<script>
+/* ---------- animated wax blobs (metaballs), WebGL ---------- */
+(function(){
+const canvas=document.getElementById('c');
+const gl=canvas.getContext('webgl');
+if(!gl){ return; } // graceful fallback to the SVG lamp below
+
+let W,H,DPR;
+function resize(){
+  DPR=Math.min(window.deviceSystem||window.devicePixelRatio||1,2);
+  W=Math.floor(innerWidth*DPR); H=Math.floor(innerHeight*DPR);
+  canvas.width=W; canvas.height=H;
+  gl.viewport(0,0,W,H);
+}
+resize();
+
+const vs=`attribute vec2 a; void main(){ gl_Position=vec4(a,0.0,1.0); }`;
+
+const fs=`
+precision highp float;
+uniform vec2 uRes;
+uniform vec4 uB[14];
+uniform vec2 uBulb;
+uniform float uTime;
+
+float field(vec2 p){
+  float f=0.0;
+  for(int i=0;i<14;i++){
+    vec4 b=uB[i];
+    vec2 d=p-b.xy;
+    float dist=length(d);
+    float r=max(b.z,0.001);
+    float w=b.w;
+    f += w*(r*r)/max(dist*dist,1.0);
+  }
+  return f;
+}
+vec3 bg(vec2 uv){
+  float y=uv.y;
+  vec3 top=vec3(0.012,0.011,0.016);
+  vec3 bot=vec3(0.055,0.030,0.022);
+  vec3 c=mix(top,bot,smoothstep(0.0,1.0,y));
+  float d=distance(uv,vec2(0.5,0.28));
+  c += vec3(0.05,0.028,0.014)*smoothstep(0.6,0.0,d)*0.7;
+  return c;
+}
+vec3 lava(float t){
+  t=clamp(t,0.0,1.0);
+  vec3 c1=vec3(0.40,0.03,0.010);
+  vec3 c2=vec3(0.92,0.15,0.030);
+  vec3 c3=vec3(1.00,0.42,0.090);
+  vec3 c4=vec3(1.00,0.80,0.320);
+  vec3 c5=vec3(1.00,0.95,0.720);
+  vec3 col=mix(c1,c2,smoothstep(0.0,0.25,t));
+  col=mix(col,c3,smoothstep(0.25,0.50,t));
+  col=mix(col,c4,smoothstep(0.50,0.78,t));
+  col=mix(col,c5,smoothstep(0.78,1.0,t));
+  return col;
+}
+void main(){
+  vec2 uv=gl_FragCoord.xy/uRes;
+  vec2 p=vec2(gl_FragCoord.x, gl_FragCoord.y);
+  float f=field(p);
+  float t=smoothstep(0.70,1.30,f);
+  vec3 col=bg(uv);
+  if(t>0.001){
+    vec3 L=lava(t);
+    float depth=1.0-t;
+    float lit=0.42+0.58*depth;
+    float glow=smoothstep(0.62,1.30,f);
+    L+=vec3(1.0,0.55,0.22)*glow*0.22;
+    L=mix(L*lit,L,max(0.0,depth-0.55)*1.25);
+    float ca=smoothstep(0.72,0.86,f);
+    col=mix(col,L,ca);
+    float halo=smoothstep(1.30,0.62,f);
+    col+=vec3(1.0,0.42,0.16)*halo*0.34;
+  }
+  float bd=distance(p,uBulb);
+  col+=vec3(1.0,0.55,0.25)*smoothstep(0.0,300.0,bd)*0.05;
+  col+=vec3(1.0,0.55,0.25)*smoothstep(0.0,110.0,bd)*0.10;
+  float g=fract(sin(dot(p,vec2(12.9898,78.233))*43758.5453)*0.5+0.5);
+  col+=(g-0.5)*0.012;
+  gl_FragColor=vec4(col,1.0);
+}`;
+
+const prog=gl.createProgram();
+gl.attachShader(prog,gl.createShader(gl.VERTEX_SHADER));
+gl.attachShader(prog,gl.createShader(gl.FRAGMENT_SHADER));
+const vsh=gl.createShader(gl.VERTEX_SHADER);
+const fsh=gl.createShader(gl.FRAGMENT_SHADER);
+gl.shaderSource(vsh,vs); gl.compileShader(vsh);
+gl.shaderSource(fsh,fs); gl.compileShader(fsh);
+gl.attachShader(prog,vsh); gl.attachShader(prog,fsh);
+gl.linkProgram(prog);
+if(!gl.getProgramParameter(prog,gl.LINK_STATUS)){ return; }
+
+const buf=gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1, 1,-1, -1,1, -1,1, 1,-1, 1,1]),gl.STATIC_DRAW);
+const loc=gl.getAttribLocation(prog,'a');
+gl.enableVertexAttribArray(loc);
+gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0);
+const uRes=gl.getUniformLocation(prog,'uRes');
+const uB=gl.getUniformLocation(prog,'uB');
+const uBulb=gl.getUniformLocation(prog,'uBulb');
+const uTime=gl.getUniformLocation(prog,'uTime');
+
+const N=14;
+const B=[];
+for(let i=0;i<N;i++){
+  const a=(i*137.508)%360*Math.PI/180;
+  B.push({
+    x:0.5+Math.cos(a)*0.16, y:0.42+Math.sin(a)*0.18,
+    r:0.055+Math.random()*0.04,
+    ax:0.05+Math.random()*0.08, ay:0.05+Math.random()*0.07,
+    sx:0.10+Math.random()*0.10, sy:0.08+Math.random()*0.09,
+    ph:Math.random()*6.283, ph2:Math.random()*6.283, w:1.0
+  });
+}
+const data=new Float32Array(N*4);
+const t0=performance.now();
+function loop(){
+  const t=(performance.now()-t0)/1000;
+  for(let i=0;i<N;i++){
+    const b=B[i];
+    let x=0.5+Math.sin(t*b.sx+b.ph)*b.ax;
+    let y=0.44+Math.sin(t*b.sy+b.ph2)*b.ay;
+    let r=b.r*(1+0.18*Math.sin(t*0.6+b.ph));
+    data[i*4]=x*W; data[i*4+1]=y*H; data[i*4+2]=r*W; data[i*4+3]=b.w;
+  }
+  gl.useProgram(prog);
+  gl.uniform2f(uRes,W,H);
+  gl.uniform4fv(uB,data);
+  gl.uniform2f(uBulb,W*0.5,H*0.855);
+  gl.uniform1f(uTime,t);
+  gl.drawArrays(gl.TRIANGLES,0,6);
+}
+function frame(){ loop(); requestAnimationFrame(frame); }
+window.addEventListener('resize',()=>{ resize(); });
+requestAnimationFrame(frame);
+})();
+</script>
+
+<!-- ---------- the lamp: glass, wax, base bulb, cap, reflections ---------- -->
+<svg viewBox="0 0 400 620" width="100%" height="100%" preserveAspectRatio="xMidYMid meet"
+     xmlns="http://www.w3.org/2000/svg" style="position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;">
+<defs>
+  <clipPath id="glassClip">
+    <path d="M138 442 C132 392 120 332 110 262 C100 196 112 128 150 86 L250 86 C288 128 300 196 290 262 C280 332 268 392 262 442 Z"/>
+  </clipPath>
+
+  <radialGradient id="glassG" cx="0.42" cy="0.30" r="0.85">
+    <stop offset="0" stop-color="#dfe9f5" stop-opacity="0.05"/>
+    <stop offset="0.55" stop-color="#cfe0f0" stop-opacity="0.10"/>
+    <stop offset="1" stop-color="#93a9c6" stop-opacity="0.24"/>
+  </radialGradient>
+  <radialGradient id="metal" cx="0.40" cy="0.28" r="0.9">
+    <stop offset="0" stop-color="#f6f0e2"/><stop offset="0.35" stop-color="#d9c69a"/>
+    <stop offset="0.7" stop-color="#9a8a66"/><stop offset="1" stop-color="#6b5e45"/>
+  </radialGradient>
+  <linearGradient id="metalLin" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#6b5e45"/><stop offset="0.18" stop-color="#c8b890"/>
+    <stop offset="0.4" stop-color="#f4ecda"/><stop offset="0.6" stop-color="#c8b890"/>
+    <stop offset="0.85" stop-color="#7d6f52"/><stop offset="1" stop-color="#5a4f3a"/>
+  </linearGradient>
+  <linearGradient id="brass" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#f3e9d0"/><stop offset="0.22" stop-color="#d8c48f"/>
+    <stop offset="0.55" stop-color="#a58e5c"/><stop offset="1" stop-color="#6e5f42"/>
+  </linearGradient>
+  <linearGradient id="brassD" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#c8b890"/><stop offset="0.5" stop-color="#8a7a55"/>
+    <stop offset="1" stop-color="#4f452f"/>
+  </linearGradient>
+  <radialGradient id="bulbGlow" cx="0.5" cy="0.5" r="0.5">
+    <stop offset="0" stop-color="#ffe6b0" stop-opacity="0.95"/>
+    <stop offset="0.4" stop-color="#ff9a45" stop-opacity="0.55"/>
+    <stop offset="1" stop-color="#ff7030" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="coreGlow" cx="0.5" cy="0.5" r="0.5">
+    <stop offset="0" stop-color="#fff2c8" stop-opacity="0.9"/>
+    <stop offset="0.5" stop-color="#ff9a4a" stop-opacity="0.4"/>
+    <stop offset="1" stop-color="#ff7030" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="wax" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#ff5a1e"/><stop offset="0.5" stop-color="#e0381a"/>
+    <stop offset="1" stop-color="#b21e12"/>
+  </linearGradient>
+  <linearGradient id="waxHi" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#ff8a3a"/><stop offset="0.6" stop-color="#e85020"/>
+    <stop offset="1" stop-color="#c23016"/>
+  </linearGradient>
+  <linearGradient id="gloss" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#ffffff" stop-opacity="0.22"/>
+    <stop offset="0.4" stop-color="#ffffff" stop-opacity="0.06"/>
+    <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+  </linearGradient>
+</defs>
+
+<!-- ground shadow -->
+<ellipse cx="200" cy="576" rx="120" ry="22" fill="#000" opacity="0.5"/>
+
+<!-- base / pedestal -->
+<path d="M120 440 L280 440 L270 462 L130 462 Z" fill="url(#brassD)"/>
+<path d="M130 462 L270 462 L262 486 L138 486 Z" fill="url(#brass)"/>
+<rect x="146" y="486" width="108" height="26" rx="3" fill="url(#brass)"/>
+<ellipse cx="200" cy="514" rx="54" ry="10" fill="#6e5f42"/>
+<rect x="190" y="512" width="20" height="20" rx="3" fill="#4a4030"/>
+<ellipse cx="200" cy="532" rx="62" ry="13" fill="url(#brass)"/>
+<ellipse cx="200" cy="532" rx="62" ry="13" fill="none" stroke="#5a4f3a" stroke-width="1" opacity="0.6"/>
+
+<!-- base bulb glow (lit from below) -->
+<ellipse cx="200" cy="452" rx="120" ry="90" fill="url(#bulbGlow)" opacity="0.85"/>
+<ellipse cx="200" cy="440" rx="70" ry="50" fill="url(#coreGlow)" opacity="0.8"/>
+
+<!-- glass vessel body -->
+<path d="M138 442 C132 392 120 332 110 262 C100 196 112 128 150 86 L250 86 C288 128 300 196 290 262 C280 332 268 392 262 442 Z"
+      fill="url(#glassG)" stroke="#e8f2ff" stroke-opacity="0.28" stroke-width="1.4"/>
+
+<!-- rising wax blobs -->
+<g clip-path="url(#glassClip)">
+  <g>
+    <animate attributeName="opacity" dur="11s" repeatCount="indefinite"
+             values="0.5;0.9;0.5" keyTimes="0;0.5;1"/>
+    <animateTransform attributeName="transform" type="translate" dur="11s" repeatCount="indefinite"
+      values="0,0; 6,-40; -4,-84; 3,-40; 0,0" keyTimes="0;0.25;0.5;0.75;1"
+      calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <path d="M150 430 C146 360 140 300 136 240 C132 190 128 150 126 130 L274 130 C278 170 284 210 288 250 C292 300 296 360 290 430 Z"
+          fill="url(#wax)" opacity="0.5"/>
+  </g>
+  <g>
+    <animate attributeName="opacity" dur="9s" begin="-3s" repeatCount="indefinite"
+             values="0.6;1;0.6" keyTimes="0;0.5;1"/>
+    <animateTransform attributeName="transform" type="translate" dur="9s" begin="-3s" repeatCount="indefinite"
+      values="0,0; -8,-34; 5,-70; -3,-34; 0,0" keyTimes="0;0.25;0.5;0.75;1"
+      calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <path d="M160 430 C156 360 150 300 146 250 C142 200 140 170 138 150 L262 150 C266 190 270 240 274 290 C278 340 282 390 278 430 Z"
+          fill="url(#waxHi)" opacity="0.6"/>
+  </g>
+  <g>
+    <animate attributeName="opacity" dur="13s" begin="-6s" repeatCount="indefinite"
+             values="0.45;0.85;0.45" keyTimes="0;0.5;1"/>
+    <animateTransform attributeName="transform" type="translate" dur="13s" begin="-6s" repeatCount="indefinite"
+      values="0,0; 10,-28; -6,-58; 4,-28; 0,0" keyTimes="0;0.25;0.5;0.75;1"
+      calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/>
+    <path d="M170 430 C166 370 162 310 158 260 C154 220 152 190 150 175 L250 175 C254 210 258 260 262 310 C266 360 270 400 266 430 Z"
+          fill="url(#wax)" opacity="0.45"/>
+  </g>
+</g>
+
+<!-- glass reflections / highlights -->
+<path d="M150 430 C145 370 138 310 132 250 C126 190 120 140 150 92 L160 92 C150 140 140 190 146 250 C150 310 156 370 160 430 Z"
+      fill="url(#gloss)" opacity="0.5"/>
+<path d="M250 92 C288 130 300 196 290 262 C280 332 268 392 262 442"
+      fill="none" stroke="#ffffff" stroke-opacity="0.14" stroke-width="3" stroke-linecap="round"/>
+<path d="M150 96 C112 128 100 196 110 262 C120 332 132 392 138 440"
+      fill="none" stroke="#eaf2ff" stroke-opacity="0.22" stroke-width="1.4"/>
+<path d="M170 90 C172 120 176 160 180 200" fill="none" stroke="#ffffff" stroke-opacity="0.3" stroke-width="2" stroke-linecap="round"/>
+<path d="M118 250 C116 210 118 170 122 140" fill="none" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.5" stroke-linecap="round"/>
+
+<!-- neck -->
+<path d="M146 88 L254 88 L250 54 L150 54 Z" fill="url(#brassD)"/>
+<path d="M146 88 L254 88 L250 54 L150 54 Z" fill="none" stroke="#4a4030" stroke-width="1" opacity="0.5"/>
+
+<!-- cap -->
+<path d="M132 54 L268 54 L262 34 L138 34 Z" fill="url(#metalLin)"/>
+<ellipse cx="200" cy="34" rx="62" ry="12" fill="url(#metal)"/>
+<ellipse cx="200" cy="34" rx="62" ry="12" fill="none" stroke="#6b5e45" stroke-width="1" opacity="0.5"/>
+<ellipse cx="200" cy="20" rx="16" ry="7" fill="url(#metal)"/>
+<rect x="194" y="12" width="12" height="10" rx="2" fill="url(#brass)"/>
+<ellipse cx="182" cy="30" rx="26" ry="7" fill="#ffffff" opacity="0.14"/>
+
+<!-- rim light on cap -->
+<path d="M140 34 L260 34" fill="none" stroke="#fff8e8" stroke-opacity="0.5" stroke-width="1.4"/>
+</svg>
+</body>
+</html>

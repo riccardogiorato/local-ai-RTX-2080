@@ -1,0 +1,428 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lava Lamp</title>
+<style>
+  :root{
+    --ink:#050607;
+    --ink2:#0b0e11;
+    --ink3:#14181c;
+    --ink4:#222830;
+    --line:#2a3138;
+    --text:#e9eef3;
+    --dim:#8b949c;
+    --warm:#ffb454;
+    --warm2:#ff6a2b;
+    --red:#ff5138;
+    --cool:#4c6472;
+    --cool2:#7a94a3;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:
+      radial-gradient(1200px 820px at 50% 86%, rgba(255,106,43,.14), transparent 62%),
+      radial-gradient(900px 640px at 50% 12%, rgba(255,180,84,.05), transparent 60%),
+      radial-gradient(700px 500px at 8% 10%, rgba(76,100,114,.06), transparent 55%),
+      linear-gradient(180deg, #0a0d10, #050607 55%, #0b0d11);
+    color:var(--text);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    min-height:100vh;
+  }
+  body::before{
+    position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.045;
+    background-image:
+      linear-gradient(rgba(255,255,255,.14) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.14) 1px, transparent 1px);
+    background-size:34px 34px;
+  }
+  .wrap{
+    position:relative;z-index:1;max-width:1040px;margin:0 auto;padding:26px 20px 40px;
+    display:flex;flex-direction:column;gap:22px;align-items:center;
+  }
+  .topbar{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+  .brand{
+    font-family:"Courier New",ui-monospace,monospace;font-size:12px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--dim);
+    border:1px solid var(--line);border-radius:6px;padding:6px 12px;
+    background:linear-gradient(180deg,var(--ink3),var(--ink2));
+  }
+  .title{font-size:clamp(20px,3.4vw,32px);font-weight:700;letter-spacing:.01em}
+  .title .dot{color:var(--warm2)}
+  .meta{font-size:12px;color:var(--dim);font-family:ui-monospace,monospace}
+
+  .stage{
+    display:grid;grid-template-columns:1fr 340px;gap:20px;align-items:stretch;
+  }
+  @media(max-width:860px){.stage{grid-template-columns:1fr}}
+
+  .lamp{
+    position:relative;max-width:460px;margin:0 auto;min-height:420px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .lamp svg{width:100%;height:auto;display:block}
+
+  .panel{
+    background:linear-gradient(180deg,var(--ink2),var(--ink));
+    border:1px solid var(--line);border-radius:12px;padding:18px 18px 16px;
+    box-shadow:0 12px 30px rgba(0,0,0,.35);
+  }
+  .panel h2{
+    font-family:"Courier New",ui-monospace,monospace;font-size:12px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--dim);margin:0 0 12px;
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .panel h2 .led{width:8px;height:8px;border-radius:50%;background:var(--warm);box-shadow:0 0 8px var(--warm)}
+  .row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:10px 0}
+  .row label{font-size:12px;color:var(--dim);letter-spacing:.04em}
+  .row .val{font-family:ui-monospace,monospace;font-size:12px;color:var(--text)}
+  .row input[type=range]{width:100%;accent-color:var(--warm2)}
+  .btns{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+  .btn{
+    font-family:"Courier New",ui-monospace,monospace;font-size:12px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--text);background:var(--ink3);
+    border:1px solid var(--line);border-radius:8px;padding:9px 12px;cursor:pointer;
+    transition:background .15s,border-color .15s,transform .12s;
+  }
+  .btn:hover{background:var(--ink4);border-color:#3a444e}
+  .btn:active{transform:translateY(1px)}
+  .btn.on{background:var(--warm2);border-color:var(--warm2);color:#1a0d05}
+
+  .legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+  .chip{
+    display:flex;align-items:center;gap:8px;font-size:12px;color:var(--dim);
+    border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--ink2);
+  }
+  .chip .sw{width:14px;height:14px;border-radius:4px}
+  .sw.warm{background:linear-gradient(135deg,var(--warm),var(--warm2))}
+  .sw.cool{background:linear-gradient(135deg,var(--cool),var(--cool2))}
+  .sw.glass{background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.02))}
+  .sw.bulb{background:radial-gradient(circle,var(--warm),var(--red))}
+
+  .foot{font-size:11px;color:var(--dim);font-family:ui-monospace,monospace;letter-spacing:.05em}
+
+  @keyframes bulbPulse{0%,100%{opacity:.72}50%{opacity:1}}
+  @keyframes haloPulse{0%,100%{opacity:.42}50%{opacity:.62}}
+  @keyframes shimmer{0%,100%{opacity:.10}50%{opacity:.16}}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+  .bulbGlow{animation:bulbPulse 4.2s ease-in-out infinite}
+  .halo{animation:haloPulse 5.2s ease-in-out infinite}
+  .shimmer{animation:shimmer 6.5s ease-in-out infinite}
+  .led{animation:blink 3.2s ease-in-out infinite}
+  @media(prefers-reduced-motion:reduce){.bulbGlow,.halo,.shimmer,.led{animation:none}}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">Amp 1 · Wax Flow</div>
+      <div class="title">Lava Lamp <span class="dot">·</span> Metaball Study</div>
+      <div class="meta">real-time · 60fps · no external assets</div>
+    </div>
+
+    <div class="stage">
+      <div class="lamp">
+        <svg id="lamp" viewBox="0 0 400 600" role="img" aria-label="Animated lava lamp">
+          <defs>
+            <linearGradient id="capGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#242b33"/><stop offset="1" stop-color="#101519"/>
+            </linearGradient>
+            <linearGradient id="neckGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#14191f"/><stop offset=".45" stop-color="#2c343d"/>
+              <stop offset=".55" stop-color="#343d46"/><stop offset="1" stop-color="#14191f"/>
+            </linearGradient>
+            <linearGradient id="baseGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#2b333c"/><stop offset="1" stop-color="#0c1014"/>
+            </linearGradient>
+            <linearGradient id="baseHi" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#46515c"/><stop offset="1" stop-color="#161b21"/>
+            </linearGradient>
+            <linearGradient id="liquidGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#1b2127"/><stop offset=".5" stop-color="#242c34"/>
+              <stop offset="1" stop-color="#33271f"/>
+            </linearGradient>
+            <radialGradient id="bulbGrad" cx="50%" cy="45%" r="60%">
+              <stop offset="0" stop-color="#fff0c6"/><stop offset=".45" stop-color="#ff8a3c"/>
+              <stop offset="1" stop-color="#c93b20"/>
+            </radialGradient>
+            <radialGradient id="bulbHalo" cx="50%" cy="50%" r="50%">
+              <stop offset="0" stop-color="rgba(255,140,60,.9)"/><stop offset="1" stop-color="rgba(255,140,60,0)"/>
+            </radialGradient>
+            <linearGradient id="glassShine" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="rgba(255,255,255,.16)"/><stop offset=".5" stop-color="rgba(255,255,255,.02)"/>
+              <stop offset="1" stop-color="rgba(255,255,255,.10)"/>
+            </linearGradient>
+            <linearGradient id="edgeGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="rgba(255,255,255,.22)"/><stop offset=".5" stop-color="rgba(255,255,255,.05)"/>
+              <stop offset="1" stop-color="rgba(255,255,255,.16)"/>
+            </linearGradient>
+            <linearGradient id="coolGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#3b4b55"/><stop offset="1" stop-color="#22282f"/>
+            </linearGradient>
+            <filter id="softBlur" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="3"/>
+            </filter>
+            <filter id="blobFilter" x="-45%" y="-45%" width="190%" height="190%">
+              <feGaussianBlur stdDeviation="6" result="b"/>
+              <feComponentTransfer in="b">
+                <feFuncA type="table" tableValues="0 0 0 0.5 0.9 1 1 1 1"/>
+              </feComponentTransfer>
+            </filter>
+            <filter id="bulbBlur" x="-120%" y="-120%" width="340%" height="340%">
+              <feGaussianBlur stdDeviation="9"/>
+            </filter>
+            <clipPath id="vesselClip">
+              <path d="M128,368 C128,352 146,346 170,344 C188,343 194,344 198,346 L202,346
+                        C206,344 212,343 230,344 C254,346 272,352 272,368
+                        C272,412 258,452 242,466 L158,466
+                        C142,452 128,412 128,368 Z"/>
+            </clipPath>
+          </defs>
+
+          <ellipse class="halo" cx="200" cy="452" rx="150" ry="120" fill="url(#bulbHalo)"/>
+
+          <g class="base">
+            <ellipse cx="200" cy="466" rx="82" ry="15" fill="url(#baseGrad)"/>
+            <ellipse cx="200" cy="452" rx="70" ry="9" fill="url(#baseHi)"/>
+            <rect x="150" y="438" width="100" height="18" rx="5" fill="url(#baseHi)"/>
+            <rect x="162" y="432" width="76" height="12" rx="4" fill="#2b333c"/>
+            <ellipse cx="200" cy="450" rx="36" ry="12" fill="url(#bulbGrad)" class="bulbGlow" filter="url(#bulbBlur)"/>
+            <ellipse cx="200" cy="451" rx="14" ry="7" fill="#fff2d0" class="bulbGlow"/>
+          </g>
+
+          <g class="vessel">
+            <path d="M128,368 C128,352 146,346 170,344 C188,343 194,344 198,346 L202,346
+                     C206,344 212,343 230,344 C254,346 272,352 272,368
+                     C272,412 258,452 242,466 L158,466
+                     C142,452 128,412 128,368 Z"
+                  fill="url(#liquidGrad)" stroke="rgba(255,255,255,.10)" stroke-width="1.4"/>
+            <path d="M128,368 C128,352 146,346 170,344 C188,343 194,344 198,346 L202,346
+                     C206,344 212,343 230,344 C254,346 272,352 272,368
+                     C272,412 258,452 242,466 L158,466
+                     C142,452 128,412 128,368 Z"
+                  fill="url(#edgeGrad)" opacity=".5"/>
+            <g clip-path="url(#vesselClip)">
+              <g id="blobs" filter="url(#blobFilter)"></g>
+            </g>
+            <path class="shimmer" d="M135,366 C136,406 148,442 160,456" fill="none"
+                  stroke="rgba(255,255,255,.14)" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M265,368 C265,406 256,438 246,452" fill="none"
+                  stroke="rgba(255,255,255,.08)" stroke-width="2" stroke-linecap="round"/>
+            <path d="M128,368 C128,352 146,346 170,344 C188,343 194,344 198,346 L202,346
+                     C206,344 212,343 230,344 C254,346 272,352 272,368
+                     C272,412 258,452 242,466 L158,466
+                     C142,452 128,412 128,368 Z"
+                  fill="none" stroke="rgba(255,255,255,.18)" stroke-width="1.2"/>
+          </g>
+
+          <g class="neck">
+            <rect x="194" y="344" width="12" height="10" fill="url(#neckGrad)"/>
+            <rect x="193" y="352" width="14" height="6" rx="2" fill="url(#neckGrad)"/>
+            <rect x="191" y="334" width="18" height="12" rx="3" fill="url(#neckGrad)"/>
+            <rect x="190" y="336" width="20" height="2" rx="1" fill="rgba(255,255,255,.12)"/>
+            <rect x="190" y="342" width="20" height="2" rx="1" fill="rgba(255,255,255,.08)"/>
+          </g>
+
+          <g class="cap">
+            <path d="M186,312 L214,312 L214,334 L186,334 Z" fill="url(#capGrad)"/>
+            <path d="M186,312 L214,312 L214,334 L186,334 Z" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+            <path d="M189,312 C189,302 192,297 200,297 C208,297 211,302 211,312 Z" fill="url(#capGrad)"/>
+            <path d="M194,312 C194,304 197,299 200,299 C203,299 206,304 206,312 Z" fill="rgba(255,255,255,.05)"/>
+            <path d="M186,312 L214,312" stroke="rgba(255,255,255,.14)" stroke-width="1.4"/>
+            <path d="M187,320 L213,320" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+            <path d="M187,326 L213,326" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+            <path d="M194,310 C194,302 198,299 200,299" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.4"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="panel">
+        <h2>Controls <span class="led"></span></h2>
+        <div class="row"><label>Heat</label><span class="val" id="heatVal">55%</span></div>
+        <input id="heat" type="range" min="0" max="100" value="55">
+        <div class="row"><label>Gravity</label><span class="val" id="gravVal">55%</span></div>
+        <input id="grav" type="range" min="0" max="100" value="55">
+        <div class="row"><label>Viscosity</label><span class="val" id="viscVal">45%</span></div>
+        <input id="visc" type="range" min="0" max="100" value="45">
+        <div class="btns">
+          <button class="btn" id="coolBtn">Cool down</button>
+          <button class="btn" id="resetBtn">Reset</button>
+        </div>
+        <div class="legend">
+          <div class="chip"><span class="sw warm"></span>Heated wax</div>
+          <div class="chip"><span class="sw cool"></span>Cooled wax</div>
+          <div class="chip"><span class="sw bulb"></span>Base bulb</div>
+        </div>
+        <p class="foot">Blobs merge on contact and split when buoyancy overcomes cohesion — metaball field, SVG filter.</p>
+      </div>
+    </div>
+
+    <div class="foot">Rendered entirely in-browser · single HTML file · dark ambient stage</div>
+  </div>
+
+<script>
+(function(){
+  const svg = document.getElementById('lamp');
+  const blobsGroup = document.getElementById('blobs');
+  const NS = 'http://www.w3.org/2000/svg';
+
+  const clamp = (v,a,b)=> v<a?a:(v>b?b:v);
+  const rand  = (a,b)=> a + Math.random()*(b-a);
+
+  const params = { heat:0.55, gravity:0.55, viscosity:0.45, paused:false };
+
+  const CFG = {
+    top:344, bottom:466, left:130, right:270,
+    bottomY:462, topY:346,
+    rMin:8, rMax:30,
+    buoyMax:0.14, buoyMin:0.03,
+    gMax:0.10, gMin:0.03,
+    dampMax:0.998, dampMin:0.984,
+    coolRate:0.014, heatRate:0.020,
+    merge:4.5, split:11.5
+  };
+
+  const blobs = [];
+  function addBlob(x,y,r){
+    const el = document.createElementNS(NS,'circle');
+    el.setAttribute('cx',x); el.setAttribute('cy',y); el.setAttribute('r',r);
+    blobsGroup.appendChild(el);
+    blobs.push({x,y,r,vx:0,vy:0,temp:0.55,el});
+  }
+
+  function initBlobs(){
+    blobsGroup.innerHTML=''; blobs.length=0;
+    addBlob(200, 456, 26);
+    addBlob(180, 448, 14);
+    addBlob(222, 452, 12);
+    addBlob(196, 384, 16);
+    addBlob(205, 362, 10);
+    addBlob(188, 410, 11);
+  }
+
+  function splitBlob(b){
+    const big = Math.max(b.r*0.6, CFG.rMin+1);
+    const small = Math.max(b.r - big, CFG.rMin);
+    const s = Math.random()<0.5 ? -1 : 1;
+    const dx = s*(big+small)/2;
+    const el2 = document.createElementNS(NS,'circle');
+    el2.setAttribute('cx', b.x + dx); el2.setAttribute('cy', b.y); el2.setAttribute('r', small);
+    blobsGroup.appendChild(el2);
+    blobs.push({x:b.x+dx, y:b.y, r:small, vx: s*0.3, vy: b.vy, temp: b.temp, el:el2});
+    b.r = big;
+    b.vx = -s*0.3;
+  }
+
+  function mergeBlob(a,b){
+    const m = a.r + b.r;
+    a.x = (a.x*a.r + b.x*b.r)/m;
+    a.y = (a.y*a.r + b.y*b.r)/m;
+    a.vx = (a.vx*a.r + b.vx*b.r)/m;
+    a.vy = (a.vy*a.r + b.vy*b.r)/m;
+    a.temp = (a.temp*a.r + b.temp*b.r)/m;
+    a.r = Math.min(CFG.rMax, Math.sqrt(a.r*a.r + b.r*b.r));
+    blobs.splice(blobs.indexOf(b),1);
+    blobsGroup.removeChild(b.el);
+  }
+
+  function step(){
+    const heat = params.heat, grav = params.gravity, visc = params.viscosity;
+    const buoyMax = 0.03 + heat*0.11;
+    const buoyMin = 0.02 + heat*0.01;
+    const g = 0.03 + grav*0.07;
+    const damp = 0.984 + visc*0.014;
+
+    for(const b of blobs){
+      if(b.y > CFG.bottomY) b.temp += CFG.heatRate;
+      if(b.y < CFG.topY)    b.temp -= CFG.coolRate;
+      b.temp = clamp(b.temp, 0.12, 0.98);
+
+      const buoy = buoyMin + (buoyMax - buoyMin)*b.temp;
+      b.vy += buoy - g;
+      b.vx += Math.sin(b.y*0.06 + b.x*0.03)*0.01;
+      b.vx *= damp; b.vy *= damp;
+
+      b.x += b.vx; b.y += b.vy;
+
+      const r = b.r;
+      if(b.x < CFG.left + r){ b.x = CFG.left + r; b.vx = -b.vx*0.3; }
+      if(b.x > CFG.right - r){ b.x = CFG.right - r; b.vx = -b.vx*0.3; }
+      if(b.y > CFG.bottom){ b.y = CFG.bottom; b.vy = -b.vy*0.3; }
+      if(b.y < CFG.top){ b.y = CFG.top; b.vy = -b.vy*0.3; }
+
+      const dist = Math.hypot(b.x-200, b.y-452);
+      const rBase = 40;
+      if(dist < rBase + r){
+        const ang = Math.atan2(b.y-452, b.x-200);
+        b.vx += Math.cos(ang)*0.04; b.vy += Math.sin(ang)*0.04;
+      }
+
+      if(b.r > CFG.split){ splitBlob(b); }
+    }
+
+    for(let i=0;i<blobs.length;i++){
+      for(let j=i+1;j<blobs.length;j++){
+        const a = blobs[i], b = blobs[j];
+        const d = Math.hypot(a.x-b.x, a.y-b.y);
+        if(d < CFG.merge){ mergeBlob(a,b); i=-1; break; }
+      }
+      if(i<0) break;
+    }
+  }
+
+  function render(){
+    for(const b of blobs){
+      const t = clamp(b.temp, 0, 1);
+      const R = Math.round(255*(0.42 + t*0.58));
+      const G = Math.round(255*(0.16 + t*0.34));
+      const B = Math.round(255*(0.06 + t*0.16));
+      b.el.setAttribute('cx', b.x.toFixed(2));
+      b.el.setAttribute('cy', b.y.toFixed(2));
+      b.el.setAttribute('r', b.r.toFixed(2));
+      b.el.setAttribute('fill', `rgb(${R},${G},${B})`);
+    }
+  }
+
+  function frame(){
+    if(!params.paused) step();
+    render();
+    requestAnimationFrame(frame);
+  }
+
+  // Controls
+  const heatEl = document.getElementById('heat');
+  const gravEl = document.getElementById('grav');
+  const viscEl = document.getElementById('visc');
+  const heatVal = document.getElementById('heatVal');
+  const gravVal = document.getElementById('gravVal');
+  const viscVal = document.getElementById('viscVal');
+
+  heatEl.addEventListener('input', e=>{ params.heat = e.target.value/100; heatVal.textContent = e.target.value + '%'; });
+  gravEl.addEventListener('input', e=>{ params.gravity = e.target.value/100; gravVal.textContent = e.target.value + '%'; });
+  viscEl.addEventListener('input', e=>{ params.viscosity = e.target.value/100; viscVal.textContent = e.target.value + '%'; });
+
+  const coolBtn = document.getElementById('coolBtn');
+  coolBtn.addEventListener('click', ()=>{
+    params.paused = !params.paused;
+    coolBtn.classList.toggle('on', params.paused);
+    coolBtn.textContent = params.paused ? 'Resume' : 'Cool down';
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', ()=>{
+    params.heat=0.55; params.gravity=0.55; params.viscosity=0.45; params.paused=false;
+    heatEl.value=55; gravEl.value=55; viscEl.value=45;
+    heatVal.textContent='55%'; gravVal.textContent='55%'; viscVal.textContent='45%';
+    coolBtn.classList.remove('on'); coolBtn.textContent='Cool down';
+    initBlobs();
+  });
+
+  initBlobs();
+  frame();
+})();
+</script>
+</body>
+</html>
+```

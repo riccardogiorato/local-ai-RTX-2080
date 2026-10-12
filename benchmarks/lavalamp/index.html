@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lava lamp bench · RTX 2080</title>
+<style>
+:root { color-scheme: dark; --bg:#0b0b0d; --card:#151518; --line:#26262b; --ink:#ececf0; --mute:#8b8b95; --acc:#ff8a3d; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 system-ui, sans-serif; }
+main { max-width:1400px; margin:0 auto; padding:32px 20px 60px; }
+h1 { margin:0 0 6px; font-size:26px; }
+.sub { color:var(--mute); margin:0 0 18px; }
+details { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:10px 14px; margin-bottom:24px; }
+summary { cursor:pointer; color:var(--mute); }
+pre { white-space:pre-wrap; margin:10px 0 0; font-size:13px; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); gap:18px; }
+.card { background:var(--card); border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+.card header { display:flex; align-items:baseline; gap:10px; padding:12px 14px; }
+.card h2 { font-size:16px; margin:0; flex:1; }
+.rank { color:var(--mute); font-variant-numeric:tabular-nums; }
+.score { color:var(--acc); font-weight:600; }
+.frame { aspect-ratio:3/4; background:#000; border-block:1px solid var(--line); }
+iframe { width:100%; height:100%; border:0; display:block; }
+dl { display:grid; grid-template-columns:repeat(4, 1fr); margin:0; padding:10px 14px 0; }
+dt { color:var(--mute); font-size:12px; }
+dd { margin:0; font-variant-numeric:tabular-nums; font-weight:600; }
+.meta { color:var(--mute); font-size:13px; margin:8px 14px 12px; }
+.note { font-size:13px; margin:0 14px 14px; }
+a { color:var(--acc); }
+</style></head><body><main>
+<h1>Lava lamp bench</h1>
+<p class="sub">Same prompt, one attempt per model, on an RTX 2080 (8 GB) + i5-9600K + 64 GB DDR4-3200. Thinking off, temperature 0.7.
+Time is the full request wall clock including prompt processing. Ranked by the visual score, then by time.</p>
+<details><summary>Prompt</summary><pre>Generate a single self-contained HTML file that renders an animated lava lamp.
+Requirements:
+- All HTML, CSS, and JavaScript inline (no external assets or CDNs)
+- Realistic glass vessel with base, neck, and cap
+- Multiple metaball-style wax blobs that slowly rise, fall, merge, and split
+- Warm lighting from the base bulb with glow and subtle glass reflections
+- Smooth 60fps animation on a dark background
+- Output only the complete HTML file
+</pre></details>
+<section class="grid">
+<article class="card">
+  <header><span class="rank">#1</span><h2>Qwen3.5-35B-A3B IQ2_XXS</h2><span class="score">6/10</span></header>
+  <div class="frame"><iframe src="out/a3b-35b.html" sandbox="allow-scripts" title="a3b-35b"></iframe></div>
+  <dl>
+    <div><dt>Time</dt><dd>147 s</dd></div>
+    <div><dt>Tokens</dt><dd>4344</dd></div>
+    <div><dt>Speed</dt><dd>29.7 tok/s</dd></div>
+    <div><dt>File</dt><dd>16.1 KB</dd></div>
+  </dl>
+  <p class="meta">llama.cpp b11562 · <a href="out/a3b-35b.html" target="_blank">open full screen</a></p>
+  <p class="note">Best overall: glowing wax blobs rise and fall continuously, cap, base and a warm bulb glow under the glass. Blobs are blurred circles that overlap rather than true merging metaballs; the vessel is a plain rectangle.</p>
+</article>
+<article class="card">
+  <header><span class="rank">#2</span><h2>Flash-Next Coder IQ1_M 125B</h2><span class="score">5/10</span></header>
+  <div class="frame"><iframe src="out/strata-coder.html" sandbox="allow-scripts" title="strata-coder"></iframe></div>
+  <dl>
+    <div><dt>Time</dt><dd>207 s</dd></div>
+    <div><dt>Tokens</dt><dd>5856</dd></div>
+    <div><dt>Speed</dt><dd>28.5 tok/s</dd></div>
+    <div><dt>File</dt><dd>12.0 KB</dd></div>
+  </dl>
+  <p class="meta">Strata 0.1.38 · <a href="out/strata-coder.html" target="_blank">open full screen</a></p>
+  <p class="note">Best-looking lamp by far: tapered glass, metal cap and neck, stepped base, bulb glow and glass highlights. But its WebGL shader fails to set up (attachShader error), so the wax shows as sliding rectangles instead of blobs.</p>
+</article>
+<article class="card">
+  <header><span class="rank">#3</span><h2>Gemma-4 E4B</h2><span class="score">4/10</span></header>
+  <div class="frame"><iframe src="out/gemma-e4b.html" sandbox="allow-scripts" title="gemma-e4b"></iframe></div>
+  <dl>
+    <div><dt>Time</dt><dd>14 s</dd></div>
+    <div><dt>Tokens</dt><dd>2595</dd></div>
+    <div><dt>Speed</dt><dd>186.0 tok/s</dd></div>
+    <div><dt>File</dt><dd>8.7 KB</dd></div>
+  </dl>
+  <p class="meta">llama.cpp b11562 · <a href="out/gemma-e4b.html" target="_blank">open full screen</a></p>
+  <p class="note">Moves smoothly with plenty of blobs and a glowing bulb, but it reads as dots in a box: no real vessel shape, no merging. Fastest by far.</p>
+</article>
+<article class="card">
+  <header><span class="rank">#4</span><h2>Qwen3.8-Flash-Next Q2_0 125B</h2><span class="score">4/10</span></header>
+  <div class="frame"><iframe src="out/strata-125b.html" sandbox="allow-scripts" title="strata-125b"></iframe></div>
+  <dl>
+    <div><dt>Time</dt><dd>163 s</dd></div>
+    <div><dt>Tokens</dt><dd>7638</dd></div>
+    <div><dt>Speed</dt><dd>47.5 tok/s</dd></div>
+    <div><dt>File</dt><dd>18.5 KB</dd></div>
+  </dl>
+  <p class="meta">Strata 0.1.43 · <a href="out/strata-125b.html" target="_blank">open full screen</a></p>
+  <p class="note">The only true metaball merge/split (SVG goo filter) plus heat/gravity/viscosity controls. But the lamp is small and jar-shaped, and a flipped buoyancy sign pushes hot wax down, so it mostly sits at the bottom.</p>
+</article>
+<article class="card">
+  <header><span class="rank">#5</span><h2>Qwen3.5-9B</h2><span class="score">3/10</span></header>
+  <div class="frame"><iframe src="out/qwen35-9b.html" sandbox="allow-scripts" title="qwen35-9b"></iframe></div>
+  <dl>
+    <div><dt>Time</dt><dd>26 s</dd></div>
+    <div><dt>Tokens</dt><dd>2721</dd></div>
+    <div><dt>Speed</dt><dd>103.6 tok/s</dd></div>
+    <div><dt>File</dt><dd>8.6 KB</dd></div>
+  </dl>
+  <p class="meta">llama.cpp b11562 · <a href="out/qwen35-9b.html" target="_blank">open full screen</a></p>
+  <p class="note">Pill-shaped glass with a cap and a wax pool at the bottom, but almost nothing moves.</p>
+</article>
+<article class="card">
+  <header><span class="rank">#6</span><h2>Qwen3.5-4B</h2><span class="score">2/10</span></header>
+  <div class="frame"><iframe src="out/qwen35-4b.html" sandbox="allow-scripts" title="qwen35-4b"></iframe></div>
+  <dl>
+    <div><dt>Time</dt><dd>51 s</dd></div>
+    <div><dt>Tokens</dt><dd>6592</dd></div>
+    <div><dt>Speed</dt><dd>129.5 tok/s</dd></div>
+    <div><dt>File</dt><dd>24.8 KB</dd></div>
+  </dl>
+  <p class="meta">llama.cpp b11562 · <a href="out/qwen35-4b.html" target="_blank">open full screen</a></p>
+  <p class="note">Broken script (SyntaxError: &#x27;data&#x27; declared twice): empty glass and a glowing bulb, no wax.</p>
+</article>
+<article class="card">
+  <header><span class="rank">#7</span><h2>MiMo-9B distill</h2><span class="score">0/10</span></header>
+  <div class="frame"><iframe src="out/mimo-9b.html" sandbox="allow-scripts" title="mimo-9b"></iframe></div>
+  <dl>
+    <div><dt>Time</dt><dd>75 s</dd></div>
+    <div><dt>Tokens</dt><dd>4588</dd></div>
+    <div><dt>Speed</dt><dd>61.5 tok/s</dd></div>
+    <div><dt>File</dt><dd>10.9 KB</dd></div>
+  </dl>
+  <p class="meta">llama.cpp b11562 · <a href="out/mimo-9b.html" target="_blank">open full screen</a></p>
+  <p class="note">Black screen: the script crashes on start (ReferenceError: capY is not defined).</p>
+</article></section>
+</main></body></html>

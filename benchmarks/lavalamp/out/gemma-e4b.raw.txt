@@ -1,0 +1,259 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Lava Lamp</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #050505;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #canvas-container {
+            position: relative;
+            width: 400px;
+            height: 600px;
+            box-shadow: 0 0 50px rgba(255, 100, 0, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Stylized Glass Elements (Visual Aids, not functional rendering) */
+        .glass-vessel {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            /* Basic glass look simulation via CSS */
+            border-left: 2px solid rgba(255, 255, 255, 0.1);
+            border-right: 2px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 10px solid rgba(255, 255, 255, 0.1);
+            pointer-events: none;
+        }
+
+        .base {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 50px;
+            background: rgba(20, 20, 20, 0.9);
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 0 20px rgba(255, 100, 0, 0.5);
+        }
+
+        .bulb {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle, rgba(255, 165, 0, 0.8) 0%, rgba(255, 69, 0, 0.5) 70%, transparent 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 30px 10px rgba(255, 140, 0, 0.8);
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="canvas-container">
+        <div class="glass-vessel"></div>
+        <div class="base"></div>
+        <div class="bulb"></div>
+        <canvas id="lavaCanvas"></canvas>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('lavaCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // --- Configuration ---
+        const CANVAS_WIDTH = 400;
+        const CANVAS_HEIGHT = 600;
+        canvas.width = CANVAS_WIDTH;
+        canvas.height = CANVAS_HEIGHT;
+
+        const NUM_BLOBS = 12;
+        const GRAVITY = 0.005;
+        const DENSITY_FACTOR = 0.01; // Controls how much they merge/repel
+        const WAX_COLOR_BASE = [255, 100, 0]; // Orange/Red
+        const WAX_COLOR_LIME = [255, 255, 150]; // Lighter wax
+
+        // --- Metaball/Blob Structure ---
+        class Blob {
+            constructor(x, y, radius, color) {
+                this.x = x;
+                this.y = y;
+                this.radius = radius;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.color = color;
+                this.mass = Math.PI * radius * radius;
+            }
+
+            draw(ctx) {
+                // Draw the core blob
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                
+                // Simple gradient for 3D effect
+                const gradient = ctx.createRadialGradient(
+                    this.x - this.radius/3, this.y - this.radius/3, this.radius/5,
+                    this.x, this.y, this.radius
+                );
+                gradient.addColorStop(0, `rgba(${this.color.join(',')}, 1)`);
+                gradient.addColorStop(1, `rgba(${this.color.join(',')}, 0.4)`);
+                
+                ctx.fillStyle = gradient;
+                ctx.fill();
+
+                // Subtle rim/highlight
+                ctx.strokeStyle = `rgba(255, 255, 255, 0.2)`;
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+        }
+
+        let blobs = [];
+
+        function initializeBlobs() {
+            blobs = [];
+            for (let i = 0; i < NUM_BLOBS; i++) {
+                // Start them scattered in the lower half of the glass
+                const radius = Math.random() * 15 + 10;
+                const x = Math.random() * (CANVAS_WIDTH - 80) + 40;
+                const y = Math.random() * (CANVAS_HEIGHT * 0.7) + CANVAS_HEIGHT * 0.2;
+                const color = Math.random() > 0.5 ? WAX_COLOR_BASE : WAX_COLOR_LIME;
+                blobs.push(new Blob(x, y, radius, color));
+            }
+        }
+
+        // --- Physics Simulation ---
+
+        function handleInteractions() {
+            // 1. Gravity and Damping
+            blobs.forEach(blob => {
+                blob.vy += GRAVITY;
+                blob.vx *= 0.99; // Air resistance
+                blob.vy *= 0.99;
+                
+                // Boundary collision (Glass walls)
+                if (blob.x - blob.radius < 0 || blob.x + blob.radius > CANVAS_WIDTH) {
+                    blob.vx *= -0.5;
+                    blob.x = Math.max(blob.radius, Math.min(CANVAS_WIDTH - blob.radius, blob.x));
+                }
+                if (blob.y - blob.radius < 0) {
+                    blob.vy *= -0.5;
+                    blob.y = blob.radius;
+                }
+            });
+
+            // 2. Metaball Merging/Repulsion (Simplified)
+            for (let i = 0; i < blobs.length; i++) {
+                for (let j = i + 1; j < blobs.length; j++) {
+                    const b1 = blobs[i];
+                    const b2 = blobs[j];
+                    const dx = b2.x - b1.x;
+                    const dy = b2.y - b1.y;
+                    const distSq = dx * dx + dy * dy;
+                    const minDistance = b1.radius + b2.radius;
+                    const minDistanceSq = minDistance * minDistance;
+
+                    if (distSq < minDistanceSq) {
+                        const dist = Math.sqrt(distSq);
+                        const overlap = minDistance - dist;
+
+                        // Repulsion force (to prevent overlap)
+                        const force = overlap * DENSITY_FACTOR * 10; 
+                        
+                        // Apply force inversely proportional to distance
+                        const fx = (dx / dist) * force;
+                        const fy = (dy / dist) * force;
+
+                        // Move them apart slightly
+                        b1.x -= fx * 0.1;
+                        b1.y -= fy * 0.1;
+                        b2.x += fx * 0.1;
+                        b2.y += fy * 0.1;
+
+                        // Simple merging logic (if overlap is extreme)
+                        if (overlap > 20) {
+                            // Merge b2 into b1 (simple approximation)
+                            const newRadius = Math.sqrt(b1.radius * b1.radius + b2.radius * b2.radius);
+                            b1.x = (b1.x * b1.mass + b2.x * b2.mass) / (b1.mass + b2.mass);
+                            b1.y = (b1.y * b1.mass + b2.y * b2.mass) / (b1.mass + b2.mass);
+                            b1.radius = newRadius;
+                            b1.mass = Math.PI * newRadius * newRadius;
+                            // Remove b2
+                            blobs.splice(j, 1);
+                            j--; // Adjust loop index
+                        }
+                    }
+                }
+            }
+        }
+
+        function update() {
+            // Update positions based on physics
+            handleInteractions();
+
+            // Update positions (Integration step)
+            blobs.forEach(blob => {
+                blob.x += blob.vx;
+                blob.y += blob.vy;
+            });
+        }
+
+        // --- Rendering ---
+
+        function draw() {
+            // 1. Clear canvas (Dark background)
+            ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+
+            // 2. Simulate internal glow/light from the base
+            const glowGradient = ctx.createRadialGradient(
+                CANVAS_WIDTH / 2, CANVAS_HEIGHT - 50, 10,
+                CANVAS_WIDTH / 2, CANVAS_HEIGHT - 50, 100
+            );
+            glowGradient.addColorStop(0, 'rgba(255, 100, 0, 0.15)');
+            glowGradient.addColorStop(1, 'rgba(255, 100, 0, 0)');
+            ctx.fillStyle = glowGradient;
+            ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+
+
+            // 3. Draw Blobs
+            blobs.forEach(blob => blob.draw(ctx));
+        }
+
+        // --- Animation Loop ---
+        function animate() {
+            update();
+            draw();
+            requestAnimationFrame(animate);
+        }
+
+        // --- Initialization ---
+        initializeBlobs();
+        animate();
+
+    </script>
+</body>
+</html>
+```
