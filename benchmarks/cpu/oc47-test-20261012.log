@@ -1,0 +1,10 @@
+== chain finished 18:11:26
+== qwen35-4b-128k rerun (stock) 10/11 wall 1219s misses: ['task2-react-fix']
+original MSR 0x1AD = 3110627436349238830 (0x2b2b2b2c2c2e2e2e)
+MSR 0x1AD now [47, 47, 47, 47, 47, 47]
+ABORT at t=1s: core 95.0 C, vcore 1.335 V
+Traceback (most recent call last):
+  File "<stdin>", line 5, in <module>
+ZeroDivisionError: division by zero
+burn aborted or short: skipping Strata probe
+MSR 0x1AD restored to stock

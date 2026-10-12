@@ -20,6 +20,26 @@ passed a controlled repeat. [Results, scoring correction and limits](benchmarks/
 > ranges over repeated runs (no best-of), speeds compared only on the same prompt file, thinking
 > off by default. Treat decode deltas < 15% across prompt classes as noise.
 
+## Fair-context run (2026-10-12)
+
+Same v2.2 suite, but each model at its largest useful context instead of the 32K default, so long-prompt tasks
+(task9 is ~40K tokens) stop failing on capacity. One run per model on llama.cpp b11562 / Strata, DDR4-3200.
+
+| Model | Context | v2.2 | Suite wall | p/h | Misses |
+|---|---|---|---|---|---|
+| Qwen3.5-9B | 64K | **11/11** | 532 s | **74.4** | none |
+| Qwen3.8-Flash-Next Q2_0 125B (Strata 0.1.43) | 128K | **11/11** | 1097 s | 36.1 | none |
+| A3B IQ2_XXS 35B | 64K | **11/11** | 1175 s | 33.7 | none |
+| Flash-Next Coder IQ1_M 125B (Strata 0.1.38) | 32K | **11/11** | 1689 s | 23.4 | none |
+| Qwen3.5-4B | 128K | **10/11** | 1219 s | 29.5 | task2 |
+| MiMo-9B | 64K | **9/11** | 2703 s | 12.0 | task9, task11 |
+
+With enough context, four models reach 11/11, and Qwen3.5-9B does it fastest. The 32K ceiling explained the 9B and
+A3B task9 misses below. Caveats: single runs; the Strata 128K run was cut at 9 tasks by a harness timeout and its last two
+tasks finished on the same live server ([merged rows](benchmarks/results/strata-q20-128k-0143-v22-20261012-171801-merged.jsonl));
+the Qwen-4B row is the clean stock re-run (an earlier run overlapped a CPU stress test: 10/11 @ 1326 s).
+Raw: `benchmarks/results/*-64k-* / *-128k-* / *-32k-*-20261012-*`, [runner log](benchmarks/results/fairctx-ram3200-20261012.runner.log).
+
 ## Top models on this card
 
 Ranked by **AG-Bench v2.2** (900 s per task, the two broken checkers fixed), then by efficiency. The five llama.cpp models were all re-run same-day on one fresh build (b11562); the Strata models run their own engine. v2.1-era scores for every model stay in [TESTED.md](TESTED.md) and git history.

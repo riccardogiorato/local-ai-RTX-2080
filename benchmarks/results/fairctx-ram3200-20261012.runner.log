@@ -1,0 +1,27 @@
+===== qwen35-9b-64k-b11562-v22 15:35:44
+VRAM 6764 MiB
+warm-up attempt 1: ok (model replied)
+== qwen35-9b-64k-b11562-v22 11/11 wall 532s misses: []
+===== mimo-9b-64k-b11562-v22 15:45:50
+VRAM 6178 MiB
+warm-up attempt 1: ok (model replied)
+== mimo-9b-64k-b11562-v22 9/11 wall 2703s misses: ['t11', 't9']
+===== qwen35-4b-128k-b11562-v22 16:32:08
+VRAM 6650 MiB
+warm-up attempt 1: ok (model replied)
+== qwen35-4b-128k-b11562-v22 10/11 wall 1326s misses: ['t2-react-fix']
+===== a3b-iq2xxs-64k-b11562-v22 16:54:56
+VRAM 4100 MiB
+warm-up attempt 1: ok (model replied)
+== a3b-iq2xxs-64k-b11562-v22 11/11 wall 1175s misses: []
+champion 128K ctx: 131072
+===== strata-q20-128k-0143-v22 17:17:04
+Running as unit: ctx-champ.service; invocation ID: e1e8cccb53894fb79050bd47ef2f983e
+== resume 17:36:26: champion partial /home/riccardogiorato/Desktop/github/local-ai-rtx2080/benchmarks/results/strata-q20-128k-0143-v22-20261012-171801.jsonl (9 tasks), finishing task8+task9 on the live serve
+== strata-q20-128k-0143-v22 11/11 wall 1097s misses: []
+   (9 tasks from strata-q20-128k-0143-v22-20261012-171801.jsonl + 2 from strata-q20-128k-0143-v22-tail-20261012-173626.jsonl, same ctx-champ serve boot)
+===== strata-coder-32k-0138-v22 17:42:08
+warm-up attempt 1: ok (model replied)
+== strata-coder-32k-0138-v22 11/11 wall 1689s misses: []
+EN draft vocab restored: 162100 bytes
+FAIRCTX-DONE

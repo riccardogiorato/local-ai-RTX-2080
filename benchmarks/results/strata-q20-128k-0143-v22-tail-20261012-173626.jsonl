@@ -1,0 +1,2 @@
+{"model": "strata-q20-128k-0143-v22-tail", "task": "task8-tb-broken-python", "passed": true, "wall_s": 278, "suspect_garbage_pass": false, "tool_calls": 125, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-q20-128k-0143-v22-tail", "task": "task9-tb-analyze-access-logs", "passed": true, "wall_s": 48, "suspect_garbage_pass": false, "tool_calls": 27, "finish": "unknown", "zero_byte_retry": false}

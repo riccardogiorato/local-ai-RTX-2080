@@ -55,3 +55,24 @@ changed live in the order 225 -> 190 -> 165 -> 145 -> 125 -> 145 -> 165 -> 190 -
 Decode is RAM/PCIe-bound and does not slow at any limit (differences are run-to-run noise). Prefill is the only
 GPU-bound phase: -2-4% at 145 W for ~30% less GPU power, -7% at 125 W for ~38% less. Sweet spot **145 W**
 (`sudo nvidia-smi -pl 145`, resets at reboot). GPU board power only; CPU and RAM draw are not in these numbers.
+
+## CPU clock and expert-pool workers (measured 2026-10-12)
+
+Same Strata 0.1.43 chat config on DDR4-3200, `benchmarks/strata-env-probe.py` (3 short prompts + a 32K needle per boot).
+
+| Arm | Short decode | 32K prefill | Decode after 32K | Notes |
+|---|---|---|---|---|
+| Stock 4.3 GHz all-core | 53.3 / 47.8 / 50.7 | 654 | 31.6 | 55 C core peak, 82 W package |
+| MSR 0x1AD 47x6 (asked 4.7) | 53.5 / 37.8 / 47.3 | 657 | 32.6 | ran at 4.53 GHz avg, capped 4.6 by intel_pstate; 67 C, 115 W, 1.341 V |
+| 5 pool workers (default) x2 boots | 54.7 / 35.6 / 34.0, 54.9 / 51.0 / 51.7 | 662 / 656 | 31.5 / 33.3 | first boot cold |
+| `--pool-workers 6` x2 boots | 36.7 / 34.5 / 36.6, 38.4 / 32.2 / 35.2 | 657 / 655 | 20.4 / 21.9 | 7 threads on 6 cores |
+
+CPU clock does not move decode (+6% clock, flat within noise), and neither did +26% RAM bandwidth (2533 -> 3200).
+Decode does scale with worker count up to the 6 physical cores (2/3/5 workers: 36/45/52 tok/s), and the default already
+uses all 6 (5 workers + the draining host thread). A 6th worker oversubscribes and costs about 30% (-35% after 32K).
+Reading: the CPU expert pool is limited by how many scattered RAM fetches the 6 non-SMT cores keep in flight, not by
+clock or bandwidth. Levers left: more hardware threads (i9-9900K, 8C/16T, same socket) or fewer pool fetches.
+The synthetic all-core AVX2 burn hit 95 C in 1 s at 47x and self-aborted; Strata itself peaked at 67 C.
+Data: [OC monitor](benchmarks/cpu/oc47f-strata-20261012.csv), [stock](benchmarks/results/strata-oc47f-stock-probe-20261012.json) /
+[47x](benchmarks/results/strata-oc47f-47-probe-20261012.json) / [workers](benchmarks/results/strata-0143-workers6-probe-20261012.json) probes,
+[script](benchmarks/cpu/oc47-strata-only.sh).

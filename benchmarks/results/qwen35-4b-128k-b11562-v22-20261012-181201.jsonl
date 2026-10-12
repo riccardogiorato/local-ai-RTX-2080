@@ -1,0 +1,11 @@
+{"model": "qwen35-4b-128k-b11562-v22", "task": "task10-tb-bank-trans-filter", "passed": true, "wall_s": 41, "suspect_garbage_pass": false, "tool_calls": 26, "finish": "unknown", "zero_byte_retry": false}
+{"model": "qwen35-4b-128k-b11562-v22", "task": "task11-tb-assign-seats", "passed": true, "wall_s": 185, "suspect_garbage_pass": false, "tool_calls": 120, "finish": "unknown", "zero_byte_retry": false}
+{"model": "qwen35-4b-128k-b11562-v22", "task": "task1-js-bugfix", "passed": true, "wall_s": 13, "suspect_garbage_pass": false, "tool_calls": 24, "finish": "unknown", "zero_byte_retry": false}
+{"model": "qwen35-4b-128k-b11562-v22", "task": "task2-react-fix", "passed": false, "wall_s": 479, "suspect_garbage_pass": false, "tool_calls": 269, "finish": "unknown", "zero_byte_retry": false}
+{"model": "qwen35-4b-128k-b11562-v22", "task": "task3-dep-upgrade", "passed": true, "wall_s": 49, "suspect_garbage_pass": false, "tool_calls": 108, "finish": "unknown", "zero_byte_retry": false}
+{"model": "qwen35-4b-128k-b11562-v22", "task": "task4-python-bugfix", "passed": true, "wall_s": 7, "suspect_garbage_pass": false, "tool_calls": 11, "finish": "unknown", "zero_byte_retry": false}
+{"model": "qwen35-4b-128k-b11562-v22", "task": "task5-js-to-ts", "passed": true, "wall_s": 16, "suspect_garbage_pass": false, "tool_calls": 28, "finish": "unknown", "zero_byte_retry": false}
+{"model": "qwen35-4b-128k-b11562-v22", "task": "task6-extra-code-task", "passed": true, "wall_s": 17, "suspect_garbage_pass": false, "tool_calls": 29, "finish": "unknown", "zero_byte_retry": false}
+{"model": "qwen35-4b-128k-b11562-v22", "task": "task7-long-context-agent", "passed": true, "wall_s": 17, "suspect_garbage_pass": false, "tool_calls": 34, "finish": "unknown", "zero_byte_retry": false}
+{"model": "qwen35-4b-128k-b11562-v22", "task": "task8-tb-broken-python", "passed": true, "wall_s": 330, "suspect_garbage_pass": false, "tool_calls": 613, "finish": "unknown", "zero_byte_retry": false}
+{"model": "qwen35-4b-128k-b11562-v22", "task": "task9-tb-analyze-access-logs", "passed": true, "wall_s": 65, "suspect_garbage_pass": false, "tool_calls": 45, "finish": "unknown", "zero_byte_retry": false}
