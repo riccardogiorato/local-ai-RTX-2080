@@ -19,7 +19,7 @@ All recipes in this repo run on this machine. If a number here is cited elsewher
 | Field | Value |
 |---|---|
 | CPU | Intel Core i5-9600K — 6 cores / 6 threads @ 3.70 GHz |
-| RAM | 48 GB (46 GiB; 4-DIMM 2×8+2×16 DDR4: G.Skill F4-3200C16-8GVKB SR + Corsair CMK32GX4M2E3200C16 DR, 2DPC mixed) — **2533 MT/s since 2026-10-06** (2600/2666 failed to train; 2533 passed a full 4×8 GB parallel memtester battery, bus-saturated, zero failures, MCE/EDAC clean on ASUS ROG STRIX Z390-F). Prior eras: 2400 MT/s from 2026-09-27 (XMP failed on the mixed population; pre-2026-09-27 numbers were 16 GB) — era-bound numbers stay in recipes as measured |
+| RAM | **64 GB (62 GiB) DDR4-3200 since 2026-10-12**: 4×16 GB Corsair Vengeance LPX CMK32GX4M2E3200C16 (two identical 2×16 kits, 2 DIMMs per channel), XMP 3200 MT/s CL16 trained first boot on ASUS ROG STRIX Z390-F (BIOS 2203). Passed a 4×14 GB parallel memtester pass (56 GB, bus-saturated, all patterns, 0 failures, 1 h 56 min), kernel log clean. Prior eras: 48 GB mixed (G.Skill F4-3200C16-8GVKB + Corsair) at 2533 MT/s from 2026-10-06, at 2400 MT/s from 2026-09-27 (XMP failed on the mixed population), 16 GB before that. Era-bound numbers stay in recipes as measured |
 | OS | Arch Linux / Omarchy (kernel 7.2.3-arch1-3), Wayland |
 | Desktop baseline VRAM | **0 since 2026-10-06** (desktop moved to the iGPU: i915 drives the display, 2080 fully headless — 2 MiB / 18 W idle receipts). Before that: ~520 MiB (Hyprland + shell) — subtracted from residency numbers for pre-2026-10-06 runs |
 | Container runtime | Docker via sudo; nvidia-container-toolkit (CDI mode) installed 2026-09-23 |
