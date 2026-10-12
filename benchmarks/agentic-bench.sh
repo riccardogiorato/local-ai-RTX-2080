@@ -12,6 +12,10 @@ BENCH_DIR="$(cd "$(dirname "$0")" && pwd)"
 TASKS_DIR="$BENCH_DIR/agentic-tasks"
 OUT="$BENCH_DIR/results/${LABEL}-$(date +%Y%m%d-%H%M%S).jsonl"
 mkdir -p "$BENCH_DIR/results" /tmp/agentic-run
+# Call the pi binary directly: ~/.local/bin/pi is a mise wrapper that runs `mise use -g pi` first, which can
+# stall on a slow network (2026-10-12: every warm-up hung that way). PI_BIN overrides; falls back to `pi`.
+PI_BIN="${PI_BIN:-$HOME/.local/share/mise/installs/pi/latest/pi/pi}"
+[ -x "$PI_BIN" ] || PI_BIN=pi
 
 run_task() {
   restore_master_if_dirty
@@ -33,7 +37,7 @@ run_task() {
   # let it fall through to verify (honest fail) and flag it in the row.
   local zero_byte_retry=0
   for attempt in 1 2; do
-    ( cd "$work" && PI_OFFLINE=${PI_OFFLINE:-1} timeout "$CAP" pi --provider llamacpp-local --model local-model \
+    ( cd "$work" && PI_OFFLINE=${PI_OFFLINE:-1} timeout "$CAP" "$PI_BIN" --provider llamacpp-local --model local-model \
         --mode json --no-session \
         -p "$(cat "$work/TASK.md")" < /dev/null ) > "$work/pi-session.jsonl" 2>"$work/pi-errors.log"
     [ -s "$work/pi-session.jsonl" ] && break
@@ -132,7 +136,7 @@ WARM_TIMEOUT="${WARM_TIMEOUT:-90}"
 WARM_BYPASS="${WARM_BYPASS:-0}"
 WARM_OK=""
 for attempt in 1 2 3; do
-  if PI_OFFLINE=${PI_OFFLINE:-1} timeout "$WARM_TIMEOUT" pi --provider llamacpp-local --model local-model \
+  if PI_OFFLINE=${PI_OFFLINE:-1} timeout "$WARM_TIMEOUT" "$PI_BIN" --provider llamacpp-local --model local-model \
       --mode json --no-session -p "Reply with the single word OK." < /dev/null \
       > /tmp/agentic-warmup.jsonl 2>/dev/null; then
     if grep -q '"stopReason":"stop"' /tmp/agentic-warmup.jsonl 2>/dev/null; then
