@@ -1,0 +1,9 @@
+{"model": "qwen35-4b-128k-b11562-v22", "task": "task10-tb-bank-trans-filter", "passed": true, "wall_s": 64, "suspect_garbage_pass": false, "tool_calls": 32, "finish": "unknown", "zero_byte_retry": false}
+{"model": "qwen35-4b-128k-b11562-v22", "task": "task11-tb-assign-seats", "passed": true, "wall_s": 322, "suspect_garbage_pass": false, "tool_calls": 101, "finish": "unknown", "zero_byte_retry": false}
+{"model": "qwen35-4b-128k-b11562-v22", "task": "task1-js-bugfix", "passed": true, "wall_s": 14, "suspect_garbage_pass": false, "tool_calls": 20, "finish": "unknown", "zero_byte_retry": false}
+{"model": "qwen35-4b-128k-b11562-v22", "task": "task2-react-fix", "passed": true, "wall_s": 59, "suspect_garbage_pass": false, "tool_calls": 59, "finish": "unknown", "zero_byte_retry": false}
+{"model": "qwen35-4b-128k-b11562-v22", "task": "task3-dep-upgrade", "passed": true, "wall_s": 16, "suspect_garbage_pass": false, "tool_calls": 35, "finish": "unknown", "zero_byte_retry": false}
+{"model": "qwen35-4b-128k-b11562-v22", "task": "task4-python-bugfix", "passed": true, "wall_s": 28, "suspect_garbage_pass": false, "tool_calls": 23, "finish": "unknown", "zero_byte_retry": false}
+{"model": "qwen35-4b-128k-b11562-v22", "task": "task5-js-to-ts", "passed": true, "wall_s": 23, "suspect_garbage_pass": false, "tool_calls": 42, "finish": "unknown", "zero_byte_retry": false}
+{"model": "qwen35-4b-128k-b11562-v22", "task": "task6-extra-code-task", "passed": true, "wall_s": 63, "suspect_garbage_pass": false, "tool_calls": 62, "finish": "unknown", "zero_byte_retry": false}
+{"model": "qwen35-4b-128k-b11562-v22", "task": "task7-long-context-agent", "passed": true, "wall_s": 29, "suspect_garbage_pass": false, "tool_calls": 91, "finish": "unknown", "zero_byte_retry": false}
