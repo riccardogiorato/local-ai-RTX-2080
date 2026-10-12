@@ -7,9 +7,9 @@ exact artifact (repo, revision, SHA-256), the runtime (digest-pinned), the launc
 measured results, raw evidence, and a copy-paste reproduce command. Failures are recorded
 with the same care as wins.
 
-**Full test history →** [TESTED.md](TESTED.md) (all 25 models, recipes, and details).
+**Full test history →** [TESTED.md](TESTED.md) (all 25 models, v2.1-era scores, recipes, and details).
 **Untested backlog →** [NEXT-IDEAS.md](NEXT-IDEAS.md).
-**AG-Bench v2.1 suite (11 tasks, canary-verified) →** [benchmarks/README.md](benchmarks/README.md).
+**AG-Bench v2.2 suite (11 tasks, 900 s cap) →** [benchmarks/README.md](benchmarks/README.md).
 
 **Strata update (2026-10-11):** v0.1.43 adopted: AG-Bench v2.2 **11/11**, short decode 49.8 → 52.5 tok/s over v0.1.42 (same calibrated chat settings). Earlier, **(2026-10-10):** v0.1.42 adopted with the existing calibrated
 chat settings. Full same-day v2.2 comparison: v0.1.41 11/11 at 871 s,
@@ -20,41 +20,27 @@ passed a controlled repeat. [Results, scoring correction and limits](benchmarks/
 > ranges over repeated runs (no best-of), speeds compared only on the same prompt file, thinking
 > off by default. Treat decode deltas < 15% across prompt classes as noise.
 
-## Top 10 models on this card
+## Top models on this card
 
-Ranked by AG-Bench v2.1 score (11 canary-verified tasks), then by efficiency. Engine: stock Strata, tag-pinned (v0.1.40).
+Ranked by **AG-Bench v2.2** (900 s per task, the two broken checkers fixed), then by efficiency. The five llama.cpp models were all re-run same-day on one fresh build (b11562); the Strata models run their own engine. v2.1-era scores for every model stay in [TESTED.md](TESTED.md) and git history.
 
-| Rank | Model | Score | p/h | Decode / Prefill | Ctx | V/R GB | Spec |
-|---|---|---|---|---|---|---|---|
-| 1 | [MiMo-9B](https://huggingface.co/bartowski/MiMo-V2.6-Distill-Qwen-9B-GGUF) | **8–9/11** | 42.5 | 52 / 1.7K | 32K | 5.5 / 1 | **DFlash d8** |
-| 1 | [Qwen3.5-9B](https://huggingface.co/Qwen/Qwen3.5-9B) | **9/11** | 37.9 | 100 / 1.6K | 64K | 5.5 / 1 | MTP d4 |
-| 1 | [Qwen3.8-Flash-Next GSQ-RCO Q2_0 125B](https://huggingface.co/ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF) | **8–10/11** | 28.4 | **34–42 / 280-620** | 16K (128K ladder) | 4.5 / 34 | Strata MTP d6 |
-| 1 | [Qwen3.8-Flash-Next GSQ-RCO Coder IQ1_M 125B](https://huggingface.co/ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-Coder-GGUF) | **9/11** | 15.7 | 22–27 / 175 | 16K | 4.6 / 31 | Strata MTP d4 |
-| 3 | [Qwen3.5-4B](https://huggingface.co/Qwen/Qwen3.5-4B) | **8/11** | 30.3 | 150 / 2.3K | **128K** | 2.6 / 1 | MTP d4 |
-| 3 | [A3B IQ2_XXS](https://huggingface.co/Qwen/Qwen3.5-35B-A3B) | **9/11** | 14.9 | 40 / 1K | 32K+ | 4.6 / 12 | MTP d4 ext |
-| 3 | [Bonsai-64K](https://huggingface.co/sudoingx/Ternary-Bonsai-2-27B-PTQ1_0-MTP-GGUF) | **9/11** | 8.5 | 15 / 350 | 64K | 6.0 / 2 | graft d2 + lookup |
-| 3 | [Xing-29B](https://huggingface.co/XingChen-AGI/Xing4.0-29B-A4B) | **8/11** | 5.8 | 25 / 346 | 8K | 4.0 / 12 | MTP d2 |
-| 7 | [Gemma-E4B](https://huggingface.co/google/gemma-4-E4B-it-qat-q4_0-unquantized) | **7/11** | **93.3** | **181** / 2.8K | **128K** | 4.3 / 1 | MTP d3 ext |
-| 8 | [Bonsai-8K](https://huggingface.co/sudoingx/Ternary-Bonsai-2-27B-PTQ1_0-MTP-GGUF) | **5/11** | 29.7 | **55** / 520 | 8K | 7.3 / 1 | graft d2 |
-| 9 | [LFM2.5 DSpark](https://huggingface.co/LiquidAI/LFM2.5-8B-A1B) | 0/11 | — | **221** / 500 | 32K | resident | DSpark d4 |
-| 10 | [ThinkCap-27B](https://huggingface.co/holooo/ThinkingCap-Qwen3.8-27B-Q2_K-GGUF) | 4/6 | — | 9.6 / 239 | 32K | 7.4 / 6 | MTP d2 |
+| Rank | Model | v2.2 | Suite wall | p/h | Engine | Notes |
+|---|---|---|---|---|---|---|
+| 1 | [Qwen3.8-Flash-Next GSQ-RCO Q2_0 125B](https://huggingface.co/ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF) | **11/11** | 1009 s | 39.2 | Strata 0.1.43 | only perfect run on the card; 10/11 on 0.1.42 @ 815 s |
+| 2 | [Qwen3.5-4B](https://huggingface.co/Qwen/Qwen3.5-4B) | **10/11** | 444 s | 81.1 | llama.cpp b11562 | miss: task10 |
+| 2 | [Qwen3.5-9B](https://huggingface.co/Qwen/Qwen3.5-9B) | **10/11** | 515 s | 69.9 | llama.cpp b11562 | miss: task9, a 40K-token prompt past its 32K ctx (capacity, not quality) |
+| 2 | [MiMo-9B](https://huggingface.co/bartowski/MiMo-V2.6-Distill-Qwen-9B-GGUF) (32K, no draft) | **10/11** | 1062 s | 33.9 | llama.cpp b11562 | miss: task11 |
+| 2 | [A3B IQ2_XXS 35B](https://huggingface.co/Qwen/Qwen3.5-35B-A3B) | **10/11** | 2078 s | 17.3 | llama.cpp b11562 | miss: task9, same 32K-ctx ceiling artifact |
+| 6 | [Gemma-E4B](https://huggingface.co/google/gemma-4-E4B-it-qat-q4_0-unquantized) (d3, 128K) | **9/11** | 368 s | **88.0** | llama.cpp b11562 | efficiency record on the card |
+| 6 | [Qwen3.8-Flash-Next GSQ-RCO Coder IQ1_M 125B](https://huggingface.co/ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-Coder-GGUF) | **9/11** | 2329 s | 13.9 | Strata 0.1.38 | 22-27 tok/s decode class |
 
-Units: decode/prefill = t/s / tok/s · p/h = AG-Bench passes per hour · V/R = VRAM/DRAM GB. Full details, caveats and configs live in each model's recipe.
+p/h = AG-Bench passes per hour of suite wall time. Decode/prefill speeds and full caveats live in each model's recipe.
 
-**Also on card:** GLM-OCR · kev · laya · GLiNER 2.5 · [d1-3B](recipes/d1-3b-decision-llamacpp.md) · [EmbeddingGemma-2](recipes/embeddinggemma-2-llamacpp.md) (utility tier: vision, routing, schema extraction, decisions, embeddings)
+**What v2.2 is:** 900 s per task (was 600) plus two fixed checkers. task2 expected an impossible total (18.00 EUR; the inputs sum to 17.50) and task5's TypeScript check never ran on current npm (1 pass in 64 runs); both had been failing every model since September. The longer cap changed no Strata outcome (every miss ended well before 600 s), the checker fixes are what moved scores. Same pi harness, same 11 tasks. Raw and corrected rows are both in `benchmarks/results/` (`*-v22-*` and `*-v22-fixed-*`).
 
-## AG-Bench v2.2 re-rank (2026-10-08)
+**Not yet re-run under v2.2** (v2.1-era scores in [TESTED.md](TESTED.md)): Bonsai-64K 9/11 (needs the PrismML fork), Xing-29B 8/11, Bonsai-8K 5/11, ThinkCap-27B 4/6, LFM2.5 DSpark 0/11.
 
-v2.2 = 900 s per task (was 600) plus two fixed checkers: task2 expected an impossible total (18.00 EUR; the inputs sum to 17.50) and task5's TypeScript check never ran on current npm (1 pass in 64 runs). Both bugs had been failing every model since September. Same pi harness, same 11 tasks, the four rank-1 models one after another.
-
-| Model | Runtime | v2.2 score | Suite wall | Misses |
-|---|---|---|---|---|
-| [Qwen3.8-Flash-Next GSQ-RCO Q2_0 125B](https://huggingface.co/ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF) | Strata 0.1.40.3 | **11/11** | 1280 s | none |
-| [MiMo-9B](https://huggingface.co/bartowski/MiMo-V2.6-Distill-Qwen-9B-GGUF) (32K, no draft) | llama.cpp b11459 | **9/11** | 1695 s | task2 line prices, task8 |
-| [Qwen3.8-Flash-Next GSQ-RCO Coder IQ1_M 125B](https://huggingface.co/ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-Coder-GGUF) | Strata 0.1.38 | **9/11** | 2329 s | task2 total, task10 |
-| [Qwen3.5-9B](https://huggingface.co/Qwen/Qwen3.5-9B) (32K, MTP d4) | llama.cpp b11459 | **8/11** | 1571 s | task2 line prices, task8, task9 (prompt grew past 32K) |
-
-The longer cap changed no outcome for the two Strata models: every miss ended well before 600 s. The checker fixes are what moved scores. Raw and corrected rows are both in `benchmarks/results/` (`*-v22-*` and `*-v22-fixed-*`).
+**Also on card:** GLM-OCR · kev · laya · GLiNER 2.5 · [d1-3B](recipes/d1-3b-decision-llamacpp.md) · [EmbeddingGemma-2](recipes/embeddinggemma-2-llamacpp.md) · [Saluki 27B](recipes/saluki-27b-iq2mix-llamacpp.md) (utility tier: vision, routing, schema extraction, decisions, embeddings; Saluki tested, not adopted)
 
 ## Key findings from 25 models
 
