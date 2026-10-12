@@ -191,23 +191,12 @@ Verdicts inline below; evidence
   (bench Q8_0 vs UD-Q4_K_XL against whatever retrieval GT we trust);
   llama-server embeddings endpoint + `--pooling mean` is the serve
   shape. Tiny footprint, so this is a half-session item, not a lane.
-- **Fleet re-baseline on the LATEST upstream llama.cpp** — every recipe
-  in `recipes/` is pinned to a fork/commit from its own testing era, so
-  cumulative engine drift vs today's upstream is unmeasured. Upstream is
-  at b11457 (10-06) and moving fast: K2-Horizon/MoVA arch support landed
-  in b11454 (directly relevant to the K2-Horizon-7B Tier 3 item),
-  XIELU BF16 CUDA support in b11457, per-thread-stream CUDA fix in
-  b11456, and the post-#28549 CUDA-graphs-for-MTP base sits behind the
-  already-listed fork-rebase entry. Shape: one pinned fresh upstream
-  build, verbatim recipes, 11-task AG-Bench for each llama.cpp-family
-  leaderboard row (Strata serves are their own engine, skip), staged by
-  leaderboard relevance (Bonsai, MiMo pair, E4B first). Caveat: the
-  fork-only features (keyed-gumbel, lookup-prompt, batch-invariant
-  path) do not exist upstream, so the upstream arm measures pure
-  engine drift under stock flags; the fork-rebase item above is the
-  eventual merge point where both histories reunite. Per-model this is
-  a lane-class session, so it is a campaign to schedule, not a
-  one-off.
+- ✓ **Fleet re-baseline on the LATEST upstream llama.cpp** — DONE 2026-10-12 on b11562 (build
+  from source, sm75): qwen35-4b 10/11 @ 444 s, gemma-e4b 9/11 @ 368 s, qwen35-9b 10/11 @ 515 s,
+  mimo-9b 10/11 @ 1062 s, a3b-iq2xxs 10/11 @ 2078 s (its 11th = task9 hit the 32K-ctx ceiling at
+  a 39,947-token request — capacity artifact, not quality). Caveat: engine + 900 s cap + band
+  variance moved together vs the era pins; walls are the cleaner signal. Bonsai excluded (fork
+  PTQ1_0). Evidence `evidence/fleet-rebaseline-b11562.jsonl`.
 
 **Intake 2026-10-03 (wide scan — Reddit + GitHub + HF, 3-week window):**
 
