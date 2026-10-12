@@ -40,7 +40,7 @@ expert bytes to VRAM or feeds the pool faster is the whole game.
    shave; PLE idle stalls of 50-150 ms documented (ple_reader.hpp).
 4. **`--prefill auto:16384`** — TTFT lever (PR #282 +15% on 32K prompts).
 5. **`--pcie-frac` sweep 0.15/0.35/0.50** around auto's 0.25-0.26 — few-%.
-6. **`--pool-workers 4/5/6`** — machine-specific; 4 may win on this desktop.
+6. ~~**`--pool-workers 4/5/6`**~~ measured 2026-10-12: default 5 (+ draining host = 6 cores) wins; 6 workers costs ~30%, fewer workers scale down (2/3/5 = 36/45/52 tok/s). See hardware.md.
 7. **Spec stack after warm acceptance**: `--spec 4 --spec-min-p 0.5`, then
    `--suffix-draft 5` on code/repeat workloads (+6-11% code edits upstream);
    suffix drafting widens verify to spec+2 — sequence AFTER acceptance warms.
