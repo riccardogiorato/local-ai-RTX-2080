@@ -1,6 +1,21 @@
 # Qwen3.8-Flash-Next GSQ-RCO Q2_0 125B · Strata engine — the fleet-record row
 
-## Current runtime: v0.1.43 (2026-10-11)
+## Current runtime: v0.1.44 (2026-10-13)
+
+Stock tag `v0.1.44` (`ed4773eb`) built for sm_75 with the same flags and ggml pin as 0.1.43
+(`strata-0144/build-turing-0144/strata`, MMQ kquants off); [chat config](strata-configs/strata-q20-gsq-0144-tailnet.json)
+is the 0.1.43 one with the new engine. Upstream says GSQ-RCO answers are byte-identical to 0.1.43.1.
+Same-night ABBA probe on the chat config: short decode median 0.1.43 **52.8**, 0.1.44 **51.8** tok/s (noise), tail skip
+off 42.4; 32K prefill 657 tok/s on both; needle passes on both. Greedy outputs match on 2 of 4 cases; the other two vary
+from boot to boot within each engine, so the probe cannot confirm byte identity. Full v2.2 suite: **10/11 at 709 s**,
+86 requests, aggregate decode 47.3 tok/s (0.1.43: 11/11 at 1009 s, 105 requests, 44.8). The miss is task10 (bank filter):
+prompt grew to 16,435 tokens, past the 16K bench context. ABBA task10-only repeats: 0.1.44 pass 115 s / pass 91 s,
+0.1.43 fail (same overflow) 108 s / pass 106 s. Verdict: flaky task, not a regression.
+
+An earlier probe the same evening read ~25% slower decode on **both** engines: an orphaned `vite dev` preview server
+from the lava-lamp one-shot bench was spinning one core. Kept in `benchmarks/results/contended/` as a cautionary record.
+
+## Previous runtime: v0.1.43 (2026-10-11)
 
 Stock tag `v0.1.43` built for sm_75 (`strata-0143/build-turing-0143/strata`), serve from the `strata-0143`
 worktree; [chat config](strata-configs/strata-q20-gsq-0143-tailnet.json) is the 0.1.42 one with the new engine.

@@ -23,7 +23,7 @@ env.pop('TASK_RE', None)
 outdir = repo / 'benchmarks/results'
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--task-re', help='Optional task subset for diagnostic repeats')
-parser.add_argument('--arms', default='0141,0142', help='Comma-separated 0141,0142,0142-tail-off,0143,0143-tail-off')
+parser.add_argument('--arms', default='0141,0142', help='Comma-separated 0141,0142,0142-tail-off,0143,0143-tail-off,0144,0144-tail-off')
 parser.add_argument('--suffix', default='ab-v22-20261010')
 parser.add_argument('--pcie-frac', help='Pin PCIe share for controlled diagnostic repeats')
 opts = parser.parse_args()
@@ -31,7 +31,7 @@ if opts.task_re:
     env['TASK_RE'] = opts.task_re
 
 for version in opts.arms.split(','):
-    if version not in ('0141', '0142', '0142-tail-off', '0143', '0143-tail-off'):
+    if version not in ('0141', '0142', '0142-tail-off', '0143', '0143-tail-off', '0144', '0144-tail-off'):
         raise ValueError(f'Unknown arm: {version}')
     cfg = repo / 'recipes/strata-configs/strata-q20-gsq-0141-bench-reference.json'
     label = f'strata-{version}-{opts.suffix}'

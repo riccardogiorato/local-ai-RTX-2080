@@ -216,6 +216,13 @@ Verdicts inline below; evidence
 - **Ling-3.0-flash-VL IQ2_XXS (36.7 GB)** — 124B/A5.1B hybrid
   linear-attention record-row challenger in-pool; IQ1_S 28.1 GB doubles as
   a sub-2bpw reasoning-wall probe. No native MTP.
+- **Qwen3.6-35B-A3B on Strata 0.1.44** (added 2026-10-13): first Qwen3.6 row and the
+  successor to our Qwen3.5 A3B. Strata 0.1.44 runs it with the file's own MTP block
+  (`--mtp` = draft count). Needs a second sm_75 build with `STRATA_MMQ_KQUANTS=ON` and
+  Unsloth `Qwen3.6-35B-A3B-UD-Q4_K_XL.gguf` (22.9 GB, sha `55983c5a...`, repo
+  unsloth/Qwen3.6-35B-A3B-MTP-GGUF @5bc3e238). Compare against llama.cpp on the same file
+  and against the Qwen3.5 A3B IQ2_XXS row. Upstream: 1.47x llama.cpp on 4K prompts on an
+  RTX 3060 with experts in RAM.
 - **K2-Horizon-7B** — scores between Qwen3.6-27B and 35B-A3B on AA index;
   KV is 18 GiB/128K → quantized-KV mandatory; GGUF ready.
 - ~~**jadidbourbaki lookup-drafting port**~~ — PARKED by owner call 2026-10-04

@@ -11,7 +11,7 @@ with the same care as wins.
 **Untested backlog →** [NEXT-IDEAS.md](NEXT-IDEAS.md).
 **AG-Bench v2.2 suite (11 tasks, 900 s cap) →** [benchmarks/README.md](benchmarks/README.md).
 
-**Strata update (2026-10-11):** v0.1.43 adopted: AG-Bench v2.2 **11/11**, short decode 49.8 → 52.5 tok/s over v0.1.42 (same calibrated chat settings). Earlier, **(2026-10-10):** v0.1.42 adopted with the existing calibrated
+**Strata update (2026-10-13):** v0.1.44 adopted: speed parity with v0.1.43 (short decode 51.8 vs 52.8 tok/s, 32K prefill 657 both), AG-Bench v2.2 **10/11 at 709 s** (the miss is the flaky bank task, which passed 2/2 repeats on 0.1.44 and 1/2 on 0.1.43). Earlier, **(2026-10-11):** v0.1.43 adopted: AG-Bench v2.2 **11/11**, short decode 49.8 → 52.5 tok/s over v0.1.42 (same calibrated chat settings). Earlier, **(2026-10-10):** v0.1.42 adopted with the existing calibrated
 chat settings. Full same-day v2.2 comparison: v0.1.41 11/11 at 871 s,
 v0.1.42 10/11 at 815 s; aggregate decode 37 → 44 tok/s. The missed bank task
 passed a controlled repeat. [Results, scoring correction and limits](benchmarks/README.md#strata-0141-vs-0142-2026-10-10).
