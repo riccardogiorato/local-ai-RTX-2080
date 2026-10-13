@@ -1,0 +1,22 @@
+[2026-10-14T00:59:19+02:00] === rotation start ===
+[2026-10-14T00:59:19+02:00] stage 1: backup flashnext pair (rsync -rtH, hardlink dedup expected on dest)
+[2026-10-14T01:15:12+02:00] stage 1 copy done
+[2026-10-14T01:28:02+02:00] VERIFY PASS archive-copy/flashnext-gsq-rco (4 files, sha256-identical)
+[2026-10-14T01:39:29+02:00] VERIFY PASS archive-copy/flashnext-coder (7 files, sha256-identical)
+[2026-10-14T01:39:29+02:00] stage 1 VERIFIED: fleet-record pair now backed up on HDD
+[2026-10-14T01:39:29+02:00] stage 2: rotation copy
+[2026-10-14T01:48:23+02:00] VERIFY PASS rotate/saluki-27b (24 files, sha256-identical)
+[2026-10-14T01:49:09+02:00] VERIFY PASS rotate/d1-3B (51 files, sha256-identical)
+[2026-10-14T01:52:49+02:00] VERIFY PASS rotate/d1-3B-gguf (46 files, sha256-identical)
+[2026-10-14T01:53:18+02:00] VERIFY PASS rotate/atomicchat-d1 (15 files, sha256-identical)
+[2026-10-14T01:53:34+02:00] VERIFY PASS rotate/laya-gguf (9 files, sha256-identical)
+[2026-10-14T01:53:34+02:00] stage 2 VERIFIED, deleting SSD source dirs
+[2026-10-14T01:53:34+02:00] deleted /home/riccardogiorato/models/saluki-27b
+[2026-10-14T01:53:34+02:00] deleted /home/riccardogiorato/models/d1-3B
+[2026-10-14T01:53:35+02:00] deleted /home/riccardogiorato/models/d1-3B-gguf
+[2026-10-14T01:53:35+02:00] deleted /home/riccardogiorato/models/atomicchat-d1
+[2026-10-14T01:53:35+02:00] deleted /home/riccardogiorato/models/laya-gguf
+[2026-10-14T01:53:35+02:00] === rotation complete ===
+Filesystem                Size  Used Avail Use% Mounted on
+/dev/mapper/omarchy_root  464G  301G  162G  66% /home
+/dev/sda2                 4.6T  3.0T  1.7T  64% /mnt/archive

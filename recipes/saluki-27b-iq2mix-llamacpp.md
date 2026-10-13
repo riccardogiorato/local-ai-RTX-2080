@@ -33,3 +33,7 @@ Partial rows: `benchmarks/results/saluki-27b-iq2mix-v22-PARTIAL-stopped-*.jsonl`
 llama-server -m Underdog-Saluki-27B-1.0-IQ2-mix.gguf --jinja -fa on -c 16384 -np 1 -ngl 57 \
   -ctk q4_0 -ctv q4_0 --reasoning off
 ```
+
+## Archive (rotated 2026-10-14)
+
+Moved to `/mnt/archive/local-models/{'recipes/laya-serve.md': 'laya-gguf', 'recipes/d1-3b-decision-llamacpp.md': 'd1-3B-GGUF dirs d1-3B + d1-3B-gguf', 'recipes/saluki-27b-iq2mix-llamacpp.md': 'saluki-27b'}` (sha256-verified against the SSD copy before deletion; see evidence/hdd-backup-rotation-2026-10-14.jsonl). Rotate back to `~/models/` before serving.
