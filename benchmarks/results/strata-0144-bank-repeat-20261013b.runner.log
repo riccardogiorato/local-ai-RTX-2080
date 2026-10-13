@@ -1,0 +1,5 @@
+AG-Bench model=strata-0144-bank-repeat-20261013b cap=900s
+slots ready after 2s
+warm-up attempt 1: ok (model replied)
+{"model": "strata-0144-bank-repeat-20261013b", "task": "task10-tb-bank-trans-filter", "passed": true, "wall_s": 91, "suspect_garbage_pass": false, "tool_calls": 30, "finish": "unknown", "zero_byte_retry": false}
+DONE — results in /home/riccardogiorato/Desktop/github/local-ai-rtx2080/benchmarks/results/strata-0144-bank-repeat-20261013b-20261013-223852.jsonl

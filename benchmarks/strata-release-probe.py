@@ -13,6 +13,8 @@ from pathlib import Path
 
 cfg_path, old_exe, new_exe, output = sys.argv[1:]
 cfg = json.loads(Path(cfg_path).read_text())
+# Arm labels come from the worktree name, e.g. .../strata-0144/build-turing-0144/strata -> 0144.
+old, new = (Path(exe).parent.parent.name.removeprefix("strata-") for exe in (old_exe, new_exe))
 root = Path(cfg["cwd"])
 sys.path[:0] = [str(root), str(root / "tools")]
 from serve.server import StrataEngine, child_env
@@ -41,12 +43,12 @@ def record(row):
     print(json.dumps({k: v for k, v in row.items() if k not in ("text", "ids", "info")}), flush=True)
 
 arms = [
-    ("0141", old_exe, None), ("0142", new_exe, None),
-    ("0142", new_exe, None), ("0141", old_exe, None),
-    ("0142-tail-off", new_exe, "0"),
+    (old, old_exe, None), (new, new_exe, None),
+    (new, new_exe, None), (old, old_exe, None),
+    (f"{new}-tail-off", new_exe, "0"),
 ]
 if os.environ.get("STREAM_ONLY"):
-    arms = [("0141", old_exe, None), ("0142", new_exe, None)]
+    arms = [(old, old_exe, None), (new, new_exe, None)]
 for boot, (arm, exe, skip) in enumerate(arms):
     env = child_env(cfg)
     if skip is not None:
