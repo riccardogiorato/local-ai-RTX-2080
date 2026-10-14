@@ -118,4 +118,4 @@ the same build and settings as [d1-3B](d1-3b-decision-llamacpp.md).
 
 ## Archive (rotated 2026-10-14)
 
-Moved to `/mnt/archive/local-models/{'recipes/laya-serve.md': 'laya-gguf', 'recipes/d1-3b-decision-llamacpp.md': 'd1-3B-GGUF dirs d1-3B + d1-3B-gguf', 'recipes/saluki-27b-iq2mix-llamacpp.md': 'saluki-27b'}` (sha256-verified against the SSD copy before deletion; see evidence/hdd-backup-rotation-2026-10-14.jsonl). Rotate back to `~/models/` before serving.
+Moved to `/mnt/archive/local-models/laya-gguf/` (sha256-verified against the SSD copy before deletion; see evidence/hdd-backup-rotation-2026-10-14.jsonl). Rotate back to `~/models/` before serving.
