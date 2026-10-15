@@ -1,0 +1,17 @@
+19:57:43 == speed r0 old {'--pcie-frac': '0.20', '--adapt-swaps': '160'}: boot
+20:02:29    old: short 44.6 tok/s, 4K 655, 16K 662, 32K 647 t/t, agent ttft 5.8 s, agent decode 34.9 tok/s, hit 69%
+20:03:29 == speed r1 new {'--pcie-frac': '0.35', '--adapt-swaps': '80'}: boot
+20:08:21    new: short 45.8 tok/s, 4K 655, 16K 659, 32K 644 t/t, agent ttft 5.595 s, agent decode 36.6 tok/s, hit 69%
+20:09:21 == speed r2 new {'--pcie-frac': '0.35', '--adapt-swaps': '80'}: boot
+20:14:10    new: short 46.75 tok/s, 4K 655, 16K 659, 32K 648 t/t, agent ttft 5.552 s, agent decode 37.65 tok/s, hit 69%
+20:15:10 == speed r3 old {'--pcie-frac': '0.20', '--adapt-swaps': '160'}: boot
+20:20:02    old: short 46.0 tok/s, 4K 659, 16K 659, 32K 645 t/t, agent ttft 5.596 s, agent decode 38.85 tok/s, hit 68%
+20:20:02 speed phase medians:
+20:20:02   old: short [44.6, 46.0], 32K prefill [647.2, 644.85]
+20:20:02   new: short [45.8, 46.75], 32K prefill [644.5, 648.15]
+20:21:02 == v2.2 old old {'--pcie-frac': '0.20', '--adapt-swaps': '160'}: boot
+20:38:55    old: 11/11 in 1025 s
+20:38:55 waiting: CPU-heavy process running: load average 6.6
+20:40:45 == v2.2 new new {'--pcie-frac': '0.35', '--adapt-swaps': '80'}: boot
+21:00:26    new: 11/11 in 1135 s
+21:00:26 ALL-DONE

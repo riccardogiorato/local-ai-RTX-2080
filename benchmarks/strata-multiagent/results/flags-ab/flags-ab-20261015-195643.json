@@ -1,0 +1,74 @@
+{
+ "speed": [
+  {
+   "arm": "old",
+   "tag": "r0",
+   "short": 44.6,
+   "ttft": 0.867,
+   "4k": 655.4,
+   "16k": 661.9,
+   "32k": 647.2,
+   "agent_ttft": 5.8,
+   "agent_decode": 34.9,
+   "agent_hit": 68.541
+  },
+  {
+   "arm": "new",
+   "tag": "r1",
+   "short": 45.8,
+   "ttft": 0.824,
+   "4k": 655.05,
+   "16k": 658.65,
+   "32k": 644.5,
+   "agent_ttft": 5.595,
+   "agent_decode": 36.6,
+   "agent_hit": 68.523
+  },
+  {
+   "arm": "new",
+   "tag": "r2",
+   "short": 46.75,
+   "ttft": 0.799,
+   "4k": 655.25,
+   "16k": 658.75,
+   "32k": 648.15,
+   "agent_ttft": 5.552,
+   "agent_decode": 37.65,
+   "agent_hit": 68.551
+  },
+  {
+   "arm": "old",
+   "tag": "r3",
+   "short": 46.0,
+   "ttft": 0.865,
+   "4k": 659.05,
+   "16k": 658.8,
+   "32k": 644.85,
+   "agent_ttft": 5.596,
+   "agent_decode": 38.85,
+   "agent_hit": 68.446
+  }
+ ],
+ "v22": [
+  {
+   "arm": "old",
+   "tag": "old",
+   "passed": 11,
+   "wall_s": 1025,
+   "n": 11,
+   "suspect": 0,
+   "contended": false,
+   "first_contention": null
+  },
+  {
+   "arm": "new",
+   "tag": "new",
+   "passed": 11,
+   "wall_s": 1135,
+   "n": 11,
+   "suspect": 0,
+   "contended": false,
+   "first_contention": null
+  }
+ ]
+}
