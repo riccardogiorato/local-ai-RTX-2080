@@ -1,0 +1,14 @@
+19:28:41 waiting: CPU-heavy process running: load average 3.3
+19:29:52 == round 0 cur {'--pcie-frac': '0.20', '--adapt-swaps': '160'}: boot
+19:31:38    cur: decode median 51.7 (44.8-53.4), n=18
+19:31:41 waiting: CPU-heavy process running: load average 5.3
+19:33:21 == round 0 cand {'--pcie-frac': '0.35', '--adapt-swaps': '80'}: boot
+19:35:03    cand: decode median 54.8 (48.7-56.1), n=18
+19:35:04 waiting: CPU-heavy process running: load average 5.4
+19:36:44 == round 1 cand {'--pcie-frac': '0.35', '--adapt-swaps': '80'}: boot
+19:38:26    cand: decode median 54.9 (48.1-56.4), n=18
+19:38:28 waiting: CPU-heavy process running: load average 5.2
+19:40:08 == round 1 cur {'--pcie-frac': '0.20', '--adapt-swaps': '160'}: boot
+19:41:53    cur: decode median 51.8 (46.8-53.3), n=18
+19:41:55 cur: medians ['51.7', '51.8']
+19:41:55 cand: medians ['54.8', '54.9']  vs cur: x1.060 (x1.06 to x1.06)
