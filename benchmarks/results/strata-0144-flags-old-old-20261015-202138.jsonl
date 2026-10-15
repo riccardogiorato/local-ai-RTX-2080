@@ -1,0 +1,11 @@
+{"model": "strata-0144-flags-old-old", "task": "task10-tb-bank-trans-filter", "passed": true, "wall_s": 138, "suspect_garbage_pass": false, "tool_calls": 39, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0144-flags-old-old", "task": "task11-tb-assign-seats", "passed": true, "wall_s": 109, "suspect_garbage_pass": false, "tool_calls": 40, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0144-flags-old-old", "task": "task1-js-bugfix", "passed": true, "wall_s": 36, "suspect_garbage_pass": false, "tool_calls": 16, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0144-flags-old-old", "task": "task2-react-fix", "passed": true, "wall_s": 87, "suspect_garbage_pass": false, "tool_calls": 27, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0144-flags-old-old", "task": "task3-dep-upgrade", "passed": true, "wall_s": 86, "suspect_garbage_pass": false, "tool_calls": 60, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0144-flags-old-old", "task": "task4-python-bugfix", "passed": true, "wall_s": 21, "suspect_garbage_pass": false, "tool_calls": 12, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0144-flags-old-old", "task": "task5-js-to-ts", "passed": true, "wall_s": 67, "suspect_garbage_pass": false, "tool_calls": 20, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0144-flags-old-old", "task": "task6-extra-code-task", "passed": true, "wall_s": 47, "suspect_garbage_pass": false, "tool_calls": 16, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0144-flags-old-old", "task": "task7-long-context-agent", "passed": true, "wall_s": 79, "suspect_garbage_pass": false, "tool_calls": 42, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0144-flags-old-old", "task": "task8-tb-broken-python", "passed": true, "wall_s": 296, "suspect_garbage_pass": false, "tool_calls": 155, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0144-flags-old-old", "task": "task9-tb-analyze-access-logs", "passed": true, "wall_s": 59, "suspect_garbage_pass": false, "tool_calls": 35, "finish": "unknown", "zero_byte_retry": false}
