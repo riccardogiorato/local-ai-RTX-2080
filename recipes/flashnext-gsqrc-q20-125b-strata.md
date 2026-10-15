@@ -12,6 +12,14 @@ from boot to boot within each engine, so the probe cannot confirm byte identity.
 prompt grew to 16,435 tokens, past the 16K bench context. ABBA task10-only repeats: 0.1.44 pass 115 s / pass 91 s,
 0.1.43 fail (same overflow) 108 s / pass 106 s. Verdict: flaky task, not a regression.
 
+**Recalibrated 2026-10-15**: `tools/calibrate.py` on 0.1.44 (891 s) picked **pcie-frac 0.35** (sweep median
+47.2 vs the standing 0.20's 42.4) and **adapt-swaps 80** (53.5/54.8 vs default 51.4/51.7); the fourth calibrate
+probe of the pcie knob since the RAM-3200 upgrade and the first ABBA confirm to separate cleanly: short decode
+**51.7/51.8 → 54.8/54.9 tok/s (+6%)** on a 4-boot ABBA (`benchmarks/strata-multiagent/knob-probe.py`, 18 chats per
+boot). spec-min-p 0.70 and 5 workers confirmed unchanged. Both chat configs now carry 0.35/80. Evidence:
+`strata_calibrate_0144` in `evidence/strata-q20-sm75-port.jsonl`, raw calibrate + ABBA in
+`benchmarks/strata-multiagent/results/`.
+
 An earlier probe the same evening read ~25% slower decode on **both** engines: an orphaned `vite dev` preview server
 from the lava-lamp one-shot bench was spinning one core. Kept in `benchmarks/results/contended/` as a cautionary record.
 

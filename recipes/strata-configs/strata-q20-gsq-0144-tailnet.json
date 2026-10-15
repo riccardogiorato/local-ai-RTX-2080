@@ -28,11 +28,11 @@
     "--kv-resident",
     "32768",
     "--pcie-frac",
-    "0.20",
+    "0.35",
     "--adapt-every",
     "1",
     "--adapt-swaps",
-    "160",
+    "80",
     "--adapt-decay",
     "0.97"
   ],
