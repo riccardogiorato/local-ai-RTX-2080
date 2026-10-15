@@ -1,0 +1,6 @@
+10:33:56 sessions: expert-cache (5 turns), tokenizer-fr (5 turns), cuda-kernel (3 turns), installer-fr (4 turns)
+10:33:56 waiting: CPU-heavy process running: 2409789 ninja -C /home/riccardogiorato/Desktop/github/ps2-web-recomp/build/web-kh2 ps2web
+10:38:36 == seq-r0: 1 slot(s), 1 agent(s) at once; starting server
+10:39:21    ready in 45.0 s, total_slots=1, VRAM 7300 MiB
+10:42:56    done: 7 requests in 213 s, 4 errors, load max 11.33; first error None
+10:42:59 waiting: CPU-heavy process running: 2418219 ninja -C /home/riccardogiorato/Desktop/github/ps2-web-recomp/build/native-kh2 ps2run

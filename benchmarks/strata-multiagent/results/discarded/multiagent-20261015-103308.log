@@ -1,0 +1,2 @@
+10:33:09 sessions: expert-cache (5 turns), tokenizer-fr (5 turns), cuda-kernel (3 turns), installer-fr (4 turns)
+10:33:09 waiting: CPU-heavy process running: 2402682 /usr/bin/bash -c source /home/riccardogiorato/.claude/shell-snapshots/snapshot-bash-1792049741470-rcogiy.sh 2>/d

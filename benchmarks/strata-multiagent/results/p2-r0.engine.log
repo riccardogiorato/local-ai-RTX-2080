@@ -1,0 +1,611 @@
+[strata] 2026-10-15 11:44:12 engine started: /home/riccardogiorato/Desktop/github/strata-0144/build-turing-0144/strata --serve --pack packs/q2_0-gsq --native /home/riccardogiorato/models/flashnext-gsq-rco/Qwen3.8-Flash-Next-GSQ-RCO-Q2_0-00001-of-00002.gguf --ple-gguf /home/riccardogiorato/models/flashnext-gsq-rco/Qwen3.8-Flash-Next-GSQ-RCO-Q2_0-00002-of-00002.gguf --ple-io mmap --expert-profile data/expert-profile.bin --expert-cache auto --spec 4 --spec-min-p 0.70 --kv int8 --prefill auto:131072 --mtp mtp/rt --max-context 131072 --kv-resident 16384 --pcie-frac 0.20 --adapt-every 1 --adapt-swaps 160 --adapt-decay 0.97 --batch 2
+strata generate: memory guard: limit 62.6 GiB (source: meminfo), current 7.3 GiB, reclaimable cache credited 0.0 GiB; available 55.4 GiB (MemAvailable 55.4 GiB), floor 2560 MiB
+strata generate: this CPU has no AVX-512: the expert kernels run on AVX-2 (multi-token for the i-quant gate/up rows)
+strata generate: native pack: packs/q2_0-gsq experts (largest blob 1.38 MB), token embedding Q3_K in mapped host memory (260 MiB, 0.6 s)
+strata generate: 1416 MiB of weights loaded from packs/q2_0-gsq in 0.7 s (303 canonical tensors skipped: served natively)
+strata generate: 301 native projection matrices, 1376.20 MiB of weights, in 0.7 s
+strata generate: profile data/expert-profile.bin: 24576 ranked pairs, built for 24576 slots
+strata generate: KV streaming: 20480 of 131072 cells per QSA layer in VRAM, the K/V in 1.55 GiB of pinned RAM
+strata generate: PLE on, table 320001536 rows of /home/riccardogiorato/models/flashnext-gsq-rco/Qwen3.8-Flash-Next-GSQ-RCO-Q2_0-00002-of-00002.gguf
+strata generate: --batch: 2 slot sessions on CUDA0 (0.58 GiB each); 2.80 GiB free
+strata generate: --batch 2: the slot sessions take 1.16 GiB of VRAM on CUDA0 that the expert cache would otherwise hold
+strata mtp: draft layer loaded, 835 MiB of VRAM (experts 675, dense 111), files read in 0.42 s (1857 MiB/s)
+strata generate: experimental native Q5_K head, 437043200 bytes, in 0.2 s
+strata generate: GPU 0: NVIDIA GeForce RTX 2080, compute capability 7.5
+strata generate: expert arena read through the file cache (buffered (not Windows))
+strata generate: expert arena: cudaHostRegister PORTABLE ok; MAP_HUGETLB unavailable (needed 16201 2 MiB pages, vm.nr_hugepages=0); transparent huge pages are on for every mapping (THP always): MADV_HUGEPAGE not requested
+strata generate: loaded 31.64 GiB at 1.24 GiB/s
+strata generate: GPU host-callback thread started before host-core pinning
+strata generate: CPU pool tasks/phase: 18 (automatic), participating threads: 6
+strata generate: 5 pool workers on logical processors 1,2,3,4,5, the host thread on 0 (draining too) (--host-core first)
+strata aux cpus: threads that are neither pool workers nor the host go to CPUs none spare (every CPU is the host's, a worker's or shares a core with a worker or has no known core) (off at start; a request's aux_cpus=1 turns it on)
+strata generate: expert cache auto: 1.51 GiB free, 700 MiB reserved (+73 MiB for the draft head) -> 587 slots
+strata generate: expert cache 587 slots, 0.76 GiB of VRAM; policy is
+strata generate: the GPU computes the experts in the cache; it rounds differently from the CPU,
+                 so a reply can differ slightly from a run without the cache (same quality:
+                 bench/results/2026-09-27-cache-parity).
+                 PROFILE, ranked by routing frequency, no eviction.
+strata generate: pre-filled 587 of 587 slots from the profile in 0.1 s (11944 MB/s); slot 0 verified
+strata generate: R4 hit path ON - resident experts are computed on the GPU
+strata generate: 5 expert-pool workers + the host thread
+strata generate: session is up (engine 0.1.44)
+strata generate: token graph hit path: 587 resident experts, decided on the device
+strata serve: prompt chunk auto: 512 tokens, a 8-slot ring
+strata serve: the prompt path borrows 365 CUDA0 cache slots (0.47 GiB)
+strata hc: CUDA0: the hyper-connection read runs as staged (the norm per token and stream, the down projection's activations staged ahead by cp.async); checked bit for bit against the plain read on this card (STRATA_HC_SPLIT=1 or 0 for the earlier ones)
+strata verify: window up to 6 tokens, 55.6 MiB of device buffers
+strata mtp: draft head over 40525 tokens (68.0 MiB)
+strata verify: batch windows of up to 2 sequences (layers [0, 48))
+strata serve: STRATA_ROUTE_TAIL_SKIP=7 is ON: a missed expert that every token of a verify window routes at rank 7 or lower is skipped (+10..20% decode on 12-16 GB cards that miss experts, answers differ slightly from 0.1.41); STRATA_ROUTE_TAIL_SKIP=0 turns it off
+strata serve: adaptive overlap: off (STRATA_ADAPT_OVERLAP=1 turns it on)
+strata serve: 494 MiB of VRAM free with everything loaded
+strata serve: WARNING: only 494 MiB of VRAM free at the start of this request (below 512 MiB): when the card is this full the driver can page GPU memory to system RAM, decode falls to a few tok/s and a window may never finish (#2065). Add --vram-reserve-mib 768 to the config's args, or lower --max-context / --batch
+strata verify: capturing the 6-token window (494 MiB of VRAM free)
+strata verify: captured the 6-token window (upload no error, sync no error)
+strata verify: capturing the 2-token window (476 MiB of VRAM free)
+strata verify: captured the 2-token window (upload no error, sync no error)
+strata verify: capturing the 1-token window (460 MiB of VRAM free)
+strata verify: captured the 1-token window (upload no error, sync no error)
+strata verify: capturing the 4-token window (444 MiB of VRAM free)
+strata verify: captured the 4-token window (upload no error, sync no error)
+strata serve: prompt 15 tokens = 0 reused + 15 read in 379 ms (39.6 tok/s), 2 generated in 152 ms (13.1 tok/s), drafts accepted 3 of 3, 1 checkpoints
+strata serve: decode expert cache hit rate: 25.0% (421 hits / 1681 lookups); 187 more read by the GPU over PCIe or from another GPU (10.0% of all 1868 routed)
+strata serve: route tail skip: 1598 missed experts skipped (1757 entries) since the start
+strata serve: KV streaming: 90.91% of 660 block reads hit VRAM, 0.2 MiB read from RAM
+strata KV prefetch: 0 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata serve: prompt 2163 tokens = 0 reused + 2163 read in 12102 ms (178.7 tok/s), 1 generated in 115 ms (8.7 tok/s), drafts accepted 0 of 0, 1 checkpoints
+strata serve: decode expert cache hit rate: 38.5% (135 hits / 351 lookups); 19 more read by the GPU over PCIe or from another GPU (5.1% of all 370 routed)
+strata serve: route tail skip: 2075 missed experts skipped (2290 entries) since the start
+strata serve: KV streaming: 84.98% of 43140 block reads hit VRAM, 26.1 MiB read from RAM
+strata batch: slot 0 takes 2164 tokens (copied in 280.9 ms)
+strata serve: prompt 2164 tokens = 2163 reused + 1 read in 15 ms (65.6 tok/s), 1 generated in 147 ms (6.8 tok/s), drafts accepted 0 of 0, 1 checkpoints
+strata serve: decode expert cache hit rate: 44.8% (163 hits / 364 lookups); 18 more read by the GPU over PCIe or from another GPU (4.7% of all 382 routed)
+strata serve: route tail skip: 2173 missed experts skipped (2388 entries) since the start
+strata serve: KV streaming: 86.84% of 49296 block reads hit VRAM, 26.1 MiB read from RAM
+strata verify: captured the batch window over slots 0
+strata KV prefetch: 0 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata batch: 28 windows, avg 1.00 rows, 146.86 ms/window = run 144.74 (CUDA0 GPU-reach wait 22.73 + CPU experts 117.77) + commit 1.57 + emit 0.48 + adapt wait 0.07; per stage (ms/window): CUDA0 wait 22.73 + pool 117.77; per layer-window: CPU experts 5.71, VRAM hits 0.49, PCIe 0.91; routed entries per window: VRAM 23.4 (6.9%), PCIe 43.6 (12.8%), CPU 274.3 (80.4%); adaptive tier: 1 rounds, 2 experts swapped in; 2.4 rows/s over 11662 ms of wall time (admissions included)
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata batch: the prompt was read in 4 parts, the slots decoding 3951 ms between them
+strata batch: slot 1 takes 5984 tokens (copied in 319.6 ms)
+strata serve: prompt 5984 tokens = 0 reused + 5984 read in 34297 ms (174.5 tok/s), 1 generated in 101 ms (9.9 tok/s), drafts accepted 0 of 0, 1 checkpoints
+strata serve: decode expert cache hit rate: 51.5% (189 hits / 367 lookups); 12 more read by the GPU over PCIe or from another GPU (3.2% of all 379 routed)
+strata serve: route tail skip: 6471 missed experts skipped (6734 entries) since the start
+strata serve: KV streaming: 75.74% of 43128 block reads hit VRAM, 42.1 MiB read from RAM
+strata verify: captured the batch window over slots 1
+strata batch: 2 windows, avg 1.00 rows, 146.79 ms/window = run 143.79 (CUDA0 GPU-reach wait 21.91 + CPU experts 108.39) + commit 1.37 + emit 0.15 + adapt wait 1.49; per stage (ms/window): CUDA0 wait 21.91 + pool 108.39; per layer-window: CPU experts 4.57, VRAM hits 2.58, PCIe 0.48; routed entries per window: VRAM 124.0 (33.8%), PCIe 23.0 (6.3%), CPU 219.5 (59.9%); adaptive tier: 2 rounds, 31 experts swapped in; 6.8 rows/s over 294 ms of wall time (admissions included)
+strata batch: slot 1 gave back 5986 tokens of this conversation (all it holds) in 220.1 ms
+strata verify: capturing the 3-token window (380 MiB of VRAM free)
+strata verify: captured the 3-token window (upload no error, sync no error)
+strata serve: prompt 5987 tokens = 5986 reused + 1 read in 222 ms (4.5 tok/s), 48 generated in 4459 ms (10.8 tok/s), drafts accepted 32 of 37, 0 checkpoints
+strata serve: decode expert cache hit rate: 39.5% (7808 hits / 19773 lookups); 1591 more read by the GPU over PCIe or from another GPU (7.4% of all 21364 routed)
+strata serve: route tail skip: 11468 missed experts skipped (11997 entries) since the start
+strata serve: KV streaming: 95.76% of 338904 block reads hit VRAM, 57.9 MiB read from RAM
+strata serve: suffix drafts: 1 windows, 3 of 3 drafts accepted
+[strata] 2026-10-15 11:48:38 engine started: /home/riccardogiorato/Desktop/github/strata-0144/build-turing-0144/strata --serve --pack packs/q2_0-gsq --native /home/riccardogiorato/models/flashnext-gsq-rco/Qwen3.8-Flash-Next-GSQ-RCO-Q2_0-00001-of-00002.gguf --ple-gguf /home/riccardogiorato/models/flashnext-gsq-rco/Qwen3.8-Flash-Next-GSQ-RCO-Q2_0-00002-of-00002.gguf --ple-io mmap --expert-profile data/expert-profile.bin --expert-cache auto --spec 4 --spec-min-p 0.70 --kv int8 --prefill auto:131072 --mtp mtp/rt --max-context 131072 --kv-resident 16384 --pcie-frac 0.20 --adapt-every 1 --adapt-swaps 160 --adapt-decay 0.97 --batch 2
+strata generate: memory guard: limit 62.6 GiB (source: meminfo), current 7.3 GiB, reclaimable cache credited 0.0 GiB; available 55.3 GiB (MemAvailable 55.3 GiB), floor 2560 MiB
+strata generate: this CPU has no AVX-512: the expert kernels run on AVX-2 (multi-token for the i-quant gate/up rows)
+strata generate: native pack: packs/q2_0-gsq experts (largest blob 1.38 MB), token embedding Q3_K in mapped host memory (260 MiB, 0.6 s)
+strata generate: 1416 MiB of weights loaded from packs/q2_0-gsq in 1.3 s (303 canonical tensors skipped: served natively)
+strata generate: 301 native projection matrices, 1376.20 MiB of weights, in 0.9 s
+strata generate: profile data/expert-profile.bin: 24576 ranked pairs, built for 24576 slots
+strata generate: KV streaming: 20480 of 131072 cells per QSA layer in VRAM, the K/V in 1.55 GiB of pinned RAM
+strata generate: PLE on, table 320001536 rows of /home/riccardogiorato/models/flashnext-gsq-rco/Qwen3.8-Flash-Next-GSQ-RCO-Q2_0-00002-of-00002.gguf
+strata generate: --batch: 2 slot sessions on CUDA0 (0.58 GiB each); 2.80 GiB free
+strata generate: --batch 2: the slot sessions take 1.16 GiB of VRAM on CUDA0 that the expert cache would otherwise hold
+strata mtp: draft layer loaded, 835 MiB of VRAM (experts 675, dense 111), files read in 0.42 s (1862 MiB/s)
+strata generate: experimental native Q5_K head, 437043200 bytes, in 0.2 s
+strata generate: GPU 0: NVIDIA GeForce RTX 2080, compute capability 7.5
+strata generate: expert arena read through the file cache (buffered (not Windows))
+strata generate: expert arena: cudaHostRegister PORTABLE ok; MAP_HUGETLB unavailable (needed 16201 2 MiB pages, vm.nr_hugepages=0); transparent huge pages are on for every mapping (THP always): MADV_HUGEPAGE not requested
+strata generate: loaded 31.64 GiB at 1.29 GiB/s
+strata generate: GPU host-callback thread started before host-core pinning
+strata generate: CPU pool tasks/phase: 18 (automatic), participating threads: 6
+strata generate: 5 pool workers on logical processors 1,2,3,4,5, the host thread on 0 (draining too) (--host-core first)
+strata aux cpus: threads that are neither pool workers nor the host go to CPUs none spare (every CPU is the host's, a worker's or shares a core with a worker or has no known core) (off at start; a request's aux_cpus=1 turns it on)
+strata generate: expert cache auto: 1.51 GiB free, 700 MiB reserved (+73 MiB for the draft head) -> 587 slots
+strata generate: expert cache 587 slots, 0.76 GiB of VRAM; policy is
+strata generate: the GPU computes the experts in the cache; it rounds differently from the CPU,
+                 so a reply can differ slightly from a run without the cache (same quality:
+                 bench/results/2026-09-27-cache-parity).
+                 PROFILE, ranked by routing frequency, no eviction.
+strata generate: pre-filled 587 of 587 slots from the profile in 0.1 s (11956 MB/s); slot 0 verified
+strata generate: R4 hit path ON - resident experts are computed on the GPU
+strata generate: 5 expert-pool workers + the host thread
+strata generate: session is up (engine 0.1.44)
+strata generate: token graph hit path: 587 resident experts, decided on the device
+strata serve: prompt chunk auto: 512 tokens, a 8-slot ring
+strata serve: the prompt path borrows 365 CUDA0 cache slots (0.47 GiB)
+strata hc: CUDA0: the hyper-connection read runs as staged (the norm per token and stream, the down projection's activations staged ahead by cp.async); checked bit for bit against the plain read on this card (STRATA_HC_SPLIT=1 or 0 for the earlier ones)
+strata verify: window up to 6 tokens, 55.6 MiB of device buffers
+strata mtp: draft head over 40525 tokens (68.0 MiB)
+strata verify: batch windows of up to 2 sequences (layers [0, 48))
+strata serve: STRATA_ROUTE_TAIL_SKIP=7 is ON: a missed expert that every token of a verify window routes at rank 7 or lower is skipped (+10..20% decode on 12-16 GB cards that miss experts, answers differ slightly from 0.1.41); STRATA_ROUTE_TAIL_SKIP=0 turns it off
+strata serve: adaptive overlap: off (STRATA_ADAPT_OVERLAP=1 turns it on)
+strata serve: 494 MiB of VRAM free with everything loaded
+strata serve: WARNING: only 494 MiB of VRAM free at the start of this request (below 512 MiB): when the card is this full the driver can page GPU memory to system RAM, decode falls to a few tok/s and a window may never finish (#2065). Add --vram-reserve-mib 768 to the config's args, or lower --max-context / --batch
+strata verify: capturing the 6-token window (494 MiB of VRAM free)
+strata verify: captured the 6-token window (upload no error, sync no error)
+strata verify: capturing the 2-token window (476 MiB of VRAM free)
+strata verify: captured the 2-token window (upload no error, sync no error)
+strata verify: capturing the 1-token window (460 MiB of VRAM free)
+strata verify: captured the 1-token window (upload no error, sync no error)
+strata verify: capturing the 4-token window (444 MiB of VRAM free)
+strata verify: captured the 4-token window (upload no error, sync no error)
+strata serve: prompt 15 tokens = 0 reused + 15 read in 378 ms (39.6 tok/s), 2 generated in 146 ms (13.7 tok/s), drafts accepted 3 of 3, 1 checkpoints
+strata serve: decode expert cache hit rate: 25.0% (421 hits / 1681 lookups); 187 more read by the GPU over PCIe or from another GPU (10.0% of all 1868 routed)
+strata serve: route tail skip: 1598 missed experts skipped (1757 entries) since the start
+strata serve: KV streaming: 90.91% of 660 block reads hit VRAM, 0.2 MiB read from RAM
+strata KV prefetch: 0 layer prefixes, single existing staging pool
+strata batch: the prompt read gives way at 512 of 5984 tokens; slot 0 holds it (copied in 70.5 ms)
+strata serve: prompt 5984 tokens = 0 reused + 512 of 5984 read in 2656 ms (192.8 tok/s), 0 generated in 0 ms (0.0 tok/s), drafts accepted 0 of 0, 0 checkpoints (cancelled)
+strata serve: route tail skip: 1598 missed experts skipped (1757 entries) since the start
+strata serve: KV streaming: 100.00% of 0 block reads hit VRAM, 0.0 MiB read from RAM
+strata batch: slot 0 gave back 512 tokens of this conversation (all it holds) in 70.0 ms
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata batch: slot 1 takes 2163 tokens (copied in 141.1 ms)
+strata serve: prompt 2163 tokens = 512 reused + 1651 read in 8701 ms (189.7 tok/s), 1 generated in 30 ms (33.8 tok/s), drafts accepted 0 of 0, 1 checkpoints
+strata serve: decode expert cache hit rate: 38.5% (135 hits / 351 lookups); 19 more read by the GPU over PCIe or from another GPU (5.1% of all 370 routed)
+strata serve: route tail skip: 2075 missed experts skipped (2290 entries) since the start
+strata serve: KV streaming: 84.98% of 43140 block reads hit VRAM, 26.1 MiB read from RAM
+strata verify: captured the batch window over slots 1
+strata batch: slot 0 gave back 512 tokens of this conversation (all it holds) in 78.1 ms
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata batch: 26 windows, avg 1.00 rows, 32.84 ms/window = run 31.67 (CUDA0 GPU-reach wait 13.93 + CPU experts 15.25) + commit 0.90 + emit 0.11 + adapt wait 0.15; per stage (ms/window): CUDA0 wait 13.93 + pool 15.25; per layer-window: CPU experts 5.64, VRAM hits 0.62, PCIe 0.89; routed entries per window: VRAM 29.8 (8.7%), PCIe 42.9 (12.5%), CPU 270.8 (78.8%); adaptive tier: 1 rounds, 40 experts swapped in; 8.1 rows/s over 3214 ms of wall time (admissions included)
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata batch: the prompt was read in 2 parts, the slots decoding 810 ms between them
+strata batch: slot 0 takes 5984 tokens (copied in 145.0 ms)
+strata serve: prompt 5984 tokens = 512 reused + 5472 read in 26956 ms (203.0 tok/s), 1 generated in 26 ms (38.1 tok/s), drafts accepted 0 of 0, 1 checkpoints
+strata serve: decode expert cache hit rate: 51.6% (190 hits / 368 lookups); 12 more read by the GPU over PCIe or from another GPU (3.2% of all 380 routed)
+strata serve: route tail skip: 6034 missed experts skipped (6301 entries) since the start
+strata serve: KV streaming: 75.76% of 43128 block reads hit VRAM, 42.1 MiB read from RAM
+strata verify: captured the batch window over slots 0
+strata batch: slot 1 gave back 2156 tokens of this conversation (its turn checkpoint) in 63.1 ms
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata batch: 50 windows, avg 1.00 rows, 35.33 ms/window = run 34.31 (CUDA0 GPU-reach wait 14.58 + CPU experts 17.34) + commit 0.92 + emit 0.09 + adapt wait 0.01; per stage (ms/window): CUDA0 wait 14.58 + pool 17.34; per layer-window: CPU experts 5.47, VRAM hits 0.91, PCIe 0.81; routed entries per window: VRAM 43.7 (12.7%), PCIe 38.7 (11.2%), CPU 262.7 (76.1%); adaptive tier: 1 rounds, 9 experts swapped in; 7.8 rows/s over 6417 ms of wall time (admissions included)
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata batch: the prompt was read in 3 parts, the slots decoding 1726 ms between them
+strata batch: slot 1 takes 7199 tokens (copied in 154.3 ms)
+strata serve: prompt 7199 tokens = 2156 reused + 5043 read in 25456 ms (198.1 tok/s), 1 generated in 26 ms (38.8 tok/s), drafts accepted 0 of 0, 2 checkpoints
+strata serve: decode expert cache hit rate: 53.0% (193 hits / 364 lookups); 10 more read by the GPU over PCIe or from another GPU (2.7% of all 374 routed)
+strata serve: route tail skip: 13249 missed experts skipped (13577 entries) since the start
+strata serve: KV streaming: 71.84% of 43140 block reads hit VRAM, 48.9 MiB read from RAM
+strata batch: slot 0 gave back 5977 tokens of this conversation (its turn checkpoint) in 79.0 ms
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata batch: 73 windows, avg 1.00 rows, 32.98 ms/window = run 31.97 (CUDA0 GPU-reach wait 14.14 + CPU experts 15.64) + commit 0.90 + emit 0.11 + adapt wait 0.00; per stage (ms/window): CUDA0 wait 14.14 + pool 15.64; per layer-window: CPU experts 5.63, VRAM hits 0.61, PCIe 0.89; routed entries per window: VRAM 29.4 (8.6%), PCIe 42.6 (12.4%), CPU 270.1 (79.0%); adaptive tier: 1 rounds, 1 experts swapped in; 7.8 rows/s over 9307 ms of wall time (admissions included)
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata batch: the prompt was read in 4 parts, the slots decoding 2362 ms between them
+strata batch: slot 0 takes 8806 tokens (copied in 150.2 ms)
+strata serve: prompt 8806 tokens = 5977 reused + 2829 read in 16326 ms (173.3 tok/s), 1 generated in 27 ms (36.5 tok/s), drafts accepted 0 of 0, 2 checkpoints
+strata serve: decode expert cache hit rate: 45.2% (165 hits / 365 lookups); 16 more read by the GPU over PCIe or from another GPU (4.2% of all 381 routed)
+strata serve: route tail skip: 23726 missed experts skipped (24101 entries) since the start
+strata serve: KV streaming: 76.04% of 43140 block reads hit VRAM, 41.6 MiB read from RAM
+strata batch: slot 1 gave back 7192 tokens of this conversation (its turn checkpoint) in 82.4 ms
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata batch: 50 windows, avg 1.00 rows, 31.85 ms/window = run 30.91 (CUDA0 GPU-reach wait 14.11 + CPU experts 14.71) + commit 0.91 + emit 0.04 + adapt wait 0.00; per stage (ms/window): CUDA0 wait 14.11 + pool 14.71; per layer-window: CPU experts 5.45, VRAM hits 0.91, PCIe 0.81; routed entries per window: VRAM 43.6 (12.7%), PCIe 39.1 (11.4%), CPU 261.6 (76.0%); adaptive tier: 1 rounds, 3 experts swapped in; 7.5 rows/s over 6690 ms of wall time (admissions included)
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata batch: the prompt was read in 3 parts, the slots decoding 1546 ms between them
+strata batch: slot 1 takes 17662 tokens (copied in 165.4 ms)
+strata serve: prompt 17662 tokens = 7192 reused + 10470 read in 55210 ms (189.6 tok/s), 1 generated in 29 ms (34.6 tok/s), drafts accepted 0 of 0, 2 checkpoints
+strata serve: decode expert cache hit rate: 50.4% (180 hits / 357 lookups); 11 more read by the GPU over PCIe or from another GPU (3.0% of all 368 routed)
+strata serve: route tail skip: 30961 missed experts skipped (31386 entries) since the start
+strata serve: KV streaming: 68.66% of 43140 block reads hit VRAM, 54.5 MiB read from RAM
+strata batch: slot 0 gave back 8799 tokens of this conversation (its turn checkpoint) in 85.8 ms
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata batch: 69 windows, avg 1.00 rows, 33.12 ms/window = run 32.07 (CUDA0 GPU-reach wait 14.30 + CPU experts 15.61) + commit 0.91 + emit 0.14 + adapt wait 0.00; per stage (ms/window): CUDA0 wait 14.30 + pool 15.61; per layer-window: CPU experts 5.55, VRAM hits 0.75, PCIe 0.86; routed entries per window: VRAM 36.1 (10.5%), PCIe 41.1 (12.0%), CPU 266.5 (77.5%); adaptive tier: 1 rounds, 0 experts swapped in; 9.3 rows/s over 7398 ms of wall time (admissions included)
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata batch: the prompt was read in 3 parts, the slots decoding 2253 ms between them
+strata batch: slot 0 takes 27603 tokens (copied in 187.3 ms)
+strata serve: prompt 27603 tokens = 8799 reused + 18804 read in 95164 ms (197.6 tok/s), 1 generated in 26 ms (37.9 tok/s), drafts accepted 0 of 0, 3 checkpoints
+strata serve: decode expert cache hit rate: 51.1% (185 hits / 362 lookups); 10 more read by the GPU over PCIe or from another GPU (2.7% of all 372 routed)
+strata serve: route tail skip: 40778 missed experts skipped (41249 entries) since the start
+strata serve: KV streaming: 70.24% of 43140 block reads hit VRAM, 51.7 MiB read from RAM
+strata batch: slot 1 gave back 17655 tokens of this conversation (its turn checkpoint) in 107.0 ms
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata batch: 49 windows, avg 1.00 rows, 31.95 ms/window = run 30.91 (CUDA0 GPU-reach wait 14.37 + CPU experts 14.74) + commit 0.91 + emit 0.13 + adapt wait 0.00; per stage (ms/window): CUDA0 wait 14.37 + pool 14.74; per layer-window: CPU experts 5.41, VRAM hits 0.96, PCIe 0.82; routed entries per window: VRAM 46.1 (13.4%), PCIe 39.3 (11.4%), CPU 259.5 (75.2%); adaptive tier: 1 rounds, 0 experts swapped in; 7.6 rows/s over 6483 ms of wall time (admissions included)
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata batch: the prompt was read in 3 parts, the slots decoding 1537 ms between them
+strata batch: slot 1 takes 19036 tokens (copied in 163.4 ms)
+strata serve: prompt 19036 tokens = 17655 reused + 1381 read in 8903 ms (155.1 tok/s), 1 generated in 26 ms (37.8 tok/s), drafts accepted 0 of 0, 2 checkpoints
+strata serve: decode expert cache hit rate: 49.2% (177 hits / 360 lookups); 9 more read by the GPU over PCIe or from another GPU (2.4% of all 369 routed)
+strata serve: route tail skip: 47881 missed experts skipped (48402 entries) since the start
+strata serve: KV streaming: 69.73% of 43128 block reads hit VRAM, 52.6 MiB read from RAM
+strata batch: slot 0 gave back 27596 tokens of this conversation (its turn checkpoint) in 122.1 ms
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata batch: 29 windows, avg 1.00 rows, 31.81 ms/window = run 30.76 (CUDA0 GPU-reach wait 14.33 + CPU experts 14.53) + commit 0.92 + emit 0.13 + adapt wait 0.00; per stage (ms/window): CUDA0 wait 14.33 + pool 14.53; per layer-window: CPU experts 5.30, VRAM hits 1.15, PCIe 0.74; routed entries per window: VRAM 55.0 (15.9%), PCIe 35.6 (10.3%), CPU 254.6 (73.8%); adaptive tier: 1 rounds, 1 experts swapped in; 8.2 rows/s over 3543 ms of wall time (admissions included)
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata batch: the prompt was read in 2 parts, the slots decoding 891 ms between them
+strata batch: slot 0 takes 30328 tokens (copied in 324.6 ms)
+strata serve: prompt 30328 tokens = 27596 reused + 2732 read in 15213 ms (179.6 tok/s), 1 generated in 28 ms (36.1 tok/s), drafts accepted 0 of 0, 2 checkpoints
+strata serve: decode expert cache hit rate: 42.5% (148 hits / 348 lookups); 14 more read by the GPU over PCIe or from another GPU (3.9% of all 362 routed)
+strata serve: route tail skip: 52246 missed experts skipped (52827 entries) since the start
+strata serve: KV streaming: 68.95% of 43128 block reads hit VRAM, 53.9 MiB read from RAM
+strata batch: slot 1 gave back 19029 tokens of this conversation (its turn checkpoint) in 111.6 ms
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata batch: 68 windows, avg 1.00 rows, 32.46 ms/window = run 31.51 (CUDA0 GPU-reach wait 14.36 + CPU experts 15.35) + commit 0.91 + emit 0.04 + adapt wait 0.00; per stage (ms/window): CUDA0 wait 14.36 + pool 15.35; per layer-window: CPU experts 5.47, VRAM hits 0.89, PCIe 0.83; routed entries per window: VRAM 42.9 (12.4%), PCIe 39.7 (11.5%), CPU 262.5 (76.1%); adaptive tier: 1 rounds, 1 experts swapped in; 9.4 rows/s over 7246 ms of wall time (admissions included)
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata batch: the prompt was read in 3 parts, the slots decoding 2174 ms between them
+strata batch: slot 1 takes 46022 tokens (copied in 446.7 ms)
+strata serve: prompt 46022 tokens = 19029 reused + 26993 read in 143284 ms (188.4 tok/s), 1 generated in 28 ms (36.3 tok/s), drafts accepted 0 of 0, 3 checkpoints
+strata serve: decode expert cache hit rate: 44.4% (155 hits / 349 lookups); 12 more read by the GPU over PCIe or from another GPU (3.3% of all 361 routed)
+strata serve: route tail skip: 61862 missed experts skipped (62490 entries) since the start
+strata serve: KV streaming: 65.55% of 43140 block reads hit VRAM, 59.9 MiB read from RAM
+strata batch: slot 0 gave back 30321 tokens of this conversation (its turn checkpoint) in 285.2 ms
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata batch: 42 windows, avg 1.00 rows, 32.04 ms/window = run 31.04 (CUDA0 GPU-reach wait 14.61 + CPU experts 14.65) + commit 0.91 + emit 0.09 + adapt wait 0.00; per stage (ms/window): CUDA0 wait 14.61 + pool 14.65; per layer-window: CPU experts 5.39, VRAM hits 1.05, PCIe 0.78; routed entries per window: VRAM 50.3 (14.5%), PCIe 37.4 (10.8%), CPU 258.6 (74.7%); adaptive tier: 1 rounds, 0 experts swapped in; 9.8 rows/s over 4291 ms of wall time (admissions included)
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata batch: BYIELD 0 not taken at 31345 of 31652
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata batch: the prompt was read in 2 parts, the slots decoding 1313 ms between them
+strata batch: slot 0 takes 31652 tokens (copied in 344.6 ms)
+strata serve: prompt 31652 tokens = 30321 reused + 1331 read in 9314 ms (142.9 tok/s), 1 generated in 27 ms (36.5 tok/s), drafts accepted 0 of 0, 2 checkpoints
+strata serve: decode expert cache hit rate: 44.1% (154 hits / 349 lookups); 14 more read by the GPU over PCIe or from another GPU (3.9% of all 363 routed)
+strata serve: route tail skip: 67914 missed experts skipped (68592 entries) since the start
+strata serve: KV streaming: 71.33% of 43128 block reads hit VRAM, 49.8 MiB read from RAM
+strata KV prefetch: 0 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata batch: 47 windows, avg 1.00 rows, 32.28 ms/window = run 31.22 (CUDA0 GPU-reach wait 14.71 + CPU experts 15.03) + commit 0.92 + emit 0.14 + adapt wait 0.00; per stage (ms/window): CUDA0 wait 14.71 + pool 15.03; per layer-window: CPU experts 5.31, VRAM hits 1.12, PCIe 0.77; routed entries per window: VRAM 53.5 (15.5%), PCIe 37.0 (10.7%), CPU 254.8 (73.8%); adaptive tier: 1 rounds, 1 experts swapped in; 7.5 rows/s over 6295 ms of wall time (admissions included)
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata batch: the prompt was read in 3 parts, the slots decoding 1488 ms between them
+strata batch: slot 1 takes 2374 tokens (copied in 125.7 ms)
+strata serve: prompt 2374 tokens = 0 reused + 2374 read in 12817 ms (185.2 tok/s), 1 generated in 27 ms (37.0 tok/s), drafts accepted 0 of 0, 1 checkpoints
+strata serve: decode expert cache hit rate: 43.1% (149 hits / 346 lookups); 14 more read by the GPU over PCIe or from another GPU (3.9% of all 360 routed)
+strata serve: route tail skip: 74723 missed experts skipped (75464 entries) since the start
+strata serve: KV streaming: 83.68% of 43140 block reads hit VRAM, 28.4 MiB read from RAM
+strata KV prefetch: 0 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata batch: 44 windows, avg 1.00 rows, 31.54 ms/window = run 30.50 (CUDA0 GPU-reach wait 14.01 + CPU experts 14.63) + commit 0.91 + emit 0.14 + adapt wait 0.00; per stage (ms/window): CUDA0 wait 14.01 + pool 14.63; per layer-window: CPU experts 5.38, VRAM hits 1.05, PCIe 0.79; routed entries per window: VRAM 50.5 (14.6%), PCIe 37.8 (10.9%), CPU 258.0 (74.5%); adaptive tier: 1 rounds, 0 experts swapped in; 7.1 rows/s over 6163 ms of wall time (admissions included)
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata batch: the prompt was read in 3 parts, the slots decoding 1358 ms between them
+strata batch: slot 0 takes 39793 tokens (copied in 401.9 ms)
+strata serve: prompt 39793 tokens = 0 reused + 39793 read in 197778 ms (201.2 tok/s), 1 generated in 27 ms (36.8 tok/s), drafts accepted 0 of 0, 3 checkpoints
+strata serve: decode expert cache hit rate: 44.6% (153 hits / 343 lookups); 16 more read by the GPU over PCIe or from another GPU (4.5% of all 359 routed)
+strata serve: route tail skip: 81059 missed experts skipped (81848 entries) since the start
+strata serve: KV streaming: 67.65% of 43128 block reads hit VRAM, 56.2 MiB read from RAM
+strata batch: slot 1 gave back 2367 tokens of this conversation (its turn checkpoint) in 72.9 ms
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata batch: 55 windows, avg 1.00 rows, 32.27 ms/window = run 31.26 (CUDA0 GPU-reach wait 14.54 + CPU experts 14.71) + commit 0.91 + emit 0.10 + adapt wait 0.00; per stage (ms/window): CUDA0 wait 14.54 + pool 14.71; per layer-window: CPU experts 5.47, VRAM hits 0.90, PCIe 0.82; routed entries per window: VRAM 43.1 (12.5%), PCIe 39.2 (11.4%), CPU 262.4 (76.1%); adaptive tier: 1 rounds, 0 experts swapped in; 8.7 rows/s over 6324 ms of wall time (admissions included)
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata batch: the prompt was read in 3 parts, the slots decoding 1741 ms between them
+strata batch: slot 1 takes 36503 tokens (copied in 387.8 ms)
+strata serve: prompt 36503 tokens = 2367 reused + 34136 read in 166291 ms (205.3 tok/s), 1 generated in 28 ms (35.7 tok/s), drafts accepted 0 of 0, 4 checkpoints
+strata serve: decode expert cache hit rate: 43.1% (149 hits / 346 lookups); 12 more read by the GPU over PCIe or from another GPU (3.4% of all 358 routed)
+strata serve: route tail skip: 88964 missed experts skipped (89816 entries) since the start
+strata serve: KV streaming: 69.34% of 43140 block reads hit VRAM, 53.3 MiB read from RAM
+strata batch: slot 0 gave back 39786 tokens of this conversation (its turn checkpoint) in 357.4 ms
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata batch: 33 windows, avg 1.00 rows, 31.37 ms/window = run 30.38 (CUDA0 GPU-reach wait 14.53 + CPU experts 14.42) + commit 0.91 + emit 0.08 + adapt wait 0.00; per stage (ms/window): CUDA0 wait 14.53 + pool 14.42; per layer-window: CPU experts 5.31, VRAM hits 1.19, PCIe 0.75; routed entries per window: VRAM 57.0 (16.4%), PCIe 36.0 (10.4%), CPU 254.7 (73.3%); adaptive tier: 1 rounds, 1 experts swapped in; 8.1 rows/s over 4077 ms of wall time (admissions included)
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata batch: the prompt was read in 2 parts, the slots decoding 1003 ms between them
+strata batch: slot 0 takes 46563 tokens (copied in 453.0 ms)
+strata serve: prompt 46563 tokens = 39786 reused + 6777 read in 36839 ms (184.0 tok/s), 1 generated in 28 ms (36.0 tok/s), drafts accepted 0 of 0, 2 checkpoints
+strata serve: decode expert cache hit rate: 42.4% (146 hits / 344 lookups); 13 more read by the GPU over PCIe or from another GPU (3.6% of all 357 routed)
+strata serve: route tail skip: 93787 missed experts skipped (94698 entries) since the start
+strata serve: KV streaming: 67.00% of 43140 block reads hit VRAM, 57.4 MiB read from RAM
+strata batch: slot 1 gave back 36496 tokens of this conversation (its turn checkpoint) in 327.5 ms
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata batch: 65 windows, avg 1.00 rows, 33.04 ms/window = run 32.00 (CUDA0 GPU-reach wait 14.57 + CPU experts 15.01) + commit 0.91 + emit 0.13 + adapt wait 0.00; per stage (ms/window): CUDA0 wait 14.57 + pool 15.01; per layer-window: CPU experts 5.42, VRAM hits 0.95, PCIe 0.80; routed entries per window: VRAM 45.7 (13.3%), PCIe 38.6 (11.2%), CPU 260.3 (75.5%); adaptive tier: 1 rounds, 0 experts swapped in; 8.6 rows/s over 7581 ms of wall time (admissions included)
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata batch: the prompt was read in 3 parts, the slots decoding 2101 ms between them
+strata batch: slot 1 takes 39216 tokens (copied in 406.2 ms)
+strata serve: prompt 39216 tokens = 36496 reused + 2720 read in 17311 ms (157.1 tok/s), 1 generated in 68 ms (14.8 tok/s), drafts accepted 0 of 0, 2 checkpoints
+strata serve: decode expert cache hit rate: 41.0% (144 hits / 351 lookups); 16 more read by the GPU over PCIe or from another GPU (4.4% of all 367 routed)
+strata serve: route tail skip: 103023 missed experts skipped (104000 entries) since the start
+strata serve: KV streaming: 70.02% of 43128 block reads hit VRAM, 52.1 MiB read from RAM
+strata batch: 3 windows, avg 1.00 rows, 31.75 ms/window = run 29.91 (CUDA0 GPU-reach wait 15.52 + CPU experts 12.43) + commit 0.98 + emit 0.82 + adapt wait 0.04; per stage (ms/window): CUDA0 wait 15.52 + pool 12.43; per layer-window: CPU experts 4.60, VRAM hits 2.57, PCIe 0.48; routed entries per window: VRAM 123.3 (33.6%), PCIe 23.0 (6.3%), CPU 220.7 (60.1%); adaptive tier: 3 rounds, 2 experts swapped in; 31.5 rows/s over 95 ms of wall time (admissions included)
+strata batch: slot 1 gave back 39219 tokens of this conversation (all it holds) in 357.6 ms
+strata verify: capturing the 3-token window (380 MiB of VRAM free)
+strata verify: captured the 3-token window (upload no error, sync no error)
+strata verify: capturing the 5-token window (358 MiB of VRAM free)
+strata verify: captured the 5-token window (upload no error, sync no error)
+strata serve: prompt 39220 tokens = 39219 reused + 1 read in 360 ms (2.8 tok/s), 55 generated in 1473 ms (37.3 tok/s), drafts accepted 39 of 43, 0 checkpoints
+strata serve: decode expert cache hit rate: 32.9% (7249 hits / 22037 lookups); 2014 more read by the GPU over PCIe or from another GPU (8.4% of all 24051 routed)
+strata serve: route tail skip: 108773 missed experts skipped (110048 entries) since the start
+strata serve: KV streaming: 91.51% of 382020 block reads hit VRAM, 130.6 MiB read from RAM
+strata serve: suffix drafts: 7 windows, 22 of 22 drafts accepted
