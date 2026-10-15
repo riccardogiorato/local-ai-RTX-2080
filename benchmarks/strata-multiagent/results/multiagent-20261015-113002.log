@@ -1,0 +1,38 @@
+11:30:02 sessions: expert-cache (5 turns), tokenizer-fr (5 turns), cuda-kernel (3 turns), installer-fr (2 turns)
+11:31:02 == seq-r0: 1 slot(s), 1 agent(s) at once; starting server
+11:31:35    ready in 33.0 s, total_slots=1, VRAM 7300 MiB
+11:34:23    CONTENDED, discarded and rerun: 2443140 ninja -C build/native-kh2 ps2run
+11:34:25 waiting: CPU-heavy process running: load average 3.0
+11:35:35 == seq-r0: 1 slot(s), 1 agent(s) at once; starting server
+11:36:11    ready in 36.0 s, total_slots=1, VRAM 7300 MiB
+11:42:18    done: 15 requests in 365 s, 0 errors, load max 4.29
+11:44:12 == p2-r0: 2 slot(s), 2 agent(s) at once; starting server
+11:44:51    ready in 39.0 s, total_slots=2, VRAM 7301 MiB
+11:45:45    CONTENDED, discarded and rerun: 2448807 ninja -C /home/riccardogiorato/Desktop/github/ps2-web-recomp/build/web-kh2 ps2web
+11:45:48 waiting: CPU-heavy process running: 2448807 ninja -C /home/riccardogiorato/Desktop/github/ps2-web-recomp/build/web-kh2 ps2web
+11:48:38 == p2-r0: 2 slot(s), 2 agent(s) at once; starting server
+11:49:14    ready in 36.0 s, total_slots=2, VRAM 7301 MiB
+12:03:21    done: 15 requests in 846 s, 0 errors, load max 3.28
+12:04:23 == p4-r0: 4 slot(s), 4 agent(s) at once; starting server
+12:04:59    ready in 36.0 s, total_slots=4, VRAM 7495 MiB
+12:37:34    done: 15 requests in 1955 s, 0 errors, load max 3.27
+12:41:38 == p1x2-r0: 1 slot(s), 2 agent(s) at once; starting server
+12:42:11    ready in 33.0 s, total_slots=1, VRAM 7300 MiB
+12:48:57    CONTENDED, discarded and rerun: 2474563 ninja -C /home/riccardogiorato/Desktop/github/ps2-web-recomp/build/web-kh2 ps2web
+12:49:00 waiting: CPU-heavy process running: 2474563 ninja -C /home/riccardogiorato/Desktop/github/ps2-web-recomp/build/web-kh2 ps2web
+12:51:10 == p1x2-r0: 1 slot(s), 2 agent(s) at once; starting server
+12:51:43    ready in 33.0 s, total_slots=1, VRAM 7301 MiB
+13:01:23    done: 15 requests in 579 s, 0 errors, load max 2.75
+13:02:25 == p1x2-r1: 1 slot(s), 2 agent(s) at once; starting server
+13:02:58    ready in 33.0 s, total_slots=1, VRAM 7301 MiB
+13:12:37    done: 15 requests in 578 s, 0 errors, load max 2.84
+13:13:39 == p4-r1: 4 slot(s), 4 agent(s) at once; starting server
+13:14:12    ready in 33.0 s, total_slots=4, VRAM 7495 MiB
+13:41:30    done: 15 requests in 1637 s, 0 errors, load max 2.55
+13:42:32 == p2-r1: 2 slot(s), 2 agent(s) at once; starting server
+13:43:05    ready in 33.0 s, total_slots=2, VRAM 7301 MiB
+13:57:14    done: 15 requests in 849 s, 0 errors, load max 3.26
+13:58:17 == seq-r1: 1 slot(s), 1 agent(s) at once; starting server
+13:58:50    ready in 33.0 s, total_slots=1, VRAM 7301 MiB
+14:03:49    done: 15 requests in 299 s, 0 errors, load max 3.0
+14:03:51 ALL-DONE

@@ -1,0 +1,30 @@
+[strata] 2026-10-15 11:25:13 engine started: /home/riccardogiorato/Desktop/github/strata-0144/build-turing-0144/strata --serve --pack packs/q2_0-gsq --native /home/riccardogiorato/models/flashnext-gsq-rco/Qwen3.8-Flash-Next-GSQ-RCO-Q2_0-00001-of-00002.gguf --ple-gguf /home/riccardogiorato/models/flashnext-gsq-rco/Qwen3.8-Flash-Next-GSQ-RCO-Q2_0-00002-of-00002.gguf --ple-io mmap --expert-profile data/expert-profile.bin --expert-cache auto --spec 4 --spec-min-p 0.70 --kv int8 --prefill auto:65536 --mtp mtp/rt --max-context 65536 --kv-resident 16384 --pcie-frac 0.20 --adapt-every 1 --adapt-swaps 160 --adapt-decay 0.97 --batch 4
+strata generate: memory guard: limit 62.6 GiB (source: meminfo), current 7.2 GiB, reclaimable cache credited 0.0 GiB; available 55.4 GiB (MemAvailable 55.4 GiB), floor 2560 MiB
+strata generate: this CPU has no AVX-512: the expert kernels run on AVX-2 (multi-token for the i-quant gate/up rows)
+strata generate: native pack: packs/q2_0-gsq experts (largest blob 1.38 MB), token embedding Q3_K in mapped host memory (260 MiB, 0.6 s)
+strata generate: 1416 MiB of weights loaded from packs/q2_0-gsq in 0.7 s (303 canonical tensors skipped: served natively)
+strata generate: 301 native projection matrices, 1376.20 MiB of weights, in 0.8 s
+strata generate: profile data/expert-profile.bin: 24576 ranked pairs, built for 24576 slots
+strata generate: KV streaming: 20480 of 65536 cells per QSA layer in VRAM, the K/V in 0.77 GiB of pinned RAM
+strata generate: PLE on, table 320001536 rows of /home/riccardogiorato/models/flashnext-gsq-rco/Qwen3.8-Flash-Next-GSQ-RCO-Q2_0-00002-of-00002.gguf
+strata generate: --batch: 4 slot sessions on CUDA0 (0.47 GiB each); 1.99 GiB free
+strata generate: --batch 4: the slot sessions take 1.89 GiB of VRAM on CUDA0 that the expert cache would otherwise hold
+strata mtp: draft layer loaded, 835 MiB of VRAM (experts 675, dense 111), files read in 0.43 s (1839 MiB/s)
+strata generate: experimental native Q5_K head, 437043200 bytes, in 0.2 s
+strata generate: GPU 0: NVIDIA GeForce RTX 2080, compute capability 7.5
+strata generate: expert arena read through the file cache (buffered (not Windows))
+strata generate: expert arena: cudaHostRegister PORTABLE ok; MAP_HUGETLB unavailable (needed 16201 2 MiB pages, vm.nr_hugepages=0); transparent huge pages are on for every mapping (THP always): MADV_HUGEPAGE not requested
+strata generate: loaded 31.64 GiB at 1.12 GiB/s
+strata generate: GPU host-callback thread started before host-core pinning
+strata generate: CPU pool tasks/phase: 18 (automatic), participating threads: 6
+strata generate: 5 pool workers on logical processors 1,2,3,4,5, the host thread on 0 (draining too) (--host-core first)
+strata aux cpus: threads that are neither pool workers nor the host go to CPUs none spare (every CPU is the host's, a worker's or shares a core with a worker or has no known core) (off at start; a request's aux_cpus=1 turns it on)
+strata generate: expert cache auto: 0.70 GiB free, 700 MiB reserved (+73 MiB for the draft head) -> 0 slots
+strata generate: no VRAM is left for the expert cache: it needs at least 379 slots (499 MiB), about 158 MiB more than this card has free. To make room: a smaller --max-context (the session, mostly its KV cache, takes 482 MiB at 65536 tokens), --kv q4_0, the English draft subset (setup --draft-vocab en; the draft head takes 73 MiB now), images on the CPU, or close other programs that use the GPU
+strata generate: pre-filled 0 of 0 slots from the profile in 0.0 s (0 MB/s); slot 0 verified
+strata generate: 5 expert-pool workers + the host thread
+strata generate: session is up (engine 0.1.44)
+strata serve: the prompt path allocates its own buffers (too few cache slots to borrow)
+strata serve: prefill: device buffers for a chunk of 1024 tokens do not fit (28 of 7794 MiB free at the failure; 512 MiB taken, the failing buffer wanted 32 MiB): trying a 512-token chunk
+strata hc: CUDA0: the hyper-connection read runs as staged (the norm per token and stream, the down projection's activations staged ahead by cp.async); checked bit for bit against the plain read on this card (STRATA_HC_SPLIT=1 or 0 for the earlier ones)
+strata serve: verify: needs the profile-filled VRAM expert tier (--expert-profile and --expert-cache); with --expert-cache auto, no VRAM was left for it - the 'no VRAM is left for the expert cache' line above says how much is short and what makes room (a smaller --max-context, --kv q4_0, setup --draft-vocab en, images on the CPU)
