@@ -44,6 +44,11 @@ Qwen3.5-9B (hybrid attention: 24 linear + 8 full-attention layers → cheap KV,
    128K fit in 8 GB next to the MTP context.
 3. 128K f16 KV does not fit at all (cudaMalloc failure at load); 128K + mmproj
    doesn't fit either → vision serve drops to 64K.
+4. **On-GPU KV context ceiling: 136K** (probed 2026-10-16, binary search of
+   load attempts): c 139264 loads at 7619 MiB, c 147456 fails. KV cost ≈
+   24.5 KB/token with `-ctk q8_0`/V-f16 (the card's 262K claim wants a
+   6.3 GiB KV chunk alone — unreachable on 8 GB with this main+MTP
+   footprint; a working q4_0-K + FA on SM75 is the only theoretical squeeze).
 4. Bare `/completion` on huge prose prompts ends in instant EOS (0 predicted)
    — use `/v1/chat/completions` (or a chat template) for long-context probes.
 
