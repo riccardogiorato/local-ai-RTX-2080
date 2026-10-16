@@ -44,11 +44,18 @@ Qwen3.5-9B (hybrid attention: 24 linear + 8 full-attention layers → cheap KV,
    128K fit in 8 GB next to the MTP context.
 3. 128K f16 KV does not fit at all (cudaMalloc failure at load); 128K + mmproj
    doesn't fit either → vision serve drops to 64K.
-4. **On-GPU KV context ceiling: 136K** (probed 2026-10-16, binary search of
-   load attempts): c 139264 loads at 7619 MiB, c 147456 fails. KV cost ≈
-   24.5 KB/token with `-ctk q8_0`/V-f16 (the card's 262K claim wants a
-   6.3 GiB KV chunk alone — unreachable on 8 GB with this main+MTP
-   footprint; a working q4_0-K + FA on SM75 is the only theoretical squeeze).
+4. **On-GPU KV context ceiling: 136K (K-q8_0) / 160K (K-q4_0)** (probed
+   2026-10-16): q8_0-K loads to 139264 @ 7619 MiB, 147456 fails; q4_0-K
+   loads to 163840 @ 7759 MiB, 192K fails even without the MTP drafter.
+   262K is out of reach on 8 GB with any supported quant set — V cannot
+   leave f16 on SM75. **q4_0-K is the recommend fit for the 128K serve**:
+   same-fill A/B at 101K shows identical prefill (1068–1076 vs 1068–1073
+   t/s), +2% decode-after-fill (66.6–66.7 vs 65.2–65.5 t/s), needle
+   retrieval perfect in all runs, 524 MiB less VRAM (6847 vs 7371). On
+   the precision concern: no measurable needle loss, and the fork ships
+   `--kv-mean-center` (q4_0-K-only, softmax-invariant calibrated bias,
+   see docs/kv-mean-center.md + tools/kv-mean-center) to recover further
+   fidelity if real-corpus degradation ever shows up.
 4. Bare `/completion` on huge prose prompts ends in instant EOS (0 predicted)
    — use `/v1/chat/completions` (or a chat template) for long-context probes.
 
@@ -99,8 +106,8 @@ llama-server -m ~/models/bonsai2-9b-dflash2/Ternary-Bonsai-2-9B-PQ2_0-MTP-Q8_0.g
   --alias local-model --host 127.0.0.1 --port 8080 -ngl 99 -fa on -c 32768 \
   --spec-type draft-mtp --spec-draft-n-max 2 --spec-draft-n-min 0 --spec-draft-p-min 0 \
   --jinja --metrics
-# 128K long-context config (7.4 GB VRAM): add -c 131072 -ctk q8_0   (K only!)
-# 4-slot agents: add --parallel 4                                     (7.2 GB @ 128K)
+# 128K long-context config (6.8 GB VRAM): add -c 131072 -ctk q4_0   (K only; q4 beats q8 here)
+# 4-slot agents: add --parallel 4                                     (fits under either -ctk)
 # vision (64K + mmproj, 6.1 GB): add -c 65536 -ctk q8_0 \
 #   --mmproj ~/models/bonsai2-9b-dflash2/Ternary-Bonsai-2-9B-mmproj-Q8_0.gguf
 ```
