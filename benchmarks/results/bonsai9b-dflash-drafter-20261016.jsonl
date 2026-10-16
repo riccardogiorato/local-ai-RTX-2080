@@ -1,0 +1,4 @@
+{"label":"bonsai9b-dflash-32k","prompt":"code-continuation.txt","run":1,{"decode_tps": 113.45, "decode_n": 256, "prefill_tps": 1326.33},"acceptance":0.935,"mean_len":3.82}
+{"label":"bonsai9b-dflash-32k","prompt":"code-continuation.txt","run":2,{"decode_tps": 113.8, "decode_n": 256, "prefill_tps": 1584.34},"acceptance":0.935,"mean_len":3.82}
+{"label":"bonsai9b-dflash-32k","prompt":"decode-isolation.txt","run":1,{"decode_tps": 71.45, "decode_n": 60, "prefill_tps": 247.48},"acceptance":0.407,"mean_len":2.22}
+{"label":"bonsai9b-dflash-32k","prompt":"decode-isolation.txt","run":2,{"decode_tps": 71.62, "decode_n": 60, "prefill_tps": 245.34},"acceptance":0.407,"mean_len":2.22}

@@ -3,7 +3,7 @@
 Every model, variant, and configuration tested on this card, with links to the
 recipe and raw evidence. Failures are recorded with the same care as wins.
 
-**Total models/variants tested: 24** (plus 6 blocked-with-triggers in [NEXT-IDEAS.md](NEXT-IDEAS.md))
+**Total models/variants tested: 25** (plus 6 blocked-with-triggers in [NEXT-IDEAS.md](NEXT-IDEAS.md))
 
 ## Test queue (historical — all resolved)
 
@@ -40,6 +40,7 @@ recipe and raw evidence. Failures are recorded with the same care as wins.
 | 18 | Gemma-12B QAT + Q4 MTP head | 29.4/43.5 tok/s, 3/6 | ✅ evidence-only |
 | 19 | MiniCPM5-2B + DSpark drafter | 2/6 on original-6, 180 tok/s novel class | ✅ evidence-only |
 | 20 | Qwen3.8-Flash-Next GSQ-RCO Q2_0 (2.40 bpw, official ISTA-DASLab) | reasoning chain **INTACT** (4/4 probes), 8.1–8.3 tok/s, novel-prefill 9 t/s | ✅ [recipe](recipes/flashnext-gsqrc-q20-125b-llamacpp-fork.md) · probe-tier |
+| 21 | Ternary-Bonsai-2-9B PQ2_0 + built-in MTP ⭐ **new best 9B on card** | **11/11 v2.2** (first llama.cpp perfect run), 115/82 tok/s, native 128K, free 4-slot, vision | ✅ [recipe](recipes/ternary-bonsai2-9b-pq20-mtp-llamacpp-fork.md) |
 
 ## Full technical details
 
@@ -63,6 +64,7 @@ recipe and raw evidence. Failures are recorded with the same care as wins.
 | [xing4-29b-a4b-dyn](recipes/xing4-29b-a4b-dyn-llamacpp-fork.md) | fork host @ 63c16fb | 8K | 25 tok/s (ub4096 warm) | **346 tok/s** | 🔬 lab-verified |
 | [qwen38-27b-udiq1s](evidence/qwen38-27b-udiq1s.jsonl) | docker b11118 · full resident | 8K | 19.7 tok/s no-draft | ~505 tok/s | 🔬 evidence-only |
 | [flashnext-ultralite-125b](recipes/flashnext-ultralite-125b-llamacpp-fork.md) | patched qwen4exp @ 250b61446 | 128K claim | 12.5 tok/s | 218–233 tok/s | 🔬 boundary record |
+| [ternary-bonsai2-9b](recipes/ternary-bonsai2-9b-pq20-mtp-llamacpp-fork.md) | prism-branch fork host build · MTP d2 · vision | **128K** | **115 / 82 tok/s** | **1.1–1.7K** tok/s | 🔬 lab-verified · **11/11 v2.2** |
 
 ## Blocked (see NEXT-IDEAS.md for triggers)
 
