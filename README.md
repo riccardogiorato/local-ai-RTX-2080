@@ -47,6 +47,7 @@ Ranked by **AG-Bench v2.2** (900 s per task, the two broken checkers fixed), the
 | Rank | Model | v2.2 | Suite wall | p/h | Engine | Notes |
 |---|---|---|---|---|---|---|
 | 1 | [Qwen3.8-Flash-Next GSQ-RCO Q2_0 125B](https://huggingface.co/ISTA-DASLab/Qwen3.8-Flash-Next-GSQ-RCO-GGUF) | **11/11** | 1009 s | 39.2 | Strata 0.1.43 | only perfect run on the card; 10/11 on 0.1.42 @ 815 s |
+| 1 | [Ternary-Bonsai-2-9B PQ2_0+MTP](https://huggingface.co/prism-ml/Ternary-Bonsai-2-9B-gguf) | **11/11** | 617 s | **64.1** | prism fork (llama.cpp) | fastest perfect run; native 128K, 115 t/s decode, free 4-slot, vision |
 | 2 | [Qwen3.5-4B](https://huggingface.co/Qwen/Qwen3.5-4B) | **10/11** | 444 s | 81.1 | llama.cpp b11562 | miss: task10 |
 | 2 | [Qwen3.5-9B](https://huggingface.co/Qwen/Qwen3.5-9B) | **10/11** | 515 s | 69.9 | llama.cpp b11562 | miss: task9, a 40K-token prompt past its 32K ctx (capacity, not quality) |
 | 2 | [MiMo-9B](https://huggingface.co/bartowski/MiMo-V2.6-Distill-Qwen-9B-GGUF) (32K, no draft) | **10/11** | 1062 s | 33.9 | llama.cpp b11562 | miss: task11 |

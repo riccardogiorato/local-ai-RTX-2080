@@ -1,0 +1,4 @@
+{"label":"bonsai9b-mtp-d2-32k","prompt":"code-continuation.txt","run":1,{"decode_tps": 115.11, "decode_n": 256, "prefill_tps": 1612.63},"acceptance":0.927,"mean_len":2.88}
+{"label":"bonsai9b-mtp-d2-32k","prompt":"code-continuation.txt","run":2,{"decode_tps": 115.06, "decode_n": 256, "prefill_tps": 1724.26},"acceptance":0.927,"mean_len":2.88}
+{"label":"bonsai9b-mtp-d2-32k","prompt":"decode-isolation.txt","run":1,{"decode_tps": 82.58, "decode_n": 60, "prefill_tps": 237.18},"acceptance":0.468,"mean_len":1.94}
+{"label":"bonsai9b-mtp-d2-32k","prompt":"decode-isolation.txt","run":2,{"decode_tps": 82.19, "decode_n": 60, "prefill_tps": 244.55},"acceptance":0.468,"mean_len":1.94}

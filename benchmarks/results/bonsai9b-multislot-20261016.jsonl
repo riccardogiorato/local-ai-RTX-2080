@@ -1,0 +1,6 @@
+{"label":"bonsai9b-np1-queue","concurrency":4,"run":1,"wall_s":4.56,"decode_tps_per_client":[67.89,35.45,71.22,33.61],"decode_tps_min":33.61,"decode_tps_max":71.22,"acceptance":0.692,"serve":"np1 c131072"}
+{"label":"bonsai9b-np1-queue","concurrency":4,"run":2,"wall_s":4.75,"decode_tps_per_client":[69.31,36.71,72.04,34.8],"decode_tps_min":34.8,"decode_tps_max":72.04,"acceptance":0.692,"serve":"np1 c131072"}
+{"label":"bonsai9b-np4-slots","concurrency":4,"run":1,"wall_s":4.64,"decode_tps_per_client":[64.08,33.28,61.51,32.42],"decode_tps_min":32.42,"decode_tps_max":64.08,"acceptance":0.655,"serve":"np4 c131072 vram 7187 MiB"}
+{"label":"bonsai9b-np4-slots","concurrency":4,"run":2,"wall_s":4.62,"decode_tps_per_client":[64.89,34.48,62.85,33.72],"decode_tps_min":33.72,"decode_tps_max":64.89,"acceptance":0.655,"serve":"np4 c131072 vram 7187 MiB"}
+{"label":"bonsai9b-np4-slots","concurrency":2,"run":1,"wall_s":2.9,"decode_tps_per_client":[77.78,45.28],"decode_tps_min":45.28,"decode_tps_max":77.78,"acceptance":0.701,"serve":"np4 c131072"}
+{"label":"bonsai9b-np4-slots","concurrency":2,"run":2,"wall_s":2.91,"decode_tps_per_client":[77.9,45.29],"decode_tps_min":45.29,"decode_tps_max":77.9,"acceptance":0.701,"serve":"np4 c131072"}

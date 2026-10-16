@@ -118,6 +118,20 @@ turned out stale:
    downloading (chained); staged script `/tmp/strata-gsqrc-test.sh`.
    (Strata thread.)
 
+9. **Bonsai2-9B follow-ups (opened 2026-10-16 after the 11/11 session)** —
+   three small measurements on the new champion serve, none blocking adoption:
+   (a) DFlash2 drafter against the **plain PQ2_0 main** (card-prescribed
+   pairing; the A/B ran it against the MTP-bundled main, fork accepted it —
+   confirm acceptance/len isn't an artifact of the extra graft layer);
+   (b) thinking-OFF AG-Bench arm — reasoning probes failed thinking-off but
+   the 11/11 ran with template-default thinking ON; slowest unknown is how
+   much of a 2.4x pass/h edge survives with thinking off;
+   (c) 262K context attempt: K q8_0/V f16 fits 128K in 7.4 GB; the 2x KV
+   scale to 262K obviously won't fit 8 GB unless a q4_0 K works with FA on
+   SM75 (untested — the q8_0-V kernel gap says don't assume). Weights on
+   SSD at ~/models/bonsai2-9b-dflash2/, archived copy verified.
+   (Bonsai thread.)
+
 ## Tier 2 — engineering (sessions)
 
 **Ledger 2026-10-02: 2.1 ✓ 2.2 ✓ 2.3 ✓(watch) 2.4 partial-open 2.5 ✓ 2.6 ✓
