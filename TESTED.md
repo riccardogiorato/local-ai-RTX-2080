@@ -41,6 +41,7 @@ recipe and raw evidence. Failures are recorded with the same care as wins.
 | 19 | MiniCPM5-2B + DSpark drafter | 2/6 on original-6, 180 tok/s novel class | ✅ evidence-only |
 | 20 | Qwen3.8-Flash-Next GSQ-RCO Q2_0 (2.40 bpw, official ISTA-DASLab) | reasoning chain **INTACT** (4/4 probes), 8.1–8.3 tok/s, novel-prefill 9 t/s | ✅ [recipe](recipes/flashnext-gsqrc-q20-125b-llamacpp-fork.md) · probe-tier |
 | 21 | Ternary-Bonsai-2-9B PQ2_0 + built-in MTP ⭐ **new best 9B on card** | **11/11 v2.2** (first llama.cpp perfect run), 115/82 tok/s, native 128K, free 4-slot, vision | ✅ [recipe](recipes/ternary-bonsai2-9b-pq20-mtp-llamacpp-fork.md) |
+| 22 | Qwen3.6-35B-A3B UD-Q4_K_XL · Strata 0.1.45 ⭐ **first qwen36 row, perfect v2.2 on Strata** | **11/11 v2.2** (22.8 min, 900s cap), 31 tok/s greedy w/ MTP (57-59% accepted), prefill ~90-110 tok/s (6-thread expert pool), 16K ctx | ✅ [recipe](recipes/qwen36-35b-a3b-strata.md) |
 
 ## Full technical details
 

@@ -1,0 +1,25 @@
+{
+  "exe": "/home/riccardogiorato/Desktop/github/strata-0145/build-turing-0145/strata",
+  "args": [
+    "--native",
+    "/home/riccardogiorato/models/qwen36-35b-a3b/Qwen3.6-35B-A3B-UD-Q4_K_XL.gguf",
+    "--max-context",
+    "16384",
+    "--prefill",
+    "auto",
+    "--mtp",
+    "2",
+    "--expert-slots",
+    "10"
+  ],
+  "cwd": "/home/riccardogiorato/Desktop/github/strata-0145",
+  "tokenizer": "/home/riccardogiorato/Desktop/github/strata-0145/data/packs/qwen36-ud-q4_kxl/tokenizer",
+  "model_name": "local-model",
+  "arch": "qwen35moe",
+  "log": "strata-qwen36-a3b.log",
+  "host": "100.110.49.114",
+  "port": 8080,
+  "fit_max_tokens": true,
+  "env": {},
+  "api_key": ""
+}
