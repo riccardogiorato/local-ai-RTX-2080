@@ -1,5 +1,21 @@
 # Qwen3.8-Flash-Next GSQ-RCO Q2_0 125B · Strata engine — the fleet-record row
 
+## Current runtime: v0.1.45 (2026-10-18)
+
+Stock tag `v0.1.45` built for sm_75 by the standard flags (`strata-0145/build-turing-0145`; kquants off as before).
+This release carries **PR #1821's Turing prompt-attention kernel** (the GitHub PR is still marked open, but the work is in
+the tag: `qsa_prompt_attn.cu`, 37.9 -> 29.2 KB shared memory = two blocks/SM, int8 K/V register prefetch, K/V union buffer).
+Own-card A/B against 0.1.44 on the standing chat config, same bodies, quiet box: **24.7K fill 485.8 -> 636.5 tok/s (+31%),
+99.9K fill 476.6 -> 582.7 tok/s (+22%)**, decode parity (quiet-box top band 54.9-55.7 both engines). Adopted; [chat config](strata-configs/strata-q20-gsq-0145-tailnet.json), knobs unchanged from the 0.1.44 line.
+
+New v0.1.45 knobs probed on this rig (all neutral, none adopted): `--prefill-pipe` is layer-split only (n/a single GPU);
+`STRATA_ADAPT_EVICT_SYNC=0` decode 41.4 vs 39.4 median, fill 586.4 vs 582.7 (keep the default ON); `--prompt-cache-spread`
+identical reuse on a mid-history edit probe (49,152/50,769 both policies). The 4-cpu-kquant-kq plugin that ships in both
+0145 build dirs is inert for this model (flashnext runs without it; see the qwen36 recipe for the one model where it mattered).
+
+Noise trap re-confirmed: a `ps2run` (~1 core, load 4.7-5.6 on 6c) cut BOTH engines' decode medians ~30% during first probes;
+stopping it restored the 54.x band. Same class as the orphaned-vite record in the host-ops memory.
+
 ## Current runtime: v0.1.44 (2026-10-13)
 
 Stock tag `v0.1.44` (`ed4773eb`) built for sm_75 with the same flags and ggml pin as 0.1.43
