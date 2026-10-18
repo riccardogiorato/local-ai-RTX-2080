@@ -1,0 +1,6 @@
+{
+  "gpu": "P8, 19.15 W, 225.00 W, 0 %, 5 MiB",
+  "listeners_8080": "State Recv-Q Send-Q Local Address:Port Peer Address:PortProcess\n",
+  "server_pid": 911666,
+  "server_pid_exists": false
+}

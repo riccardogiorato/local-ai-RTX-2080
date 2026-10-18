@@ -1,0 +1,25 @@
+<section id="strata-power-comparison" aria-label="Strata RTX 2080 power and context comparison">
+<style>
+#strata-power-comparison{color:var(--foreground);font-family:var(--font-sans);width:100%}#strata-power-comparison h3{font-weight:500;margin:0 0 8px}#strata-power-comparison .sub{color:var(--muted-foreground);margin:0 0 14px}#strata-power-comparison table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;margin:0 0 24px}#strata-power-comparison th,#strata-power-comparison td{text-align:right;padding:10px 6px;border-bottom:1px solid var(--border)}#strata-power-comparison th{font-weight:500}#strata-power-comparison th:first-child,#strata-power-comparison td:first-child{text-align:left}#strata-power-comparison td{white-space:nowrap}#strata-power-comparison .chosen{font-weight:500}#strata-power-comparison .units{color:var(--muted-foreground)}
+</style>
+<h3>100K input: power cap versus throughput</h3>
+<p class="sub">Flash-Next Q2_0 125B · tuned Strata v0.1.45 · RTX 2080</p>
+<table aria-label="Ranges across descending and ascending power checkpoints"><thead><tr><th>Cap<br><span class="units">W</span></th><th>Prefill<br><span class="units">tok/s</span></th><th>Decode<br><span class="units">tok/s</span></th><th>GPU, prefill<br><span class="units">W</span></th></tr></thead><tbody>
+<tr><td>225</td><td>706.9–709.5</td><td>47.2–49.3</td><td>206.9–208.1</td></tr>
+<tr><td>190</td><td>701.8–702.1</td><td>47.2–48.4</td><td>181.7–182.4</td></tr>
+<tr class="chosen"><td>165 ★</td><td>692.3–694.8</td><td>46.1–49.9</td><td>160.4–160.7</td></tr>
+<tr><td>145</td><td>677.1–679.0</td><td>37.3–48.1</td><td>142.1–142.2</td></tr>
+<tr><td>125</td><td>645.0</td><td>48.3</td><td>122.5</td></tr>
+</tbody></table>
+<h3>Context ladder at 225 W</h3>
+<p class="sub">Two runs per point · all 10 retrieval checks passed · ★ recommended low-loss cap</p>
+<table aria-label="Context ladder throughput ranges"><thead><tr><th>Input class</th><th>Prefill<br><span class="units">tok/s</span></th><th>Decode<br><span class="units">tok/s</span></th><th>Wall<br><span class="units">s</span></th></tr></thead><tbody>
+<tr><td>32K</td><td>701.3–708.9</td><td>40.5–56.9</td><td>49.6–51.5</td></tr>
+<tr><td>64K</td><td>708.4</td><td>47.1–50.6</td><td>96.4–96.7</td></tr>
+<tr><td>80K</td><td>706.4–709.8</td><td>48.0–48.3</td><td>119.5–120.0</td></tr>
+<tr><td>96K</td><td>704.0–705.9</td><td>45.9–48.4</td><td>143.3–143.9</td></tr>
+<tr><td>128K</td><td>702.7–704.6</td><td>42.2–51.2</td><td>189.5–190.9</td></tr>
+</tbody></table>
+<p class="sub">128K-class prompt: 130,833 actual tokens · 192 output tokens · zero prefix reuse</p>
+<script>console.log('comparison rows',document.querySelectorAll('#strata-power-comparison tbody tr').length);</script>
+</section>

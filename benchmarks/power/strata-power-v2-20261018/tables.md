@@ -1,0 +1,49 @@
+## Strata v0.1.45 · Flash-Next Q2_0 125B · 2026-10-18
+
+One pinned calibrated 128K/32K-resident serve, same executable and weights throughout. Two ladder runs per point; the power walk uses both directions and a 60-second cooldown at every checkpoint. All values below are ranges over this run, not best-of or comparisons with historical measurements.
+
+### Controlled context ladder at 225 W
+
+| Input class | Actual prompt tokens | Prefill tok/s | Decode after fill tok/s | Request wall s | Needle |
+|---|---:|---:|---:|---:|---|
+| 32K | 32,767 | 701.3–708.9 | 40.5–56.9 | 49.6–51.5 | 2/2 |
+| 64K | 65,553 | 708.4 | 47.1–50.6 | 96.4–96.7 | 2/2 |
+| 80K | 81,938 | 706.4–709.8 | 48.0–48.3 | 119.5–120.0 | 2/2 |
+| 96K | 98,321 | 704.0–705.9 | 45.9–48.4 | 143.3–143.9 | 2/2 |
+| 128K | 130,833 | 702.7–704.6 | 42.2–51.2 | 189.5–190.9 | 2/2 |
+
+128K is the assigned 131,072-token context; its prompt leaves space for the requested 192 output tokens. All long inputs use actual code/prose, zero prefix reuse and an exact key at about 10% depth.
+
+### Power limit versus throughput
+
+| Limit W | Short decode tok/s | 30K prefill tok/s | Decode at 30K tok/s | 100K prefill tok/s | Decode at 100K tok/s |
+|---:|---:|---:|---:|---:|---:|
+| 225 | 48.9–63.1 | 709.2–714.5 | 48.4–48.8 | 706.9–709.5 | 47.2–49.3 |
+| 190 | 48.3–62.6 | 713.0–713.6 | 48.4–50.3 | 701.8–702.1 | 47.2–48.4 |
+| 165 | 50.1–63.6 | 707.8–708.3 | 48.1–49.5 | 692.3–694.8 | 46.1–49.9 |
+| 145 | 47.4–62.9 | 696.8–698.9 | 45.8–47.3 | 677.1–679.0 | 37.3–48.1 |
+| 125 | 49.2–61.4 | 663.3 | 43.6 | 645.0 | 48.3 |
+
+The 145 W 100K range includes the extra recheck on the ascending footstep. The 125 W midpoint has one checkpoint; other limits have two. Short-decode ranges include the three fixed prompt classes.
+
+### Board telemetry during the 100K arm
+
+| Limit W | Prefill W | Decode W | Prefill SM MHz | Decode SM MHz | Prefill °C | Decode °C | Prefill PCIe RX MB/s |
+|---:|---:|---:|---:|---:|---:|---:|---:|
+| 225 | 206.9–208.1 | 163.8–165.9 | 1,869–1,870 | 1,875 | 72.2–73.0 | 72.0–72.6 | 12,736–12,837 |
+| 190 | 181.7–182.4 | 159.9–165.0 | 1,809–1,815 | 1,875–1,890 | 68.7–69.9 | 69.9–70.0 | 12,248–12,569 |
+| 165 | 160.4–160.7 | 155.4–155.7 | 1,725–1,733 | 1,879–1,884 | 65.2–66.6 | 67.0–67.9 | 12,415–12,554 |
+| 145 | 142.1–142.2 | 135.2–142.3 | 1,632–1,643 | 1,850–1,868 | 61.1–63.7 | 62.7–64.3 | 12,059–12,294 |
+| 125 | 122.5 | 123.5 | 1,509 | 1,768 | 58.4 | 59.2 | 11,545 |
+
+Telemetry entries are ranges of per-request window means. Measurement records include window min/max from the raw 200 ms GPU samples; PCIe traffic is sampled at 1 Hz in nvidia-smi’s reported MB/s. GPU board power excludes CPU and RAM power.
+
+### Ascending 145 W recheck
+
+- Step 3, walk, run 0: 677.1 tok/s prefill, 47.0 tok/s decode, 155.4 s wall; needle passed.
+- Step 5, walk, run 0: 679.0 tok/s prefill, 37.3 tok/s decode, 156.1 s wall; needle passed.
+- Step 5, recheck, run 1: 678.1 tok/s prefill, 48.1 tok/s decode, 155.1 s wall; needle passed.
+
+All 29 long-context needle checks passed. There was one loaded server instance; cleanup restored 225 W, stopped the owned server and both sampler processes, and verified the standing config was unchanged.
+
+[Raw measurements](../strata-power-v2-20261018.jsonl) · [Run protocol and pinned discovery](README.md) · [Runner](../strata-power-sweep.py)

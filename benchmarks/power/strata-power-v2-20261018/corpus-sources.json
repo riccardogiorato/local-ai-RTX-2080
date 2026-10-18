@@ -1,0 +1,4212 @@
+[
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "NEXT-IDEAS.md",
+    "sha256": "8702691d7b36699eeaf3259ed3e5f24936c37f96a0490313e7d57a47409349cd"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "README.md",
+    "sha256": "c94e17f8a0c4ebc3275d40f61c8c4d914993386e20ce81b50f93c6c8ac601e71"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "TESTED.md",
+    "sha256": "6839c7ece69be6281624d8cc946aba7100e19e9eb2464bf3a8da148a1fb1693f"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "benchmarks/README.md",
+    "sha256": "a83843f3debe5a019311b91fefddde803997075472dac455e17042dcfa213811"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "benchmarks/bonsai9b-longctx-probe.py",
+    "sha256": "1fcfd1c19327750791b7f67cc6daef8f63a05ef96fd3574ba5ab895ff6110af0"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "benchmarks/bonsai9b-multislot.py",
+    "sha256": "5ed65ba5ec1d411170d2d33b61f0f58a7a7b7ed64683241507e1000cf5a467d9"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "benchmarks/bonsai9b-vision-probe.py",
+    "sha256": "e1e81724861efde57fd58e188b0c153b94f0521f2be315e65707cbc68a2a997f"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "benchmarks/cpu/oc-monitor.py",
+    "sha256": "b3ce36e408dfef89892bbad679e4e4df628faba12069b971193c2961a92cb4fa"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "benchmarks/lavalamp/build.py",
+    "sha256": "18f7b611b9f5c1d99597a6ff2e443d9ce8c840069327f0ff60947c573566d4ef"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "benchmarks/lavalamp/gen.py",
+    "sha256": "a8960c33c8d4dc46f1f3196f40d7d17262f88b3b8cc916ec62ebe85802d50f3a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "benchmarks/lavalamp3d/build.py",
+    "sha256": "6468d69586380e8d2b0e6c09219587eedf11a2e98b405a784cbc84750c7353b0"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "benchmarks/lavalamp3d/gen.py",
+    "sha256": "a8960c33c8d4dc46f1f3196f40d7d17262f88b3b8cc916ec62ebe85802d50f3a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "benchmarks/plot-strata-context-time.py",
+    "sha256": "bc4ab91024aa7c92b8bd6f802a93b6910a2ec59e2f43e8611a37dec4e0027a13"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "benchmarks/power/strata-power-sweep.py",
+    "sha256": "108eae3ae298ece088f0ea49f9f7bd89764302410cb06e0e8e8f7408cae9e901"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "benchmarks/strata-env-probe.py",
+    "sha256": "f4bc8d748265f7cd4128a82f008afe013426778745b18dfed702975266c0bc47"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "benchmarks/strata-multiagent/README.md",
+    "sha256": "b881c80d43eaddc7997031ed5b48b6d9d123aef07abe9938058af5c2c15d277b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "benchmarks/strata-multiagent/bench-ab.py",
+    "sha256": "26149b3fe3575a8661540ecb083a41e5ed101ecefe12fbeebe81e0d1c4be1b5e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "benchmarks/strata-multiagent/knob-probe.py",
+    "sha256": "febf85c774b033c1af85ef7de9ffbd61b1994622d2b958e63d4ee3254ae9758a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "benchmarks/strata-multiagent/probe.py",
+    "sha256": "b5a1133f5842bd5de505bdf81543afcd8db574c4131cc80259aa86d50d7cb8d8"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "benchmarks/strata-multiagent/q3xxs-probe.py",
+    "sha256": "83cc797aa3983e96e08eb54cd3364d992d8535d0ba411278bda0cecded7a39d4"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "benchmarks/strata-multiagent/q3xxs-v22.py",
+    "sha256": "338287bbf4142371acbaf6ee8d95e9bc5d60688039b0dc29b36591cce1b07d0a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "benchmarks/strata-multiagent/run.py",
+    "sha256": "7663501e1166aff94d08f942d9e2113bcec30aefe111cf0c5f26a6fc790ae672"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "benchmarks/strata-multiagent/summarize.py",
+    "sha256": "ed7c4775b1d024f74681c58bddadc61e4c6f2bc476823e906d9fdd1bc2f3d78b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "benchmarks/strata-release-probe.py",
+    "sha256": "865fedd289ed15550706fd18f8be1b1e35cb109688ae25ee770eb05094d7859a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "benchmarks/strata-release-suite.py",
+    "sha256": "06e81738f73ba2e03774288e1813b92e8069eb764ad655be621db89f7a62d4d6"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "hardware.md",
+    "sha256": "12c63976ed1a3fe73834678d1322e6824518c7da2893dbe6784d74ee46007801"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "measurements/2026-09-23-qwen35-mtp-linux-matrix.md",
+    "sha256": "c4a4f3dbcc08df43fbd78a7a47a6df006d20efb229784309d44bfd97f96199d6"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "notes/design-recurrent-state-snapshots.md",
+    "sha256": "0f1e2a808680b2f82c31d987e3ae4af63ebd51d9d67d9d54f5fbc986d4215370"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "notes/findings-2026-09-23.md",
+    "sha256": "404a96130b9f5f93d06da6a855babb3d2bad9b6462261e45e917acbc19681852"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "notes/findings-2026-09-24.md",
+    "sha256": "acb3c0d30acb00ff6f66ab3b14fbda1beb7c5558cbaecb6fdf750e8f6893ade5"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "notes/kernel-sm75-ptq1_0-investigation.md",
+    "sha256": "ea1ed32e663c7037b276245b2acebcff10dedac911cdea72dcd324de63d7f6ab"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "notes/keyed-gumbel-llamacpp-integration.md",
+    "sha256": "4ff9f28d22e5e14a9b663f61da6c8797e501bb237a9f73d35208b62ffc32545e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "notes/keyed_gumbel_sampler.h",
+    "sha256": "c05ad3cae9b71936e7f244da9102c22096f08d462f435bab747f9697019d1350"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "notes/keyed_gumbel_sampler_test.cpp",
+    "sha256": "ef67ffff28e520e9f50922fad410c0c948309954e533467abbe5493aa210e950"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "notes/llama-bench-microtier.md",
+    "sha256": "5d548f5157d4ff0c29a6944dd519f2d1ecb4673d0681498a183b70b388dfc5a9"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "notes/mimo_mtp_graft_attempt.py",
+    "sha256": "4266ff4e50a642ff1995ef24a4d08b701e0b9c7d3449a3e62f052f76bdcc248a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "notes/mlxfast-bonsai2-portability.md",
+    "sha256": "a5a91176a7ca61ca588e6a932e0f313ef4ea6c513e594a919be9632196d37271"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "notes/mma_bitslice_probe_sm75.cu",
+    "sha256": "7e92e19318824d27749a1239bf5f2fbed79b23db9faef1fcbe466417d1cdd158"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "notes/research-david19p-turing-kernel.md",
+    "sha256": "102bb84dff72cac6f030fedc1b3b6809129a2b9cb96858845c2d135fb4bcba8c"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "notes/roofline_probe_sm75.cu",
+    "sha256": "c1aba46503cd81cc90e1cc31401ee3af15dc7d87fef38647574e32cf81d0a3be"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "notes/strata-optimization-menu.md",
+    "sha256": "97a44e69a51f804b2397e78aad64ab3b7d384649597edc83c632b7c4f91e1784"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "notes/tensorfold-analysis.md",
+    "sha256": "1c79671e65731de3248eaed6e192929d7ab3f5eed62899c748ec3ced674a6ae0"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "recipes/d1-3b-decision-llamacpp.md",
+    "sha256": "9405f5e214720c5144a5b28aa28931edcf8d303a4f4887cf08013a6d38a5f964"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "recipes/embeddinggemma-2-llamacpp.md",
+    "sha256": "7558759269ac2df393831ddc07dab7c2e3a660670dc6a04113784519d7dc3443"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "recipes/flashnext-gsqrc-coder-iq1m-125b-strata.md",
+    "sha256": "3ca3aa9ca75888e0cbf9288e47fe83fbc756e8fe1960ee10e0980fbbb7cc2d5b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "recipes/flashnext-gsqrc-q20-125b-llamacpp-fork.md",
+    "sha256": "4680f09e2a2908249229fce4e5f8a97eda1ffeb1f3115dac890d0b873cf91ff4"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "recipes/flashnext-gsqrc-q20-125b-strata.md",
+    "sha256": "9fe1ce33f84e7b247fdc6105e4464967ae345d94cdde06bbccbe544c6a824a35"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "recipes/flashnext-ultralite-125b-llamacpp-fork.md",
+    "sha256": "d4e29b171aa86fb2ab197d04ef78fd15a279899499f3c3c115755654575b77ce"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "recipes/gemma-4-e4b-qat-llamacpp.md",
+    "sha256": "c9fbdef469c026ee92762f08ec56b835f0140844edeafc10cfa8614d6cbd0ab9"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "recipes/gliner25-multi-v1-serve.md",
+    "sha256": "9fe8b1d579ae17b43977bbda81c6e4fcc2308bdf2ebc8bc3d1188f0004821d8c"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "recipes/glm-ocr-q4km-llamacpp.md",
+    "sha256": "35a2b76529e82a51dd7da3b4bda2b975dfbbe007052e5b5af668f95338e72478"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "recipes/kev-05b-serve.md",
+    "sha256": "cb7d63514ea83f881daa07078d5c0b7d0301cb68f96c8fcdcded085167252e2b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "recipes/laya-serve.md",
+    "sha256": "699ed74ca491ed6ee8d5fbe12e71f30b50e9286a1a06ccc2f750bc5e39039c38"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "recipes/lfm25-8b-a1b-dspark-llamacpp.md",
+    "sha256": "ff7ae7e7758e4963aa38bc09e92b4010aeb1b2d02f1408800b8b7315c9d71496"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "recipes/mimo-9b-distill-q4km-llamacpp.md",
+    "sha256": "c258679da5099b10b47888827c5044784d3c5c87756eb3b8925e8a5794797e18"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "recipes/qwen35-35b-a3b-cpuexperts-llamacpp.md",
+    "sha256": "94102ab2c685726ee6b380a2fb6534730fbbb75eff21972d424046523aa8ac2a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "recipes/qwen35-4b-mtp-q4km-llamacpp.md",
+    "sha256": "042a14d191d7a9a61a0ddc83d63e7be91d231f70d567d50c5064bd777e87c612"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "recipes/qwen35-9b-mtp-q4km-llamacpp.md",
+    "sha256": "bb9e434add7cb3d0a40a71310e41b2e72b8605a5e220d275abbc486d52f52eb4"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "recipes/qwen36-35b-a3b-strata.md",
+    "sha256": "559d78ee5f8ba4056de08ef63acc30e942313fc1269a1f802231d8b5d2c89239"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "recipes/qwen38-27b-iq2-llamacpp.md",
+    "sha256": "b0dde34caf1ede7e360bd7c4b386066c139674570a0063b8887f76681553477d"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "recipes/saluki-27b-iq2mix-llamacpp.md",
+    "sha256": "0785d13cddca1cc57ad9f565515cf62c79f8173698824df20d499b53799ad49d"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "recipes/swift15-27b-iq2xs-mtp-llamacpp.md",
+    "sha256": "16d7e904e29cb98f28548846112f09ba32c1d59f8f8928891fce9114abca1ead"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "recipes/ternary-bonsai2-27b-ptq1_0-llamacpp-fork.md",
+    "sha256": "592641e97d6f621ca1ed39d1f98852a91bfdb12e0e0ec058cbbff8a87c9a1ba2"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "recipes/ternary-bonsai2-9b-pq20-mtp-llamacpp-fork.md",
+    "sha256": "7de92c9c25c08a547c94259e028a159a18517da53da79d458ff5956e7cc0f597"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "recipes/thinkingcap-27b-q2k-llamacpp.md",
+    "sha256": "28ac211a10a734f2864358bdb453309061fce2bfa784e961a1e95ed313475fb4"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "recipes/xing4-29b-a4b-dyn-llamacpp-fork.md",
+    "sha256": "fedd649447701ee883f6234a17890b9aff825354066136b1600d08f63e38ac9d"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/local-ai-rtx2080",
+    "path": "registry/README.md",
+    "sha256": "1b1b1b111863170dc6542bd2ece15b45063846c2629a84d5a3b9713b3d561b78"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": ".github/pull_request_template.md",
+    "sha256": "8121d72102a13a8739c1cf6214a4f5df5526c2ef7785c7b644e0d78c371adf74"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "AGENTS.md",
+    "sha256": "db66231d3d037ac2c5bdb3eaabf3bde0a23ecfb9e69970b088fbdf6be57c0671"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "README.de.md",
+    "sha256": "e5f1b1a2a524d1ae86a098202e10b47d05aa9c52167783e6ce9ec6ad57af4dca"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "README.es.md",
+    "sha256": "39c31549ade6fc9c5c95ff90c1af9522f63aa7ad254422d189cd4e049a9c7c13"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "README.fr.md",
+    "sha256": "9ea9fc914646805c9e20e0e9cba59680df212181cc861d1104d7ea36c5b1c317"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "README.ja.md",
+    "sha256": "17459f2181aa9690f157a9f9e79c789ba29aaa29d6fe71628a0e41dbc138d1f1"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "README.md",
+    "sha256": "faf05135dc46a0e3bc22c09197e9a6760bdbc1dcd18bebb760e13645975c7f09"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "README.pt-BR.md",
+    "sha256": "9ed40a4e2ba97bac5f7406e16d73a93809b1225dbb4a5a630c86b6c9d1c510db"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "README.zh-CN.md",
+    "sha256": "d9b7f6be9b6cbb23482ddb72486f251c7cd91450a0f07291de20309d3618be3f"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "SECURITY.md",
+    "sha256": "c17af8ad5d0d6e8c7ec40bc27161670f5459d3f31e886e5afb25ec621c1a6382"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "bench/bench_vs_llama.py",
+    "sha256": "078c6b9ea8a60803f0b55dda22a043037150c82f8afb03563a84ddef526151d9"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "bench/gfx906_qsa_query_swizzle_probe.cpp",
+    "sha256": "34147b3e7e217846052b8b81a4656af5e6ec33d4530566cb72f0eea3dff9e531"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "bench/micro/cuda_callback_affinity.cpp",
+    "sha256": "ed2a577b641e15253c8539ba093d6afdaea6a16432cd1d1e2912605b425b3fda"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "bench/test_gfx906_qsa_query_swizzle_guard.py",
+    "sha256": "e3a59a689414f66fe32f1bfb8d7fcfbdd301827b6d6fb0f411d67c377b30e0a8"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "chat.py",
+    "sha256": "1099b3ce9190a3d393caf75dc3aa06b8d7753af5428366d34313f1ea3299640f"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "conftest.py",
+    "sha256": "44a63bc5a414fde6e76edc93c93ab47fd1d2543788117004272d35bad04330a0"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "data/experimental-speed-projection/README.md",
+    "sha256": "64f9db774b32962ad55729b6daa672bec6aaf4c37b5178871da2a0ac20d5b953"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/A770_SPEED_SPEC.md",
+    "sha256": "238dd6dbc8275ea43b710c96d7ea4058b470f1a55fba89735a9a072085b2b563"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/AI_SETUP.md",
+    "sha256": "9523be9106ea454e2198c99f8dbe636a294e7163aba5d8add33d72ab77b62c96"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/AMD_HIP.md",
+    "sha256": "d7904eec9b3d259fb6ec2a0db33686d045485fcb6a524a5500445fef1a669f78"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/AMD_HIP_PERFORMANCE.md",
+    "sha256": "8688da5ff35b928584ebfa66bf88fe1eaaca0869e2cb2a93642520861beeb5bc"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/BATCHED_DMA.md",
+    "sha256": "a6ba5568af56f99088ab8253b3c01e6f4493bfb05c1fbc119d8cc4f66385e089"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/BATCHING.md",
+    "sha256": "b4b31902c7ee04d6fe7244441ecc9dba417243063a1003d155f152dca1103b1e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/COMMUNITY_BENCHMARKS.md",
+    "sha256": "dad4ec3d9d5aaae01e26596c24932244ef7fa84768fbc6139b635f618bea486d"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/DISJOINT_EXPERT_CACHE.md",
+    "sha256": "a679f9e592600444990f35f0cd2641ee02475fd4191b28eb0f96a8f694e70b33"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/EXCHANGE_ROTATION.md",
+    "sha256": "89a366602975bdaba4c9bf492f6dca9f911c8b1ec39f6cd253b3bc3bf78a8578"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/EXPERTDEC.md",
+    "sha256": "3376b2afe83bc931c73a42804c332f807a92b3e4a31e9f734815430070fbcbe2"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/HOW_IT_WORKS.md",
+    "sha256": "e8475372d246a850269172a3a5cbf0a5496fd0b3a4536d525e5e71ca6c3a634b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/IMAGES.md",
+    "sha256": "dde535489fc59674dcb014eb9311cf58bb5e0c9bb237c73e8daa781136ac0da5"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/INSTALL.md",
+    "sha256": "b099bf108cca6f67fcbac66426befab6244e82a844677025d43b836d264db9e2"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/INTEL.md",
+    "sha256": "fea34443ede0d4da2d4a79af99e12a820e2e02eaf6abcb3bb4f30c1d2bdde556"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/INTEL_ARC.md",
+    "sha256": "aa8333d8d6cb1c6af8262e244dacb23d2c7bdf854bfdd49f674438fde728c507"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/KV_PREFETCH.md",
+    "sha256": "d92f2d4a8d2378ccd5b0f72e1e1e5483cf09cbfae89b2ae093999b36143eb2df"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/LLAMA_SWAP.md",
+    "sha256": "f9e4872cc95a56f87e2e20b55c479cfdcb7f2d3f57db154b66fa9db719e781e9"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/LOGIT_BIAS.md",
+    "sha256": "c8c40e4109b083472a57515e4a424e15e9218e897703ac9d18169dad2094e444"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/MAC.md",
+    "sha256": "3bcd37e76f4819ae70a00253a20598d0815aa820013d5d6e7c762484f99c1a59"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/MCP_SERVER.md",
+    "sha256": "11e842da47f24278fadbae62c6cece8bc858d4bcf4a61e5f787cd5a4c5833003"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/MESSAGE_BOUNDARY_CACHE.md",
+    "sha256": "4657c12f54f7bd1985253bdb92dc3b0a148fab5e19b2f44c8f0d3f46e326f534"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/MMVQ_IL_TABLE.md",
+    "sha256": "c653122bd48f9f1825cdf5a1c2980f7f251b7ba33de9d8e6f34a86548fea8a68"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/MODELS.md",
+    "sha256": "e4b94d9c116b9fbbfe97c8a7142e6f02f5d2d3fece2cd6724bdbb659c498d92b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/MULTI_GPU.md",
+    "sha256": "901353b4989e61fb95857f862c4a84571315a7a09d10b7ba9128bd59325d5ed6"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/NVFP4.md",
+    "sha256": "abb62e9194b85162592acb5dd0c061dbad23bba2875601199b6c128491be4ba1"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/NVIDIA_V100.md",
+    "sha256": "f84406e63348133b78cb2005aaa7d34038744428a9107f72f839c0fc45616282"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/OLDER_GPUS.md",
+    "sha256": "f0677ebb78557b86a758fb389fc21b6e443b478e6a9090b80b6acbd8f707c42c"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/ORCA.md",
+    "sha256": "1b7166714b1b71925ba2c07c070f5dbf53f5f79ac68b226aee20b4041e5ba92c"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/ORCA_Q4_K_S.md",
+    "sha256": "fd1159e0fa7475fb8ef8bccb7e643af5b4c0900c4019d2d9d92ede55d5ee3e0f"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/PREFILL_HEAD_ALIAS.md",
+    "sha256": "1149b08647c39a13c1661ac085ba424ef84d9876c47a63f0cda2ad3cd267ba69"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/PROMPT_CACHE_TAIL.md",
+    "sha256": "a9d520ecd4eef73a229188aaafb36543a13856f966bad3cec68e931fd4103909"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/QSAROWS.md",
+    "sha256": "2a246759e78e2c41d6e6aacdc0197416371ff2880f4c8d0fdcf966196a27a8f1"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/QUANTS.md",
+    "sha256": "20dc0152c47b43ec5462ecd5847cb84e726b5f9a83052a42d5b053f51aecf3c1"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/QWEN36.md",
+    "sha256": "6c9aa007e94b4d21e8d9fe7532e3fda40c03c0a09396639927a130555d0143ff"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/RADEON_780M.md",
+    "sha256": "ba1e4e41817d1ac5ddec1a7b730a7f4c03c5740bc229b707c73c62a9626dfba3"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/RESEARCH_RUNS.md",
+    "sha256": "8cad76cd79334042a00903b3f28c1c2f4a43cda61f06acca17042da377ae3992"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/SECOND_GPU.md",
+    "sha256": "a2c75bdfac2634bedcd8378f4ff9aab5a73d3eaeff04f17de01b9f5906a5c9e5"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/STRIX_HALO.md",
+    "sha256": "c348eb69a415a106756497aebd0ef6e90ab058296aabe4bf9352a97f1e907e9f"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/TEST_REQUESTS.md",
+    "sha256": "f03603a54dcea9b450edee996542c5a897a429052edd5f55727ed31a1cc03fa8"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/TROUBLESHOOTING.md",
+    "sha256": "0252d34f8e97d5000f797cd61a858793993688b2b662a48fef0abe0c62de9e97"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/UNSLOTH_Q4.md",
+    "sha256": "d7369448e6b449c2ccb3d1e0a0656f1133aaaa5f1d63cf152ff34896d1c28819"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/UNSLOTH_Q6.md",
+    "sha256": "fa6c449cfe8e1780825146ed05b670035c4f24a4a91e88dd82e3f77907cf0289"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/VRAM_ELASTIC.md",
+    "sha256": "271d2105ec78e9674072c7d92d1c2d96f3f2d5bb2ddf112c405273cc07d80bd4"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/benchmarks/windows-zen2-gfx1030-workers.md",
+    "sha256": "66970b15a2352bd7b1afd53b14c30fee7da0bdc376ca79faaf9d697c2ac8b4cd"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "docs/media/make_figures.py",
+    "sha256": "c3304d32704930281b9fb83cd94079ee5fbbcb83f0a66953f874a1ad4670ce07"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "include/strata/hip_compat/cublas_v2.h",
+    "sha256": "cd28bbab24a4623f8dd2cbd1c7b7dc469fc5567c473bc9cca4183d4927754eb6"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "include/strata/hip_compat/cuda_fp16.h",
+    "sha256": "5864a3c6a57debde2e84b83702a1467a01130dd1d2cdb70d75695931ca1582cc"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "include/strata/hip_compat/cuda_runtime.h",
+    "sha256": "10d633c122397b20b54451a37f2ee3174e2d7fc6c6c94df1a7165de357563d72"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "include/strata/hip_compat/cuda_runtime_api.h",
+    "sha256": "153e9ca18085214f68b95183d5ffac1a247c305144fb217bb6c68f8a4e6e01f3"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "include/strata/hip_compat/math_constants.h",
+    "sha256": "b72ba65e9a31def2f69a582f159f276dc4fdb1a984433cb2cd299a46a27f522f"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "include/strata/platform/hip_compat/cublas_v2.h",
+    "sha256": "1a82bd37bdee4da2da923d768afe9a4a3c4e6d0dcb8e1b0dfbb06137e856c37f"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "include/strata/platform/hip_compat/cuda_fp16.h",
+    "sha256": "d054d07dc83186ca4d85491d2a869629add900a7608e56daac5b443a78c418de"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "include/strata/platform/hip_compat/cuda_runtime.h",
+    "sha256": "d054d07dc83186ca4d85491d2a869629add900a7608e56daac5b443a78c418de"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "include/strata/platform/hip_compat/math_constants.h",
+    "sha256": "bb6b8ab8e4de9c5f7b0f6c5d5a828107dda6785dd7730212c06cb3e6e4d8ec31"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "include/strata/platform/hip_compat/strata_hip.h",
+    "sha256": "b785e2302b7774c96b6ee88fdd44bea5daa27570503e7a3332be9bf9272c96f6"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/include/metal_compat/cpuid.h",
+    "sha256": "95f67495645568da88ba4992d86f4562c3c7e310e8c835a1809daa287e334705"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/include/metal_compat/cuda_runtime.h",
+    "sha256": "27d943c7a81d5d978ec864924df75a6b5208cccf57bb2631bd43f4f628152450"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/include/metal_compat/immintrin.h",
+    "sha256": "e9c2fdecf360974c0c0627fca2511188e9e8e1463076f8d97e995a05fd10282d"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/include/metal_compat/linux/mman.h",
+    "sha256": "4a203171020aa65904fe9190d653e2951773de0b70dbd022d13f05d87f9bddbf"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/probe/mtl_doorbell.cpp",
+    "sha256": "f47fd9cf2eebd0e2a497cd3e45d39ee18434775b567023d13ad02e4fc9602a71"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/probe/mtl_probe.cpp",
+    "sha256": "c4454be49a30dc7d5909dbee05c035c1acca84c31c0419f529b5dd50d420784f"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/setup_mac.py",
+    "sha256": "cfaaca054827fb80f8e148e300fb6b30a6517cc5784948cab70a30594e468f19"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/src/engine/arena_budget.h",
+    "sha256": "52df7df71bd5e6623fe86c3830b432a39ce89c6c681ffce567b60b19f8973fca"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/src/engine/iq_host.cpp",
+    "sha256": "342d16b185bf388c6c3612f0d49b131f80e7f882a301f0695a0ced52467f3ff6"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/src/engine/missing.cpp",
+    "sha256": "016a54398536ffad8487767ab2c4e4d05956e9228ca59ccf79c6a7be713c2bd9"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/src/engine/mmvq_host.cpp",
+    "sha256": "ead243ffe70c1d306f0148d307c2d43f32fd2de0b0f6a6c29db4afb5a9dc4455"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/src/engine/setup_host.cpp",
+    "sha256": "6a0feb96d7873cb12e9bebd4e4788f3db6f21198839f7de11f8e744ffa418813"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/src/engine/stream.cpp",
+    "sha256": "45ea57867dc0445c03c4b090d660fedcbc1c6a9c1ca5edbfe12e9fbdc7817f37"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/src/engine/stream.h",
+    "sha256": "e8efda2787c47fb0e2bc02c4e6e8f42c29a72cc163382d5c9c2177877d6ce451"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/src/engine/stubs.cpp",
+    "sha256": "ce5db2e9d5c64da3940e20d422d4d16628d1f1b87bad6a899db4fdb62b00f7b3"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/src/engine/stubs_144.cpp",
+    "sha256": "cd8dfefc7506d962315ee3176fa7bd6627fb1860e586c06af5c2dcf559091e3a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/src/engine/window.cpp",
+    "sha256": "5fa9403c403bb51e69bd6c9d8f4b5212c34ffda6fd5c8780f6a6daa509176a12"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/src/gguf_lite.cpp",
+    "sha256": "5cc3310afe3e1cf2b2d3ac763636d32d1f4901e2e8766fa580af890d13bed0a8"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/src/gguf_lite.h",
+    "sha256": "5b308ffafed701c15164620018faac1292788195c5fb85150a423f56e7bd92c1"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/src/gpu/runtime.cpp",
+    "sha256": "042f40c6adc78ea3e5de89a82cd4535d34f18fe7ca88bc696b4419fec6bf5406"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/src/mtl_rt.h",
+    "sha256": "99f9539dd63625b13e8d18b7cd59020c85555222e1775e0ef5706dc569b3b83d"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/src/ref_quant.cpp",
+    "sha256": "da8677bedd16922cf88dbf86dcf861e25d93755a8f792f57fa5141d6a2ae92d0"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/src/ref_quant.h",
+    "sha256": "308fe02d8086d0ba565641ce924625390eeab027fda500fcf1f0850229e71dc1"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/tests/alu_bench.cpp",
+    "sha256": "b27a7a462cd104360ff04dc3c1202594a802f16cbec3a31ce684086b92926bbd"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/tests/arena_budget_test.cpp",
+    "sha256": "ac446c109759702c76c7bd530be77e319df7e3260d9e30a359622ac650d430b1"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/tests/coop_layout.cpp",
+    "sha256": "0ad500961cb56855ee88fa1b0bd3b5fdcd54749f3bd372d05f56fb42e1c2fd2b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/tests/coop_probe.h",
+    "sha256": "ff5299029df042965238eb8d24a5843f5bec20adc71bff86e62cd4a7d36fbf05"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/tests/dense_mm_parity.cpp",
+    "sha256": "528fb0cadbd2c3016c5f6eed43870781d749f68a6fc272fcc657b73cbd9feadc"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/tests/expert_parity.cpp",
+    "sha256": "eb0df3e7a72f0ffd5db6fdc1b559f52bf058eb358715fd1a19af006ca62856db"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/tests/fuse_parity.cpp",
+    "sha256": "04656fca94b3e9e07d59dbbd3e09af303e7068228be96120e9dbfc87a1ea22bf"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/tests/gdn_parity.cpp",
+    "sha256": "04d63a245b84e49652288ba00d9c92e794db470034642489ca51790222e922a5"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/tests/gdn_prompt_parity.cpp",
+    "sha256": "190eed22dce8d6ec98db69709e65bdfddea9324593d1fdf94712fa7957bc8b53"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/tests/gemv_parity.cpp",
+    "sha256": "82593d28d6d3d9933cfb12477d7516c81150dcc5140c811d3a5be4d0f4dc8573"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/tests/gr2_parity.cpp",
+    "sha256": "f94f708065f27b64f3abb099b39c5cdddd191dbbcaded10331991873e79ed11b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/tests/gr_parity.cpp",
+    "sha256": "87b7c048e60b2d0efe456526100c50a3b4736208c9417141e3d60d3e3f52a199"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/tests/gridbar_bench.cpp",
+    "sha256": "df423d488fb639927516a23d295a06573b2e62e238a85231f30a409792abf2bd"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/tests/mm_bench.cpp",
+    "sha256": "a297a45870e7d6b56a6afc0733537afba17561a95122547ef0cabc4a4561d582"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/tests/mma_parity.cpp",
+    "sha256": "289bf7a390815643dbf65ab153d637307aa12708566b3227503c37be5061d9ac"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/tests/moe_mm_parity.cpp",
+    "sha256": "71bd09a575e94818563b67945086c851c55001d4567adb652bd90500620d2177"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/tests/pair_parity.cpp",
+    "sha256": "a73b3b804a13a5ef81f18c4309759fb85c28e27649425621342bd259a435fd3e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/tests/prompt_chain.cpp",
+    "sha256": "d7c9aeaf40669e818850b5ca3c070f3add066f150c232c2c793ce5de8425d9cd"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/tests/prompt_parity.cpp",
+    "sha256": "b487152c07dd709555d75524bc32f9f6c53f5ee0b0f35711ccee3a086650d325"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/tests/qsa_parity.cpp",
+    "sha256": "724570235f7481e36c16b5fe517d83c9dbef0bc2ab25613767a8d2ab6c7cc12d"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/tests/qsa_prompt_parity.cpp",
+    "sha256": "63c729a7a493196fa4266b56689d3da7e907f7863ad3fb0ad5814b2ed3ae8fc9"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/tests/ref_dump.cpp",
+    "sha256": "5a7abe9657a3771cf63a6a30028ea8186d3bf1cbc3815fe13b60036f278679bf"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/tests/route_parity.cpp",
+    "sha256": "d79ad22dda397e940a04fb36237c16cb3bd25b67be9e8a9c79f0adf05beafd09"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/tests/rt_bench.cpp",
+    "sha256": "a03df176d465e4e517e0d9126442e41c6d3b0f0f48e054a00ff75c44d34bd7c6"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/tests/runtime_hello.cpp",
+    "sha256": "4cdfe59acc39177fa2962849513162259833dc31267fe4d6ad1768b09f0a35a8"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/tests/sample_parity.cpp",
+    "sha256": "0fa5b816cf318b4bce4ec25e864493b2aa48eb5bd5952b45e47a9437b54b91cc"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/tests/token_chain.cpp",
+    "sha256": "1b77df8c36703c13ea6e2b71326e772f968a0705606bc6b931affa4b79e5e96a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/tests/wrap_split_test.cpp",
+    "sha256": "091954411dc610b714c00a61dc03012e8a1c2b8295039e81d20b2fd313d62f1f"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/tools/chat_tokens.py",
+    "sha256": "d23c8ad07e290413dc3122c165b7b8a6c393fb570ced42ba1a395312bfb33306"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/tools/check_ref.py",
+    "sha256": "db850f3505126dd6c048219f03d6b4296d4559bfc73ab903233b16309e5d1cfb"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/tools/gen_stubs.py",
+    "sha256": "e894e51f17c01385a64499a27ed2a1e106c3ce3232ddfde137c69b707586edc4"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/tools/gguf_list.cpp",
+    "sha256": "875be405de8e19ba4bd5bf081b5f0861c880f67125242df219c6b1c93503eb22"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/tools/metal_repack.py",
+    "sha256": "27c76ad20dce5a8980a6fa0429c4923d3e2f595da93cda74ac8ecbd38dfac9d9"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "metal/tools/stream_experts.py",
+    "sha256": "ecc86ec79ed0f044d428c40e0841da08ed694d73f49d9b8decf80b24bdf47ef3"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "ref/load.py",
+    "sha256": "e03580c1a0a26b41ba39776af19041679c255eb57820f92115ba7d61fc916364"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/__init__.py",
+    "sha256": "7195d862b09ee0c290b6c28d5c1b6e7c5819212328ecbea7cd1422b4a5d4a3d6"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/cache_drop.py",
+    "sha256": "49dbc6e301f5f4005d7a30ebc8a0ea16a5df42a40e969aa93fc8c8df8711d618"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/cpu_affinity.py",
+    "sha256": "2f0394b97d94404fafbfc59bf637fdfb32f2fa71010b9b994aa771286348e51c"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/fixtures/fake_sd_cli.py",
+    "sha256": "2916b3328c25f2b6d269b5d0989334629476237f50aa841dd8bf56543756ffa6"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/frontend.py",
+    "sha256": "1f40ac6fc9f4ad021ac0c202f35f184f5784009355dd7485ee0e44746bfd75e1"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/images.py",
+    "sha256": "9ea414b3b21610333aec84dc7ad0073753ea6c34febb625ebd6958ddfd27270a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/keepawake.py",
+    "sha256": "874d33da4aff553c12da2ded297a6856dce48e09877167f9c387b667cd7b060f"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/logit_bias.py",
+    "sha256": "1cff46f6ac1c58790adb76572670aecc35e4846eda561e995a6561aed0bc1292"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/mcp.py",
+    "sha256": "659c8e3c7db7d51c939870f843b2350f3efcf2ce8f1ff4b4372db4631e39b77f"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/mcp_fake_server.py",
+    "sha256": "ecc6afa3b44461e120d6901822a1b0db96bddf59324fefe8faa8f2cad48b7157"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/prometheus.py",
+    "sha256": "3b46bdfab7b02c063a54a041b457d7f15fc0f25c51addc67d63a1c147f3fd6d0"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/replicas.py",
+    "sha256": "db3f2b363dd9344311e2df2ef2f68a4421e9e306e9ddd84808a957b91069509d"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/responses.py",
+    "sha256": "5215aafab91eea1b77b4c81a1405731cd175fcbdcc9b0e56aa64db701a7100f4"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/runconfig.py",
+    "sha256": "58aa118367a9d6dbb534cae5f35d6f418112f96985db85b048fa23eb042e403a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/session_save_retry.py",
+    "sha256": "a474a0ae50fd22a24308298d5edfe9a47200bc7bdd0bae4f08957ed063a45977"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/structured.py",
+    "sha256": "cd92893b672c89c9126839729c4f0d5a787dfe81ea020005f7494c6f9fe904d3"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/telemetry.py",
+    "sha256": "d26913657b57442e2450501a4f7f21c68ee90fa9771fae0694f21c588711738a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_admit_order.py",
+    "sha256": "bbfe80b214f0dfcf2339bb4aab08e1549330951bcf5b7a607acea4f436cae47b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_cache_drop.py",
+    "sha256": "8ffd7a0267fe839e652c58b1f896fcf176b0a8cda11226ef376b3b8a7a492a1b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_chunked_body.py",
+    "sha256": "646627cf49a939c8660a6b264ead72df5f12eda589881d0d061c5065ab582f2f"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_context_overflow.py",
+    "sha256": "6ea558b3d8b6ef3986ebf4e49b672d1e79ca252c6869b7b22fcc90d52ec16588"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_control_cancel.py",
+    "sha256": "bf685446e4aee36483a7e530eaa1b51f751ecaf62fec280832d76692a551cc51"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_detok.py",
+    "sha256": "7a5bc54138daf95df6fb23b94e6ca939c21a80878164f0ac60b772a2081490f9"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_effort_paths.py",
+    "sha256": "9501d8787e396b95f5143eb298334973a8553b298feff0e93b8708dfcc4f6db9"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_env_to_user.py",
+    "sha256": "e78d8e973d72f39a6dc8977848543db9f104d0a7a9451b5ba2caa32e76ea123c"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_exif_orientation.py",
+    "sha256": "9e258b3494cd21e05902f8c3e04f9e4582a3ed5d4fea985195ab10e2fc5032df"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_family_name.py",
+    "sha256": "7115e79ed6ab93930e3487d687cda3028fca9cab3aa21eb2684f2b2231a173be"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_fatal_recovery.py",
+    "sha256": "8796f18e9027226a830f85b6fccb4e76c9a2cfb840574cc29c848d57f1cfb06e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_frontend.py",
+    "sha256": "694201431937217233049ff17274831fd15efc180aff02dbc57d176576c7feac"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_images.py",
+    "sha256": "5d0c8535df765b2203cc43d384815703d3d1721024b3a81adf39796e5793c654"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_keepawake.py",
+    "sha256": "93ce569868f594cbe41252a19ff96812997994034f8ea4235d5255fa8e401f73"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_lifecycle.py",
+    "sha256": "6652d32df39c5a0fd67a0df74e6bf333afd414795b72a779613adc88039fa778"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_logit_bias.py",
+    "sha256": "f605101160feb919c3469002988de9c0f568c73ad74de1d538b81d20dae59b76"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_mcp.py",
+    "sha256": "4f77c5773c49098228795a79ed2faaa1f543ae6a8581c80f08dd5199a4c27d86"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_model_card_sampling.py",
+    "sha256": "38a90fe3d2339d1bca61b073a5e0bafae936c36ab1b1953ffdc6f756a06bf5f3"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_monitor.py",
+    "sha256": "c5d8af4b3e1877afd0a8b044688dfc7f58531cbe7081647a924edced2649eb5f"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_parallel.py",
+    "sha256": "0f6147f1e74badb61f974d0fd71d2b39e4c141eaeee6dc3cfbf5f5bbb585eeec"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_parser_call_scan.py",
+    "sha256": "71aab3ee7ea39bf8810099e3d59d1c8580836923b7aa3446a72c281b6398232d"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_parser_hold.py",
+    "sha256": "d50e799c0bbf003318b51938f09e0b40fb11b8d572a7377ddd4617b9ddf9d7cf"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_parser_track.py",
+    "sha256": "9539134578bed96cbda96d8405133877f609e6d9163461dac36c91b44969efc9"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_prometheus.py",
+    "sha256": "6ff62b63c896842bbe60861a1c17940f846f0fb4134da86f734d18362803b6c9"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_prompt_encoder.py",
+    "sha256": "fad128ea329949fd38ce034a026b3f86d060c484fcfe1c0fea2a13f94524a73c"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_q36_config.py",
+    "sha256": "278dae2f526ad8cda6fe8a719e075456c71824bbd8b2362b87fe62139b6b0ea8"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_queue_keepalive.py",
+    "sha256": "17893b3f69667f1ad9dff1c0120775d668207d7ae62e2500ca143ede3fa90c62"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_quiet_cancel.py",
+    "sha256": "cd3c4b02180dbacaa4900cdfa5f692ef02ce6b5514c2f9c5dc8eaeb597315c5c"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_ready_timeout.py",
+    "sha256": "0ccfa9ecaef608c1067674039acb74f9158e05f64d8227182795d3fc2f5dd69e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_reasoning_loop_recovery.py",
+    "sha256": "c448df0757ae1bffb0a4fe8b48f45ee57ae0f06e7056d6bc96885dc8b024bf7b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_reasoning_rescue.py",
+    "sha256": "d91252b93945465bce47bd3602d0c7a4fed36639d7cb5cc08b3153ac535a1d03"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_reasoning_tools.py",
+    "sha256": "a7703a25adfa46fb47053269cb0d1f8057a8de46f982fec906025c7344abded3"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_replicas.py",
+    "sha256": "cc69d9912520d4b2c4589f37f57e76a5ea76c28f8e20cf45a499f6a7a2480031"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_request_accounting.py",
+    "sha256": "c2a414e3bd9420619c2a3122329a03bb54960ac119f951fa8c1c1243cbd90f53"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_request_hardening.py",
+    "sha256": "5e9d4e904f48fe0224965fb1e43311d6175f404c687af225ccf96c48fc366f87"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_responses.py",
+    "sha256": "2fa7e52940f7c41fed953547fd3846215f7aeedd3e5722b792aa51bdc7092269"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_restart_waiters.py",
+    "sha256": "5c0a322fa2d8b92ad5543f582d0f06ac7116f755730d932a7f7511c184f6824c"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_runconfig.py",
+    "sha256": "efa3712dd39d3367d156da606d2155cd2b1a6ec6894dc17b9210a11dde761650"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_security.py",
+    "sha256": "50a1497a3757d220f663112f2c4d1f2a1d6e5731a3b5a5237a0c3652421c673b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_session_save_retry.py",
+    "sha256": "6ab00d066b380f652f8857280deab5f30d03bbecbe3d575f35c1d5a686a8ec35"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_slot_alloc.py",
+    "sha256": "7ea0cb07ed01f95d720fb0ae1d945cee705a31a34213bd5ada22dfa35c68d40c"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_slots.py",
+    "sha256": "55f72e4b4fc32948d3f4e848f7fd3da030d33d7e2aba9250ed41d716e77f9658"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_structured.py",
+    "sha256": "6361f10e7237ffaa9cafaec114650ff23c0480fa09335914ec061ceb03a2ec01"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_tool_name_space.py",
+    "sha256": "07cbe06fc7fd4f2b27c0477c2fa39b0ea06262e26cdf2eb718c383ecd44f5078"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_vision_busy.py",
+    "sha256": "b78de126c4afa27dfa4090faf2db2d203d89e99c1bbddb8f7b2c6aadd8464648"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_vision_elastic.py",
+    "sha256": "2fd8879d7326c4a6ae1248b0d19e5489761b1d17ba9c2a30290096c307993e2d"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_vram.py",
+    "sha256": "40967f4970ff017ae43d58bb08c1df795fb71f3cecaea89ab4cb375c5f537ac6"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_web_sampling.py",
+    "sha256": "8e4e717aaab9049b99a1a44beff2bae1d48e6f60d08de98a28e2d875d2eba18d"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/test_winjob.py",
+    "sha256": "069d5e28845b44ee1f1b34c63de6cd68b6d722609726f72a270f51ed7f7ee1a6"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "serve/winjob.py",
+    "sha256": "8fff65cf850e108b84ab06c3fb44a68b947b0f4834ce5880139ada5dfb11a749"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/artifact/dequant.cpp",
+    "sha256": "944edf278c6d9858ed63998976b50d2b7913385d4a832de6d76bd32cd1090f26"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/artifact/gguf_reader.cpp",
+    "sha256": "90e6a1a664645075d4a946a84a498cf05cd9947ab11c4036aee577a3b8632431"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/artifact/gguf_reader_test.cpp",
+    "sha256": "7f54be48741b0d784c1ad2e51c9f01ddbf52b4b5286f88031d621a3826cfeb81"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/arch_defaults.cpp",
+    "sha256": "28ba81206b988191aac953cf85faeed17765a68a2670bbc6d090222397557ee2"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/arch_defaults_test.cpp",
+    "sha256": "ca432b6b42de6e6229f903834fe2b525a287865cb8b9d6c842f91b63b302ee5c"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/concurrent_main.cpp",
+    "sha256": "06d919aab9a1687d4bb0b5f9be0c69273b7af5857d81718ff50a2fd351a7c582"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/conversation_cache_test.cpp",
+    "sha256": "04921da6af961ad182ed9e4808e44b9c8f31b1c2df7b0ee2995aca7e5353296c"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/conversation_file.cpp",
+    "sha256": "afc7041504adf9e5297fa21f17c8e697389092da6352ffb9814ec2c35b900642"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/conversation_file_test.cpp",
+    "sha256": "a6019d53acd0ef7c3a847a739a5ff20b5e1aed7c17438ce0ea846a3cea488d8c"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/conversation_memory.cpp",
+    "sha256": "acc470475b0c02a87f364a772d07ac5ea4729bb13a5ac3ade58b6da9bb6fbb66"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/conversation_memory_test.cpp",
+    "sha256": "d73a54de89f9ad5a1c110adca9ad1c80b923deefd9e835f7cef89996986c173c"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/conversation_snapshot.cpp",
+    "sha256": "fe6e3fecd4c7f7d2e4941ab9ac903369e4e17a4fb8c2df1fce6f40ce20c409ce"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/conversation_snapshot_test.cpp",
+    "sha256": "0db4c0525bdce33787b533699c823da0053ad50726d8a5c12751deeb056f89e4"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/conversation_split_failure_test.cpp",
+    "sha256": "134bfc43811c5a86afdec15c66380754b612d22adbf7da8221755ddd117ad939"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/conversation_state.cpp",
+    "sha256": "5d7b1b40c037850048c98f12ce16d8aa7ab7f44a785006af5473fa68a2a75274"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/conversation_validation_test.cpp",
+    "sha256": "a0afbc6b8155173b3cd71ff14493932ac1dc786a9c60b3d1e749478baae73546"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/coupled_draft_test.cpp",
+    "sha256": "d5be5618fef9255ff04499723893bc1538d7238166255de62ba7092678ab2a55"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/device.cu",
+    "sha256": "ff339006a712508a610a5b9e1b643c567de4d0c7a62545064c82e1ade34bdf85"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/device_main.cpp",
+    "sha256": "60a66b6b2c05527f5cb59d6c5397370c4740205551d74d04db2202989d7f3584"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/expert_cache.cpp",
+    "sha256": "9176bc1516acd49c097727dc12725ef52a95ddf0f5961a56fd36603b548ec340"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/graph.cpp",
+    "sha256": "ac8b1de9372b6755bb5c9be30b83c76fef2f89186b0f7e5316676448f66483c3"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/layer.cpp",
+    "sha256": "0fe39a1d85f4a2b7bb6044586a5a1cf1f517a68764af1de9373145209efac329"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/layout.cpp",
+    "sha256": "f1e166c91025710fe318c85f7fba27a721291ca2d27ececd797abafa5a5cc7eb"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/load_main.cpp",
+    "sha256": "83ea314dd762cf37c7ea9249842bc10613f16e7ba17715ee8b2dadae320fa008"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/logit_bias_test.cpp",
+    "sha256": "ef6fbaa467f968f73bdbca92a0be5f21d468eb79bedf25d55270d475813c893f"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/mtp.cpp",
+    "sha256": "47067bb3158129712bb2219d16f9ac0b093a4fe0d7b070c8b1ed62fb18de6cb5"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/native_dense.cpp",
+    "sha256": "4fe6d8433796e688232073801416da299af7c99cb479b91df17b5f63b1ce908e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/native_head.cpp",
+    "sha256": "02316a39684570df7bc2c606108fdc464295e10fc50071e48a9e971dbb5f15ea"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/overlap_main.cpp",
+    "sha256": "d48e5d20cf224301da6ff05cfc67fedf6fe40b8c6b17a39e8a191192f03e03c4"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/peer_experts.cpp",
+    "sha256": "46f34f7c412e7c1454bb437e9b3fbb1d234c3562f3edad54f8609a1c5300fa36"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/pinned.cu",
+    "sha256": "166a774e8ff6860b19c1b966cccef4606fa150621a8a6c76f6029345570f91e7"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/pinned_shared_test.cpp",
+    "sha256": "0dd0cfe5f3e4d48631b5d95b0ce45e4b52d3e1701cddb231986606ef59b3ec02"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/remote_expert_opt.cu",
+    "sha256": "231ee06d6aacc8e8cbb0c6c76fdb55fbf6855b985a81b71f2d3e373c24a130ef"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/remote_experts.cpp",
+    "sha256": "f086c5e170d3c806423d3a164baf56a4bd3ecee0f3462b163e3fbb11d797cfde"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/session.cpp",
+    "sha256": "f8ef8d3e7ce30289435d134178478af5787115e273b4f3d8f646e0b525f3e21c"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/session_save_reclaim_test.cpp",
+    "sha256": "51afb7b6fb20239675848a9b7748f8498e292ab5858218eb351ee498b86379fa"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/spec_prob_test.cpp",
+    "sha256": "eebc7b8b2936720912b54e78c56d34a66e5e06bd6e9f5ceb4585683719f88f0b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/vmm.cpp",
+    "sha256": "d3d6b88971a88976ab6376a267ae7b4fbfed0c4774a62fc15a45a02df868a7de"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/core/weights.cpp",
+    "sha256": "5b0fe48d83beb000b0cb4bff0091a7635e56be14ff44bfd1bae1a9a5c56dc38c"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/b6_mmvq_bench.cpp",
+    "sha256": "5363a5842616f2c9eeed1df780b09eadf7dc4c2f1966116a25fa408850c8c60e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/batch_rows_parity.cpp",
+    "sha256": "6d97bfe34c478899c6c8f675c8569cc1ea378a34526c33d8189a0c55b0fc194d"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/bf16_bits_test.cpp",
+    "sha256": "e26ebb9239946d0416e81cb212ba24618386ed3da15522c8ed1af9995b586d97"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/bf16_gemv_parity.cpp",
+    "sha256": "a7c6de83f57b333865e5fefb7f790573db6de6d8a88d79c950280f56c2f5e44e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cpu/expert.cpp",
+    "sha256": "31b7b1a628e29f22bce3e39e69efe968298066d08383d8292c9ea1279bee1cfe"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cpu/expert_layout.cpp",
+    "sha256": "b8b69717f57a51ebf42018cb9c91fd0b24d13224c64465862a8ae0f4c894f6aa"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cpu/expert_multi_test.cpp",
+    "sha256": "e78740421b62ba8a322e21e94f57783e3d0173a6959a498504a4759e12c95450"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cpu/expert_parity.cpp",
+    "sha256": "75bd21e3e73d294669dd795832cb174eaecee286c75bb813f80af8d52e135031"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cpu/iq_avx1.cpp",
+    "sha256": "af3a4b7fa9ae4eb61cbc99e9ea49d5bae2374521a60a49fd34fc4fd569a7fe03"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cpu/iq_avx1_parity.cpp",
+    "sha256": "046bc442c1a8f89f515db500575225612e571005132f1c0268a87fafe47f86bb"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cpu/iq_avx2.cpp",
+    "sha256": "4657c0af025e0598166130d25b98bfd9ffa5c99646bb53e06fb1cfe46d059f1c"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cpu/iq_avx2_parity.cpp",
+    "sha256": "2841a5db9a00b121a209dafcf4bc80e9048e76d7145569b297624e5a811a8f8f"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cpu/iq_avx512.cpp",
+    "sha256": "539256cc7cba4cc7673ec5a3122737ddd485ec4d0947fd13acda6fbdbefe4f0d"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cpu/kq_avx1.cpp",
+    "sha256": "ea8921defccebef78137e74f984f148f5f3c80ba0ced76b772c275b2c88bfd04"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cpu/kq_avx2.cpp",
+    "sha256": "7deb631710f5a31e0e43442def497cecd78211e9be2b3861796dbded167f2f7e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cpu/kq_cpu_bench.cpp",
+    "sha256": "9f8e3a4e8a8ee578c55638b448a054e11e92e4afc7dbd94b05b184e8d1648d9a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cpu/native_expert.cpp",
+    "sha256": "f3d31a9e451bb84e76c2f1725d9a30c2cf96cb978869048178dbbb3794a0c9fd"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cpu/nvfp4_avx2.cpp",
+    "sha256": "af67580a2af8b4d951339c1f3bd334abffbae1a6b942ef49e79b39feb6042bfe"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cpu/nvfp4_avx512.cpp",
+    "sha256": "4271f7a29b2e67ad579a2b6ef34840d06cfc6d9362683d654b095b8167a77b96"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cpu/nvfp4_avx512_parity.cpp",
+    "sha256": "3f63d738f49b239ec4cfecc235dfa6f32805d35f87e6748ee47c911dfe6922c5"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cpu/pool.cpp",
+    "sha256": "62033ce1b7a366e512994e97143fdf6640eecfc3111abc9d15534a686091dc5a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cpu/pool_affinity_linux_test.cpp",
+    "sha256": "33305144a4d15b4bd74027f42d0a7daee05aeac01053b377fe02f848f90de465"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cpu/pool_affinity_test.cpp",
+    "sha256": "623c32207ab87c6bbbfc0d4b3e811bc577d5965234214f0c16cea8e8d18d7d6b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cpu/pool_stress.cpp",
+    "sha256": "21fdb493bc6aab804583c38a3f8befba418becb67243452d61a6fa3b8a32d88b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cpu/pool_tasks_test.cpp",
+    "sha256": "3473ad141e76226f9e58d63da47a54d261216354544cd3ace140046f81280786"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cpu/pool_test.cpp",
+    "sha256": "d1f225f1b5f5e4ec2805843fc3a49cfc3a53788f15e243c76c63b02f2ed913ef"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cpu/q2_avx1.cpp",
+    "sha256": "055a281bcb67dfd14a380cef8c05dd96a23795ed8f468f3e36543cc4a1d9566a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cpu/q2_avx2.cpp",
+    "sha256": "ce92563c3706433845aaee48488ccac2d817eb69ae1a48d44ea3a3be1c093dec"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cpu/q2_bitplane_parity.cpp",
+    "sha256": "a8c08d4540f84f1fd5d75203a88cb16bf0c940e3880a888fd800bae43709271e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cpu/q8k_quant_parity.cpp",
+    "sha256": "db23ca8d2636cb99621cb99c05788fc5ba92ab598c5e653015c8a81cc8d9be12"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cpu/router_dot_parity.cpp",
+    "sha256": "1d14ce8bef7dd769bdd4ada8ba97caad67be28a86651e96b2b8a7bb219f8c19e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/bf16_gemv.cu",
+    "sha256": "1408ce4707d9d03bc3d752773401afbb1170b0cf1fc3b53fb95cab9aff652c53"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/cvec.cu",
+    "sha256": "bc81bc52db8c2889756ff63bea6e3312dfa7cc3251a400e63fbbac5084e7335d"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/dequant_bf16.cu",
+    "sha256": "976c5e74ce34f9b3c885807d94736f8d702ae9d2a1805039473bc87fa7e324f3"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/dequant_s2.cu",
+    "sha256": "a32870e7c7fb7deab1bb93e36ba15d6679ba3b5b2055ea0ab0b3e88c421d2f63"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/elementwise.cu",
+    "sha256": "edcd8f71a862665c103ab47fc3f5b055c1eaf9b5690dc07de05ac374e3959861"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/fused_gdn.cu",
+    "sha256": "3c1fbc952f122013ef24eb21460dc4dc374b0a3aea255fd426a0005cd2d48177"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/fused_gr.cu",
+    "sha256": "dc6dd8ee5db5477dfd51ee374dde9aa1ae6ebb9d30fe7d60325504c4f1d3993b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/gdn.cu",
+    "sha256": "0ed432dfd55d3d758fe0661fb7f4bc951bd57cd23adf73c2dfbe323ba1c0bbfd"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/gr.cu",
+    "sha256": "f3683679baf10670a7b9c9ff92f8e3b7ffbf1b48154ae5bbd9b7222356d19f2c"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/kv_q4.cu",
+    "sha256": "e055aebc0316c219d0a005b84824d8991b23107ba264c80c7090dc1c52574427"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/kv_q8.cu",
+    "sha256": "52610aee08ddf7597a921f76a02270811d967beb2c5091a089fa0e45281a7b8a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/kv_stream.cu",
+    "sha256": "1e4b9c67666b4f460898429a684f4ce7a3c8fc506538450f99da46adaccd66fc"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/native_bf16.cu",
+    "sha256": "ddb35a48c6372a85a5b2dff3ca56dd1fc9a76e800beb2f897d0c2c96d2b63093"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/native_flash_attn.cu",
+    "sha256": "d848cc229226e499405b50050e6baacd4ca6031087b45983065319c16b06b9bf"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/native_gdn.cu",
+    "sha256": "5ea9d912cdb179c157bed76317ec4148361a873464c8f248e1b54752d0f8fb03"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/native_gdn_preprocess.cu",
+    "sha256": "940aa60cd42e77ad7f4b5a6e2fd8177b80016975d2aaf55ed7a620f6437f27c4"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/native_gr_norm.cu",
+    "sha256": "15648e96fadfa771cb68f96ef0dfe6aab9c7c4e3b91d0271d2122cd246df80b6"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/native_gr_postops.cu",
+    "sha256": "23c3c0b613c1bbd41fbbf05f958ba6a050be99705ef8d4e22c0d95ff3f058b13"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/native_mmvq.cu",
+    "sha256": "f1cefe3093538e9e87ed27be80ae755e0308ccfdbfebe21301e706a733a641c0"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/native_moe.cu",
+    "sha256": "ed63f56561673e0ad00fd830b75a4dc912d1963d781a43db566932cb2caa9b6e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/native_ple_postops.cu",
+    "sha256": "4dfa61501f8f6e428f313c4a1fc8cf08b7d882185d517e90e914781dfe48ab95"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/native_qsa.cu",
+    "sha256": "91a21d493e9896b486e106ab53b26a4df9dfebb369880842a1a9add79c7604b4"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/native_qsa_indexer.cu",
+    "sha256": "8fa911b34164e03a4ada188a89eed5e1d5af7aff98ed6a94c270fa863c50764f"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/native_qsa_score.cu",
+    "sha256": "046dac614be068448e71d378150e9d1c5c39fa07d8fd27459611efd5e1566e5d"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/native_rope.cu",
+    "sha256": "afd49a84a3a4f0dc8cd618329b07b44c2fb59c11212d05919e7ffc6345961768"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/native_router.cu",
+    "sha256": "89131c17bb9809e7ed02d08d2e3b03d2a2b0e077885d2f82df9471a7b8bf2256"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/ple.cu",
+    "sha256": "ca887e5837f70ee4198a7a24329daf4f028744d443e898edb53febe7ba016382"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/qsa.cu",
+    "sha256": "dc7ff0992355ec744bcdcb919f50cf8925a340438e0c5209ae917177d938295a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/qsa_decode_attn.cu",
+    "sha256": "958b60cc920e1835d1d279831db2bc6fc89aa8dc255ee0fc9fa79e1c22c88b4e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/qsa_prompt_attn.cu",
+    "sha256": "1692266ed3efdaed3996d1bcbd7b93e07487ae0b517026c0bc96cf4148566390"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/qsa_scores_gfx1100_test.cu",
+    "sha256": "2a26063e9c5c58cb36f0973b36bb590db10762515f9eda5318314162fafda588"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/qsa_select.cu",
+    "sha256": "e109383d6be98cc5bc2981fe1d4ec2bd80c5be1a4db8b2d6cf33ffee193bbd88"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/quantize_act.cu",
+    "sha256": "207d0e2ec4b0fca136d03bc6bee10b625fe01683f996eb317af1ca5a5f25eb67"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/rope.cu",
+    "sha256": "8b72c00ff58b885e06561f01c3474cd9d9731c0b42abdc635fba7cef84d262ba"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/route_prior.cu",
+    "sha256": "f5e0d560e951d7c2dd19a780ec1d77f0293d7a835bbe28def2bd5264ccdf2aaf"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/router_top10.cu",
+    "sha256": "4fa8260d101ba1d5c82e9ee1ee6260ca3f8a7d8020493254682dd0e597c5e94a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/s2_expert_grouped.cu",
+    "sha256": "df5b571883379c778ead44ec200cef732febbe8722fcd73c2a6a6b0d0bcfbbc8"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/s2_gemv.cu",
+    "sha256": "4d21a4e14e166b02652719c095b25fa7f346c3d0b3dd1009e050e793b2167b9b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/s2_gemv_fast.cu",
+    "sha256": "ff3ab5c5b0da5b25aa73f7da3a86894c93960efef3b8c71463d501c1e8adaafe"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/s2_gemv_q8.cu",
+    "sha256": "c5123b1a7373acad6e62c701bac3ed04f90c1ed5702104008892125de052733d"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/s2_gemv_quads.cu",
+    "sha256": "3633ad7b7006fdfc96e7b1aa06733168e2292a5b700c49ece60e121c3db4280c"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/s_gemv.cu",
+    "sha256": "46c946cff34b50f252a5d4a6b2f99e0d30b78a6ad741919417566ccb43017e40"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/sampler.cu",
+    "sha256": "988f8535ece34b475ddc367690ea5f018da27eed526258173fe77b6111481092"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/shared_expert.cu",
+    "sha256": "da071b470c5caa2e00d838d3d3dc9ebf0e2080bc4a02bd103fb1340e6e8da25f"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cuda/verify_kernels.cu",
+    "sha256": "f26835b630f5f52d4ebf3eb675e9b772d63cfa0fd87b79754e841638dc55c2c8"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/cvec_parity.cpp",
+    "sha256": "cadfaa08778a4db2254e714940b3cbc23e08c3b366f02c4b07a0d756717ce8e7"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/decode_cluster_parity.cpp",
+    "sha256": "89957dbd82f2921663da5e97cb6051bc298661d18600098e2f088aaf8e915d95"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/dequant_bf16_test.cpp",
+    "sha256": "65d9c5fad2d3e887020917aeeabe741593a2678b96b9ba49ac6071097d24273f"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/dequant_s2_parity.cpp",
+    "sha256": "456935d009abf36b7d8ff3f620094ea281210e077f234b5ceba74d3634d84679"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/dequant_wide_parity.cpp",
+    "sha256": "4cf5cf71d9d04cb6991004573d3c8287e379e642476ef42129e2494ae00038f6"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/elementwise_parity.cpp",
+    "sha256": "4e8a5efb2cade6675d8d0687e63bdc1edc1b712914834a65870e00571a571098"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/expdec_bench.cpp",
+    "sha256": "a8e975c48003a5b4488d50fc67957d238c23d9bf26ea3fa3c2557549f1f39e88"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/fused_gr_bench.cpp",
+    "sha256": "d293222aa0492913906fb69f23882ec7267156f332f6dc91a35b52c11b71acf9"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/gdn_parity.cpp",
+    "sha256": "01eafd9de8f7f215868626c6b0c7eaa123ad8a623f1c029d2f271bcd5323111c"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/gr_multi_parity.cpp",
+    "sha256": "96327cad5f493dbd5a1c7cf20892fafa2bae2cbc3e506bd3b14fef2be26c01c8"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/gr_parity.cpp",
+    "sha256": "ee96e4e112fa34698316ca97266b9d2cc3c755a163dc9ffdf81ce8694ac37cd6"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/hc_persist_parity.cpp",
+    "sha256": "5d40436d6369dd314e71fd0de7f62fc4cd70b19f92c99fd9a0e306790d3058b6"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/iq_multi_parity.cpp",
+    "sha256": "df320364c11b04fc4e952b98eaac0fad712e2a0515c4bae89e125ce1af36f976"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/iq_parity.cpp",
+    "sha256": "21bba170ff91d80d5b0f1db877af96d4c57e3b70957eb7fae27e238a39851b8a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/kv_hybrid_parity.cpp",
+    "sha256": "f315eedf6ce80ce12d9862644dee92d0bb99253e5eb2e744715627c689b3d7f3"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/kv_q4_parity.cpp",
+    "sha256": "2b5dece46df2c1448735ac78e5f81c7fa1108b9d4827f5ec75190b504681af63"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/kv_q8_parity.cpp",
+    "sha256": "acb2310d93f60f5638941e350d1dd29b860c9575202bf264dc03c37efe95c04f"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/kv_steps_parity.cpp",
+    "sha256": "726597d93f053470f6d72340b70a52c802f109e74eb4e3393b69fe5bcb19ab2a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/kv_stream_parity.cpp",
+    "sha256": "e0ada4be116973ba7a165fa081df0be9c13f9ffa6865540913218bbe5c35ea11"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/kv_window_parity.cpp",
+    "sha256": "192d241bb427cafea999e91c033b427a21ad78d1192e501a61893c8c489284aa"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/mmvf_rows_parity.cpp",
+    "sha256": "1ee1c71a01e306fc619958ea0a9e36517db248afadb30668f3931ce8ec2be225"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/mmvq_il_parity.cpp",
+    "sha256": "0ce0eb4484fb21926b8992201f9a38278e59282035bf166d6db778666e3b8dd5"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/mmvq_multi_parity.cpp",
+    "sha256": "012120687ed2970c7f6be152477ee279aa4240663a08bcdc5e076998e3021b8a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/native_expert_bench.cpp",
+    "sha256": "17f5205fa82ba205b97db7bd82419b61e319561f7c3bc4fe271d88dd99094747"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/native_expert_parity.cpp",
+    "sha256": "87478752f6879ed1a0e4cc49374919a50b78f7376406170e5dd9cecf74246144"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/native_grouped_parity.cpp",
+    "sha256": "c338db5092e0fac7256e0222d194e94372aea6d86aad05df549df256dd5db0e8"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/native_multi_parity.cpp",
+    "sha256": "fb0042a854c86e3783783c3b944d9cb22bf7d9130434f2d8d5fb82baa1c847ce"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/ngram.cpp",
+    "sha256": "6e6589551f0ac2ea3ac8ca4e996d4c136366a21cac90ad5425dbb5f2acbb3aab"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/nvfp4_decode_bench.cpp",
+    "sha256": "26d8f697d759c7f7ab49cf2e935999a5ded52853d21610e27c4d64720b8b3c86"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/nvfp4_expert_gpu_parity.cpp",
+    "sha256": "53abcfb1014220c1faec198ca0375c51415891f64f5673971aa24f2a91e4426f"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/pdl_parity.cpp",
+    "sha256": "bd2e5c56c42565aecff1e2d7d5d9bf1bfbc426a67ba36c8c5df4fc86d100d82e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/ple_fp8_parity.cpp",
+    "sha256": "cc9f2003628c6169a38464d2e65b28237311d92fa92f6b4fdbb8984d775a168e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/ple_parity.cpp",
+    "sha256": "3bcb3df4442205a3d010903f544823b8d9431e49bc20fc1c67108fc55f61bd23"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/ple_q5_parity.cpp",
+    "sha256": "8f8540c618dfefd05bf5b8e62dd98970d4c69b222c9725234f611e6051f2b869"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/q5_projection_parity.cpp",
+    "sha256": "efc674248722919c1c2daafeaee07cc6fe104955a7b8fe58106d6e94dba202dd"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/q8_gemv_bench.cpp",
+    "sha256": "34d8b3aa14d7a11b662b3338d9c410557dc445783e975389d7f163830f251810"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/qsa_merge_daily_parity.cpp",
+    "sha256": "a30656805e53f624a00db4e3ec48677b9fd75f82aefbc3e95d8c38fbd42f8389"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/qsa_parity.cpp",
+    "sha256": "d541095fa2264105b70490f3f97712f70202c5b356295bfdd8080168d272bbf6"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/qsa_prompt_attn_parity.cpp",
+    "sha256": "df3357f2568983c3ea2763e652853846647a53e6b514bf52df3e913bb404a914"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/qsa_rows_bench.cpp",
+    "sha256": "7261c4c1159ead51b28822fc7e1609f77fbf13d1fa806137260045ab95975d3e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/qsa_scores_gfx1100_parity.cpp",
+    "sha256": "0972d0b1c6273e3ddb73bc9cdb1ebd1cf9add0b312a466229baf556f995d37f1"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/qsa_scores_parity.cpp",
+    "sha256": "83dbf334fb352d32a0d3d75bf877e1e459291fd01f8be7854d1b1f2894d832e8"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/qsa_select_bench.cpp",
+    "sha256": "302ce87be739320c210d54890689ce584a8f7cb7a6658d6389321aa52e1fd6ee"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/qsa_slots_parity.cpp",
+    "sha256": "eb00e3dad9c5e1bc6fabb28e203e0e87650279c483623095811e230e53446934"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/qsa_topk_active_parity.cpp",
+    "sha256": "ad514dfaf2d773b89f25f7b209615e26c81c4c5e42d4f6472488eca231eda2d3"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/qsa_topk_parity.cpp",
+    "sha256": "1223d0091cea64efbd5301e3cba5d22c665893094d18edff01f62b279150221a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/quantize_act_parity.cpp",
+    "sha256": "435da59b51f4279e1b479fffb5e705245390295639618b533311f9372a709ea8"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/resident_plan_parity.cpp",
+    "sha256": "c95791c38c80e3416eff60292323327d5a4936b52d3600acc6ccb504cb076a3e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/rope_parity.cpp",
+    "sha256": "e1faa8d016de4487e15f1e9acd84d6d7aa071ee912060847a4de05c3c9f9df7c"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/route_resident_parity.cu",
+    "sha256": "b4006789a14a37439eadcdf5acbf6198a9a8097bff0eb600751b9cbce30238b6"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/route_window_parity.cpp",
+    "sha256": "ad6057c9632cb66606b46f07fcdf5c247e03c88f7a7664b0d050d4b08842dc5d"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/router_chain_bench.cpp",
+    "sha256": "a83ad0f8f39d450b0e50091c1a2c514b9bd316ee0462d1127836d726f63b9fcf"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/router_top10_parity.cpp",
+    "sha256": "987983c10f5035d919d26853f068ea45007296c5a3fe22df2c0bc3a694b086d9"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/s2_expert_grouped_parity.cpp",
+    "sha256": "2a83a46766172baa4690fc2310a09fe6575ac1faf45d18fdf0ecb039dbdbbc55"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/s2_gemv_parity.cpp",
+    "sha256": "3b7f7f5b1fdbcb24962ceb4cfc659e8660a002f538bc181fb2f791560a2fcacc"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/s2_gemv_q8_parity.cpp",
+    "sha256": "33b0372c74e09a429987d154130394db47e203bca15a6d9a4fbd4f9821e02935"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/s_gemv_parity.cpp",
+    "sha256": "e936521ff789e93ef7052594f41e90eb8af165394ef3a8f170aa8e0fdad876ba"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/s_gemv_q8k_parity.cpp",
+    "sha256": "da527cedd708f376a2fed8ecd62859fa5e462dd853f1fab72e39a15cc07de566"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/sampler_parity.cpp",
+    "sha256": "7239bd56225bbffce41a117f960022674349ac7b19ac0007bf94c998778c0dff"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/shared_expert_parity.cpp",
+    "sha256": "fc6ed4bbcf0ad9902298e748aa3c580ebd63ee5d518d525b5ea55aed1d8a3b0e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/spec_verify_parity.cpp",
+    "sha256": "4c006d046023c7030d9806de416c6f9190da0a74f0535cbf06153f46060b9acb"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/verify_batch_parity.cpp",
+    "sha256": "c75ff016724d463073171b53e99a7b2f181cee314882404e8b70cb8b716c04cc"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/kernels/verify_parity.cpp",
+    "sha256": "22a29523ed932dbdb6b0c536444ba56f7a664e9415ef8ddbb9e0e4095a800f6b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/ngram/ple_reader.cpp",
+    "sha256": "f0cb0694dbe32b893b5a3854521bccc0e97e5ac5f74293aa003a4de84b4f2d48"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/ngram/ple_reader_test.cpp",
+    "sha256": "6eede85aea6a594d091b542b0be5d286681c8c083eff8c8cea86cdbd12d0e84b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/plan/plan_main.cpp",
+    "sha256": "8687284d95632f2908af9b9ff6680448d3e48726cecfa17211339cde36ce094a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/platform/direct_file.cpp",
+    "sha256": "f4bc441ce97d62e9d6a05e145c76094ef0ceee9676618ffe514100a3a088388b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/platform/memory.cpp",
+    "sha256": "336b126cbbebfba041e1c091fadb4c0a905597806fbad94a97f434b5b11194e8"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/platform/memory_test.cpp",
+    "sha256": "bd7aa70424ef89aa2635095f8e505faae75c3da0840d5f42e640bd2d59b15ace"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/prefill/gdn_rec_parity.cu",
+    "sha256": "de48a40e78429704844a764dd81a494e430f1107aac0ef2555ca84c632ce5d82"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/prefill/gemm.cu",
+    "sha256": "518cee6a41e5732c4485066cfe3d7186c9fd4c6dd288330da9f763ac89ef9a3b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/prefill/gemm_bf16_parity.cu",
+    "sha256": "6000971002b62f82786e8ef9e259c4bd98c7b39dc51273638453fcd6df999213"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/prefill/gemm_f32_parity.cu",
+    "sha256": "b220ac3c7dcf793e52dfb6eba59fd6e19e693edf6f761064b9547980fffd32b2"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/prefill/ggml_cuda_host.cu",
+    "sha256": "6ea66ed71f8ea15c6f7bada00f8aef2b603c29bd2686ceecbc69c2bbf15dd630"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/prefill/gr_upmix_parity.cu",
+    "sha256": "9eb60713c3e600f56affb5127a6a97e19c604a7cfefd8d348b9ebb5f5f098988"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/prefill/kernels.cu",
+    "sha256": "65da51bfa7aabec5bdeca0b42930d1be49c68543b978b563ba2c87e7b7932317"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/prefill/mmq_expert_bench.cpp",
+    "sha256": "a8f07765c9bbf2a010a68ba41e02db4ddd635f1442342b94bd154cad9a31da8e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/prefill/mmq_kq_lib.cu",
+    "sha256": "8601af7ffb6aa6ea66ad1da91c8974660cc9ec246c462d7fd235886629483e4e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/prefill/mmq_kq_loader.cpp",
+    "sha256": "4ac84ff24a17f1f5b261441238cd22289742f929cc52f5db0f92708eeedd2b8e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/prefill/mmq_nvfp4_parity.cpp",
+    "sha256": "297c34da110fcbacb2ce8abb6a90d5aef297231a0a9d5d38090b42f737df4514"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/prefill/mmq_nvfp4_w4a4.cu",
+    "sha256": "3538f8ea0c895b3f7ff9b845ccf389c193576ddedf7821af4636ad6c747cc93a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/prefill/mmq_nvfp4_w4a8.cu",
+    "sha256": "4acbf826496ad4488362d968b7eec042cfc4d6e7914f1e08c81de8841fb5a608"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/prefill/moe_f16_kq.cu",
+    "sha256": "528eb7dc010314d1845226ec877a30878b32befa8f1ecc43cc1347ed4b42f11a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/prefill/moe_fused.cu",
+    "sha256": "17c7de7c471e21c231918dafeb3c31108fd0aceb25d7ef63904fa4c568904b50"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/prefill/moe_fused_iq.cu",
+    "sha256": "8833108c6fe84dbdce73eb0962ebb20ede3e378366fa7a22643c0b225af8b461"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/prefill/moe_mmq.cu",
+    "sha256": "ca2b8b7e3a02d5552d9ff48938b407d54566e812c016958060dba9a9e1f4746a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/prefill/wmma_gemm.cu",
+    "sha256": "d281528ae876e9167873a0782850d850fa0170c8406cb8a54de5d2813113f920"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/prefill/wmma_gemm.h",
+    "sha256": "57bd2a9caf6e179b837680b908d830d3c28c2bcab82c6f3b7d7c71f7e7cad0de"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/program/batch_groups_test.cpp",
+    "sha256": "412db1b9005eaf5b69525a841024ad64ffabc1f3ffd696fe42833ac73ef8f9ad"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/program/conv_cache_test.cpp",
+    "sha256": "5fe97fbb44026b881e0c8a4931bd1b0eacd8b711b70a37a0bb9f33f5c5086541"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/program/draft_kv_plan_test.cpp",
+    "sha256": "892ea404f721d017f86151c82f26382f0a825021ab1b5cc89fea14d02bcd2aea"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/program/message_boundary_test.cpp",
+    "sha256": "0ea5a682eb01ad3f6407617897b428eb8bc1111ba6cd04b2f8fc6b7995799951"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/program/split_ring_test.cpp",
+    "sha256": "d39a9463c0460c99856fb03cdf63ae2337e59d3f688aa59e1d225fa06c7b79b5"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/qwen35/q36_main.cpp",
+    "sha256": "ac5464d29bade017445f2722cbf68104610757d2d1410a5e0ce2fb97628f67df"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/qwen35/q36ref.cu",
+    "sha256": "949436dc148aee86db3646d4583462398bca359ae848025e24f0871e4ac35c60"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/spec/controller.cpp",
+    "sha256": "9ea393b4d369ddce11315032695899a51deeb697e1a7745dc397724f4db7351f"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/spec/controller_test.cpp",
+    "sha256": "8c7674086900898bb67afced50e76812b5e6848f490c95526397497475a1d7b4"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/spec/draft_policy.cpp",
+    "sha256": "04eba40c79c272043de4bf9d86823e9050ed72f5563f3ca1361faffd66d2992d"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/spec/draft_policy_test.cpp",
+    "sha256": "50f04cfaa280e6fd9df6647979cd860739d31fb5406a5438d9ded48142632a09"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/spec/draft_source.cpp",
+    "sha256": "ed2669b4dccf7a1686af56776520b237a50d6244e543078c916c19a6a4660474"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/spec/suffix_drafter.cpp",
+    "sha256": "aeee3eb16627642e9e07c9765fd4946938b5c764f51304500403908d75e67325"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "src/spec/suffix_drafter_test.cpp",
+    "sha256": "f3bcb731e7afae5350e849116d115def713507e5d1e636f90b35966ed59fe9ae"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/include/dpct/dpl_extras/algorithm.h",
+    "sha256": "06571321824ef56288ae66617002021319a42f17ab6c52eb43ca8b8668ca2fba"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/include/dpct/dpl_extras/dpcpp_extensions.h",
+    "sha256": "286c1e54a4c264fcadd12c8fb884f3425fc941c5be98199634df2a366035a356"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/include/dpct/dpl_extras/functional.h",
+    "sha256": "6048e0cb85753d2aebdb0235962ecc2090e3dab7bb5065a04111e3b9dce6f456"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/include/dpct/dpl_extras/iterator_adaptor.h",
+    "sha256": "a0ed225f6949a7d906a5d51c69d86c6c10f22695e8bb73a49044f09c4175e2be"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/include/dpct/dpl_extras/iterators.h",
+    "sha256": "cd64494a713654e1e867eebf8cf520a8509e61726cd68be48916ba03fe68bdf9"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/include/dpct/dpl_extras/memory.h",
+    "sha256": "88d3113dcdd7bbeb44edb962f8454f1ece33d6bd68a66888851467655c29d7b1"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/include/dpct/dpl_extras/numeric.h",
+    "sha256": "4bf13685e72d163d8c7cb18a205ca79ea1eaf6ae39ec63099175fbf1b83fe933"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/include/dpct/dpl_extras/vector.h",
+    "sha256": "209b7e20a5c7739255c06dd89ca3ac7d50e0e9d600b57e59a06c31457706fefb"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/probe/alias_scan.cpp",
+    "sha256": "9d17cdee43036dea4c9fb73218e9e04e320217c639334f97fc3b81b3aca689ef"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/probe/arena_rw.cpp",
+    "sha256": "ebb01071d178dc69843bbdb91a920d28377f2cb1e5ea116d26c2e85b89509838"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/probe/doorbell_store.cpp",
+    "sha256": "a29eb8c795627da5b1a06089dfe15281f261e598caf6de70aa8a7154ffbfdaac"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/probe/fp64_cost.cpp",
+    "sha256": "dcc5b2176ec635b4b1a623295b2419cdacfcf2184f27fb420f4f6dd707161da1"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/probe/gemm_launch.cpp",
+    "sha256": "a4e682288a3818db988d71f272881df603332729002767763b90c0380e231c6d"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/probe/gemm_vary.cpp",
+    "sha256": "feb12c855d85c0e7775e9ecf68b5432071eb16357593eb96adfdff5e24f4b07b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/probe/launch_cost.cpp",
+    "sha256": "24ef34dc9bd8da48ae1412dd6e620b81ff5f4fa0ce3ea0c3f13840f2f006742a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/probe/payload_pairs.cpp",
+    "sha256": "6a59575d0fe79d62c2598698e597fa424d0d13de4c6b5692a8e05b19cd2c7a7f"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/probe/router_fast.cpp",
+    "sha256": "0e940fd50985710f2d4c4a4af4c099d640f4d3009f4588a08934f132c484a51b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/serve/server_intel.py",
+    "sha256": "a91f78b30e8e49a9f8afb5aac65cac40ea8e70539d978a5cc591568b5768e09f"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/serve/xe_telemetry.py",
+    "sha256": "a92ab9cddab1335dd2497fa8c1dd61971fd3b975c74ca6cea9e1738f63ea57fc"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/setup_intel.py",
+    "sha256": "0ae7d7ed83cdbde89e190e10d094a8ff70f2db1b939bcccd6ef750676db1f5d3"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/core/concurrent_main.cpp",
+    "sha256": "e222443f920547af2c44aaa260325f052cfcc07c3b0b686f18d9216cd5f13d09"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/core/conversation_snapshot.cpp",
+    "sha256": "8aad8aa2615b28b8f579ef725f99c79cf994ffd95dc7fd931dec300082d745a5"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/core/conversation_snapshot_test.cpp",
+    "sha256": "8cdf9e6ce11c849e916c771db8cc42daaaa52426ddc26188a3aff47587c5cb19"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/core/conversation_state.cpp",
+    "sha256": "95e8faff15f3f36d3db0caf1e1a08f28302dc449286b6c2a93896466934cfbab"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/core/copy_queue.cpp",
+    "sha256": "0eaf9ad041ba77b8d70a6c2ea331b061c168bb5e7f1a7b51184d7bbbb981a9cf"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/core/device.dp.cpp",
+    "sha256": "a3adf2af4b2c2f434c539d22f85169e2a22a7bdd266157fb5af0c4452bb956a3"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/core/expert_cache.cpp",
+    "sha256": "9d4f0026195ccbbc17dd6c6070e6e6c11ff7c5231f756d1c50554405ebe81420"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/core/expert_source.cpp",
+    "sha256": "8c59920c0317a35be12c2562593b997f20be5221561528a698bfbbd78c67b541"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/core/gguf_expert_source.cpp",
+    "sha256": "c4f8a1cf0248f2e2f44995b35ea21e8c62492b00be19372fe5877dfdd85b368c"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/core/graph.cpp",
+    "sha256": "bd46e2868f713f14a02297a87d5486eca751445bcba65f2a941587f8923ac998"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/core/layer.cpp",
+    "sha256": "c89d9bb9a1c37616e9e415730e667b821e88ab73239a1dc5a27867aac7b04016"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/core/mtp.cpp",
+    "sha256": "d26f0e55bc2f78117b0379113fb341bbc3be11964f5cd94d87756bf6561b6831"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/core/native_dense.cpp",
+    "sha256": "99f925bfdc0a295e3314bea43a2fc0f7119f80f1a5111b38939e1478bf67f2d8"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/core/native_head.cpp",
+    "sha256": "9effb6077180a5ee5e6930eae7f7594c170b91e0267d0304ff5af68a7be5cb1e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/core/overlap_main.cpp",
+    "sha256": "f55aaf1ff4cd6be503f2db378faf46fb5c4af175146551314c3aaf557f596608"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/core/peer_experts.cpp",
+    "sha256": "5708f78a7571bb8e6ed883f5d582298fe238145d2a1d224939becc0332cf0360"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/core/pinned.dp.cpp",
+    "sha256": "fd54f20a1d61d4bd9c7258589ae4c911d5e2aafc89f46ae25fae3a447ffb1a35"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/core/remote_expert_opt_stub.cpp",
+    "sha256": "cd7f23dc9fcb3117bf0c651f85a0764593d78037ea7c67205a6a94c056f8320e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/core/remote_experts.cpp",
+    "sha256": "9e196380fd74fa1286a46f6b525bac1b7afa8a71da75fc5681bb95318881c5eb"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/core/session.cpp",
+    "sha256": "30e7f5788d8d97df6ea395ca4ecbe20b11b17b412722ef8fe1c8bc20d3095144"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/core/vmm.cpp",
+    "sha256": "2d2ca61894fcc5c6ea81c5e249fa2d9f556cad2cbeb3aade5d6fa676c09c0652"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/core/weights.cpp",
+    "sha256": "bd3588c6fa0a6f1ea6d5ce4b4002e980edad9ca43b61a363448b87c0be6833ef"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/bf16_gemv_parity.cpp",
+    "sha256": "c86268e1a93883dd8e3abfffcca2d5168a7120d07e78a48498fe8e561f17474a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/bf16_gemv.dp.cpp",
+    "sha256": "f6a1ecdde48ce4023a91d8723a12f1a006d29a3d4d88bc75c59d6e66c2a0c127"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/cvec.dp.cpp",
+    "sha256": "cbd07fb5e97b87948f82b4ee2825bf21dee8c07af8a2813c4884c5799259f729"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/dequant_bf16.dp.cpp",
+    "sha256": "d038d9df5599614ee1fdee5dbabccaca2df7201ca492424a141722e7165551ca"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/dequant_s2.dp.cpp",
+    "sha256": "6343106ac17205944954968ae35ba0200e3640a89d48b746b0882974648b9727"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/elementwise.dp.cpp",
+    "sha256": "0bfd2202017195c1c2ac42c78f7679c224ba634d3ace187dfb987f32682ab5a5"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/fused_gdn.dp.cpp",
+    "sha256": "ee4793711349df36b7a9fde9a993433fd4959075f9e49be062e6767e8df99c11"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/fused_gr.dp.cpp",
+    "sha256": "f4bf5df38dabef88665d1905828d5ed1bb61b4970bca1023632555eb7a42edcb"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/gdn.dp.cpp",
+    "sha256": "e3c4d51990410a447cde819433dfcba2161af1b5629c0259d442e11c309e2a47"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/gr.dp.cpp",
+    "sha256": "b568690fdce01f92a2789c0263a6afa4b016eadc363a90c588d78d9bd00a909f"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/kv_q4.dp.cpp",
+    "sha256": "771e5e958778753fa7799c31dbd256aa87ed96284e1c391e8817b7cfb39fbb3d"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/kv_q8.dp.cpp",
+    "sha256": "8be6e54cb98efa4dcd5fae7e3215356d1e7f271315397ecf71470c13c0700f16"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/kv_stream.dp.cpp",
+    "sha256": "777a7fa3fea47d98ec993cfa810114bd47bdb1febdec9ddf97822df2815374eb"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/native_bf16.dp.cpp",
+    "sha256": "f850713172f1e534ab0332b959ad85cd8b62b894a906f69064133a708b3d8242"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/native_flash_attn.dp.cpp",
+    "sha256": "f35d581af3124ea55301a2905392a25af23baa64a62cc42cef83ebd97bb8b99e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/native_gdn.dp.cpp",
+    "sha256": "ee00891065abb368a4bd2487afa6fb3072d032d9071b117842cfd0174f512813"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/native_gdn_preprocess.dp.cpp",
+    "sha256": "f618623173b3a6dce49e38ba02df84a2f5efe61455e8e7781d946f95bd1bd3df"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/native_gr_norm.dp.cpp",
+    "sha256": "8bc78539478bcbdb4aa3427ee1121211774f6cfaecfb8c9c81e469d6ef439182"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/native_gr_postops.dp.cpp",
+    "sha256": "629201720d7c4a79b7b1afd189345110d30ca6c375d6644a8329af4e4b748532"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/native_mmvq.dp.cpp",
+    "sha256": "d36b47b7090553c2678ebb470cbbd3a882218491548712624804c3898c6d43e2"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/native_moe.dp.cpp",
+    "sha256": "644ad4023b6ec0e588daf1ab42bbe1f2d7cb448a4d369094b4e335a748795c84"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/native_ple_postops.dp.cpp",
+    "sha256": "fb29cba9748f6aef3040113ccaed93ec217f32b520801cc0c61ec537be676724"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/native_qsa.dp.cpp",
+    "sha256": "a935d8edbad66eb341d6e4a1c45fa51a81b9dc8606a062a0b1e95ba0e1318f37"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/native_qsa_indexer.dp.cpp",
+    "sha256": "133027606e4dd23afb7b7a463d756d27fe4f312b10a82f884abfb0bcddedd465"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/native_qsa_score.dp.cpp",
+    "sha256": "820e2bb85c7a19862ade655aa3a7a2dbcd5e0796056d3082d046e704fe7cb6a5"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/native_rope.dp.cpp",
+    "sha256": "009092009b6e880f332151606de1ba27fb69e370abcc4c6dd36011d01cebc38c"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/native_router.dp.cpp",
+    "sha256": "a2c0f3c7055fc46388afb1d82d070352baab6dcbb3f8b5ba35818796a12ec140"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/ple.dp.cpp",
+    "sha256": "811a03ecd3e46cf4e322c6e33e0be0261c6e9ade69db9d3627941e6bc3e71959"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/qsa.dp.cpp",
+    "sha256": "86a7f5499ba249d526d8b14158626cc9c9ce32d1a4b9bfb8716192bebd8b17ca"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/qsa_decode_attn.dp.cpp",
+    "sha256": "00bf1c45f15b1899e0562006aa6a410da4baec164eff1b1690316a6f2a66dcdb"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/qsa_prompt_attn.dp.cpp",
+    "sha256": "d57239375f2cbd8a2392516359f5f077c9c5d26af1c05af684f693c3e21f127a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/qsa_prompt_attn_xmx.dp.cpp",
+    "sha256": "793c2f10b2302a65601ec5da054064adf7bd64f0119fbe7dc562ae1b990bee66"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/qsa_select.dp.cpp",
+    "sha256": "443c1c9d4e79b1eb13988507ab9a079c11651f15a610a317c4d0d3945e4f3978"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/quantize_act.dp.cpp",
+    "sha256": "7f4ae5e5a80c44a0a5c51faeebab76b3e376de0f46e3cbf263fb32291310d7de"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/rope.dp.cpp",
+    "sha256": "c5881e7d04c787658443ffa0781f0fa744663d3090a884bc3c1192687a1913ae"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/router_top10.dp.cpp",
+    "sha256": "53f1863592205d4126f1e93018c7bc5c673bc4c4fe7e9d04e9447a5b055f5382"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/s2_expert_grouped.dp.cpp",
+    "sha256": "06179050425e0936860c121cddc0ebdc0b7b18b27102de4f3b5d05ba37010164"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/s2_gemv.dp.cpp",
+    "sha256": "de5640010c025271803b03ad3320f6e492cc22ea51666cb41d777461774aea5b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/s2_gemv_fast.dp.cpp",
+    "sha256": "55e690148ccdf797f5cf1b91d2164e7708706bd514b36d4c1548096008f19b48"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/s2_gemv_q8.dp.cpp",
+    "sha256": "c3d5eb2bc3d6c56b22a84f8c5d05e41a36381ce15f10300635ec70234f8e6627"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/s2_gemv_quads.dp.cpp",
+    "sha256": "8fc416f044136185eb70b0e85e830bc7e4fd601667d2857bc9c15a92dc498b12"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/s_gemv.dp.cpp",
+    "sha256": "fd710fcd7cbb9d98353680d860f0841d72d3968864ccbb4d8871ee676a743532"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/sampler.dp.cpp",
+    "sha256": "b227dbe8ded71292b6373c886204174c6b04d3212e1872ca00bff646053feb1a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/shared_expert.dp.cpp",
+    "sha256": "c0ed885fbfa1f89b0136d8a5c3f7b8dae7ebcff3c8d1fd2bf06e4df4f7e5430d"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cuda/verify_kernels.dp.cpp",
+    "sha256": "bf418dd014df0c3b20da36ba297c30ce40d974f35d736408b1ed4ce10b19faef"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/cvec_parity.cpp",
+    "sha256": "29f472417b2255f751b913e662458243f7209ee2683f112c6ecb25b2ae8dc4c9"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/dense_bench.cpp",
+    "sha256": "f2c36f407cb925cb450ed92f0457e5f67592b6d2b709c01bbaeb9569893cd3f2"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/dequant_bench.cpp",
+    "sha256": "997480e31f0559f320ac0f83d7e283750b6ce627af68c98eaa5822f63e1763f0"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/dequant_bf16_test.cpp",
+    "sha256": "adb4f62b9cd2a7a56143404cd3090a9031aacea7d365fba7c75e6b20ae3668b6"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/dequant_s2_parity.cpp",
+    "sha256": "431f4e201a349b814987d23136a54690cef167467aa402b8f51ae8fa9ec334d1"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/elementwise_parity.cpp",
+    "sha256": "14766410fe4217e5302ca03c019ccd7d37f403c1a99322f63b3cf8c1801e61a6"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/fused_gr_bench.cpp",
+    "sha256": "299a81b08ecf91a2f664931bbd5b7d5e77da70c3dc26454814dba6d5dd06e3c4"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/gdn_parity.cpp",
+    "sha256": "473b320b478d4034af169457c4c7a2c7fa91ee942de0edcc0fa4daaef4efa98f"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/gr_bench.cpp",
+    "sha256": "b1a7188bb9366ab4e025019e8a5b449179a63de5211f8f38b2456096e79b68c3"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/gr_multi_parity.cpp",
+    "sha256": "f96c09d119cc19beee9c834ca6933751b267ac3b1927d0d54fd7a0cdbd35eb19"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/gr_parity.cpp",
+    "sha256": "cf8db0804aef39c83efce580c58ed309cc5fa2685e90ea0ad3fd01c4581a8181"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/iq_multi_parity.cpp",
+    "sha256": "21b7ca105acd2186ada431366185053f1ae91b7676113555ead77c04789e3994"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/iq_parity.cpp",
+    "sha256": "2f6ea13a74fd93218bb19d67fce27ac76f832629163040198a9422829eb7a27a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/kv_hybrid_parity.cpp",
+    "sha256": "eaf36d2d1cdf5b3139452ade2b7b0574d8f96f1f0706bacfb2e5b2c70ba97b99"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/kv_q4_parity.cpp",
+    "sha256": "92c89213e7ea41af920c26ec77b5f1eb37f3f83561ad188e8868337f3618d8e1"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/kv_q8_parity.cpp",
+    "sha256": "a2ee4dab78ce97b26a42f5724e5123c54ba144b85932955ccb301d544d4d1ca5"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/kv_steps_parity.cpp",
+    "sha256": "d8ee328ba403bcee81845694bec01b7da519a9ed06debb3acd887b663d23c39b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/kv_stream_parity.cpp",
+    "sha256": "8ee3d193112c9f4467a25b44c2a1f8a9022aac662422ca9210985bee8f9356e3"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/mmvq_bench.cpp",
+    "sha256": "280f6691bf6c2f9483b05dbe092ed6d368ef23b056e50e6969c89dcf663c4592"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/mmvq_multi_parity.cpp",
+    "sha256": "6cbec30ffba262601b4b4406e3f154d9c6a701b65422e0ffecda3b6c552e37d8"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/mmvq_sg_bench.cpp",
+    "sha256": "1474fa34c34caf61d4ef9bf56a4f477c3a9dce45137c48c033025cbb7a118d9e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/native_expert_bench.cpp",
+    "sha256": "3ce62d9fa82db4082e1c903fa8ef672f46f2d0e5fe4da3320452f908cd7409f5"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/native_expert_parity.cpp",
+    "sha256": "9c8e8421550cb31d6166acbc0716acfaa7dddde1bf5beef9fcf29956a05cad8e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/native_grouped_parity.cpp",
+    "sha256": "e8cf426be36d18f90807ba5323e99120e51581083ddca1c1e34a13b7c3ab11fe"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/native_multi_parity.cpp",
+    "sha256": "842a94b713ba2ed53a1b16896f9c3881f67e062c7fc1e5e884aaa4003159678d"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/ple_parity.cpp",
+    "sha256": "1bfe8c9f5dee102db4ea754b484d8da9e9a9574aadb4f380bfb1cc7a57635f66"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/q5_projection_parity.cpp",
+    "sha256": "b8f036075592500ad382202ad28f037da9300be12c51da8d4b04589869f89f13"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/q6k_align_bench.cpp",
+    "sha256": "816938e58389459362ac94413d5ab06513193bbd285d176a933d09fa196e8bc8"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/qsa_parity.cpp",
+    "sha256": "6226e8c3f7e5c1b6f99aa4bab9f72f68dc78b3c2052eaa2359e1961cacf678d2"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/qsa_prompt_attn_parity.cpp",
+    "sha256": "ffe25930ee229a297b5797b46394034365688690b0c01f954750d0f96e4152a4"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/qsa_select_bench.cpp",
+    "sha256": "d17175badba87e953dac100f550a393bc2ce4db29fb295db4240b6c727c7297a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/qsa_topk_active_parity.cpp",
+    "sha256": "71c7729d6a1683d2b682e6fd3d2c9ec538b099d12b438b07f41687f232b2059f"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/qsa_topk_parity.cpp",
+    "sha256": "f85e553a1e52cc3c21ddc92beaee1310dc531f814ea3fcfc94dcb3639870feca"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/quantize_act_parity.cpp",
+    "sha256": "a3bb9a7a19c92d3f1f9f30aebeff29aa52b9dd782ba7d00cd7802a8ae6a99ac2"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/resident_plan_parity.cpp",
+    "sha256": "7eb3e257d3da35336f23e0e68b9fca4e99d15cc4ff5c761fed6e9f02406e4819"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/rope_parity.cpp",
+    "sha256": "80f57c5413f6c53d57118666bdb095a1af765753d9e4cd11979cedadc6a83046"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/route_window_parity.cpp",
+    "sha256": "d4e0669f5fc01917bb0410875244dc6c376640b43b56741b6a845d35ac93dcd3"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/router_top10_parity.cpp",
+    "sha256": "dc569d195559dcbf1087337b8ecd823c6c6cc98a665663151c76f6a39768616b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/s2_expert_grouped_parity.cpp",
+    "sha256": "552b1edcd2d523568cf223c319e82f02d5793b2509d016b7d405f0ecf88adc08"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/s2_gemv_parity.cpp",
+    "sha256": "832d67e38693cfc17d91bd75477afe85be980d688a7d7821be9dd400bae82919"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/s2_gemv_q8_parity.cpp",
+    "sha256": "a445cc67fb8b0ebba2cf8597fddfd71ce88af3929b0b82d9931382e594b6020e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/s_gemv_parity.cpp",
+    "sha256": "2d6aa50d911aa0cf5671a362397f260785c576722aa777719e4aa3ea658166d5"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/s_gemv_q8k_parity.cpp",
+    "sha256": "06dccdeffa72e607e28e9e99756ea1b1e71fcf977f2b54c0126a914c6e726e4b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/sampler_parity.cpp",
+    "sha256": "4603b79a28dedb1f5103853ef50511fee5f68182a21c49cdebdec227dfc03f76"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/shared_expert_parity.cpp",
+    "sha256": "3cba7566ddce3e74ea4cc98b3d8d790cb697da7676e022c521af563554db1193"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/verify_parity.cpp",
+    "sha256": "2d3063b476120686e0bb0391c0802f3f37885578097c9c3f4fde34a0e5341808"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/xmx_gemm_bench.cpp",
+    "sha256": "fc64986e4b4c26ca646c0fe47afa87e8ecff86be714d170ccbf36b504cb61234"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/xmx_group_parity.cpp",
+    "sha256": "45b08e689713be606cac6ce51e04b3d29803c1abd97d02bfe10efb2a67e267b7"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/kernels/xmx_int8_bench.cpp",
+    "sha256": "0191dbed0d168c2604d582257169817edcfa87391a3df0870b4e17c7d1c1c92a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/ngram/ple_reader.cpp",
+    "sha256": "6805e2491fe7d65bd829d48a1d187ef0cd8796421fe7f62e40ad2a1eacd73863"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/platform/direct_file.cpp",
+    "sha256": "d0a5b22c99fd09a12acf376ffdf7bfb2d4b439b13841a03b297a66e379a9b3b2"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/prefill/gemm.dp.cpp",
+    "sha256": "3e6c14d1f9d569198ec40c1eb318925f51fa11ef32039ff07e50eeb876b43c81"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/prefill/gemm_bf16_parity.dp.cpp",
+    "sha256": "cbd42047f8f118afde6ca5b6bda9408a471232fd40535805a9eee728b30a0c71"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/prefill/ggml_cuda_host.dp.cpp",
+    "sha256": "4d1f0db3ad915c53e252a219897be67b6a7cbb03d208028a120051ffb592bf94"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/prefill/kernels.dp.cpp",
+    "sha256": "a6fed7cf0df41e92ba46e949493808a83a0589dbd95d4d46e25e0071b39b2030"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/prefill/moe_fused.dp.cpp",
+    "sha256": "1edd5bee4bbc42442d63816abb585aca14c875f148f70ab971ef3a63a8cbd4dd"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/prefill/moe_fused_iq.dp.cpp",
+    "sha256": "1717285bc25ad7742cd10a9077682ffeed7ee8b98e485b0a52157be337940998"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/prefill/moe_fused_stub.cpp",
+    "sha256": "ba8a9e74b8178727eff00ec8119d365664abb242b233f7c80ab5811994b12e8a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/prefill/moe_mmq.dp.cpp",
+    "sha256": "d226dedd2df3d4d116083386b3000f7d485541e7ff3361fb566875825a94ff1e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/src/prefill/xmx_moe.dp.cpp",
+    "sha256": "8f039eb01dc47f77bef604768050c6b2a0d67fa06f93a38bddec4c0cedbeda04"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/tools/fixups.py",
+    "sha256": "b3b0f2e74f318222701d99fef3700b648086158971646ec352f65e0b4263a294"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/tools/gpustat.py",
+    "sha256": "5da408cd6cfa968fb70bc50f492d9c0ee3f82845a1b574dde5dc3d79a04c361b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "sycl/tools/merge_upstream.py",
+    "sha256": "efd687da438e9d70c79f84b9f7ece2be0eb1846db1de52335a9203dc2135b6cd"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/core/batch_rows_test.cpp",
+    "sha256": "cfa71023b32d2a82adb04388991a1c82a4e928eadfa0bb1b07142565490182d5"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/core/dequant_q5_1_test.cpp",
+    "sha256": "612d6fd18bb52ed4090da7f16c6f55597ee4ee97ca28265d91034569f7efccdf"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/core/dma_batch_parity.cu",
+    "sha256": "325c044479a070d0490869f6e0e1b2a9de5c4bc0064855a4db26ce5e5c037161"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/core/exchange_storage_test.cpp",
+    "sha256": "5c482df1231df9775944fab1f138ef06e3825ab9ccaab4c64992441042d9dfa2"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/core/expert_cache_per_layer_test.cpp",
+    "sha256": "89a809179e95c2e4418b09e04e2f904e5c8696ce451254acb4bd48feb9512edc"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/core/expert_cache_segmented_test.cpp",
+    "sha256": "44ac5feea8226e9bb84519aba3e43e3cd73d5f9b9ef0a129ccb9bf9f1667f76d"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/core/expert_cache_slot_guard_test.cpp",
+    "sha256": "db6c6433c637e0d64f7518c9ba6c9adf8e08ecf9fcdb21d436022361b38985f4"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/core/expert_layout_test.cpp",
+    "sha256": "e9c6bd3c64db823e0290c7827151df5638ff6a562d9d2076924049c03042ac2b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/core/expert_profile_save_test.cpp",
+    "sha256": "8fbca3756821946c6894bdf4c7a102f566ce72a8d0db6a7492b71ae495cf87ce"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/core/expert_profile_version_test.cpp",
+    "sha256": "be3ca46c9db63c52b57ea3d7515fd005ea6fa6d3060292d051e4b21fb93300be"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/core/file_expert_source_test.cpp",
+    "sha256": "3d0d246b415e7465fc5800e7e8302e0c2b410a0436848f5c585b082b65ac08c8"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/core/gguf_geometry_test.cpp",
+    "sha256": "90508909af4f3d1ac20252770b71169e439faebf543b5519380219d407b7787c"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/core/gguf_split_test.cpp",
+    "sha256": "6bce7e67ba1ed3f40105df481669417977718ff9a7497352d1e3f0e045247ee3"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/core/host_graph_launch_test.cu",
+    "sha256": "465cf26c39d454ab1f9a673930074318a20dfd52da25aa81233c22d122bad59a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/core/memory_guard_test.cpp",
+    "sha256": "b58c6c765019690d198492534d9391ed9e8304af0abd2deffdf4375e5429a43e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/core/model_family_test.cpp",
+    "sha256": "1683933d4f009b3a894289cded0ef48014806abafbe07cac22c279d5bdb13034"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/core/native_dense_ple_key_test.cpp",
+    "sha256": "8882e42d0a9d0d84e8e6667b8ec452965f1bef657c3e3f5d3266e8e531358df1"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/core/split_lend_complement_test.cpp",
+    "sha256": "b4cf74b40b53dc3d867d959964d83e3646462c080d49e0a360ef8f11abdf48ab"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/core/vmm_test.cpp",
+    "sha256": "da4511f37ff0f9eaa0000d97fe3a20e48481b2611d93ddbec8f6702be9a932b3"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/cuda/pa_bench.cpp",
+    "sha256": "b27392a3085f85528784f1f54f7d664ac3203dee4f6f8e10c95dc0c2d4884728"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/cuda/prefill_fused_iq_test.cpp",
+    "sha256": "e52daba8363fa6991831e74ec971a49167069f2cd468349d30f14e81f285742f"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/cuda/prefill_fused_moe_test.cpp",
+    "sha256": "051bb2f7135e4f2fd1aaf543896fd1317ee22d0c4ecfd6a821e7f9465bdd99e7"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/cuda/prefill_mmq_kquant_test.cpp",
+    "sha256": "05072858295bcc110a0c74b3d500e48bac681d54d075f9fde3314e2dfb025efa"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/cuda/prefill_mmq_scatter_test.cpp",
+    "sha256": "8dda40f3d9c9680240a4bb73caf8ec4539910ecfecd559a231c5a714f7f86546"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/cuda/prefill_mmq_tab_test.cu",
+    "sha256": "f7640b90400f3ce6e783b2b9ad122dd36b12b0c9f8c09a88b05e51870c23b180"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/hip/expert_cache_staging.cpp",
+    "sha256": "f9ee8802de3199afc5e84b52287aa953c8bde7a5b70eb65ae9ac5d7ef72433f7"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/hip/gdn_chunked.cpp",
+    "sha256": "23e1a044de8b5451f434f85f15abfc71dda65d84d5dceabab2e2219b6064855c"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/hip/gdn_rec_head.cpp",
+    "sha256": "c3d3bb2698e84440435727a1925fc495d542c5231dff956745c804a44ba7c67e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/hip/gemm_f16_io_parity.cpp",
+    "sha256": "7febc1fcc6930733755b505c85f6ed1fd7fdb9cd7bd5b434feabace15405c6a6"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/hip/handoff.cpp",
+    "sha256": "fa481a7d3b44afb499789b1692a6e54065d31df96d8431cc8d860eda74618aef"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/hip/intrinsics.cpp",
+    "sha256": "00b43f18cda86570fee5c1844c6533e224a75a776929301374de74dda6a53b2d"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/hip/mapped_alias.cpp",
+    "sha256": "81eb72111f20e15c046c6a0ac9f55a57d65f5579754c1624e42ddcb85ab89b99"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/hip/native_qsa_score.cpp",
+    "sha256": "826a8ce35f9d6bad0f7268e5b6f10253496060d6308070e345ac5354296d82d2"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/hip/ple_iq4.cpp",
+    "sha256": "d79b26741f4a8ee6aa73d646ce9c98c66a7bed5389b86af0d4c5adc099d601e8"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/hip/prefill_gemm.cpp",
+    "sha256": "b9e4fec4d3e40a59792684d43765cb57d9abdafa3a98d5480b280b173e13f674"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/hip/prefill_hcd_exact_parity.cpp",
+    "sha256": "8fbf7faddc7a22aa428447abfbea758c06e2b8959dcfcc2a97e5b384a737d1c3"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/hip/prefill_hipblaslt_gemm.cpp",
+    "sha256": "1f8ab9db589e5d44027f6ea543c07a0a0447eed81255a2560e026a24527be0ff"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/hip/prefill_mmq_parity.cpp",
+    "sha256": "f4909f907f4bd7b6fd9d65bd604fbf6b7f51393ec45ec26c37467a1658329afa"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/hip/prefill_native_batch.cpp",
+    "sha256": "22ff9f9a8cd81a3bffb27f108798751025401740b5c1de57ff302c3f6c04f3b0"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/hip/prefill_rocblas_gemm.cpp",
+    "sha256": "b8ac8c50db72dd4066b0b022cba60c3e0225f9c9086c697314d0738dcf321105"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/hip/prefill_wmma_gemm_parity.cpp",
+    "sha256": "8eaec15b322189c80027f53802aed2414a6ac99420e45bd117bac51a4978780d"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/hip/q2_zero.cpp",
+    "sha256": "4e760dfa6835873d687788cc45a6019676d7e36677ab91a120b6f60e947a117f"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/hip/router_fast.cpp",
+    "sha256": "0d71c633ab51e4b99165f595b9cbd15b8977e4bba20d94da9e92183e2618d640"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/platform/aux_cpus_test.cpp",
+    "sha256": "872a49c53dd489b0076a5247e83dc2ab5e93244427df89701ffccea1fcc11508"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/platform/direct_file_async.cpp",
+    "sha256": "e465bca18f4c594c3a401ab170210f6375885ab354947093b3b99ee5729f68d8"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/platform/host_limits_test.cpp",
+    "sha256": "c60ccf96c878b07760fe18ee91d8c17494f7af8006e4d2adc1550c58e1846d23"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/prefill/share_rules_test.cpp",
+    "sha256": "32ffcf9e7653630b0cc7d6822c503f9fb73c9562e3cda73fcb8a10e48fcd457a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/prefill/tuning_header_arch_family_test.cpp",
+    "sha256": "1962354b821f0666aa94277495fb75bade3b70da06843c67e2b3928e2943b88c"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/program/batch_read_test.cpp",
+    "sha256": "73a5d05b8404d2c5e67a1146019221cdc7dbc41f59c01d1281224094f560cea8"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tests/program/split_rules_test.cpp",
+    "sha256": "10f587246d434be6bd14119502a6d1c5b986e3b340c824a13fb8c5620d64deb4"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/_paths.py",
+    "sha256": "31b0f4d27d66b32793074ad1ff00a7a9b5938dc63dca3ffe79a8de5df7b37d27"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/ab_engine.py",
+    "sha256": "694b563dc7d422a61be05523c75d6bfd473530dee257b71ac65517886f918f77"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/agent_turns_bench.py",
+    "sha256": "784c1c36f49017aa47a0d4a4dfc73788800068b5486b31b9cf39784fab59007e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/batch_groups_cache_test.py",
+    "sha256": "de0eb0e3b17464967e990425301889900a8883f16ab7bbbea785c4a0c9fcd4fa"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/batch_interleave_test.py",
+    "sha256": "bf023f77c7ee390c9e24e44f3d6d5585cf918a62945d60e77fe6bab0941b6ca2"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/batch_test.py",
+    "sha256": "1f09c11d51dc0e5eba93f066495d3d199809fb2715050e08e9bffce1bb332362"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/bench_eviction.py",
+    "sha256": "2a10455f68d4ad940b5d61d82051380c7ab97d957bc405fe3af63c615ebe952f"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/calibrate.py",
+    "sha256": "a8a97616b88a27508a01cf10f9fb6c8370e4e03023c6cde98a658546d5adab62"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/cancel_park_test.py",
+    "sha256": "1451ed33cb913d193ab09125cedb48b243da3324959ab7e51814f9fa58348921"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/canonical_xcheck.py",
+    "sha256": "ce294518a12ef2a8dcbceb59f386cc37c2e8d5db5c7ea434ca54d720636c89dc"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/check_isa_guard.py",
+    "sha256": "06ef019d57044852f71d561768063c789d990ffc75f2e34146b306f7c8e40ec0"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/collect_profile_traces.py",
+    "sha256": "b711c8b9f11c0a25255d53cf7fc64f24326a62310325147916615e12bbf1bfad"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/conversation_cache_disabled.py",
+    "sha256": "910a280a2241eb2cdff720986b3fa0ba72397a9c035de77cde789559ca98be61"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/conversation_cache_growth.py",
+    "sha256": "14a76e3d5834c6910ee95f6bc64eaff788548fcfe99ecb79968a0199de6772fa"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/conversation_cache_http_smoke.py",
+    "sha256": "5d94772b51bd17cec4ee5da01b1fb33703da6d92055f4a399ce5d7b6292e70b4"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/conversation_cache_isolation.py",
+    "sha256": "0c42dccfa59fc657186f5b1bfd56fe67a8f6f2aa6b3b22ea35e81f8ce3fa25ee"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/conversation_cache_parity.py",
+    "sha256": "b85a67810870aa4974e4d542e494e37004bda72117726addc04f0235272e9c8d"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/conversation_cache_soak.py",
+    "sha256": "094eab177a3eeaab5672735d8e7f81ffafec9e269d2bfced5726680c922a66e1"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/conversation_restore_speed.py",
+    "sha256": "2f54ea80c92dd40e5bbbc3c10d13aaec908073a0183edec0d514114dab4cc383"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/draft_vocab.py",
+    "sha256": "3832709d652fafc726a829f9889b39621bb2afadbc9c6af5ccf357d766089e4c"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/early_close_test.py",
+    "sha256": "200a4a3dedb29f90a59b6abf2bffceb2142a7901720e85000c0b5c4893eb0c84"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/embd_bf16_pack.py",
+    "sha256": "98711f070957a1023e7bf60f2accf8df7dfa5b97cfab1c7a231c419644a737e2"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/gguf_reader.py",
+    "sha256": "5ecf739bb3c2f07bc7f889f7f3a455e3dfdb40068409e10781a1a9b2be289b5e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/gguf_writer.py",
+    "sha256": "cdcef57013ac98134ec410390b8b20afe4e538a6d646a23be648a007f8bc8fc9"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/h2d_bench.cu",
+    "sha256": "8ff0b645a5e2e03c9555ded3436a079bb53f29468c4ce8d98bb43a55ab66afb0"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/hip/bench_prefill.py",
+    "sha256": "52a431489b767dd600bfdf4cf6c66287a45e69e42ea9745fec6f786cd4f3ed36"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/hip/dll_closure.py",
+    "sha256": "35944b68cdb874a4ae20c78aff7cb698dd08845a3928a05c255df29365f4f4e2"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/hip/package_windows.py",
+    "sha256": "851bc2a00c26d830284c7fa982fe4d91e285abd4c0f2049aa0d730564a0341a0"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/hip/tune_hipblaslt.cpp",
+    "sha256": "ade4420c80df1b00831e409a02482f8bf93a11e0a56ad5c73e8dd7766b974f09"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/hip/tune_rocblas.cpp",
+    "sha256": "0c363fdc1c72ce274e6925c592e39e5bb0c68af5e06d045f7e39d764bff102e7"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/image/install.py",
+    "sha256": "ddca4a992b799c98e9768e11364fe6967b8a06b1dc5b66495520f0d940b55f3d"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/image/qimage.py",
+    "sha256": "7717a8da5bf4768627d639b1c661149af7c9152b348513d9eeebd201ccb760b3"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/image/sdcpp_native/apply.py",
+    "sha256": "8e387d22c110b62f19dc4bc3299adab17a153d264cf8810abb4b849b31d946fb"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/image/sdcpp_native/qi21-native.cu",
+    "sha256": "55130511bbb1e57b877f0b4b7033d6bbf1dce49c85e97f3e6ecd9a28c2eb03f7"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/iq_fixture.py",
+    "sha256": "85343cd5c66ff5b2a2e40be7e24b6c3c6ec9fe6c146c7e0956299832ecd4deef"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/iq_pack.py",
+    "sha256": "21b73cdb06031d2fe65bd87ebcd1ccfd8c40ac15cdb1c54d6dbe84d233c8049b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/logit_bias_english_example.py",
+    "sha256": "e8918427adee4602ebbba71d144410aa72b3919501b867d59ad49719f922aeee"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/logit_bias_http_probe.py",
+    "sha256": "99092df78ae1a1c7ddf8ccce154a514c180880f42fd18dfcf17fa752a23102f1"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/make_profile.py",
+    "sha256": "54864322d25f688144ce01217aed8a829a9c3dc1dad9610f2feb033d0e601027"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/make_profile_mix.py",
+    "sha256": "d5f75968bee72c838169c87f4708384e5e7f0d5cb731d4298da1a7a1485965fb"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/mtp_fetch.py",
+    "sha256": "6ea31614ae9fadc6ed17177db352145436b1546957f0fb6f5abb99f4297857fc"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/mtp_pack.py",
+    "sha256": "322502ce2356122c72c5958e0775e4bbbf22ab804a31a8a63c783388e04b3894"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/mtp_rt.py",
+    "sha256": "2d128e3a62f8f4810e1837cf4292d0e8473c80c384c2f2e10e2c9bfc4e94a531"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/needle_bench.py",
+    "sha256": "eb55ad42a0846057e20a2f0ca53112502dd78f5407bf8470b82b2a16698945d2"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/nvfp4_convert.py",
+    "sha256": "d63dad75178ae95f6239d933f3e9364f04e5cfa7d15f952a63663f680a0f1527"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/nvfp4_verify.py",
+    "sha256": "1c6633712edbfe8797dee794835c540f59a0eb3d0f906b40667ff166f35ad818"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/nvfp4_verify_gguf.py",
+    "sha256": "94346f1e241c62f08c6d754e46fdfcde01a95a53ffcd65e78c7475609ae8a32c"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/pack_index.py",
+    "sha256": "b4af22069a5f8dc699ab45adccc61cf33068ff3fc9d03fc77e788af44c7fecf3"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/pack_layer.py",
+    "sha256": "caf142fdbf0a6d48ae1c0ab02c520997fca28978ccf80254d88c703cbf33192d"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/parking_test.py",
+    "sha256": "f69a30ce0c8f93b7cc7275561b1938d4963222888dbe8ea1a7fb51a7881531ec"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/piped_read_join_bench.py",
+    "sha256": "3fd153102a13eaaf51a7dcab6d1acf6f8f6d1640591eafa75d60e9dfaa364e18"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/ple_fp8_pack.py",
+    "sha256": "6f7a2327ffafa435ff88611167362273399fd77a057efc8e669240e3c06a9419"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/quant_bound.py",
+    "sha256": "29b4dc901c631fdc43088b9fafde2a9315fabbb8d3728bd78c6ad434cbd70b4d"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/quant_formats.py",
+    "sha256": "f41e1ae0ae14ff31ac1290f1da510bfcc815ea8cafab0b5ffd7ea5c16fe139a7"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/quant_quality.py",
+    "sha256": "6edec1519b3d86f6468c815829b95878abc431063c5c16516c7e0a28228bea56"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/quantscope.py",
+    "sha256": "3a3cf0d54e68dcafc5e475c186af562766e199729405f17aaf7433cfddb30570"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/qwen35/compare_dumps.py",
+    "sha256": "3619af448681f921b49ed7b1db8bebb7562a79aead5d83f0299eff8312263dd0"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/qwen35/kl.py",
+    "sha256": "9d84f7ccdadaf7291e09ca2673d266761e94230b3f01297bbd829447da8815c5"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/qwen35/make_big_picture.py",
+    "sha256": "c838cfa583f9bce256124cdf5f658997b3428b1a7cb21b91cbf798afa22381f6"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/qwen35/parity.py",
+    "sha256": "3fef6046f36a6531fc57d255b50573b1138175df0b18d456a5117b6b2745240f"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/qwen35/q36_batch_gate.py",
+    "sha256": "d42a76759161776483d62934b3205ad7499b8a607db0fed0dea8ccba05374db4"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/qwen35/q36_cmp_gate.py",
+    "sha256": "c261edfdacb7dcbabf677664518bf22aa20f023720d3dad8a97164007350ca2b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/qwen35/q36_harness.py",
+    "sha256": "18be61542a2658a49fe5172217f31378575eeaaba5e6c07b3126453ce40890a7"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/qwen35/q36_interleave_probe.py",
+    "sha256": "7574c6bf0749bfa5ee0c99cbc1c5a526ec6e7abc542a9c4d8e54a916ebad96bb"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/qwen35/q36_lgcmp.py",
+    "sha256": "e6fa99c775d3f4877842c5d665267687d1f8215eb3d278fd7d7d101bc16b906d"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/qwen35/q36_llama_dump.cpp",
+    "sha256": "ec0210f51dc03f0ba9a1036960c755e76aeb8f830e517e09f75197812d8ad703"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/qwen35/q36_mtmd_dump.cpp",
+    "sha256": "ac258e78be520f70c92c68c642a766c70966904b8c2cda331d085acb27600cd7"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/qwen35/q36_multilingual_prompts.py",
+    "sha256": "eaddff7b8d1904a62d31f9709b05289d58e6f074d7e60145ae8d5b31d12aa27b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/qwen35/q36_par_bench.py",
+    "sha256": "308e33c5457ddd6fffd629b7ffb7e7a21ff773460c09022bdaecb1b90700a905"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/qwen35/q36_proto_edge.py",
+    "sha256": "f74e0665cd7800f068f12afb70a41371a0404735eb08ec5cbbe2cea891da7d15"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/qwen35/q36_serve_handoff.py",
+    "sha256": "b9e8e5b8bb0ed4526ca72d16c1632635e69aaa81de2001fbac2426875c1a28e7"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/qwen35/q36_serve_par.py",
+    "sha256": "2561bd35f52995479ad10c0e95a2367a9bb40668c58400e16d16a647aa231c94"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/qwen35/q36_solo_gate.py",
+    "sha256": "19de067187285651888c6ecb962a8ce68d76fcc2805821ec04469242a693035d"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/qwen35/q36_venc.py",
+    "sha256": "7d955fd4eca12b25efaf0a29a62f178223c0873a9ace01ba18ec857f00605487"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/qwen35/q36_vision_cmp.py",
+    "sha256": "ebd5fcdaee2998e7f846143ff3fcfb482a60dc4c3c6a80d7777be2d60342a74c"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/qwen35/q36_vision_proto.py",
+    "sha256": "7ca61b1f04dee9865688e1e47ecd048087e57c2c80042f93383a519017e6ebe2"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/qwen35/q36_vision_serve.py",
+    "sha256": "9c1c1ecfc5457d0da2c4263245714526ce0b3c4df17ae11c1925a177a2449cd2"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/qwen35/q36_vram_refusal.py",
+    "sha256": "0a16959b3d35be33ba7e2b9b20b1169ace6bdb4001562143384da9443f61aa94"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/replay_cache_policy.py",
+    "sha256": "37227e86f94ab3996c0f7a39f67b19ef0395b926e3c3c23fd5314308d464392a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/research_run.py",
+    "sha256": "048d56cba7bb2e33eaeb6b1ba35913aefb6b113e49999d8dc0e79f86ce6f7b46"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/serve_load.py",
+    "sha256": "bf97e79f14835cf2260cbd5150d59e910047f7d05fe900bd955f53f2a6f4e75b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/session_pressure_test.py",
+    "sha256": "419ada53cd453816f2385776a7295c3bbc5a1074398c7a4266a8d3a74999b916"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/sm60_dp4a_check.cu",
+    "sha256": "d416cb40c9b22424502baf0a9fca468cc3039219ae7ec39ac03c99665f584402"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/split_mtp_batch_parity.py",
+    "sha256": "cc370b0015565e2f6bac1958fcce3d07fca6f2bcb7bf3ffc5c1e65836aaa8934"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/stop_resend_test.py",
+    "sha256": "fa3e8c0bade988cd9154af9537b1c19876acdbae30f8a444ec9ab2a8b03bd082"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/strata_bench.py",
+    "sha256": "76720d4bee98c8795e06a5d0949adb4baf244ca90c874e0cc37ac5cbac5e1382"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/strata_inspect.py",
+    "sha256": "318661be0e8f595eff08d251df84958cff0b98b1efddbb7d12f4a2a14b856a8b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/strata_mcp.py",
+    "sha256": "2f6786097ec4148ad561a13bcd05c53d1a946661f5eb6bb4ed7460c0a21d658f"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/strata_pack.py",
+    "sha256": "4fe5f3696401e5d9dc4071c45ee9eac9ebbd0a5bc4f9865bd9d6add11832e14a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/strata_tokenizer.py",
+    "sha256": "e0cd8d6ae38dda0a4ad7c14f812eb64d5fd6f4fed9c920d4427a14bf585dc9b3"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_bench_eviction.py",
+    "sha256": "ded90169168a6e6fb2fd386151a6647b19be912f583deca9f53f0f8a60ff3da4"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_bench_host.py",
+    "sha256": "4ec03198369aa565dce2fcf1f4a8ce600663c599d75fbc4b95e4cab7cafb7b51"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_calibrate.py",
+    "sha256": "fa5e47540f1212c791b6449dce779a9189d05967d974fa7aa58537586f033744"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_check_isa_guard.py",
+    "sha256": "36637858a1a305339900c5c6f61541fd10c7f90bb498f56941f31686da9a0dbb"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_conversation_cache_disabled.py",
+    "sha256": "9ffde82d9ee88bf79eb111400e45e5604e39cf40f8fa4cf35b0b4ee47545f106"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_conversation_cache_growth.py",
+    "sha256": "857e7843a126522aebbdb60cda08ef5e042d8509c193fab963a11defa53afd8b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_conversation_cache_http_smoke.py",
+    "sha256": "43f54ad4f1524adcd635a4f35962b6d5aa586603fb73b3ae9edc9c94761b7552"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_conversation_cache_isolation.py",
+    "sha256": "049248a64f25240e79fb24ce6a32185a8137deacb575c93eec728870395465e3"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_conversation_cache_parity.py",
+    "sha256": "c75b3d2812789cd1988cb244d5adb5cbef32e6bcf5a97e1ce7c60039bff258b1"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_conversation_cache_soak.py",
+    "sha256": "96fc5e236ff2381c7f06be7e332dd414bcd1e117ba8c46ca1affadf538b8ecb9"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_conversation_restore_speed.py",
+    "sha256": "1f5e4c5ff1e49258a181a7b0305d4084a16a92f5cbd7a67449247b353cfa960c"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_dll_closure.py",
+    "sha256": "42e3ec5e5adfdcdd2d69435756f8e59e81022745a836e43d6c2cf4f9150236d0"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_docker_entrypoint.py",
+    "sha256": "2c617fab1bbcdfeae352d4f1336dd05b5e889b95766c3117dc70f604c960abc4"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_draft_vocab.py",
+    "sha256": "abcfff0384986d9d6e4b197b263735146867f941ecae8d4fdcff56837546ea46"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_effort_end_args.py",
+    "sha256": "ad92f94822f47fdc150c49b08439b419e6c4a9719f52a8f12a3dc513fe676338"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_iq_pack.py",
+    "sha256": "7870933083fa1d45941568dae869a27a3c47bfcf4924c67cf1ebe390d22e59ce"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_make_profile.py",
+    "sha256": "4f5d16e632c961b8e25ad6c9e33b8f21fe6ced22504e2179095eb3f5a915c7d4"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_make_profile_mix.py",
+    "sha256": "9433b5ec75855912b0f4081f21a3a0a1fa97bec255b7ab38f8fc3d13268c8b82"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_mtp_fetch.py",
+    "sha256": "aab608460ca2aa390aad1126e89a31621481750a42844dd2c566696bcf7ba214"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_qimage.py",
+    "sha256": "8764128040371e6947295e4b0de5739452d09a3a0acb2611a97490b182eabf0d"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_research_run.py",
+    "sha256": "2b160df9576cbb019342bb6b1ff3215ec5887a61a8eec0926d0b0b6530f73972"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_amd.py",
+    "sha256": "a3e0017e20cf4bbd0770856c4f26c4df69216f80b1dc6d74160072a8196f54c7"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_bench_tips.py",
+    "sha256": "bb11933f3c5639eb2bc1c17c005219167ed8e644ba5243d11549c558c3f9074a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_choices.py",
+    "sha256": "763b79ae0b5a1c9f38909c7d12d7ce6fdc998cda4851c6cd63967d93726681e1"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_compute_mode.py",
+    "sha256": "65279837a6bddc7a3f5eb628d07bef15681c843d9d8d430f9da0f91e7388a649"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_config.py",
+    "sha256": "253199313977f99b4103cfddaea743ab19ccc2219d6677e309fe065df1e17b0d"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_configs.py",
+    "sha256": "93403d3ade6d685bc6151600048a44121c888238b3f7148aeb4ddc000b06afd1"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_cuda_repo.py",
+    "sha256": "77e8ffee72ddfe569ae14d2caf63fc00f90b63fbad69c0840b45c548f8179256"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_draft_vocab.py",
+    "sha256": "f09b8db0bcb737dd0050491b450baf9fb390254bbdb986b302339d4159514314"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_engine_hash.py",
+    "sha256": "53cb016609a5af85e3df8575b82715d3a4e2f4de2b5067f337aee48cdc3582ab"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_engine_keep.py",
+    "sha256": "bdbf0106e1cdec6cf5601c60893b80055f489b6372f7b7475d5db9bbcf6b4e53"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_golden.py",
+    "sha256": "a407f11af8276494b3e15e26fd96a3367656fab90d23eb0dbed3ba0c75d4aea7"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_hotfix_tag.py",
+    "sha256": "8a967f6072b2188996027ecbbce66fb4254748240df2e0c7a6fb26d347c90264"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_hybrid.py",
+    "sha256": "c8d4b9ccd7910082be49223d0ad096b7d5add3f417d9435d59b0176757d01e85"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_llama_archive.py",
+    "sha256": "1090d6d17ee9c14efac38e62b3c8d9f3f7a0edf7d37642a4af32c7ede845faa4"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_lowram.py",
+    "sha256": "8c3b925ac822c4493542dc38f5ecec5c6dad1abee6fc04beb80a7fc8352f77b0"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_mac.py",
+    "sha256": "753a5d1fa835c1017ff00fdd5d84512de53e277a1c15c3f780ee2c1dff972492"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_menu.py",
+    "sha256": "13532ad90fe45641a0c990f90923f70887d82abc006dd0bc31edc23dd970958e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_modelscope.py",
+    "sha256": "e1380a7843a434a3dc6a693f89c458eabdeb48e4bddf7c79e7d6036bee81c6d2"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_nvfp4.py",
+    "sha256": "fde3fa2fa812e524695a055a6d59ea5294a40326e928929f8fb019462f88b627"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_oldcpu.py",
+    "sha256": "ca3b6571ece5a7ed7fc88e4ffc3d875bc8c0bed45a505b0c9a28a94ed33d5b4e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_older_gpus.py",
+    "sha256": "e89c17071e8649fd5dce8f757f3e052b2059bdbf4b9467e6ed3ccc896a786180"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_page_file.py",
+    "sha256": "77b31d258b23835fb6baee981888523422b71b9628fdacffc37d338e2b6ccab3"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_parallel.py",
+    "sha256": "ac17585e77f7a9f17e6abae4ace77a1d1ed76bca0aab0128e8d0a179e5190d64"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_pcie.py",
+    "sha256": "c833b3c9e67e4a9cdd54e05a6711ff712dac0a770fce6f1686936db28152e67c"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_pins.py",
+    "sha256": "b83e01924bf7bab713669b099d20b840f1de063408c6e80146aabd89a07e64c9"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_prompts.py",
+    "sha256": "aceb5f394717fdd87fcc2044c00ae5b03b19f6ba906694df928bcf82829c893b"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_qwen36.py",
+    "sha256": "0c3b78455aef82c4c5908824d0f2b072f4bf3d55aba6541457dc86462accbcf9"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_remote_opt.py",
+    "sha256": "9c3f484f5d9f35d2777cac453e73cf1e3b33225a0df5a57e13b5ed6bd61cf933"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_rerun_size.py",
+    "sha256": "a348579ac5577a5ff374b7ca6522abbdd5b246b54908cea7c8b8c660f25884bd"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_risk.py",
+    "sha256": "07b39cceb96aec8c1bd1429c18c9c80e5451b1808a873ff15386f4c84f3e89e8"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_rocm_pins.py",
+    "sha256": "1d0e809d94deae7aebbca4400c70e680caa4600a37928a12868a4718d95e2426"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_rope.py",
+    "sha256": "4c6d2d763edbd74c018bb7ad91b28a8484c56506e3307ed0cdd9924c90a36040"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_shard_check.py",
+    "sha256": "77df6f20f39907be15fd79a3bdaf02f7a8ecd781e6ae1ece36b32e7f423ee10d"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_small_card.py",
+    "sha256": "9f03db409c41ecc1f411ce8152e63c9f37f3bbf1a48547544b8342ca399730ca"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_stale_stamp.py",
+    "sha256": "9d86a128a26cf84f889b4dc2f70d9236dfbca1a4bf80d73f2b7850a7e7988680"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_start_gpus_amd.py",
+    "sha256": "7674c5e795cc5e82d205227cdc0526ae179b7cd4281a9c9f70b5cfb731ec445d"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_strix_halo.py",
+    "sha256": "a65b667d9554a0d8f443d852f9f5c08a65a5b55deef119a3dba169fc441ea824"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_sycl.py",
+    "sha256": "4193e3ee394b4b3ccb06fbcaf53ec5077451ff60050ce85b5d6c9ef7c344f85f"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_unsloth.py",
+    "sha256": "d99cde2e43fbcff9ec5f6dff0532c7c6db9971a261f81bbc2a2c9d259b579afa"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_update.py",
+    "sha256": "34557b1c8f9593f0c6b5abb8a8b808253a4806fb5d769b59bf8ef68f4a66c331"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_setup_update_gpu.py",
+    "sha256": "ff9281ca6015287773a6a86d2543bd5b3524419ccb6c1902d6aeac6919f34a6a"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_shards.py",
+    "sha256": "792f1596905f456e4e293cec647b3e7a1d5947cdc67581bc98c1484f4f981c00"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_source_nul_bytes.py",
+    "sha256": "bce9e57bb22e1c95356dbd484872c6de782b16991697eb6a1171ae1661bfd893"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_strata_bench.py",
+    "sha256": "8ee0135d138323c0d2c7a3e0fedf2bddcb899e37652f16e5c83e45de79882fd4"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_strata_inspect.py",
+    "sha256": "0f55c6b57b1b48d6b25e0304bbe18a66c6bf08a25fecdd5bbbfdd8a076051a65"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_strata_mcp.py",
+    "sha256": "336345f92d6c66f13409621f5a18fb67a3e00bab4423e1912d884bf1877681b2"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_strata_tokenizer.py",
+    "sha256": "6a3cadf78c1972e83acd0ef90a8f5119868c7c3a4613fcfa000faae1195017b5"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_tokenizer_plain_spans.py",
+    "sha256": "79c0d8faee235553e953ade84ad14e5a6958c6813f50528a349cfba7403bb92e"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/test_windows_amd_gpu.py",
+    "sha256": "bdab50d9593f8907cc225d78a6dd96c05e2b9e5f756181eaf9ae367930c5d758"
+  },
+  {
+    "repo": "/home/riccardogiorato/Desktop/github/strata-0145",
+    "path": "tools/vision/strata_vision.cpp",
+    "sha256": "951b3b2d4faf35bdbc18353a81fbb24d5fad5d06364f0989958738ffd4166541"
+  }
+]
