@@ -27,6 +27,13 @@ IQ3_XXS is the pick when answer quality outweighs round-trip speed. Weights: `~/
 Evidence: `iq3_xxs_probe_vs_q2_0` in [evidence/strata-q20-sm75-port.jsonl](../evidence/strata-q20-sm75-port.jsonl) ·
 raw rows [benchmarks/strata-multiagent/results/q3xxs-20261018-195009](../benchmarks/strata-multiagent/results/q3xxs-20261018-195009).
 
+**AG-Bench v2.2 same night (128K suite config, cap 900, 0.35/80): 11/11 passed at 1465 s, 0 suspect**
+(Q2_0 same protocol: 11/11 at 1135 s). The quality tier holds the perfect score; the wall pays the
+predicted +29%. Suite config `strata-port/suite-0144-q3xxs-128k.json`; runner
+`benchmarks/strata-multiagent/q3xxs-v22.py`; rows
+[benchmarks/results/strata-0144-q3xxs-r0-20261018-211126.jsonl](../benchmarks/results/strata-0144-q3xxs-r0-20261018-211126.jsonl).
+Updated verdict: **IQ3_XXS matches Q2_0's 11/11 on the eleven-task bench; choose per use-case, not quality risk.**
+
 
 ## Local Turing scorer and SSD runtime (2026-10-18)
 
