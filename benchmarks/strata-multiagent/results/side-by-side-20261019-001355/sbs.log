@@ -1,0 +1,32 @@
+00:13:55 waiting: CPU-heavy process running: load average 3.0
+00:15:05 boot q2_0
+00:15:43   q2_0 logic: 133 chars in 2.4 s
+00:15:46   q2_0 logic2: 425 chars in 3.0 s
+00:15:48   q2_0 codebug: 115 chars in 1.6 s
+00:15:51   q2_0 codebug2: 387 chars in 3.2 s
+00:15:57   q2_0 codehard: 1032 chars in 6.2 s
+00:16:00   q2_0 math: 80 chars in 2.7 s
+00:16:04   q2_0 italiano: 546 chars in 3.9 s
+00:16:08   q2_0 idiom: 584 chars in 4.3 s
+00:16:10   q2_0 doc-reading: 16 chars in 1.8 s
+00:16:12   q2_0 doc-inference: 132 chars in 2.1 s
+00:16:14   q2_0 constraints: 82 chars in 1.9 s
+00:16:15   q2_0 selfref: 28 chars in 1.1 s
+00:16:16   q2_0 algorithm: 4 chars in 1.2 s
+00:16:19   q2_0 emergent: 199 chars in 2.9 s
+00:16:21 boot iq3_xxs
+00:17:11   iq3_xxs logic: 110 chars in 2.8 s
+00:17:13   iq3_xxs logic2: 83 chars in 1.8 s
+00:17:15   iq3_xxs codebug: 115 chars in 2.1 s
+00:17:21   iq3_xxs codebug2: 506 chars in 5.4 s
+00:17:27   iq3_xxs codehard: 969 chars in 6.7 s
+00:17:30   iq3_xxs math: 87 chars in 3.0 s
+00:17:36   iq3_xxs italiano: 694 chars in 6.0 s
+00:17:44   iq3_xxs idiom: 863 chars in 7.5 s
+00:17:46   iq3_xxs doc-reading: 17 chars in 2.1 s
+00:17:48   iq3_xxs doc-inference: 85 chars in 2.3 s
+00:17:51   iq3_xxs constraints: 95 chars in 2.3 s
+00:17:52   iq3_xxs selfref: 28 chars in 1.2 s
+00:17:54   iq3_xxs algorithm: 4 chars in 1.7 s
+00:17:58   iq3_xxs emergent: 314 chars in 4.6 s
+00:18:01 done -> /home/riccardogiorato/Desktop/github/local-ai-rtx2080/benchmarks/strata-multiagent/results/side-by-side-20261019-001355/side-by-side.md

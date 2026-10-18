@@ -1,0 +1,174 @@
+{
+ "q2_0": {
+  "logic": {
+   "prompt": "A bat and a ball cost 1.10 EUR in total. The bat costs 1.00 EUR more than the ball. How much does the ball cost? Reply with the number and one line of justification.",
+   "text": "0.10 EUR\nLet the ball cost x, then the bat costs x + 1.00, so x + (x + 1.00) = 1.10, which simplifies to 2x = 0.10, meaning x = 0.10.",
+   "seconds": 2.4,
+   "err": null
+  },
+  "logic2": {
+   "prompt": "If all Bloops are Razzies and all Razzies are Lazzies, are all Bloops definitely Lazzies? Also state the inverse claim's truth: are all Lazzies definitely Bloops?",
+   "text": "Yes, all Bloops are definitely Lazzies. This follows from the transitive property of set inclusion: if the set of Bloops is a subset of Razzies, and the set of Razzies is a subset of Lazzies, then the set of Bloops is necessarily a subset of Lazzies.\n\nNo, all Lazzies are not definitely Bloops. The inverse claim is false because the relationship is not symmetric; Lazzies may include elements that are not Razzies or Bloops.",
+   "seconds": 3.0,
+   "err": null
+  },
+  "codebug": {
+   "prompt": "Find the bug and output ONLY the corrected function:\n```python\ndef counters(n):\n    fns = []\n    for i in range(n):\n        fns.append(lambda: i)\n    return fns\n```",
+   "text": "```python\ndef counters(n):\n    fns = []\n    for i in range(n):\n        fns.append(lambda i=i: i)\n    return fns\n```",
+   "seconds": 1.6,
+   "err": null
+  },
+  "codebug2": {
+   "prompt": "This JS rate limiter has a race; explain the race in one sentence and output the corrected code:\n```js\nlet tokens = 0;\nfunction allow() { if (tokens > 0) { tokens--; return true; } return false; }\nsetInterval(() => { tokens = 5; }, 1000);\n```",
+   "text": "The race condition occurs because `setInterval` and `allow()` can interleave in a way that allows multiple concurrent calls to decrement `tokens` below zero or bypass the check, leading to inconsistent state.\n\nCorrected code:\n```js\nlet tokens = 0;\nfunction allow() {\n  if (tokens > 0) {\n    tokens--;\n    return true;\n  }\n  return false;\n}\nsetInterval(() => {\n  tokens = 5;\n}, 1000);\n```",
+   "seconds": 3.2,
+   "err": null
+  },
+  "codehard": {
+   "prompt": "Implement a function is_bipartite(graph) in Python that detects whether an undirected graph is 2-colorable, handles disconnected components, and does not mutate the input.",
+   "text": "```python\ndef is_bipartite(graph):\n    \"\"\"\n    Detect whether an undirected graph is 2-colorable (bipartite).\n    \n    Args:\n        graph: A list of lists where graph[i] contains the neighbors of node i.\n               Nodes are numbered 0 to len(graph)-1.\n    \n    Returns:\n        True if the graph is bipartite, False otherwise.\n    \"\"\"\n    n = len(graph)\n    if n == 0:\n        return True\n    \n    # color[i] = 0 means uncolored, 1 or 2 are the two colors\n    color = [0] * n\n    \n    for start in range(n):\n        if color[start] != 0:\n            continue\n        \n        # BFS from this uncolored node\n        queue = [start]\n        color[start] = 1\n        \n        while queue:\n            node = queue.pop(0)\n            for neighbor in graph[node]:\n                if color[neighbor] == 0:\n                    color[neighbor] = 3 - color[node]  # flip 1->2, 2->1\n                    queue.append(neighbor)\n                elif color[neighbor] == color[node]:\n                    return False\n    \n    return True\n```",
+   "seconds": 6.2,
+   "err": null
+  },
+  "math": {
+   "prompt": "A factory's output doubles every 3 days. It starts at 8 units. After how many full days does it first exceed 1000 units? Show the calculation in one line.",
+   "text": "8 * 2^(d/3) > 1000 => 2^(d/3) > 125 => d/3 > log2(125) \u2248 6.97 => d > 20.91 => 21",
+   "seconds": 2.7,
+   "err": null
+  },
+  "italiano": {
+   "prompt": "Spiega in italiano, in massimo 4 frasi, la differenza tra quantizzazione 2-bit e 3-bit per un modello linguistico, e quando conviene l'una o l'altra.",
+   "text": "La quantizzazione 2-bit comprime drasticamente il modello, riducendo la memoria e aumentando la velocit\u00e0, ma introduce spesso una significativa perdita di accuratezza e instabilit\u00e0. La quantizzazione 3-bit offre un miglior equilibrio, mantenendo una qualit\u00e0 superiore rispetto al 2-bit pur consumando pi\u00f9 risorse. Conviene usare il 2-bit quando l'hardware \u00e8 molto limitato o si privilegia la velocit\u00e0 a scapito della precisione. Conviene usare il 3-bit quando si necessita di un compromesso accettabile tra performance e affidabilit\u00e0 del modello.",
+   "seconds": 3.9,
+   "err": null
+  },
+  "idiom": {
+   "prompt": "Translate to Italian and briefly explain the trap: 'The data pipeline is a double-edged sword.'",
+   "text": "**Traduzione:**\n\"La pipeline dei dati \u00e8 un'arma a doppio taglio.\"\n\n**Spiegazione della trappola:**\nLa frase \u00e8 ambigua perch\u00e9 \"double-edged sword\" (arma a doppio taglio) implica che la pipeline dei dati ha sia vantaggi significativi (efficienza, automazione, insights) sia rischi o svantaggi gravi (vulnerabilit\u00e0 a errori, complessit\u00e0, costi, sicurezza). La trappola sta nel fatto che molti interpretano \"pipeline dei dati\" come un concetto puramente positivo o neutro, mentre la metafora avverte che la sua implementazione pu\u00f2 avere conseguenze negative se non gestita con attenzione.",
+   "seconds": 4.3,
+   "err": null
+  },
+  "doc-reading": {
+   "prompt": "From these meeting notes, answer precisely: Meeting notes, ACME Corp, Q3 planning.\n- Attendance: Ravi (infra), Giulia (payments), Marianne (security), Paul (data).\n- Decision 1: payments API v2 ships Nov 12, after the PCI audit closes (audit window Oct 28 - Nov 4).\n- Decision 2: Ravi's team owns the blue/green migration; freeze window Dec 1-10, no exceptions without Marianne's signoff.\n- Decision 3: The legacy SOAP endpoint is deprecated on Jan 15; Giulia published the migration guide version 3.1, supersedes 2.8.\n- Decision 4: Budget: EUR 40k for the observability overhaul, capped; anything above needs Paul's histogram of current telemetry costs.\n- Decision 5: Paul presents data-retention findings on Nov 30, one week before the freeze begins.\n- Open item: who runs the incident rotation during the freeze? Marianne proposed Ravi, Ravi countered that Giulia should hold it because payments will be in code-freeze.\n\nQuestion: Giulia's migration guide is at which version, which one does it replace, and which of Dec 1-10 or Nov 30 falls inside the PCI audit window? Three answers on one line.",
+   "text": "3.1, 2.8, Nov 30",
+   "seconds": 1.8,
+   "err": null
+  },
+  "doc-inference": {
+   "prompt": "Same meeting notes: Meeting notes, ACME Corp, Q3 planning.\n- Attendance: Ravi (infra), Giulia (payments), Marianne (security), Paul (data).\n- Decision 1: payments API v2 ships Nov 12, after the PCI audit closes (audit window Oct 28 - Nov 4).\n- Decision 2: Ravi's team owns the blue/green migration; freeze window Dec 1-10, no exceptions without Marianne's signoff.\n- Decision 3: The legacy SOAP endpoint is deprecated on Jan 15; Giulia published the migration guide version 3.1, supersedes 2.8.\n- Decision 4: Budget: EUR 40k for the observability overhaul, capped; anything above needs Paul's histogram of current telemetry costs.\n- Decision 5: Paul presents data-retention findings on Nov 30, one week before the freeze begins.\n- Open item: who runs the incident rotation during the freeze? Marianne proposed Ravi, Ravi countered that Giulia should hold it because payments will be in code-freeze.\n\nQuestion: Who most plausibly runs the incident rotation during the freeze, and whose objection must be answered first? One line.",
+   "text": "Ravi most plausibly runs the incident rotation (as the infra owner of the migration), and Giulia's objection must be answered first.",
+   "seconds": 2.1,
+   "err": null
+  },
+  "constraints": {
+   "prompt": "Write exactly three sentences about a GPU's memory bandwidth. Constraints: sentence 2 must contain a number, sentence 3 must not contain the letter 'e' anywhere, and NO bullet points.",
+   "text": "A GPU uses memory bandwidth to move data. The speed is 100 GB/s. RAM flow is fast.",
+   "seconds": 1.9,
+   "err": null
+  },
+  "selfref": {
+   "prompt": "In the exact sentence you are about to write, how many words will there be? Write that sentence so your claim is true.",
+   "text": "This sentence has six words.",
+   "seconds": 1.1,
+   "err": null
+  },
+  "algorithm": {
+   "prompt": "For an LRU cache with capacity C that has just evicted its oldest key, what is the amortized cost of a single put() in terms of hash-table lookups? One sentence, complexity only.",
+   "text": "O(1)",
+   "seconds": 1.2,
+   "err": null
+  },
+  "emergent": {
+   "prompt": "Give a rule that generalizes all of these: (2,4)->8, (3,5)->15, (4,7)->28, (5,9)->45. Then apply it to (10,13).",
+   "text": "The rule is: **Multiply the two numbers.**\n\nVerification:\n- $2 \\times 4 = 8$\n- $3 \\times 5 = 15$\n- $4 \\times 7 = 28$\n- $5 \\times 9 = 45$\n\nApplying to $(10, 13)$:\n$10 \\times 13 = 130$\n\n**Answer:** 130",
+   "seconds": 2.9,
+   "err": null
+  }
+ },
+ "iq3_xxs": {
+  "logic": {
+   "prompt": "A bat and a ball cost 1.10 EUR in total. The bat costs 1.00 EUR more than the ball. How much does the ball cost? Reply with the number and one line of justification.",
+   "text": "0.10 EUR\nLet the ball cost x, so the bat costs x + 1.00; x + (x + 1.00) = 1.10 implies 2x = 0.10, so x = 0.10.",
+   "seconds": 2.8,
+   "err": null
+  },
+  "logic2": {
+   "prompt": "If all Bloops are Razzies and all Razzies are Lazzies, are all Bloops definitely Lazzies? Also state the inverse claim's truth: are all Lazzies definitely Bloops?",
+   "text": "Yes, all Bloops are definitely Lazzies.\n\nNo, all Lazzies are not definitely Bloops.",
+   "seconds": 1.8,
+   "err": null
+  },
+  "codebug": {
+   "prompt": "Find the bug and output ONLY the corrected function:\n```python\ndef counters(n):\n    fns = []\n    for i in range(n):\n        fns.append(lambda: i)\n    return fns\n```",
+   "text": "```python\ndef counters(n):\n    fns = []\n    for i in range(n):\n        fns.append(lambda i=i: i)\n    return fns\n```",
+   "seconds": 2.1,
+   "err": null
+  },
+  "codebug2": {
+   "prompt": "This JS rate limiter has a race; explain the race in one sentence and output the corrected code:\n```js\nlet tokens = 0;\nfunction allow() { if (tokens > 0) { tokens--; return true; } return false; }\nsetInterval(() => { tokens = 5; }, 1000);\n```",
+   "text": "The race condition occurs because `tokens` is a shared mutable variable accessed without synchronization, allowing concurrent calls to `allow()` to read the same value before decrementing, potentially allowing more requests than the limit.\n\n```js\nlet tokens = 0;\nlet isRefilling = false;\n\nfunction allow() {\n  if (tokens > 0) {\n    tokens--;\n    return true;\n  }\n  return false;\n}\n\nsetInterval(() => {\n  if (!isRefilling) {\n    isRefilling = true;\n    tokens = 5;\n    isRefilling = false;\n  }\n}, 1000);\n```",
+   "seconds": 5.4,
+   "err": null
+  },
+  "codehard": {
+   "prompt": "Implement a function is_bipartite(graph) in Python that detects whether an undirected graph is 2-colorable, handles disconnected components, and does not mutate the input.",
+   "text": "```python\ndef is_bipartite(graph):\n    \"\"\"\n    Detect whether an undirected graph is 2-colorable (bipartite).\n    \n    Args:\n        graph: A dictionary mapping each node to a list of its neighbors.\n               The graph is assumed to be undirected.\n    \n    Returns:\n        True if the graph is bipartite, False otherwise.\n    \"\"\"\n    # color: 0 = uncolored, 1 = color A, -1 = color B\n    color = {}\n    \n    for node in graph:\n        if node in color:\n            continue\n        \n        # Start BFS/DFS from this node (handles disconnected components)\n        color[node] = 1\n        stack = [node]\n        \n        while stack:\n            current = stack.pop()\n            for neighbor in graph[current]:\n                if neighbor not in color:\n                    color[neighbor] = -color[current]\n                    stack.append(neighbor)\n                elif color[neighbor] == color[current]:\n                    return False\n    \n    return True\n```",
+   "seconds": 6.7,
+   "err": null
+  },
+  "math": {
+   "prompt": "A factory's output doubles every 3 days. It starts at 8 units. After how many full days does it first exceed 1000 units? Show the calculation in one line.",
+   "text": "8 * 2^(d/3) > 1000 => 2^(d/3) > 125 => d/3 > log2(125) \u2248 6.966 => d > 20.898 => 21 days",
+   "seconds": 3.0,
+   "err": null
+  },
+  "italiano": {
+   "prompt": "Spiega in italiano, in massimo 4 frasi, la differenza tra quantizzazione 2-bit e 3-bit per un modello linguistico, e quando conviene l'una o l'altra.",
+   "text": "La quantizzazione 2-bit comprime i pesi del modello in soli 4 valori discreti, riducendo drasticamente memoria e costi computazionali rispetto alla 3-bit, che utilizza 8 valori e offre una maggiore fedelt\u00e0 ai pesi originali. La 2-bit \u00e8 ideale per dispositivi con risorse estremamente limitate o quando la velocit\u00e0 di inferenza \u00e8 prioritaria, accettando un degrado significativo delle prestazioni. La 3-bit rappresenta un compromesso migliore, mantenendo una qualit\u00e0 accettabile per la maggior parte dei task generativi su hardware con memoria moderata. In sintesi, si preferisce la 2-bit per l'efficienza estrema e la 3-bit quando \u00e8 necessario bilanciare compressione e accuratezza del modello.",
+   "seconds": 6.0,
+   "err": null
+  },
+  "idiom": {
+   "prompt": "Translate to Italian and briefly explain the trap: 'The data pipeline is a double-edged sword.'",
+   "text": "**Traduzione:**\n\"La pipeline di dati \u00e8 un'arma a doppio taglio.\"\n\n**Spiegazione della trappola:**\nLa trappola risiede nell'ambiguit\u00e0 del termine \"double-edged sword\" (arma a doppio taglio). In italiano, questa espressione \u00e8 un'idioma consolidato che indica qualcosa che ha sia vantaggi significativi che rischi o svantaggi gravi. Tuttavia, nel contesto tecnico di una \"data pipeline\", potrebbe essere frainteso come un problema puramente negativo o come una metafora troppo generica. La \"trappola\" \u00e8 che l'espressione suggerisce che la pipeline stessa \u00e8 intrinsecamente pericolosa o dannosa, mentre in realt\u00e0 il rischio dipende dall'implementazione, dalla governance e dall'uso che se ne fa. Una pipeline ben progettata \u00e8 uno strumento neutro; il \"doppio taglio\" emerge solo se non gestita correttamente (es. dati sporchi, sicurezza insufficiente, costi elevati).",
+   "seconds": 7.5,
+   "err": null
+  },
+  "doc-reading": {
+   "prompt": "From these meeting notes, answer precisely: Meeting notes, ACME Corp, Q3 planning.\n- Attendance: Ravi (infra), Giulia (payments), Marianne (security), Paul (data).\n- Decision 1: payments API v2 ships Nov 12, after the PCI audit closes (audit window Oct 28 - Nov 4).\n- Decision 2: Ravi's team owns the blue/green migration; freeze window Dec 1-10, no exceptions without Marianne's signoff.\n- Decision 3: The legacy SOAP endpoint is deprecated on Jan 15; Giulia published the migration guide version 3.1, supersedes 2.8.\n- Decision 4: Budget: EUR 40k for the observability overhaul, capped; anything above needs Paul's histogram of current telemetry costs.\n- Decision 5: Paul presents data-retention findings on Nov 30, one week before the freeze begins.\n- Open item: who runs the incident rotation during the freeze? Marianne proposed Ravi, Ravi countered that Giulia should hold it because payments will be in code-freeze.\n\nQuestion: Giulia's migration guide is at which version, which one does it replace, and which of Dec 1-10 or Nov 30 falls inside the PCI audit window? Three answers on one line.",
+   "text": "3.1, 2.8, neither",
+   "seconds": 2.1,
+   "err": null
+  },
+  "doc-inference": {
+   "prompt": "Same meeting notes: Meeting notes, ACME Corp, Q3 planning.\n- Attendance: Ravi (infra), Giulia (payments), Marianne (security), Paul (data).\n- Decision 1: payments API v2 ships Nov 12, after the PCI audit closes (audit window Oct 28 - Nov 4).\n- Decision 2: Ravi's team owns the blue/green migration; freeze window Dec 1-10, no exceptions without Marianne's signoff.\n- Decision 3: The legacy SOAP endpoint is deprecated on Jan 15; Giulia published the migration guide version 3.1, supersedes 2.8.\n- Decision 4: Budget: EUR 40k for the observability overhaul, capped; anything above needs Paul's histogram of current telemetry costs.\n- Decision 5: Paul presents data-retention findings on Nov 30, one week before the freeze begins.\n- Open item: who runs the incident rotation during the freeze? Marianne proposed Ravi, Ravi countered that Giulia should hold it because payments will be in code-freeze.\n\nQuestion: Who most plausibly runs the incident rotation during the freeze, and whose objection must be answered first? One line.",
+   "text": "Giulia most plausibly runs the rotation, and Ravi's objection must be answered first.",
+   "seconds": 2.3,
+   "err": null
+  },
+  "constraints": {
+   "prompt": "Write exactly three sentences about a GPU's memory bandwidth. Constraints: sentence 2 must contain a number, sentence 3 must not contain the letter 'e' anywhere, and NO bullet points.",
+   "text": "High bandwidth allows rapid data transfer. 1000 GB/s is a common figure. Fast flow aids gaming.",
+   "seconds": 2.3,
+   "err": null
+  },
+  "selfref": {
+   "prompt": "In the exact sentence you are about to write, how many words will there be? Write that sentence so your claim is true.",
+   "text": "This sentence has six words.",
+   "seconds": 1.2,
+   "err": null
+  },
+  "algorithm": {
+   "prompt": "For an LRU cache with capacity C that has just evicted its oldest key, what is the amortized cost of a single put() in terms of hash-table lookups? One sentence, complexity only.",
+   "text": "O(1)",
+   "seconds": 1.7,
+   "err": null
+  },
+  "emergent": {
+   "prompt": "Give a rule that generalizes all of these: (2,4)->8, (3,5)->15, (4,7)->28, (5,9)->45. Then apply it to (10,13).",
+   "text": "**Rule:**\nFor a pair $(a, b)$, the result is $a \\times b$.\n\n**Verification:**\n*   $(2, 4) \\rightarrow 2 \\times 4 = 8$\n*   $(3, 5) \\rightarrow 3 \\times 5 = 15$\n*   $(4, 7) \\rightarrow 4 \\times 7 = 28$\n*   $(5, 9) \\rightarrow 5 \\times 9 = 45$\n\n**Application:**\nFor $(10, 13)$:\n$$10 \\times 13 = 130$$\n\n**Answer:** 130",
+   "seconds": 4.6,
+   "err": null
+  }
+ }
+}
