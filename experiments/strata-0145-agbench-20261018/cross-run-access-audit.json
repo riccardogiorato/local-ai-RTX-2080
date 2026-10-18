@@ -1,0 +1,114 @@
+{
+  "method": "Tool-argument references to another /tmp/agentic-run/<label>; not an OS sandbox or exhaustive information-flow proof.",
+  "findings": [
+    {
+      "arm": "stock",
+      "task": "task5-js-to-ts",
+      "foreign_runs": [
+        "out"
+      ],
+      "tool": "bash",
+      "args": {
+        "command": "bash verify.sh; echo \"---\"; npx --yes -p typescript@5 tsc --noEmit false --outDir /tmp/agentic-run/out --module NodeNext --moduleResolution NodeNext --target ES2022 src/index.ts src/inventory.ts 2>&1 | tail -3; node /tmp/agentic-run/out/index.js"
+      },
+      "review": "Own temporary TypeScript output directory, created and deleted by this task; not another run."
+    },
+    {
+      "arm": "stock",
+      "task": "task5-js-to-ts",
+      "foreign_runs": [
+        "out"
+      ],
+      "tool": "bash",
+      "args": {
+        "command": "rm -rf /tmp/agentic-run/out; ls src"
+      },
+      "review": "Own temporary TypeScript output directory, created and deleted by this task; not another run."
+    },
+    {
+      "arm": "stock",
+      "task": "task8-tb-broken-python",
+      "foreign_runs": [
+        "mimo-serial-c32k-q8kv-unpinned"
+      ],
+      "tool": "bash",
+      "args": {
+        "command": "cd /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python/protected/venv\nOLD='/home/riccardogiorato/Desktop/github/local-ai-rtx2080/benchmarks/agentic-tasks/task8-tb-broken-python/protected/venv'\nNEW='/tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python/protected/venv'\ngrep -rl \"$OLD\" bin pyvenv.cfg\nsed -i \"s|$OLD|$NEW|g\" bin/activate bin/activate.csh bin/activate.fish bin/Activate.ps1 pyvenv.cfg\nsed -i \"s|/tmp/agentic-run/mimo-serial-c32k-q8kv-unpinned/task8-tb-broken-python/protected/venv|$NEW|g\" bin/pip bin/pip3\ngrep -rn \"venv/bin/python3\" bin/pip bin/pip3 bin/pip3.14; grep -n \"command\\|executable\" pyvenv.cfg"
+      },
+      "review": "String replacement of a stale launcher path; this command does not read that old run."
+    },
+    {
+      "arm": "optimized",
+      "task": "task8-tb-broken-python",
+      "foreign_runs": [
+        "qwen36-35b-a3b-strata-0145",
+        "strata-0145-stock-turing-v22-20261018"
+      ],
+      "tool": "bash",
+      "args": {
+        "command": "ls -la /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/ ; ls -la /tmp/agentic-run/qwen36-35b-a3b-strata-0145/ | head"
+      },
+      "review": "Task 8 references/inspects retained run artifacts; task 8 excluded from headline timing."
+    },
+    {
+      "arm": "optimized",
+      "task": "task8-tb-broken-python",
+      "foreign_runs": [
+        "strata-0145-stock-turing-v22-20261018"
+      ],
+      "tool": "bash",
+      "args": {
+        "command": "cd /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python; ls -la; ls -la protected/venv/bin; ls -la protected/venv/lib/python3.14/site-packages; find . -maxdepth 2 -name verify.sh -o -name TASK.md"
+      },
+      "review": "Task 8 references/inspects retained run artifacts; task 8 excluded from headline timing."
+    },
+    {
+      "arm": "optimized",
+      "task": "task8-tb-broken-python",
+      "foreign_runs": [
+        "strata-0145-stock-turing-v22-20261018"
+      ],
+      "tool": "bash",
+      "args": {
+        "command": "cat /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python/verify.log; echo ---; grep -o '\"type\":\"[a-z_]*\"' /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python/pi-session.jsonl | sort | uniq -c"
+      },
+      "review": "Task 8 references/inspects retained run artifacts; task 8 excluded from headline timing."
+    },
+    {
+      "arm": "optimized",
+      "task": "task8-tb-broken-python",
+      "foreign_runs": [
+        "strata-0145-stock-turing-v22-20261018"
+      ],
+      "tool": "bash",
+      "args": {
+        "command": "cd /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python; python3 -c \"\nimport json\nfor line in open('pi-session.jsonl'):\n    try: d=json.loads(line)\n    except: continue\n    if d.get('type')=='tool_execution_start':\n        args=d.get('args',{})\n        cmd=args.get('command') or args.get('path') or ''\n        print('TOOL', d.get('toolName'), str(cmd)[:300])\n\""
+      },
+      "review": "Task 8 references/inspects retained run artifacts; task 8 excluded from headline timing."
+    },
+    {
+      "arm": "optimized",
+      "task": "task8-tb-broken-python",
+      "foreign_runs": [
+        "strata-0145-optimized-turing-v20261018"
+      ],
+      "tool": "bash",
+      "args": {
+        "command": "cd /tmp/agentic-run/strata-0145-optimized-turing-v20261018 2>/dev/null || cd /tmp/agentic-run/strata-0145-optimized-turing-v22-20261018/task8-tb-broken-python\ngrep -rn \"mimo-serial\\|riccardogiorato/Desktop\" protected/ | head -20\necho \"--- counts\"\ngrep -rc \"mimo-serial\" protected/venv/bin/* 2>/dev/null"
+      },
+      "review": "Task 8 references/inspects retained run artifacts; task 8 excluded from headline timing."
+    },
+    {
+      "arm": "optimized",
+      "task": "task8-tb-broken-python",
+      "foreign_runs": [
+        "qwen36-35b-a3b-strata-0145"
+      ],
+      "tool": "bash",
+      "args": {
+        "command": "ls -la /tmp/agentic-run/qwen36-35b-a3b-strata-0145/task8-tb-broken-python/protected/venv/bin/ 2>/dev/null; ls -la /tmp/agentic-run/qwen36-35b-a3b-strata-0145/task8-tb-broken-python/protected/venv/lib/python3.14/site-packages/ 2>/dev/null; ls /tmp/agentic-run/qwen36-35b-a3b-strata-0145/task8-tb-broken-python/ 2>/dev/null"
+      },
+      "review": "Task 8 references/inspects retained run artifacts; task 8 excluded from headline timing."
+    }
+  ]
+}

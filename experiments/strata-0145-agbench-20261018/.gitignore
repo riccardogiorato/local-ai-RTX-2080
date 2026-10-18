@@ -1,0 +1,6 @@
+pristine-tasks/
+pi-agent/
+pi-wrapper
+*.frozen.sh
+__pycache__/
+before-*

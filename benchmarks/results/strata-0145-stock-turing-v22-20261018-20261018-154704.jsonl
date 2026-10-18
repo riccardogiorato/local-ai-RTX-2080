@@ -1,0 +1,11 @@
+{"model": "strata-0145-stock-turing-v22-20261018", "task": "task1-js-bugfix", "passed": true, "wall_s": 45, "suspect_garbage_pass": false, "tool_calls": 26, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0145-stock-turing-v22-20261018", "task": "task10-tb-bank-trans-filter", "passed": true, "wall_s": 85, "suspect_garbage_pass": false, "tool_calls": 43, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0145-stock-turing-v22-20261018", "task": "task11-tb-assign-seats", "passed": true, "wall_s": 59, "suspect_garbage_pass": false, "tool_calls": 31, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0145-stock-turing-v22-20261018", "task": "task2-react-fix", "passed": true, "wall_s": 42, "suspect_garbage_pass": false, "tool_calls": 27, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0145-stock-turing-v22-20261018", "task": "task3-dep-upgrade", "passed": true, "wall_s": 232, "suspect_garbage_pass": false, "tool_calls": 93, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0145-stock-turing-v22-20261018", "task": "task4-python-bugfix", "passed": true, "wall_s": 18, "suspect_garbage_pass": false, "tool_calls": 12, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0145-stock-turing-v22-20261018", "task": "task5-js-to-ts", "passed": true, "wall_s": 121, "suspect_garbage_pass": false, "tool_calls": 26, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0145-stock-turing-v22-20261018", "task": "task6-extra-code-task", "passed": true, "wall_s": 58, "suspect_garbage_pass": false, "tool_calls": 21, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0145-stock-turing-v22-20261018", "task": "task7-long-context-agent", "passed": true, "wall_s": 68, "suspect_garbage_pass": false, "tool_calls": 54, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0145-stock-turing-v22-20261018", "task": "task8-tb-broken-python", "passed": true, "wall_s": 419, "suspect_garbage_pass": false, "tool_calls": 188, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0145-stock-turing-v22-20261018", "task": "task9-tb-analyze-access-logs", "passed": true, "wall_s": 43, "suspect_garbage_pass": false, "tool_calls": 39, "finish": "unknown", "zero_byte_retry": false}

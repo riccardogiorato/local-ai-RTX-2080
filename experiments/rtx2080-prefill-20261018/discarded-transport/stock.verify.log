@@ -1,0 +1,85 @@
+(node:646880) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/riccardogiorato/Desktop/github/local-ai-rtx2080/experiments/rtx2080-prefill-20261018/pi-work-stock/test/cart.test.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/riccardogiorato/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✖ subtotal multiplies price by qty (1.928759ms)
+✔ subtotal handles single item with qty 1 (0.174095ms)
+✖ total applies discount by subtracting (0.231962ms)
+✔ zero discount leaves total unchanged (0.12233ms)
+✖ mergeDuplicates keeps unique items unchanged (0.237432ms)
+✔ mergeDuplicates combines same-name items (0.133811ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 3
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 62.984193
+
+✖ failing tests:
+
+test at test/cart.test.js:5:1
+✖ subtotal multiplies price by qty (1.928759ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  1.7 !== 4.4
+  
+      at TestContext.<anonymous> (file:///home/riccardogiorato/Desktop/github/local-ai-rtx2080/experiments/rtx2080-prefill-20261018/pi-work-stock/test/cart.test.js:9:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 1.7,
+    expected: 4.4,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/cart.test.js:18:1
+✖ total applies discount by subtracting (0.231962ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  55 !== 63
+  
+      at TestContext.<anonymous> (file:///home/riccardogiorato/Desktop/github/local-ai-rtx2080/experiments/rtx2080-prefill-20261018/pi-work-stock/test/cart.test.js:23:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 55,
+    expected: 63,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/cart.test.js:32:1
+✖ mergeDuplicates keeps unique items unchanged (0.237432ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 2
+  
+      at TestContext.<anonymous> (file:///home/riccardogiorato/Desktop/github/local-ai-rtx2080/experiments/rtx2080-prefill-20261018/pi-work-stock/test/cart.test.js:37:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 2,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+VERIFY_TASK1: FAIL

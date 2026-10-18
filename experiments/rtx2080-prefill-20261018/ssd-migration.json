@@ -1,0 +1,63 @@
+{
+  "alias": "/home/riccardogiorato/models/flashnext-gsq-rco",
+  "old_target": "/mnt/archive/local-models/flashnext-gsq-rco",
+  "new_target": "/home/riccardogiorato/models/flashnext-gsq-rco-nvme",
+  "hdd_backup_retained": true,
+  "assets": [
+    {
+      "path": "/home/riccardogiorato/models/flashnext-gsq-rco/Qwen3.8-Flash-Next-GSQ-RCO-Q2_0-00001-of-00002.gguf",
+      "resolved": "/home/riccardogiorato/models/flashnext-gsq-rco-nvme/Qwen3.8-Flash-Next-GSQ-RCO-Q2_0-00001-of-00002.gguf",
+      "bytes": 37623740192,
+      "mount": "/dev/mapper/omarchy_root[/@home] btrfs /home"
+    },
+    {
+      "path": "/home/riccardogiorato/models/flashnext-gsq-rco/Qwen3.8-Flash-Next-GSQ-RCO-Q2_0-00002-of-00002.gguf",
+      "resolved": "/home/riccardogiorato/models/flashnext-gsq-rco-nvme/Qwen3.8-Flash-Next-GSQ-RCO-Q2_0-00002-of-00002.gguf",
+      "bytes": 28800138432,
+      "mount": "/dev/mapper/omarchy_root[/@home] btrfs /home"
+    },
+    {
+      "path": "/home/riccardogiorato/Desktop/github/strata-port/packs/q2_0-gsq/dense.bin",
+      "resolved": "/home/riccardogiorato/Desktop/github/strata-port/packs/q2_0-gsq/dense.bin",
+      "bytes": 1485606400,
+      "mount": "/dev/mapper/omarchy_root[/@home] btrfs /home"
+    },
+    {
+      "path": "/home/riccardogiorato/Desktop/github/strata-port/mtp/rt/experts.bin",
+      "resolved": "/home/riccardogiorato/Desktop/github/strata-port/mtp/rt/experts.bin",
+      "bytes": 707788800,
+      "mount": "/dev/mapper/omarchy_root[/@home] btrfs /home"
+    },
+    {
+      "path": "/home/riccardogiorato/Desktop/github/strata-port/mtp/rt/dense.bin",
+      "resolved": "/home/riccardogiorato/Desktop/github/strata-port/mtp/rt/dense.bin",
+      "bytes": 116099072,
+      "mount": "/dev/mapper/omarchy_root[/@home] btrfs /home"
+    },
+    {
+      "path": "/home/riccardogiorato/Desktop/github/strata-port/mtp/rt/draft_vocab.bin",
+      "resolved": "/home/riccardogiorato/Desktop/github/strata-port/mtp/rt/draft_vocab.bin",
+      "bytes": 162100,
+      "mount": "/dev/mapper/omarchy_root[/@home] btrfs /home"
+    },
+    {
+      "path": "/home/riccardogiorato/Desktop/github/strata-port/packs/q2_0-gsq/tokenizer/vocab.json",
+      "resolved": "/home/riccardogiorato/Desktop/github/strata-port/packs/q2_0-gsq/tokenizer/vocab.json",
+      "bytes": 5737005,
+      "mount": "/dev/mapper/omarchy_root[/@home] btrfs /home"
+    },
+    {
+      "path": "/home/riccardogiorato/Desktop/github/strata-0145/data/expert-profile.bin",
+      "resolved": "/home/riccardogiorato/Desktop/github/strata-0145/data/expert-profile.bin",
+      "bytes": 196632,
+      "mount": "/dev/mapper/omarchy_root[/@home] btrfs /home"
+    },
+    {
+      "path": "/home/riccardogiorato/Desktop/github/strata-port/data/expert-profile.bin",
+      "resolved": "/home/riccardogiorato/Desktop/github/strata-port/data/expert-profile.bin",
+      "bytes": 196632,
+      "mount": "/dev/mapper/omarchy_root[/@home] btrfs /home",
+      "role": "runtime expert profile resolved relative to engine cwd"
+    }
+  ]
+}

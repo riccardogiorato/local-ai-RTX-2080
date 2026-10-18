@@ -1,0 +1,8 @@
+strata-stock
+qsa-select-stock
+*.bin
+*.response.json
+body-*.json
+__pycache__/
+pi-work-*/
+pi-agent/

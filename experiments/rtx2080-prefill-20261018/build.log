@@ -1,0 +1,31 @@
+[  7%] Built target strata_core
+[  7%] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/qsa_select.cu.o
+/home/riccardogiorato/Desktop/github/strata-0145/src/kernels/cuda/qsa_select.cu(2146): warning #550-D: variable "x" was set but never used
+      int x = v;
+          ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+/home/riccardogiorato/Desktop/github/strata-0145/src/kernels/cuda/qsa_select.cu(2189): warning #63-D: shift count is too large
+          prefix = (uint32_t) pa | ((uint32_t) d << (24 - 8 * (P - 1)));
+                                                    ^
+          detected during instantiation of "void strata::kernels::topk_split_hist_kernel<P>(const float *, const int32_t *, int64_t) [with P=0]" at line 2373
+
+[ 15%] Linking CXX static library libstrata_kernels.a
+[100%] Built target strata_kernels
+[100%] Linking CXX executable qsa_select_bench
+[100%] Built target qsa_select_bench
+[  2%] Built target strata_spec
+[ 11%] Built target ggml-base
+[ 14%] Built target strata_core
+[ 17%] Built target strata_mmq_w4a4
+[ 20%] Built target strata_kq
+[ 28%] Built target ggml-cpu
+[ 37%] Built target strata_kernels_cpu
+[ 48%] Built target strata_mmq
+[ 82%] Built target strata_kernels
+[ 94%] Built target strata_engine
+[ 97%] Built target strata_prefill
+[ 97%] Built target strata_qwen35
+[100%] Linking CXX executable strata
+[100%] Built target strata

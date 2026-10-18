@@ -1,0 +1,223 @@
+diff --git i/src/kernels/cuda/qsa_select.cu w/src/kernels/cuda/qsa_select.cu
+index e956dc8b..6cbfe743 100644
+--- i/src/kernels/cuda/qsa_select.cu
++++ w/src/kernels/cuda/qsa_select.cu
+@@ -60,6 +60,52 @@ __global__ void __launch_bounds__(SCORE_WARPS * 32) block_scores_kernel(const fl
+     }
+ }
+ 
++#if !defined(__HIPCC__)
++// Validation only: compare actual prompt scores, including the tail, with the
++// original warp kernel. Padding past each query's n_bid is not initialized.
++__global__ void check_turing_scores_kernel(const float* actual, const float* reference,
++                                            const int32_t* steps, int64_t nq, int64_t max_blocks,
++                                            int64_t reach, unsigned long long* mismatches) {
++    for (int64_t i = (int64_t) blockIdx.x * blockDim.x + threadIdx.x;
++         i < nq * reach; i += (int64_t) blockDim.x * gridDim.x) {
++        const int64_t qi = i / reach, b = i % reach;
++        if (b <= steps[qi * kStepCount + kStepNBid] &&
++            __float_as_uint(actual[qi * max_blocks + b]) != __float_as_uint(reference[qi * max_blocks + b]))
++            atomicAdd(mismatches, 1ull);
++    }
++}
++
++void check_turing_scores(const float* pooled, const float* dead, const float* q_idx,
++                         const int32_t* steps, int64_t nq, int64_t max_blocks, int64_t reach,
++                         const float* actual, cudaStream_t stream) {
++    auto ck = [](cudaError_t e) {
++        if (e != cudaSuccess) {
++            std::fprintf(stderr, "Turing score check: %s\n", cudaGetErrorString(e));
++            std::exit(1);
++        }
++    };
++    float* reference = nullptr;
++    unsigned long long* mismatches = nullptr;
++    ck(cudaMalloc(&reference, (size_t) nq * max_blocks * sizeof(float)));
++    ck(cudaMalloc(&mismatches, sizeof(unsigned long long)));
++    ck(cudaMemsetAsync(mismatches, 0, sizeof(unsigned long long), stream));
++    const dim3 grid((unsigned) ((reach + SCORE_WARPS - 1) / SCORE_WARPS), (unsigned) nq);
++    block_scores_kernel<<<grid, SCORE_WARPS * 32, 0, stream>>>(pooled, dead, q_idx, steps, max_blocks, reference);
++    const int64_t needed = (nq * reach + 255) / 256;
++    const unsigned blocks = (unsigned) (needed < 4096 ? needed : 4096);
++    check_turing_scores_kernel<<<blocks, 256, 0, stream>>>(actual, reference, steps, nq, max_blocks, reach, mismatches);
++    ck(cudaGetLastError());
++    unsigned long long count = 0;
++    ck(cudaMemcpyAsync(&count, mismatches, sizeof(count), cudaMemcpyDeviceToHost, stream));
++    ck(cudaStreamSynchronize(stream));
++    ck(cudaFree(mismatches));
++    ck(cudaFree(reference));
++    std::fprintf(stderr, "Turing score check: %lld queries, %lld active blocks, %llu mismatches\n",
++                 (long long) nq, (long long) reach, count);
++    if (count) std::exit(1);
++}
++#endif
++
+ __global__ void __launch_bounds__(TOPK_T) block_topk_kernel(const float* __restrict__ scores,
+                                                             const int32_t* __restrict__ steps, int64_t max_blocks,
+                                                             int64_t cap, int32_t* __restrict__ ids) {
+@@ -1253,14 +1299,15 @@ __device__ __forceinline__ float ts_part(const float4 k4, const float4 q4) {
+     return k4.x * q4.x + k4.y * q4.y + k4.z * q4.z + k4.w * q4.w;   // block_scores_kernel's per-lane expression
+ }
+ 
+-__global__ void __launch_bounds__(256, 1) block_scores_thread_kernel(const float* __restrict__ pooled,
++template <int QUERIES = TS_Q, int KEY_BATCH = TS_KB, int BLOCK_RANGE = TS_BR>
++__global__ void __launch_bounds__(QUERIES * 4, 1) block_scores_thread_kernel(const float* __restrict__ pooled,
+                                                                     const float* __restrict__ q_idx,
+                                                                     const int32_t* __restrict__ steps, int64_t nq,
+                                                                     int64_t max_blocks, int64_t reach,
+                                                                     float* __restrict__ out) {
+-    __shared__ __align__(16) float4 ks[TS_KB][IDX_DIM / 4];
+-    __shared__ float so[TS_Q][TS_KB + 1];
+-    __shared__ int64_t s_nbid[TS_Q];
++    __shared__ __align__(16) float4 ks[KEY_BATCH][IDX_DIM / 4];
++    __shared__ float so[QUERIES][KEY_BATCH + 1];
++    __shared__ int64_t s_nbid[QUERIES];
+     // Four lanes per query, lane j (0..3) one quarter of the tree for all four heads: the partials c[j] of lane 0's
+     // xor-shuffle sum combine groups j, j+16, j+8, j+24, j+4, j+20, j+12, j+28, and only then do the quarters meet
+     // (c0 + c2, c1 + c3, then their sum) - two shuffles here.  A key load now feeds four heads: four times fewer
+@@ -1268,8 +1315,8 @@ __global__ void __launch_bounds__(256, 1) block_scores_thread_kernel(const float
+     constexpr int QG[8] = {0, 16, 8, 24, 4, 20, 12, 28};
+     const int t = threadIdx.x, lane = t & 31;
+     const int ql = (t >> 5) * 8 + (lane >> 2), j4 = lane & 3;   // this lane's query (in the CTA) and quarter
+-    const int64_t q0 = (int64_t) blockIdx.y * TS_Q, qi = q0 + ql;
+-    if (t < TS_Q) s_nbid[t] = q0 + t < nq ? steps[(q0 + t) * kStepCount + kStepNBid] : -1;
++    const int64_t q0 = (int64_t) blockIdx.y * QUERIES, qi = q0 + ql;
++    if (t < QUERIES) s_nbid[t] = q0 + t < nq ? steps[(q0 + t) * kStepCount + kStepNBid] : -1;
+     float4 qv[IDX_HEADS][8];
+     {
+         const float4* src = reinterpret_cast<const float4*>(q_idx + (qi < nq ? qi : 0) * IDX_HEADS * IDX_DIM);
+@@ -1280,14 +1327,14 @@ __global__ void __launch_bounds__(256, 1) block_scores_thread_kernel(const float
+     }
+     __syncthreads();
+     int64_t top = -1;   // the largest n_bid of the CTA's queries: blocks at or past it are never written here
+-    for (int i = 0; i < TS_Q; ++i) top = s_nbid[i] > top ? s_nbid[i] : top;
+-    const int64_t b_lo = (int64_t) blockIdx.x * TS_BR;
+-    int64_t b_hi = b_lo + TS_BR;
++    for (int i = 0; i < QUERIES; ++i) top = s_nbid[i] > top ? s_nbid[i] : top;
++    const int64_t b_lo = (int64_t) blockIdx.x * BLOCK_RANGE;
++    int64_t b_hi = b_lo + BLOCK_RANGE;
+     if (b_hi > reach) b_hi = reach;
+     if (b_hi > top) b_hi = top;
+     if (b_hi > max_blocks) b_hi = max_blocks;
+-    for (int64_t b0 = b_lo; b0 < b_hi; b0 += TS_KB) {
+-        const int nb = (int) (b_hi - b0 < TS_KB ? b_hi - b0 : TS_KB);
++    for (int64_t b0 = b_lo; b0 < b_hi; b0 += KEY_BATCH) {
++        const int nb = (int) (b_hi - b0 < KEY_BATCH ? b_hi - b0 : KEY_BATCH);
+         __syncthreads();   // the previous tile's reads of ks and so are done
+         for (int i = t; i < nb * (IDX_DIM / 4); i += blockDim.x)
+             ks[i / (IDX_DIM / 4)][i % (IDX_DIM / 4)] = reinterpret_cast<const float4*>(pooled + (b0 + i / (IDX_DIM / 4)) * IDX_DIM)[i % (IDX_DIM / 4)];
+@@ -1314,7 +1361,7 @@ __global__ void __launch_bounds__(256, 1) block_scores_thread_kernel(const float
+             }
+         }
+         __syncthreads();
+-        for (int i = t; i < TS_Q * nb; i += blockDim.x) {
++        for (int i = t; i < QUERIES * nb; i += blockDim.x) {
+             const int q = i / nb, j = i % nb;
+             if (b0 + j < s_nbid[q]) out[(q0 + q) * max_blocks + b0 + j] = so[q][j];
+         }
+@@ -1706,6 +1753,21 @@ bool scores_halve_on() {
+     return ok[dev] == 1;
+ }
+ 
++#if !defined(__HIPCC__)
++bool scores_turing_device() {
++    static int supported[64] = {};
++    int dev = 0;
++    if (cudaGetDevice(&dev) != cudaSuccess || dev < 0 || dev >= 64) return false;
++    if (!supported[dev]) {
++        int major = 0, minor = 0;
++        cudaDeviceGetAttribute(&major, cudaDevAttrComputeCapabilityMajor, dev);
++        cudaDeviceGetAttribute(&minor, cudaDevAttrComputeCapabilityMinor, dev);
++        supported[dev] = major == 7 && minor == 5 ? 1 : 2;
++    }
++    return supported[dev] == 1;
++}
++#endif
++
+ void qsa_block_scores(const float* pooled, const float* dead, const float* q_idx, const int32_t* steps, int64_t nq,
+                       int64_t max_blocks, const QsaShapes& s, float* scores, void* stream, int64_t active_blocks) {
+     if (nq <= 0) return;
+@@ -1773,11 +1835,47 @@ void qsa_block_scores(const float* pooled, const float* dead, const float* q_idx
+         return;
+     }
+ #else
++    // RTX 2080 experiment: smaller exact-score CTAs permit more resident warps despite the
++    // 128 query registers per thread. Only the ownership/tiling changes; ts_part and the
++    // reduction tree are identical. Explicit opt-in; other architectures retain their path.
++    static const int turing_tile = [] {
++        const char* v = std::getenv("STRATA_SCORES_TURING");
++        return v ? std::atoi(v) : 0;
++    }();
++    if (active_blocks > 0 && turing_tile >= 1 && turing_tile <= 3) {
++        if (scores_turing_device()) {
++            static thread_local bool logged = false;
++            if (!logged) {
++                std::fprintf(stderr, "qsa select: custom exact Turing scorer, tile %d (STRATA_SCORES_TURING)\n", turing_tile);
++                logged = true;
++            }
++            const cudaStream_t st = (cudaStream_t) stream;
++            if (turing_tile == 1) {
++                const dim3 grid((unsigned) ((reach + 127) / 128), (unsigned) ((nq + 31) / 32));
++                block_scores_thread_kernel<32, 16, 128><<<grid, 128, 0, st>>>(pooled, q_idx, steps, nq, max_blocks, reach, scores);
++            } else if (turing_tile == 2) {
++                const dim3 grid((unsigned) ((reach + 255) / 256), (unsigned) ((nq + 31) / 32));
++                block_scores_thread_kernel<32, 32, 256><<<grid, 128, 0, st>>>(pooled, q_idx, steps, nq, max_blocks, reach, scores);
++            } else {
++                const dim3 grid((unsigned) ((reach + 255) / 256), (unsigned) ((nq + 63) / 64));
++                block_scores_thread_kernel<64, 16, 256><<<grid, 256, 0, st>>>(pooled, q_idx, steps, nq, max_blocks, reach, scores);
++            }
++            block_scores_tail_kernel<<<(unsigned) nq, 32, 0, st>>>(dead, q_idx, steps, max_blocks, scores);
++            const cudaError_t e = cudaGetLastError();
++            if (e != cudaSuccess) { std::fprintf(stderr, "qsa_block_scores Turing tile: %s\n", cudaGetErrorString(e)); std::exit(1); }
++            static const bool check = [] {
++                const char* v = std::getenv("STRATA_SCORES_TURING_CHECK");
++                return v && std::atoi(v) != 0;
++            }();
++            if (check) check_turing_scores(pooled, dead, q_idx, steps, nq, max_blocks, reach, scores, st);
++            return;
++        }
++    }
+     // prompt calls (an active-block count): the thread-per-head kernel, the same bits (opt-in: scores_thread_on); else the
+     // warp kernel below
+     if (active_blocks > 0 && scores_thread_on()) {
+         const dim3 tgrid((unsigned) ((reach + TS_BR - 1) / TS_BR), (unsigned) ((nq + TS_Q - 1) / TS_Q));
+-        block_scores_thread_kernel<<<tgrid, 256, 0, (cudaStream_t) stream>>>(pooled, q_idx, steps, nq, max_blocks, reach,
++        block_scores_thread_kernel<><<<tgrid, 256, 0, (cudaStream_t) stream>>>(pooled, q_idx, steps, nq, max_blocks, reach,
+                                                                              scores);
+         block_scores_tail_kernel<<<(unsigned) nq, 32, 0, (cudaStream_t) stream>>>(dead, q_idx, steps, max_blocks, scores);
+         const cudaError_t e = cudaGetLastError();
+diff --git i/src/kernels/qsa_select_bench.cpp w/src/kernels/qsa_select_bench.cpp
+index 094b9d2c..4145f798 100644
+--- i/src/kernels/qsa_select_bench.cpp
++++ w/src/kernels/qsa_select_bench.cpp
+@@ -39,7 +39,8 @@ int main(int argc, char** argv) {
+     const k::QsaShapes s = k::qsa_real_shapes();
+     const int64_t capacity = argc > 4 ? std::atoll(argv[4]) : 0;
+     const int64_t max_blocks = capacity > 0 ? capacity / 4 + 2 : ctx / 4 + 1, cap = k::qsa_selection_width(k::kTopkMaxCells, s);
+-    std::mt19937 rng(7);
++    const char* seed = std::getenv("QSA_BENCH_SEED");
++    std::mt19937 rng(seed ? (unsigned) std::strtoul(seed, nullptr, 10) : 7);
+     std::normal_distribution<float> nd(0.f, 1.f);
+     // keys with a shared direction plus noise, so the scores have a spread like a real indexer's
+     std::vector<float> dir(128), pooled((size_t) (max_blocks * 128)), dead(128), q((size_t) (nq * 512));
+@@ -132,6 +133,20 @@ int main(int argc, char** argv) {
+     ck(cudaMemcpy(ib.data(), ids_new, ib.size() * 4, cudaMemcpyDeviceToHost), "down");
+     std::vector<int32_t> ir(ia.size());
+     ck(cudaMemcpy(ir.data(), ids_reg, ir.size() * 4, cudaMemcpyDeviceToHost), "down");
++    // Optional complete logical output for cross-process bitwise comparisons. Padding
++    // beyond n_bid / width is uninitialized and deliberately excluded.
++    if (const char* path = std::getenv("QSA_BENCH_DUMP")) {
++        FILE* f = std::fopen(path, "wb");
++        if (!f) { std::perror(path); return 2; }
++        bool ok = true;
++        for (int64_t i = 0; i < nq; ++i) {
++            const size_t ns = (size_t) steps[(size_t) (i * k::kStepCount + k::kStepNBid)] + 1;
++            const size_t ni = (size_t) steps[(size_t) (i * k::kStepCount + k::kStepWidth)];
++            ok = std::fwrite(a.data() + i * max_blocks, sizeof(float), ns, f) == ns && ok;
++            ok = std::fwrite(ir.data() + i * cap, sizeof(int32_t), ni, f) == ni && ok;
++        }
++        if (std::fclose(f) != 0 || !ok) { std::fprintf(stderr, "benchmark dump failed\n"); return 2; }
++    }
+     int64_t reg_same = 0;
+     for (int64_t i = 0; i < nq; ++i) {
+         const int64_t w = steps[(size_t) (i * k::kStepCount + k::kStepWidth)];

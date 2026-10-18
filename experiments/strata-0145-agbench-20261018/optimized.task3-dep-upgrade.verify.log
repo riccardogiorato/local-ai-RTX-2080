@@ -1,0 +1,12 @@
+✔ postedAt renders an about-time string with suffix (1.148334ms)
+✔ postedAt handles future dates (0.165298ms)
+✔ postedAt rejects garbage input (0.209943ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 834.911175
+VERIFY_TASK3: PASS

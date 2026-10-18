@@ -1,0 +1,14 @@
+AG-Bench model=strata-0145-optimized-turing-v22-20261018 cap=900s
+warm-up attempt 1: ok (model replied)
+{"model": "strata-0145-optimized-turing-v22-20261018", "task": "task1-js-bugfix", "passed": true, "wall_s": 29, "suspect_garbage_pass": false, "tool_calls": 16, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0145-optimized-turing-v22-20261018", "task": "task10-tb-bank-trans-filter", "passed": true, "wall_s": 63, "suspect_garbage_pass": false, "tool_calls": 34, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0145-optimized-turing-v22-20261018", "task": "task11-tb-assign-seats", "passed": true, "wall_s": 95, "suspect_garbage_pass": false, "tool_calls": 31, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0145-optimized-turing-v22-20261018", "task": "task2-react-fix", "passed": true, "wall_s": 40, "suspect_garbage_pass": false, "tool_calls": 21, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0145-optimized-turing-v22-20261018", "task": "task3-dep-upgrade", "passed": true, "wall_s": 147, "suspect_garbage_pass": false, "tool_calls": 85, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0145-optimized-turing-v22-20261018", "task": "task4-python-bugfix", "passed": true, "wall_s": 25, "suspect_garbage_pass": false, "tool_calls": 17, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0145-optimized-turing-v22-20261018", "task": "task5-js-to-ts", "passed": true, "wall_s": 41, "suspect_garbage_pass": false, "tool_calls": 24, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0145-optimized-turing-v22-20261018", "task": "task6-extra-code-task", "passed": true, "wall_s": 35, "suspect_garbage_pass": false, "tool_calls": 17, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0145-optimized-turing-v22-20261018", "task": "task7-long-context-agent", "passed": true, "wall_s": 61, "suspect_garbage_pass": false, "tool_calls": 40, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0145-optimized-turing-v22-20261018", "task": "task8-tb-broken-python", "passed": true, "wall_s": 421, "suspect_garbage_pass": false, "tool_calls": 183, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-0145-optimized-turing-v22-20261018", "task": "task9-tb-analyze-access-logs", "passed": true, "wall_s": 41, "suspect_garbage_pass": false, "tool_calls": 37, "finish": "unknown", "zero_byte_retry": false}
+DONE — results in /home/riccardogiorato/Desktop/github/local-ai-rtx2080/benchmarks/results/strata-0145-optimized-turing-v22-20261018-20261018-160744.jsonl

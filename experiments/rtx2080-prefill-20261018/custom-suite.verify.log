@@ -1,0 +1,19 @@
+(node:652023) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/riccardogiorato/Desktop/github/local-ai-rtx2080/experiments/rtx2080-prefill-20261018/pi-work-custom-suite/test/cart.test.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/riccardogiorato/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ subtotal multiplies price by qty (1.287285ms)
+✔ subtotal handles single item with qty 1 (0.123363ms)
+✔ total applies discount by subtracting (0.204389ms)
+✔ zero discount leaves total unchanged (0.116166ms)
+✔ mergeDuplicates keeps unique items unchanged (0.645152ms)
+✔ mergeDuplicates combines same-name items (0.138178ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 64.155415
+VERIFY_TASK1: PASS

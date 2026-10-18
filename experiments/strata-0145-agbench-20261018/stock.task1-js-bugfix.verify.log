@@ -1,0 +1,15 @@
+✔ subtotal multiplies price by qty (0.767429ms)
+✔ subtotal handles single item with qty 1 (0.114504ms)
+✔ total applies discount by subtracting (0.176065ms)
+✔ zero discount leaves total unchanged (0.111989ms)
+✔ mergeDuplicates keeps unique items unchanged (0.684687ms)
+✔ mergeDuplicates combines same-name items (0.124469ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 58.921882
+VERIFY_TASK1: PASS

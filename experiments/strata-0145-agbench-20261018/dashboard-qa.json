@@ -1,0 +1,26 @@
+{
+  "browser": "Installed Chromium through local CDP",
+  "fallback_reason": "T3 preview_open failed twice and html_preview remained unavailable during its browser download.",
+  "desktop": {
+    "status": "Benchmark complete",
+    "stock": "11 / 11",
+    "optimized": "11 / 11",
+    "wall": "\u221225,2%",
+    "prefill": "695 tok/s",
+    "rows": 11,
+    "chartRows": 11,
+    "failureFilter": true,
+    "allFilter": true
+  },
+  "desktop_size": {
+    "width": 1425,
+    "height": 2155,
+    "viewport": 1440
+  },
+  "mobile": {
+    "width": 360,
+    "height": 3825,
+    "viewport": 375
+  },
+  "runtime_errors": []
+}

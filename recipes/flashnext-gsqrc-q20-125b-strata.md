@@ -1,5 +1,37 @@
 # Qwen3.8-Flash-Next GSQ-RCO Q2_0 125B · Strata engine — the fleet-record row
 
+
+## Local Turing scorer and SSD runtime (2026-10-18)
+
+The standing 0.1.45 config now enables the local exact-score tile
+`STRATA_SCORES_TURING=2` together with the existing upstream
+`STRATA_SM75_PERF=1` series. Real coding-session histories, zero prefix reuse,
+same 128K / int8 KV / 32K resident setup on the RTX 2080:
+
+- 20,053 tokens: **656.5 → 692.2 tok/s (+5.4%)**.
+- 121,776 tokens: **580.6 → 696.1 tok/s (+19.9%)**, prompt read **209.7 → 174.9 s**.
+- Custom scorer alone: 667.6 / 658.4 tok/s respectively. Most scorer-level gain
+  versus the standing warp scorer comes from the existing upstream exact scorer;
+  the new tile separately improves its 2,048-query / 100K scoring throughput by 8.6%.
+
+One full-model sample per configuration and workload; observed gains, not a
+physical ceiling or confidence interval. Actual Pi bug-fix tasks passed on stock,
+custom and combined builds with test files unchanged. Pi changed its actions and
+generated token counts, so its task wall times are not a controlled speedup.
+The custom scorer matched the reference bit-for-bit on every valid score of
+**5,712 calls over the real 121K history**, as well as 40 cross-variant synthetic
+comparisons. Whole-model long replies vary with the existing adaptive CPU/GPU
+paths; the 20K greedy reply matched on all three builds.
+
+The real prompt exposed cold PLE reads from the external rotational HDD. Both
+required GGUF shards now live on NVMe, independently read-back verified against
+the original SHA-256 manifest. The canonical model symlink was switched, keeping
+existing configuration paths valid. Dense pack, MTP, tokenizer and expert profile
+were already on NVMe. All final kernel comparisons use the same SSD placement;
+no storage gain is attributed to the kernel. HDD originals remain as backups.
+
+[Measurements, patch, scripts and rollback](../experiments/rtx2080-prefill-20261018/README.md).
+
 ## Current runtime: v0.1.45 (2026-10-18)
 
 Stock tag `v0.1.45` built for sm_75 by the standard flags (`strata-0145/build-turing-0145`; kquants off as before).
@@ -158,3 +190,16 @@ as opt-in). Same-protocol bench: **9/11 @ 1238s** (prev 8/11 @ 1374/1413s), fail
 `recipes/strata-configs/strata-q20-gsq-0140.json` (+ `-tailnet` variant for the
 standing chat; the tailnet config's engine log field renamed to `chat-tailnet.log`,
 which also fixes the bench/chat telemetry mixing from 2026-10-04).
+
+### Full-suite verification after Turing tuning (2026-10-18)
+
+Both stock and combined-optimized v0.1.45 returned 11/11 audited verifier passes
+on Pi 1.3.0 with the same calibrated 128K settings and verified NVMe files.
+Ten tasks excluding flagged task8 took 771 → 577 s, a 25.2% observed reduction
+for one paired suite with different trajectories. Full 11-task time: 1,190 → 998 s.
+Task8 already passes before agent work, and its optimized agent inspected stock
+logs; it is excluded from the headline comparison. Repeated standard probes:
+32K prefill 644.8 → 695.4 tok/s (+7.8%), short decode 42.9 → 47.1 tok/s (+9.8%).
+These combined results include upstream SM75 options, not only our custom tile.
+[Dashboard](../benchmarks/index.html) ·
+[Full method and evidence](../experiments/strata-0145-agbench-20261018/README.md).

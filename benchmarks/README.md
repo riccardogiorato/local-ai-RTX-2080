@@ -4,6 +4,26 @@
 can the model explore a repo, run a failing test suite, read real output, edit the right
 file, and iterate until `verify.sh` passes — inside a real coding-agent harness.
 
+## Strata v0.1.45 Turing verification (2026-10-18)
+
+Stock and optimized both returned **11/11 audited verifier passes**. Excluding
+flagged task8, task time was **771 → 577 s (25.2% less)**; all eleven tasks took
+1,190 → 998 s. This is one paired suite with different trajectories, not a
+25.2% isolated kernel gain. Both used Pi 1.3.0 and identical calibrated 128K
+settings and NVMe model files.
+
+Three-repetition standard probes measured **32K prefill 644.8 → 695.4 tok/s
+(+7.8%)** and **short decode 42.9 → 47.1 tok/s (+9.8%)**. Optimized combines our
+exact-scorer Turing tile with upstream SM75 options. No speed requests failed.
+
+Task8 already passes before agent work, and its optimized agent inspected stock
+logs; it is excluded from the timing headline and provides no repair-quality
+evidence. The other ten tasks passed with protected fixtures intact. Historical
+runs used older Pi versions, so use the matched same-day arms for comparison.
+
+[Interactive dashboard](index.html) · [Data](strata-0145-results.json) ·
+[Method, raw evidence and caveats](../experiments/strata-0145-agbench-20261018/README.md).
+
 ## Harness
 
 ### Strata 0.1.41 vs 0.1.42 (2026-10-10)

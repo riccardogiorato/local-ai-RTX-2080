@@ -1,0 +1,301 @@
+[
+  {
+    "arm": "stock",
+    "class": "code-25k",
+    "wall_seconds": 31.315050784003688,
+    "engine_summary": "strata serve: prompt 20053 tokens = 0 reused + 20053 read in 30544 ms (656.5 tok/s), 30 generated in 730 ms (41.1 tok/s), drafts accepted 24 of 30, 2 checkpoints",
+    "timing": "strata prefill timing: 20046 tokens, GPU timeline 30216 ms, wall 30226 ms, host staging 442 ms: embed+steps 200 (0.7%) hc read 5617 (18.6%) gdn 2197 (7.3%) qsa proj 1282 (4.2%) qsa indexer 2 (0.0%) qsa select 732 (2.4%) qsa attn 2865 (9.5%) router+shared 854 (2.8%) host grouping 104 (0.3%) gather 150 (0.5%) wait copy 1480 (4.9%) dequant 2707 (9.0%) gemm gate/up 4914 (16.3%) gemm down 3103 (10.3%) combine 1414 (4.7%) ple 110 (0.4%) kv stage 1 (0.0%) gdn conv+gates 239 (0.8%) gdn recurrence 1172 (3.9%) gdn out proj 1075 (3.6%)",
+    "message": {
+      "role": "assistant",
+      "content": null,
+      "tool_calls": [
+        {
+          "id": "call_3e2e90bfe6144fb7a725baf1",
+          "type": "function",
+          "function": {
+            "name": "read_file",
+            "arguments": "{\"path\":\"src/program/generate.cpp\"}"
+          }
+        }
+      ]
+    },
+    "usage": {
+      "prompt_tokens": 20053,
+      "completion_tokens": 30,
+      "total_tokens": 20083,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 20053,
+      "prompt_ms": 30544.0,
+      "prompt_per_token_ms": 1.523,
+      "prompt_per_second": 656.5,
+      "predicted_n": 30,
+      "predicted_ms": 730.2,
+      "predicted_per_token_ms": 24.34,
+      "predicted_per_second": 41.1,
+      "draft_n": 30,
+      "draft_n_accepted": 24
+    }
+  },
+  {
+    "arm": "stock",
+    "class": "code-100k",
+    "wall_seconds": 211.66532859098515,
+    "engine_summary": "strata serve: prompt 121776 tokens = 0 reused + 121776 read in 209733 ms (580.6 tok/s), 73 generated in 1773 ms (41.2 tok/s), drafts accepted 49 of 55, 6 checkpoints",
+    "timing": "strata prefill timing: 121769 tokens, GPU timeline 209477 ms, wall 209483 ms, host staging 3082 ms: embed+steps 1042 (0.5%) hc read 34853 (16.6%) gdn 13514 (6.5%) qsa proj 7910 (3.8%) qsa indexer 9 (0.0%) qsa select 30366 (14.5%) qsa attn 19454 (9.3%) router+shared 5289 (2.5%) host grouping 683 (0.3%) gather 912 (0.4%) wait copy 6820 (3.3%) dequant 16161 (7.7%) gemm gate/up 29986 (14.3%) gemm down 18957 (9.0%) combine 7514 (3.6%) ple 668 (0.3%) kv stage 3 (0.0%) gdn conv+gates 1451 (0.7%) gdn recurrence 7285 (3.5%) gdn out proj 6600 (3.2%)",
+    "message": {
+      "role": "assistant",
+      "content": "Let me look at how existing server options like `--fit-max-tokens` and `--idle-unload` are defined.",
+      "tool_calls": [
+        {
+          "id": "call_03e7fedfe8b246b9b03d9a6d",
+          "type": "function",
+          "function": {
+            "name": "grep",
+            "arguments": "{\"pattern\":\"fit-max-tokens|fit_max_tokens\",\"path\":\"serve/server.py\"}"
+          }
+        }
+      ]
+    },
+    "usage": {
+      "prompt_tokens": 121776,
+      "completion_tokens": 73,
+      "total_tokens": 121849,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 121776,
+      "prompt_ms": 209733.0,
+      "prompt_per_token_ms": 1.722,
+      "prompt_per_second": 580.6,
+      "predicted_n": 73,
+      "predicted_ms": 1773.3,
+      "predicted_per_token_ms": 24.292,
+      "predicted_per_second": 41.2,
+      "draft_n": 55,
+      "draft_n_accepted": 49
+    }
+  },
+  {
+    "arm": "custom",
+    "class": "code-25k",
+    "wall_seconds": 30.827789247006876,
+    "engine_summary": "strata serve: prompt 20053 tokens = 0 reused + 20053 read in 30038 ms (667.6 tok/s), 30 generated in 757 ms (39.6 tok/s), drafts accepted 24 of 30, 2 checkpoints",
+    "timing": "strata prefill timing: 20046 tokens, GPU timeline 29724 ms, wall 29734 ms, host staging 457 ms: embed+steps 266 (0.9%) hc read 5730 (19.3%) gdn 2281 (7.7%) qsa proj 1307 (4.4%) qsa indexer 2 (0.0%) qsa select 256 (0.9%) qsa attn 2930 (9.9%) router+shared 872 (2.9%) host grouping 93 (0.3%) gather 150 (0.5%) wait copy 1094 (3.7%) dequant 2708 (9.1%) gemm gate/up 5014 (16.9%) gemm down 3165 (10.6%) combine 1213 (4.1%) ple 110 (0.4%) kv stage 1 (0.0%) gdn conv+gates 239 (0.8%) gdn recurrence 1196 (4.0%) gdn out proj 1096 (3.7%)",
+    "message": {
+      "role": "assistant",
+      "content": null,
+      "tool_calls": [
+        {
+          "id": "call_1dc05493c16d42bc9c9656c4",
+          "type": "function",
+          "function": {
+            "name": "read_file",
+            "arguments": "{\"path\":\"src/program/generate.cpp\"}"
+          }
+        }
+      ]
+    },
+    "usage": {
+      "prompt_tokens": 20053,
+      "completion_tokens": 30,
+      "total_tokens": 20083,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 20053,
+      "prompt_ms": 30038.1,
+      "prompt_per_token_ms": 1.498,
+      "prompt_per_second": 667.6,
+      "predicted_n": 30,
+      "predicted_ms": 757.1,
+      "predicted_per_token_ms": 25.237,
+      "predicted_per_second": 39.6,
+      "draft_n": 30,
+      "draft_n_accepted": 24
+    }
+  },
+  {
+    "arm": "custom",
+    "class": "code-100k",
+    "wall_seconds": 187.60706301301252,
+    "engine_summary": "strata serve: prompt 121776 tokens = 0 reused + 121776 read in 184967 ms (658.4 tok/s), 106 generated in 2477 ms (42.8 tok/s), drafts accepted 64 of 82, 6 checkpoints",
+    "timing": "strata prefill timing: 121769 tokens, GPU timeline 184679 ms, wall 184683 ms, host staging 3194 ms: embed+steps 1219 (0.7%) hc read 35092 (19.0%) gdn 13631 (7.4%) qsa proj 7970 (4.3%) qsa indexer 9 (0.0%) qsa select 5733 (3.1%) qsa attn 19387 (10.5%) router+shared 5322 (2.9%) host grouping 657 (0.4%) gather 914 (0.5%) wait copy 5832 (3.2%) dequant 16136 (8.7%) gemm gate/up 30183 (16.3%) gemm down 19076 (10.3%) combine 7380 (4.0%) ple 672 (0.4%) kv stage 3 (0.0%) gdn conv+gates 1451 (0.8%) gdn recurrence 7338 (4.0%) gdn out proj 6673 (3.6%)",
+    "message": {
+      "role": "assistant",
+      "content": "Let me look at how existing options like `--fit-max-tokens` and `--idle-unload` are wired in serve/server.py.",
+      "tool_calls": [
+        {
+          "id": "call_46749c506ad94fb2a9a0e066",
+          "type": "function",
+          "function": {
+            "name": "grep",
+            "arguments": "{\"pattern\":\"fit-max-tokens|fit_max_tokens|idle_unload_s|idle-unload|min_free_vram_mib|min-free-vram-mib|max_queue|max-queue|503\",\"path\":\"serve/server.py\"}"
+          }
+        }
+      ]
+    },
+    "usage": {
+      "prompt_tokens": 121776,
+      "completion_tokens": 106,
+      "total_tokens": 121882,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 121776,
+      "prompt_ms": 184967.4,
+      "prompt_per_token_ms": 1.519,
+      "prompt_per_second": 658.4,
+      "predicted_n": 106,
+      "predicted_ms": 2477.5,
+      "predicted_per_token_ms": 23.373,
+      "predicted_per_second": 42.8,
+      "draft_n": 82,
+      "draft_n_accepted": 64
+    }
+  },
+  {
+    "arm": "custom",
+    "class": "pi-cart-bugfix",
+    "wall_seconds": 30.71522015600931,
+    "pi_exit": 0,
+    "tests_pass": true,
+    "immutable_files_unchanged": true,
+    "engine_summaries": [
+      "strata serve: prompt 1674 tokens = 0 reused + 1674 read in 3117 ms (537.1 tok/s), 58 generated in 1042 ms (55.6 tok/s), drafts accepted 42 of 44, 1 checkpoints",
+      "strata serve: prompt 2541 tokens = 1731 reused + 810 read in 2412 ms (335.8 tok/s), 44 generated in 833 ms (52.8 tok/s), drafts accepted 31 of 36, 2 checkpoints",
+      "strata serve: prompt 2612 tokens = 2586 reused + 26 read in 415 ms (62.6 tok/s), 83 generated in 1623 ms (51.1 tok/s), drafts accepted 61 of 69, 3 checkpoints",
+      "strata serve: prompt 3943 tokens = 2696 reused + 1247 read in 3079 ms (405.0 tok/s), 43 generated in 1103 ms (39.0 tok/s), drafts accepted 28 of 42, 4 checkpoints",
+      "strata serve: prompt 4466 tokens = 3988 reused + 478 read in 1804 ms (264.9 tok/s), 406 generated in 8166 ms (49.7 tok/s), drafts accepted 297 of 333, 5 checkpoints",
+      "strata serve: prompt 4901 tokens = 4875 reused + 26 read in 510 ms (51.0 tok/s), 42 generated in 1008 ms (41.7 tok/s), drafts accepted 29 of 38, 6 checkpoints",
+      "strata serve: prompt 5566 tokens = 4944 reused + 622 read in 2200 ms (282.8 tok/s), 116 generated in 2602 ms (44.6 tok/s), drafts accepted 78 of 98, 6 checkpoints"
+    ]
+  },
+  {
+    "arm": "custom-suite",
+    "class": "code-25k",
+    "wall_seconds": 29.684227452002233,
+    "engine_summary": "strata serve: prompt 20053 tokens = 0 reused + 20053 read in 28970 ms (692.2 tok/s), 30 generated in 682 ms (44.0 tok/s), drafts accepted 24 of 30, 2 checkpoints",
+    "timing": "strata prefill timing: 20046 tokens, GPU timeline 28639 ms, wall 28649 ms, host staging 433 ms: embed+steps 183 (0.6%) hc read 5760 (20.1%) gdn 1889 (6.6%) qsa proj 1151 (4.0%) qsa indexer 2 (0.0%) qsa select 256 (0.9%) qsa attn 1679 (5.9%) router+shared 796 (2.8%) host grouping 89 (0.3%) gather 151 (0.5%) wait copy 1645 (5.7%) dequant 2714 (9.5%) gemm gate/up 5040 (17.6%) gemm down 3188 (11.1%) combine 1227 (4.3%) ple 105 (0.4%) kv stage 369 (1.3%) gdn conv+gates 239 (0.8%) gdn recurrence 1202 (4.2%) gdn out proj 955 (3.3%)",
+    "message": {
+      "role": "assistant",
+      "content": null,
+      "tool_calls": [
+        {
+          "id": "call_3028fa28b9ec49c2b27b4d65",
+          "type": "function",
+          "function": {
+            "name": "read_file",
+            "arguments": "{\"path\":\"src/program/generate.cpp\"}"
+          }
+        }
+      ]
+    },
+    "usage": {
+      "prompt_tokens": 20053,
+      "completion_tokens": 30,
+      "total_tokens": 20083,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 20053,
+      "prompt_ms": 28970.5,
+      "prompt_per_token_ms": 1.445,
+      "prompt_per_second": 692.2,
+      "predicted_n": 30,
+      "predicted_ms": 681.5,
+      "predicted_per_token_ms": 22.717,
+      "predicted_per_second": 44.0,
+      "draft_n": 30,
+      "draft_n_accepted": 24
+    }
+  },
+  {
+    "arm": "custom-suite",
+    "class": "code-100k",
+    "wall_seconds": 176.47396295698127,
+    "engine_summary": "strata serve: prompt 121776 tokens = 0 reused + 121776 read in 174941 ms (696.1 tok/s), 65 generated in 1374 ms (47.3 tok/s), drafts accepted 40 of 47, 6 checkpoints",
+    "timing": "strata prefill timing: 121769 tokens, GPU timeline 174653 ms, wall 174657 ms, host staging 3046 ms: embed+steps 1139 (0.7%) hc read 35262 (20.2%) gdn 11243 (6.4%) qsa proj 7045 (4.0%) qsa indexer 9 (0.0%) qsa select 5709 (3.3%) qsa attn 11032 (6.3%) router+shared 4870 (2.8%) host grouping 649 (0.4%) gather 915 (0.5%) wait copy 8106 (4.6%) dequant 16157 (9.3%) gemm gate/up 30390 (17.4%) gemm down 19239 (11.0%) combine 7423 (4.3%) ple 627 (0.4%) kv stage 210 (0.1%) gdn conv+gates 1450 (0.8%) gdn recurrence 7366 (4.2%) gdn out proj 5810 (3.3%)",
+    "message": {
+      "role": "assistant",
+      "content": "Let me look at how existing server options like `--fit-max-tokens` and `--idle-unload` are implemented.",
+      "tool_calls": [
+        {
+          "id": "call_999cc2acdf224912903e96da",
+          "type": "function",
+          "function": {
+            "name": "grep",
+            "arguments": "{\"pattern\":\"fit_max_tokens|fit-max-tokens|max_queue|max-queue\"}"
+          }
+        }
+      ]
+    },
+    "usage": {
+      "prompt_tokens": 121776,
+      "completion_tokens": 65,
+      "total_tokens": 121841,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 121776,
+      "prompt_ms": 174940.7,
+      "prompt_per_token_ms": 1.437,
+      "prompt_per_second": 696.1,
+      "predicted_n": 65,
+      "predicted_ms": 1373.8,
+      "predicted_per_token_ms": 21.135,
+      "predicted_per_second": 47.3,
+      "draft_n": 47,
+      "draft_n_accepted": 40
+    }
+  },
+  {
+    "arm": "custom-suite",
+    "class": "pi-cart-bugfix",
+    "wall_seconds": 18.00625219300855,
+    "pi_exit": 0,
+    "tests_pass": true,
+    "immutable_files_unchanged": true,
+    "engine_summaries": [
+      "strata serve: prompt 1675 tokens = 0 reused + 1675 read in 3096 ms (541.1 tok/s), 58 generated in 982 ms (59.0 tok/s), drafts accepted 40 of 49, 1 checkpoints",
+      "strata serve: prompt 2466 tokens = 1732 reused + 734 read in 2191 ms (335.0 tok/s), 66 generated in 988 ms (66.8 tok/s), drafts accepted 48 of 51, 2 checkpoints",
+      "strata serve: prompt 3616 tokens = 2532 reused + 1084 read in 3064 ms (353.8 tok/s), 153 generated in 2570 ms (59.5 tok/s), drafts accepted 112 of 123, 3 checkpoints",
+      "strata serve: prompt 3798 tokens = 3771 reused + 27 read in 477 ms (56.6 tok/s), 28 generated in 478 ms (58.5 tok/s), drafts accepted 21 of 21, 4 checkpoints",
+      "strata serve: prompt 4166 tokens = 3826 reused + 340 read in 1518 ms (223.9 tok/s), 100 generated in 1937 ms (51.6 tok/s), drafts accepted 69 of 79, 5 checkpoints"
+    ]
+  },
+  {
+    "arm": "stock",
+    "class": "pi-cart-bugfix",
+    "wall_seconds": 22.981929860980017,
+    "pi_exit": 0,
+    "tests_pass": true,
+    "immutable_files_unchanged": true,
+    "engine_summaries": [
+      "strata serve: prompt 1674 tokens = 0 reused + 1674 read in 3152 ms (531.1 tok/s), 63 generated in 1391 ms (45.3 tok/s), drafts accepted 44 of 53, 1 checkpoints",
+      "strata serve: prompt 2470 tokens = 1736 reused + 734 read in 2312 ms (317.4 tok/s), 70 generated in 1214 ms (57.6 tok/s), drafts accepted 50 of 56, 2 checkpoints",
+      "strata serve: prompt 3712 tokens = 2539 reused + 1173 read in 3095 ms (379.0 tok/s), 336 generated in 6138 ms (54.7 tok/s), drafts accepted 246 of 264, 3 checkpoints",
+      "strata serve: prompt 4077 tokens = 4050 reused + 27 read in 556 ms (48.6 tok/s), 28 generated in 531 ms (52.7 tok/s), drafts accepted 21 of 21, 4 checkpoints",
+      "strata serve: prompt 4445 tokens = 4105 reused + 340 read in 1636 ms (207.8 tok/s), 101 generated in 2212 ms (45.7 tok/s), drafts accepted 70 of 82, 5 checkpoints"
+    ]
+  }
+]

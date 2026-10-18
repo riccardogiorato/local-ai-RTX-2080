@@ -1,0 +1,11 @@
+[
+  {
+    "arm": "stock",
+    "class": "pi-cart-bugfix",
+    "wall_seconds": 0.5233513189887162,
+    "pi_exit": 0,
+    "tests_pass": false,
+    "immutable_files_unchanged": true,
+    "engine_summaries": []
+  }
+]
