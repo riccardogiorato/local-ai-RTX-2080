@@ -1,0 +1,122 @@
+{
+  "prefill": [
+    {
+      "arm": "stock",
+      "case": "code-25k",
+      "prompt_tokens": 20053,
+      "prefill_seconds": 30.544,
+      "prefill_tokens_per_second": 656.5,
+      "wall_seconds": 31.315050784003688,
+      "completion_tokens": 30,
+      "throughput_gain_percent": 0.0,
+      "greedy_message_matches_stock": true
+    },
+    {
+      "arm": "stock",
+      "case": "code-100k",
+      "prompt_tokens": 121776,
+      "prefill_seconds": 209.733,
+      "prefill_tokens_per_second": 580.6,
+      "wall_seconds": 211.66532859098515,
+      "completion_tokens": 73,
+      "throughput_gain_percent": 0.0,
+      "greedy_message_matches_stock": true
+    },
+    {
+      "arm": "custom",
+      "case": "code-25k",
+      "prompt_tokens": 20053,
+      "prefill_seconds": 30.0381,
+      "prefill_tokens_per_second": 667.6,
+      "wall_seconds": 30.827789247006876,
+      "completion_tokens": 30,
+      "throughput_gain_percent": 1.6907844630617008,
+      "greedy_message_matches_stock": true
+    },
+    {
+      "arm": "custom",
+      "case": "code-100k",
+      "prompt_tokens": 121776,
+      "prefill_seconds": 184.9674,
+      "prefill_tokens_per_second": 658.4,
+      "wall_seconds": 187.60706301301252,
+      "completion_tokens": 106,
+      "throughput_gain_percent": 13.39993110575266,
+      "greedy_message_matches_stock": false
+    },
+    {
+      "arm": "custom-suite",
+      "case": "code-25k",
+      "prompt_tokens": 20053,
+      "prefill_seconds": 28.9705,
+      "prefill_tokens_per_second": 692.2,
+      "wall_seconds": 29.684227452002233,
+      "completion_tokens": 30,
+      "throughput_gain_percent": 5.437928408225434,
+      "greedy_message_matches_stock": true
+    },
+    {
+      "arm": "custom-suite",
+      "case": "code-100k",
+      "prompt_tokens": 121776,
+      "prefill_seconds": 174.94070000000002,
+      "prefill_tokens_per_second": 696.1,
+      "wall_seconds": 176.47396295698127,
+      "completion_tokens": 65,
+      "throughput_gain_percent": 19.893213916637965,
+      "greedy_message_matches_stock": false
+    }
+  ],
+  "pi": [
+    {
+      "arm": "custom",
+      "class": "pi-cart-bugfix",
+      "wall_seconds": 30.71522015600931,
+      "pi_exit": 0,
+      "tests_pass": true,
+      "immutable_files_unchanged": true,
+      "engine_summaries": [
+        "strata serve: prompt 1674 tokens = 0 reused + 1674 read in 3117 ms (537.1 tok/s), 58 generated in 1042 ms (55.6 tok/s), drafts accepted 42 of 44, 1 checkpoints",
+        "strata serve: prompt 2541 tokens = 1731 reused + 810 read in 2412 ms (335.8 tok/s), 44 generated in 833 ms (52.8 tok/s), drafts accepted 31 of 36, 2 checkpoints",
+        "strata serve: prompt 2612 tokens = 2586 reused + 26 read in 415 ms (62.6 tok/s), 83 generated in 1623 ms (51.1 tok/s), drafts accepted 61 of 69, 3 checkpoints",
+        "strata serve: prompt 3943 tokens = 2696 reused + 1247 read in 3079 ms (405.0 tok/s), 43 generated in 1103 ms (39.0 tok/s), drafts accepted 28 of 42, 4 checkpoints",
+        "strata serve: prompt 4466 tokens = 3988 reused + 478 read in 1804 ms (264.9 tok/s), 406 generated in 8166 ms (49.7 tok/s), drafts accepted 297 of 333, 5 checkpoints",
+        "strata serve: prompt 4901 tokens = 4875 reused + 26 read in 510 ms (51.0 tok/s), 42 generated in 1008 ms (41.7 tok/s), drafts accepted 29 of 38, 6 checkpoints",
+        "strata serve: prompt 5566 tokens = 4944 reused + 622 read in 2200 ms (282.8 tok/s), 116 generated in 2602 ms (44.6 tok/s), drafts accepted 78 of 98, 6 checkpoints"
+      ],
+      "tool_execution_starts": 7
+    },
+    {
+      "arm": "custom-suite",
+      "class": "pi-cart-bugfix",
+      "wall_seconds": 18.00625219300855,
+      "pi_exit": 0,
+      "tests_pass": true,
+      "immutable_files_unchanged": true,
+      "engine_summaries": [
+        "strata serve: prompt 1675 tokens = 0 reused + 1675 read in 3096 ms (541.1 tok/s), 58 generated in 982 ms (59.0 tok/s), drafts accepted 40 of 49, 1 checkpoints",
+        "strata serve: prompt 2466 tokens = 1732 reused + 734 read in 2191 ms (335.0 tok/s), 66 generated in 988 ms (66.8 tok/s), drafts accepted 48 of 51, 2 checkpoints",
+        "strata serve: prompt 3616 tokens = 2532 reused + 1084 read in 3064 ms (353.8 tok/s), 153 generated in 2570 ms (59.5 tok/s), drafts accepted 112 of 123, 3 checkpoints",
+        "strata serve: prompt 3798 tokens = 3771 reused + 27 read in 477 ms (56.6 tok/s), 28 generated in 478 ms (58.5 tok/s), drafts accepted 21 of 21, 4 checkpoints",
+        "strata serve: prompt 4166 tokens = 3826 reused + 340 read in 1518 ms (223.9 tok/s), 100 generated in 1937 ms (51.6 tok/s), drafts accepted 69 of 79, 5 checkpoints"
+      ],
+      "tool_execution_starts": 6
+    },
+    {
+      "arm": "stock",
+      "class": "pi-cart-bugfix",
+      "wall_seconds": 22.981929860980017,
+      "pi_exit": 0,
+      "tests_pass": true,
+      "immutable_files_unchanged": true,
+      "engine_summaries": [
+        "strata serve: prompt 1674 tokens = 0 reused + 1674 read in 3152 ms (531.1 tok/s), 63 generated in 1391 ms (45.3 tok/s), drafts accepted 44 of 53, 1 checkpoints",
+        "strata serve: prompt 2470 tokens = 1736 reused + 734 read in 2312 ms (317.4 tok/s), 70 generated in 1214 ms (57.6 tok/s), drafts accepted 50 of 56, 2 checkpoints",
+        "strata serve: prompt 3712 tokens = 2539 reused + 1173 read in 3095 ms (379.0 tok/s), 336 generated in 6138 ms (54.7 tok/s), drafts accepted 246 of 264, 3 checkpoints",
+        "strata serve: prompt 4077 tokens = 4050 reused + 27 read in 556 ms (48.6 tok/s), 28 generated in 531 ms (52.7 tok/s), drafts accepted 21 of 21, 4 checkpoints",
+        "strata serve: prompt 4445 tokens = 4105 reused + 340 read in 1636 ms (207.8 tok/s), 101 generated in 2212 ms (45.7 tok/s), drafts accepted 70 of 82, 5 checkpoints"
+      ],
+      "tool_execution_starts": 6
+    }
+  ]
+}

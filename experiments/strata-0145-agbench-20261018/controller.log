@@ -1,0 +1,9 @@
+15:46:25 START full AG-Bench stock, 11 tasks x 900s cap
+15:47:04 READY stock ag, load 39.0s
+16:07:02 DONE stock: 11/11 in 1190s
+16:07:06 START full AG-Bench optimized, 11 tasks x 900s cap
+16:07:44 READY optimized ag, load 38.0s
+16:24:32 DONE optimized: 11/11 in 998s
+16:25:14 READY stock speed, load 38.0s
+16:32:16 READY optimized speed, load 38.0s
+16:38:17 ALL BENCHMARKS COMPLETE

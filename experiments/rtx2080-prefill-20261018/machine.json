@@ -1,0 +1,20 @@
+{
+  "kernel": "7.2.5-3-omarchy",
+  "date": "2026-10-18T14:50:40+02:00",
+  "strata_commit": "477ac13cbe8e582c20484871ce459d20d82df09d",
+  "gpu": "name, driver_version, memory.total [MiB], power.limit [W]\nNVIDIA GeForce RTX 2080, 610.57.04, 8192 MiB, 225.00 W\n",
+  "workloads": {
+    "code-25k": "tools/agent_turns_bench.py expert-cache.3",
+    "code-100k": "tools/agent_turns_bench.py server-option.4",
+    "pi-cart-bugfix": "benchmarks/agentic-tasks/task1-js-bugfix"
+  },
+  "build_log": "/tmp/rtx2080-kernel-build.log",
+  "notes": [
+    "Standalone scorer tests ran before full-model measurements.",
+    "Unrelated wasm-opt build completed before any full-model request.",
+    "Labels code-25k/code-100k are approximate; engine logs give actual counts.",
+    "The first real prompt attempt on HDD was stopped before completion; it is excluded from speed comparisons.",
+    "All final full-model arms use the same verified NVMe model files."
+  ],
+  "storage_migration": "ssd-migration.json"
+}

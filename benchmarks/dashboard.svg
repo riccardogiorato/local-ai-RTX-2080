@@ -1,238 +1,144 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" role="img" aria-label="Benchmarking AI Models — Evaluation Console dashboard">
-  <title>Benchmarking AI Models — Evaluation Console</title>
-
-  <defs>
-    <style>
-      text {
-        font-family: 'Inter', 'Helvetica Neue', system-ui, -apple-system, 'Segoe UI', sans-serif;
-        -webkit-font-smoothing: antialiased;
-      }
-      .display   { font-size: 48px; font-weight: 600; letter-spacing: -0.02em; fill: #ffffff; }
-      .heading   { font-size: 24px; font-weight: 600; letter-spacing: -0.01em; fill: #ffffff; }
-      .body      { font-size: 16px; font-weight: 400; fill: #8a8a8a; }
-      .label     { font-size: 14px; font-weight: 500; fill: #ffffff; }
-      .label-mut { font-size: 14px; font-weight: 500; fill: #8a8a8a; }
-      .micro     { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; fill: #8a8a8a; }
-      .micro-ink { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; fill: #ffffff; }
-      .value     { font-size: 14px; font-weight: 600; fill: #d4ff00; letter-spacing: 0.02em; }
-      .value-mut { font-size: 14px; font-weight: 600; fill: #8a8a8a; letter-spacing: 0.02em; }
-      .score     { font-size: 14px; font-weight: 600; fill: #d4ff00; }
-      .brand     { font-size: 18px; font-weight: 600; letter-spacing: -0.02em; fill: #d4ff00; }
-      .btn       { font-size: 14px; font-weight: 500; fill: #050505; }
-      .btn-ghost { font-size: 14px; font-weight: 500; fill: #ffffff; }
-      .icon      { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: square; stroke-linejoin: miter; }
-    </style>
-
-    <symbol id="ico-overview" viewBox="0 0 20 20">
-      <g class="icon">
-        <rect x="2.5" y="2.5" width="6" height="6"/>
-        <rect x="11.5" y="2.5" width="6" height="6"/>
-        <rect x="2.5" y="11.5" width="6" height="6"/>
-        <rect x="11.5" y="11.5" width="6" height="6"/>
-      </g>
-    </symbol>
-
-    <symbol id="ico-models" viewBox="0 0 20 20">
-      <g class="icon">
-        <path d="M2.5 17.5V9M7.5 17.5V4M12.5 17.5V12M17.5 17.5V6.5"/>
-      </g>
-    </symbol>
-
-    <symbol id="ico-runs" viewBox="0 0 20 20">
-      <g class="icon">
-        <path d="M2.5 12.5L7 7.5L11 11.5L17.5 4"/>
-        <path d="M17.5 4H11M17.5 4V10"/>
-      </g>
-    </symbol>
-
-    <symbol id="ico-settings" viewBox="0 0 20 20">
-      <g class="icon">
-        <circle cx="10" cy="10" r="7.5"/>
-        <path d="M10 5.5V10L13.5 12.5"/>
-      </g>
-    </symbol>
-  </defs>
-
-  <!-- ================= CANVAS ================= -->
-  <rect x="0" y="0" width="1440" height="900" fill="#050505"/>
-
-  <!-- ================= SIDEBAR ================= -->
-  <g id="sidebar">
-    <rect x="0" y="0" width="80" height="900" fill="#050505"/>
-    <line x1="80" y1="0" x2="80" y2="900" stroke="#262626" stroke-width="1"/>
-
-    <!-- brand -->
-    <text class="brand" x="40" y="56" text-anchor="middle">B</text>
-
-    <!-- nav -->
-    <g>
-      <!-- active -->
-      <rect x="0" y="152" width="4" height="24" fill="#d4ff00"/>
-      <use href="#ico-overview" x="20" y="140" width="20" height="20" color="#ffffff"/>
-      <text class="label" x="40" y="176" text-anchor="middle">Overview</text>
-
-      <use href="#ico-models" x="20" y="192" width="20" height="20" color="#8a8a8a"/>
-      <text class="label-mut" x="40" y="228" text-anchor="middle">Models</text>
-
-      <use href="#ico-runs" x="20" y="244" width="20" height="20" color="#8a8a8a"/>
-      <text class="label-mut" x="40" y="280" text-anchor="middle">Runs</text>
-
-      <use href="#ico-settings" x="20" y="296" width="20" height="20" color="#8a8a8a"/>
-      <text class="label-mut" x="40" y="332" text-anchor="middle">Settings</text>
-    </g>
-
-    <!-- sidebar foot -->
-    <line x1="0" y1="700" x2="80" y2="700" stroke="#262626" stroke-width="1"/>
-    <text class="micro" x="40" y="730" text-anchor="middle">v2.4.0</text>
-    <rect x="37" y="744" width="6" height="6" fill="#d4ff00"/>
-  </g>
-
-  <!-- ================= MAIN ================= -->
-  <g id="main">
-
-    <!-- header -->
-    <text class="micro" x="120" y="56">EVALUATION CONSOLE</text>
-    <text class="heading" x="120" y="92">Benchmarking AI Models</text>
-    <text class="body" x="120" y="120">Live comparison across reasoning, coding and retrieval workloads.</text>
-
-    <!-- ================= HERO ================= -->
-    <g id="hero">
-      <rect x="120" y="160" width="1240" height="300" fill="#1a1a1a"/>
-      <rect x="120" y="160" width="1240" height="1" fill="#d4ff00"/>
-      <rect x="120" y="161" width="1240" height="299" fill="none" stroke="#262626" stroke-width="1"/>
-
-      <!-- left: copy -->
-      <g>
-        <rect x="144" y="192" width="8" height="8" fill="#d4ff00"/>
-        <text class="micro" x="164" y="200">LIVE CAPTURE</text>
-
-        <text class="display" x="144" y="268">Measure what</text>
-        <text class="display" x="144" y="321">actually matters.</text>
-
-        <text class="body" x="144" y="356">Run controlled evaluations against a fixed prompt set and</text>
-        <text class="body" x="144" y="380">compare models on the metrics that define your workload.</text>
-
-        <!-- actions -->
-        <g>
-          <rect x="144" y="404" width="184" height="40" rx="9999" fill="#d4ff00"/>
-          <text class="btn" x="168" y="429">Start benchmark</text>
-          <path d="M284 424H300M294 418L300 424L294 430" fill="none" stroke="#050505" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"/>
-
-          <rect x="344" y="404" width="160" height="40" fill="none" stroke="#262626" stroke-width="1"/>
-          <text class="btn-ghost" x="368" y="429">View methodology</text>
-        </g>
-      </g>
-
-      <!-- right: metric stack -->
-      <g id="metrics">
-        <line x1="840" y1="184" x2="1336" y2="184" stroke="#262626" stroke-width="1"/>
-        <text class="label-mut" x="840" y="219">Models evaluated</text>
-        <text class="value" x="1336" y="219" text-anchor="end">12</text>
-
-        <line x1="840" y1="247" x2="1336" y2="247" stroke="#262626" stroke-width="1"/>
-        <text class="label-mut" x="840" y="282">Total runs</text>
-        <text class="value" x="1336" y="282" text-anchor="end">4,812</text>
-
-        <line x1="840" y1="310" x2="1336" y2="310" stroke="#262626" stroke-width="1"/>
-        <text class="label-mut" x="840" y="345">Median latency</text>
-        <text class="value" x="1336" y="345" text-anchor="end">1.84s</text>
-
-        <line x1="840" y1="373" x2="1336" y2="373" stroke="#262626" stroke-width="1"/>
-        <text class="label-mut" x="840" y="408">Pass rate</text>
-        <text class="value" x="1336" y="408" text-anchor="end">94.2%</text>
-
-        <line x1="840" y1="436" x2="1336" y2="436" stroke="#262626" stroke-width="1"/>
-      </g>
-    </g>
-
-    <!-- ================= PANELS ================= -->
-    <g id="panels">
-
-      <!-- performance -->
-      <g id="performance">
-        <rect x="120" y="500" width="760" height="300" fill="#0f0f0f"/>
-        <rect x="120" y="500" width="760" height="299" fill="none" stroke="#262626" stroke-width="1"/>
-
-        <text class="heading" x="144" y="548">Model Performance</text>
-        <text class="micro" x="856" y="548" text-anchor="end">REASONING</text>
-        <text class="label-mut" x="144" y="576">Composite score across 240 evaluation tasks.</text>
-
-        <!-- chart -->
-        <g id="chart">
-          <text class="label" x="144" y="612">Frontier-1</text>
-          <rect x="240" y="608" width="616" height="8" fill="#262626"/>
-          <rect x="240" y="608" width="591" height="8" fill="#d4ff00"/>
-          <text class="score" x="856" y="612" text-anchor="end">96.4</text>
-
-          <text class="label" x="144" y="648">Frontier-2</text>
-          <rect x="240" y="644" width="616" height="8" fill="#262626"/>
-          <rect x="240" y="644" width="561" height="8" fill="#d4ff00"/>
-          <text class="score" x="856" y="648" text-anchor="end">91.8</text>
-
-          <text class="label" x="144" y="684">Open-Reason</text>
-          <rect x="240" y="680" width="616" height="8" fill="#262626"/>
-          <rect x="240" y="680" width="517" height="8" fill="#262626"/>
-          <text class="score" x="856" y="684" text-anchor="end">84.2</text>
-
-          <text class="label" x="144" y="720">Code-Large</text>
-          <rect x="240" y="716" width="616" height="8" fill="#262626"/>
-          <rect x="240" y="716" width="444" height="8" fill="#262626"/>
-          <text class="score" x="856" y="720" text-anchor="end">72.6</text>
-
-          <text class="label" x="144" y="756">Compact-3</text>
-          <rect x="240" y="752" width="616" height="8" fill="#262626"/>
-          <rect x="240" y="752" width="357" height="8" fill="#262626"/>
-          <text class="score" x="856" y="756" text-anchor="end">58.1</text>
-        </g>
-      </g>
-
-      <!-- system status -->
-      <g id="system-status">
-        <rect x="920" y="500" width="440" height="300" fill="#0f0f0f"/>
-        <rect x="920" y="500" width="440" height="299" fill="none" stroke="#262626" stroke-width="1"/>
-
-        <text class="heading" x="944" y="548">System Status</text>
-        <text class="micro" x="1336" y="548" text-anchor="end">RUNTIME</text>
-        <text class="label-mut" x="944" y="576">Infrastructure health across the evaluation cluster.</text>
-
-        <g id="status-list">
-          <line x1="944" y1="596" x2="1336" y2="596" stroke="#262626" stroke-width="1"/>
-          <text class="label" x="944" y="618">GPU Cluster</text>
-          <text class="micro" x="944" y="636">8 / 8 nodes online</text>
-          <text class="value" x="1336" y="622" text-anchor="end">Healthy</text>
-
-          <line x1="944" y1="638" x2="1336" y2="638" stroke="#262626" stroke-width="1"/>
-          <text class="label" x="944" y="660">Prompt Cache</text>
-          <text class="micro" x="944" y="678">12.4 GB allocated</text>
-          <text class="value" x="1336" y="664" text-anchor="end">98.1%</text>
-
-          <line x1="944" y1="680" x2="1336" y2="680" stroke="#262626" stroke-width="1"/>
-          <text class="label" x="944" y="702">Queue Depth</text>
-          <text class="micro" x="944" y="720">Current run backlog</text>
-          <text class="value-mut" x="1336" y="706" text-anchor="end">03</text>
-
-          <line x1="944" y1="722" x2="1336" y2="722" stroke="#262626" stroke-width="1"/>
-          <text class="label" x="944" y="744">Data Pipeline</text>
-          <text class="micro" x="944" y="762">Last sync 2m ago</text>
-          <text class="value" x="1336" y="748" text-anchor="end">Live</text>
-
-          <line x1="944" y1="764" x2="1336" y2="764" stroke="#262626" stroke-width="1"/>
-        </g>
-
-        <text class="micro" x="944" y="786">ALL SYSTEMS OPERATIONAL</text>
-      </g>
-    </g>
-  </g>
-
-  <!-- ================= FOOTER ================= -->
-  <g id="footer">
-    <rect x="0" y="800" width="1440" height="100" fill="#1a3b2b"/>
-    <line x1="0" y1="800" x2="1440" y2="800" stroke="#262626" stroke-width="1"/>
-
-    <text class="micro-ink" x="120" y="846">BENCHMARKING AI MODELS</text>
-    <text class="label-mut" x="720" y="846" text-anchor="middle">© 2025 Evaluation Console</text>
-
-    <rect x="1288" y="840" width="6" height="6" fill="#d4ff00"/>
-    <text class="micro" x="1360" y="846" text-anchor="end">BUILT FOR EVALUATION</text>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1120" viewBox="0 0 1440 1120">
+<rect width="1440" height="1120" fill="#080c12"/>
+<text x="48" y="48" font-family="DejaVu Sans, sans-serif" font-size="15" fill="#9caec3" font-weight="700" text-anchor="start">RTX 2080 / BENCH LAB</text>
+<text x="1392" y="48" font-family="DejaVu Sans, sans-serif" font-size="13" fill="#9caec3" font-weight="400" text-anchor="end">2026-10-18 · complete</text>
+<text x="48" y="112" font-family="DejaVu Sans, sans-serif" font-size="40" fill="#edf4fb" font-weight="700" text-anchor="start">Strata, measured end to end.</text>
+<text x="48" y="148" font-family="DejaVu Sans, sans-serif" font-size="16" fill="#9caec3" font-weight="400" text-anchor="start">v0.1.45 stock vs Turing opt-ins · Flash-Next 125B Q2_0 · RTX 2080 8 GiB · Pi 1.3.0</text>
+<text x="48" y="176" font-family="DejaVu Sans, sans-serif" font-size="14" fill="#9caec3" font-weight="400" text-anchor="start">128K context / int8 KV / 32K resident · identical NVMe files · AG-Bench v2.2 · 900 s/task</text>
+<rect x="48" y="210" width="326" height="140" rx="10" fill="#101720"/>
+<text x="68" y="241" font-family="DejaVu Sans, sans-serif" font-size="13" fill="#9caec3" font-weight="400" text-anchor="start">Stock verifier passes</text>
+<text x="68" y="292" font-family="DejaVu Sans, sans-serif" font-size="29" fill="#edf4fb" font-weight="700" text-anchor="start">11 / 11</text>
+<text x="68" y="325" font-family="DejaVu Sans, sans-serif" font-size="12" fill="#9caec3" font-weight="400" text-anchor="start">1,190 s task wall</text>
+<rect x="390" y="210" width="326" height="140" rx="10" fill="#101720"/>
+<text x="410" y="241" font-family="DejaVu Sans, sans-serif" font-size="13" fill="#9caec3" font-weight="400" text-anchor="start">Optimized verifier passes</text>
+<text x="410" y="292" font-family="DejaVu Sans, sans-serif" font-size="29" fill="#75e6b2" font-weight="700" text-anchor="start">11 / 11</text>
+<text x="410" y="325" font-family="DejaVu Sans, sans-serif" font-size="12" fill="#9caec3" font-weight="400" text-anchor="start">998 s task wall</text>
+<rect x="732" y="210" width="326" height="140" rx="10" fill="#101720"/>
+<text x="752" y="241" font-family="DejaVu Sans, sans-serif" font-size="13" fill="#9caec3" font-weight="400" text-anchor="start">10-task wall change</text>
+<text x="752" y="292" font-family="DejaVu Sans, sans-serif" font-size="29" fill="#edf4fb" font-weight="700" text-anchor="start">-25.2%</text>
+<text x="752" y="325" font-family="DejaVu Sans, sans-serif" font-size="12" fill="#9caec3" font-weight="400" text-anchor="start">Excludes task 8; one suite per arm</text>
+<rect x="1074" y="210" width="326" height="140" rx="10" fill="#101720"/>
+<text x="1094" y="241" font-family="DejaVu Sans, sans-serif" font-size="13" fill="#9caec3" font-weight="400" text-anchor="start">32K prompt throughput</text>
+<text x="1094" y="292" font-family="DejaVu Sans, sans-serif" font-size="29" fill="#edf4fb" font-weight="700" text-anchor="start">695 tok/s</text>
+<text x="1094" y="325" font-family="DejaVu Sans, sans-serif" font-size="12" fill="#9caec3" font-weight="400" text-anchor="start">Median of three fixed probes</text>
+<rect x="48" y="374" width="816" height="600" rx="10" fill="#101720"/>
+<rect x="884" y="374" width="508" height="600" rx="10" fill="#101720"/>
+<text x="70" y="411" font-family="DejaVu Sans, sans-serif" font-size="21" fill="#edf4fb" font-weight="700" text-anchor="start">Time per task</text>
+<text x="70" y="436" font-family="DejaVu Sans, sans-serif" font-size="12" fill="#9caec3" font-weight="400" text-anchor="start">Seconds · lower is better · failed tasks shown in red</text>
+<rect x="594" y="402" width="10" height="10" rx="5" fill="#778ba5"/>
+<text x="612" y="412" font-family="DejaVu Sans, sans-serif" font-size="12" fill="#9caec3" font-weight="400" text-anchor="start">Stock</text>
+<rect x="693" y="402" width="10" height="10" rx="5" fill="#75e6b2"/>
+<text x="711" y="412" font-family="DejaVu Sans, sans-serif" font-size="12" fill="#9caec3" font-weight="400" text-anchor="start">Optimized</text>
+<text x="70" y="484" font-family="DejaVu Sans, sans-serif" font-size="12" fill="#9caec3" font-weight="400" text-anchor="start">01  Cart bugfix</text>
+<rect x="267" y="471" width="500" height="7" rx="3" fill="#192330"/>
+<rect x="267" y="471" width="53.44418052256532" height="7" rx="3" fill="#778ba5"/>
+<text x="835" y="479" font-family="DejaVu Sans, sans-serif" font-size="11" fill="#9caec3" font-weight="400" text-anchor="end">45 s</text>
+<rect x="267" y="484" width="500" height="7" rx="3" fill="#192330"/>
+<rect x="267" y="484" width="34.441805225653205" height="7" rx="3" fill="#75e6b2"/>
+<text x="835" y="492" font-family="DejaVu Sans, sans-serif" font-size="11" fill="#9caec3" font-weight="400" text-anchor="end">29 s</text>
+<text x="70" y="526" font-family="DejaVu Sans, sans-serif" font-size="12" fill="#9caec3" font-weight="400" text-anchor="start">02  React contract</text>
+<rect x="267" y="513" width="500" height="7" rx="3" fill="#192330"/>
+<rect x="267" y="513" width="49.8812351543943" height="7" rx="3" fill="#778ba5"/>
+<text x="835" y="521" font-family="DejaVu Sans, sans-serif" font-size="11" fill="#9caec3" font-weight="400" text-anchor="end">42 s</text>
+<rect x="267" y="526" width="500" height="7" rx="3" fill="#192330"/>
+<rect x="267" y="526" width="47.50593824228029" height="7" rx="3" fill="#75e6b2"/>
+<text x="835" y="534" font-family="DejaVu Sans, sans-serif" font-size="11" fill="#9caec3" font-weight="400" text-anchor="end">40 s</text>
+<text x="70" y="568" font-family="DejaVu Sans, sans-serif" font-size="12" fill="#9caec3" font-weight="400" text-anchor="start">03  Dependency upgrade</text>
+<rect x="267" y="555" width="500" height="7" rx="3" fill="#192330"/>
+<rect x="267" y="555" width="275.53444180522564" height="7" rx="3" fill="#778ba5"/>
+<text x="835" y="563" font-family="DejaVu Sans, sans-serif" font-size="11" fill="#9caec3" font-weight="400" text-anchor="end">232 s</text>
+<rect x="267" y="568" width="500" height="7" rx="3" fill="#192330"/>
+<rect x="267" y="568" width="174.58432304038004" height="7" rx="3" fill="#75e6b2"/>
+<text x="835" y="576" font-family="DejaVu Sans, sans-serif" font-size="11" fill="#9caec3" font-weight="400" text-anchor="end">147 s</text>
+<text x="70" y="610" font-family="DejaVu Sans, sans-serif" font-size="12" fill="#9caec3" font-weight="400" text-anchor="start">04  Python metrics</text>
+<rect x="267" y="597" width="500" height="7" rx="3" fill="#192330"/>
+<rect x="267" y="597" width="21.377672209026127" height="7" rx="3" fill="#778ba5"/>
+<text x="835" y="605" font-family="DejaVu Sans, sans-serif" font-size="11" fill="#9caec3" font-weight="400" text-anchor="end">18 s</text>
+<rect x="267" y="610" width="500" height="7" rx="3" fill="#192330"/>
+<rect x="267" y="610" width="29.69121140142518" height="7" rx="3" fill="#75e6b2"/>
+<text x="835" y="618" font-family="DejaVu Sans, sans-serif" font-size="11" fill="#9caec3" font-weight="400" text-anchor="end">25 s</text>
+<text x="70" y="652" font-family="DejaVu Sans, sans-serif" font-size="12" fill="#9caec3" font-weight="400" text-anchor="start">05  TypeScript migration</text>
+<rect x="267" y="639" width="500" height="7" rx="3" fill="#192330"/>
+<rect x="267" y="639" width="143.70546318289786" height="7" rx="3" fill="#778ba5"/>
+<text x="835" y="647" font-family="DejaVu Sans, sans-serif" font-size="11" fill="#9caec3" font-weight="400" text-anchor="end">121 s</text>
+<rect x="267" y="652" width="500" height="7" rx="3" fill="#192330"/>
+<rect x="267" y="652" width="48.69358669833729" height="7" rx="3" fill="#75e6b2"/>
+<text x="835" y="660" font-family="DejaVu Sans, sans-serif" font-size="11" fill="#9caec3" font-weight="400" text-anchor="end">41 s</text>
+<text x="70" y="694" font-family="DejaVu Sans, sans-serif" font-size="12" fill="#9caec3" font-weight="400" text-anchor="start">06  Pagination</text>
+<rect x="267" y="681" width="500" height="7" rx="3" fill="#192330"/>
+<rect x="267" y="681" width="68.88361045130641" height="7" rx="3" fill="#778ba5"/>
+<text x="835" y="689" font-family="DejaVu Sans, sans-serif" font-size="11" fill="#9caec3" font-weight="400" text-anchor="end">58 s</text>
+<rect x="267" y="694" width="500" height="7" rx="3" fill="#192330"/>
+<rect x="267" y="694" width="41.56769596199525" height="7" rx="3" fill="#75e6b2"/>
+<text x="835" y="702" font-family="DejaVu Sans, sans-serif" font-size="11" fill="#9caec3" font-weight="400" text-anchor="end">35 s</text>
+<text x="70" y="736" font-family="DejaVu Sans, sans-serif" font-size="12" fill="#9caec3" font-weight="400" text-anchor="start">07  ADR gateway</text>
+<rect x="267" y="723" width="500" height="7" rx="3" fill="#192330"/>
+<rect x="267" y="723" width="80.76009501187649" height="7" rx="3" fill="#778ba5"/>
+<text x="835" y="731" font-family="DejaVu Sans, sans-serif" font-size="11" fill="#9caec3" font-weight="400" text-anchor="end">68 s</text>
+<rect x="267" y="736" width="500" height="7" rx="3" fill="#192330"/>
+<rect x="267" y="736" width="72.44655581947744" height="7" rx="3" fill="#75e6b2"/>
+<text x="835" y="744" font-family="DejaVu Sans, sans-serif" font-size="11" fill="#9caec3" font-weight="400" text-anchor="end">61 s</text>
+<text x="70" y="778" font-family="DejaVu Sans, sans-serif" font-size="12" fill="#9caec3" font-weight="400" text-anchor="start">08  Python environment*</text>
+<rect x="267" y="765" width="500" height="7" rx="3" fill="#192330"/>
+<rect x="267" y="765" width="497.62470308788596" height="7" rx="3" fill="#778ba5"/>
+<text x="835" y="773" font-family="DejaVu Sans, sans-serif" font-size="11" fill="#9caec3" font-weight="400" text-anchor="end">419 s</text>
+<rect x="267" y="778" width="500" height="7" rx="3" fill="#192330"/>
+<rect x="267" y="778" width="500.0" height="7" rx="3" fill="#75e6b2"/>
+<text x="835" y="786" font-family="DejaVu Sans, sans-serif" font-size="11" fill="#9caec3" font-weight="400" text-anchor="end">421 s</text>
+<text x="70" y="820" font-family="DejaVu Sans, sans-serif" font-size="12" fill="#9caec3" font-weight="400" text-anchor="start">09  Access-log analysis</text>
+<rect x="267" y="807" width="500" height="7" rx="3" fill="#192330"/>
+<rect x="267" y="807" width="51.06888361045131" height="7" rx="3" fill="#778ba5"/>
+<text x="835" y="815" font-family="DejaVu Sans, sans-serif" font-size="11" fill="#9caec3" font-weight="400" text-anchor="end">43 s</text>
+<rect x="267" y="820" width="500" height="7" rx="3" fill="#192330"/>
+<rect x="267" y="820" width="48.69358669833729" height="7" rx="3" fill="#75e6b2"/>
+<text x="835" y="828" font-family="DejaVu Sans, sans-serif" font-size="11" fill="#9caec3" font-weight="400" text-anchor="end">41 s</text>
+<text x="70" y="862" font-family="DejaVu Sans, sans-serif" font-size="12" fill="#9caec3" font-weight="400" text-anchor="start">10  Bank filtering</text>
+<rect x="267" y="849" width="500" height="7" rx="3" fill="#192330"/>
+<rect x="267" y="849" width="100.95011876484561" height="7" rx="3" fill="#778ba5"/>
+<text x="835" y="857" font-family="DejaVu Sans, sans-serif" font-size="11" fill="#9caec3" font-weight="400" text-anchor="end">85 s</text>
+<rect x="267" y="862" width="500" height="7" rx="3" fill="#192330"/>
+<rect x="267" y="862" width="74.82185273159145" height="7" rx="3" fill="#75e6b2"/>
+<text x="835" y="870" font-family="DejaVu Sans, sans-serif" font-size="11" fill="#9caec3" font-weight="400" text-anchor="end">63 s</text>
+<text x="70" y="904" font-family="DejaVu Sans, sans-serif" font-size="12" fill="#9caec3" font-weight="400" text-anchor="start">11  Seating constraints</text>
+<rect x="267" y="891" width="500" height="7" rx="3" fill="#192330"/>
+<rect x="267" y="891" width="70.07125890736341" height="7" rx="3" fill="#778ba5"/>
+<text x="835" y="899" font-family="DejaVu Sans, sans-serif" font-size="11" fill="#9caec3" font-weight="400" text-anchor="end">59 s</text>
+<rect x="267" y="904" width="500" height="7" rx="3" fill="#192330"/>
+<rect x="267" y="904" width="112.82660332541568" height="7" rx="3" fill="#75e6b2"/>
+<text x="835" y="912" font-family="DejaVu Sans, sans-serif" font-size="11" fill="#9caec3" font-weight="400" text-anchor="end">95 s</text>
+<text x="906" y="411" font-family="DejaVu Sans, sans-serif" font-size="21" fill="#edf4fb" font-weight="700" text-anchor="start">Standard speed probes</text>
+<text x="906" y="436" font-family="DejaVu Sans, sans-serif" font-size="12" fill="#9caec3" font-weight="400" text-anchor="start">Fresh server per arm · 3 repetitions · medians</text>
+<text x="1185" y="473" font-family="DejaVu Sans, sans-serif" font-size="12" fill="#9caec3" font-weight="400" text-anchor="end">Stock</text>
+<text x="1370" y="473" font-family="DejaVu Sans, sans-serif" font-size="12" fill="#9caec3" font-weight="400" text-anchor="end">Optimized</text>
+<text x="906" y="509" font-family="DejaVu Sans, sans-serif" font-size="13" fill="#9caec3" font-weight="400" text-anchor="start">Short decode</text>
+<text x="1185" y="509" font-family="DejaVu Sans, sans-serif" font-size="13" fill="#edf4fb" font-weight="400" text-anchor="end">42.9 tok/s</text>
+<text x="1370" y="509" font-family="DejaVu Sans, sans-serif" font-size="13" fill="#edf4fb" font-weight="400" text-anchor="end">47.1 tok/s</text>
+<text x="906" y="548" font-family="DejaVu Sans, sans-serif" font-size="13" fill="#9caec3" font-weight="400" text-anchor="start">4K prefill</text>
+<text x="1185" y="548" font-family="DejaVu Sans, sans-serif" font-size="13" fill="#edf4fb" font-weight="400" text-anchor="end">660.6 tok/s</text>
+<text x="1370" y="548" font-family="DejaVu Sans, sans-serif" font-size="13" fill="#edf4fb" font-weight="400" text-anchor="end">677.2 tok/s</text>
+<text x="906" y="587" font-family="DejaVu Sans, sans-serif" font-size="13" fill="#9caec3" font-weight="400" text-anchor="start">16K prefill</text>
+<text x="1185" y="587" font-family="DejaVu Sans, sans-serif" font-size="13" fill="#edf4fb" font-weight="400" text-anchor="end">657.8 tok/s</text>
+<text x="1370" y="587" font-family="DejaVu Sans, sans-serif" font-size="13" fill="#edf4fb" font-weight="400" text-anchor="end">697.1 tok/s</text>
+<text x="906" y="626" font-family="DejaVu Sans, sans-serif" font-size="13" fill="#9caec3" font-weight="400" text-anchor="start">32K prefill</text>
+<text x="1185" y="626" font-family="DejaVu Sans, sans-serif" font-size="13" fill="#edf4fb" font-weight="400" text-anchor="end">644.8 tok/s</text>
+<text x="1370" y="626" font-family="DejaVu Sans, sans-serif" font-size="13" fill="#edf4fb" font-weight="400" text-anchor="end">695.4 tok/s</text>
+<text x="906" y="665" font-family="DejaVu Sans, sans-serif" font-size="13" fill="#9caec3" font-weight="400" text-anchor="start">Agent first token</text>
+<text x="1185" y="665" font-family="DejaVu Sans, sans-serif" font-size="13" fill="#edf4fb" font-weight="400" text-anchor="end">5.6 s</text>
+<text x="1370" y="665" font-family="DejaVu Sans, sans-serif" font-size="13" fill="#edf4fb" font-weight="400" text-anchor="end">5.2 s</text>
+<text x="906" y="704" font-family="DejaVu Sans, sans-serif" font-size="13" fill="#9caec3" font-weight="400" text-anchor="start">Agent decode</text>
+<text x="1185" y="704" font-family="DejaVu Sans, sans-serif" font-size="13" fill="#edf4fb" font-weight="400" text-anchor="end">43.0 tok/s</text>
+<text x="1370" y="704" font-family="DejaVu Sans, sans-serif" font-size="13" fill="#edf4fb" font-weight="400" text-anchor="end">45.3 tok/s</text>
+<text x="906" y="778" font-family="DejaVu Sans, sans-serif" font-size="16" fill="#edf4fb" font-weight="700" text-anchor="start">Agent work performed</text>
+<text x="906" y="815" font-family="DejaVu Sans, sans-serif" font-size="12" fill="#9caec3" font-weight="400" text-anchor="start">Wall excluding task 8 (s)</text>
+<text x="1370" y="815" font-family="DejaVu Sans, sans-serif" font-size="13" fill="#edf4fb" font-weight="400" text-anchor="end">771 → 577</text>
+<text x="906" y="851" font-family="DejaVu Sans, sans-serif" font-size="12" fill="#9caec3" font-weight="400" text-anchor="start">Generated tokens</text>
+<text x="1370" y="851" font-family="DejaVu Sans, sans-serif" font-size="13" fill="#edf4fb" font-weight="400" text-anchor="end">37,761 → 39,427</text>
+<text x="906" y="887" font-family="DejaVu Sans, sans-serif" font-size="12" fill="#9caec3" font-weight="400" text-anchor="start">Tool executions</text>
+<text x="1370" y="887" font-family="DejaVu Sans, sans-serif" font-size="13" fill="#edf4fb" font-weight="400" text-anchor="end">130 → 119</text>
+<text x="906" y="923" font-family="DejaVu Sans, sans-serif" font-size="12" fill="#9caec3" font-weight="400" text-anchor="start">Aggregate decode (tok/s)</text>
+<text x="1370" y="923" font-family="DejaVu Sans, sans-serif" font-size="13" fill="#edf4fb" font-weight="400" text-anchor="end">47.7 → 52.7</text>
+<text x="48" y="1009" font-family="DejaVu Sans, sans-serif" font-size="13" fill="#9caec3" font-weight="400" text-anchor="start">One paired suite measures observed task time. Different agent trajectories can change token and tool work.</text>
+<text x="48" y="1034" font-family="DejaVu Sans, sans-serif" font-size="13" fill="#9caec3" font-weight="400" text-anchor="start">*Task 8 was already green and its optimized agent read stock logs; excluded from the time-change headline.</text>
+<text x="48" y="1068" font-family="DejaVu Sans, sans-serif" font-size="12" fill="#75e6b2" font-weight="400" text-anchor="start">Interactive details: benchmarks/index.html · Data: benchmarks/strata-0145-results.json</text>
+<text x="48" y="1092" font-family="DejaVu Sans, sans-serif" font-size="12" fill="#9caec3" font-weight="400" text-anchor="start">Method and raw evidence: experiments/strata-0145-agbench-20261018/README.md</text>
 </svg>

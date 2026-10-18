@@ -1,0 +1,44 @@
+[
+  {
+    "context": 1024,
+    "queries": 1,
+    "seed": 1,
+    "bitwise_equal": true,
+    "sha256": "329cb4fa7b24ef7c93bcd270d3180d5e32367e2e25561e9cbddd334a27b32670"
+  },
+  {
+    "context": 4096,
+    "queries": 17,
+    "seed": 2,
+    "bitwise_equal": true,
+    "sha256": "a85512f5c6b8e5b029e8ceaacd92bc7ba0bd96492114347ace21093a60dd401c"
+  },
+  {
+    "context": 8193,
+    "queries": 65,
+    "seed": 3,
+    "bitwise_equal": true,
+    "sha256": "59df9685ef5e0ad5aea5262634da7169ca4338104ef1ec891d6e3644907a3614"
+  },
+  {
+    "context": 32769,
+    "queries": 129,
+    "seed": 19,
+    "bitwise_equal": true,
+    "sha256": "889db5fa066d2476d15717eec32038bb13c06bd78815590bbab9936a3ebd3ad6"
+  },
+  {
+    "context": 100003,
+    "queries": 257,
+    "seed": 42,
+    "bitwise_equal": true,
+    "sha256": "7f4b3d241e87f7b778dca7b80fcb3c3f0cdb0619d51e10705a6b2212026ec58e"
+  },
+  {
+    "context": 131071,
+    "queries": 33,
+    "seed": 123,
+    "bitwise_equal": true,
+    "sha256": "3e3876102a2b7288a7a011ccb083c86319d894c0138f7ae1f4f8d1c5788dd0b2"
+  }
+]

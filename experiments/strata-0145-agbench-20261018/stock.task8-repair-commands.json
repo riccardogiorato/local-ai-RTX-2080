@@ -1,0 +1,212 @@
+[
+  {
+    "tool": "bash",
+    "args": {
+      "command": "ls -la; echo ---; ls -la protected; echo ---; ls -la wheels tests"
+    }
+  },
+  {
+    "tool": "bash",
+    "args": {
+      "command": "cat verify.sh"
+    }
+  },
+  {
+    "tool": "bash",
+    "args": {
+      "command": "cat tests/test_outputs.py; echo ---; cat TASK.md"
+    }
+  },
+  {
+    "tool": "bash",
+    "args": {
+      "command": "find protected/venv -maxdepth 3 | head -100"
+    }
+  },
+  {
+    "tool": "bash",
+    "args": {
+      "command": "cd protected/venv; ls -la bin; echo ---; cat pyvenv.cfg; echo ---; ls -la lib/python3.14/site-packages; ls -la lib lib64"
+    }
+  },
+  {
+    "tool": "bash",
+    "args": {
+      "command": "cd protected/venv; file bin/*; echo ---; head -5 bin/python; head -5 bin/pip"
+    }
+  },
+  {
+    "tool": "bash",
+    "args": {
+      "command": "cd protected/venv; for f in bin/pip bin/pip3 bin/pip3.14; do echo \"== $f\"; cat -A \"$f\" | head -20; done"
+    }
+  },
+  {
+    "tool": "bash",
+    "args": {
+      "command": "cd protected/venv; ls -la lib/python3.14/site-packages/pip; ls lib/python3.14/site-packages/pip-26.2.1.dist-info"
+    }
+  },
+  {
+    "tool": "bash",
+    "args": {
+      "command": "cd /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python; bash verify.sh 2>&1 | head -40"
+    }
+  },
+  {
+    "tool": "bash",
+    "args": {
+      "command": "cd /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python; protected/venv/bin/python -m pip --version; echo \"exit=$?\""
+    }
+  },
+  {
+    "tool": "bash",
+    "args": {
+      "command": "cd /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python; find . -maxdepth 4 -name '.*' ; echo ---; cat protected/venv/.gitignore; echo ---; ls -la lib 2>/dev/null; find protected/venv -name '*.pth' -o -name 'sitecustomize*' -o -name '*.pyc' | head"
+    }
+  },
+  {
+    "tool": "bash",
+    "args": {
+      "command": "cd /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python; head -c 2000 pi-session.jsonl; echo; wc -l pi-session.jsonl pi-errors.log"
+    }
+  },
+  {
+    "tool": "bash",
+    "args": {
+      "command": "cd /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python; protected/venv/bin/python -m pip install --no-index --find-links wheels six --target /tmp/piptest -v 2>&1 | tail -30"
+    }
+  },
+  {
+    "tool": "bash",
+    "args": {
+      "command": "cd /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python; protected/venv/bin/python -c \"import pip; print(pip.__file__)\"; ls -la protected/venv/bin/python3; /usr/bin/python3 -V; ls /usr/bin | grep -i python"
+    }
+  },
+  {
+    "tool": "bash",
+    "args": {
+      "command": "cd /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python; ./protected/venv/bin/pip --version; echo \"exit=$?\"; ./protected/venv/bin/pip3 --version; echo \"exit=$?\"; ls /tmp/agentic-run/"
+    }
+  },
+  {
+    "tool": "bash",
+    "args": {
+      "command": "cd /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python/protected/venv/lib/python3.14/site-packages; find pip -type f -name '*.py' | wc -l; find pip -size 0 -type f | head -20; echo \"--- zero-size above ---\"; python3 - <<'EOF'\nimport pathlib\np=pathlib.Path('pip-26.2.1.dist-info/RECORD')\nmissing=[]\nfor line in p.read_text().splitlines():\n    f=line.split(',')[0]\n    if not pathlib.Path(f).exists(): missing.append(f)\nprint(\"RECORD entries missing on disk:\", len(missing))\nprint(missing[:20])\nEOF"
+    }
+  },
+  {
+    "tool": "bash",
+    "args": {
+      "command": "cd /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python; protected/venv/bin/python -m pip list; echo ---; protected/venv/bin/python -m pip show six; echo ---; protected/venv/bin/python -c \"import sys; print(sys.version); print(sys.path)\""
+    }
+  },
+  {
+    "tool": "bash",
+    "args": {
+      "command": "grep -rl \"broken-python\" /tmp/agentic-run /home/riccardogiorato 2>/dev/null | head -20; echo ---; ls /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/"
+    }
+  },
+  {
+    "tool": "bash",
+    "args": {
+      "command": "cd /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python; grep -o '\"type\":\"[^\"]*\"' pi-session.jsonl | sort | uniq -c; echo ---; tail -c 3000 pi-session.jsonl"
+    }
+  },
+  {
+    "tool": "bash",
+    "args": {
+      "command": "cd /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python; env -i bash verify.sh; echo \"exit=$?\"; echo ---; python3 - <<'EOF'\nimport pathlib\nroot=pathlib.Path('protected/venv')\nbad=[]\nfor p in root.rglob('*.pyc'):\n    src=p.with_suffix('').with_suffix('')  # not reliable\n    # find matching .py\n    name=p.name.split('.')[0]\n    cand=p.parent.parent / (name + '.py') if p.parent.name=='__pycache__' else None\n    if cand and not cand.exists(): bad.append(str(p))\nprint(\"orphan pyc:\", bad[:20], len(bad))\nEOF"
+    }
+  },
+  {
+    "tool": "bash",
+    "args": {
+      "command": "cd /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python; protected/venv/bin/python -m pip uninstall -y six 2>&1 | tail -3; protected/venv/bin/python -c \"import six\" ; echo \"import exit=$?\"; protected/venv/bin/python -m pip install --no-index --find-links wheels six 2>&1 | tail -3; protected/venv/bin/python -c \"import six; print(six.__version__)\""
+    }
+  },
+  {
+    "tool": "bash",
+    "args": {
+      "command": "cd /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python/protected/venv; grep -n \"VIRTUAL_ENV=\" bin/activate bin/activate.csh bin/activate.fish; grep -n \"mimo-serial\\|riccardogiorato\" bin/Activate.ps1 | head"
+    }
+  },
+  {
+    "tool": "bash",
+    "args": {
+      "command": "cd /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python/protected/venv; sed -n '40,55p' bin/activate; echo '--- csh'; sed -n '1,20p' bin/activate.csh; echo '--- fish'; sed -n '1,20p' bin/activate.fish"
+    }
+  },
+  {
+    "tool": "bash",
+    "args": {
+      "command": "cd /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python/protected/venv\nOLD='/home/riccardogiorato/Desktop/github/local-ai-rtx2080/benchmarks/agentic-tasks/task8-tb-broken-python/protected/venv'\nNEW='/tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python/protected/venv'\ngrep -rl \"$OLD\" bin pyvenv.cfg\nsed -i \"s|$OLD|$NEW|g\" bin/activate bin/activate.csh bin/activate.fish bin/Activate.ps1 pyvenv.cfg\nsed -i \"s|/tmp/agentic-run/mimo-serial-c32k-q8kv-unpinned/task8-tb-broken-python/protected/venv|$NEW|g\" bin/pip bin/pip3\ngrep -rn \"venv/bin/python3\" bin/pip bin/pip3 bin/pip3.14; grep -n \"command\\|executable\" pyvenv.cfg"
+    }
+  },
+  {
+    "tool": "bash",
+    "args": {
+      "command": "cd /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python/protected/venv/bin\nfor f in pip pip3 pip3.14; do\n  printf '%s\\n' '#!/bin/sh' \"'''exec' \\\"\\$(dirname \\\"\\$(readlink -f \\\"\\$0\\\")\\\")/python3\\\" \\\"\\$0\\\" \\\"\\$@\\\"\" \" ' '''\" 'import sys' 'from pip._internal.cli.main import main' \"if __name__ == '__main__':\" \"    sys.argv[0] = sys.argv[0].removesuffix('.exe')\" '    sys.exit(main())' > \"$f\"\n  chmod 755 \"$f\"\ndone\ncat pip; echo '=== tests ==='\n./pip --version; ./pip3 --version; ./pip3.14 --version\ncd /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python\n./protected/venv/bin/pip --version; echo \"exit=$?\""
+    }
+  },
+  {
+    "tool": "bash",
+    "args": {
+      "command": "cd /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python/protected/venv/lib/python3.14/site-packages; python3 - <<'EOF'\nimport hashlib, pathlib, csv\nbad=[]\nfor row in csv.reader(open('pip-26.2.1.dist-info/RECORD')):\n    f,hash_,size=row[0],row[1],row[2]\n    p=pathlib.Path(f)\n    if not p.exists(): continue\n    if not hash_: continue\n    d=hashlib.sha256(p.read_bytes()).hexdigest()\n    if d != hash_.split('=')[-1]: bad.append(f)\nprint(\"hash mismatches:\", bad)\nEOF\necho ---; cd /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python; python3 -c \"\nimport zipfile\nz=zipfile.ZipFile('wheels/six-1.17.0-py2.py3-none-any.whl')\na=z.read('six.py')\nb=open('protected/venv/lib/python3.14/site-packages/six.py','rb').read()\nprint('six.py identical:', a==b, len(a), len(b))\n\""
+    }
+  },
+  {
+    "tool": "bash",
+    "args": {
+      "command": "cd /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python; bash -c 'source protected/venv/bin/activate; echo \"$VIRTUAL_ENV\"; which python pip; python -c \"import sys; print(sys.prefix, sys.version)\"; pip install --no-index --find-links wheels six; deactivate; echo deactivated ok'"
+    }
+  },
+  {
+    "tool": "bash",
+    "args": {
+      "command": "cd /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python/protected/venv/bin\nABS=/tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python/protected/venv/bin/python3\nfor f in pip pip3 pip3.14; do\n  printf '%s\\n' '#!/bin/sh' \"'''exec' sh -c 'p=\\\"$(dirname \\\"\\$(readlink -f \\\"\\$0\\\")\\\")/python3\\\"; test -x \\\"\\$p\\\" || p=$ABS; exec \\\"\\$p\\\" \\\"\\$0\\\" \\\"\\$@\\\"' \\\"\\$0\\\" \\\"\\$@\\\"\" \" ' '''\" 'import sys' 'from pip._internal.cli.main import main' \"if __name__ == '__main__':\" \"    sys.argv[0] = sys.argv[0].removesuffix('.exe')\" '    sys.exit(main())' > \"$f\"\n  chmod 755 \"$f\"\ndone\ncat pip\necho '=== tests ==='\n./pip --version | head -1\ncd /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python; PATH=\"$PWD/protected/venv/bin:$PATH\" pip --version | head -1; echo \"exit=$?\""
+    }
+  },
+  {
+    "tool": "bash",
+    "args": {
+      "command": "cd /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python/protected/venv/bin\nABS=/tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python/protected/venv/bin/python3\nfor f in pip pip3 pip3.14; do\n  cat > \"$f\" <<EOF\n#!/bin/sh\n'''exec' sh -c 'p=\"\\$(dirname \"\\$(readlink -f \"\\$0\")\")/python3\"; test -x \"\\$p\" || p=$ABS; exec \"\\$p\" \"\\$0\" \"\\$@\"' \"\\$0\" \"\\$@\"\n ' '''\nimport sys\nfrom pip._internal.cli.main import main\n\nif __name__ == '__main__':\n    sys.argv[0] = sys.argv[0].removesuffix('.exe')\n    sys.exit(main())\nEOF\n  chmod 755 \"$f\"\ndone\ncat pip; echo '=== tests ==='\n./pip --version | head -1\ncd /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python\nPATH=\"$PWD/protected/venv/bin:$PATH\" pip --version | head -1; echo \"exit=$?\""
+    }
+  },
+  {
+    "tool": "bash",
+    "args": {
+      "command": "cd /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python/protected/venv/lib/python3.14/site-packages; python3 - <<'EOF'\nimport hashlib, base64, pathlib, csv\nrec=pathlib.Path('pip-26.2.1.dist-info/RECORD')\nlines=rec.read_text().splitlines()\nout=[]\nfixed=0\nfor line in lines:\n    parts=line.split(',')\n    f=parts[0]\n    if f in ('../../../bin/pip','../../../bin/pip3','../../../bin/pip3.14'):\n        p=pathlib.Path('..').joinpath(f) if False else pathlib.Path(pathlib.Path('pip').parent.parent / f)\n        data=p.read_bytes()\n        h='sha256,'+base64.urlsafe_b64encode(hashlib.sha256(data).digest()).decode().rstrip('=')\n        parts[1]=h; parts[2]=str(len(data))\n        fixed+=1\n    out.append(','.join(parts))\nrec.write_text('\\n'.join(out)+'\\n')\nprint(\"fixed RECORD entries:\", fixed)\nEOF\npython3 - <<'EOF'\nimport hashlib, base64, pathlib, csv\nbad=[]\nfor row in csv.reader(open('pip-26.2.1.dist-info/RECORD')):\n    f,h,s=row[0],row[1],row[2]\n    if not h: continue\n    p=pathlib.Path('pip').parent.joinpath(f) if f.startswith('..') else pathlib.Path(f)\n    if not p.exists(): continue\n    d=base64.urlsafe_b64encode(hashlib.sha256(p.read_bytes()).digest()).decode().rstrip('=')\n    if d != h.split(',')[-1]: bad.append(f)\nprint(\"real hash mismatches:\", bad)\nEOF"
+    }
+  },
+  {
+    "tool": "bash",
+    "args": {
+      "command": "cd /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python/protected/venv/lib/python3.14/site-packages; head -3 pip-26.2.1.dist-info/RECORD; python3 -c \"\nimport hashlib,base64\nd=open('pip/__init__.py','rb').read()\nprint(len(d), base64.urlsafe_b64encode(hashlib.sha256(d).digest()).decode())\n\""
+    }
+  },
+  {
+    "tool": "bash",
+    "args": {
+      "command": "cd /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python/protected/venv/lib/python3.14/site-packages; grep -n \"^pip/__init__.py\" pip-26.2.1.dist-info/RECORD; grep -n \"^pip/__main__.py\" pip-26.2.1.dist-info/RECORD; wc -l pip-26.2.1.dist-info/RECORD; ls pip-26.2.1.dist-info; cat pip-26.2.1.dist-info/INSTALLER"
+    }
+  },
+  {
+    "tool": "bash",
+    "args": {
+      "command": "cd /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python/protected/venv/lib/python3.14/site-packages; python3 - <<'EOF'\nimport hashlib, base64, pathlib, csv\nbad=[]\nfor row in csv.reader(open('pip-26.2.1.dist-info/RECORD')):\n    f,h,s=row[0],row[1],row[2]\n    if not h: continue\n    p=(pathlib.Path('..')/f) if f.startswith('..') else pathlib.Path(f)\n    if not p.exists(): continue\n    d=base64.urlsafe_b64encode(hashlib.sha256(p.read_bytes()).digest()).decode().rstrip('=')\n    if d != h.split('=')[-1]: bad.append(f)\nprint(\"hash mismatches:\", bad)\nEOF"
+    }
+  },
+  {
+    "tool": "bash",
+    "args": {
+      "command": "cp -a /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python /tmp/relocate-test 2>/dev/null; cd /tmp/relocate-test; bash verify.sh; echo \"exit=$?\"; ./protected/venv/bin/pip --version | head -1; cd /tmp/relocate-test/protected/venv/bin && ./pip --version | head -1"
+    }
+  },
+  {
+    "tool": "bash",
+    "args": {
+      "command": "rm -rf /tmp/relocate-test /tmp/piptest; cd /tmp/agentic-run/strata-0145-stock-turing-v22-20261018/task8-tb-broken-python\necho \"== final verification ==\"\nbash verify.sh\necho \"== entry points ==\"\nfor f in pip pip3 pip3.14; do printf '%s -> %s\\n' \"$f\" \"$(./protected/venv/bin/$f --version | head -1)\"; done\necho \"== interpreter ==\"\nprotected/venv/bin/python -c \"import sys, six; print(sys.executable, sys.prefix, six.__version__)\"\nls -l protected/venv/bin"
+    }
+  }
+]

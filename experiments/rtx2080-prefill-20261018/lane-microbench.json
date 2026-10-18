@@ -1,0 +1,162 @@
+[
+  {
+    "context": 32768,
+    "queries": 256,
+    "mode": 0,
+    "sha256": "c4434ca5a25ca9ab554fe057749e56f6b8d0b8e05ce6c3fd764176e295602d58",
+    "bitwise_equal": true,
+    "output": "top-k 0.881 -> 0.189 ms (4.7x), register top-k identical to the reference 256/256\nSKIP accuracy vs FP64 (score scale 274): warp kernel max err 2.36e-05, fast scorer max err 2.36e-05 (8.6e-08 of scale)\nfast scorer not available on this device: warp scorer 2.727 ms, top-k 0.189 ms (6% of the two)\nctx 32768, 256 queries x 8193 blocks: scores 2.727 -> 2.727 ms (1.0x), top-k 0.881 ms; score rel diff mean 0 max 0; selections identical 256/256, cells differing 0.0000%\n"
+  },
+  {
+    "context": 32768,
+    "queries": 256,
+    "mode": 2,
+    "sha256": "c4434ca5a25ca9ab554fe057749e56f6b8d0b8e05ce6c3fd764176e295602d58",
+    "bitwise_equal": true,
+    "output": "top-k 0.875 -> 0.188 ms (4.7x), register top-k identical to the reference 256/256\nSKIP accuracy vs FP64 (score scale 274): warp kernel max err 2.36e-05, fast scorer max err 2.36e-05 (8.6e-08 of scale)\nfast scorer not available on this device: warp scorer 0.433 ms, top-k 0.188 ms (30% of the two)\nctx 32768, 256 queries x 8193 blocks: scores 0.433 -> 0.433 ms (1.0x), top-k 0.875 ms; score rel diff mean 0 max 0; selections identical 256/256, cells differing 0.0000%\n"
+  },
+  {
+    "context": 32768,
+    "queries": 256,
+    "mode": 4,
+    "sha256": "c4434ca5a25ca9ab554fe057749e56f6b8d0b8e05ce6c3fd764176e295602d58",
+    "bitwise_equal": true,
+    "output": "top-k 0.875 -> 0.187 ms (4.7x), register top-k identical to the reference 256/256\nSKIP accuracy vs FP64 (score scale 274): warp kernel max err 2.36e-05, fast scorer max err 2.36e-05 (8.6e-08 of scale)\nfast scorer not available on this device: warp scorer 0.521 ms, top-k 0.187 ms (26% of the two)\nctx 32768, 256 queries x 8193 blocks: scores 0.521 -> 0.521 ms (1.0x), top-k 0.875 ms; score rel diff mean 0 max 0; selections identical 256/256, cells differing 0.0000%\n"
+  },
+  {
+    "context": 32768,
+    "queries": 256,
+    "mode": 5,
+    "sha256": "c4434ca5a25ca9ab554fe057749e56f6b8d0b8e05ce6c3fd764176e295602d58",
+    "bitwise_equal": true,
+    "output": "top-k 0.878 -> 0.189 ms (4.6x), register top-k identical to the reference 256/256\nSKIP accuracy vs FP64 (score scale 274): warp kernel max err 2.36e-05, fast scorer max err 2.36e-05 (8.6e-08 of scale)\nfast scorer not available on this device: warp scorer 0.798 ms, top-k 0.189 ms (19% of the two)\nctx 32768, 256 queries x 8193 blocks: scores 0.798 -> 0.798 ms (1.0x), top-k 0.878 ms; score rel diff mean 0 max 0; selections identical 256/256, cells differing 0.0000%\n"
+  },
+  {
+    "context": 99912,
+    "queries": 256,
+    "mode": 0,
+    "sha256": "02332a9b91614d4c87c6de0457a672d033916d7a23a17b19359d98085553c9cf",
+    "bitwise_equal": true,
+    "output": "top-k 5.061 -> 0.462 ms (11.0x), register top-k identical to the reference 256/256\nSKIP accuracy vs FP64 (score scale 262): warp kernel max err 2.25e-05, fast scorer max err 2.25e-05 (8.6e-08 of scale)\nfast scorer not available on this device: warp scorer 8.002 ms, top-k 0.462 ms (5% of the two)\nctx 99912, 256 queries x 24979 blocks: scores 8.002 -> 8.002 ms (1.0x), top-k 5.061 ms; score rel diff mean 0 max 0; selections identical 256/256, cells differing 0.0000%\n"
+  },
+  {
+    "context": 99912,
+    "queries": 256,
+    "mode": 2,
+    "sha256": "02332a9b91614d4c87c6de0457a672d033916d7a23a17b19359d98085553c9cf",
+    "bitwise_equal": true,
+    "output": "top-k 5.057 -> 0.461 ms (11.0x), register top-k identical to the reference 256/256\nSKIP accuracy vs FP64 (score scale 262): warp kernel max err 2.25e-05, fast scorer max err 2.25e-05 (8.6e-08 of scale)\nfast scorer not available on this device: warp scorer 1.014 ms, top-k 0.461 ms (31% of the two)\nctx 99912, 256 queries x 24979 blocks: scores 1.014 -> 1.014 ms (1.0x), top-k 5.057 ms; score rel diff mean 0 max 0; selections identical 256/256, cells differing 0.0000%\n"
+  },
+  {
+    "context": 99912,
+    "queries": 256,
+    "mode": 4,
+    "sha256": "02332a9b91614d4c87c6de0457a672d033916d7a23a17b19359d98085553c9cf",
+    "bitwise_equal": true,
+    "output": "top-k 5.059 -> 0.462 ms (11.0x), register top-k identical to the reference 256/256\nSKIP accuracy vs FP64 (score scale 262): warp kernel max err 2.25e-05, fast scorer max err 2.25e-05 (8.6e-08 of scale)\nfast scorer not available on this device: warp scorer 1.240 ms, top-k 0.462 ms (27% of the two)\nctx 99912, 256 queries x 24979 blocks: scores 1.240 -> 1.240 ms (1.0x), top-k 5.059 ms; score rel diff mean 0 max 0; selections identical 256/256, cells differing 0.0000%\n"
+  },
+  {
+    "context": 99912,
+    "queries": 256,
+    "mode": 5,
+    "sha256": "02332a9b91614d4c87c6de0457a672d033916d7a23a17b19359d98085553c9cf",
+    "bitwise_equal": true,
+    "output": "top-k 5.052 -> 0.462 ms (10.9x), register top-k identical to the reference 256/256\nSKIP accuracy vs FP64 (score scale 262): warp kernel max err 2.25e-05, fast scorer max err 2.25e-05 (8.6e-08 of scale)\nfast scorer not available on this device: warp scorer 1.967 ms, top-k 0.462 ms (19% of the two)\nctx 99912, 256 queries x 24979 blocks: scores 1.967 -> 1.967 ms (1.0x), top-k 5.052 ms; score rel diff mean 0 max 0; selections identical 256/256, cells differing 0.0000%\n"
+  },
+  {
+    "context": 99912,
+    "queries": 2048,
+    "mode": 0,
+    "sha256": "e37833deb1b7e5f9b4e6ad47e837b228c49d2c6089d7f2f22765662d60f54d21",
+    "bitwise_equal": true,
+    "output": "top-k 36.769 -> 3.367 ms (10.9x), register top-k identical to the reference 2048/2048\nSKIP accuracy vs FP64 (score scale 259): warp kernel max err 2.07e-05, fast scorer max err 2.07e-05 (8e-08 of scale)\nfast scorer not available on this device: warp scorer 63.246 ms, top-k 3.367 ms (5% of the two)\nctx 99912, 2048 queries x 24979 blocks: scores 63.246 -> 63.246 ms (1.0x), top-k 36.769 ms; score rel diff mean 0 max 0; selections identical 2048/2048, cells differing 0.0000%\n"
+  },
+  {
+    "context": 99912,
+    "queries": 2048,
+    "mode": 2,
+    "sha256": "e37833deb1b7e5f9b4e6ad47e837b228c49d2c6089d7f2f22765662d60f54d21",
+    "bitwise_equal": true,
+    "output": "top-k 36.758 -> 3.368 ms (10.9x), register top-k identical to the reference 2048/2048\nSKIP accuracy vs FP64 (score scale 259): warp kernel max err 2.07e-05, fast scorer max err 2.07e-05 (8e-08 of scale)\nfast scorer not available on this device: warp scorer 7.995 ms, top-k 3.368 ms (30% of the two)\nctx 99912, 2048 queries x 24979 blocks: scores 7.995 -> 7.995 ms (1.0x), top-k 36.758 ms; score rel diff mean 0 max 0; selections identical 2048/2048, cells differing 0.0000%\n"
+  },
+  {
+    "context": 99912,
+    "queries": 2048,
+    "mode": 4,
+    "sha256": "e37833deb1b7e5f9b4e6ad47e837b228c49d2c6089d7f2f22765662d60f54d21",
+    "bitwise_equal": true,
+    "output": "top-k 36.614 -> 3.364 ms (10.9x), register top-k identical to the reference 2048/2048\nSKIP accuracy vs FP64 (score scale 259): warp kernel max err 2.07e-05, fast scorer max err 2.07e-05 (8e-08 of scale)\nfast scorer not available on this device: warp scorer 10.011 ms, top-k 3.364 ms (25% of the two)\nctx 99912, 2048 queries x 24979 blocks: scores 10.011 -> 10.011 ms (1.0x), top-k 36.614 ms; score rel diff mean 0 max 0; selections identical 2048/2048, cells differing 0.0000%\n"
+  },
+  {
+    "context": 99912,
+    "queries": 2048,
+    "mode": 5,
+    "sha256": "e37833deb1b7e5f9b4e6ad47e837b228c49d2c6089d7f2f22765662d60f54d21",
+    "bitwise_equal": true,
+    "output": "top-k 36.725 -> 3.368 ms (10.9x), register top-k identical to the reference 2048/2048\nSKIP accuracy vs FP64 (score scale 259): warp kernel max err 2.07e-05, fast scorer max err 2.07e-05 (8e-08 of scale)\nfast scorer not available on this device: warp scorer 15.968 ms, top-k 3.368 ms (17% of the two)\nctx 99912, 2048 queries x 24979 blocks: scores 15.968 -> 15.968 ms (1.0x), top-k 36.725 ms; score rel diff mean 0 max 0; selections identical 2048/2048, cells differing 0.0000%\n"
+  },
+  {
+    "context": 100003,
+    "queries": 257,
+    "mode": 0,
+    "sha256": "de926a2f0c7522f9aaf2b883007fe546062f9e357633c3a5bd9c1c91645c4616",
+    "bitwise_equal": true,
+    "output": "top-k 5.083 -> 0.466 ms (10.9x), register top-k identical to the reference 257/257\nSKIP accuracy vs FP64 (score scale 266): warp kernel max err 2.22e-05, fast scorer max err 2.22e-05 (8.3e-08 of scale)\nfast scorer not available on this device: warp scorer 8.013 ms, top-k 0.466 ms (5% of the two)\nctx 100003, 257 queries x 25001 blocks: scores 8.013 -> 8.013 ms (1.0x), top-k 5.083 ms; score rel diff mean 0 max 0; selections identical 257/257, cells differing 0.0000%\n"
+  },
+  {
+    "context": 100003,
+    "queries": 257,
+    "mode": 2,
+    "sha256": "de926a2f0c7522f9aaf2b883007fe546062f9e357633c3a5bd9c1c91645c4616",
+    "bitwise_equal": true,
+    "output": "top-k 5.073 -> 0.466 ms (10.9x), register top-k identical to the reference 257/257\nSKIP accuracy vs FP64 (score scale 266): warp kernel max err 2.22e-05, fast scorer max err 2.22e-05 (8.3e-08 of scale)\nfast scorer not available on this device: warp scorer 1.152 ms, top-k 0.466 ms (29% of the two)\nctx 100003, 257 queries x 25001 blocks: scores 1.152 -> 1.152 ms (1.0x), top-k 5.073 ms; score rel diff mean 0 max 0; selections identical 257/257, cells differing 0.0000%\n"
+  },
+  {
+    "context": 100003,
+    "queries": 257,
+    "mode": 4,
+    "sha256": "de926a2f0c7522f9aaf2b883007fe546062f9e357633c3a5bd9c1c91645c4616",
+    "bitwise_equal": true,
+    "output": "top-k 5.097 -> 0.466 ms (10.9x), register top-k identical to the reference 257/257\nSKIP accuracy vs FP64 (score scale 266): warp kernel max err 2.22e-05, fast scorer max err 2.22e-05 (8.3e-08 of scale)\nfast scorer not available on this device: warp scorer 1.422 ms, top-k 0.466 ms (25% of the two)\nctx 100003, 257 queries x 25001 blocks: scores 1.422 -> 1.422 ms (1.0x), top-k 5.097 ms; score rel diff mean 0 max 0; selections identical 257/257, cells differing 0.0000%\n"
+  },
+  {
+    "context": 100003,
+    "queries": 257,
+    "mode": 5,
+    "sha256": "de926a2f0c7522f9aaf2b883007fe546062f9e357633c3a5bd9c1c91645c4616",
+    "bitwise_equal": true,
+    "output": "top-k 5.079 -> 0.465 ms (10.9x), register top-k identical to the reference 257/257\nSKIP accuracy vs FP64 (score scale 266): warp kernel max err 2.22e-05, fast scorer max err 2.22e-05 (8.3e-08 of scale)\nfast scorer not available on this device: warp scorer 2.099 ms, top-k 0.465 ms (18% of the two)\nctx 100003, 257 queries x 25001 blocks: scores 2.099 -> 2.099 ms (1.0x), top-k 5.079 ms; score rel diff mean 0 max 0; selections identical 257/257, cells differing 0.0000%\n"
+  },
+  {
+    "context": 131071,
+    "queries": 33,
+    "mode": 0,
+    "sha256": "04bfdbc439746c43112bf844908e7acc21a41638e9f5943761f3ffb03d50e8ba",
+    "bitwise_equal": true,
+    "output": "top-k 0.246 -> 0.106 ms (2.3x), register top-k identical to the reference 33/33\nSKIP accuracy vs FP64 (score scale 265): warp kernel max err 2.15e-05, fast scorer max err 2.15e-05 (8.1e-08 of scale)\nfast scorer not available on this device: warp scorer 1.351 ms, top-k 0.106 ms (7% of the two)\nctx 131071, 33 queries x 32768 blocks: scores 1.351 -> 1.351 ms (1.0x), top-k 0.246 ms; score rel diff mean 0 max 0; selections identical 33/33, cells differing 0.0000%\n"
+  },
+  {
+    "context": 131071,
+    "queries": 33,
+    "mode": 2,
+    "sha256": "04bfdbc439746c43112bf844908e7acc21a41638e9f5943761f3ffb03d50e8ba",
+    "bitwise_equal": true,
+    "output": "top-k 0.245 -> 0.105 ms (2.3x), register top-k identical to the reference 33/33\nSKIP accuracy vs FP64 (score scale 265): warp kernel max err 2.15e-05, fast scorer max err 2.15e-05 (8.1e-08 of scale)\nfast scorer not available on this device: warp scorer 0.371 ms, top-k 0.105 ms (22% of the two)\nctx 131071, 33 queries x 32768 blocks: scores 0.371 -> 0.371 ms (1.0x), top-k 0.245 ms; score rel diff mean 0 max 0; selections identical 33/33, cells differing 0.0000%\n"
+  },
+  {
+    "context": 131071,
+    "queries": 33,
+    "mode": 4,
+    "sha256": "04bfdbc439746c43112bf844908e7acc21a41638e9f5943761f3ffb03d50e8ba",
+    "bitwise_equal": true,
+    "output": "top-k 0.245 -> 0.106 ms (2.3x), register top-k identical to the reference 33/33\nSKIP accuracy vs FP64 (score scale 265): warp kernel max err 2.15e-05, fast scorer max err 2.15e-05 (8.1e-08 of scale)\nfast scorer not available on this device: warp scorer 0.445 ms, top-k 0.106 ms (19% of the two)\nctx 131071, 33 queries x 32768 blocks: scores 0.445 -> 0.445 ms (1.0x), top-k 0.245 ms; score rel diff mean 0 max 0; selections identical 33/33, cells differing 0.0000%\n"
+  },
+  {
+    "context": 131071,
+    "queries": 33,
+    "mode": 5,
+    "sha256": "04bfdbc439746c43112bf844908e7acc21a41638e9f5943761f3ffb03d50e8ba",
+    "bitwise_equal": true,
+    "output": "top-k 0.245 -> 0.106 ms (2.3x), register top-k identical to the reference 33/33\nSKIP accuracy vs FP64 (score scale 265): warp kernel max err 2.15e-05, fast scorer max err 2.15e-05 (8.1e-08 of scale)\nfast scorer not available on this device: warp scorer 0.526 ms, top-k 0.106 ms (17% of the two)\nctx 131071, 33 queries x 32768 blocks: scores 0.526 -> 0.526 ms (1.0x), top-k 0.245 ms; score rel diff mean 0 max 0; selections identical 33/33, cells differing 0.0000%\n"
+  }
+]

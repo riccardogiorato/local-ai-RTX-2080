@@ -45,6 +45,8 @@
   "fit_max_tokens": true,
   "env": {
     "STRATA_KV_PREFETCH": "1",
-    "STRATA_ROUTE_TAIL_SKIP": "7"
+    "STRATA_ROUTE_TAIL_SKIP": "7",
+    "STRATA_SCORES_TURING": "2",
+    "STRATA_SM75_PERF": "1"
   }
 }

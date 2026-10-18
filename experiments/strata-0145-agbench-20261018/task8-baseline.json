@@ -1,0 +1,8 @@
+{
+  "task": "task8-tb-broken-python",
+  "before_agent": true,
+  "returncode": 0,
+  "stdout": "ok pip_version\nok pip_install\nok import_six\nALL OK\n",
+  "stderr": "",
+  "source": "unchanged frozen fixture copy"
+}

@@ -1,0 +1,1038 @@
+loading the model (the first start takes a minute or two) ...
+[strata] starting the engine: reading the model's weights ...
+[strata] loading the experts into RAM (about 38 GB) and locking part of them for the GPU.
+         YOUR PC CAN BE SLOW OR STOP RESPONDING FOR 1-3 MINUTES NOW - this is normal.
+         Please wait and don't close this window; the browser opens when it is ready.
+[strata] still starting (23 s) - please wait ...
+[strata] experts loaded: 31.64 GiB at 1.11 GiB/s (36 s so far)
+[strata] filling the GPU's expert cache (1377 experts, 1.77 GiB of VRAM) ...
+[strata] almost ready ...
+ready: http://127.0.0.1:8083/v1  (OpenAI: /v1/chat/completions, Anthropic: /v1/messages, context 131072 tokens)
+       open http://127.0.0.1:8083/ in a browser to chat; close this window to stop the model
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 1,600 of 1,605 tokens, 3 s so far
+[strata] done: 12 tokens in 3 s (43.2 tok/s) (stop, cancel=False), expert cache 48.6% hit (+14.4% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 1,693 of 1,698 tokens, 3 s so far
+[strata] writing a tool call: bash: 40 of max 32768 tokens, 52.4 tok/s, 4 s
+[strata] done: 73 tokens in 4 s (55.5 tok/s) (stop, cancel=False), expert cache 60.3% hit (+11.7% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 2,661 of 2,666 tokens, 2 s so far
+[strata] done: 42 tokens in 3 s (55.5 tok/s) (stop, cancel=False), expert cache 59.9% hit (+12.6% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 3,181 of 3,186 tokens, 1 s so far
+[strata] thinking: 41 of budget 24576 (max 32768) tokens, 49.4 tok/s, 2 s
+[strata] writing a tool call: edit: 96 of max 32768 tokens, 52.4 tok/s, 3 s
+[strata] writing a tool call: edit: 158 of max 32768 tokens, 55.4 tok/s, 4 s
+[strata] writing a tool call: edit: 219 of max 32768 tokens, 56.6 tok/s, 6 s
+[strata] writing a tool call: edit: 277 of max 32768 tokens, 56.3 tok/s, 7 s
+[strata] writing a tool call: edit: 341 of max 32768 tokens, 57.4 tok/s, 8 s
+[strata] writing a tool call: edit: 401 of max 32768 tokens, 57.6 tok/s, 9 s
+[strata] writing a tool call: edit: 456 of max 32768 tokens, 57.1 tok/s, 10 s
+[strata] writing a tool call: edit: 512 of max 32768 tokens, 56.9 tok/s, 11 s
+[strata] writing a tool call: edit: 576 of max 32768 tokens, 57.4 tok/s, 12 s
+[strata] done: 644 tokens in 13 s (58.2 tok/s) (stop, cancel=False), expert cache 51.8% hit (+15.1% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] thinking: 21 of budget 24576 (max 32768) tokens, 40.9 tok/s, 1 s
+[strata] thinking: 60 of budget 24576 (max 32768) tokens, 38.8 tok/s, 2 s
+[strata] writing a tool call: bash: 110 of max 32768 tokens, 42.7 tok/s, 3 s
+[strata] done: 119 tokens in 3 s (44.1 tok/s) (stop, cancel=False), expert cache 49.0% hit (+15.7% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 4,167 of 4,168 tokens, 1 s so far
+[strata] answering: 50 of max 32768 tokens, 48.9 tok/s, 2 s
+[strata] answering: 106 of max 32768 tokens, 51.7 tok/s, 3 s
+[strata] answering: 152 of max 32768 tokens, 49.5 tok/s, 4 s
+[strata] answering: 206 of max 32768 tokens, 50.4 tok/s, 5 s
+[strata] done: 209 tokens in 5 s (51.1 tok/s) (stop, cancel=False), expert cache 48.3% hit (+15.8% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 1,784 of 1,789 tokens, 3 s so far
+[strata] writing a tool call: bash: 36 of max 32768 tokens, 48.2 tok/s, 4 s
+[strata] done: 93 tokens in 5 s (54.9 tok/s) (stop, cancel=False), expert cache 50.2% hit (+14.7% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 2,617 of 2,622 tokens, 2 s so far
+[strata] writing a tool call: read: 50 of max 32768 tokens, 58.9 tok/s, 3 s
+[strata] done: 67 tokens in 3 s (63.4 tok/s) (stop, cancel=False), expert cache 61.4% hit (+12.0% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 3,856 of 3,861 tokens, 3 s so far
+[strata] thinking: 32 of budget 24576 (max 32768) tokens, 41.6 tok/s, 4 s
+[strata] thinking: 82 of budget 24576 (max 32768) tokens, 45.5 tok/s, 5 s
+[strata] writing a tool call: bash: 146 of max 32768 tokens, 51.6 tok/s, 6 s
+[strata] done: 202 tokens in 7 s (53.4 tok/s) (stop, cancel=False), expert cache 51.7% hit (+14.2% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 4,484 of 4,489 tokens, 2 s so far
+[strata] thinking: 40 of budget 24576 (max 32768) tokens, 48.6 tok/s, 3 s
+[strata] writing a tool call: bash: 91 of max 32768 tokens, 48.9 tok/s, 4 s
+[strata] writing a tool call: bash: 152 of max 32768 tokens, 52.5 tok/s, 5 s
+[strata] tool call complete: 209 of max 32768 tokens, 53.2 tok/s, 6 s
+[strata] done: 210 tokens in 6 s (53.4 tok/s) (stop, cancel=False), expert cache 56.3% hit (+13.2% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 6,748 of 6,853 tokens, 3 s so far
+[strata] reading the prompt: 6,852 of 6,853 tokens, 4 s so far
+[strata] thinking: 42 of budget 24576 (max 32768) tokens, 43.1 tok/s, 5 s
+[strata] thinking: 83 of budget 24576 (max 32768) tokens, 41.8 tok/s, 6 s
+[strata] thinking: 128 of budget 24576 (max 32768) tokens, 42.6 tok/s, 7 s
+[strata] thinking: 181 of budget 24576 (max 32768) tokens, 44.8 tok/s, 8 s
+[strata] thinking: 225 of budget 24576 (max 32768) tokens, 44.3 tok/s, 9 s
+[strata] thinking: 285 of budget 24576 (max 32768) tokens, 46.8 tok/s, 10 s
+[strata] thinking: 331 of budget 24576 (max 32768) tokens, 46.6 tok/s, 11 s
+[strata] writing a tool call: write: 379 of max 32768 tokens, 46.2 tok/s, 12 s
+[strata] writing a tool call: write: 429 of max 32768 tokens, 46.6 tok/s, 13 s
+[strata] writing a tool call: write: 475 of max 32768 tokens, 46.4 tok/s, 14 s
+[strata] writing a tool call: write: 535 of max 32768 tokens, 47.4 tok/s, 15 s
+[strata] writing a tool call: write: 591 of max 32768 tokens, 47.9 tok/s, 16 s
+[strata] writing a tool call: write: 652 of max 32768 tokens, 48.8 tok/s, 17 s
+[strata] writing a tool call: write: 721 of max 32768 tokens, 50.1 tok/s, 18 s
+[strata] writing a tool call: write: 772 of max 32768 tokens, 50.2 tok/s, 19 s
+[strata] writing a tool call: write: 833 of max 32768 tokens, 50.8 tok/s, 20 s
+[strata] writing a tool call: write: 896 of max 32768 tokens, 51.4 tok/s, 21 s
+[strata] writing a tool call: write: 967 of max 32768 tokens, 52.3 tok/s, 22 s
+[strata] writing a tool call: write: 1039 of max 32768 tokens, 53.2 tok/s, 23 s
+[strata] done: 1074 tokens in 24 s (53.5 tok/s) (stop, cancel=False), expert cache 59.8% hit (+12.0% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] thinking: 33 of budget 24576 (max 32768) tokens, 54.3 tok/s, 1 s
+[strata] thinking: 80 of budget 24576 (max 32768) tokens, 48.5 tok/s, 2 s
+[strata] writing a tool call: bash: 140 of max 32768 tokens, 51.9 tok/s, 3 s
+[strata] writing a tool call: bash: 208 of max 32768 tokens, 55.8 tok/s, 4 s
+[strata] writing a tool call: bash: 269 of max 32768 tokens, 56.1 tok/s, 5 s
+[strata] done: 277 tokens in 5 s (56.2 tok/s) (stop, cancel=False), expert cache 55.0% hit (+13.1% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] thinking: 6 of budget 24576 (max 32768) tokens, 35.5 tok/s, 1 s
+[strata] thinking: 47 of budget 24576 (max 32768) tokens, 39.0 tok/s, 2 s
+[strata] writing a tool call: bash: 108 of max 32768 tokens, 48.5 tok/s, 3 s
+[strata] done: 142 tokens in 4 s (50.0 tok/s) (stop, cancel=False), expert cache 52.8% hit (+14.1% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 9,253 of 9,258 tokens, 2 s so far
+[strata] thinking: 28 of budget 24576 (max 32768) tokens, 37.3 tok/s, 3 s
+[strata] answering: 83 of max 32768 tokens, 46.8 tok/s, 4 s
+[strata] answering: 131 of max 32768 tokens, 46.5 tok/s, 5 s
+[strata] answering: 185 of max 32768 tokens, 48.1 tok/s, 6 s
+[strata] answering: 244 of max 32768 tokens, 49.8 tok/s, 7 s
+[strata] answering: 299 of max 32768 tokens, 50.5 tok/s, 8 s
+[strata] answering: 345 of max 32768 tokens, 49.6 tok/s, 9 s
+[strata] done: 348 tokens in 9 s (49.6 tok/s) (stop, cancel=False), expert cache 50.0% hit (+14.8% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 1,777 of 1,782 tokens, 3 s so far
+[strata] writing a tool call: bash: 18 of max 32768 tokens, 23.7 tok/s, 4 s
+[strata] done: 48 tokens in 4 s (39.4 tok/s) (stop, cancel=False), expert cache 41.4% hit (+15.9% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 2,561 of 2,566 tokens, 2 s so far
+[strata] writing a tool call: bash: 45 of max 32768 tokens, 54.4 tok/s, 3 s
+[strata] done: 96 tokens in 4 s (56.8 tok/s) (stop, cancel=False), expert cache 58.9% hit (+12.7% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 3,148 of 3,153 tokens, 2 s so far
+[strata] thinking: 39 of budget 24576 (max 32768) tokens, 46.7 tok/s, 3 s
+[strata] thinking: 91 of budget 24576 (max 32768) tokens, 48.8 tok/s, 4 s
+[strata] writing a tool call: bash: 136 of max 32768 tokens, 46.7 tok/s, 5 s
+[strata] done: 188 tokens in 5 s (50.1 tok/s) (stop, cancel=False), expert cache 51.5% hit (+14.3% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 3,585 of 3,590 tokens, 1 s so far
+[strata] thinking: 34 of budget 24576 (max 32768) tokens, 41.2 tok/s, 2 s
+[strata] thinking: 80 of budget 24576 (max 32768) tokens, 43.1 tok/s, 3 s
+[strata] thinking: 134 of budget 24576 (max 32768) tokens, 45.9 tok/s, 4 s
+[strata] thinking: 181 of budget 24576 (max 32768) tokens, 45.8 tok/s, 5 s
+[strata] thinking: 232 of budget 24576 (max 32768) tokens, 46.4 tok/s, 6 s
+[strata] thinking: 281 of budget 24576 (max 32768) tokens, 46.4 tok/s, 7 s
+[strata] thinking: 328 of budget 24576 (max 32768) tokens, 46.3 tok/s, 8 s
+[strata] thinking: 376 of budget 24576 (max 32768) tokens, 46.4 tok/s, 9 s
+[strata] thinking: 414 of budget 24576 (max 32768) tokens, 45.3 tok/s, 10 s
+[strata] thinking: 471 of budget 24576 (max 32768) tokens, 46.4 tok/s, 11 s
+[strata] writing a tool call: bash: 530 of max 32768 tokens, 47.5 tok/s, 12 s
+[strata] writing a tool call: bash: 587 of max 32768 tokens, 48.2 tok/s, 13 s
+[strata] writing a tool call: bash: 641 of max 32768 tokens, 48.5 tok/s, 15 s
+[strata] writing a tool call: bash: 699 of max 32768 tokens, 49.2 tok/s, 16 s
+[strata] writing a tool call: bash: 765 of max 32768 tokens, 50.2 tok/s, 17 s
+[strata] writing a tool call: bash: 830 of max 32768 tokens, 51.0 tok/s, 18 s
+[strata] writing a tool call: bash: 895 of max 32768 tokens, 51.7 tok/s, 19 s
+[strata] writing a tool call: bash: 955 of max 32768 tokens, 52.1 tok/s, 20 s
+[strata] done: 963 tokens in 20 s (52.2 tok/s) (stop, cancel=False), expert cache 61.9% hit (+11.6% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] thinking: 5 of budget 24576 (max 32768) tokens, 27.2 tok/s, 1 s
+[strata] thinking: 52 of budget 24576 (max 32768) tokens, 42.8 tok/s, 2 s
+[strata] thinking: 102 of budget 24576 (max 32768) tokens, 45.7 tok/s, 3 s
+[strata] thinking: 155 of budget 24576 (max 32768) tokens, 47.8 tok/s, 4 s
+[strata] thinking: 214 of budget 24576 (max 32768) tokens, 50.1 tok/s, 5 s
+[strata] thinking: 258 of budget 24576 (max 32768) tokens, 48.7 tok/s, 6 s
+[strata] thinking: 312 of budget 24576 (max 32768) tokens, 49.3 tok/s, 7 s
+[strata] thinking: 367 of budget 24576 (max 32768) tokens, 50.0 tok/s, 8 s
+[strata] thinking: 417 of budget 24576 (max 32768) tokens, 49.8 tok/s, 9 s
+[strata] thinking: 473 of budget 24576 (max 32768) tokens, 50.3 tok/s, 10 s
+[strata] thinking: 536 of budget 24576 (max 32768) tokens, 51.3 tok/s, 11 s
+[strata] thinking: 594 of budget 24576 (max 32768) tokens, 51.8 tok/s, 12 s
+[strata] thinking: 647 of budget 24576 (max 32768) tokens, 51.8 tok/s, 13 s
+[strata] thinking: 701 of budget 24576 (max 32768) tokens, 51.9 tok/s, 14 s
+[strata] thinking: 755 of budget 24576 (max 32768) tokens, 51.9 tok/s, 15 s
+[strata] thinking: 797 of budget 24576 (max 32768) tokens, 51.3 tok/s, 16 s
+[strata] writing a tool call: bash: 849 of max 32768 tokens, 51.1 tok/s, 17 s
+[strata] writing a tool call: bash: 906 of max 32768 tokens, 51.4 tok/s, 19 s
+[strata] writing a tool call: bash: 972 of max 32768 tokens, 52.0 tok/s, 20 s
+[strata] writing a tool call: bash: 1043 of max 32768 tokens, 52.9 tok/s, 21 s
+[strata] writing a tool call: bash: 1111 of max 32768 tokens, 53.6 tok/s, 22 s
+[strata] done: 1139 tokens in 22 s (53.5 tok/s) (stop, cancel=False), expert cache 61.9% hit (+11.7% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] thinking: 3 of budget 24576 (max 32768) tokens, 37.1 tok/s, 1 s
+[strata] thinking: 52 of budget 24576 (max 32768) tokens, 47.9 tok/s, 2 s
+[strata] thinking: 103 of budget 24576 (max 32768) tokens, 48.7 tok/s, 3 s
+[strata] thinking: 162 of budget 24576 (max 32768) tokens, 51.6 tok/s, 4 s
+[strata] thinking: 204 of budget 24576 (max 32768) tokens, 49.1 tok/s, 5 s
+[strata] thinking: 255 of budget 24576 (max 32768) tokens, 49.3 tok/s, 6 s
+[strata] thinking: 315 of budget 24576 (max 32768) tokens, 50.7 tok/s, 7 s
+[strata] thinking: 372 of budget 24576 (max 32768) tokens, 51.4 tok/s, 8 s
+[strata] thinking: 420 of budget 24576 (max 32768) tokens, 50.9 tok/s, 9 s
+[strata] thinking: 478 of budget 24576 (max 32768) tokens, 51.6 tok/s, 10 s
+[strata] writing a tool call: bash: 531 of max 32768 tokens, 51.6 tok/s, 11 s
+[strata] writing a tool call: bash: 596 of max 32768 tokens, 52.6 tok/s, 12 s
+[strata] writing a tool call: bash: 656 of max 32768 tokens, 53.0 tok/s, 13 s
+[strata] writing a tool call: bash: 711 of max 32768 tokens, 53.1 tok/s, 14 s
+[strata] done: 755 tokens in 15 s (53.3 tok/s) (stop, cancel=False), expert cache 58.9% hit (+12.5% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] thinking: 14 of budget 24576 (max 32768) tokens, 37.4 tok/s, 1 s
+[strata] thinking: 66 of budget 24576 (max 32768) tokens, 46.3 tok/s, 2 s
+[strata] thinking: 119 of budget 24576 (max 32768) tokens, 48.2 tok/s, 3 s
+[strata] writing a tool call: bash: 173 of max 32768 tokens, 49.1 tok/s, 4 s
+[strata] writing a tool call: bash: 233 of max 32768 tokens, 51.1 tok/s, 5 s
+[strata] writing a tool call: bash: 297 of max 32768 tokens, 52.9 tok/s, 6 s
+[strata] writing a tool call: bash: 359 of max 32768 tokens, 54.3 tok/s, 7 s
+[strata] writing a tool call: bash: 425 of max 32768 tokens, 55.8 tok/s, 8 s
+[strata] writing a tool call: bash: 492 of max 32768 tokens, 56.8 tok/s, 9 s
+[strata] writing a tool call: bash: 553 of max 32768 tokens, 57.1 tok/s, 10 s
+[strata] writing a tool call: bash: 620 of max 32768 tokens, 58.0 tok/s, 11 s
+[strata] writing a tool call: bash: 691 of max 32768 tokens, 58.9 tok/s, 12 s
+[strata] done: 699 tokens in 13 s (58.8 tok/s) (stop, cancel=False), expert cache 56.2% hit (+13.4% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 9,265 of 9,270 tokens, 3 s so far
+[strata] thinking: 28 of budget 24576 (max 32768) tokens, 37.7 tok/s, 4 s
+[strata] answering: 78 of max 32768 tokens, 43.7 tok/s, 5 s
+[strata] answering: 126 of max 32768 tokens, 45.2 tok/s, 6 s
+[strata] answering: 179 of max 32768 tokens, 47.2 tok/s, 7 s
+[strata] answering: 234 of max 32768 tokens, 48.4 tok/s, 8 s
+[strata] answering: 291 of max 32768 tokens, 49.6 tok/s, 9 s
+[strata] answering: 341 of max 32768 tokens, 49.5 tok/s, 10 s
+[strata] answering: 388 of max 32768 tokens, 48.9 tok/s, 11 s
+[strata] done: 401 tokens in 11 s (49.3 tok/s) (stop, cancel=False), expert cache 44.3% hit (+16.6% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 1,757 of 1,762 tokens, 3 s so far
+[strata] writing a tool call: bash: 40 of max 32768 tokens, 52.1 tok/s, 4 s
+[strata] done: 56 tokens in 4 s (55.3 tok/s) (stop, cancel=False), expert cache 47.6% hit (+14.9% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 3,382 of 3,387 tokens, 3 s so far
+[strata] thinking: 41 of budget 24576 (max 32768) tokens, 51.9 tok/s, 4 s
+[strata] thinking: 97 of budget 24576 (max 32768) tokens, 53.8 tok/s, 5 s
+[strata] thinking: 143 of budget 24576 (max 32768) tokens, 51.0 tok/s, 6 s
+[strata] thinking: 194 of budget 24576 (max 32768) tokens, 50.8 tok/s, 7 s
+[strata] thinking: 249 of budget 24576 (max 32768) tokens, 51.5 tok/s, 8 s
+[strata] thinking: 301 of budget 24576 (max 32768) tokens, 51.5 tok/s, 9 s
+[strata] writing a tool call: write: 352 of max 32768 tokens, 51.0 tok/s, 10 s
+[strata] writing a tool call: write: 417 of max 32768 tokens, 52.5 tok/s, 11 s
+[strata] writing a tool call: write: 466 of max 32768 tokens, 51.8 tok/s, 12 s
+[strata] writing a tool call: write: 520 of max 32768 tokens, 51.9 tok/s, 13 s
+[strata] writing a tool call: write: 590 of max 32768 tokens, 53.5 tok/s, 14 s
+[strata] writing a tool call: write: 657 of max 32768 tokens, 54.4 tok/s, 15 s
+[strata] writing a tool call: write: 723 of max 32768 tokens, 55.2 tok/s, 16 s
+[strata] done: 744 tokens in 17 s (55.4 tok/s) (stop, cancel=False), expert cache 54.2% hit (+13.9% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] thinking: 23 of budget 24576 (max 32768) tokens, 41.6 tok/s, 1 s
+[strata] writing a tool call: bash: 80 of max 32768 tokens, 51.4 tok/s, 2 s
+[strata] done: 82 tokens in 2 s (52.6 tok/s) (stop, cancel=False), expert cache 45.7% hit (+15.9% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 4,557 of 4,562 tokens, 1 s so far
+[strata] thinking: 30 of budget 24576 (max 32768) tokens, 36.0 tok/s, 2 s
+[strata] writing a tool call: edit: 94 of max 32768 tokens, 50.4 tok/s, 3 s
+[strata] done: 143 tokens in 4 s (54.9 tok/s) (stop, cancel=False), expert cache 54.7% hit (+13.6% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] thinking: 18 of budget 24576 (max 32768) tokens, 35.8 tok/s, 1 s
+[strata] done: 49 tokens in 1 s (54.1 tok/s) (stop, cancel=False), expert cache 50.5% hit (+15.2% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] thinking: 22 of budget 24576 (max 32768) tokens, 39.8 tok/s, 1 s
+[strata] done: 60 tokens in 2 s (47.1 tok/s) (stop, cancel=False), expert cache 53.5% hit (+14.1% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 5,273 of 5,278 tokens, 1 s so far
+[strata] answering: 47 of max 32768 tokens, 57.0 tok/s, 2 s
+[strata] answering: 100 of max 32768 tokens, 53.2 tok/s, 4 s
+[strata] answering: 160 of max 32768 tokens, 55.1 tok/s, 5 s
+[strata] answering: 202 of max 32768 tokens, 51.5 tok/s, 6 s
+[strata] answering: 260 of max 32768 tokens, 52.4 tok/s, 7 s
+[strata] done: 312 tokens in 7 s (53.7 tok/s) (stop, cancel=False), expert cache 53.9% hit (+14.0% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 1,758 of 1,763 tokens, 3 s so far
+[strata] writing a tool call: bash: 32 of max 32768 tokens, 43.4 tok/s, 4 s
+[strata] writing a tool call: bash: 95 of max 32768 tokens, 54.7 tok/s, 5 s
+[strata] done: 100 tokens in 5 s (55.7 tok/s) (stop, cancel=False), expert cache 47.8% hit (+14.9% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 2,430 of 2,435 tokens, 2 s so far
+[strata] writing a tool call: read: 41 of max 32768 tokens, 48.0 tok/s, 3 s
+[strata] done: 80 tokens in 3 s (49.2 tok/s) (stop, cancel=False), expert cache 56.9% hit (+13.9% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 2,896 of 2,901 tokens, 1 s so far
+[strata] thinking: 40 of budget 24576 (max 32768) tokens, 46.5 tok/s, 2 s
+[strata] thinking: 89 of budget 24576 (max 32768) tokens, 46.9 tok/s, 3 s
+[strata] thinking: 137 of budget 24576 (max 32768) tokens, 47.2 tok/s, 4 s
+[strata] writing a tool call: bash: 187 of max 32768 tokens, 47.6 tok/s, 5 s
+[strata] writing a tool call: bash: 245 of max 32768 tokens, 49.4 tok/s, 7 s
+[strata] done: 259 tokens in 7 s (50.3 tok/s) (stop, cancel=False), expert cache 54.8% hit (+13.2% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] writing a tool call: bash: 35 of max 32768 tokens, 56.9 tok/s, 1 s
+[strata] writing a tool call: bash: 97 of max 32768 tokens, 58.0 tok/s, 2 s
+[strata] done: 104 tokens in 2 s (60.0 tok/s) (stop, cancel=False), expert cache 59.6% hit (+12.6% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 3,431 of 3,432 tokens, 1 s so far
+[strata] thinking: 42 of budget 24576 (max 32768) tokens, 43.2 tok/s, 2 s
+[strata] thinking: 93 of budget 24576 (max 32768) tokens, 47.0 tok/s, 3 s
+[strata] thinking: 141 of budget 24576 (max 32768) tokens, 46.8 tok/s, 4 s
+[strata] writing a tool call: bash: 206 of max 32768 tokens, 51.2 tok/s, 5 s
+[strata] writing a tool call: bash: 274 of max 32768 tokens, 54.2 tok/s, 6 s
+[strata] done: 333 tokens in 7 s (56.4 tok/s) (stop, cancel=False), expert cache 58.6% hit (+12.4% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 4,826 of 4,831 tokens, 3 s so far
+[strata] thinking: 36 of budget 24576 (max 32768) tokens, 46.0 tok/s, 4 s
+[strata] thinking: 82 of budget 24576 (max 32768) tokens, 45.6 tok/s, 5 s
+[strata] thinking: 130 of budget 24576 (max 32768) tokens, 46.3 tok/s, 6 s
+[strata] thinking: 178 of budget 24576 (max 32768) tokens, 46.7 tok/s, 7 s
+[strata] thinking: 227 of budget 24576 (max 32768) tokens, 47.2 tok/s, 8 s
+[strata] thinking: 277 of budget 24576 (max 32768) tokens, 47.7 tok/s, 9 s
+[strata] thinking: 325 of budget 24576 (max 32768) tokens, 47.5 tok/s, 10 s
+[strata] thinking: 375 of budget 24576 (max 32768) tokens, 47.8 tok/s, 11 s
+[strata] thinking: 430 of budget 24576 (max 32768) tokens, 48.3 tok/s, 12 s
+[strata] thinking: 484 of budget 24576 (max 32768) tokens, 48.8 tok/s, 13 s
+[strata] writing a tool call: bash: 546 of max 32768 tokens, 49.9 tok/s, 14 s
+[strata] done: 575 tokens in 15 s (50.0 tok/s) (stop, cancel=False), expert cache 58.7% hit (+12.3% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 6,817 of 6,822 tokens, 3 s so far
+[strata] thinking: 38 of budget 24576 (max 32768) tokens, 50.6 tok/s, 4 s
+[strata] thinking: 84 of budget 24576 (max 32768) tokens, 47.0 tok/s, 5 s
+[strata] thinking: 136 of budget 24576 (max 32768) tokens, 47.8 tok/s, 6 s
+[strata] writing a tool call: bash: 186 of max 32768 tokens, 47.9 tok/s, 7 s
+[strata] writing a tool call: bash: 246 of max 32768 tokens, 50.1 tok/s, 8 s
+[strata] done: 274 tokens in 8 s (50.8 tok/s) (stop, cancel=False), expert cache 58.7% hit (+12.3% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 7,614 of 7,619 tokens, 1 s so far
+[strata] thinking: 33 of budget 24576 (max 32768) tokens, 41.0 tok/s, 2 s
+[strata] thinking: 84 of budget 24576 (max 32768) tokens, 46.4 tok/s, 3 s
+[strata] thinking: 126 of budget 24576 (max 32768) tokens, 44.5 tok/s, 4 s
+[strata] thinking: 180 of budget 24576 (max 32768) tokens, 46.9 tok/s, 5 s
+[strata] thinking: 227 of budget 24576 (max 32768) tokens, 46.6 tok/s, 6 s
+[strata] thinking: 277 of budget 24576 (max 32768) tokens, 46.8 tok/s, 8 s
+[strata] writing a tool call: bash: 335 of max 32768 tokens, 48.0 tok/s, 9 s
+[strata] done: 362 tokens in 9 s (48.8 tok/s) (stop, cancel=False), expert cache 53.9% hit (+13.5% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 9,283 of 9,288 tokens, 3 s so far
+[strata] thinking: 30 of budget 24576 (max 32768) tokens, 40.0 tok/s, 4 s
+[strata] thinking: 75 of budget 24576 (max 32768) tokens, 42.0 tok/s, 5 s
+[strata] thinking: 125 of budget 24576 (max 32768) tokens, 44.6 tok/s, 6 s
+[strata] thinking: 174 of budget 24576 (max 32768) tokens, 45.7 tok/s, 7 s
+[strata] thinking: 219 of budget 24576 (max 32768) tokens, 45.0 tok/s, 8 s
+[strata] thinking: 271 of budget 24576 (max 32768) tokens, 46.0 tok/s, 9 s
+[strata] thinking: 327 of budget 24576 (max 32768) tokens, 47.3 tok/s, 10 s
+[strata] thinking: 375 of budget 24576 (max 32768) tokens, 47.1 tok/s, 11 s
+[strata] thinking: 422 of budget 24576 (max 32768) tokens, 47.0 tok/s, 12 s
+[strata] thinking: 475 of budget 24576 (max 32768) tokens, 47.6 tok/s, 13 s
+[strata] thinking: 526 of budget 24576 (max 32768) tokens, 47.8 tok/s, 14 s
+[strata] writing a tool call: bash: 577 of max 32768 tokens, 47.9 tok/s, 15 s
+[strata] writing a tool call: bash: 641 of max 32768 tokens, 49.0 tok/s, 16 s
+[strata] done: 672 tokens in 17 s (49.4 tok/s) (stop, cancel=False), expert cache 56.1% hit (+13.0% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] thinking: 5 of budget 24576 (max 32768) tokens, 23.4 tok/s, 1 s
+[strata] writing a tool call: write: 60 of max 32768 tokens, 48.1 tok/s, 2 s
+[strata] writing a tool call: write: 109 of max 32768 tokens, 48.3 tok/s, 3 s
+[strata] writing a tool call: write: 163 of max 32768 tokens, 50.0 tok/s, 4 s
+[strata] writing a tool call: write: 220 of max 32768 tokens, 51.3 tok/s, 5 s
+[strata] writing a tool call: write: 267 of max 32768 tokens, 50.2 tok/s, 6 s
+[strata] writing a tool call: write: 324 of max 32768 tokens, 50.9 tok/s, 7 s
+[strata] done: 353 tokens in 8 s (51.7 tok/s) (stop, cancel=False), expert cache 50.4% hit (+14.6% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] thinking: 28 of budget 24576 (max 32768) tokens, 47.8 tok/s, 1 s
+[strata] writing a tool call: bash: 79 of max 32768 tokens, 49.2 tok/s, 2 s
+[strata] tool call complete: 136 of max 32768 tokens, 51.6 tok/s, 3 s
+[strata] done: 137 tokens in 3 s (52.0 tok/s) (stop, cancel=False), expert cache 52.0% hit (+14.1% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 10,975 of 10,980 tokens, 1 s so far
+[strata] thinking: 35 of budget 24576 (max 32768) tokens, 43.2 tok/s, 2 s
+[strata] thinking: 77 of budget 24576 (max 32768) tokens, 41.8 tok/s, 3 s
+[strata] writing a tool call: bash: 144 of max 32768 tokens, 50.1 tok/s, 5 s
+[strata] done: 182 tokens in 5 s (52.2 tok/s) (stop, cancel=False), expert cache 58.2% hit (+12.1% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] thinking: 1 of budget 24576 (max 32768) tokens, 381300.4 tok/s, 1 s
+[strata] thinking: 51 of budget 24576 (max 32768) tokens, 48.8 tok/s, 2 s
+[strata] writing a tool call: bash: 96 of max 32768 tokens, 46.2 tok/s, 3 s
+[strata] writing a tool call: bash: 156 of max 32768 tokens, 50.6 tok/s, 4 s
+[strata] writing a tool call: bash: 220 of max 32768 tokens, 53.5 tok/s, 5 s
+[strata] done: 238 tokens in 5 s (54.5 tok/s) (stop, cancel=False), expert cache 58.2% hit (+12.4% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 11,795 of 11,796 tokens, 1 s so far
+[strata] thinking: 43 of budget 24576 (max 32768) tokens, 43.5 tok/s, 2 s
+[strata] thinking: 90 of budget 24576 (max 32768) tokens, 44.3 tok/s, 3 s
+[strata] thinking: 141 of budget 24576 (max 32768) tokens, 46.3 tok/s, 4 s
+[strata] writing a tool call: write: 194 of max 32768 tokens, 47.8 tok/s, 5 s
+[strata] writing a tool call: write: 254 of max 32768 tokens, 50.0 tok/s, 6 s
+[strata] writing a tool call: write: 309 of max 32768 tokens, 50.4 tok/s, 7 s
+[strata] writing a tool call: write: 352 of max 32768 tokens, 49.3 tok/s, 8 s
+[strata] writing a tool call: write: 407 of max 32768 tokens, 50.0 tok/s, 9 s
+[strata] writing a tool call: write: 468 of max 32768 tokens, 51.1 tok/s, 10 s
+[strata] done: 519 tokens in 11 s (51.9 tok/s) (stop, cancel=False), expert cache 50.5% hit (+15.2% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] thinking: 22 of budget 24576 (max 32768) tokens, 35.9 tok/s, 1 s
+[strata] thinking: 65 of budget 24576 (max 32768) tokens, 39.7 tok/s, 2 s
+[strata] thinking: 112 of budget 24576 (max 32768) tokens, 42.1 tok/s, 3 s
+[strata] writing a tool call: bash: 173 of max 32768 tokens, 46.9 tok/s, 4 s
+[strata] writing a tool call: bash: 224 of max 32768 tokens, 47.7 tok/s, 5 s
+[strata] done: 283 tokens in 6 s (50.9 tok/s) (stop, cancel=False), expert cache 52.9% hit (+13.6% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] thinking: 4 of budget 24576 (max 32768) tokens, 43.4 tok/s, 1 s
+[strata] thinking: 40 of budget 24576 (max 32768) tokens, 35.0 tok/s, 2 s
+[strata] writing a tool call: bash: 88 of max 32768 tokens, 40.8 tok/s, 3 s
+[strata] writing a tool call: bash: 145 of max 32768 tokens, 45.5 tok/s, 4 s
+[strata] done: 151 tokens in 4 s (46.5 tok/s) (stop, cancel=False), expert cache 52.3% hit (+14.1% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 13,524 of 13,529 tokens, 2 s so far
+[strata] thinking: 41 of budget 24576 (max 32768) tokens, 49.9 tok/s, 3 s
+[strata] thinking: 88 of budget 24576 (max 32768) tokens, 48.0 tok/s, 4 s
+[strata] thinking: 145 of budget 24576 (max 32768) tokens, 50.5 tok/s, 5 s
+[strata] thinking: 202 of budget 24576 (max 32768) tokens, 51.9 tok/s, 6 s
+[strata] thinking: 247 of budget 24576 (max 32768) tokens, 50.3 tok/s, 7 s
+[strata] writing a tool call: bash: 309 of max 32768 tokens, 52.0 tok/s, 8 s
+[strata] done: 323 tokens in 8 s (52.7 tok/s) (stop, cancel=False), expert cache 58.7% hit (+12.3% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 14,265 of 14,270 tokens, 2 s so far
+[strata] thinking: 36 of budget 24576 (max 32768) tokens, 44.7 tok/s, 3 s
+[strata] answering: 88 of max 32768 tokens, 48.4 tok/s, 4 s
+[strata] answering: 148 of max 32768 tokens, 51.5 tok/s, 5 s
+[strata] answering: 206 of max 32768 tokens, 53.0 tok/s, 6 s
+[strata] answering: 253 of max 32768 tokens, 51.3 tok/s, 7 s
+[strata] answering: 308 of max 32768 tokens, 51.6 tok/s, 8 s
+[strata] answering: 366 of max 32768 tokens, 52.1 tok/s, 9 s
+[strata] answering: 413 of max 32768 tokens, 51.4 tok/s, 10 s
+[strata] answering: 462 of max 32768 tokens, 50.9 tok/s, 11 s
+[strata] answering: 512 of max 32768 tokens, 50.8 tok/s, 12 s
+[strata] answering: 567 of max 32768 tokens, 51.1 tok/s, 13 s
+[strata] done: 586 tokens in 13 s (50.9 tok/s) (stop, cancel=False), expert cache 52.0% hit (+14.5% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 1,708 of 1,713 tokens, 3 s so far
+[strata] writing a tool call: bash: 32 of max 32768 tokens, 41.9 tok/s, 4 s
+[strata] writing a tool call: read: 97 of max 32768 tokens, 53.3 tok/s, 5 s
+[strata] done: 135 tokens in 5 s (55.9 tok/s) (stop, cancel=False), expert cache 46.5% hit (+15.6% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 2,165 of 2,170 tokens, 1 s so far
+[strata] writing a tool call: read: 51 of max 32768 tokens, 61.6 tok/s, 2 s
+[strata] writing a tool call: read: 124 of max 32768 tokens, 66.9 tok/s, 3 s
+[strata] done: 132 tokens in 3 s (67.0 tok/s) (stop, cancel=False), expert cache 60.2% hit (+12.6% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 2,648 of 2,653 tokens, 1 s so far
+[strata] thinking: 36 of budget 24576 (max 32768) tokens, 42.7 tok/s, 2 s
+[strata] thinking: 81 of budget 24576 (max 32768) tokens, 43.9 tok/s, 3 s
+[strata] writing a tool call: edit: 140 of max 32768 tokens, 48.3 tok/s, 4 s
+[strata] writing a tool call: edit: 208 of max 32768 tokens, 53.0 tok/s, 5 s
+[strata] writing a tool call: edit: 278 of max 32768 tokens, 56.0 tok/s, 6 s
+[strata] done: 331 tokens in 7 s (57.8 tok/s) (stop, cancel=False), expert cache 52.4% hit (+14.3% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 3,042 of 3,047 tokens, 1 s so far
+[strata] thinking: 37 of budget 24576 (max 32768) tokens, 41.9 tok/s, 2 s
+[strata] done: 97 tokens in 3 s (53.9 tok/s) (stop, cancel=False), expert cache 47.3% hit (+15.8% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] answering: 17 of max 32768 tokens, 48.1 tok/s, 1 s
+[strata] answering: 71 of max 32768 tokens, 51.0 tok/s, 2 s
+[strata] answering: 119 of max 32768 tokens, 49.7 tok/s, 3 s
+[strata] answering: 172 of max 32768 tokens, 50.5 tok/s, 4 s
+[strata] done: 198 tokens in 5 s (50.3 tok/s) (stop, cancel=False), expert cache 46.6% hit (+16.0% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 1,772 of 1,777 tokens, 3 s so far
+[strata] writing a tool call: bash: 43 of max 32768 tokens, 57.8 tok/s, 4 s
+[strata] done: 80 tokens in 4 s (61.3 tok/s) (stop, cancel=False), expert cache 49.7% hit (+14.7% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 2,769 of 2,774 tokens, 2 s so far
+[strata] writing a tool call: read: 50 of max 32768 tokens, 61.4 tok/s, 3 s
+[strata] done: 57 tokens in 3 s (65.7 tok/s) (stop, cancel=False), expert cache 50.5% hit (+14.6% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 2,982 of 2,983 tokens, 1 s so far
+[strata] thinking: 45 of budget 24576 (max 32768) tokens, 45.6 tok/s, 2 s
+[strata] thinking: 98 of budget 24576 (max 32768) tokens, 48.8 tok/s, 3 s
+[strata] thinking: 152 of budget 24576 (max 32768) tokens, 50.1 tok/s, 4 s
+[strata] thinking: 207 of budget 24576 (max 32768) tokens, 51.0 tok/s, 5 s
+[strata] thinking: 258 of budget 24576 (max 32768) tokens, 50.9 tok/s, 6 s
+[strata] writing a tool call: write: 310 of max 32768 tokens, 51.0 tok/s, 7 s
+[strata] writing a tool call: write: 377 of max 32768 tokens, 52.9 tok/s, 8 s
+[strata] writing a tool call: write: 445 of max 32768 tokens, 54.7 tok/s, 9 s
+[strata] writing a tool call: write: 507 of max 32768 tokens, 55.4 tok/s, 10 s
+[strata] writing a tool call: write: 577 of max 32768 tokens, 56.7 tok/s, 11 s
+[strata] done: 586 tokens in 11 s (56.8 tok/s) (stop, cancel=False), expert cache 59.8% hit (+12.4% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] thinking: 22 of budget 24576 (max 32768) tokens, 38.5 tok/s, 1 s
+[strata] done: 67 tokens in 2 s (49.6 tok/s) (stop, cancel=False), expert cache 43.5% hit (+16.6% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] thinking: 29 of budget 24576 (max 32768) tokens, 44.6 tok/s, 1 s
+[strata] thinking: 78 of budget 24576 (max 32768) tokens, 47.1 tok/s, 2 s
+[strata] thinking: 128 of budget 24576 (max 32768) tokens, 47.2 tok/s, 3 s
+[strata] writing a tool call: bash: 193 of max 32768 tokens, 51.5 tok/s, 4 s
+[strata] writing a tool call: bash: 249 of max 32768 tokens, 52.3 tok/s, 5 s
+[strata] done: 296 tokens in 6 s (53.6 tok/s) (stop, cancel=False), expert cache 59.6% hit (+12.0% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] thinking: 15 of budget 24576 (max 32768) tokens, 36.0 tok/s, 1 s
+[strata] thinking: 60 of budget 24576 (max 32768) tokens, 41.1 tok/s, 2 s
+[strata] writing a tool call: bash: 127 of max 32768 tokens, 51.5 tok/s, 3 s
+[strata] writing a tool call: bash: 192 of max 32768 tokens, 54.6 tok/s, 4 s
+[strata] done: 204 tokens in 4 s (55.0 tok/s) (stop, cancel=False), expert cache 56.4% hit (+13.4% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] thinking: 21 of budget 24576 (max 32768) tokens, 43.8 tok/s, 1 s
+[strata] answering: 75 of max 32768 tokens, 50.7 tok/s, 2 s
+[strata] answering: 139 of max 32768 tokens, 55.0 tok/s, 3 s
+[strata] answering: 193 of max 32768 tokens, 54.7 tok/s, 4 s
+[strata] answering: 238 of max 32768 tokens, 52.2 tok/s, 5 s
+[strata] done: 282 tokens in 6 s (52.9 tok/s) (stop, cancel=False), expert cache 50.6% hit (+14.8% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 1,689 of 1,694 tokens, 3 s so far
+[strata] writing a tool call: bash: 33 of max 32768 tokens, 44.8 tok/s, 4 s
+[strata] done: 70 tokens in 4 s (55.0 tok/s) (stop, cancel=False), expert cache 47.5% hit (+15.5% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 2,161 of 2,166 tokens, 1 s so far
+[strata] writing a tool call: read: 50 of max 32768 tokens, 59.5 tok/s, 2 s
+[strata] done: 69 tokens in 3 s (61.6 tok/s) (stop, cancel=False), expert cache 60.4% hit (+13.0% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 2,927 of 2,932 tokens, 2 s so far
+[strata] thinking: 35 of budget 24576 (max 32768) tokens, 42.2 tok/s, 3 s
+[strata] thinking: 89 of budget 24576 (max 32768) tokens, 47.5 tok/s, 4 s
+[strata] thinking: 138 of budget 24576 (max 32768) tokens, 47.9 tok/s, 5 s
+[strata] thinking: 187 of budget 24576 (max 32768) tokens, 47.9 tok/s, 6 s
+[strata] writing a tool call: edit: 232 of max 32768 tokens, 47.2 tok/s, 7 s
+[strata] writing a tool call: edit: 291 of max 32768 tokens, 49.1 tok/s, 8 s
+[strata] writing a tool call: edit: 355 of max 32768 tokens, 50.9 tok/s, 9 s
+[strata] writing a tool call: edit: 426 of max 32768 tokens, 53.2 tok/s, 10 s
+[strata] writing a tool call: edit: 492 of max 32768 tokens, 54.5 tok/s, 11 s
+[strata] writing a tool call: edit: 567 of max 32768 tokens, 56.3 tok/s, 12 s
+[strata] writing a tool call: edit: 629 of max 32768 tokens, 56.8 tok/s, 13 s
+[strata] writing a tool call: edit: 701 of max 32768 tokens, 57.9 tok/s, 14 s
+[strata] done: 740 tokens in 15 s (58.2 tok/s) (stop, cancel=False), expert cache 56.1% hit (+13.4% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] thinking: 25 of budget 24576 (max 32768) tokens, 51.1 tok/s, 1 s
+[strata] thinking: 80 of budget 24576 (max 32768) tokens, 53.2 tok/s, 2 s
+[strata] done: 141 tokens in 3 s (56.7 tok/s) (stop, cancel=False), expert cache 51.9% hit (+14.1% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 4,057 of 4,062 tokens, 1 s so far
+[strata] answering: 40 of max 32768 tokens, 48.7 tok/s, 2 s
+[strata] answering: 96 of max 32768 tokens, 51.7 tok/s, 3 s
+[strata] answering: 157 of max 32768 tokens, 54.6 tok/s, 4 s
+[strata] answering: 219 of max 32768 tokens, 56.4 tok/s, 5 s
+[strata] answering: 282 of max 32768 tokens, 57.8 tok/s, 6 s
+[strata] answering: 326 of max 32768 tokens, 55.0 tok/s, 7 s
+[strata] answering: 383 of max 32768 tokens, 55.1 tok/s, 8 s
+[strata] answering: 442 of max 32768 tokens, 55.2 tok/s, 9 s
+[strata] done: 469 tokens in 10 s (54.6 tok/s) (stop, cancel=False), expert cache 51.8% hit (+15.1% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 1,733 of 1,738 tokens, 3 s so far
+[strata] writing a tool call: bash: 40 of max 32768 tokens, 53.0 tok/s, 4 s
+[strata] done: 89 tokens in 5 s (58.0 tok/s) (stop, cancel=False), expert cache 42.5% hit (+16.0% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 2,570 of 2,575 tokens, 2 s so far
+[strata] writing a tool call: read: 44 of max 32768 tokens, 52.4 tok/s, 3 s
+[strata] done: 110 tokens in 4 s (60.4 tok/s) (stop, cancel=False), expert cache 56.7% hit (+13.5% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 3,112 of 3,117 tokens, 1 s so far
+[strata] writing a tool call: bash: 46 of max 32768 tokens, 53.2 tok/s, 3 s
+[strata] done: 85 tokens in 3 s (56.2 tok/s) (stop, cancel=False), expert cache 52.0% hit (+14.3% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 3,406 of 3,411 tokens, 1 s so far
+[strata] thinking: 36 of budget 24576 (max 32768) tokens, 43.1 tok/s, 2 s
+[strata] writing a tool call: bash: 90 of max 32768 tokens, 48.7 tok/s, 3 s
+[strata] done: 104 tokens in 3 s (51.4 tok/s) (stop, cancel=False), expert cache 56.2% hit (+13.3% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 4,084 of 4,089 tokens, 1 s so far
+[strata] writing a tool call: bash: 49 of max 32768 tokens, 58.1 tok/s, 2 s
+[strata] done: 79 tokens in 3 s (63.1 tok/s) (stop, cancel=False), expert cache 56.5% hit (+13.3% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 6,215 of 13,225 tokens, 3 s so far
+[strata] reading the prompt: 8,263 of 13,225 tokens, 6 s so far
+[strata] reading the prompt: 10,311 of 13,225 tokens, 9 s so far
+[strata] reading the prompt: 12,359 of 13,225 tokens, 11 s so far
+[strata] reading the prompt: 13,220 of 13,225 tokens, 13 s so far
+[strata] thinking: 39 of budget 24576 (max 32768) tokens, 51.5 tok/s, 14 s
+[strata] thinking: 91 of budget 24576 (max 32768) tokens, 51.1 tok/s, 16 s
+[strata] thinking: 151 of budget 24576 (max 32768) tokens, 53.6 tok/s, 17 s
+[strata] writing a tool call: write: 204 of max 32768 tokens, 53.0 tok/s, 18 s
+[strata] writing a tool call: write: 259 of max 32768 tokens, 53.3 tok/s, 19 s
+[strata] writing a tool call: write: 318 of max 32768 tokens, 53.7 tok/s, 20 s
+[strata] writing a tool call: write: 374 of max 32768 tokens, 53.9 tok/s, 21 s
+[strata] writing a tool call: write: 426 of max 32768 tokens, 53.4 tok/s, 22 s
+[strata] done: 467 tokens in 22 s (53.5 tok/s) (stop, cancel=False), expert cache 48.0% hit (+15.5% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] thinking: 25 of budget 24576 (max 32768) tokens, 44.9 tok/s, 1 s
+[strata] thinking: 77 of budget 24576 (max 32768) tokens, 49.3 tok/s, 2 s
+[strata] thinking: 133 of budget 24576 (max 32768) tokens, 51.9 tok/s, 3 s
+[strata] thinking: 184 of budget 24576 (max 32768) tokens, 51.4 tok/s, 4 s
+[strata] thinking: 234 of budget 24576 (max 32768) tokens, 50.8 tok/s, 5 s
+[strata] thinking: 281 of budget 24576 (max 32768) tokens, 50.0 tok/s, 6 s
+[strata] thinking: 330 of budget 24576 (max 32768) tokens, 49.5 tok/s, 7 s
+[strata] thinking: 378 of budget 24576 (max 32768) tokens, 49.0 tok/s, 8 s
+[strata] thinking: 425 of budget 24576 (max 32768) tokens, 48.7 tok/s, 9 s
+[strata] writing a tool call: bash: 475 of max 32768 tokens, 48.7 tok/s, 10 s
+[strata] done: 513 tokens in 11 s (49.1 tok/s) (stop, cancel=False), expert cache 59.2% hit (+12.4% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] thinking: 6 of budget 24576 (max 32768) tokens, 40.2 tok/s, 1 s
+[strata] writing a tool call: bash: 63 of max 32768 tokens, 53.4 tok/s, 2 s
+[strata] done: 69 tokens in 2 s (55.7 tok/s) (stop, cancel=False), expert cache 55.4% hit (+13.4% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] answering: 35 of max 32768 tokens, 47.8 tok/s, 1 s
+[strata] answering: 82 of max 32768 tokens, 46.3 tok/s, 2 s
+[strata] answering: 129 of max 32768 tokens, 46.5 tok/s, 3 s
+[strata] answering: 180 of max 32768 tokens, 46.8 tok/s, 4 s
+[strata] answering: 235 of max 32768 tokens, 48.0 tok/s, 5 s
+[strata] answering: 297 of max 32768 tokens, 50.1 tok/s, 6 s
+[strata] answering: 349 of max 32768 tokens, 50.1 tok/s, 7 s
+[strata] done: 376 tokens in 8 s (50.3 tok/s) (stop, cancel=False), expert cache 48.9% hit (+15.7% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 1,760 of 1,765 tokens, 3 s so far
+[strata] writing a tool call: bash: 42 of max 32768 tokens, 54.7 tok/s, 4 s
+[strata] done: 96 tokens in 5 s (59.8 tok/s) (stop, cancel=False), expert cache 46.9% hit (+15.1% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 2,579 of 2,584 tokens, 2 s so far
+[strata] thinking: 34 of budget 24576 (max 32768) tokens, 41.7 tok/s, 3 s
+[strata] writing a tool call: bash: 97 of max 32768 tokens, 52.8 tok/s, 4 s
+[strata] done: 121 tokens in 4 s (55.5 tok/s) (stop, cancel=False), expert cache 56.3% hit (+13.2% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 3,353 of 3,358 tokens, 2 s so far
+[strata] thinking: 36 of budget 24576 (max 32768) tokens, 41.8 tok/s, 3 s
+[strata] writing a tool call: bash: 91 of max 32768 tokens, 48.7 tok/s, 4 s
+[strata] done: 152 tokens in 5 s (57.1 tok/s) (stop, cancel=False), expert cache 60.0% hit (+11.8% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 4,371 of 4,376 tokens, 2 s so far
+[strata] thinking: 34 of budget 24576 (max 32768) tokens, 43.8 tok/s, 3 s
+[strata] thinking: 87 of budget 24576 (max 32768) tokens, 48.2 tok/s, 4 s
+[strata] writing a tool call: bash: 151 of max 32768 tokens, 53.6 tok/s, 5 s
+[strata] done: 220 tokens in 6 s (58.2 tok/s) (stop, cancel=False), expert cache 60.2% hit (+11.8% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 5,096 of 5,101 tokens, 1 s so far
+[strata] thinking: 42 of budget 24576 (max 32768) tokens, 49.8 tok/s, 2 s
+[strata] done: 93 tokens in 3 s (54.8 tok/s) (stop, cancel=False), expert cache 56.8% hit (+13.4% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] thinking: 25 of budget 24576 (max 32768) tokens, 54.6 tok/s, 1 s
+[strata] thinking: 69 of budget 24576 (max 32768) tokens, 46.4 tok/s, 2 s
+[strata] thinking: 120 of budget 24576 (max 32768) tokens, 47.8 tok/s, 3 s
+[strata] thinking: 171 of budget 24576 (max 32768) tokens, 48.3 tok/s, 4 s
+[strata] thinking: 220 of budget 24576 (max 32768) tokens, 48.4 tok/s, 5 s
+[strata] thinking: 265 of budget 24576 (max 32768) tokens, 47.8 tok/s, 6 s
+[strata] thinking: 315 of budget 24576 (max 32768) tokens, 47.9 tok/s, 7 s
+[strata] thinking: 359 of budget 24576 (max 32768) tokens, 47.2 tok/s, 8 s
+[strata] thinking: 406 of budget 24576 (max 32768) tokens, 47.2 tok/s, 9 s
+[strata] thinking: 461 of budget 24576 (max 32768) tokens, 47.8 tok/s, 10 s
+[strata] thinking: 516 of budget 24576 (max 32768) tokens, 48.4 tok/s, 11 s
+[strata] thinking: 567 of budget 24576 (max 32768) tokens, 48.5 tok/s, 12 s
+[strata] thinking: 618 of budget 24576 (max 32768) tokens, 48.6 tok/s, 13 s
+[strata] writing a tool call: bash: 673 of max 32768 tokens, 48.9 tok/s, 14 s
+[strata] tool call complete: 745 of max 32768 tokens, 50.2 tok/s, 15 s
+[strata] done: 746 tokens in 15 s (50.3 tok/s) (stop, cancel=False), expert cache 64.7% hit (+10.6% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 8,023 of 22,858 tokens, 3 s so far
+[strata] reading the prompt: 10,071 of 22,858 tokens, 6 s so far
+[strata] reading the prompt: 12,119 of 22,858 tokens, 8 s so far
+[strata] reading the prompt: 14,167 of 22,858 tokens, 11 s so far
+[strata] reading the prompt: 16,215 of 22,858 tokens, 14 s so far
+[strata] reading the prompt: 18,263 of 22,858 tokens, 17 s so far
+[strata] reading the prompt: 20,311 of 22,858 tokens, 20 s so far
+[strata] reading the prompt: 22,359 of 22,858 tokens, 23 s so far
+[strata] reading the prompt: 22,853 of 22,858 tokens, 24 s so far
+[strata] thinking: 31 of budget 24576 (max 32768) tokens, 41.7 tok/s, 25 s
+[strata] thinking: 80 of budget 24576 (max 32768) tokens, 45.5 tok/s, 26 s
+[strata] thinking: 133 of budget 24576 (max 32768) tokens, 48.0 tok/s, 27 s
+[strata] thinking: 178 of budget 24576 (max 32768) tokens, 47.0 tok/s, 28 s
+[strata] thinking: 229 of budget 24576 (max 32768) tokens, 47.9 tok/s, 29 s
+[strata] thinking: 283 of budget 24576 (max 32768) tokens, 48.9 tok/s, 30 s
+[strata] thinking: 331 of budget 24576 (max 32768) tokens, 48.7 tok/s, 31 s
+[strata] thinking: 380 of budget 24576 (max 32768) tokens, 48.6 tok/s, 32 s
+[strata] thinking: 430 of budget 24576 (max 32768) tokens, 48.6 tok/s, 34 s
+[strata] thinking: 481 of budget 24576 (max 32768) tokens, 48.7 tok/s, 35 s
+[strata] thinking: 524 of budget 24576 (max 32768) tokens, 48.1 tok/s, 36 s
+[strata] writing a tool call: bash: 579 of max 32768 tokens, 48.5 tok/s, 37 s
+[strata] writing a tool call: bash: 637 of max 32768 tokens, 49.2 tok/s, 38 s
+[strata] writing a tool call: bash: 700 of max 32768 tokens, 50.0 tok/s, 39 s
+[strata] done: 747 tokens in 39 s (50.7 tok/s) (stop, cancel=False), expert cache 64.3% hit (+10.7% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 23,820 of 23,825 tokens, 1 s so far
+[strata] thinking: 40 of budget 24576 (max 32768) tokens, 48.6 tok/s, 2 s
+[strata] thinking: 92 of budget 24576 (max 32768) tokens, 49.7 tok/s, 3 s
+[strata] thinking: 146 of budget 24576 (max 32768) tokens, 50.6 tok/s, 4 s
+[strata] thinking: 202 of budget 24576 (max 32768) tokens, 51.3 tok/s, 5 s
+[strata] thinking: 248 of budget 24576 (max 32768) tokens, 50.1 tok/s, 6 s
+[strata] thinking: 296 of budget 24576 (max 32768) tokens, 49.5 tok/s, 7 s
+[strata] thinking: 338 of budget 24576 (max 32768) tokens, 48.2 tok/s, 8 s
+[strata] thinking: 398 of budget 24576 (max 32768) tokens, 49.6 tok/s, 9 s
+[strata] thinking: 446 of budget 24576 (max 32768) tokens, 49.4 tok/s, 10 s
+[strata] writing a tool call: bash: 494 of max 32768 tokens, 49.2 tok/s, 11 s
+[strata] writing a tool call: bash: 553 of max 32768 tokens, 50.0 tok/s, 12 s
+[strata] writing a tool call: bash: 621 of max 32768 tokens, 51.3 tok/s, 13 s
+[strata] writing a tool call: bash: 693 of max 32768 tokens, 52.7 tok/s, 14 s
+[strata] done: 718 tokens in 15 s (53.3 tok/s) (stop, cancel=False), expert cache 61.0% hit (+11.6% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 25,811 of 25,816 tokens, 3 s so far
+[strata] thinking: 33 of budget 24576 (max 32768) tokens, 44.2 tok/s, 4 s
+[strata] thinking: 80 of budget 24576 (max 32768) tokens, 44.6 tok/s, 5 s
+[strata] thinking: 121 of budget 24576 (max 32768) tokens, 43.3 tok/s, 6 s
+[strata] writing a tool call: bash: 183 of max 32768 tokens, 48.2 tok/s, 7 s
+[strata] done: 207 tokens in 7 s (49.8 tok/s) (stop, cancel=False), expert cache 53.7% hit (+13.8% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 26,908 of 26,913 tokens, 2 s so far
+[strata] thinking: 35 of budget 24576 (max 32768) tokens, 44.1 tok/s, 3 s
+[strata] writing a tool call: bash: 103 of max 32768 tokens, 57.3 tok/s, 4 s
+[strata] done: 138 tokens in 4 s (57.7 tok/s) (stop, cancel=False), expert cache 60.6% hit (+11.8% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 28,197 of 28,202 tokens, 3 s so far
+[strata] thinking: 38 of budget 24576 (max 32768) tokens, 49.1 tok/s, 4 s
+[strata] thinking: 91 of budget 24576 (max 32768) tokens, 50.7 tok/s, 5 s
+[strata] thinking: 140 of budget 24576 (max 32768) tokens, 50.0 tok/s, 6 s
+[strata] thinking: 192 of budget 24576 (max 32768) tokens, 50.0 tok/s, 7 s
+[strata] thinking: 241 of budget 24576 (max 32768) tokens, 49.8 tok/s, 8 s
+[strata] thinking: 287 of budget 24576 (max 32768) tokens, 48.8 tok/s, 9 s
+[strata] thinking: 325 of budget 24576 (max 32768) tokens, 47.2 tok/s, 10 s
+[strata] thinking: 371 of budget 24576 (max 32768) tokens, 47.0 tok/s, 11 s
+[strata] thinking: 424 of budget 24576 (max 32768) tokens, 47.5 tok/s, 12 s
+[strata] thinking: 476 of budget 24576 (max 32768) tokens, 47.9 tok/s, 13 s
+[strata] thinking: 529 of budget 24576 (max 32768) tokens, 48.3 tok/s, 14 s
+[strata] writing a tool call: bash: 579 of max 32768 tokens, 48.3 tok/s, 15 s
+[strata] writing a tool call: bash: 636 of max 32768 tokens, 48.8 tok/s, 16 s
+[strata] done: 689 tokens in 17 s (49.5 tok/s) (stop, cancel=False), expert cache 60.0% hit (+11.9% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 29,229 of 29,234 tokens, 1 s so far
+[strata] thinking: 36 of budget 24576 (max 32768) tokens, 45.0 tok/s, 2 s
+[strata] writing a tool call: bash: 90 of max 32768 tokens, 49.4 tok/s, 3 s
+[strata] writing a tool call: bash: 154 of max 32768 tokens, 54.0 tok/s, 4 s
+[strata] done: 213 tokens in 5 s (56.2 tok/s) (stop, cancel=False), expert cache 57.8% hit (+12.5% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 31,494 of 32,421 tokens, 3 s so far
+[strata] reading the prompt: 32,416 of 32,421 tokens, 5 s so far
+[strata] thinking: 31 of budget 24576 (max 32768) tokens, 42.7 tok/s, 6 s
+[strata] thinking: 71 of budget 24576 (max 32768) tokens, 40.9 tok/s, 7 s
+[strata] thinking: 115 of budget 24576 (max 32768) tokens, 41.4 tok/s, 8 s
+[strata] thinking: 162 of budget 24576 (max 32768) tokens, 42.7 tok/s, 9 s
+[strata] thinking: 215 of budget 24576 (max 32768) tokens, 44.7 tok/s, 10 s
+[strata] thinking: 263 of budget 24576 (max 32768) tokens, 44.9 tok/s, 11 s
+[strata] thinking: 319 of budget 24576 (max 32768) tokens, 46.5 tok/s, 12 s
+[strata] thinking: 359 of budget 24576 (max 32768) tokens, 45.5 tok/s, 13 s
+[strata] thinking: 406 of budget 24576 (max 32768) tokens, 45.7 tok/s, 14 s
+[strata] thinking: 462 of budget 24576 (max 32768) tokens, 46.7 tok/s, 15 s
+[strata] thinking: 500 of budget 24576 (max 32768) tokens, 45.9 tok/s, 16 s
+[strata] thinking: 549 of budget 24576 (max 32768) tokens, 46.0 tok/s, 17 s
+[strata] writing a tool call: bash: 608 of max 32768 tokens, 46.9 tok/s, 18 s
+[strata] writing a tool call: bash: 668 of max 32768 tokens, 47.7 tok/s, 19 s
+[strata] writing a tool call: bash: 740 of max 32768 tokens, 49.2 tok/s, 20 s
+[strata] writing a tool call: bash: 808 of max 32768 tokens, 50.3 tok/s, 21 s
+[strata] writing a tool call: bash: 867 of max 32768 tokens, 50.8 tok/s, 22 s
+[strata] done: 910 tokens in 23 s (50.8 tok/s) (stop, cancel=False), expert cache 60.5% hit (+11.9% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 34,134 of 34,139 tokens, 2 s so far
+[strata] thinking: 37 of budget 24576 (max 32768) tokens, 48.1 tok/s, 3 s
+[strata] thinking: 81 of budget 24576 (max 32768) tokens, 45.6 tok/s, 4 s
+[strata] thinking: 132 of budget 24576 (max 32768) tokens, 46.9 tok/s, 5 s
+[strata] thinking: 170 of budget 24576 (max 32768) tokens, 44.5 tok/s, 6 s
+[strata] thinking: 211 of budget 24576 (max 32768) tokens, 43.7 tok/s, 7 s
+[strata] thinking: 254 of budget 24576 (max 32768) tokens, 43.5 tok/s, 8 s
+[strata] thinking: 305 of budget 24576 (max 32768) tokens, 44.5 tok/s, 9 s
+[strata] thinking: 356 of budget 24576 (max 32768) tokens, 45.1 tok/s, 10 s
+[strata] thinking: 412 of budget 24576 (max 32768) tokens, 46.3 tok/s, 11 s
+[strata] thinking: 459 of budget 24576 (max 32768) tokens, 46.3 tok/s, 12 s
+[strata] thinking: 508 of budget 24576 (max 32768) tokens, 46.5 tok/s, 13 s
+[strata] thinking: 556 of budget 24576 (max 32768) tokens, 46.6 tok/s, 14 s
+[strata] thinking: 605 of budget 24576 (max 32768) tokens, 46.7 tok/s, 15 s
+[strata] thinking: 651 of budget 24576 (max 32768) tokens, 46.6 tok/s, 16 s
+[strata] thinking: 699 of budget 24576 (max 32768) tokens, 46.6 tok/s, 17 s
+[strata] thinking: 742 of budget 24576 (max 32768) tokens, 46.4 tok/s, 18 s
+[strata] thinking: 796 of budget 24576 (max 32768) tokens, 46.7 tok/s, 19 s
+[strata] thinking: 845 of budget 24576 (max 32768) tokens, 46.8 tok/s, 20 s
+[strata] thinking: 893 of budget 24576 (max 32768) tokens, 46.8 tok/s, 21 s
+[strata] writing a tool call: bash: 950 of max 32768 tokens, 47.2 tok/s, 22 s
+[strata] writing a tool call: bash: 1005 of max 32768 tokens, 47.5 tok/s, 23 s
+[strata] writing a tool call: bash: 1056 of max 32768 tokens, 47.7 tok/s, 24 s
+[strata] done: 1070 tokens in 25 s (47.6 tok/s) (stop, cancel=False), expert cache 62.2% hit (+11.3% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 35,812 of 35,817 tokens, 2 s so far
+[strata] thinking: 41 of budget 24576 (max 32768) tokens, 49.9 tok/s, 3 s
+[strata] thinking: 90 of budget 24576 (max 32768) tokens, 48.8 tok/s, 4 s
+[strata] thinking: 145 of budget 24576 (max 32768) tokens, 50.1 tok/s, 5 s
+[strata] thinking: 194 of budget 24576 (max 32768) tokens, 49.8 tok/s, 6 s
+[strata] thinking: 250 of budget 24576 (max 32768) tokens, 50.9 tok/s, 7 s
+[strata] thinking: 299 of budget 24576 (max 32768) tokens, 50.4 tok/s, 8 s
+[strata] thinking: 358 of budget 24576 (max 32768) tokens, 51.5 tok/s, 9 s
+[strata] thinking: 416 of budget 24576 (max 32768) tokens, 52.3 tok/s, 10 s
+[strata] thinking: 471 of budget 24576 (max 32768) tokens, 52.6 tok/s, 11 s
+[strata] thinking: 523 of budget 24576 (max 32768) tokens, 52.4 tok/s, 12 s
+[strata] thinking: 571 of budget 24576 (max 32768) tokens, 51.9 tok/s, 13 s
+[strata] thinking: 620 of budget 24576 (max 32768) tokens, 51.5 tok/s, 14 s
+[strata] thinking: 673 of budget 24576 (max 32768) tokens, 51.5 tok/s, 15 s
+[strata] thinking: 734 of budget 24576 (max 32768) tokens, 52.2 tok/s, 16 s
+[strata] thinking: 776 of budget 24576 (max 32768) tokens, 51.4 tok/s, 17 s
+[strata] thinking: 828 of budget 24576 (max 32768) tokens, 51.4 tok/s, 18 s
+[strata] thinking: 890 of budget 24576 (max 32768) tokens, 51.8 tok/s, 19 s
+[strata] thinking: 936 of budget 24576 (max 32768) tokens, 51.5 tok/s, 20 s
+[strata] thinking: 982 of budget 24576 (max 32768) tokens, 51.2 tok/s, 21 s
+[strata] thinking: 1027 of budget 24576 (max 32768) tokens, 50.8 tok/s, 22 s
+[strata] thinking: 1073 of budget 24576 (max 32768) tokens, 50.5 tok/s, 23 s
+[strata] thinking: 1116 of budget 24576 (max 32768) tokens, 50.1 tok/s, 24 s
+[strata] thinking: 1165 of budget 24576 (max 32768) tokens, 50.0 tok/s, 25 s
+[strata] thinking: 1211 of budget 24576 (max 32768) tokens, 49.8 tok/s, 26 s
+[strata] thinking: 1252 of budget 24576 (max 32768) tokens, 49.4 tok/s, 27 s
+[strata] thinking: 1299 of budget 24576 (max 32768) tokens, 49.3 tok/s, 28 s
+[strata] thinking: 1343 of budget 24576 (max 32768) tokens, 49.1 tok/s, 29 s
+[strata] thinking: 1387 of budget 24576 (max 32768) tokens, 48.9 tok/s, 30 s
+[strata] thinking: 1433 of budget 24576 (max 32768) tokens, 48.8 tok/s, 31 s
+[strata] thinking: 1476 of budget 24576 (max 32768) tokens, 48.6 tok/s, 32 s
+[strata] writing a tool call: bash: 1528 of max 32768 tokens, 48.6 tok/s, 33 s
+[strata] writing a tool call: bash: 1589 of max 32768 tokens, 48.9 tok/s, 34 s
+[strata] writing a tool call: bash: 1657 of max 32768 tokens, 49.4 tok/s, 35 s
+[strata] done: 1679 tokens in 36 s (49.6 tok/s) (stop, cancel=False), expert cache 62.4% hit (+11.2% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 38,285 of 38,290 tokens, 2 s so far
+[strata] thinking: 29 of budget 24576 (max 32768) tokens, 38.8 tok/s, 3 s
+[strata] thinking: 79 of budget 24576 (max 32768) tokens, 44.6 tok/s, 4 s
+[strata] thinking: 130 of budget 24576 (max 32768) tokens, 46.5 tok/s, 5 s
+[strata] thinking: 182 of budget 24576 (max 32768) tokens, 47.4 tok/s, 6 s
+[strata] thinking: 227 of budget 24576 (max 32768) tokens, 46.8 tok/s, 7 s
+[strata] thinking: 275 of budget 24576 (max 32768) tokens, 46.9 tok/s, 8 s
+[strata] thinking: 320 of budget 24576 (max 32768) tokens, 46.5 tok/s, 9 s
+[strata] thinking: 364 of budget 24576 (max 32768) tokens, 46.0 tok/s, 10 s
+[strata] thinking: 417 of budget 24576 (max 32768) tokens, 46.5 tok/s, 11 s
+[strata] thinking: 469 of budget 24576 (max 32768) tokens, 47.0 tok/s, 12 s
+[strata] thinking: 516 of budget 24576 (max 32768) tokens, 46.8 tok/s, 13 s
+[strata] thinking: 576 of budget 24576 (max 32768) tokens, 47.8 tok/s, 14 s
+[strata] thinking: 630 of budget 24576 (max 32768) tokens, 48.2 tok/s, 15 s
+[strata] thinking: 688 of budget 24576 (max 32768) tokens, 48.8 tok/s, 16 s
+[strata] thinking: 741 of budget 24576 (max 32768) tokens, 49.1 tok/s, 17 s
+[strata] thinking: 794 of budget 24576 (max 32768) tokens, 49.3 tok/s, 18 s
+[strata] thinking: 846 of budget 24576 (max 32768) tokens, 49.4 tok/s, 19 s
+[strata] thinking: 891 of budget 24576 (max 32768) tokens, 49.1 tok/s, 20 s
+[strata] thinking: 941 of budget 24576 (max 32768) tokens, 49.1 tok/s, 21 s
+[strata] thinking: 995 of budget 24576 (max 32768) tokens, 49.3 tok/s, 22 s
+[strata] thinking: 1037 of budget 24576 (max 32768) tokens, 49.0 tok/s, 23 s
+[strata] thinking: 1091 of budget 24576 (max 32768) tokens, 49.2 tok/s, 24 s
+[strata] thinking: 1142 of budget 24576 (max 32768) tokens, 49.2 tok/s, 25 s
+[strata] thinking: 1191 of budget 24576 (max 32768) tokens, 49.2 tok/s, 26 s
+[strata] thinking: 1241 of budget 24576 (max 32768) tokens, 49.2 tok/s, 27 s
+[strata] thinking: 1287 of budget 24576 (max 32768) tokens, 49.0 tok/s, 28 s
+[strata] thinking: 1343 of budget 24576 (max 32768) tokens, 49.3 tok/s, 29 s
+[strata] thinking: 1403 of budget 24576 (max 32768) tokens, 49.6 tok/s, 30 s
+[strata] thinking: 1455 of budget 24576 (max 32768) tokens, 49.7 tok/s, 31 s
+[strata] thinking: 1519 of budget 24576 (max 32768) tokens, 50.1 tok/s, 32 s
+[strata] thinking: 1584 of budget 24576 (max 32768) tokens, 50.5 tok/s, 33 s
+[strata] thinking: 1633 of budget 24576 (max 32768) tokens, 50.4 tok/s, 34 s
+[strata] thinking: 1682 of budget 24576 (max 32768) tokens, 50.3 tok/s, 36 s
+[strata] thinking: 1728 of budget 24576 (max 32768) tokens, 50.2 tok/s, 37 s
+[strata] thinking: 1787 of budget 24576 (max 32768) tokens, 50.4 tok/s, 38 s
+[strata] thinking: 1843 of budget 24576 (max 32768) tokens, 50.5 tok/s, 39 s
+[strata] thinking: 1896 of budget 24576 (max 32768) tokens, 50.6 tok/s, 40 s
+[strata] thinking: 1949 of budget 24576 (max 32768) tokens, 50.6 tok/s, 41 s
+[strata] thinking: 2007 of budget 24576 (max 32768) tokens, 50.8 tok/s, 42 s
+[strata] thinking: 2060 of budget 24576 (max 32768) tokens, 50.8 tok/s, 43 s
+[strata] thinking: 2108 of budget 24576 (max 32768) tokens, 50.8 tok/s, 44 s
+[strata] thinking: 2157 of budget 24576 (max 32768) tokens, 50.7 tok/s, 45 s
+[strata] writing a tool call: bash: 2215 of max 32768 tokens, 50.8 tok/s, 46 s
+[strata] writing a tool call: bash: 2277 of max 32768 tokens, 51.0 tok/s, 47 s
+[strata] writing a tool call: bash: 2329 of max 32768 tokens, 51.1 tok/s, 48 s
+[strata] done: 2346 tokens in 48 s (51.1 tok/s) (stop, cancel=False), expert cache 63.1% hit (+11.0% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 41,236 of 41,241 tokens, 2 s so far
+[strata] thinking: 41 of budget 24576 (max 32768) tokens, 50.9 tok/s, 3 s
+[strata] thinking: 99 of budget 24576 (max 32768) tokens, 54.7 tok/s, 4 s
+[strata] thinking: 161 of budget 24576 (max 32768) tokens, 57.3 tok/s, 5 s
+[strata] thinking: 213 of budget 24576 (max 32768) tokens, 55.6 tok/s, 6 s
+[strata] thinking: 261 of budget 24576 (max 32768) tokens, 53.7 tok/s, 7 s
+[strata] thinking: 315 of budget 24576 (max 32768) tokens, 53.5 tok/s, 8 s
+[strata] thinking: 362 of budget 24576 (max 32768) tokens, 52.4 tok/s, 9 s
+[strata] thinking: 412 of budget 24576 (max 32768) tokens, 52.0 tok/s, 10 s
+[strata] thinking: 462 of budget 24576 (max 32768) tokens, 51.7 tok/s, 11 s
+[strata] thinking: 504 of budget 24576 (max 32768) tokens, 50.7 tok/s, 12 s
+[strata] thinking: 552 of budget 24576 (max 32768) tokens, 50.4 tok/s, 13 s
+[strata] thinking: 611 of budget 24576 (max 32768) tokens, 51.0 tok/s, 14 s
+[strata] thinking: 653 of budget 24576 (max 32768) tokens, 50.3 tok/s, 15 s
+[strata] writing a tool call: bash: 706 of max 32768 tokens, 50.4 tok/s, 16 s
+[strata] writing a tool call: bash: 765 of max 32768 tokens, 50.9 tok/s, 17 s
+[strata] done: 776 tokens in 17 s (51.2 tok/s) (stop, cancel=False), expert cache 57.0% hit (+12.6% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 42,855 of 42,860 tokens, 2 s so far
+[strata] thinking: 39 of budget 24576 (max 32768) tokens, 48.0 tok/s, 3 s
+[strata] writing a tool call: bash: 92 of max 32768 tokens, 49.5 tok/s, 4 s
+[strata] writing a tool call: bash: 159 of max 32768 tokens, 54.7 tok/s, 5 s
+[strata] done: 162 tokens in 5 s (55.7 tok/s) (stop, cancel=False), expert cache 55.3% hit (+14.0% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] thinking: 26 of budget 24576 (max 32768) tokens, 44.6 tok/s, 1 s
+[strata] writing a tool call: bash: 74 of max 32768 tokens, 46.3 tok/s, 2 s
+[strata] writing a tool call: bash: 134 of max 32768 tokens, 50.8 tok/s, 3 s
+[strata] done: 171 tokens in 4 s (53.9 tok/s) (stop, cancel=False), expert cache 54.3% hit (+13.9% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 43,881 of 43,886 tokens, 2 s so far
+[strata] thinking: 33 of budget 24576 (max 32768) tokens, 40.8 tok/s, 3 s
+[strata] thinking: 77 of budget 24576 (max 32768) tokens, 41.9 tok/s, 4 s
+[strata] thinking: 125 of budget 24576 (max 32768) tokens, 43.9 tok/s, 5 s
+[strata] thinking: 166 of budget 24576 (max 32768) tokens, 42.9 tok/s, 6 s
+[strata] thinking: 220 of budget 24576 (max 32768) tokens, 45.1 tok/s, 7 s
+[strata] thinking: 267 of budget 24576 (max 32768) tokens, 45.1 tok/s, 8 s
+[strata] thinking: 321 of budget 24576 (max 32768) tokens, 46.2 tok/s, 9 s
+[strata] thinking: 372 of budget 24576 (max 32768) tokens, 46.5 tok/s, 10 s
+[strata] thinking: 423 of budget 24576 (max 32768) tokens, 46.8 tok/s, 11 s
+[strata] thinking: 477 of budget 24576 (max 32768) tokens, 47.5 tok/s, 12 s
+[strata] thinking: 526 of budget 24576 (max 32768) tokens, 47.6 tok/s, 13 s
+[strata] writing a tool call: bash: 584 of max 32768 tokens, 48.1 tok/s, 14 s
+[strata] writing a tool call: bash: 654 of max 32768 tokens, 49.5 tok/s, 15 s
+[strata] writing a tool call: bash: 718 of max 32768 tokens, 50.5 tok/s, 16 s
+[strata] done: 756 tokens in 17 s (51.2 tok/s) (stop, cancel=False), expert cache 58.0% hit (+12.6% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 44,899 of 44,904 tokens, 1 s so far
+[strata] writing a tool call: bash: 38 of max 32768 tokens, 47.1 tok/s, 2 s
+[strata] writing a tool call: bash: 103 of max 32768 tokens, 56.0 tok/s, 3 s
+[strata] done: 162 tokens in 4 s (57.5 tok/s) (stop, cancel=False), expert cache 54.0% hit (+13.3% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 45,835 of 45,840 tokens, 2 s so far
+[strata] thinking: 33 of budget 24576 (max 32768) tokens, 43.1 tok/s, 3 s
+[strata] thinking: 90 of budget 24576 (max 32768) tokens, 50.4 tok/s, 4 s
+[strata] thinking: 131 of budget 24576 (max 32768) tokens, 46.5 tok/s, 5 s
+[strata] writing a tool call: bash: 187 of max 32768 tokens, 48.6 tok/s, 6 s
+[strata] writing a tool call: bash: 248 of max 32768 tokens, 51.0 tok/s, 7 s
+[strata] writing a tool call: bash: 317 of max 32768 tokens, 53.7 tok/s, 8 s
+[strata] done: 368 tokens in 9 s (54.0 tok/s) (stop, cancel=False), expert cache 55.6% hit (+13.5% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] thinking: 1 of budget 24576 (max 32768) tokens, 349525.3 tok/s, 1 s
+[strata] writing a tool call: bash: 44 of max 32768 tokens, 42.0 tok/s, 2 s
+[strata] writing a tool call: bash: 110 of max 32768 tokens, 52.6 tok/s, 3 s
+[strata] writing a tool call: bash: 176 of max 32768 tokens, 56.1 tok/s, 4 s
+[strata] writing a tool call: bash: 242 of max 32768 tokens, 58.4 tok/s, 5 s
+[strata] writing a tool call: bash: 301 of max 32768 tokens, 58.0 tok/s, 6 s
+[strata] writing a tool call: bash: 365 of max 32768 tokens, 58.7 tok/s, 7 s
+[strata] done: 385 tokens in 8 s (58.6 tok/s) (stop, cancel=False), expert cache 62.1% hit (+11.2% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 46,993 of 46,998 tokens, 1 s so far
+[strata] thinking: 37 of budget 24576 (max 32768) tokens, 44.9 tok/s, 2 s
+[strata] writing a tool call: bash: 89 of max 32768 tokens, 48.5 tok/s, 3 s
+[strata] writing a tool call: bash: 153 of max 32768 tokens, 53.4 tok/s, 4 s
+[strata] writing a tool call: bash: 216 of max 32768 tokens, 55.7 tok/s, 5 s
+[strata] writing a tool call: bash: 273 of max 32768 tokens, 55.9 tok/s, 6 s
+[strata] done: 335 tokens in 7 s (57.3 tok/s) (stop, cancel=False), expert cache 62.4% hit (+11.5% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 47,881 of 47,886 tokens, 2 s so far
+[strata] thinking: 34 of budget 24576 (max 32768) tokens, 42.2 tok/s, 3 s
+[strata] thinking: 81 of budget 24576 (max 32768) tokens, 44.3 tok/s, 4 s
+[strata] thinking: 131 of budget 24576 (max 32768) tokens, 45.4 tok/s, 5 s
+[strata] thinking: 184 of budget 24576 (max 32768) tokens, 47.3 tok/s, 6 s
+[strata] thinking: 246 of budget 24576 (max 32768) tokens, 50.0 tok/s, 7 s
+[strata] thinking: 298 of budget 24576 (max 32768) tokens, 50.0 tok/s, 8 s
+[strata] thinking: 349 of budget 24576 (max 32768) tokens, 50.0 tok/s, 9 s
+[strata] thinking: 406 of budget 24576 (max 32768) tokens, 50.7 tok/s, 10 s
+[strata] thinking: 464 of budget 24576 (max 32768) tokens, 51.5 tok/s, 11 s
+[strata] thinking: 514 of budget 24576 (max 32768) tokens, 51.1 tok/s, 12 s
+[strata] thinking: 557 of budget 24576 (max 32768) tokens, 50.4 tok/s, 13 s
+[strata] thinking: 600 of budget 24576 (max 32768) tokens, 49.7 tok/s, 14 s
+[strata] thinking: 654 of budget 24576 (max 32768) tokens, 50.0 tok/s, 15 s
+[strata] thinking: 698 of budget 24576 (max 32768) tokens, 49.6 tok/s, 16 s
+[strata] thinking: 750 of budget 24576 (max 32768) tokens, 49.5 tok/s, 17 s
+[strata] done: 807 tokens in 18 s (50.3 tok/s) (stop, cancel=False), expert cache 62.4% hit (+11.3% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 49,929 of 50,461 tokens, 3 s so far
+[strata] reading the prompt: 50,456 of 50,461 tokens, 5 s so far
+[strata] thinking: 40 of budget 24576 (max 32768) tokens, 55.1 tok/s, 6 s
+[strata] thinking: 84 of budget 24576 (max 32768) tokens, 48.1 tok/s, 7 s
+[strata] thinking: 127 of budget 24576 (max 32768) tokens, 45.6 tok/s, 8 s
+[strata] writing a tool call: read: 180 of max 32768 tokens, 47.3 tok/s, 9 s
+[strata] done: 207 tokens in 9 s (48.8 tok/s) (stop, cancel=False), expert cache 56.0% hit (+13.3% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 51,238 of 51,243 tokens, 2 s so far
+[strata] thinking: 40 of budget 24576 (max 32768) tokens, 50.0 tok/s, 3 s
+[strata] thinking: 98 of budget 24576 (max 32768) tokens, 52.6 tok/s, 4 s
+[strata] thinking: 154 of budget 24576 (max 32768) tokens, 53.6 tok/s, 5 s
+[strata] thinking: 200 of budget 24576 (max 32768) tokens, 51.2 tok/s, 6 s
+[strata] thinking: 249 of budget 24576 (max 32768) tokens, 50.5 tok/s, 7 s
+[strata] thinking: 307 of budget 24576 (max 32768) tokens, 51.3 tok/s, 8 s
+[strata] writing a tool call: edit: 358 of max 32768 tokens, 51.1 tok/s, 9 s
+[strata] writing a tool call: edit: 409 of max 32768 tokens, 50.8 tok/s, 10 s
+[strata] writing a tool call: edit: 467 of max 32768 tokens, 51.3 tok/s, 11 s
+[strata] writing a tool call: edit: 535 of max 32768 tokens, 52.9 tok/s, 12 s
+[strata] writing a tool call: edit: 596 of max 32768 tokens, 53.4 tok/s, 13 s
+[strata] writing a tool call: edit: 664 of max 32768 tokens, 54.5 tok/s, 14 s
+[strata] done: 725 tokens in 15 s (55.2 tok/s) (stop, cancel=False), expert cache 53.3% hit (+13.9% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 52,035 of 52,036 tokens, 1 s so far
+[strata] thinking: 46 of budget 24576 (max 32768) tokens, 46.1 tok/s, 2 s
+[strata] thinking: 92 of budget 24576 (max 32768) tokens, 45.0 tok/s, 3 s
+[strata] thinking: 139 of budget 24576 (max 32768) tokens, 45.2 tok/s, 4 s
+[strata] writing a tool call: bash: 201 of max 32768 tokens, 48.8 tok/s, 5 s
+[strata] writing a tool call: bash: 256 of max 32768 tokens, 49.8 tok/s, 6 s
+[strata] writing a tool call: bash: 323 of max 32768 tokens, 52.6 tok/s, 7 s
+[strata] writing a tool call: bash: 389 of max 32768 tokens, 54.1 tok/s, 8 s
+[strata] done: 398 tokens in 8 s (54.3 tok/s) (stop, cancel=False), expert cache 58.2% hit (+12.7% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 52,761 of 52,766 tokens, 1 s so far
+[strata] thinking: 36 of budget 24576 (max 32768) tokens, 44.9 tok/s, 2 s
+[strata] thinking: 86 of budget 24576 (max 32768) tokens, 46.9 tok/s, 3 s
+[strata] thinking: 132 of budget 24576 (max 32768) tokens, 46.2 tok/s, 4 s
+[strata] thinking: 176 of budget 24576 (max 32768) tokens, 45.3 tok/s, 5 s
+[strata] writing a tool call: bash: 226 of max 32768 tokens, 46.0 tok/s, 6 s
+[strata] writing a tool call: bash: 283 of max 32768 tokens, 47.6 tok/s, 7 s
+[strata] writing a tool call: bash: 343 of max 32768 tokens, 49.3 tok/s, 8 s
+[strata] writing a tool call: bash: 413 of max 32768 tokens, 51.6 tok/s, 9 s
+[strata] writing a tool call: bash: 478 of max 32768 tokens, 52.9 tok/s, 10 s
+[strata] writing a tool call: bash: 544 of max 32768 tokens, 53.9 tok/s, 12 s
+[strata] done: 565 tokens in 12 s (54.0 tok/s) (stop, cancel=False), expert cache 56.8% hit (+12.8% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 53,552 of 53,557 tokens, 1 s so far
+[strata] thinking: 38 of budget 24576 (max 32768) tokens, 44.6 tok/s, 2 s
+[strata] thinking: 89 of budget 24576 (max 32768) tokens, 47.7 tok/s, 3 s
+[strata] thinking: 143 of budget 24576 (max 32768) tokens, 49.7 tok/s, 4 s
+[strata] thinking: 195 of budget 24576 (max 32768) tokens, 49.8 tok/s, 5 s
+[strata] thinking: 248 of budget 24576 (max 32768) tokens, 50.3 tok/s, 6 s
+[strata] thinking: 305 of budget 24576 (max 32768) tokens, 51.4 tok/s, 7 s
+[strata] answering: 350 of max 32768 tokens, 50.4 tok/s, 8 s
+[strata] answering: 399 of max 32768 tokens, 50.1 tok/s, 9 s
+[strata] answering: 449 of max 32768 tokens, 50.0 tok/s, 10 s
+[strata] answering: 514 of max 32768 tokens, 51.4 tok/s, 11 s
+[strata] answering: 571 of max 32768 tokens, 51.8 tok/s, 12 s
+[strata] answering: 626 of max 32768 tokens, 51.9 tok/s, 13 s
+[strata] answering: 678 of max 32768 tokens, 51.7 tok/s, 14 s
+[strata] answering: 734 of max 32768 tokens, 51.9 tok/s, 15 s
+[strata] answering: 789 of max 32768 tokens, 52.1 tok/s, 16 s
+[strata] answering: 839 of max 32768 tokens, 51.9 tok/s, 17 s
+[strata] answering: 899 of max 32768 tokens, 52.3 tok/s, 18 s
+[strata] answering: 964 of max 32768 tokens, 52.9 tok/s, 19 s
+[strata] answering: 1027 of max 32768 tokens, 53.4 tok/s, 20 s
+[strata] answering: 1083 of max 32768 tokens, 53.5 tok/s, 22 s
+[strata] done: 1111 tokens in 22 s (53.1 tok/s) (stop, cancel=False), expert cache 55.5% hit (+13.5% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 1,813 of 1,818 tokens, 3 s so far
+[strata] writing a tool call: bash: 37 of max 32768 tokens, 51.1 tok/s, 4 s
+[strata] done: 82 tokens in 4 s (60.1 tok/s) (stop, cancel=False), expert cache 52.2% hit (+14.0% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 2,560 of 2,565 tokens, 2 s so far
+[strata] done: 51 tokens in 3 s (65.0 tok/s) (stop, cancel=False), expert cache 60.3% hit (+12.3% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] reading the prompt: 3,335 of 3,340 tokens, 2 s so far
+[strata] thinking: 40 of budget 24576 (max 32768) tokens, 46.9 tok/s, 3 s
+[strata] writing a tool call: write: 100 of max 32768 tokens, 53.1 tok/s, 4 s
+[strata] writing a tool call: write: 162 of max 32768 tokens, 55.6 tok/s, 5 s
+[strata] writing a tool call: write: 223 of max 32768 tokens, 57.0 tok/s, 6 s
+[strata] writing a tool call: write: 291 of max 32768 tokens, 59.1 tok/s, 7 s
+[strata] writing a tool call: write: 371 of max 32768 tokens, 62.3 tok/s, 8 s
+[strata] writing a tool call: write: 439 of max 32768 tokens, 63.1 tok/s, 9 s
+[strata] writing a tool call: write: 515 of max 32768 tokens, 64.4 tok/s, 10 s
+[strata] writing a tool call: write: 569 of max 32768 tokens, 63.2 tok/s, 11 s
+[strata] done: 581 tokens in 11 s (63.1 tok/s) (stop, cancel=False), expert cache 62.7% hit (+11.0% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] thinking: 25 of budget 24576 (max 32768) tokens, 42.7 tok/s, 1 s
+[strata] writing a tool call: bash: 93 of max 32768 tokens, 58.2 tok/s, 2 s
+[strata] done: 150 tokens in 3 s (63.9 tok/s) (stop, cancel=False), expert cache 64.4% hit (+10.7% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] thinking: 3 of budget 24576 (max 32768) tokens, 38.5 tok/s, 1 s
+[strata] thinking: 52 of budget 24576 (max 32768) tokens, 47.6 tok/s, 2 s
+[strata] done: 93 tokens in 3 s (52.4 tok/s) (stop, cancel=False), expert cache 49.1% hit (+15.5% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] thinking: 2 of budget 24576 (max 32768) tokens, 58.1 tok/s, 1 s
+[strata] thinking: 50 of budget 24576 (max 32768) tokens, 46.0 tok/s, 2 s
+[strata] done: 105 tokens in 3 s (52.9 tok/s) (stop, cancel=False), expert cache 55.2% hit (+13.3% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] thinking: 5 of budget 24576 (max 32768) tokens, 40.2 tok/s, 1 s
+[strata] thinking: 66 of budget 24576 (max 32768) tokens, 58.2 tok/s, 2 s
+[strata] thinking: 135 of budget 24576 (max 32768) tokens, 62.2 tok/s, 3 s
+[strata] thinking: 194 of budget 24576 (max 32768) tokens, 60.8 tok/s, 4 s
+[strata] thinking: 245 of budget 24576 (max 32768) tokens, 58.4 tok/s, 5 s
+[strata] tool call complete: 312 of max 32768 tokens, 59.3 tok/s, 6 s
+[strata] done: 313 tokens in 6 s (59.5 tok/s) (stop, cancel=False), expert cache 60.3% hit (+12.1% of the routed experts over PCIe)
+[strata] thinking limited to 24576 of max_tokens 32768 so the answer has room ("answer_room": false in the config turns this off)
+[strata] thinking: 12 of budget 24576 (max 32768) tokens, 53.6 tok/s, 1 s
+[strata] answering: 56 of max 32768 tokens, 43.7 tok/s, 2 s
+[strata] answering: 104 of max 32768 tokens, 45.3 tok/s, 3 s
+[strata] answering: 172 of max 32768 tokens, 51.4 tok/s, 4 s
+[strata] answering: 227 of max 32768 tokens, 51.7 tok/s, 5 s
+[strata] answering: 293 of max 32768 tokens, 54.4 tok/s, 6 s
+[strata] answering: 359 of max 32768 tokens, 55.9 tok/s, 7 s
+[strata] done: 367 tokens in 7 s (56.0 tok/s) (stop, cancel=False), expert cache 51.8% hit (+14.6% of the routed experts over PCIe)
+
+[strata] stopping (Ctrl+C again to end the engine at once) ...
+[strata] stopped

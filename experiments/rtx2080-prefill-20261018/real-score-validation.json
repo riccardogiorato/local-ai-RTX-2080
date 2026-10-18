@@ -1,0 +1,10 @@
+{
+  "prompt_tokens": 121776,
+  "checked_calls": 5712,
+  "active_blocks_range": [
+    65,
+    30443
+  ],
+  "mismatches": 0,
+  "validation_timing_not_a_performance_sample": true
+}

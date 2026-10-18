@@ -1,0 +1,528 @@
+[strata] 2026-10-18 15:10:52 engine started: /home/riccardogiorato/Desktop/github/local-ai-rtx2080/experiments/rtx2080-prefill-20261018/strata-stock --serve --pack packs/q2_0-gsq --native /home/riccardogiorato/models/flashnext-gsq-rco/Qwen3.8-Flash-Next-GSQ-RCO-Q2_0-00001-of-00002.gguf --ple-gguf /home/riccardogiorato/models/flashnext-gsq-rco/Qwen3.8-Flash-Next-GSQ-RCO-Q2_0-00002-of-00002.gguf --ple-io mmap --expert-profile data/expert-profile.bin --expert-cache auto --spec 4 --spec-min-p 0.70 --kv int8 --prefill auto:16384 --mtp mtp/rt --max-context 131072 --kv-resident 32768 --pcie-frac 0.35 --adapt-every 1 --adapt-swaps 80 --adapt-decay 0.97
+strata generate: memory guard: limit 62.6 GiB (source: meminfo), current 7.8 GiB, reclaimable cache credited 0.0 GiB; available 54.8 GiB (MemAvailable 54.8 GiB), floor 2560 MiB
+strata generate: this CPU has no AVX-512: the expert kernels run on AVX-2 (multi-token for the i-quant gate/up rows)
+strata generate: native pack: packs/q2_0-gsq experts (largest blob 1.38 MB), token embedding Q3_K in mapped host memory (260 MiB, 0.5 s)
+strata trace: 6203 MiB free after the CUDA context and the weight arena
+strata generate: 1416 MiB of weights loaded from packs/q2_0-gsq in 0.8 s (303 canonical tensors skipped: served natively)
+strata trace: 6203 MiB free after the pack weights
+strata generate: 301 native projection matrices, 1376.20 MiB of weights, in 0.3 s
+strata generate: profile data/expert-profile.bin: 24576 ranked pairs, built for 24576 slots
+strata generate: KV streaming: 32768 of 131072 cells per QSA layer in VRAM, the K/V in 1.55 GiB of pinned RAM
+strata generate: PLE on, table 320001536 rows of /home/riccardogiorato/models/flashnext-gsq-rco/Qwen3.8-Flash-Next-GSQ-RCO-Q2_0-00002-of-00002.gguf
+strata trace: 3913 MiB free after the session (KV, GDN state, PLE history)
+strata mtp: draft layer loaded, 835 MiB of VRAM (experts 675, dense 111), files read in 0.58 s (1353 MiB/s)
+strata generate: experimental native Q5_K head, 437043200 bytes, in 0.2 s
+strata trace: 2653 MiB free after the native head
+strata generate: GPU 0: NVIDIA GeForce RTX 2080, compute capability 7.5
+strata generate: expert arena read through the file cache (buffered (not Windows))
+strata generate: expert arena: cudaHostRegister PORTABLE ok; MAP_HUGETLB unavailable (needed 16201 2 MiB pages, vm.nr_hugepages=0); transparent huge pages are on for every mapping (THP always): MADV_HUGEPAGE not requested
+strata generate: loaded 31.64 GiB at 1.09 GiB/s
+strata generate: GPU host-callback thread started before host-core pinning
+strata generate: CPU pool tasks/phase: 18 (automatic), participating threads: 6
+strata generate: 5 pool workers on logical processors 1,2,3,4,5, the host thread on 0 (draining too) (--host-core first)
+strata aux cpus: threads that are neither pool workers nor the host go to CPUs none spare (every CPU is the host's, a worker's or shares a core with a worker or has no known core) (off at start; a request's aux_cpus=1 turns it on)
+strata trace: 2589 MiB free after the weights, the session and the drafter
+strata generate: expert cache auto: 2.53 GiB free, 700 MiB reserved (+73 MiB for the draft head) -> 1377 slots
+strata generate: expert cache 1377 slots, 1.77 GiB of VRAM; policy is
+strata trace: 773 MiB free after opening the expert cache
+strata generate: the GPU computes the experts in the cache; it rounds differently from the CPU,
+                 so a reply can differ slightly from a run without the cache (same quality:
+                 bench/results/2026-09-27-cache-parity).
+                 PROFILE, ranked by routing frequency, no eviction.
+strata trace: 773 MiB free after the profile fill
+strata generate: pre-filled 1377 of 1377 slots from the profile in 0.2 s (11897 MB/s); slot 0 verified
+strata trace: 773 MiB free after the R4 hit path
+strata generate: R4 hit path ON - resident experts are computed on the GPU
+strata generate: 5 expert-pool workers + the host thread
+strata trace: 773 MiB free after the expert cache and the graphs
+strata generate: session is up (engine 0.1.45)
+strata generate: token graph hit path: 1377 resident experts, decided on the device
+prefill: the CPU share is ON by default for prompt chunks below 1024 tokens (the idle CPU takes some of the experts the GPU would stream; answers can differ slightly from 0.1.40.3, mean KL ~0.004). STRATA_PREFILL_CPU_SHARE=0 turns it off.
+strata serve: prompt chunk auto: 2048 tokens, a 384-slot ring
+strata serve: the prompt path borrows 1178 CUDA0 cache slots (1.52 GiB)
+strata trace: 773 MiB free after before the prompt path init
+strata trace: 625 MiB free after the head and the prompt path
+strata hc: CUDA0: the hyper-connection read runs as staged (the norm per token and stream, the down projection's activations staged ahead by cp.async); checked bit for bit against the plain read on this card (STRATA_HC_SPLIT=1 or 0 for the earlier ones)
+strata verify: window up to 6 tokens, 55.6 MiB of device buffers
+strata mtp: draft head over 40525 tokens (68.0 MiB)
+strata trace: 493 MiB free after the verifier and the drafter's binding
+strata serve: STRATA_ROUTE_TAIL_SKIP=7 is ON: a missed expert that every token of a verify window routes at rank 7 or lower is skipped (+10..20% decode on 12-16 GB cards that miss experts, answers differ slightly from 0.1.41); STRATA_ROUTE_TAIL_SKIP=0 turns it off
+strata serve: adaptive overlap: off (STRATA_ADAPT_OVERLAP=1 turns it on)
+strata serve: 493 MiB of VRAM free with everything loaded
+strata serve: WARNING: only 493 MiB of VRAM free at the start of this request (below 512 MiB): when the card is this full the driver can page GPU memory to system RAM, decode falls to a few tok/s and a window may never finish (#2065). Add --vram-reserve-mib 768 to the config's args, or lower --max-context / --batch
+strata trace: request 20053 0
+strata trace: prompt start 20052 -1
+strata trace: lent 1178 slots for 2048 tokens in 0.1 ms
+strata trace: prompt chunk 0 of 20046
+strata trace: prompt chunk 2048 of 20046
+strata trace: prompt chunk 4096 of 20046
+strata trace: prompt chunk 6144 of 20046
+strata trace: prompt chunk 8192 of 20046
+strata trace: prompt chunk 10240 of 20046
+strata trace: prompt chunk 12288 of 20046
+strata trace: prompt chunk 14336 of 20046
+strata trace: checkpoint at 16384: sync 0.0 ms, save 27.8 ms (1 stage(s))
+strata trace: prompt chunk 16384 of 20046
+strata trace: prompt chunk 18432 of 20046
+strata KV prefetch: 108 layer prefixes, single existing staging pool
+strata prefill timing: 20046 tokens, GPU timeline 30216 ms, wall 30226 ms, host staging 442 ms: embed+steps 200 (0.7%) hc read 5617 (18.6%) gdn 2197 (7.3%) qsa proj 1282 (4.2%) qsa indexer 2 (0.0%) qsa select 732 (2.4%) qsa attn 2865 (9.5%) router+shared 854 (2.8%) host grouping 104 (0.3%) gather 150 (0.5%) wait copy 1480 (4.9%) dequant 2707 (9.0%) gemm gate/up 4914 (16.3%) gemm down 3103 (10.3%) combine 1414 (4.7%) ple 110 (0.4%) kv stage 1 (0.0%) gdn conv+gates 239 (0.8%) gdn recurrence 1172 (3.9%) gdn out proj 1075 (3.6%)
+strata prefill timing: host: chunk setup (PLE rows, the expert stream plan) 6 ms, waiting for each chunk 224 ms, after each chunk (the draft layer, progress) 155 ms, PLE 246 ms
+strata trace: read 20046 tokens (batched) in 30226.3 ms
+strata trace: checkpoint at 20046: sync 0.0 ms, save 53.4 ms (1 stage(s))
+strata trace: refill start 1178 -1
+strata trace: refilled 1178 slots on 1 stage(s) in 131.7 ms
+strata verify: capturing the 6-token window (479 MiB of VRAM free)
+strata verify: captured the 6-token window (upload no error, sync no error)
+strata trace: read 6 tokens (windows) in 130.5 ms
+strata trace: prompt done (slots refilled) -1 -1
+strata trace: window 20052 1
+strata verify: capturing the 1-token window (463 MiB of VRAM free)
+strata verify: captured the 1-token window (upload no error, sync no error)
+strata trace: window 20053 4
+strata verify: capturing the 4-token window (447 MiB of VRAM free)
+strata verify: captured the 4-token window (upload no error, sync no error)
+strata trace: window 20057 4
+strata trace: window 20058 6
+strata trace: window 20064 6
+strata trace: window 20067 4
+strata trace: window 20071 4
+strata trace: window 20075 4
+strata trace: window 20079 6
+strata serve: prompt 20053 tokens = 0 reused + 20053 read in 30544 ms (656.5 tok/s), 30 generated in 730 ms (41.1 tok/s), drafts accepted 24 of 30, 2 checkpoints
+strata serve: decode expert cache hit rate: 45.6% (6033 hits / 13226 lookups); 2376 more read by the GPU over PCIe or from another GPU (15.2% of all 15602 routed)
+strata serve: route tail skip: 3255 missed experts skipped (3507 entries) since the start
+strata serve: KV streaming: 91.17% of 277284 block reads hit VRAM, 98.6 MiB read from RAM
+strata serve: suffix drafts: 3 windows, 12 of 15 drafts accepted
+strata trace: request 121776 0
+strata trace: prompt start 121775 -1
+strata trace: lent 1178 slots for 2048 tokens in 0.1 ms
+strata trace: prompt chunk 0 of 121769
+strata trace: prompt chunk 2048 of 121769
+strata trace: prompt chunk 4096 of 121769
+strata trace: prompt chunk 6144 of 121769
+strata trace: prompt chunk 8192 of 121769
+strata trace: prompt chunk 10240 of 121769
+strata trace: prompt chunk 12288 of 121769
+strata trace: prompt chunk 14336 of 121769
+strata trace: checkpoint at 16384: sync 0.0 ms, save 53.4 ms (1 stage(s))
+strata trace: prompt chunk 16384 of 121769
+strata trace: prompt chunk 18432 of 121769
+strata trace: prompt chunk 20480 of 121769
+strata trace: prompt chunk 22528 of 121769
+strata trace: prompt chunk 24576 of 121769
+strata trace: prompt chunk 26624 of 121769
+strata trace: prompt chunk 28672 of 121769
+strata trace: prompt chunk 30720 of 121769
+strata trace: checkpoint at 32768: sync 0.0 ms, save 20.6 ms (1 stage(s))
+strata trace: prompt chunk 32768 of 121769
+strata trace: prompt chunk 34816 of 121769
+strata trace: prompt chunk 36864 of 121769
+strata trace: prompt chunk 38912 of 121769
+strata trace: prompt chunk 40960 of 121769
+strata trace: prompt chunk 43008 of 121769
+strata trace: prompt chunk 45056 of 121769
+strata trace: prompt chunk 47104 of 121769
+strata trace: checkpoint at 49152: sync 0.0 ms, save 35.4 ms (1 stage(s))
+strata trace: prompt chunk 49152 of 121769
+strata trace: prompt chunk 51200 of 121769
+strata trace: prompt chunk 53248 of 121769
+strata trace: prompt chunk 55296 of 121769
+strata trace: prompt chunk 57344 of 121769
+strata trace: prompt chunk 59392 of 121769
+strata trace: prompt chunk 61440 of 121769
+strata trace: prompt chunk 63488 of 121769
+strata trace: checkpoint at 65536: sync 0.0 ms, save 21.7 ms (1 stage(s))
+strata trace: prompt chunk 65536 of 121769
+strata trace: prompt chunk 67584 of 121769
+strata trace: prompt chunk 69632 of 121769
+strata trace: prompt chunk 71680 of 121769
+strata trace: prompt chunk 73728 of 121769
+strata trace: prompt chunk 75776 of 121769
+strata trace: prompt chunk 77824 of 121769
+strata trace: prompt chunk 79872 of 121769
+strata trace: checkpoint at 81920: sync 0.0 ms, save 21.1 ms (1 stage(s))
+strata trace: prompt chunk 81920 of 121769
+strata trace: prompt chunk 83968 of 121769
+strata trace: prompt chunk 86016 of 121769
+strata trace: prompt chunk 88064 of 121769
+strata trace: prompt chunk 90112 of 121769
+strata trace: prompt chunk 92160 of 121769
+strata trace: prompt chunk 94208 of 121769
+strata trace: prompt chunk 96256 of 121769
+strata trace: checkpoint at 98304: sync 0.0 ms, save 21.1 ms (1 stage(s))
+strata trace: prompt chunk 98304 of 121769
+strata trace: prompt chunk 100352 of 121769
+strata trace: prompt chunk 102400 of 121769
+strata trace: prompt chunk 104448 of 121769
+strata trace: prompt chunk 106496 of 121769
+strata trace: prompt chunk 108544 of 121769
+strata trace: prompt chunk 110592 of 121769
+strata trace: prompt chunk 112640 of 121769
+strata trace: checkpoint at 114688: sync 0.0 ms, save 21.5 ms (1 stage(s))
+strata trace: checkpoint at 114688: 1 evicted in 0.4 ms
+strata trace: prompt chunk 114688 of 121769
+strata trace: prompt chunk 116736 of 121769
+strata trace: prompt chunk 118784 of 121769
+strata trace: prompt chunk 120832 of 121769
+strata KV prefetch: 708 layer prefixes, single existing staging pool
+strata prefill timing: 121769 tokens, GPU timeline 209477 ms, wall 209483 ms, host staging 3082 ms: embed+steps 1042 (0.5%) hc read 34853 (16.6%) gdn 13514 (6.5%) qsa proj 7910 (3.8%) qsa indexer 9 (0.0%) qsa select 30366 (14.5%) qsa attn 19454 (9.3%) router+shared 5289 (2.5%) host grouping 683 (0.3%) gather 912 (0.4%) wait copy 6820 (3.3%) dequant 16161 (7.7%) gemm gate/up 29986 (14.3%) gemm down 18957 (9.0%) combine 7514 (3.6%) ple 668 (0.3%) kv stage 3 (0.0%) gdn conv+gates 1451 (0.7%) gdn recurrence 7285 (3.5%) gdn out proj 6600 (3.2%)
+strata prefill timing: host: chunk setup (PLE rows, the expert stream plan) 28 ms, waiting for each chunk 1370 ms, after each chunk (the draft layer, progress) 413 ms, PLE 375 ms
+strata trace: read 121769 tokens (batched) in 209483.1 ms
+strata trace: checkpoint at 121769: sync 0.0 ms, save 21.2 ms (1 stage(s))
+strata trace: checkpoint at 121769: 1 evicted in 2.2 ms
+strata trace: refill start 1178 -1
+strata trace: refilled 1178 slots on 1 stage(s) in 133.9 ms
+strata trace: read 6 tokens (windows) in 83.4 ms
+strata trace: prompt done (slots refilled) -1 -1
+strata trace: window 121775 1
+strata trace: window 121776 2
+strata verify: capturing the 2-token window (429 MiB of VRAM free)
+strata verify: captured the 2-token window (upload no error, sync no error)
+strata trace: window 121778 2
+strata trace: window 121780 1
+strata trace: window 121781 1
+strata trace: window 121782 2
+strata trace: window 121784 4
+strata trace: window 121788 4
+strata trace: window 121792 2
+strata trace: window 121794 1
+strata trace: window 121795 4
+strata trace: window 121799 1
+strata trace: window 121800 2
+strata trace: window 121801 4
+strata trace: window 121805 4
+strata trace: window 121809 6
+strata trace: window 121815 6
+strata trace: window 121817 4
+strata trace: window 121821 2
+strata trace: window 121823 2
+strata trace: window 121825 4
+strata trace: window 121829 1
+strata trace: window 121830 2
+strata trace: window 121832 4
+strata trace: window 121835 1
+strata trace: window 121836 6
+strata trace: window 121842 4
+strata trace: window 121846 6
+strata serve: prompt 121776 tokens = 0 reused + 121776 read in 209733 ms (580.6 tok/s), 73 generated in 1773 ms (41.2 tok/s), drafts accepted 49 of 55, 6 checkpoints
+strata serve: decode expert cache hit rate: 55.3% (16096 hits / 29101 lookups); 4163 more read by the GPU over PCIe or from another GPU (12.5% of all 33264 routed)
+strata serve: route tail skip: 9724 missed experts skipped (10413 entries) since the start
+strata serve: KV streaming: 88.91% of 548412 block reads hit VRAM, 245.0 MiB read from RAM
+strata serve: suffix drafts: 4 windows, 16 of 20 drafts accepted
+[strata] 2026-10-18 15:25:03 engine started: /home/riccardogiorato/Desktop/github/local-ai-rtx2080/experiments/rtx2080-prefill-20261018/strata-stock --serve --pack packs/q2_0-gsq --native /home/riccardogiorato/models/flashnext-gsq-rco/Qwen3.8-Flash-Next-GSQ-RCO-Q2_0-00001-of-00002.gguf --ple-gguf /home/riccardogiorato/models/flashnext-gsq-rco/Qwen3.8-Flash-Next-GSQ-RCO-Q2_0-00002-of-00002.gguf --ple-io mmap --expert-profile data/expert-profile.bin --expert-cache auto --spec 4 --spec-min-p 0.70 --kv int8 --prefill auto:16384 --mtp mtp/rt --max-context 131072 --kv-resident 32768 --pcie-frac 0.35 --adapt-every 1 --adapt-swaps 80 --adapt-decay 0.97
+strata generate: memory guard: limit 62.6 GiB (source: meminfo), current 8.2 GiB, reclaimable cache credited 0.0 GiB; available 54.5 GiB (MemAvailable 54.5 GiB), floor 2560 MiB
+strata generate: this CPU has no AVX-512: the expert kernels run on AVX-2 (multi-token for the i-quant gate/up rows)
+strata generate: native pack: packs/q2_0-gsq experts (largest blob 1.38 MB), token embedding Q3_K in mapped host memory (260 MiB, 0.5 s)
+strata trace: 6203 MiB free after the CUDA context and the weight arena
+strata generate: 1416 MiB of weights loaded from packs/q2_0-gsq in 0.7 s (303 canonical tensors skipped: served natively)
+strata trace: 6203 MiB free after the pack weights
+strata generate: 301 native projection matrices, 1376.20 MiB of weights, in 0.9 s
+strata generate: profile data/expert-profile.bin: 24576 ranked pairs, built for 24576 slots
+strata generate: KV streaming: 32768 of 131072 cells per QSA layer in VRAM, the K/V in 1.55 GiB of pinned RAM
+strata generate: PLE on, table 320001536 rows of /home/riccardogiorato/models/flashnext-gsq-rco/Qwen3.8-Flash-Next-GSQ-RCO-Q2_0-00002-of-00002.gguf
+strata trace: 3913 MiB free after the session (KV, GDN state, PLE history)
+strata mtp: draft layer loaded, 835 MiB of VRAM (experts 675, dense 111), files read in 0.47 s (1665 MiB/s)
+strata generate: experimental native Q5_K head, 437043200 bytes, in 0.2 s
+strata trace: 2653 MiB free after the native head
+strata generate: GPU 0: NVIDIA GeForce RTX 2080, compute capability 7.5
+strata generate: expert arena read through the file cache (buffered (not Windows))
+strata generate: expert arena: cudaHostRegister PORTABLE ok; MAP_HUGETLB unavailable (needed 16201 2 MiB pages, vm.nr_hugepages=0); transparent huge pages are on for every mapping (THP always): MADV_HUGEPAGE not requested
+strata generate: loaded 31.64 GiB at 1.08 GiB/s
+strata generate: GPU host-callback thread started before host-core pinning
+strata generate: CPU pool tasks/phase: 18 (automatic), participating threads: 6
+strata generate: 5 pool workers on logical processors 1,2,3,4,5, the host thread on 0 (draining too) (--host-core first)
+strata aux cpus: threads that are neither pool workers nor the host go to CPUs none spare (every CPU is the host's, a worker's or shares a core with a worker or has no known core) (off at start; a request's aux_cpus=1 turns it on)
+strata trace: 2589 MiB free after the weights, the session and the drafter
+strata generate: expert cache auto: 2.53 GiB free, 700 MiB reserved (+73 MiB for the draft head) -> 1377 slots
+strata generate: expert cache 1377 slots, 1.77 GiB of VRAM; policy is
+strata trace: 773 MiB free after opening the expert cache
+strata generate: the GPU computes the experts in the cache; it rounds differently from the CPU,
+                 so a reply can differ slightly from a run without the cache (same quality:
+                 bench/results/2026-09-27-cache-parity).
+                 PROFILE, ranked by routing frequency, no eviction.
+strata trace: 773 MiB free after the profile fill
+strata generate: pre-filled 1377 of 1377 slots from the profile in 0.2 s (11986 MB/s); slot 0 verified
+strata trace: 773 MiB free after the R4 hit path
+strata generate: R4 hit path ON - resident experts are computed on the GPU
+strata generate: 5 expert-pool workers + the host thread
+strata trace: 773 MiB free after the expert cache and the graphs
+strata generate: session is up (engine 0.1.45)
+strata generate: token graph hit path: 1377 resident experts, decided on the device
+prefill: the CPU share is ON by default for prompt chunks below 1024 tokens (the idle CPU takes some of the experts the GPU would stream; answers can differ slightly from 0.1.40.3, mean KL ~0.004). STRATA_PREFILL_CPU_SHARE=0 turns it off.
+strata serve: prompt chunk auto: 2048 tokens, a 384-slot ring
+strata serve: the prompt path borrows 1178 CUDA0 cache slots (1.52 GiB)
+strata trace: 773 MiB free after before the prompt path init
+strata trace: 625 MiB free after the head and the prompt path
+strata hc: CUDA0: the hyper-connection read runs as staged (the norm per token and stream, the down projection's activations staged ahead by cp.async); checked bit for bit against the plain read on this card (STRATA_HC_SPLIT=1 or 0 for the earlier ones)
+strata verify: window up to 6 tokens, 55.6 MiB of device buffers
+strata mtp: draft head over 40525 tokens (68.0 MiB)
+strata trace: 493 MiB free after the verifier and the drafter's binding
+strata serve: STRATA_ROUTE_TAIL_SKIP=7 is ON: a missed expert that every token of a verify window routes at rank 7 or lower is skipped (+10..20% decode on 12-16 GB cards that miss experts, answers differ slightly from 0.1.41); STRATA_ROUTE_TAIL_SKIP=0 turns it off
+strata serve: adaptive overlap: off (STRATA_ADAPT_OVERLAP=1 turns it on)
+strata serve: 493 MiB of VRAM free with everything loaded
+strata serve: WARNING: only 493 MiB of VRAM free at the start of this request (below 512 MiB): when the card is this full the driver can page GPU memory to system RAM, decode falls to a few tok/s and a window may never finish (#2065). Add --vram-reserve-mib 768 to the config's args, or lower --max-context / --batch
+strata trace: request 1674 0
+strata trace: prompt start 1673 -1
+strata trace: lent 1105 slots for 1792 tokens in 0.1 ms
+strata trace: prompt chunk 0 of 1667
+strata KV prefetch: 0 layer prefixes, single existing staging pool
+strata prefill timing: 1667 tokens, GPU timeline 2824 ms, wall 2835 ms, host staging 43 ms: embed+steps 45 (1.6%) hc read 484 (17.1%) gdn 218 (7.7%) qsa proj 118 (4.2%) qsa indexer 0 (0.0%) qsa select 5 (0.2%) qsa attn 103 (3.7%) router+shared 79 (2.8%) host grouping 8 (0.3%) gather 12 (0.4%) wait copy 320 (11.3%) dequant 286 (10.1%) gemm gate/up 470 (16.6%) gemm down 302 (10.7%) combine 142 (5.0%) ple 10 (0.3%) kv stage 0 (0.0%) gdn conv+gates 20 (0.7%) gdn recurrence 99 (3.5%) gdn out proj 101 (3.6%)
+strata prefill timing: host: chunk setup (PLE rows, the expert stream plan) 2 ms, waiting for each chunk 24 ms, after each chunk (the draft layer, progress) 11 ms, PLE 92 ms
+strata trace: read 1667 tokens (batched) in 2835.3 ms
+strata trace: checkpoint at 1667: sync 0.0 ms, save 54.6 ms (1 stage(s))
+strata trace: refill start 1105 -1
+strata trace: refilled 1105 slots on 1 stage(s) in 125.2 ms
+strata verify: capturing the 6-token window (475 MiB of VRAM free)
+strata verify: captured the 6-token window (upload no error, sync no error)
+strata trace: read 6 tokens (windows) in 134.9 ms
+strata trace: prompt done (slots refilled) -1 -1
+strata trace: window 1673 1
+strata verify: capturing the 1-token window (459 MiB of VRAM free)
+strata verify: captured the 1-token window (upload no error, sync no error)
+strata trace: window 1674 4
+strata verify: capturing the 4-token window (443 MiB of VRAM free)
+strata verify: captured the 4-token window (upload no error, sync no error)
+strata trace: window 1678 4
+strata trace: window 1682 4
+strata trace: window 1686 4
+strata trace: window 1690 4
+strata trace: window 1692 4
+strata trace: window 1693 2
+strata verify: capturing the 2-token window (425 MiB of VRAM free)
+strata verify: captured the 2-token window (upload no error, sync no error)
+strata trace: window 1695 4
+strata trace: window 1699 4
+strata trace: window 1703 4
+strata trace: window 1707 6
+strata trace: window 1710 4
+strata trace: window 1714 4
+strata trace: window 1718 3
+strata verify: capturing the 3-token window (407 MiB of VRAM free)
+strata verify: captured the 3-token window (upload no error, sync no error)
+strata trace: window 1720 4
+strata trace: window 1724 4
+strata trace: window 1728 4
+strata trace: window 1732 4
+strata serve: prompt 1674 tokens = 0 reused + 1674 read in 3152 ms (531.1 tok/s), 63 generated in 1391 ms (45.3 tok/s), drafts accepted 44 of 53, 1 checkpoints
+strata serve: decode expert cache hit rate: 54.3% (13349 hits / 24579 lookups); 3934 more read by the GPU over PCIe or from another GPU (13.8% of all 28513 routed)
+strata serve: route tail skip: 6058 missed experts skipped (6441 entries) since the start
+strata serve: KV streaming: 98.69% of 398652 block reads hit VRAM, 21.0 MiB read from RAM
+strata serve: suffix drafts: 2 windows, 3 of 7 drafts accepted
+strata trace: request 2470 0
+strata trace: prompt start 2469 -1
+strata trace: lent 461 slots for 768 tokens in 0.1 ms
+strata trace: prompt chunk 0 of 727
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata prefill timing: 727 tokens, GPU timeline 2122 ms, wall 2129 ms, host staging 83 ms: embed+steps 0 (0.0%) hc read 280 (13.2%) gdn 128 (6.0%) qsa proj 65 (3.0%) qsa indexer 0 (0.0%) qsa select 7 (0.3%) qsa attn 106 (5.0%) router+shared 47 (2.2%) host grouping 61 (2.9%) gather 6 (0.3%) wait copy 713 (33.6%) dequant 142 (6.7%) gemm gate/up 214 (10.1%) gemm down 136 (6.4%) combine 105 (4.9%) ple 5 (0.2%) kv stage 0 (0.0%) gdn conv+gates 8 (0.4%) gdn recurrence 44 (2.1%) gdn out proj 57 (2.7%)
+strata prefill timing: host: chunk setup (PLE rows, the expert stream plan) 0 ms, waiting for each chunk 1 ms, after each chunk (the draft layer, progress) 6 ms, PLE 104 ms
+strata trace: read 727 tokens (batched) in 2129.0 ms
+strata trace: checkpoint at 2463: sync 0.0 ms, save 55.6 ms (1 stage(s))
+strata trace: refill start 461 -1
+strata trace: refilled 461 slots on 1 stage(s) in 52.0 ms
+strata trace: read 6 tokens (windows) in 75.4 ms
+strata trace: prompt done (slots refilled) -1 -1
+strata trace: window 2469 1
+strata trace: window 2470 4
+strata trace: window 2474 4
+strata trace: window 2478 1
+strata trace: window 2479 4
+strata trace: window 2483 4
+strata trace: window 2487 4
+strata trace: window 2491 4
+strata trace: window 2495 4
+strata trace: window 2496 4
+strata trace: window 2500 4
+strata trace: window 2504 4
+strata trace: window 2508 6
+strata trace: window 2511 4
+strata trace: window 2515 4
+strata trace: window 2519 4
+strata trace: window 2523 4
+strata trace: window 2527 4
+strata trace: window 2531 4
+strata trace: window 2535 4
+strata serve: prompt 2470 tokens = 1736 reused + 734 read in 2312 ms (317.4 tok/s), 70 generated in 1214 ms (57.6 tok/s), drafts accepted 50 of 56, 2 checkpoints
+strata serve: decode expert cache hit rate: 64.8% (17671 hits / 27281 lookups); 3437 more read by the GPU over PCIe or from another GPU (11.2% of all 30718 routed)
+strata serve: route tail skip: 11790 missed experts skipped (12523 entries) since the start
+strata serve: KV streaming: 99.16% of 903948 block reads hit VRAM, 30.7 MiB read from RAM
+strata serve: suffix drafts: 2 windows, 2 of 8 drafts accepted
+strata trace: request 3712 0
+strata trace: prompt start 3711 -1
+strata trace: lent 959 slots for 1280 tokens in 0.1 ms
+strata trace: prompt chunk 0 of 1166
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata prefill timing: 1166 tokens, GPU timeline 2846 ms, wall 2855 ms, host staging 126 ms: embed+steps 1 (0.0%) hc read 402 (14.1%) gdn 166 (5.8%) qsa proj 91 (3.2%) qsa indexer 0 (0.0%) qsa select 18 (0.6%) qsa attn 175 (6.2%) router+shared 62 (2.2%) host grouping 8 (0.3%) gather 9 (0.3%) wait copy 603 (21.2%) dequant 265 (9.3%) gemm gate/up 398 (14.0%) gemm down 253 (8.9%) combine 88 (3.1%) ple 7 (0.3%) kv stage 132 (4.6%) gdn conv+gates 14 (0.5%) gdn recurrence 69 (2.4%) gdn out proj 85 (3.0%)
+strata prefill timing: host: chunk setup (PLE rows, the expert stream plan) 1 ms, waiting for each chunk 21 ms, after each chunk (the draft layer, progress) 8 ms, PLE 151 ms
+strata trace: read 1166 tokens (batched) in 2854.8 ms
+strata trace: checkpoint at 3705: sync 0.0 ms, save 53.6 ms (1 stage(s))
+strata trace: refill start 959 -1
+strata trace: refilled 959 slots on 1 stage(s) in 106.5 ms
+strata trace: read 6 tokens (windows) in 79.9 ms
+strata trace: prompt done (slots refilled) -1 -1
+strata trace: window 3711 1
+strata trace: window 3712 4
+strata trace: window 3716 4
+strata trace: window 3720 4
+strata trace: window 3722 4
+strata trace: window 3726 4
+strata trace: window 3730 4
+strata trace: window 3734 4
+strata trace: window 3738 4
+strata trace: window 3742 4
+strata trace: window 3746 4
+strata trace: window 3750 4
+strata trace: window 3754 4
+strata trace: window 3756 4
+strata trace: window 3760 1
+strata trace: window 3761 4
+strata trace: window 3765 4
+strata trace: window 3769 4
+strata trace: window 3773 4
+strata trace: window 3777 4
+strata trace: window 3781 4
+strata trace: window 3785 4
+strata trace: window 3789 4
+strata trace: window 3792 4
+strata trace: window 3796 4
+strata trace: window 3800 4
+strata trace: window 3804 4
+strata trace: window 3808 4
+strata trace: window 3812 4
+strata trace: window 3816 4
+strata trace: window 3820 4
+strata trace: window 3824 4
+strata trace: window 3828 4
+strata trace: window 3832 4
+strata trace: window 3834 3
+strata trace: window 3837 4
+strata trace: window 3841 4
+strata trace: window 3845 4
+strata trace: window 3849 4
+strata trace: window 3853 4
+strata trace: window 3857 4
+strata trace: window 3859 4
+strata trace: window 3863 4
+strata trace: window 3867 4
+strata trace: window 3869 4
+strata trace: window 3873 3
+strata trace: window 3876 4
+strata trace: window 3880 4
+strata trace: window 3884 4
+strata trace: window 3888 4
+strata trace: window 3892 2
+strata trace: window 3893 4
+strata trace: window 3897 4
+strata trace: window 3901 1
+strata trace: window 3902 4
+strata trace: window 3906 4
+strata trace: window 3910 4
+strata trace: window 3913 4
+strata trace: window 3917 3
+strata trace: window 3919 4
+strata trace: window 3923 3
+strata trace: window 3926 4
+strata trace: window 3930 4
+strata trace: window 3934 4
+strata trace: window 3938 4
+strata trace: window 3942 4
+strata trace: window 3946 4
+strata trace: window 3950 6
+strata trace: window 3954 2
+strata trace: window 3956 4
+strata trace: window 3960 4
+strata trace: window 3964 4
+strata trace: window 3968 4
+strata trace: window 3972 4
+strata trace: window 3976 4
+strata trace: window 3980 4
+strata trace: window 3984 4
+strata trace: window 3988 4
+strata trace: window 3992 4
+strata trace: window 3996 4
+strata trace: window 4000 4
+strata trace: window 4004 4
+strata trace: window 4008 4
+strata trace: window 4012 4
+strata trace: window 4016 4
+strata trace: window 4020 4
+strata trace: window 4024 4
+strata trace: window 4028 4
+strata trace: window 4032 4
+strata trace: window 4034 4
+strata trace: window 4038 4
+strata trace: window 4042 4
+strata trace: window 4046 4
+strata serve: prompt 3712 tokens = 2539 reused + 1173 read in 3095 ms (379.0 tok/s), 336 generated in 6138 ms (54.7 tok/s), drafts accepted 246 of 264, 3 checkpoints
+strata serve: decode expert cache hit rate: 51.4% (61707 hits / 120145 lookups); 21230 more read by the GPU over PCIe or from another GPU (15.0% of all 141375 routed)
+strata serve: route tail skip: 40486 missed experts skipped (42825 entries) since the start
+strata serve: KV streaming: 99.61% of 3140736 block reads hit VRAM, 48.9 MiB read from RAM
+strata serve: suffix drafts: 5 windows, 11 of 17 drafts accepted
+strata trace: request 4077 0
+strata trace: prompt start 4076 -1
+strata trace: read 20 tokens (windows) in 393.9 ms
+strata trace: checkpoint at 4070: sync 0.0 ms, save 54.7 ms (1 stage(s))
+strata trace: read 6 tokens (windows) in 106.6 ms
+strata trace: prompt done (slots refilled) -1 -1
+strata trace: window 4076 1
+strata trace: window 4077 4
+strata trace: window 4081 4
+strata trace: window 4085 4
+strata trace: window 4089 4
+strata trace: window 4093 4
+strata trace: window 4097 4
+strata trace: window 4101 4
+strata serve: prompt 4077 tokens = 4050 reused + 27 read in 556 ms (48.6 tok/s), 28 generated in 531 ms (52.7 tok/s), drafts accepted 21 of 21, 4 checkpoints
+strata serve: decode expert cache hit rate: 46.9% (4524 hits / 9641 lookups); 1748 more read by the GPU over PCIe or from another GPU (15.3% of all 11389 routed)
+strata serve: route tail skip: 44847 missed experts skipped (47480 entries) since the start
+strata serve: KV streaming: 99.65% of 3479640 block reads hit VRAM, 49.6 MiB read from RAM
+strata trace: request 4445 0
+strata trace: prompt start 4444 -1
+strata trace: lent 389 slots for 512 tokens in 0.1 ms
+strata trace: prompt chunk 0 of 333
+strata KV prefetch: 12 layer prefixes, single existing staging pool
+strata prefill timing: 333 tokens, GPU timeline 1434 ms, wall 1437 ms, host staging 157 ms: embed+steps 0 (0.0%) hc read 191 (13.3%) gdn 102 (7.1%) qsa proj 45 (3.1%) qsa indexer 0 (0.0%) qsa select 6 (0.4%) qsa attn 51 (3.5%) router+shared 32 (2.3%) host grouping 17 (1.2%) gather 6 (0.4%) wait copy 558 (38.9%) dequant 103 (7.2%) gemm gate/up 121 (8.5%) gemm down 76 (5.3%) combine 62 (4.3%) ple 3 (0.2%) kv stage 0 (0.0%) gdn conv+gates 4 (0.3%) gdn recurrence 20 (1.4%) gdn out proj 37 (2.6%)
+strata prefill timing: host: chunk setup (PLE rows, the expert stream plan) 0 ms, waiting for each chunk 0 ms, after each chunk (the draft layer, progress) 3 ms, PLE 151 ms
+strata trace: read 333 tokens (batched) in 1437.4 ms
+strata trace: checkpoint at 4438: sync 0.0 ms, save 55.3 ms (1 stage(s))
+strata trace: refill start 389 -1
+strata trace: refilled 389 slots on 1 stage(s) in 43.3 ms
+strata trace: read 6 tokens (windows) in 99.4 ms
+strata trace: prompt done (slots refilled) -1 -1
+strata trace: window 4444 1
+strata trace: window 4445 4
+strata trace: window 4449 2
+strata trace: window 4451 4
+strata trace: window 4455 4
+strata trace: window 4457 4
+strata trace: window 4461 4
+strata trace: window 4465 4
+strata trace: window 4469 4
+strata trace: window 4472 4
+strata trace: window 4474 4
+strata trace: window 4478 2
+strata trace: window 4480 1
+strata trace: window 4481 4
+strata trace: window 4485 4
+strata trace: window 4489 4
+strata trace: window 4491 4
+strata trace: window 4494 4
+strata trace: window 4498 4
+strata trace: window 4502 4
+strata trace: window 4506 1
+strata trace: window 4507 4
+strata trace: window 4511 4
+strata trace: window 4515 4
+strata trace: window 4519 2
+strata trace: window 4521 4
+strata trace: window 4525 4
+strata trace: window 4526 4
+strata trace: window 4530 3
+strata trace: window 4533 3
+strata trace: window 4536 2
+strata trace: window 4538 4
+strata trace: window 4542 3
+strata trace: window 4544 4
+strata serve: prompt 4445 tokens = 4105 reused + 340 read in 1636 ms (207.8 tok/s), 101 generated in 2212 ms (45.7 tok/s), drafts accepted 70 of 82, 5 checkpoints
+strata serve: decode expert cache hit rate: 41.1% (15548 hits / 37804 lookups); 7808 more read by the GPU over PCIe or from another GPU (17.1% of all 45612 routed)
+strata serve: route tail skip: 54624 missed experts skipped (57897 entries) since the start
+strata serve: KV streaming: 99.68% of 4231380 block reads hit VRAM, 55.0 MiB read from RAM
