@@ -1,0 +1,10 @@
+19:51:09 == q3xxs b0: boot
+20:23:12    b0: short 34.25 tok/s, 4K 515, 16K 530, 32K 528 t/t, agent ttft 9.639 s, agent decode 30.55 tok/s, hit 69%
+20:23:12 waiting: CPU-heavy process running: load average 5.8
+20:25:02 == q3xxs b1: boot
+20:56:39    b1: short 35.4 tok/s, 4K 519, 16K 551, 32K 523 t/t, agent ttft 9.483 s, agent decode 31.55 tok/s, hit 69%
+20:56:39 q3xxs ranges:
+20:56:39   short: ['34.2', '35.4']
+20:56:39   32k: ['528.0', '522.8']
+20:56:39   agent_decode: ['30.6', '31.6']
+20:56:39   agent_ttft: ['9.6', '9.5']

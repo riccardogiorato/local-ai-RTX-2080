@@ -1,6 +1,33 @@
 # Qwen3.8-Flash-Next GSQ-RCO Q2_0 125B · Strata engine — the fleet-record row
 
 
+## IQ3_XXS same-engine probe: the quality tier, with a decode tax (2026-10-18)
+
+The repo's "great" tier, downloaded as the standing Q2_0 replacement candidate (shard 1 only, 43.8 GiB:
+shard 2 is byte-identical to Q2_0's and symlinked). Same v0.1.44 engine and chat knobs (0.35/80, spec-min-p
+0.70, KV int8, 128K/32K resident), two probe boots, `q3xxs-probe.py` (strata_bench --long + needle 32k/128k):
+2 boots dissent-free, needles **12/12 byte-exact**.
+
+| Phase | Q2_0 standing | IQ3_XXS | Delta |
+|---|---|---|---|
+| Short decode | 51.8-54.9 tok/s | 34.2-35.4 | **-35%** |
+| 32K prefill | 644-659 t/s | 522.8-528.0 | -19% |
+| 16K / 4K prefill | (same band range) | 530-551 / 515-519 | ~-20% |
+| Agent turn decode | 36.6-37.7 tok/s | 30.6-31.6 | -17% |
+| Agent turn TTFT | ~8.8 s | 9.5-9.6 s | +8% |
+| 128K needle fill | 476.6 t/s (0144 chat) | 295-299 | -38% |
+
+Fit is honest on 64 GB: 10-11 GiB RAM headroom during serve, VRAM 5.7/8 GiB, no cache thrash.
+Reading: the docs' -25-30% prediction holds for prefill, but decode pays ~35% because the whole
+expert pool (43.8 vs 34 GB) crosses PCIe per token; prefill amortizes reads. Retrieval quality intact.
+Status: **🧪 lab-tested (probe tier)**, adoption decision pending: chat stays Q2_0-day/coder-fast;
+IQ3_XXS is the pick when answer quality outweighs round-trip speed. Weights: `~/models/flashnext-gsq-rco-iq3xxs/`
+(shard-1 sha `219ea929…` verified vs HF; shard-2 symlink to the Q2_0 blob, sha `316b46f3…`); pack
+`strata-port/packs/iq3_xxs-gsq`; config [strata-q3xxs-gsq-0144-tailnet.json](strata-configs/strata-q3xxs-gsq-0144-tailnet.json).
+Evidence: `iq3_xxs_probe_vs_q2_0` in [evidence/strata-q20-sm75-port.jsonl](../evidence/strata-q20-sm75-port.jsonl) ·
+raw rows [benchmarks/strata-multiagent/results/q3xxs-20261018-195009](../benchmarks/strata-multiagent/results/q3xxs-20261018-195009).
+
+
 ## Local Turing scorer and SSD runtime (2026-10-18)
 
 The standing 0.1.45 config now enables the local exact-score tile

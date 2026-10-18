@@ -1,0 +1,2 @@
+{"boot": "b0", "short": 34.25, "ttft": 1.014, "4k": 515.15, "16k": 530.0, "32k": 528.05, "agent_ttft": 9.639, "agent_decode": 30.55, "agent_hit": 68.53}
+{"boot": "b1", "short": 35.4, "ttft": 0.99, "4k": 519.15, "16k": 551.05, "32k": 522.75, "agent_ttft": 9.483, "agent_decode": 31.55, "agent_hit": 68.732}
