@@ -1,5 +1,5 @@
 {
-  "exe": "/home/riccardogiorato/Desktop/github/strata-020-beta/build-turing/strata",
+  "exe": "/home/riccardogiorato/Desktop/github/strata-021/build-turing/strata",
   "args": [
     "--pack",
     "packs/q2_0-gsq",
@@ -34,12 +34,18 @@
     "--adapt-swaps",
     "80",
     "--adapt-decay",
-    "0.97"
+    "0.97",
+    "--conversation-cache-mib",
+    "8192",
+    "--conversation-cache-slots",
+    "2",
+    "--conversation-cache-min-tokens",
+    "1024"
   ],
   "cwd": "/home/riccardogiorato/Desktop/github/strata-port",
   "tokenizer": "/home/riccardogiorato/Desktop/github/strata-port/packs/q2_0-gsq/tokenizer",
   "model_name": "local-model",
-  "log": "/home/riccardogiorato/Desktop/github/strata-020-beta/chat-beta-tailnet.engine.log",
+  "log": "/home/riccardogiorato/Desktop/github/strata-021/chat-q20-gsq-021-tailnet.engine.log",
   "host": "0.0.0.0",
   "port": 8080,
   "fit_max_tokens": true,
