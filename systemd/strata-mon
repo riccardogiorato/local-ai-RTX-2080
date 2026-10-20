@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Monitor wrapper: 0.2.0 API-key gate fed from STRATA_API_KEY ('local', same as the serve).
+# Extra args pass through, e.g. strata-mon --once, strata-mon --theme dark.
+set -u
+BETA=/home/riccardogiorato/Desktop/github/strata-021
+exec env STRATA_API_KEY=local "$BETA/.venv314/bin/python" "$BETA/strata.py" monitor \
+  --url http://127.0.0.1:8080 --credential-env STRATA_API_KEY "$@"
