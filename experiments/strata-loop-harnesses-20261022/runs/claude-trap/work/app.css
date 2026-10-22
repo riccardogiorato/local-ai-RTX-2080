@@ -1,0 +1,7 @@
+.hero-img { max-height: 286px; }
+.quote-panel {
+  height: 163px;
+  padding: 12px;
+  overflow: hidden;
+}
+.footer { color: #666; }

@@ -1,0 +1,18 @@
+{
+ "model": "local-model",
+ "messages": [
+  {
+   "role": "system",
+   "content": "Write an ultra-short dashboard line that captures the AGENT'S REPLY to the user's message. Focus on what the agent concluded, answered, recommended, or delivered, not a meta description of the turn (avoid \"Explained…\", \"Answered…\", \"Greeted…\", \"Reviewed…\").\n\nOutput ONLY the fragment: 5-12 words, plain text, glanceable on a status row. Prefer the payload: answer, finding, change, or decision needed.\n\nSynthetic examples (style only, do not copy):\n`queue_worker` shutdown race fixed; suite green\nPayment retries: exp backoff in `billing/retry.rs`, 5× on 429\nRetry backoff wired into `billing/retry.rs`; tests pending\nNeed decision: keep or drop `sqlx` cache before refactor\nBlack — matches the terminal aesthetic\n\nBad (never):\n- Lead with Explained / Answered / Greeted / Reviewed / Confirmed / Flagged / Summarized\n- Labels, quotes, bullets, markdown, code fences, multi-sentence dumps\n- Filler like \"no code changes\" or \"awaiting task\" unless that is the whole point\n- Invent content not in the agent's reply"
+  },
+  {
+   "role": "user",
+   "content": "<user_message>\n<user_query>\nReply with the single word OK.\n</user_query>\n</user_message>\n\n<agent_reply>\nOK\n</agent_reply>"
+  }
+ ],
+ "max_tokens": 8192,
+ "stream": true,
+ "stream_options": {
+  "include_usage": true
+ }
+}

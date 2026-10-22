@@ -1,0 +1,145 @@
+{
+ "model": "local-model",
+ "messages": [
+  {
+   "role": "user",
+   "content": [
+    {
+     "type": "text",
+     "text": "Reply with the single word OK.",
+     "cache_control": {
+      "type": "ephemeral"
+     }
+    }
+   ]
+  }
+ ],
+ "max_tokens": 32768,
+ "stream": true,
+ "system": [
+  {
+   "type": "text",
+   "text": "You are an expert coding assistant operating inside pi, a coding agent harness. You help users by reading files, executing commands, editing code, and writing new files.\n\n<tools>\n- read: Read file contents\n- bash: Execute bash commands (ls, grep, find, etc.)\n- edit: Make precise file edits with exact text replacement, including multiple disjoint edits in one call\n- write: Create or overwrite files\n\nIn addition to the tools above, you may have access to other custom tools depending on the project.\n</tools>\n\n<rules>\n- Use bash for file operations like ls, rg, find\n- Use read to examine files instead of cat or sed.\n- You can inspect PI_* environment variables for current model and session details.\n- Use edit for precise changes (edits[].oldText must match exactly)\n- When changing multiple separate locations in one file, use one edit call with multiple entries in edits[] instead of multiple edit calls\n- Each edits[].oldText is matched against the original file, not after earlier edits are applied. Do not emit overlapping or nested edits. Merge nearby changes into one edit.\n- Keep edits[].oldText as small as possible while still being unique in the file. Do not pad with large unchanged regions.\n- Use write only for new files or complete rewrites.\n- Be concise in your responses\n- Show file paths clearly when working with files\n</rules>\n\n<docs>\nPi documentation (read only when the user asks about pi itself, its SDK, extensions, themes, skills, or TUI):\n- Main documentation: /home/riccardogiorato/.local/share/mise/installs/pi/1.3.0/pi/README.md\n- Additional docs: /home/riccardogiorato/.local/share/mise/installs/pi/1.3.0/pi/docs\n- Examples: /home/riccardogiorato/.local/share/mise/installs/pi/1.3.0/pi/examples (extensions, custom tools, SDK)\n- When reading pi docs or examples, resolve docs/... under Additional docs and examples/... under Examples, not the current working directory\n- When asked about: extensions (docs/extensions.md, examples/extensions/), themes (docs/themes.md), skills (docs/skills.md), prompt templates (docs/prompt-templates.md), TUI components (docs/tui.md), keybindings (docs/keybindings.md), SDK integrations (docs/sdk.md), custom providers (docs/custom-provider.md), adding models (docs/models.md), pi packages (docs/packages.md), environment variables (docs/environment-variables.md), MCP servers (docs/mcp.md), codemode scripts and non-LLM models such as classifiers and image models (docs/codemode.md)\n- When working on pi topics, read the docs and examples, and follow .md cross-references before implementing\n- Always read pi .md files completely and follow links to related docs (e.g., tui.md for TUI API details)\n</docs>\n\n<skills>\nThe following skills provide specialized instructions for specific tasks.\nUse the read tool to load a skill's file when the task matches its description.\nWhen a skill file references a relative path, resolve it against the skill directory (parent of SKILL.md / dirname of the path) and use that absolute path in tool commands.\n\n<available_skills>\n  <skill>\n    <name>diagnose-crash</name>\n    <description>Diagnose why a program crashed on this machine, from a systemd-coredump core dump. Use when a process has segfaulted, aborted, or otherwise dumped core, when asked why an application crashed or disappeared, or when a &quot;Process crashed:&quot; desktop notification is acted on. Triggers: crash, segfault, SIGSEGV, SIGABRT, core dump, coredumpctl, &quot;why did X crash&quot;, &quot;X keeps crashing&quot;, backtrace symbolization. Covers reporting a confirmed Omarchy bug upstream — see reporting.md.\n</description>\n    <location>/home/riccardogiorato/.pi/agent/skills/diagnose-crash/SKILL.md</location>\n  </skill>\n  <skill>\n    <name>omarchy</name>\n    <description>REQUIRED for end-user customization of Linux desktop, window manager, or system config. Use when editing ~/.config/hypr/, ~/.config/omarchy/, ~/.config/alacritty/, ~/.config/foot/, ~/.config/kitty/, or ~/.config/ghostty/. Triggers: Hyprland, window rules, animations, keybindings, monitors, gaps, borders, blur, opacity, omarchy-shell, bar, terminal config, themes, background, night light, idle, lock screen, screenshots, reminders, layer rules, workspace settings, display config, and user-facing omarchy commands. Excludes Omarchy source development through `omarchy dev link` workflows.\n</description>\n    <location>/home/riccardogiorato/.pi/agent/skills/omarchy/SKILL.md</location>\n  </skill>\n</available_skills>\n</skills>\n\n<cwd>\n/home/riccardogiorato/Desktop/github/local-ai-rtx2080/experiments/strata-loop-harnesses-20261022/runs/warm-pi/work\n</cwd>",
+   "cache_control": {
+    "type": "ephemeral"
+   }
+  }
+ ],
+ "tools": [
+  {
+   "name": "read",
+   "description": "Read the contents of a file. Supports text files and images (jpg, png, gif, webp, bmp). Images are sent as attachments. For text files, output is truncated to 2000 lines or 50KB (whichever is hit first). Use offset/limit for large files. When you need the full file, continue with offset until complete.",
+   "eager_input_streaming": true,
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "path": {
+      "type": "string",
+      "description": "Path to the file to read (relative or absolute)"
+     },
+     "offset": {
+      "type": "number",
+      "description": "Line number to start reading from (1-indexed)"
+     },
+     "limit": {
+      "type": "number",
+      "description": "Maximum number of lines to read"
+     }
+    },
+    "required": [
+     "path"
+    ]
+   }
+  },
+  {
+   "name": "bash",
+   "description": "Execute a bash command in the current working directory. Returns stdout and stderr. Output is truncated to last 2000 lines or 50KB (whichever is hit first). If truncated, full output is saved to a temp file. Optionally provide a timeout in seconds.",
+   "eager_input_streaming": true,
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "command": {
+      "type": "string",
+      "description": "Shell command to execute"
+     },
+     "timeout": {
+      "type": "number",
+      "description": "Timeout in seconds (optional, no default timeout)"
+     }
+    },
+    "required": [
+     "command"
+    ]
+   }
+  },
+  {
+   "name": "edit",
+   "description": "Edit a single file using exact text replacement. Every edits[].oldText must match a unique, non-overlapping region of the original file. If two changes affect the same block or nearby lines, merge them into one edit instead of emitting overlapping edits. Do not include large unchanged regions just to connect distant changes.",
+   "eager_input_streaming": true,
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "path": {
+      "type": "string",
+      "description": "Path to the file to edit (relative or absolute)"
+     },
+     "edits": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "required": [
+        "oldText",
+        "newText"
+       ],
+       "properties": {
+        "oldText": {
+         "type": "string",
+         "description": "Exact text for one targeted replacement. It must be unique in the original file and must not overlap with any other edits[].oldText in the same call."
+        },
+        "newText": {
+         "type": "string",
+         "description": "Replacement text for this targeted edit."
+        }
+       }
+      },
+      "description": "One or more targeted replacements. Each edit is matched against the original file, not incrementally. Do not include overlapping or nested edits. If two changes touch the same block or nearby lines, merge them into one edit instead."
+     }
+    },
+    "required": [
+     "path",
+     "edits"
+    ]
+   }
+  },
+  {
+   "name": "write",
+   "description": "Write content to a file. Creates the file if it doesn't exist, overwrites if it does. Automatically creates parent directories.",
+   "eager_input_streaming": true,
+   "input_schema": {
+    "type": "object",
+    "properties": {
+     "path": {
+      "type": "string",
+      "description": "Path to the file to write (relative or absolute)"
+     },
+     "content": {
+      "type": "string",
+      "description": "Content to write to the file"
+     }
+    },
+    "required": [
+     "path",
+     "content"
+    ]
+   },
+   "cache_control": {
+    "type": "ephemeral"
+   }
+  }
+ ],
+ "thinking": {
+  "type": "enabled",
+  "budget_tokens": 4096,
+  "display": "summarized"
+ }
+}

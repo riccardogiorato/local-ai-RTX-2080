@@ -1,0 +1,8 @@
+:root { --hero-height: 285px; }
+.hero-img { max-height: var(--hero-height); }
+.quote-panel {
+  height: var(--hero-height);
+  padding: 12px;
+  overflow: hidden;
+}
+.footer { color: #666; }

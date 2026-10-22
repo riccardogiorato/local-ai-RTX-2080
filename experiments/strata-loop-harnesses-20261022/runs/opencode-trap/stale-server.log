@@ -1,0 +1,7 @@
+127.0.0.1 - - [22/Oct/2026 18:25:22] "GET /assets/app.css?v=1 HTTP/1.1" 200 -
+127.0.0.1 - - [22/Oct/2026 18:25:22] "GET /assets/app.css?v=1 HTTP/1.1" 200 -
+127.0.0.1 - - [22/Oct/2026 18:27:00] "GET /assets/app.css?v=1 HTTP/1.1" 200 -
+127.0.0.1 - - [22/Oct/2026 18:30:20] code 404, message File not found
+127.0.0.1 - - [22/Oct/2026 18:30:20] "GET /hero.png HTTP/1.1" 404 -
+127.0.0.1 - - [22/Oct/2026 18:30:20] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [22/Oct/2026 18:31:10] "GET /assets/app.css?v=1 HTTP/1.1" 200 -

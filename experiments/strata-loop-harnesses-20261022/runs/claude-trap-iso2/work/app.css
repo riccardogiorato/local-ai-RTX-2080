@@ -1,0 +1,10 @@
+/* The quote panel must be exactly as tall as the hero image.
+   Keep both values in sync: 285px. */
+.hero-img { max-height: 285px; }
+.quote-panel {
+  box-sizing: border-box;
+  height: 285px;
+  padding: 12px;
+  overflow: hidden;
+}
+.footer { color: #666; }
