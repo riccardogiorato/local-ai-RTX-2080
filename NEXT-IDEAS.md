@@ -182,6 +182,23 @@ Verdicts inline below; evidence
 
 ## Tier 3 — backlog (run when lanes free up)
 
+**Intake 2026-10-22 (cross-harness study): upstream Strata report — constrained decoding for
+tool calls (the missing #3441 item 3) blocks Swift x Codex.** Swift 1.5 IQ2_XS on the
+Responses wire passes 9/11 AG-Bench (n=1); the failures share one signature: the model emits
+`<function=apply_patch>` as an OpenAI-legacy text call, which (a) is not a tool codex declares
+(it is an exec_command shell idiom), so Strata 0.2.2's declared-tool repair (#3441) has nothing
+to bind to, and (b) codex treats the resulting text-only turn as the final answer and exits
+rc=0 in ~25 s with zero file changes. Frequency profile (clean re-runs, no task modifications):
+task6 fails deterministically (0/2, identical 24 s collapse), task10 is stochastic (1/2 — the
+pass run patched properly through exec_command): a 10/11 ceiling with a convention-drift risk.
+Strata's release notes list "constrained decoding for calls (item 3 of #3441)" as not done —
+decode-time enforcement of declared-tool calls is exactly what would prevent/regenerate the
+malformed attempt. Filing to upstream with the failing transcripts as the reproducer
+(`experiments/strata-codex-agbench-20261022/runs/task6*/codex.out`, task10). Not worked around
+harness-side: an AGENTS.md helper note would unbalance the harness comparison (pi/claude got no
+such help). Every task where Swift patched through exec_command passed — and 7 of 9 passing
+tasks beat both pi's and claude's per-task walls, so the pairing is worth unlocking upstream.
+
 **Intake 2026-10-07 (owner tip, HF):**
 
 - **EmbeddingGemma-2 (GGUF 176–310 MB, Apache-2.0)**:

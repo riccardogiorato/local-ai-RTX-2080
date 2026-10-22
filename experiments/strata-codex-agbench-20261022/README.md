@@ -97,3 +97,14 @@ apply_patch defect is fixable harness-side (a shell wrapper that greps the final
 or a system-prompt line teaching Swift the correct channel). Worth fixing: at fixed wall
 1273 s and the leanest envelope-to-speed ratio measured today, a defect-free codex would
 rank **#2 on the card behind pi** and #1 on per-task speed. pi remains the reference client.
+
+## Post-verdict clean reruns (2026-10-22, no task modifications)
+
+- **task10 n=2: PASS in 160 s** (proper exec_command patching, ALL OK) — the overnight failure
+  was stochastic. Frequency profile of the apply_patch defect: task6 deterministic (0/2,
+  identical 24 s collapse), task10 intermittent (1/2). Ceiling: **10/11 with convention-drift
+  risk**; the 9/11 n=1 row stands as the honest single-run number per lab convention.
+- The AGENTS.md harness-side mitigation idea (owner vetoed: it would unbalance the cross-harness
+  comparison) was recorded instead as an upstream Strata report item in NEXT-IDEAS.md Tier 3:
+  their release notes list "constrained decoding for calls (item 3 of #3441)" as not done —
+  exactly the mechanism that would prevent/regenerate the malformed legacy call.

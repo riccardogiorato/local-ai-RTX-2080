@@ -1,38 +1,11 @@
-The `BUS-30g01` typo substitutes a letter for a digit (not an insertion), so my digit-stripping dropped it. Fixing the matcher to treat letters as wildcard digits.
+Done — `data/output.json` holds the 9 North West Capital transactions, sorted by Date, and `bash verify.sh` prints **ALL OK**.
 
-<tool_call>
-<function=apply_patch>
-<parameter=command>
-apply_patch <<'PATCH'
-*** Begin Patch
-*** Update File: /tmp/agbench-codex-task10-tb-bank-trans-filter-1677749/work/generate_output.py
-@@
- def account_family(account):
--    return account[:4], re.sub(r"[^0-9]", "", account[4:])
-+    return account[:4], account[4:]
-@@
- CANONICAL_PREFIX, CANONICAL_DIGITS = account_family(CANONICAL_ACCOUNT)
-+
-+
-+def account_score(digits):
-+    """Mismatches vs the canonical digits; letters in the account are wildcards
-+    because typos replace a digit with a letter (e.g. BUS-30g01).
-+    """
-+    return sum(
-+        1
-+        for canon, char in zip(CANONICAL_DIGITS, digits)
-+        if char.isdigit() and char != canon
-+    )
-@@
-     prefix, digits = account_family(row["Account Number"])
-     acct_ok = (
-         prefix == CANONICAL_PREFIX
-         and len(digits) == len(CANONICAL_DIGITS)
--        and edit_distance(digits, CANONICAL_DIGITS) <= 3
-         and digits[0] == CANONICAL_DIGITS[0]
-+        and account_score(digits) <= 3
-     )
-PATCH
-</parameter>
-</function>
-</tool_call>
+**Approach**
+- Name signal: typo-tolerant token match against `North West Capital Group Incorporated` (identity tokens `north west capital group` + suffix `incorporated`), plus the abbreviation form matched on the acronym token `NWCG` → catches `North West Capital Group Incoporated` and `NWCG Inc. Pty. Ltd.`.
+- Account signal: canonical account is the mode of the seed accounts (`BUS-30001`); rows within edit distance 2 are kept → catches `BUS-30g01` and `BUS-35001`.
+- Union of the two signals yields 9 rows: `BUS-30999` sits at edit distance 3 from the canonical account, so it is retained by its typo'd name, per the "same name **or** same account" rule. No unrelated company (e.g. `Momentum Capital`, `Northern Light Energy`) is captured by either rule.
+
+**Files**
+- `data/output.json` — answer, exact keys, exact CSV string values, ascending `Date`.
+- `filter_transactions.py` — reproducible filter (Levenshtein helper, name/account thresholds); re-running it regenerates the same output.
+- `data/bank_transactions.csv` and `tests/test_outputs.py` untouched.

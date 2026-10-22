@@ -49,6 +49,19 @@ run_task() {
   rm -rf "$ROOT"; mkdir -p "$ROOT/work"
   rsync -a --exclude node_modules --exclude package-lock.json \
         --exclude .build --exclude "service*.rc" "$task_dir/" "$ROOT/work/"
+  # MITIGATE=1: harness-side fix candidate for the apply_patch-as-text defect (Swift emits
+  # OpenAI-legacy text calls; codex's Responses wire only parses declared tools). Codex
+  # injects an AGENTS.md from the repo root into its instructions.
+  if [ "${MITIGATE:-0}" = "1" ]; then
+    cat > "$ROOT/work/AGENTS.md" <<'EOF'
+# Tool-calling note (harness-mitigation experiment 2026-10-22)
+
+`apply_patch` is NOT a separate tool in this environment. To edit files, use the
+shell tool (exec_command): write files with shell commands, or run apply_patch as
+a shell command inside the shell tool. Never emit `<function=apply_patch>` blocks
+or any other `<function=NAME>` markup - it is not parsed and nothing will execute.
+EOF
+  fi
   if [ -f "$task_dir/service.rc" ]; then ( . "$task_dir/service.rc" ) || echo "WARN: service.rc failed"; fi
   if [ -f "$task_dir/service-cleanup.rc" ]; then ( . "$task_dir/service-cleanup.rc" ) || true; fi
   curl -s "$PROXY/_label" -d "{\"harness\":\"codex-$task_name\"}" >/dev/null
