@@ -1,5 +1,5 @@
 {
-  "exe": "/home/riccardogiorato/Desktop/github/strata-021/build-turing/strata",
+  "exe": "/home/riccardogiorato/Desktop/github/strata-021/build-turing-pr3281/strata",
   "args": [
     "--pack",
     "packs/q2_0-gsq",
@@ -40,7 +40,8 @@
     "--conversation-cache-slots",
     "2",
     "--conversation-cache-min-tokens",
-    "1024"
+    "1024",
+    "--vram-elastic"
   ],
   "cwd": "/home/riccardogiorato/Desktop/github/strata-port",
   "tokenizer": "/home/riccardogiorato/Desktop/github/strata-port/packs/q2_0-gsq/tokenizer",
@@ -53,6 +54,20 @@
     "STRATA_KV_PREFETCH": "1",
     "STRATA_ROUTE_TAIL_SKIP": "7",
     "STRATA_SCORES_TURING": "2",
-    "STRATA_SM75_PERF": "1"
+    "STRATA_SM75_PERF": "1",
+    "STRATA_PREFILL_ELASTIC_LOAN": "1",
+    "STRATA_PREFILL_MTP_LOAN": "1",
+    "STRATA_PREFILL_HEAD_LOAN": "1",
+    "STRATA_PREFILL_RETAIN_STARTUP_CHUNK": "1",
+    "STRATA_PREFILL_REPEAT_LOAN": "1",
+    "STRATA_PREFILL_REPEAT_MIN_TOKENS": "8192"
+  },
+  "vision": {
+    "exe": "/home/riccardogiorato/Desktop/github/strata-021/build-vision-cpu/bin/strata-vision",
+    "mmproj": "/home/riccardogiorato/models/flashnext-coder/mmproj-Qwen3.8-Flash-Next-BF16.gguf",
+    "model": "/home/riccardogiorato/models/flashnext-gsq-rco/Qwen3.8-Flash-Next-GSQ-RCO-Q2_0-00001-of-00002.gguf",
+    "gpu": false,
+    "max_tokens": 768,
+    "threads": 3
   }
 }

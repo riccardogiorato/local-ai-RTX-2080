@@ -1,20 +1,20 @@
 [Unit]
 StartLimitIntervalSec=300
 StartLimitBurst=5
-Description=Strata 0.2.1 serve: Q2_0 125B, tailnet bind (127.0.0.1 + 100.110.49.114), key local
+Description=Strata 0.2.2 serve: Swift 1.5 Flash-Next IQ2_XS 125B, tailnet bind (127.0.0.1 + 100.110.49.114), key local
 # starts at boot via lingering, after rtx2080-power-limit.service has applied 165 W (wait enforced in ExecStartPre)
 After=network-online.target
 Wants=network-online.target
 
 [Service]
 Type=simple
-WorkingDirectory=/home/riccardogiorato/Desktop/github/strata-021
+WorkingDirectory=/home/riccardogiorato/Desktop/github/strata-022
 Environment=STRATA_API_KEY=local
 # never stack on a manually-started serve: if 8080 is already taken this unit exits and leaves it alone
 ExecStartPre=/usr/bin/bash -c 'ss -tln | grep -q ":8080 " && { echo "port 8080 busy: another serve is already running"; exit 1; } || true'
 # wait for the 165 W boot limit (same outcome as ordering after the system unit, across the user/system boundary)
 ExecStartPre=/home/riccardogiorato/.local/bin/strata-power-limit-wait
-ExecStart=/home/riccardogiorato/Desktop/github/strata-021/.venv314/bin/python strata.py serve --config /home/riccardogiorato/Desktop/github/local-ai-rtx2080/recipes/strata-configs/strata-q20-gsq-021-tailnet.json
+ExecStart=/home/riccardogiorato/Desktop/github/strata-022/.venv314/bin/python strata.py serve --config /home/riccardogiorato/Desktop/github/local-ai-rtx2080/recipes/strata-configs/strata-swift15-iq2xs-gsq-022-tailnet.json
 Restart=on-failure
 RestartSec=15
 
