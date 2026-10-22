@@ -1,2 +1,3 @@
 benchmarks/cpu/avx2-burn
 __pycache__/
+experiments/*/private/

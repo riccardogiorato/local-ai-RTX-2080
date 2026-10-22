@@ -1,0 +1,11 @@
+{"model": "strata-021-iq3s-r0", "task": "task10-tb-bank-trans-filter", "passed": true, "wall_s": 252, "suspect_garbage_pass": false, "tool_calls": 56, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-021-iq3s-r0", "task": "task11-tb-assign-seats", "passed": true, "wall_s": 101, "suspect_garbage_pass": false, "tool_calls": 28, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-021-iq3s-r0", "task": "task1-js-bugfix", "passed": true, "wall_s": 80, "suspect_garbage_pass": false, "tool_calls": 32, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-021-iq3s-r0", "task": "task2-react-fix", "passed": true, "wall_s": 97, "suspect_garbage_pass": false, "tool_calls": 25, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-021-iq3s-r0", "task": "task3-dep-upgrade", "passed": true, "wall_s": 254, "suspect_garbage_pass": false, "tool_calls": 85, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-021-iq3s-r0", "task": "task4-python-bugfix", "passed": true, "wall_s": 47, "suspect_garbage_pass": false, "tool_calls": 20, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-021-iq3s-r0", "task": "task5-js-to-ts", "passed": true, "wall_s": 76, "suspect_garbage_pass": false, "tool_calls": 25, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-021-iq3s-r0", "task": "task6-extra-code-task", "passed": true, "wall_s": 125, "suspect_garbage_pass": false, "tool_calls": 33, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-021-iq3s-r0", "task": "task7-long-context-agent", "passed": true, "wall_s": 92, "suspect_garbage_pass": false, "tool_calls": 44, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-021-iq3s-r0", "task": "task8-tb-broken-python", "passed": true, "wall_s": 652, "suspect_garbage_pass": false, "tool_calls": 198, "finish": "unknown", "zero_byte_retry": false}
+{"model": "strata-021-iq3s-r0", "task": "task9-tb-analyze-access-logs", "passed": true, "wall_s": 101, "suspect_garbage_pass": false, "tool_calls": 32, "finish": "unknown", "zero_byte_retry": false}

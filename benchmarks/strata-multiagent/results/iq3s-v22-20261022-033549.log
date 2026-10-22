@@ -1,0 +1,5 @@
+03:35:50 production stopped: True
+03:35:50 == v22 r0: boot (over={})
+04:02:00    r0: 10/11 in 1498 s (suspect 0)
+04:02:00       FAIL task3-dep-upgrade 12 s
+04:02:00 production restarted

@@ -1,0 +1,4 @@
+04:02:30 production stopped: True
+04:02:30 == v22 r0: boot (over={})
+04:34:54    r0: 11/11 in 1877 s (suspect 0)
+04:34:54 production restarted

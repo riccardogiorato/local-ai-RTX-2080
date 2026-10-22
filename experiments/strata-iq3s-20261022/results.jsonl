@@ -1,0 +1,7 @@
+{"event": "ready", "label": "iq3s", "load_s": 52.03057986299973, "health": {"status": "ok", "max_context": 131072, "model": "local-model", "images": false, "api_key": false, "image_generation": false, "loaded": true, "service": "strata"}, "at": 1792636554.2422693}
+{"event": "loop_probe", "label": "iq3s-stale-baseline", "passed": false, "unnecessaryEdits": 1, "steps": 5, "wall_s": 40.75220135800191, "at": 1792636594.995534}
+{"event": "loop_probe", "label": "iq3s-stale-guard", "passed": false, "unnecessaryEdits": 1, "steps": 6, "wall_s": 41.40491201799887, "at": 1792636636.400884}
+{"event": "loop_probe", "label": "iq3s-verified-baseline", "passed": true, "unnecessaryEdits": 0, "steps": 3, "wall_s": 18.6328476100025, "at": 1792636655.0340652}
+{"event": "loop_probe", "label": "iq3s-verified-guard", "passed": true, "unnecessaryEdits": 0, "steps": 2, "wall_s": 10.912267581006745, "at": 1792636665.9466076}
+{"event": "summary_probe", "label": "iq3s", "wall_s": 125.85496555401187, "chars": 1441, "words": 187, "stop_reason": "max_tokens", "complete": false, "usage": {"input_tokens": 31312, "output_tokens": 2048, "cache_read_input_tokens": 0}, "at": 1792636791.8169968}
+{"event": "restored", "active": true, "at": 1792636794.9639359}

@@ -1,0 +1,7 @@
+[02:52:37] production stopped: True; port check: 0
+[02:52:37] == iq3s boot1: boot (mem available 0.1 GiB, over={})
+[03:12:50]    boot1: load 54s, short 31.05 tok/s, 4K 460, 16K 546, 32K 545 t/t, agent ttft 12.051 s, agent decode 31.15 tok/s, hit 69%
+[03:12:50] == iq3s boot2: boot (mem available 0.1 GiB, over={})
+[03:33:27]    boot2: load 51s, short 31.8 tok/s, 4K 455, 16K 542, 32K 541 t/t, agent ttft 12.63 s, agent decode 32.5 tok/s, hit 69%
+[03:33:27] wrote 2 rows to /home/riccardogiorato/Desktop/github/local-ai-rtx2080/benchmarks/strata-multiagent/results/iq3s-20261022-02141/probe-rows.json
+[03:33:27] production restarted
