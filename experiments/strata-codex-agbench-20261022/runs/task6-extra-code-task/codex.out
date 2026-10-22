@@ -1,0 +1,9 @@
+Tests define the contract clearly. Rewriting the index math in `lib/paginate.js`.
+
+<tool_call>
+<function=apply_patch>
+<parameter=cmd>
+apply_patch
+</parameter>
+</function>
+</tool_call>

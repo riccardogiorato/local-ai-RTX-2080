@@ -1,0 +1,6 @@
+`verify.sh` reports ALL OK, and `access_log` is untouched (same size/mtime, read-only access).
+
+**Results**
+- `report.txt` — 2000 total requests, 273 unique IPs, `Top 3 URLs:` listing `/order-confirmation: 54`, `/product/456: 53`, `/about.html: 52`, and `404 errors: 83`.
+- `analyze.py` — parses each line with a strict combined-format regex (2000/2000 matched, zero malformed lines ignored), counts the request-target inside the quoted request field, and writes the report.
+- Top-3 tie handling: sorted by count desc, then URL asc — the cutoff is unambiguous here (52 vs next 51), so the top 3 is unique.

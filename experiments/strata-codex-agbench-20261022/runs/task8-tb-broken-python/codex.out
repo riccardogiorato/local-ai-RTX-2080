@@ -1,0 +1,20 @@
+Repaired — `bash verify.sh` prints `ALL OK`, and the venv's interpreter path is unchanged.
+
+**Diagnosis**
+- The venv payload was intact: `python -m pip --version` and offline install worked, `pip/_vendor` complete.
+- `protected/venv/bin/pip` and `protected/venv/bin/pip3:2` exec'd a dead absolute path (`/tmp/agentic-run/…/venv/bin/python3`) → exit 127.
+- `protected/venv/bin/pip3.14` exec'd the venv from the original build machine, so it silently installed into a *foreign* site-packages.
+- `activate`, `activate.csh`, `activate.fish` exported `VIRTUAL_ENV` of that foreign path, so sourcing them hijacked `PATH`, `python`, and `pip`.
+- `pyvenv.cfg` declared `version = 3.14.7` while the interpreter is 3.14.8, and `command` recorded the foreign path.
+
+**Fixes (in place, same interpreter)**
+- `protected/venv/bin/pip`, `pip3`, `pip3.14`: the `'''exec'''` line now resolves the script's own directory — `'''exec' "$(dirname "$(readlink -f "$0")")/python3" "$0" "$@"` — so the entry points bind to their own venv and survive relocation.
+- `protected/venv/bin/activate:44` derives `VIRTUAL_ENV` from `${BASH_SOURCE[0]}` (bash + cygwin branch); `protected/venv/bin/activate.csh:12` and `protected/venv/bin/activate.fish:36` point at the current venv.
+- `protected/venv/pyvenv.cfg` now records `version = 3.14.8` and the real `command` path, with `home = /usr/bin` preserved (I briefly dropped it and restored it; `sys.base_prefix` resolves correctly).
+- Untouched: `wheels/`, `tests/`, the venv layout and `protected/venv/bin/python`.
+
+**Verified**
+- `bash verify.sh` → `ok pip_version`, `ok pip_install`, `ok import_six`, `ALL OK`.
+- `protected/venv/bin/pip --version` reports *this* venv; `pip install --no-index --find-links wheels six` works via `bin/pip`, `bin/pip3`, `bin/pip3.14`.
+- Clean `uninstall` + re-`install` of `six` succeeds, `import six` → `1.17.0`, `pip check` clean.
+- Sourcing `activate` from any cwd puts the correct venv on `PATH`; a copied venv at `/tmp/reloc-test2` activated and ran `pip` correctly (then removed).

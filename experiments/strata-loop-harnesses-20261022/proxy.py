@@ -54,7 +54,9 @@ def ntok(text):
 
 
 def extract_system(payload):
-    """Return the system-instruction text for either API shape."""
+    """Return the system-instruction text for any of the three API shapes:
+    anthropic 'system', OpenAI messages[role=system], Responses input
+    items with role 'developer' (where codex puts its preamble + skills)."""
     parts = []
     sysv = payload.get('system')
     if isinstance(sysv, str):
@@ -68,6 +70,16 @@ def extract_system(payload):
                 parts.append(c)
             elif isinstance(c, list):
                 parts.extend(seg.get('text', '') for seg in c if isinstance(seg, dict))
+    for item in payload.get('input') or []:
+        if not isinstance(item, dict):
+            continue
+        if item.get('role') in ('developer', 'system'):
+            c = item.get('content')
+            if isinstance(c, str):
+                parts.append(c)
+            elif isinstance(c, list):
+                parts.extend(seg.get('text', '') for seg in c
+                             if isinstance(seg, dict) and seg.get('type') in ('input_text', 'text'))
     return '\n'.join(parts)
 
 
@@ -92,6 +104,21 @@ def harvest_sse(chunks, route):
             for ch in obj.get('choices', []):
                 if ch.get('finish_reason'):
                     stop = ch['finish_reason']
+        elif route.endswith('/responses'):
+            # OpenAI Responses SSE: response.created carries input usage,
+            # response.completed the full usage object
+            t = obj.get('type', '')
+            if t in ('response.created', 'response.completed', 'response.done', 'response.failed'):
+                resp = obj.get('response') or {}
+                u = resp.get('usage')
+                if u:
+                    if t == 'response.created':
+                        usage = usage or u
+                    else:
+                        usage = dict(u)
+                        stop = resp.get('status') or stop
+            elif obj.get('usage'):
+                usage = obj['usage']
         else:  # anthropic SSE
             if obj.get('type') == 'message_start':
                 usage = obj.get('message', {}).get('usage') or usage
@@ -240,11 +267,14 @@ class Handler(http.server.BaseHTTPRequestHandler):
         tools = payload.get('tools') or []
         prompt = usage.get('prompt_tokens') or usage.get('input_tokens')
         cached = ((usage.get('prompt_tokens_details') or {}).get('cached_tokens')
-                  or usage.get('cache_read_input_tokens'))
+                  or usage.get('cache_read_input_tokens')
+                  or (usage.get('input_tokens_details') or {}).get('cached_tokens'))
         creation = usage.get('cache_creation_input_tokens')
-        # anthropic: input_tokens counts only uncached; total context = input + creation + read
-        if usage.get('input_tokens') is not None and prompt is not None and cached is not None:
-            effective = prompt + (creation or 0) + cached
+        # anthropic splits context across input/creation/read; OpenAI shapes
+        # (chat + responses) already include cached in prompt/input_tokens
+        if (usage.get('cache_read_input_tokens') is not None
+                or usage.get('cache_creation_input_tokens') is not None):
+            effective = (prompt or 0) + (creation or 0) + (cached or 0)
         else:
             effective = prompt
         row = {
@@ -256,7 +286,8 @@ class Handler(http.server.BaseHTTPRequestHandler):
             'effective_prompt_tokens': effective,
             'output_tokens': usage.get('output_tokens') or usage.get('completion_tokens'),
             'stop_reason': stop, 'wall_s': round(wall, 2),
-            'n_messages': len(msgs), 'n_roles': [m.get('role') for m in msgs][:4],
+            'n_messages': len(msgs) or len(payload.get('input') or []),
+            'n_roles': [m.get('role') for m in msgs][:4],
             'n_tools': len(tools), 'tool_names': [t.get('name', '?') for t in tools][:24],
             'system_chars': len(system_text), 'system_tokens': ntok(system_text) if system_text else 0,
             'max_tokens': payload.get('max_tokens') or payload.get('max_completion_tokens'),

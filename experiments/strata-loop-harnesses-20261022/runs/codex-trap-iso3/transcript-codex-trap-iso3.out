@@ -1,0 +1,14 @@
+There's a leftover harness dir from an earlier run. Inspecting it for the hero image's natural size.
+
+<tool_call>
+<function=exec_measure>
+<parameter=cmd>
+cd /tmp/measure && cat probe.html && echo "===== serve.log =====" && cat serve.log && echo "===== index.html =====" && head -12 index.html && echo "===== assets =====" && ls -la assets && cat assets/app.css 2>/dev/null | head -20 && python3 -c "
+import struct, zlib
+d=open('hero.png','rb').read()
+w,h=struct.unpack('>II', d[16:24]); print('hero.png natural:', w, 'x', h)
+w,h=struct.unpack('>II', open('hero285.png','rb').read()[16:24]); print('hero285:', w,'x',h)
+"
+</parameter>
+</function>
+</tool_call>

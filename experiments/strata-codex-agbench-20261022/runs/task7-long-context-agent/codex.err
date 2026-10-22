@@ -1,0 +1,328 @@
+Reading additional input from stdin...
+OpenAI Codex v0.163.0
+--------
+workdir: /tmp/agbench-codex-task7-long-context-agent-1677749/work
+model: strata
+provider: strata
+approval: never
+sandbox: danger-full-access
+reasoning effort: none
+reasoning summaries: none
+session id: 01a16536-9573-7213-bc49-9e03bf8015d3
+--------
+user
+# Task: make the gateway spec-compliant
+
+The `src/gateway.js` module violates the project's documented API contract.
+The authoritative specification lives somewhere in `docs/` — a series of
+architecture decision records (ADRs). Somewhere in those ADRs the exact
+required header names and the exhaustion behavior are specified (mind the
+ADR series' internal supersession notes — later decisions may override
+earlier ones).
+
+Rules:
+- You may only edit `src/gateway.js`. Do not modify tests or docs.
+- All tests must pass.
+
+Verify: `bash verify.sh`.
+warning: Model metadata for `strata` not found. Defaulting to fallback metadata; this can degrade performance and cause issues.
+codex
+I'll start by exploring the repo structure, then read the ADRs and the gateway implementation.
+exec
+/usr/bin/bash -lc 'ls -la && echo "---" && find . -type f -not -path "./node_modules/*" -not -path "./.git/*" | head -100' in /tmp/agbench-codex-task7-long-context-agent-1677749/work
+ succeeded in 0ms:
+total 8
+drwxr-xr-x 5 riccardogiorato riccardogiorato 140 Sep 27 22:59 .
+drwxr-xr-x 3 riccardogiorato riccardogiorato 100 Oct 22 22:03 ..
+-rw-r--r-- 1 riccardogiorato riccardogiorato 551 Sep 27 22:59 TASK.md
+drwxr-xr-x 2 riccardogiorato riccardogiorato 660 Sep 27 22:59 docs
+drwxr-xr-x 2 riccardogiorato riccardogiorato  60 Sep 27 22:59 src
+drwxr-xr-x 2 riccardogiorato riccardogiorato  60 Sep 27 22:59 test
+-rwxr-xr-x 1 riccardogiorato riccardogiorato  74 Sep 27 22:59 verify.sh
+---
+./verify.sh
+./TASK.md
+./test/gateway.test.js
+./src/gateway.js
+./docs/ADR-0031.md
+./docs/ADR-0030.md
+./docs/ADR-0029.md
+./docs/ADR-0028.md
+./docs/ADR-0027.md
+./docs/ADR-0026.md
+./docs/ADR-0025.md
+./docs/ADR-0024.md
+./docs/ADR-0023.md
+./docs/ADR-0022.md
+./docs/ADR-0021.md
+./docs/ADR-0020.md
+./docs/ADR-0019.md
+./docs/ADR-0018.md
+./docs/ADR-0017.md
+./docs/ADR-0016.md
+./docs/ADR-0015.md
+./docs/ADR-0014.md
+./docs/ADR-0013.md
+./docs/ADR-0012.md
+./docs/ADR-0011.md
+./docs/ADR-0010.md
+./docs/ADR-0009.md
+./docs/ADR-0008.md
+./docs/ADR-0007.md
+./docs/ADR-0006.md
+./docs/ADR-0005.md
+./docs/ADR-0004.md
+./docs/ADR-0003.md
+./docs/ADR-0002.md
+./docs/ADR-0001.md
+
+exec
+/usr/bin/bash -lc 'cat TASK.md verify.sh src/gateway.js test/gateway.test.js' in /tmp/agbench-codex-task7-long-context-agent-1677749/work
+ succeeded in 0ms:
+# Task: make the gateway spec-compliant
+
+The `src/gateway.js` module violates the project's documented API contract.
+The authoritative specification lives somewhere in `docs/` — a series of
+architecture decision records (ADRs). Somewhere in those ADRs the exact
+required header names and the exhaustion behavior are specified (mind the
+ADR series' internal supersession notes — later decisions may override
+earlier ones).
+
+Rules:
+- You may only edit `src/gateway.js`. Do not modify tests or docs.
+- All tests must pass.
+
+Verify: `bash verify.sh`.
+#!/usr/bin/env bash
+set -e
+cd "$(dirname "$0")"
+node test/gateway.test.js
+// Simple quota gateway. BUG: missing required headers per the project docs.
+function respond(status, quotaRemaining) {
+    const headers = {};
+    if (quotaRemaining <= 0) {
+        headers['RateLimit'] = String(quotaRemaining); // wrong name, missing Retry-After
+    } else {
+        headers['rate-limit'] = String(quotaRemaining); // wrong case
+    }
+    return { status, headers };
+}
+module.exports = { respond };
+const { respond } = require('../src/gateway.js');
+const assert = require('assert');
+assert.strictEqual(respond(200, 42).headers['X-Rate-Limit'], '42', 'normal path: X-Rate-Limit as decimal string');
+const limited = respond(429, 0);
+assert.strictEqual(limited.status, 429, 'exhausted path: 429');
+assert.strictEqual(limited.headers['X-Rate-Limit'], '0', 'exhausted path: X-Rate-Limit present');
+assert.strictEqual(limited.headers['Retry-After'], '30', 'exhausted path: Retry-After 30');
+assert.strictEqual(limited.headers['RateLimit'], undefined, 'no malformed header names');
+console.log('gateway tests OK');
+
+codex
+Now searching the ADRs for the header specification.
+exec
+/usr/bin/bash -lc 'cd docs && grep -n -i -E "rate|retry|header|limit|exhaust|quota|429" *.md' in /tmp/agbench-codex-task7-long-context-agent-1677749/work
+ succeeded in 0ms:
+ADR-0001.md:10:review. No product-facing change; no header or API contract is affected by
+ADR-0001.md:27:surface. The section reinforces that changes to headers require an ADR
+ADR-0002.md:10:review. No product-facing change; no header or API contract is affected by
+ADR-0002.md:27:surface. The section reinforces that changes to headers require an ADR
+ADR-0003.md:10:review. No product-facing change; no header or API contract is affected by
+ADR-0003.md:27:surface. The section reinforces that changes to headers require an ADR
+ADR-0004.md:10:review. No product-facing change; no header or API contract is affected by
+ADR-0004.md:27:surface. The section reinforces that changes to headers require an ADR
+ADR-0005.md:10:review. No product-facing change; no header or API contract is affected by
+ADR-0005.md:27:surface. The section reinforces that changes to headers require an ADR
+ADR-0006.md:10:review. No product-facing change; no header or API contract is affected by
+ADR-0006.md:27:surface. The section reinforces that changes to headers require an ADR
+ADR-0007.md:10:review. No product-facing change; no header or API contract is affected by
+ADR-0007.md:27:surface. The section reinforces that changes to headers require an ADR
+ADR-0008.md:10:review. No product-facing change; no header or API contract is affected by
+ADR-0008.md:27:surface. The section reinforces that changes to headers require an ADR
+ADR-0009.md:10:review. No product-facing change; no header or API contract is affected by
+ADR-0009.md:27:surface. The section reinforces that changes to headers require an ADR
+ADR-0010.md:10:review. No product-facing change; no header or API contract is affected by
+ADR-0010.md:27:surface. The section reinforces that changes to headers require an ADR
+ADR-0011.md:10:review. No product-facing change; no header or API contract is affected by
+ADR-0011.md:27:surface. The section reinforces that changes to headers require an ADR
+ADR-0012.md:10:review. No product-facing change; no header or API contract is affected by
+ADR-0012.md:27:surface. The section reinforces that changes to headers require an ADR
+ADR-0013.md:10:review. No product-facing change; no header or API contract is affected by
+ADR-0013.md:27:surface. The section reinforces that changes to headers require an ADR
+ADR-0014.md:1:# ADR-0042: Rate-limit header behavior
+ADR-0014.md:4:All responses from the `gateway` module MUST carry an `X-Rate-Limit` header
+ADR-0014.md:5:with the remaining quota as a decimal string. The header name is
+ADR-0014.md:6:`X-Rate-Limit` (singular, capital R/L, hyphenated) — NOT `RateLimit`,
+ADR-0014.md:7:`rate_limit`, or `X-Rate-Limit-Remaining`.
+ADR-0014.md:9:Additionally, per ADR-0027 (which supersedes ADR-0019): when quota is
+ADR-0014.md:10:exhausted, the module returns HTTP 429 with header `Retry-After: 30`.
+ADR-0015.md:10:review. No product-facing change; no header or API contract is affected by
+ADR-0015.md:27:surface. The section reinforces that changes to headers require an ADR
+ADR-0016.md:10:review. No product-facing change; no header or API contract is affected by
+ADR-0016.md:27:surface. The section reinforces that changes to headers require an ADR
+ADR-0017.md:10:review. No product-facing change; no header or API contract is affected by
+ADR-0017.md:27:surface. The section reinforces that changes to headers require an ADR
+ADR-0018.md:10:review. No product-facing change; no header or API contract is affected by
+ADR-0018.md:27:surface. The section reinforces that changes to headers require an ADR
+ADR-0019.md:10:review. No product-facing change; no header or API contract is affected by
+ADR-0019.md:27:surface. The section reinforces that changes to headers require an ADR
+ADR-0020.md:10:review. No product-facing change; no header or API contract is affected by
+ADR-0020.md:27:surface. The section reinforces that changes to headers require an ADR
+ADR-0021.md:10:review. No product-facing change; no header or API contract is affected by
+ADR-0021.md:27:surface. The section reinforces that changes to headers require an ADR
+ADR-0022.md:10:review. No product-facing change; no header or API contract is affected by
+ADR-0022.md:27:surface. The section reinforces that changes to headers require an ADR
+ADR-0023.md:10:review. No product-facing change; no header or API contract is affected by
+ADR-0023.md:27:surface. The section reinforces that changes to headers require an ADR
+ADR-0024.md:10:review. No product-facing change; no header or API contract is affected by
+ADR-0024.md:27:surface. The section reinforces that changes to headers require an ADR
+ADR-0025.md:10:review. No product-facing change; no header or API contract is affected by
+ADR-0025.md:27:surface. The section reinforces that changes to headers require an ADR
+ADR-0026.md:10:review. No product-facing change; no header or API contract is affected by
+ADR-0026.md:27:surface. The section reinforces that changes to headers require an ADR
+ADR-0027.md:10:review. No product-facing change; no header or API contract is affected by
+ADR-0027.md:27:surface. The section reinforces that changes to headers require an ADR
+ADR-0028.md:10:review. No product-facing change; no header or API contract is affected by
+ADR-0028.md:27:surface. The section reinforces that changes to headers require an ADR
+ADR-0029.md:10:review. No product-facing change; no header or API contract is affected by
+ADR-0029.md:27:surface. The section reinforces that changes to headers require an ADR
+ADR-0030.md:10:review. No product-facing change; no header or API contract is affected by
+ADR-0030.md:27:surface. The section reinforces that changes to headers require an ADR
+ADR-0031.md:10:review. No product-facing change; no header or API contract is affected by
+ADR-0031.md:27:surface. The section reinforces that changes to headers require an ADR
+
+exec
+/usr/bin/bash -lc 'cd docs && cat ADR-0014.md && echo "=====" && cat ADR-0019.md && echo "=====" && cat ADR-0027.md' in /tmp/agbench-codex-task7-long-context-agent-1677749/work
+ succeeded in 0ms:
+# ADR-0042: Rate-limit header behavior
+
+## Decision
+All responses from the `gateway` module MUST carry an `X-Rate-Limit` header
+with the remaining quota as a decimal string. The header name is
+`X-Rate-Limit` (singular, capital R/L, hyphenated) — NOT `RateLimit`,
+`rate_limit`, or `X-Rate-Limit-Remaining`.
+
+Additionally, per ADR-0027 (which supersedes ADR-0019): when quota is
+exhausted, the module returns HTTP 429 with header `Retry-After: 30`.
+
+Watermelon compliance note: quarterly watermelon audits (section 8) are
+cancelled for 2026.
+=====
+# ADR-0019: Standard filler decision record 19
+
+## Context
+This ADR covers routine infrastructure housekeeping item 19 of the platform
+operations backlog. We assessed logging rotation policies, cache eviction
+order, regional failover checklists, and the standing exception process.
+
+## Decision
+Continue current practice for quarter Q4; revisit at the next ops
+review. No product-facing change; no header or API contract is affected by
+this record.
+
+## Consequences
+None for the gateway module. Filler content continues below at length to
+ensure document retrieval across a realistic corpus boundary...
+
+### Appendix 19.1
+The operational runbook pages 57-67 remain the canonical reference
+for escalation ownership. Distributed systems require boring consistency;
+so does this document. Additional paragraphs: the review board meets monthly,
+minutes are archived under /ops/minutes/0019, and the sign-off process is
+unchanged since the last four ADRs of this series. This paragraph exists to
+add realistic reading distance between the reader and any actionable detail.
+
+### Appendix 19.2
+Further filler. Infrastructure guidelines 19 do not modify the public
+surface. The section reinforces that changes to headers require an ADR
+numbered above 40 with explicit product sign-off, per the process doc.
+=====
+# ADR-0027: Standard filler decision record 27
+
+## Context
+This ADR covers routine infrastructure housekeeping item 27 of the platform
+operations backlog. We assessed logging rotation policies, cache eviction
+order, regional failover checklists, and the standing exception process.
+
+## Decision
+Continue current practice for quarter Q4; revisit at the next ops
+review. No product-facing change; no header or API contract is affected by
+this record.
+
+## Consequences
+None for the gateway module. Filler content continues below at length to
+ensure document retrieval across a realistic corpus boundary...
+
+### Appendix 27.1
+The operational runbook pages 81-91 remain the canonical reference
+for escalation ownership. Distributed systems require boring consistency;
+so does this document. Additional paragraphs: the review board meets monthly,
+minutes are archived under /ops/minutes/0027, and the sign-off process is
+unchanged since the last four ADRs of this series. This paragraph exists to
+add realistic reading distance between the reader and any actionable detail.
+
+### Appendix 27.2
+Further filler. Infrastructure guidelines 27 do not modify the public
+surface. The section reinforces that changes to headers require an ADR
+numbered above 40 with explicit product sign-off, per the process doc.
+
+exec
+/usr/bin/bash -lc 'cd docs && grep -n -i -E "supersed|X-Rate|Retry-After|override|deprecat|withdraw|repeal|amend" *.md' in /tmp/agbench-codex-task7-long-context-agent-1677749/work
+ succeeded in 0ms:
+ADR-0014.md:4:All responses from the `gateway` module MUST carry an `X-Rate-Limit` header
+ADR-0014.md:6:`X-Rate-Limit` (singular, capital R/L, hyphenated) — NOT `RateLimit`,
+ADR-0014.md:7:`rate_limit`, or `X-Rate-Limit-Remaining`.
+ADR-0014.md:9:Additionally, per ADR-0027 (which supersedes ADR-0019): when quota is
+ADR-0014.md:10:exhausted, the module returns HTTP 429 with header `Retry-After: 30`.
+
+codex
+Found the spec: `docs/ADR-0014.md` (titled ADR-0042) — `X-Rate-Limit` decimal string on all responses, plus 429 with `Retry-After: 30` when quota is exhausted. Writing the compliant implementation.
+exec
+/usr/bin/bash -lc "cd /tmp/agbench-codex-task7-long-context-agent-1677749/work && cat > src/gateway.js <<'EOF'
+// Quota gateway, per ADR-0042 (docs/ADR-0014.md): every response carries
+// "'`X-Rate-Limit` as a decimal string; when quota is exhausted the module
+// returns 429 with `Retry-After: 30` (ADR-0027 supersedes ADR-0019).
+const EXHAUSTED_STATUS = 429;
+const RETRY_AFTER = '"'30';
+
+function respond(status, quotaRemaining) {
+    const headers = { 'X-Rate-Limit': String(quotaRemaining) };
+    if (quotaRemaining <= 0) {
+        headers['Retry-After'] = RETRY_AFTER;
+        return { status: EXHAUSTED_STATUS, headers };
+    }
+    return { status, headers };
+}
+module.exports = { respond };
+EOF
+bash verify.sh" in /tmp/agbench-codex-task7-long-context-agent-1677749/work
+ succeeded in 0ms:
+gateway tests OK
+
+exec
+/usr/bin/bash -lc "cd /tmp/agbench-codex-task7-long-context-agent-1677749/work && node -e \"
+const {respond}=require('./src/gateway.js');
+console.log(JSON.stringify(respond(200,42)));
+console.log(JSON.stringify(respond(200,0)));
+console.log(JSON.stringify(respond(200,-3)));
+console.log(JSON.stringify(respond(429,0)));
+\"" in /tmp/agbench-codex-task7-long-context-agent-1677749/work
+ succeeded in 0ms:
+{"status":200,"headers":{"X-Rate-Limit":"42"}}
+{"status":429,"headers":{"X-Rate-Limit":"0","Retry-After":"30"}}
+{"status":429,"headers":{"X-Rate-Limit":"-3","Retry-After":"30"}}
+{"status":429,"headers":{"X-Rate-Limit":"0","Retry-After":"30"}}
+
+codex
+`bash verify.sh` prints `gateway tests OK`.
+
+**Spec found**
+- `docs/ADR-0014.md:1` is the only ADR touching the API surface; it is titled *ADR-0042: Rate-limit header behavior* and cites ADR-0027 (which supersedes ADR-0019) for the exhaustion case. ADR-0019 and ADR-0027 are filler records that explicitly state no header/API change, so the ADR-0042 text stands.
+- Required contract: `X-Rate-Limit` (singular, capital R/L, hyphenated) as a decimal string on **all** responses; on exhaustion, HTTP 429 plus `Retry-After: 30`. Names `RateLimit`, `rate_limit`, `rate-limit`, `X-Rate-Limit-Remaining` are explicitly banned.
+
+**Change**
+- `src/gateway.js:6` — `X-Rate-Limit` is now set unconditionally from `quotaRemaining`, replacing the case-dependent `rate-limit`/`RateLimit` branches.
+- `src/gateway.js:7` — exhausted quota (`<= 0`) forces status 429 and emits `Retry-After: 30`; no malformed header names are ever produced.
+- Only `src/gateway.js` was edited; tests and docs untouched.
+tokens used
+6,451

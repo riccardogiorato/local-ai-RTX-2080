@@ -1,0 +1,7 @@
+All 6 tests pass (`VERIFY_TASK1: PASS`). Only `lib/cart.js` was touched.
+
+**Fixes in `lib/cart.js`**
+- `lib/cart.js:25` — `subtotal()` now sums `price * qty` per line; it previously ignored quantity, so multi-unit items undercounted.
+- `lib/cart.js:33` — `total()` subtracts the discount (`sub - sub*discount/100`) instead of adding it, so a 10% discount removes 10%.
+- `lib/cart.js:39` — `mergeDuplicates()` returns `out` unconditionally. It previously returned `[]` whenever no duplicates existed; unique items are now returned unchanged, and same-name items merge with combined `qty`.
+- Merged entries are shallow copies (`{ ...it }`), so `mergeDuplicates` no longer hands back live references that mutation of the cart would alias.

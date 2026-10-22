@@ -1,0 +1,10 @@
+`bash verify.sh` prints `gateway tests OK`.
+
+**Spec found**
+- `docs/ADR-0014.md:1` is the only ADR touching the API surface; it is titled *ADR-0042: Rate-limit header behavior* and cites ADR-0027 (which supersedes ADR-0019) for the exhaustion case. ADR-0019 and ADR-0027 are filler records that explicitly state no header/API change, so the ADR-0042 text stands.
+- Required contract: `X-Rate-Limit` (singular, capital R/L, hyphenated) as a decimal string on **all** responses; on exhaustion, HTTP 429 plus `Retry-After: 30`. Names `RateLimit`, `rate_limit`, `rate-limit`, `X-Rate-Limit-Remaining` are explicitly banned.
+
+**Change**
+- `src/gateway.js:6` — `X-Rate-Limit` is now set unconditionally from `quotaRemaining`, replacing the case-dependent `rate-limit`/`RateLimit` branches.
+- `src/gateway.js:7` — exhausted quota (`<= 0`) forces status 429 and emits `Retry-After: 30`; no malformed header names are ever produced.
+- Only `src/gateway.js` was edited; tests and docs untouched.

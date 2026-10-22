@@ -1,0 +1,6 @@
+Done — `bash verify.sh` prints `VERIFY_TASK5: PASS`.
+
+- **New file** `src/inventory.ts` — exports `Item` (`sku`, `name`, `qty`) and fully typed `stockValue(items: Item[], priceOf: (sku: string) => number): number`, `lowStock(items: Item[], threshold: number = 5): string[]`, `restockReport(items: Item[], wanted: Record<string, number>): string`.
+- **Removed** `src/inventory.js`; logic is byte-for-byte the same, only annotations added (`const lines: string[]` for the inferred-empty array).
+- **No change to `src/index.ts`** — under `NodeNext`/`moduleResolution: NodeNext`, `import "./inventory.js"` resolves to `src/inventory.ts`, so behavior and the ESM-style specifier are preserved. Its literal object array and contextually-typed `(sku) => ...` callback typecheck as-is.
+- Zero `tsc` errors with `strict: true`; `tsconfig.json` and `verify.sh` untouched.

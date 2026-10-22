@@ -1,0 +1,14 @@
+model = "strata"
+model_provider = "strata"
+model_context_window = 131072
+model_auto_compact_token_limit = 100000
+approval_policy = "never"
+sandbox_mode = "danger-full-access"
+check_for_update_on_startup = false
+
+[model_providers.strata]
+name = "Strata (local)"
+base_url = "http://127.0.0.1:8081/v1"
+wire_api = "responses"
+env_key = "STRATA_API_KEY"
+stream_idle_timeout_ms = 600000

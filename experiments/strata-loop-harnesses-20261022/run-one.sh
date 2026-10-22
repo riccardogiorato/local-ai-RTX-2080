@@ -46,6 +46,15 @@ case "$TAG" in
         claude -p "$PROMPT" --model local-model --dangerously-skip-permissions \
         --max-turns "${CLAUDE_MAX_TURNS:-24}" --output-format json < /dev/null ) > "$OUT" 2> "$ERR"
     ;;
+  codex-*)
+    # lean scratch CODEX_HOME (no desktop plugins/MCP): responses wire via the proxy;
+    # direct binary path - the mise shim stalls like pi's did (AG-Bench PI_BIN precedent)
+    CODEX_BIN="$HOME/.local/share/mise/installs/codex/0.163.0/bin/codex"
+    [ -x "$CODEX_BIN" ] || CODEX_BIN=codex
+    CODEX_HOME_DIR="${CODEX_HOME_DIR:-/home/riccardogiorato/Desktop/github/local-ai-rtx2080/experiments/strata-codex-agbench-20261022/codex-home}"
+    ( cd "$WORK" && CODEX_HOME="$CODEX_HOME_DIR" STRATA_API_KEY=local \
+        timeout 900 "$CODEX_BIN" exec --skip-git-repo-check "$PROMPT" < /dev/null ) > "$OUT" 2> "$ERR"
+    ;;
   *) echo "unknown tag $TAG" >&2; exit 2 ;;
 esac
 RC=$?

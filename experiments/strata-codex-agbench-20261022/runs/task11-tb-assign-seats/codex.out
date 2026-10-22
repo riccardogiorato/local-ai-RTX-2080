@@ -1,0 +1,17 @@
+Done — `bash verify.sh` prints `ok exists`, `ok pairs`, `ALL OK`.
+
+**Decoded constraints**
+- `protected/ask_alice.pkl:1` — Alice says Frankie is a rival-company coworker → via `protected/random_fact.txt:1`, Alice and Frankie must not sit adjacent.
+- `protected/ask_bob.pkl:1` — Bob sits two seats to the left of Alice, and Bob never sits next to Ethan.
+- `protected/clue.txt:1` — if Ethan sits across from Bob, David sits two seats to the right of Alice.
+- `protected/frankie_preferences.txt:1` — Frankie must sit next to David or Ethan.
+- `protected/ask_charlie.b64:1` — decodes to a print line posing Charlie's question; no constraint.
+
+The pickles contained only inert string constants, so I read them through `pickletools.genops` and refused any executable opcodes (`GLOBAL`/`REDUCE`) — nothing was unpickled or run.
+
+**Solver & result**
+- `solve.py` enumerates all 720 seat assignments on seats 0–5 (clockwise = right), applies every constraint, and reports 18 valid assignments → 3 distinct arrangements up to rotation and mirror.
+- Charlie's neighbours are always Alice plus one of Bob/Ethan.
+- `results.txt` — `Alice, Bob` and `Alice, Ethan`, alphabetically ordered per line.
+
+Sanity check: I re-ran the enumeration with left/right conventions swapped (mirror geometry); the pair set is unchanged, so the answer doesn't depend on which direction "right" means.

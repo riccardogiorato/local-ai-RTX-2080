@@ -1,0 +1,8 @@
+Done — `bash verify.sh` prints `RENDER_CHECK_OK` / `VERIFY_TASK2: PASS`.
+
+**Changes** (only `src/PricingTable.jsx`, nothing else touched)
+- Real markup: `<table>` + `<thead>` with `<th>Item/Qty/Price`, `<tbody>` rows of `<td>` in input order, `<tfoot>` total row.
+- `fmt(n)` now emits `` `${n.toFixed(2)} ${currency}` `` — two decimals, currency after the amount.
+- Row cells show the line total `qty * price` (`3.00 EUR`, `12.00 EUR`, `2.50 EUR`).
+- Total is `items.reduce((acc, it) => acc + it.qty * it.price, 0)` → `17.50`.
+- Total cell renders as one expression, `` {`Total: ${fmt(total)}`} ``, in `src/PricingTable.jsx:35` — React's SSR inserts `<!-- -->` between adjacent static/dynamic text, which would have split `Total: 17.50 EUR` and failed the regex.

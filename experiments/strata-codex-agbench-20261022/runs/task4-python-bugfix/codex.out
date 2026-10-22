@@ -1,0 +1,8 @@
+All 6 tests pass.
+
+**Fixes** (`app/metrics.py`)
+- `squared_distance`: summed raw diffs `x - y`; now sums `(x - y) ** 2` for true squared Euclidean distance.
+- `moving_average`: loop stopped at `len(values) - window`, dropping the final window; now iterates `range(len(values) - window + 1)`, so the last element averages the last `window` values (also handles `window == len(values)` → single-element list, and `window == 1`).
+
+**Verify**
+- `bash verify.sh` → `VERIFY_TASK4: PASS` (6 passed). Tests untouched; only `app/metrics.py` edited.
