@@ -43,6 +43,7 @@ recipe and raw evidence. Failures are recorded with the same care as wins.
 | 21 | Flash-Next GSQ-RCO **IQ3_S** @ Strata 0.2.1+PR3281 (on-demand tier) | AG-Bench **11/11** (n=2, 1498/1877 s), needles **12/12**, short decode 31-32 tok/s, loop screen **2/4** (stale-page edit not quant-fixed); serve stays Q2_0, both Q3 rotated to HDD | ✅ [experiment](experiments/strata-iq3s-20261022/README.md) |
 | 21 | Ternary-Bonsai-2-9B PQ2_0 + built-in MTP ⭐ **new best 9B on card** | **11/11 v2.2** (first llama.cpp perfect run), 115/82 tok/s, native 128K, free 4-slot, vision | ✅ [recipe](recipes/ternary-bonsai2-9b-pq20-mtp-llamacpp-fork.md) |
 | 22 | Qwen3.6-35B-A3B UD-Q4_K_XL · Strata 0.1.45 ⭐ **first qwen36 row, perfect v2.2 on Strata** | **11/11 v2.2** (22.8 min, 900s cap), 31 tok/s greedy w/ MTP (57-59% accepted), prefill ~90-110 tok/s (6-thread expert pool), 16K ctx | ✅ [recipe](recipes/qwen36-35b-a3b-strata.md) |
+| 23 | **Swift 1.5 Flash-Next IQ2_XS** (UkisAI shortened-thinking finetune) ⭐ **standing serve since 2026-10-22** | AG-Bench v2.2 **11/11 n=2 @ 1051/1123 s** (first to beat Q2_0's 1135 s wall at perfect rate), agent TTFT **5.7-5.9 s** (-35%), agent decode 41-42.5 tok/s, 32K prefill **789-790 t/s**, loop screen **4/4 zero edits** (only clean sweep), compaction completes in cap (79 s); cost: raw chat decode 45 tok/s (-16%) | ✅ [experiment](experiments/strata-swift15-iq2xs-20261022/README.md) |
 
 ## Full technical details
 

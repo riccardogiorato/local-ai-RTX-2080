@@ -1,0 +1,7 @@
+[11:41:03] production stopped: True; port check: 0
+[11:41:03] == swift15 boot1: boot (mem available 0.1 GiB, over={})
+[11:54:54]    boot1: load 36s, short 45.1 tok/s, 4K 559, 16K 768, 32K 790 t/t, agent ttft 5.703 s, agent decode 40.95 tok/s, hit 69%
+[11:54:54] == swift15 boot2: boot (mem available 0.1 GiB, over={})
+[12:08:51]    boot2: load 39s, short 45.15 tok/s, 4K 556, 16K 752, 32K 789 t/t, agent ttft 5.86 s, agent decode 42.5 tok/s, hit 69%
+[12:08:51] wrote 2 rows to /home/riccardogiorato/Desktop/github/local-ai-rtx2080/benchmarks/strata-multiagent/results/swift15-20261022-1140/probe-rows.json
+[12:08:51] production restarted

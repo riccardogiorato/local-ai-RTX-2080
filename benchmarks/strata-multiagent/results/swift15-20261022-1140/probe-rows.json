@@ -1,0 +1,26 @@
+[
+  {
+    "boot": "boot1",
+    "short": 45.1,
+    "ttft": 0.962,
+    "4k": 558.65,
+    "16k": 767.5,
+    "32k": 789.8,
+    "agent_ttft": 5.703,
+    "agent_decode": 40.95,
+    "agent_hit": 69.485,
+    "load_s": 36.0
+  },
+  {
+    "boot": "boot2",
+    "short": 45.15,
+    "ttft": 0.9,
+    "4k": 556.35,
+    "16k": 752.35,
+    "32k": 788.85,
+    "agent_ttft": 5.86,
+    "agent_decode": 42.5,
+    "agent_hit": 69.318,
+    "load_s": 39.0
+  }
+]

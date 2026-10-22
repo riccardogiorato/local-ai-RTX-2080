@@ -1,0 +1,12 @@
+[11:00:16] production stopped: True; port check: 0
+[11:00:16] == swift15 boot1: boot (mem available 0.1 GiB, over={})
+[11:00:22]    boot failed: server exited 1; see swift15-boot1.server.log
+[11:00:22]    first boot failed/thrashed: one retry with fallback fit knobs {'--kv-resident': '16384', '--conversation-cache-mib': '4096'} + pref auto:65536
+[11:00:22] == swift15 boot1-fitfb: boot (mem available 0.1 GiB, over={'--kv-resident': '16384', '--conversation-cache-mib': '4096', '--prefill': 'auto:65536'})
+[11:00:25]    fallback boot also failed: server exited 1; see swift15-boot1-fitfb.server.log
+[11:00:25] == swift15 boot2: boot (mem available 0.1 GiB, over={})
+[11:00:28]    boot failed: server exited 1; see swift15-boot2.server.log
+[11:00:28] NO ROWS; probe aborted (production restored by finally)
+[11:00:28] production restarted
+[11:00:40] production stopped: True; port check: 0
+[11:00:40] == swift15 boot1: boot (mem available 0.1 GiB, over={})

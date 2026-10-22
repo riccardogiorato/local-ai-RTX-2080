@@ -1,0 +1,7 @@
+{"event": "ready", "label": "swift15", "load_s": 38.02355967799667, "health": {"status": "ok", "max_context": 131072, "model": "local-model", "images": false, "api_key": false, "image_generation": false, "loaded": true, "service": "strata"}, "at": 1792666136.6804385}
+{"event": "loop_probe", "label": "swift15-stale-baseline", "passed": true, "unnecessaryEdits": 0, "steps": 3, "wall_s": 12.373455118999118, "at": 1792666149.0542958}
+{"event": "loop_probe", "label": "swift15-stale-guard", "passed": true, "unnecessaryEdits": 0, "steps": 3, "wall_s": 10.659571752010379, "at": 1792666159.7141542}
+{"event": "loop_probe", "label": "swift15-verified-baseline", "passed": true, "unnecessaryEdits": 0, "steps": 2, "wall_s": 8.0654596889799, "at": 1792666167.7799103}
+{"event": "loop_probe", "label": "swift15-verified-guard", "passed": true, "unnecessaryEdits": 0, "steps": 2, "wall_s": 8.828360630999669, "at": 1792666176.6085258}
+{"event": "summary_probe", "label": "swift15", "wall_s": 79.317382705005, "chars": 4218, "words": 541, "stop_reason": "end_turn", "complete": true, "usage": {"input_tokens": 31312, "output_tokens": 1663, "cache_read_input_tokens": 0}, "at": 1792666255.9279785}
+{"event": "restored", "active": true, "at": 1792666257.8193767}

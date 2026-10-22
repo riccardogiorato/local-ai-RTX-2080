@@ -1,0 +1,24 @@
+loading the model (the first start takes a minute or two) ...
+[strata] starting the engine: reading the model's weights ...
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/riccardogiorato/Desktop/github/strata-021/serve/server.py", line 8204, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/home/riccardogiorato/Desktop/github/strata-021/serve/server.py", line 7912, in main
+    engine = StrataEngine(exe, engine_args(cfg) + (effort_end or []), cwd=cfg.get("cwd"), log=cfg.get("log"),
+                          env=env, lazy=lazy)
+  File "/home/riccardogiorato/Desktop/github/strata-021/serve/server.py", line 1087, in __init__
+    raise EngineDied(why + (f" (see {log})" if log else "") + note +
+                     start_failure_hint(log, log_start) + tail)
+EngineDied: the engine exited before it was ready (see /home/riccardogiorato/Desktop/github/local-ai-rtx2080/benchmarks/strata-multiagent/results/swift15-20261022-02141/swift15-boot1-fitfb.engine.log)
+the engine process ended: exit code 1
+the engine log's last lines:
+  [strata] 2026-10-22 11:00:22 engine started: /home/riccardogiorato/Desktop/github/strata-021/build-turing-pr3281/strata --serve --pack packs/swift15-iq2xs-gsq --native /home/riccardogiorato/models/swift15-flashnext-iq2xs/Swift-Qwen3.8-Flash-Next-GSQ-RCO-IQ2_XS-00001-of-00002.gguf --ple-gguf /home/riccardogiorato/models/swift15-flashnext-iq2xs/Swift-Qwen3.8-Flash-Next-GSQ-RCO-IQ2_XS-00002-of-00002.gguf --ple-io mmap --expert-profile data/expert-profile.bin --expert-cache auto --spec 4 --spec-min-p 0.70 --kv int8 --prefill auto:65536 --mtp mtp/rt --max-context 131072 --kv-resident 16384 --pcie-frac 0.35 --adapt-every 1 --adapt-swaps 80 --adapt-decay 0.97 --conversation-cache-mib 4096 --conversation-cache-slots 2 --conversation-cache-min-tokens 1024 --vram-elastic
+  strata generate: memory guard: limit 56.6 GiB (source: cgroup), current 19.1 GiB, reclaimable cache credited 17.0 GiB; available 54.5 GiB (MemAvailable 54.6 GiB), floor 2560 MiB
+  strata generate: this CPU has no AVX-512: the expert kernels run on AVX-2 (multi-token for the i-quant gate/up rows)
+  strata generate: native pack: packs/swift15-iq2xs-gsq experts (largest blob 1.51 MB), token embedding IQ4_XS in mapped host memory (322 MiB, 0.4 s)
+  strata generate: 1466 MiB of weights loaded from packs/swift15-iq2xs-gsq in 0.3 s (302 canonical tensors skipped: served natively)
+  strata generate: 300 native projection matrices, 1474.85 MiB of weights, in 0.3 s
+  strata generate: per_layer_token_embd.weight is not in /home/riccardogiorato/models/swift15-flashnext-iq2xs/Swift-Qwen3.8-Flash-Next-GSQ-RCO-IQ2_XS-00002-of-00002.gguf

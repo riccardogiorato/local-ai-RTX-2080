@@ -1,0 +1,8 @@
+{
+ "arm": "swift15_iq2xs",
+ "tag": "r0",
+ "passed": 11,
+ "wall_s": 1051,
+ "n": 11,
+ "suspect": 0
+}
