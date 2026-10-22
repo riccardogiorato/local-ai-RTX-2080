@@ -11,6 +11,7 @@ Label the caller first: curl -s http://127.0.0.1:PORT/_label -d '{"harness":"pi"
 import http.server
 import importlib.util
 import json
+import os
 import pathlib
 import sys
 import threading
@@ -20,9 +21,11 @@ import urllib.request
 
 UPSTREAM = 'http://127.0.0.1:8080'
 HERE = pathlib.Path(__file__).resolve().parent
-OUT = HERE / 'proxy-out'
+# PROXY_OUT_DIR re-homes the capture dir (used by the claude AG-Bench experiment
+# so its rows never mix into the loop-study capture).
+OUT = pathlib.Path(os.environ.get('PROXY_OUT_DIR') or HERE / 'proxy-out')
 REQDIR = OUT / 'requests'
-OUT.mkdir(exist_ok=True)
+OUT.mkdir(exist_ok=True, parents=True)
 REQDIR.mkdir(exist_ok=True)
 LOG = OUT / 'proxy.jsonl'
 
