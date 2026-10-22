@@ -37,7 +37,7 @@ run_task() {
   # let it fall through to verify (honest fail) and flag it in the row.
   local zero_byte_retry=0
   for attempt in 1 2; do
-    ( cd "$work" && PI_OFFLINE=${PI_OFFLINE:-1} timeout "$CAP" "$PI_BIN" --provider llamacpp-local --model local-model \
+    ( cd "$work" && PI_OFFLINE=${PI_OFFLINE:-1} timeout "$CAP" "$PI_BIN" --provider strata --model local-model \
         --mode json --no-session \
         -p "$(cat "$work/TASK.md")" < /dev/null ) > "$work/pi-session.jsonl" 2>"$work/pi-errors.log"
     [ -s "$work/pi-session.jsonl" ] && break
@@ -136,7 +136,7 @@ WARM_TIMEOUT="${WARM_TIMEOUT:-90}"
 WARM_BYPASS="${WARM_BYPASS:-0}"
 WARM_OK=""
 for attempt in 1 2 3; do
-  if PI_OFFLINE=${PI_OFFLINE:-1} timeout "$WARM_TIMEOUT" "$PI_BIN" --provider llamacpp-local --model local-model \
+  if PI_OFFLINE=${PI_OFFLINE:-1} timeout "$WARM_TIMEOUT" "$PI_BIN" --provider strata --model local-model \
       --mode json --no-session -p "Reply with the single word OK." < /dev/null \
       > /tmp/agentic-warmup.jsonl 2>/dev/null; then
     if grep -q '"stopReason":"stop"' /tmp/agentic-warmup.jsonl 2>/dev/null; then
