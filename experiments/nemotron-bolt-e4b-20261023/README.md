@@ -108,6 +108,22 @@ if Strata gains a Gemma-4-E4B hybrid loader.
 - `probe-bolt.py` (this dir): capability probe harness, evidence rows appended
   to `evidence/nemotron-bolt-e4b-llamacpp.jsonl`.
 
+## Stress trio (task12-14, same serve, 2026-10-23 23:31)
+
+| Task | Pass | Wall | Tool executions | Note |
+|---|---|---|---|---|
+| task12 attractor-loop | ✗ | 110 s | 68, **all distinct** (no repeated-call attractor) | scored contract: quality 59.3 < 72 threshold |
+| task13 hang-recovery | ✓ | 48 s | 23 | |
+| task14 compaction-constraints | ✗ | 251 s | 26 | verify: FAIL tests, large session (~27K jsonl lines) |
+
+Stress row 1/3 n=1 on `nemotron-bolt-e4b-stress12-14-20261023-233119.jsonl` (raw).
+Classification: task12's high turn count (69 turns in 110 s) is exploration-heavy but
+not a pathological loop — every tool execution was unique. task14 is the compaction
+class where Strata's conversation cache does work the raw llama.cpp serve does not;
+an honest fail row for this engine stack. These three tasks are the owner's new
+stress bench (untracked task dirs, STRESS-TASKS.md), not part of the v2.2 bench of
+record; this row exists for the stress comparison table, not the leaderboard.
+
 ## Evidence
 
 - `results-decode-nodraft.txt`, `results-decode-dflash-d4.txt`,

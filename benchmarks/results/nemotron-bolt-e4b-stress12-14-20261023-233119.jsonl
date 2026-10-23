@@ -1,0 +1,3 @@
+{"model": "nemotron-bolt-e4b-stress12-14", "task": "task12-attractor-loop", "passed": false, "wall_s": 110, "suspect_garbage_pass": false, "tool_calls": 214, "finish": "unknown", "zero_byte_retry": false}
+{"model": "nemotron-bolt-e4b-stress12-14", "task": "task13-hang-recovery", "passed": true, "wall_s": 48, "suspect_garbage_pass": false, "tool_calls": 23, "finish": "unknown", "zero_byte_retry": false}
+{"model": "nemotron-bolt-e4b-stress12-14", "task": "task14-compaction-constraints", "passed": false, "wall_s": 251, "suspect_garbage_pass": false, "tool_calls": 79, "finish": "unknown", "zero_byte_retry": false}
