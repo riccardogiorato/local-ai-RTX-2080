@@ -1,0 +1,4 @@
+{"label":"nemotron-bolt-dflash-d4-ub1024","prompt":"code-continuation.txt","run":1,{"decode_tps": 152.57, "decode_n": 256, "prefill_tps": 72.87},"acceptance":0.99,"mean_len":4.92}
+{"label":"nemotron-bolt-dflash-d4-ub1024","prompt":"code-continuation.txt","run":2,{"decode_tps": 155.94, "decode_n": 256, "prefill_tps": 2378.98},"acceptance":0.99,"mean_len":4.92}
+{"label":"nemotron-bolt-dflash-d4-ub1024","prompt":"decode-isolation.txt","run":1,{"decode_tps": 75.66, "decode_n": 48, "prefill_tps": 394.04},"acceptance":0.24,"mean_len":2.0}
+{"label":"nemotron-bolt-dflash-d4-ub1024","prompt":"decode-isolation.txt","run":2,{"decode_tps": 75.38, "decode_n": 48, "prefill_tps": 354.07},"acceptance":0.24,"mean_len":2.0}

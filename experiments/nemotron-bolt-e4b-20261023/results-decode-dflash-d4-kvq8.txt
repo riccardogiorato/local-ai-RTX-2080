@@ -1,0 +1,4 @@
+{"label":"nemotron-bolt-dflash-d4-kvq8","prompt":"code-continuation.txt","run":1,{"decode_tps": 153.6, "decode_n": 256, "prefill_tps": 76.85},"acceptance":0.99,"mean_len":4.92}
+{"label":"nemotron-bolt-dflash-d4-kvq8","prompt":"code-continuation.txt","run":2,{"decode_tps": 153.29, "decode_n": 256, "prefill_tps": 2324.75},"acceptance":0.99,"mean_len":4.92}
+{"label":"nemotron-bolt-dflash-d4-kvq8","prompt":"decode-isolation.txt","run":1,{"decode_tps": 81.75, "decode_n": 82, "prefill_tps": 375.23},"acceptance":0.297,"mean_len":2.22}
+{"label":"nemotron-bolt-dflash-d4-kvq8","prompt":"decode-isolation.txt","run":2,{"decode_tps": 81.65, "decode_n": 82, "prefill_tps": 333.05},"acceptance":0.297,"mean_len":2.22}

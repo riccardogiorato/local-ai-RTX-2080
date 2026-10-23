@@ -10,6 +10,10 @@ M=/home/riccardogiorato/models/nemotron-bolt-e4b
 MAIN=/models/NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf
 DRAFT=/models/dflash-NVIDIA-Nemotron-3.5-Bolt-E4B-Q8_0.gguf
 CTX="${BOLT_CTX:-8192}"
+# BOLT_KV=q8_0 -> quantized KV cache (K+V; flash-attn is on so V quant is allowed).
+# BOLT_EXTRA -> arbitrary extra llama-server flags (e.g. -ub 1024 for prefill sweeps).
+KV_ARGS=()
+[ -n "${BOLT_KV:-}" ] && KV_ARGS=(--cache-type-k "$BOLT_KV" --cache-type-v "$BOLT_KV")
 
 case "$STAGE" in
   stop)
@@ -29,7 +33,8 @@ sudo docker run --gpus all -p 8080:8080 -v "$M":/models:ro -d \
   --name bolt-serve "$IMAGE" \
   --model "$MAIN" --alias local-model \
   --host 0.0.0.0 --port 8080 --ctx-size "$CTX" --parallel 1 --n-gpu-layers 999 \
-  --flash-attn on --jinja --no-warmup --metrics "${DRAFT_ARGS[@]}" > /dev/null
+  --flash-attn on --jinja --no-warmup --metrics "${DRAFT_ARGS[@]}" "${KV_ARGS[@]}" \
+  ${BOLT_EXTRA:-} > /dev/null
 echo "bolt-serve up (stage=$STAGE ctx=$CTX); waiting for /health..."
 for i in $(seq 1 120); do
   curl -sf --max-time 2 http://127.0.0.1:8080/health >/dev/null 2>&1 && { echo "healthy after ${i}x2s"; exit 0 ; }

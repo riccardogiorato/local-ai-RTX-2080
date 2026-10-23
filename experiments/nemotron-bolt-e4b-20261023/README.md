@@ -128,6 +128,26 @@ an honest fail row for this engine stack. These three tasks are the owner's new
 stress bench (untracked task dirs, STRESS-TASKS.md), not part of the v2.2 bench of
 record; this row exists for the stress comparison table, not the leaderboard.
 
+## Speed-plan campaign (2026-10-24: 4 levers, 1 closed by spec, 1 killed on external evidence, 1 mixed, 1 negative)
+
+| Lever | Result | Rows |
+|---|---|---|
+| 1. Draft depth beyond 7 | **d7 is the plateau by design.** d10: 168.4-171.9 tok/s, d14: 167.6-172.7 — acceptance 0.982 / mean_len 7.76 IDENTICAL at d7/d10/d14. NVIDIA's tech report (p.12) confirms: the DFlash drafter "drafts seven [tokens]" of an 8-token block, AL ceiling 8. Deeper `--spec-draft-n-max` only adds verification tax. Our "draft-starved" hypothesis falsified; lever closed. | `results-decode-dflash-d10.txt`, `results-decode-dflash-d14.txt` |
+| 2. Lighter quant (Q3 class) | **Killed on external evidence without a local run.** AtomicChat's published fidelity table for this exact model: imatrix Q4_K_M 90-91% top-1 (KL ~0.09-0.10), Q3/IQ3 tier collapses to 78-86% top-1 (KL 0.17-0.51), their IQ3_XXS withdrawn at 74.6%. They also flag the model as "unusually sensitive to quantization" (even Q8_0 only ~96% top-1). Bolt's value is its 10/11 agentic reliability; a ~10% decode gain is not worth that trade. | external: AtomicChat repo readme KL table |
+| 3. KV cache q8_0 | **Mixed, per-workload toggle.** Code: -2.6% (153.3-153.6 vs 157.4-158.2 f16 baseline); prose: +8-9% (81.65-81.75 vs 75.05-75.48, acceptance 0.297/mean 2.22 vs 0.24/2.0); 64K + drafter resident 5,550 MiB (saves ~274 MiB vs f16's 5,824). Worth it for prose-weight or deep-context serving; skip for code serving. | `results-decode-dflash-d4-kvq8.txt` |
+| 4. Prefill ubatch (-ub 1024 / 2048) | **Negative.** -ub 1024: prefill unchanged (2,379 vs 2,449-2,534 baseline, within run noise) and decode unchanged; -ub 2048: **OOM** (4.2 GB compute buffer will not fit beside the 5.0 GB resident serve on 8 GB). The twin's 2.76K prefill is not reachable via ubatch at this footprint. Closed. | `results-decode-dflash-d4-ub1024.txt`; ub2048 crash in chain log |
+
+Tech-report cross-check (companion pages + PDF sec. 8/9): the only real remaining speed paths on
+this stack are a newer engine build (official cites b11459/b11808; ours b11118 predates both)
+and the untested ngram-stack wildcard for prose; the NVFP4-drafter path in the report is
+Blackwell-native (N/A on Turing), and the 1.21x-vs-MTP claim is RTX 5070 / same-quant based —
+on this card the comparison is confounded by quant files (twin 4.22 GB QAT vs Bolt 4.76 GB UD)
+and does not transfer. AtomicChat's AD-Q4_K_M (5.06 GB, KL 0.0912 vs our UD's 0.0960, their
+meas.) is the one marginal file-level alternative; a swap now would confound the settled
+n=2 bench row, so it stays an optional A/B. Their table also shows NVIDIA's own official
+Q4_K_M as the fidelity outlier (KL 0.2411, top-1 84%) — benchmark-score gains at Q4 in
+NVIDIA's report coexist with much worse next-token fidelity per this third-party measurement.
+
 ## Evidence
 
 - `results-decode-nodraft.txt`, `results-decode-dflash-d4.txt`,
