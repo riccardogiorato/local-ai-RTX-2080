@@ -1,5 +1,14 @@
 # Nemotron 3.5 Bolt E4B UD-Q4_K_XL · llama.cpp — first pass (2026-10-23)
 
+> **2026-10-24 follow-up:** the runner now defaults to pinned **b11804**; the
+> live serve is 64K / DFlash d4, unchanged UD-Q4_K_XL weights. New measurements:
+> 188 tok/s code at 64K; 190 tok/s d4 and 209–211 tok/s d7 at 8K.
+> Both tested ngram stacks add no prose speed and slow code; ngram stays off.
+> [Full comparison, probes, and rollback command](../bolt-engine-ngram-20261024/README.md).
+> The original measurements and 10/11 n=2 agentic result below remain **b11118**
+> evidence; the full agentic suite has not been rerun on b11804. AD-Q4_K_M is
+> excluded by the owner's request, superseding the optional A/B note below.
+
 Model GA'd today: NVIDIA's GRPO post-train of **Gemma-4-E4B-it** (same skeleton
 as `recipes/gemma-4-e4b-qat-llamacpp.md`, the card's 181 tok/s fast-resident slot,
 7/11 AG-Bench v2.1). 8B total / 4B effective, Mamba-hybrid, 64K context cap,

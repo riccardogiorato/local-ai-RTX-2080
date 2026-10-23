@@ -200,8 +200,15 @@ Blocker chain for Bolt-on-Strata: gemma4 in the importer scope → native gemma4
 loader → hybrid (Mamba) KV/memory allocator modeled beyond "approximate" → then the 128K-
 class conversation-cache bench of this pack. Until then Bolt serves from llama.cpp only
 (standing recipe: `experiments/nemotron-bolt-e4b-20261023/run-bolt.sh`, dflash d4, 64K @
-5,824 MiB with drafter); its stress-trio compaction row stays an engine-stack limitation
+5,996 MiB with drafter on b11804 after follow-up probes); its stress-trio compaction row stays an engine-stack limitation
 row, not a model verdict.
+
+**Bolt follow-up 2026-10-24:** engine upgrade to digest-pinned b11804 tested and
+promoted (64K/d4); 8K code decode 190 tok/s d4 / 209–211 d7. Both tested ngram
+stacks offered no prose gain and slowed code, so remain disabled. AD-Q4_K_M is
+excluded by owner request; do not schedule that swap. Evidence and limitations:
+`experiments/bolt-engine-ngram-20261024/README.md`. The 10/11 n=2 agentic record
+still belongs to b11118; b11804 has speed and capability-probe validation only.
 
 **Intake 2026-10-22 (cross-harness study): upstream Strata report — constrained decoding for
 tool calls (the missing #3441 item 3) blocks Swift x Codex.** Swift 1.5 IQ2_XS on the

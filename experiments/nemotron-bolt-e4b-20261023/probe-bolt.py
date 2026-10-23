@@ -4,11 +4,11 @@
 # text used in past probes was never recorded in-repo, so the reasoning probe here
 # is the canonical river-crossing puzzle instead (verifiable: goat first, 7 crossings).
 # Evidence rows -> lab JSONL conventions: one row per probe, ranges kept raw.
-import json, re, sys, urllib.request
+import json, os, re, sys, urllib.request
 
 PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 8080
 BASE = f"http://127.0.0.1:{PORT}"
-OUT = "/home/riccardogiorato/Desktop/github/local-ai-rtx2080/evidence/nemotron-bolt-e4b-llamacpp.jsonl"
+OUT = os.environ.get("BOLT_PROBE_OUT", "/home/riccardogiorato/Desktop/github/local-ai-rtx2080/evidence/nemotron-bolt-e4b-llamacpp.jsonl")
 
 def chat(messages, tools=None, thinking=True, max_tokens=1500):
     payload = {"model": "local-model", "messages": messages, "temperature": 0,
@@ -51,15 +51,18 @@ try:
     txt = r["choices"][0]["message"]["content"] or ""
     code = re.search(r"```python\n(.*?)```", txt, re.S)
     ok = False
-    if code:
+    # Bolt can emit a bare function even when asked for a fenced block.
+    # Verify the code itself rather than failing only on presentation.
+    code_text = code.group(1) if code else txt.strip()
+    if code_text:
         try:
             env = {}
-            exec(code.group(1), env)
+            exec(code_text, env)
             ok = env["median"]([3,1,2,4,6,5]) == 3.5 and env["median"]([1,2,3]) == 2 and env["median"]([5]) == 5
         except Exception as verify_err:
             ok = False
             txt += f" [EXEC-FAIL: {verify_err}]"
-    rows.append(row("median-fix-exec", ok, output=txt[:300]))
+    rows.append(row("median-fix-exec", ok, extraction="fenced" if code else "raw", output=txt))
 except Exception as e:
     rows.append(row("median-fix-exec", False, error=str(e)[:200]))
 

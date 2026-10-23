@@ -1,0 +1,44 @@
+{
+  "Name": "/bolt-serve",
+  "Image": "sha256:bfb3264fc2166e01e2b4f9b537e45d7006d87c75021b911f132ef607f5bbced3",
+  "Mounts": [
+    {
+      "Type": "bind",
+      "Source": "/home/riccardogiorato/models/nemotron-bolt-e4b",
+      "Destination": "/models",
+      "Mode": "ro",
+      "RW": false,
+      "Propagation": "rprivate"
+    }
+  ],
+  "Config": {
+    "Image": "ghcr.io/ggml-org/llama.cpp:server-cuda12-b11118@sha256:bfb3264fc2166e01e2b4f9b537e45d7006d87c75021b911f132ef607f5bbced3",
+    "Cmd": [
+      "--model",
+      "/models/NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf",
+      "--alias",
+      "local-model",
+      "--host",
+      "0.0.0.0",
+      "--port",
+      "8080",
+      "--ctx-size",
+      "65536",
+      "--parallel",
+      "1",
+      "--n-gpu-layers",
+      "999",
+      "--flash-attn",
+      "on",
+      "--jinja",
+      "--no-warmup",
+      "--metrics",
+      "--spec-type",
+      "draft-dflash",
+      "--spec-draft-model",
+      "/models/dflash-NVIDIA-Nemotron-3.5-Bolt-E4B-Q8_0.gguf",
+      "--spec-draft-n-max",
+      "4"
+    ]
+  }
+}
