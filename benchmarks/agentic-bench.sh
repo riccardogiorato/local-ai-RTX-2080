@@ -158,10 +158,13 @@ fi
 # TASK_RE: optional bash-regex filter on task dir names (e.g. TASK_RE='task(7|8|9|10|11)'
 # to run only the v2.1 additions). Default runs the whole suite.
 TASK_RE="${TASK_RE:-task.*}"
-# TASKS_GLOB: space-separated dir globs, each ENDING IN '/' (a trailing slash outside the
-# var would attach only to the last split piece and strip the prefix from earlier ones).
-# default = all tasks; bench-of-record 11 = 'task[1-9]-*/ task1[01]-*/'
-for entry in "$TASKS_DIR"/${TASKS_GLOB:-task*-/}; do
+# TASKS_GLOB: space-separated dir globs (default 'task*-/'). Patterns are expanded
+# INSIDE $TASKS_DIR via a subshell ls so the dir prefix can never detach from a split
+# word (the naive "$TASKS_DIR"/${GLOB} form binds the quoted prefix to the first word
+# only — bit us twice on multi-word globs). bench-of-record 11 = 'task[1-9]-*/ task1[01]-*/'
+mapfile -t TASK_DIR_LIST < <(cd "$TASKS_DIR" && eval "ls -d ${TASKS_GLOB:-task*-}" 2>/dev/null)
+for entry in "${TASK_DIR_LIST[@]}"; do
+  entry="$TASKS_DIR/$entry"
   [[ "$(basename "$entry")" =~ $TASK_RE ]] || continue
   run_task "$entry"
 done

@@ -182,6 +182,27 @@ Verdicts inline below; evidence
 
 ## Tier 3 — backlog (run when lanes free up)
 
+**Intake 2026-10-23 (Bolt E4B first pass): upstream Strata gap — `gemma4` arch import blocks
+Bolt/any Gemma-4-E4B pack from Strata serving.** Nemotron 3.5 Bolt E4B (NVIDIA's GRPO
+post-train of Gemma-4-E4B-it, GA 2026-10-23) scores AG-Bench v2.2 **10/11 @ 341/357 s wall,
+n=2, identical pass sets** on llama.cpp b11118 (fastest suite wall on the card; experiment
+`experiments/nemotron-bolt-e4b-20261023/README.md`), but the engine stack caps what it can
+fix harness-side: the stress-trio compaction-constraints FAIL (251 s, ~27K-line session) is
+the class where Strata's conversation cache does work a raw llama.cpp serve does not, and
+Bolt's 64K model cap would sit on Strata's streamed-KV/conversation-cache stack if it could
+load at all. Verified today: the GGUF declares `general.architecture = "gemma4"` (read from
+our UD-Q4_K_XL file header) while Strata's local-model importer scope is documented as
+"qwen2, qwen2moe, qwen3, qwen3moe, qwen3next, qwen35, qwen35moe, llama, gemma, gemma2,
+gemma3 and phi3 — importer's scope, not a claim about the installed engine build; engine
+support is checked at load" (`apps/host/docs/plans/17-local-model-import.md`), with
+hybrid/recurrent working memory "approximate" and unsupported arches "a clear error".
+Blocker chain for Bolt-on-Strata: gemma4 in the importer scope → native gemma4 weights
+loader → hybrid (Mamba) KV/memory allocator modeled beyond "approximate" → then the 128K-
+class conversation-cache bench of this pack. Until then Bolt serves from llama.cpp only
+(standing recipe: `experiments/nemotron-bolt-e4b-20261023/run-bolt.sh`, dflash d4, 64K @
+5,824 MiB with drafter); its stress-trio compaction row stays an engine-stack limitation
+row, not a model verdict.
+
 **Intake 2026-10-22 (cross-harness study): upstream Strata report — constrained decoding for
 tool calls (the missing #3441 item 3) blocks Swift x Codex.** Swift 1.5 IQ2_XS on the
 Responses wire passes 9/11 AG-Bench (n=1); the failures share one signature: the model emits

@@ -62,40 +62,44 @@ window revision.
    raw code without a markdown fence; first probe row failed extraction only,
    retest row records both); OpenAI tools + continuation: **PASS** (clean
    getCurrentWeather call, arguments {"city":"Rome"}, continuation correct).
-5. AG-Bench v2.2 n=1, prediction band 8-11: **HIT at 10/11 @ 341 s suite wall.**
-   Evidence: `benchmarks/results/nemotron-bolt-e4b-20261023-scored.jsonl`,
-   merged audited set (9 rows from the tasks-1-9 run + 2 rows from the tasks-10-11
-   rerun; a literal-glob harness bug excluded one garbage row, same serve,
-   sequential in time).
+5. AG-Bench v2.2 n=2, prediction band 8-11: **HIT at 10/11, both rounds, identical
+   pass sets** — r1 341 s, r2 357 s suite wall. Sole fail task2 both rounds (SSR
+   markup contract, deterministic 0/2, math correct both times). Evidence:
+   `benchmarks/results/nemotron-bolt-e4b-20261023-scored.jsonl` (r1) and
+   `nemotron-bolt-e4b-r2-20261023-scored.jsonl` (r2), each a merged audited set
+   (the tasks-1-9 run + the tasks-10-11 rerun; one garbage literal-glob row excluded
+   per round, same serve session, sequential in time; the multi-word glob trap is
+   now fixed in agentic-bench.sh).
 
 ## Verdict
 
-**10/11 v2.2 @ 341 s (n=1), the fastest suite wall ever measured on this card**,
-about 3.0-3.3x faster than the Swift IQ2_XS standing serve's 11/11 n=2 walls
-(1051/1123 s) and ahead of every pi row in per-task walls (13-45 s per task
-including the fail). The fleet hypothesis is confirmed: the GRPO post-train lifts
-the agentic tier from the base's 7/11 into the 9-11 band on this exact skeleton.
-The one miss, task2, computed the correct total (17.50 EUR) but rendered it as
-split React text nodes; SSR `<!-- -->` markers broke the markup contract regex.
-Math right, markup contract wrong: honest fail, signature recorded in the
-scored.jsonl audit row.
+**10/11 v2.2, n=2 at 341/357 s wall with identical pass sets, the fastest suite
+wall ever measured on this card** (n confirmed: r2 ran same serve, same settings,
+~4 min after r1). About 3.0-3.3x faster than the Swift IQ2_XS standing serve's
+11/11 n=2 walls (1051/1123 s); per-task walls 13-87 s. The fleet hypothesis is
+confirmed: the GRPO post-train lifts the agentic tier from the base's 7/11 into
+the 9-11 band on this exact skeleton, reproducibly. The one miss, task2, is
+deterministic (0/2): the correct total (17.50 EUR) rendered as split React text
+nodes; SSR `<!-- -->` markers broke the markup contract regex. Math right, markup
+contract wrong, both rounds: signature recorded in both scored.jsonl audit rows.
 
 Where it sits in the fleet:
 
 | | Bolt E4B | Gemma 4 E4B QAT (base) | Ternary Bonsai 2 9B | Swift 1.5 FN IQ2_XS (standing) |
 |---|---|---|---|---|
-| AG-Bench v2.2 | **10/11 @ 341 s** (n=1) | 7/11 (v2.1 era) | 11/11 @ 22.8 min | **11/11 @ 1051/1123 s** (n=2) |
+| AG-Bench v2.2 | **10/11 @ 341/357 s** (n=2) | 7/11 (v2.1 era) | 11/11 @ 22.8 min | **11/11 @ 1051/1123 s** (n=2) |
 | Decode (code) | 157-173 tok/s d4/d7 | 181 tok/s MTP d2 | 115 tok/s | 41-42.5 agent decode |
 | Context | 64K resident @ 5.8 GB | 128K @ 5.81 GB | 128K, free 4-slot | 128K serve |
 | Class | fast agentic resident | fast thinking chat | perfect-rate 9B | slow-smart reference |
 
 Bolt E4B is the strongest fast-tier candidate tested on this card: near-perfect-
-rate agentic at interactive speed, tools-clean, 64K resident in 71% of VRAM. It
-does not replace the standing serve (Swift stays the 11/11 n=2 reference, and
-Bolt's n=1 has not been repeated); the n=2 confirmation run and a possible task2
-retry (SSR-contract failure may be stochastic) are the natural next steps, and a
-Strata bring-up of Bolt would open its 128K-class streaming stack to this pack
-if Strata gains a Gemma-4-E4B hybrid loader.
+rate agentic at interactive speed, tools-clean, 64K resident in 71% of VRAM.
+The n=2 confirmation ran (identical 10/11, pass sets equal) and the task2 retry
+question is closed: deterministic SSR-contract miss, not stochastic. Remaining
+open item is the Strata gap (recorded Tier 3, NEXT-IDEAS.md): the pack declares
+`gemma4`, Strata's importer scope ends at gemma3, so Bolt's 64K window cannot use
+Strata's conversation-cache/streamed-KV machinery — and the stress-trio
+compaction FAIL stands as an engine-stack limitation row, not a model verdict.
 
 ## Wiring added (all additive, no task edits)
 
@@ -141,6 +145,7 @@ record; this row exists for the stress comparison table, not the leaderboard.
 - [x] Serve, footprint, decode + prefill measured (no-draft, d4, d7)
 - [x] 64K boot verified with drafter (5,824 MiB)
 - [x] Capability probes
-- [x] AG-Bench v2.2 n=1: 10/11 @ 341 s
-- [x] Verdict written. TESTED.md row added. Open items: n=2 confirmation, task2
-      retry, Strata loader question (NEXT-IDEAS tier material)
+- [x] AG-Bench v2.2 n=2: 10/11 both rounds, identical pass sets (341/357 s)
+- [x] Stress trio row (1/3, separate from the bench of record)
+- [x] Verdict written. TESTED.md row added. Strata `gemma4` gap filed as
+      Tier 3 upstream blocker. task2 confirmed deterministic 0/2.

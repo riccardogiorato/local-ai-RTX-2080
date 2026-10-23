@@ -1,0 +1,10 @@
+{"model": "nemotron-bolt-e4b-r2", "task": "task1-js-bugfix", "passed": true, "wall_s": 16, "suspect_garbage_pass": false, "tool_calls": 18, "finish": "unknown", "zero_byte_retry": false}
+{"model": "nemotron-bolt-e4b-r2", "task": "task2-react-fix", "passed": false, "wall_s": 66, "suspect_garbage_pass": false, "tool_calls": 39, "finish": "unknown", "zero_byte_retry": false}
+{"model": "nemotron-bolt-e4b-r2", "task": "task3-dep-upgrade", "passed": true, "wall_s": 19, "suspect_garbage_pass": false, "tool_calls": 28, "finish": "unknown", "zero_byte_retry": false}
+{"model": "nemotron-bolt-e4b-r2", "task": "task4-python-bugfix", "passed": true, "wall_s": 16, "suspect_garbage_pass": false, "tool_calls": 29, "finish": "unknown", "zero_byte_retry": false}
+{"model": "nemotron-bolt-e4b-r2", "task": "task5-js-to-ts", "passed": true, "wall_s": 32, "suspect_garbage_pass": false, "tool_calls": 35, "finish": "unknown", "zero_byte_retry": false}
+{"model": "nemotron-bolt-e4b-r2", "task": "task6-extra-code-task", "passed": true, "wall_s": 22, "suspect_garbage_pass": false, "tool_calls": 17, "finish": "unknown", "zero_byte_retry": false}
+{"model": "nemotron-bolt-e4b-r2", "task": "task7-long-context-agent", "passed": true, "wall_s": 30, "suspect_garbage_pass": false, "tool_calls": 36, "finish": "unknown", "zero_byte_retry": false}
+{"model": "nemotron-bolt-e4b-r2", "task": "task8-tb-broken-python", "passed": true, "wall_s": 21, "suspect_garbage_pass": false, "tool_calls": 22, "finish": "unknown", "zero_byte_retry": false}
+{"model": "nemotron-bolt-e4b-r2", "task": "task9-tb-analyze-access-logs", "passed": true, "wall_s": 14, "suspect_garbage_pass": false, "tool_calls": 12, "finish": "unknown", "zero_byte_retry": false}
+{"model": "nemotron-bolt-e4b-r2", "task": "task1[01]-*", "passed": false, "wall_s": 0, "suspect_garbage_pass": false, "tool_calls": 0, "finish": "unknown", "zero_byte_retry": false}
