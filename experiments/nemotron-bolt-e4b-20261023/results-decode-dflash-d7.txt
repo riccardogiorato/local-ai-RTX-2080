@@ -1,0 +1,4 @@
+{"label":"nemotron-bolt-dflash-d7","prompt":"code-continuation.txt","run":1,{"decode_tps": 173.02, "decode_n": 256, "prefill_tps": 2343.36},"acceptance":0.982,"mean_len":7.76}
+{"label":"nemotron-bolt-dflash-d7","prompt":"code-continuation.txt","run":2,{"decode_tps": 172.54, "decode_n": 256, "prefill_tps": 2353.61},"acceptance":0.982,"mean_len":7.76}
+{"label":"nemotron-bolt-dflash-d7","prompt":"decode-isolation.txt","run":1,{"decode_tps": 57.92, "decode_n": 48, "prefill_tps": 389.58},"acceptance":0.155,"mean_len":2.09}
+{"label":"nemotron-bolt-dflash-d7","prompt":"decode-isolation.txt","run":2,{"decode_tps": 57.86, "decode_n": 48, "prefill_tps": 353.35},"acceptance":0.155,"mean_len":2.09}

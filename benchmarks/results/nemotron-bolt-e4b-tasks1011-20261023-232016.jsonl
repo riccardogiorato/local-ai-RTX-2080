@@ -1,0 +1,2 @@
+{"model": "nemotron-bolt-e4b-tasks1011", "task": "task10-tb-bank-trans-filter", "passed": true, "wall_s": 34, "suspect_garbage_pass": false, "tool_calls": 15, "finish": "unknown", "zero_byte_retry": false}
+{"model": "nemotron-bolt-e4b-tasks1011", "task": "task11-tb-assign-seats", "passed": true, "wall_s": 26, "suspect_garbage_pass": false, "tool_calls": 32, "finish": "unknown", "zero_byte_retry": false}

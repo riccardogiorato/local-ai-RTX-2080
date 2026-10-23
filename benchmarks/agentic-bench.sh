@@ -37,7 +37,7 @@ run_task() {
   # let it fall through to verify (honest fail) and flag it in the row.
   local zero_byte_retry=0
   for attempt in 1 2; do
-    ( cd "$work" && PI_OFFLINE=${PI_OFFLINE:-1} timeout "$CAP" "$PI_BIN" --provider strata --model local-model \
+    ( cd "$work" && PI_OFFLINE=${PI_OFFLINE:-1} timeout "$CAP" "$PI_BIN" --provider "${PI_PROVIDER:-strata}" --model "${PI_MODEL:-local-model}" \
         --mode json --no-session \
         -p "$(cat "$work/TASK.md")" < /dev/null ) > "$work/pi-session.jsonl" 2>"$work/pi-errors.log"
     [ -s "$work/pi-session.jsonl" ] && break
@@ -136,7 +136,7 @@ WARM_TIMEOUT="${WARM_TIMEOUT:-90}"
 WARM_BYPASS="${WARM_BYPASS:-0}"
 WARM_OK=""
 for attempt in 1 2 3; do
-  if PI_OFFLINE=${PI_OFFLINE:-1} timeout "$WARM_TIMEOUT" "$PI_BIN" --provider strata --model local-model \
+  if PI_OFFLINE=${PI_OFFLINE:-1} timeout "$WARM_TIMEOUT" "$PI_BIN" --provider "${PI_PROVIDER:-strata}" --model "${PI_MODEL:-local-model}" \
       --mode json --no-session -p "Reply with the single word OK." < /dev/null \
       > /tmp/agentic-warmup.jsonl 2>/dev/null; then
     if grep -q '"stopReason":"stop"' /tmp/agentic-warmup.jsonl 2>/dev/null; then
@@ -158,7 +158,10 @@ fi
 # TASK_RE: optional bash-regex filter on task dir names (e.g. TASK_RE='task(7|8|9|10|11)'
 # to run only the v2.1 additions). Default runs the whole suite.
 TASK_RE="${TASK_RE:-task.*}"
-for entry in "$TASKS_DIR"/task*/; do
+# TASKS_GLOB: space-separated dir globs, each ENDING IN '/' (a trailing slash outside the
+# var would attach only to the last split piece and strip the prefix from earlier ones).
+# default = all tasks; bench-of-record 11 = 'task[1-9]-*/ task1[01]-*/'
+for entry in "$TASKS_DIR"/${TASKS_GLOB:-task*-/}; do
   [[ "$(basename "$entry")" =~ $TASK_RE ]] || continue
   run_task "$entry"
 done
