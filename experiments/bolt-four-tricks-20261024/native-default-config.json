@@ -1,0 +1,32 @@
+{
+  "command": [
+    "/tmp/bolt-b11804-tricks/build-default/bin/llama-server",
+    "--model",
+    "/home/riccardogiorato/models/nemotron-bolt-e4b/NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf",
+    "--alias",
+    "local-model",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080",
+    "--ctx-size",
+    "65536",
+    "--parallel",
+    "1",
+    "--n-gpu-layers",
+    "999",
+    "--flash-attn",
+    "on",
+    "--jinja",
+    "--no-warmup",
+    "--metrics",
+    "--spec-type",
+    "draft-dflash",
+    "--spec-draft-model",
+    "/home/riccardogiorato/models/nemotron-bolt-e4b/dflash-NVIDIA-Nemotron-3.5-Bolt-E4B-Q8_0.gguf",
+    "--spec-draft-n-max",
+    "4"
+  ],
+  "power_limit_w": 165,
+  "health_after_s": 4.002290020987857
+}

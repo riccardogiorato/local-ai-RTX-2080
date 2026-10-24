@@ -1,0 +1,29 @@
+{
+  "baseline-telemetry.csv": [
+    "165.00 W"
+  ],
+  "mtp-d2-telemetry.csv": [
+    "165.00 W"
+  ],
+  "mtp-d3-telemetry.csv": [
+    "165.00 W"
+  ],
+  "draft-kvq8-telemetry.csv": [
+    "165.00 W"
+  ],
+  "draft-q4-telemetry.csv": [
+    "165.00 W"
+  ],
+  "native-default-telemetry.csv": [
+    "165.00 W"
+  ],
+  "native-cublas-telemetry.csv": [
+    "165.00 W"
+  ],
+  "verify-mtp-d2-telemetry.csv": [
+    "165.00 W"
+  ],
+  "verify-native-cublas-telemetry.csv": [
+    "165.00 W"
+  ]
+}

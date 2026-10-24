@@ -1,0 +1,117 @@
+load_backend: loaded CPU backend from /app/libggml-cpu-haswell.so
+version: 0.7.0-dev (build 11804, commit c7fc50941)
+built with GNU 14.2.0 for Linux x86_64
+llama_quantize: quantizing '/models/dflash-NVIDIA-Nemotron-3.5-Bolt-E4B-Q8_0.gguf' to '/output/dflash-Bolt-Q4_K_M-from-Q8.gguf' as Q4_K_M using 4 threads
+llama_model_loader: loaded meta data with 45 key-value pairs and 58 tensors from /models/dflash-NVIDIA-Nemotron-3.5-Bolt-E4B-Q8_0.gguf (version GGUF V3 (latest))
+llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+llama_model_loader: - kv   0:                       general.architecture str              = dflash
+llama_model_loader: - kv   1:                               general.type str              = model
+llama_model_loader: - kv   2:                               general.name str              = NVIDIA-Nemotron-3.5-Bolt-E4B-DFlash
+llama_model_loader: - kv   3:                         general.size_label str              = 360M
+llama_model_loader: - kv   4:                            general.license str              = other
+llama_model_loader: - kv   5:                       general.license.name str              = nvidia-software-and-model-evaluation-...
+llama_model_loader: - kv   6:                       general.license.link str              = https://www.nvidia.com/en-us/agreemen...
+llama_model_loader: - kv   7:                   general.base_model.count u32              = 1
+llama_model_loader: - kv   8:                  general.base_model.0.name str              = NVIDIA Nemotron 3.5 Bolt E4B
+llama_model_loader: - kv   9:          general.base_model.0.organization str              = Nvidia
+llama_model_loader: - kv  10:              general.base_model.0.repo_url str              = https://huggingface.co/nvidia/NVIDIA-...
+llama_model_loader: - kv  11:                               general.tags arr[str,7]       = ["nvidia", "ModelOpt", "Nemotron-3.5-...
+llama_model_loader: - kv  12:                         dflash.block_count u32              = 5
+llama_model_loader: - kv  13:                      dflash.context_length u32              = 131072
+llama_model_loader: - kv  14:                    dflash.embedding_length u32              = 2560
+llama_model_loader: - kv  15:                 dflash.feed_forward_length u32              = 5120
+llama_model_loader: - kv  16:                dflash.attention.head_count u32              = 32
+llama_model_loader: - kv  17:             dflash.attention.head_count_kv u32              = 8
+llama_model_loader: - kv  18:                      dflash.rope.freq_base f32              = 1000000.000000
+llama_model_loader: - kv  19:    dflash.attention.layer_norm_rms_epsilon f32              = 0.000001
+llama_model_loader: - kv  20:                dflash.attention.key_length u32              = 128
+llama_model_loader: - kv  21:              dflash.attention.value_length u32              = 128
+llama_model_loader: - kv  22:                          dflash.block_size u32              = 8
+llama_model_loader: - kv  23:                     dflash.embedding_scale f32              = 50.596443
+llama_model_loader: - kv  24:                       dflash.target_layers arr[i32,5]       = [6, 12, 18, 24, 36]
+llama_model_loader: - kv  25:            dflash.attention.sliding_window u32              = 1024
+llama_model_loader: - kv  26:    dflash.attention.sliding_window_pattern arr[bool,5]      = [true, true, true, true, true]
+llama_model_loader: - kv  27:                    dflash.attention.causal bool             = false
+llama_model_loader: - kv  28:                       tokenizer.ggml.model str              = gemma4
+llama_model_loader: - kv  29:                      tokenizer.ggml.tokens arr[str,262144]  = ["<pad>", "<eos>", "<bos>", "<unk>", ...
+llama_model_loader: - kv  30:                      tokenizer.ggml.scores arr[f32,262144]  = [-1000.000000, -1000.000000, -1000.00...
+llama_model_loader: - kv  31:                  tokenizer.ggml.token_type arr[i32,262144]  = [3, 3, 3, 3, 3, 1, 1, 1, 1, 1, 1, 1, ...
+llama_model_loader: - kv  32:                      tokenizer.ggml.merges arr[str,514906]  = ["\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n \n", ...
+llama_model_loader: - kv  33:                tokenizer.ggml.bos_token_id u32              = 2
+llama_model_loader: - kv  34:                tokenizer.ggml.eos_token_id u32              = 1
+llama_model_loader: - kv  35:            tokenizer.ggml.unknown_token_id u32              = 3
+llama_model_loader: - kv  36:            tokenizer.ggml.padding_token_id u32              = 0
+llama_model_loader: - kv  37:               tokenizer.ggml.mask_token_id u32              = 4
+llama_model_loader: - kv  38:                    tokenizer.chat_template str              = {%- if conversational_mode | default(...
+llama_model_loader: - kv  39:            tokenizer.ggml.add_space_prefix bool             = false
+llama_model_loader: - kv  40:               tokenizer.ggml.add_bos_token bool             = true
+llama_model_loader: - kv  41:               general.quantization_version u32              = 2
+llama_model_loader: - kv  42:                          general.file_type u32              = 7
+llama_model_loader: - kv  43:                       general.quantized_by str              = Unsloth
+llama_model_loader: - kv  44:                           general.repo_url str              = https://huggingface.co/unsloth
+llama_model_loader: - type  f32:   22 tensors
+llama_model_loader: - type q8_0:   36 tensors
+load_arch_hparams: DFlash extract_layers = [6, 12, 18, 24, 36]
+[   1/  58] enc.output_norm.weight               - [  2560,      1,      1,      1], type =    f32, size =    0.010 MiB
+[   2/  58] fc.weight                            - [ 12800,   2560,      1,      1], type =   q8_0, converting to q4_K .. size =    33.20 MiB ->    17.58 MiB
+[   3/  58] output_norm.weight                   - [  2560,      1,      1,      1], type =    f32, size =    0.010 MiB
+[   4/  58] blk.0.attn_k.weight                  - [  2560,   1024,      1,      1], type =   q8_0, converting to q4_K .. size =     2.66 MiB ->     1.41 MiB
+[   5/  58] blk.0.attn_k_norm.weight             - [   128,      1,      1,      1], type =    f32, size =    0.000 MiB
+[   6/  58] blk.0.attn_norm.weight               - [  2560,      1,      1,      1], type =    f32, size =    0.010 MiB
+[   7/  58] blk.0.attn_output.weight             - [  4096,   2560,      1,      1], type =   q8_0, converting to q4_K .. size =    10.62 MiB ->     5.62 MiB
+[   8/  58] blk.0.attn_q.weight                  - [  2560,   4096,      1,      1], type =   q8_0, converting to q4_K .. size =    10.62 MiB ->     5.62 MiB
+[   9/  58] blk.0.attn_q_norm.weight             - [   128,      1,      1,      1], type =    f32, size =    0.000 MiB
+[  10/  58] blk.0.attn_v.weight                  - [  2560,   1024,      1,      1], type =   q8_0, converting to q4_K .. size =     2.66 MiB ->     1.41 MiB
+[  11/  58] blk.0.ffn_down.weight                - [  5120,   2560,      1,      1], type =   q8_0, converting to q4_K .. size =    13.28 MiB ->     7.03 MiB
+[  12/  58] blk.0.ffn_gate.weight                - [  2560,   5120,      1,      1], type =   q8_0, converting to q4_K .. size =    13.28 MiB ->     7.03 MiB
+[  13/  58] blk.0.ffn_norm.weight                - [  2560,      1,      1,      1], type =    f32, size =    0.010 MiB
+[  14/  58] blk.0.ffn_up.weight                  - [  2560,   5120,      1,      1], type =   q8_0, converting to q4_K .. size =    13.28 MiB ->     7.03 MiB
+[  15/  58] blk.1.attn_k.weight                  - [  2560,   1024,      1,      1], type =   q8_0, converting to q4_K .. size =     2.66 MiB ->     1.41 MiB
+[  16/  58] blk.1.attn_k_norm.weight             - [   128,      1,      1,      1], type =    f32, size =    0.000 MiB
+[  17/  58] blk.1.attn_norm.weight               - [  2560,      1,      1,      1], type =    f32, size =    0.010 MiB
+[  18/  58] blk.1.attn_output.weight             - [  4096,   2560,      1,      1], type =   q8_0, converting to q4_K .. size =    10.62 MiB ->     5.62 MiB
+[  19/  58] blk.1.attn_q.weight                  - [  2560,   4096,      1,      1], type =   q8_0, converting to q4_K .. size =    10.62 MiB ->     5.62 MiB
+[  20/  58] blk.1.attn_q_norm.weight             - [   128,      1,      1,      1], type =    f32, size =    0.000 MiB
+[  21/  58] blk.1.attn_v.weight                  - [  2560,   1024,      1,      1], type =   q8_0, converting to q4_K .. size =     2.66 MiB ->     1.41 MiB
+[  22/  58] blk.1.ffn_down.weight                - [  5120,   2560,      1,      1], type =   q8_0, converting to q4_K .. size =    13.28 MiB ->     7.03 MiB
+[  23/  58] blk.1.ffn_gate.weight                - [  2560,   5120,      1,      1], type =   q8_0, converting to q4_K .. size =    13.28 MiB ->     7.03 MiB
+[  24/  58] blk.1.ffn_norm.weight                - [  2560,      1,      1,      1], type =    f32, size =    0.010 MiB
+[  25/  58] blk.1.ffn_up.weight                  - [  2560,   5120,      1,      1], type =   q8_0, converting to q4_K .. size =    13.28 MiB ->     7.03 MiB
+[  26/  58] blk.2.attn_k.weight                  - [  2560,   1024,      1,      1], type =   q8_0, converting to q4_K .. size =     2.66 MiB ->     1.41 MiB
+[  27/  58] blk.2.attn_k_norm.weight             - [   128,      1,      1,      1], type =    f32, size =    0.000 MiB
+[  28/  58] blk.2.attn_norm.weight               - [  2560,      1,      1,      1], type =    f32, size =    0.010 MiB
+[  29/  58] blk.2.attn_output.weight             - [  4096,   2560,      1,      1], type =   q8_0, converting to q4_K .. size =    10.62 MiB ->     5.62 MiB
+[  30/  58] blk.2.attn_q.weight                  - [  2560,   4096,      1,      1], type =   q8_0, converting to q4_K .. size =    10.62 MiB ->     5.62 MiB
+[  31/  58] blk.2.attn_q_norm.weight             - [   128,      1,      1,      1], type =    f32, size =    0.000 MiB
+[  32/  58] blk.2.attn_v.weight                  - [  2560,   1024,      1,      1], type =   q8_0, converting to q6_K .. size =     2.66 MiB ->     2.05 MiB
+[  33/  58] blk.2.ffn_down.weight                - [  5120,   2560,      1,      1], type =   q8_0, converting to q6_K .. size =    13.28 MiB ->    10.25 MiB
+[  34/  58] blk.2.ffn_gate.weight                - [  2560,   5120,      1,      1], type =   q8_0, converting to q4_K .. size =    13.28 MiB ->     7.03 MiB
+[  35/  58] blk.2.ffn_norm.weight                - [  2560,      1,      1,      1], type =    f32, size =    0.010 MiB
+[  36/  58] blk.2.ffn_up.weight                  - [  2560,   5120,      1,      1], type =   q8_0, converting to q4_K .. size =    13.28 MiB ->     7.03 MiB
+[  37/  58] blk.3.attn_k.weight                  - [  2560,   1024,      1,      1], type =   q8_0, converting to q4_K .. size =     2.66 MiB ->     1.41 MiB
+[  38/  58] blk.3.attn_k_norm.weight             - [   128,      1,      1,      1], type =    f32, size =    0.000 MiB
+[  39/  58] blk.3.attn_norm.weight               - [  2560,      1,      1,      1], type =    f32, size =    0.010 MiB
+[  40/  58] blk.3.attn_output.weight             - [  4096,   2560,      1,      1], type =   q8_0, converting to q4_K .. size =    10.62 MiB ->     5.62 MiB
+[  41/  58] blk.3.attn_q.weight                  - [  2560,   4096,      1,      1], type =   q8_0, converting to q4_K .. size =    10.62 MiB ->     5.62 MiB
+[  42/  58] blk.3.attn_q_norm.weight             - [   128,      1,      1,      1], type =    f32, size =    0.000 MiB
+[  43/  58] blk.3.attn_v.weight                  - [  2560,   1024,      1,      1], type =   q8_0, converting to q4_K .. size =     2.66 MiB ->     1.41 MiB
+[  44/  58] blk.3.ffn_down.weight                - [  5120,   2560,      1,      1], type =   q8_0, converting to q4_K .. size =    13.28 MiB ->     7.03 MiB
+[  45/  58] blk.3.ffn_gate.weight                - [  2560,   5120,      1,      1], type =   q8_0, converting to q4_K .. size =    13.28 MiB ->     7.03 MiB
+[  46/  58] blk.3.ffn_norm.weight                - [  2560,      1,      1,      1], type =    f32, size =    0.010 MiB
+[  47/  58] blk.3.ffn_up.weight                  - [  2560,   5120,      1,      1], type =   q8_0, converting to q4_K .. size =    13.28 MiB ->     7.03 MiB
+[  48/  58] blk.4.attn_k.weight                  - [  2560,   1024,      1,      1], type =   q8_0, converting to q4_K .. size =     2.66 MiB ->     1.41 MiB
+[  49/  58] blk.4.attn_k_norm.weight             - [   128,      1,      1,      1], type =    f32, size =    0.000 MiB
+[  50/  58] blk.4.attn_norm.weight               - [  2560,      1,      1,      1], type =    f32, size =    0.010 MiB
+[  51/  58] blk.4.attn_output.weight             - [  4096,   2560,      1,      1], type =   q8_0, converting to q4_K .. size =    10.62 MiB ->     5.62 MiB
+[  52/  58] blk.4.attn_q.weight                  - [  2560,   4096,      1,      1], type =   q8_0, converting to q4_K .. size =    10.62 MiB ->     5.62 MiB
+[  53/  58] blk.4.attn_q_norm.weight             - [   128,      1,      1,      1], type =    f32, size =    0.000 MiB
+[  54/  58] blk.4.attn_v.weight                  - [  2560,   1024,      1,      1], type =   q8_0, converting to q6_K .. size =     2.66 MiB ->     2.05 MiB
+[  55/  58] blk.4.ffn_down.weight                - [  5120,   2560,      1,      1], type =   q8_0, converting to q6_K .. size =    13.28 MiB ->    10.25 MiB
+[  56/  58] blk.4.ffn_gate.weight                - [  2560,   5120,      1,      1], type =   q8_0, converting to q4_K .. size =    13.28 MiB ->     7.03 MiB
+[  57/  58] blk.4.ffn_norm.weight                - [  2560,      1,      1,      1], type =    f32, size =    0.010 MiB
+[  58/  58] blk.4.ffn_up.weight                  - [  2560,   5120,      1,      1], type =   q8_0, converting to q4_K .. size =    13.28 MiB ->     7.03 MiB
+llama_model_quantize_impl: model size  =   365.36 MiB (8.50 BPW)
+llama_model_quantize_impl: quant size  =   201.22 MiB (4.68 BPW)
+
+llama_quantize: quantize time = 10047.20 ms
+llama_quantize:    total time = 10047.20 ms

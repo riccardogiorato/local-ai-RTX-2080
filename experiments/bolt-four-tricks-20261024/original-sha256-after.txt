@@ -1,0 +1,2 @@
+/home/riccardogiorato/models/nemotron-bolt-e4b/NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf: OK
+/home/riccardogiorato/models/nemotron-bolt-e4b/dflash-NVIDIA-Nemotron-3.5-Bolt-E4B-Q8_0.gguf: OK

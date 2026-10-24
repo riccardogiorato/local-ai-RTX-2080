@@ -1,0 +1,2 @@
+power.limit [W], memory.used [MiB], temperature.gpu
+165.00 W, 5858 MiB, 33

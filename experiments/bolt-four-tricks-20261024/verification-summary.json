@@ -1,0 +1,140 @@
+{
+  "baseline": {
+    "probes": [
+      {
+        "probe": "river-on-1500",
+        "pass": true
+      },
+      {
+        "probe": "river-on-300",
+        "pass": false
+      },
+      {
+        "probe": "river-off",
+        "pass": true
+      },
+      {
+        "probe": "median-fix-exec",
+        "pass": true
+      },
+      {
+        "probe": "tools-call-continued",
+        "pass": true
+      }
+    ],
+    "agentic": [
+      {
+        "model": "bolt-four-tricks-baseline",
+        "task": "task1-js-bugfix",
+        "passed": true,
+        "wall_s": 17,
+        "suspect_garbage_pass": false,
+        "tool_calls": 22,
+        "finish": "unknown",
+        "zero_byte_retry": false
+      },
+      {
+        "model": "bolt-four-tricks-baseline",
+        "task": "task9-tb-analyze-access-logs",
+        "passed": true,
+        "wall_s": 39,
+        "suspect_garbage_pass": false,
+        "tool_calls": 12,
+        "finish": "unknown",
+        "zero_byte_retry": false
+      }
+    ]
+  },
+  "mtp-d2": {
+    "probes": [
+      {
+        "probe": "river-on-1500",
+        "pass": true
+      },
+      {
+        "probe": "river-on-300",
+        "pass": false
+      },
+      {
+        "probe": "river-off",
+        "pass": true
+      },
+      {
+        "probe": "median-fix-exec",
+        "pass": true
+      },
+      {
+        "probe": "tools-call-continued",
+        "pass": true
+      }
+    ],
+    "agentic": [
+      {
+        "model": "bolt-four-tricks-mtp-d2",
+        "task": "task1-js-bugfix",
+        "passed": true,
+        "wall_s": 13,
+        "suspect_garbage_pass": false,
+        "tool_calls": 22,
+        "finish": "unknown",
+        "zero_byte_retry": false
+      },
+      {
+        "model": "bolt-four-tricks-mtp-d2",
+        "task": "task9-tb-analyze-access-logs",
+        "passed": true,
+        "wall_s": 17,
+        "suspect_garbage_pass": false,
+        "tool_calls": 18,
+        "finish": "unknown",
+        "zero_byte_retry": false
+      }
+    ]
+  },
+  "native-cublas": {
+    "probes": [
+      {
+        "probe": "river-on-1500",
+        "pass": true
+      },
+      {
+        "probe": "river-on-300",
+        "pass": false
+      },
+      {
+        "probe": "river-off",
+        "pass": true
+      },
+      {
+        "probe": "median-fix-exec",
+        "pass": true
+      },
+      {
+        "probe": "tools-call-continued",
+        "pass": true
+      }
+    ],
+    "agentic": [
+      {
+        "model": "bolt-four-tricks-native-cublas",
+        "task": "task1-js-bugfix",
+        "passed": true,
+        "wall_s": 15,
+        "suspect_garbage_pass": false,
+        "tool_calls": 22,
+        "finish": "unknown",
+        "zero_byte_retry": false
+      },
+      {
+        "model": "bolt-four-tricks-native-cublas",
+        "task": "task9-tb-analyze-access-logs",
+        "passed": true,
+        "wall_s": 14,
+        "suspect_garbage_pass": false,
+        "tool_calls": 13,
+        "finish": "unknown",
+        "zero_byte_retry": false
+      }
+    ]
+  }
+}

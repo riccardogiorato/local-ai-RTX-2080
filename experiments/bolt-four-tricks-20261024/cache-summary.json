@@ -1,0 +1,38 @@
+{
+  "cache-off": [
+    {
+      "run": 1,
+      "turns": 7,
+      "prompt_ms": 11642.903,
+      "wall_s": 11.713932270009536,
+      "cache_tokens": 0,
+      "fresh_tokens": 27757
+    },
+    {
+      "run": 2,
+      "turns": 7,
+      "prompt_ms": 11646.077,
+      "wall_s": 11.717122457994265,
+      "cache_tokens": 0,
+      "fresh_tokens": 27757
+    }
+  ],
+  "cache-on": [
+    {
+      "run": 1,
+      "turns": 7,
+      "prompt_ms": 2996.303,
+      "wall_s": 3.066996335008298,
+      "cache_tokens": 21441,
+      "fresh_tokens": 6316
+    },
+    {
+      "run": 2,
+      "turns": 7,
+      "prompt_ms": 2999.585,
+      "wall_s": 3.079738091022591,
+      "cache_tokens": 21441,
+      "fresh_tokens": 6316
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+89262f03c3ecde67327797fb53005488c693be6d2a0c4f08376dbbcdab3a3b37  /tmp/bolt-b11804-tricks/build-default/bin/llama-server
+20c2064ddde4d40ba70c5d873656317d666a1299117754251096000f146baea0  /tmp/bolt-b11804-tricks/build-default/bin/libggml-cuda.so
+3c3919a0c1a0bfcae08e8feb129b7290192f6085d7fca864142252560c3117ea  /tmp/bolt-b11804-tricks/build-cublas/bin/llama-server
+f80ab4055daa7a42cc6cb540528d47ca786fb439dd9da73c55e600f77745e061  /tmp/bolt-b11804-tricks/build-cublas/bin/libggml-cuda.so

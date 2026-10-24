@@ -1,0 +1,22 @@
+warn: LLAMA_ARG_HOST environment variable is set, but will be overwritten by command line argument --host
+warn: LLAMA_ARG_PORT environment variable is set, but will be overwritten by command line argument --port
+0.00.116.783 I srv  llama_server: initializing ...
+0.00.116.804 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+0.00.117.194 W srv  llama_server: security: no API key is set and CORS allows all origins (see https://github.com/ggml-org/llama.cpp/pull/25655)
+0.00.118.574 I srv    load_model: loading model '/models/nemotron-bolt-e4b/NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf'
+0.00.760.853 E gguf_init_from_file: failed to open GGUF file '/models/gemma-4-e4b-qat/gemma-4-E4B-it-qat-assistant-MTP-Q8_0.gguf' (No such file or directory)
+0.00.760.966 E llama_model_load: error loading model: llama_model_loader: failed to load model from /models/gemma-4-e4b-qat/gemma-4-E4B-it-qat-assistant-MTP-Q8_0.gguf
+0.00.761.094 E llama_model_load_from_file_impl: failed to load model
+0.00.761.184 W operator(): failed to measure the memory of the extra model, fitting without it: failed to load model
+0.01.100.247 W load: control-looking token:    212 '</s>' was not control-type; this is probably a bug in the model. its type will be overridden
+0.01.100.441 W load: control-looking token:     50 '<|tool_response>' was not control-type; this is probably a bug in the model. its type will be overridden
+0.01.108.881 W load: '</s>' is a normal token here, removing it from EOG list
+0.01.791.950 I cmn          init: llama threadpool init, n_threads = 6
+0.01.792.721 I common_speculative_init_result: loading draft model '/models/gemma-4-e4b-qat/gemma-4-E4B-it-qat-assistant-MTP-Q8_0.gguf'
+0.01.792.789 E gguf_init_from_file: failed to open GGUF file '/models/gemma-4-e4b-qat/gemma-4-E4B-it-qat-assistant-MTP-Q8_0.gguf' (No such file or directory)
+0.01.792.867 E llama_model_load: error loading model: llama_model_loader: failed to load model from /models/gemma-4-e4b-qat/gemma-4-E4B-it-qat-assistant-MTP-Q8_0.gguf
+0.01.792.912 E llama_model_load_from_file_impl: failed to load model
+0.01.792.952 E common_speculative_init_result: failed to load draft model, '/models/gemma-4-e4b-qat/gemma-4-E4B-it-qat-assistant-MTP-Q8_0.gguf'
+0.01.792.994 E srv    load_model: failed to load draft model, '/models/gemma-4-e4b-qat/gemma-4-E4B-it-qat-assistant-MTP-Q8_0.gguf'
+0.01.793.036 I srv    operator(): operator(): cleaning up before exit...
+0.01.793.267 E srv  llama_server: exiting due to model loading error

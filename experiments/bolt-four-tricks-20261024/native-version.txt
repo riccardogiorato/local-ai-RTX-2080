@@ -1,0 +1,2 @@
+version: 0.7.0-dev (build 11804, commit c7fc50941)
+built with GNU 16.2.1 for Linux x86_64

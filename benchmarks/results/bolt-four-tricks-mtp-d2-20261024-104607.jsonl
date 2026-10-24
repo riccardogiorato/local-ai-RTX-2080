@@ -1,0 +1,2 @@
+{"model": "bolt-four-tricks-mtp-d2", "task": "task1-js-bugfix", "passed": true, "wall_s": 13, "suspect_garbage_pass": false, "tool_calls": 22, "finish": "unknown", "zero_byte_retry": false}
+{"model": "bolt-four-tricks-mtp-d2", "task": "task9-tb-analyze-access-logs", "passed": true, "wall_s": 17, "suspect_garbage_pass": false, "tool_calls": 18, "finish": "unknown", "zero_byte_retry": false}

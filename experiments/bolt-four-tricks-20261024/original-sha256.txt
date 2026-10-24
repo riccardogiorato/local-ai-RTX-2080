@@ -1,0 +1,2 @@
+b19f200ff71cc33668ad935a814ad466e7e16428fc260f1d2fbfdd49eab66a38  /home/riccardogiorato/models/nemotron-bolt-e4b/NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf
+9a63662ae8395b8bfc1a1b00d7a9ef354120f172704bd6ba88d3870cf22d4d03  /home/riccardogiorato/models/nemotron-bolt-e4b/dflash-NVIDIA-Nemotron-3.5-Bolt-E4B-Q8_0.gguf

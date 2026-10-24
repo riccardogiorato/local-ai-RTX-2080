@@ -1,0 +1,6 @@
+AG-Bench model=bolt-four-tricks-baseline cap=180s
+slots ready after 2s
+warm-up attempt 1: ok (model replied)
+{"model": "bolt-four-tricks-baseline", "task": "task1-js-bugfix", "passed": true, "wall_s": 17, "suspect_garbage_pass": false, "tool_calls": 22, "finish": "unknown", "zero_byte_retry": false}
+{"model": "bolt-four-tricks-baseline", "task": "task9-tb-analyze-access-logs", "passed": true, "wall_s": 39, "suspect_garbage_pass": false, "tool_calls": 12, "finish": "unknown", "zero_byte_retry": false}
+DONE — results in /home/riccardogiorato/Desktop/github/local-ai-rtx2080/benchmarks/results/bolt-four-tricks-baseline-20261024-104301.jsonl

@@ -47,7 +47,8 @@ for name, thinking, budget in [("river-on-1500", True, 1500), ("river-on-300", T
 
 # 4: coding — exec-verified median fix
 try:
-    r = chat([{"role": "user", "content": MEDIAN_TASK}], thinking=True, max_tokens=1000)
+    median_budget = int(os.environ.get("BOLT_MEDIAN_BUDGET", "1000"))
+    r = chat([{"role": "user", "content": MEDIAN_TASK}], thinking=True, max_tokens=median_budget)
     txt = r["choices"][0]["message"]["content"] or ""
     code = re.search(r"```python\n(.*?)```", txt, re.S)
     ok = False
@@ -62,7 +63,7 @@ try:
         except Exception as verify_err:
             ok = False
             txt += f" [EXEC-FAIL: {verify_err}]"
-    rows.append(row("median-fix-exec", ok, extraction="fenced" if code else "raw", output=txt))
+    rows.append(row("median-fix-exec", ok, budget=median_budget, extraction="fenced" if code else "raw", output=txt))
 except Exception as e:
     rows.append(row("median-fix-exec", False, error=str(e)[:200]))
 

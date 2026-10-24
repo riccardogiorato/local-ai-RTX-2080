@@ -1,0 +1,30 @@
+0.00.055.069 I srv  llama_server: initializing ...
+0.00.055.084 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+0.00.055.427 W srv  llama_server: security: no API key is set and CORS allows all origins (see https://github.com/ggml-org/llama.cpp/pull/25655)
+0.00.057.079 I srv    load_model: loading model '/home/riccardogiorato/models/nemotron-bolt-e4b/NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf'
+0.01.253.512 E llama_init_from_model: failed to initialize the context: dflash requires ctx_other to be set (this warning is normal during memory fitting)
+0.01.319.245 W operator(): failed to measure the memory of the extra model, fitting without it: failed to create llama_context from model
+0.01.823.648 W load: control-looking token:    212 '</s>' was not control-type; this is probably a bug in the model. its type will be overridden
+0.01.823.741 W load: control-looking token:     50 '<|tool_response>' was not control-type; this is probably a bug in the model. its type will be overridden
+0.01.837.113 W load: '</s>' is a normal token here, removing it from EOG list
+0.02.574.089 I cmn          init: llama threadpool init, n_threads = 6
+0.02.574.158 I common_speculative_init_result: loading draft model '/home/riccardogiorato/models/nemotron-bolt-e4b/dflash-NVIDIA-Nemotron-3.5-Bolt-E4B-Q8_0.gguf'
+0.03.413.059 W load: control-looking token:    212 '</s>' was not control-type; this is probably a bug in the model. its type will be overridden
+0.03.413.120 W load: control-looking token:     50 '<|tool_response>' was not control-type; this is probably a bug in the model. its type will be overridden
+0.03.439.377 W load: '</s>' is a normal token here, removing it from EOG list
+0.03.686.851 I srv    load_model: initializing, n_slots = 1, n_ctx_slot = 65536, kv_unified = 'false'
+0.03.686.926 I common_speculative_impl_draft_dflash: adding speculative implementation 'draft-dflash'
+0.03.686.943 I common_speculative_impl_draft_dflash: - n_max=4, n_min=0, p_min=0.00
+0.03.686.957 I common_speculative_impl_draft_dflash: - block_size=8, mask_token_id=4, n_extract=5, sample_from_anchor=true
+0.03.720.469 I srv  llama_server: model loaded
+0.03.720.510 I srv  llama_server: listening on http://127.0.0.1:8080
+0.04.089.919 I slot get_availabl: id  0 | task -1 | selected slot by LRU, n_tokens = 0, t_last = -1
+0.04.092.017 I slot launch_slot_: id  0 | task 0 | processing task, is_child = 0
+0.04.468.684 I slot print_timing: id  0 | task 0 | prompt eval time =     205.29 ms /    10 tokens (   20.53 ms per token,    48.71 tokens per second)
+0.04.468.729 I slot print_timing: id  0 | task 0 |        eval time =     171.24 ms /    16 tokens (   11.42 ms per token,    87.60 tokens per second)
+0.04.468.745 I slot print_timing: id  0 | task 0 |       total time =     376.53 ms /    26 tokens
+0.04.468.761 I slot print_timing: id  0 | task 0 |    graphs reused =          3
+0.04.468.775 I slot print_timing: id  0 | task 0 |   graph reallocs =          0    /     0        (same size) / (changed size)
+0.04.468.791 I slot print_timing: id  0 | task 0 | draft acceptance = 0.68750 (   11 accepted /    16 generated), mean len =  3.75
+0.04.469.687 I slot      release: id  0 | task 0 | stop processing: n_tokens = 25, truncated = 0
+0.04.492.050 I srv    operator(): operator(): cleaning up before exit...

@@ -1,0 +1,2 @@
+b7c56e8a22a0249844fe8365967ba19ac8e4a2099eaa73b23033ce89d9fc1a6f  /home/riccardogiorato/models/nemotron-bolt-e4b/experimental/dflash-Bolt-Q4_K_M-from-Q8.gguf
+49d8367f8e1a507ef6196a7eeed790b2797bc649568f431c10bce03f574f6ffc  /home/riccardogiorato/models/gemma-4-e4b-qat/gemma-4-E4B-it-qat-assistant-MTP-Q8_0.gguf
