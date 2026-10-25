@@ -1,3 +1,14 @@
 benchmarks/cpu/avx2-burn
 __pycache__/
 experiments/*/private/
+
+# Installed dependencies and generated build/test caches
+node_modules/
+.venv/
+.pytest_cache/
+*.py[cod]
+benchmarks/agentic-tasks/*/.build/
+
+# Local inference output and IPC sockets (benchmark evidence logs stay tracked)
+/llama.log
+*.sock
