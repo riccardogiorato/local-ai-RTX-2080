@@ -13,6 +13,7 @@ decode entries identify the workload. Model links open the full recipe and resul
 
 | Model | Prefill, tok/s | Decode, tok/s |
 |---|---:|---:|
+| [Nemotron 3.5 Bolt E4B UD-Q4_K_XL · DFlash d4](experiments/bolt-64k-engines-20261024/README.md) | **2,386 at 2.1K** | **190.2 code / 86.1 long prose** |
 | [Qwen3.8 Flash-Next 125B Q2_0 · tuned Strata 0.1.45](recipes/flashnext-gsqrc-q20-125b-strata.md) | **695.4 at 32K** | **47.1 chat** |
 | [Ternary Bonsai 2 9B](recipes/ternary-bonsai2-9b-pq20-mtp-llamacpp-fork.md) | 1,553 at 25K | 115.1 code / 82.2–82.6 prose |
 | [Qwen3.5 4B](recipes/qwen35-4b-mtp-q4km-llamacpp.md) | 2,327 at 2.8K | 181.8–182.2 code |
@@ -22,7 +23,19 @@ decode entries identify the workload. Model links open the full recipe and resul
 | [Qwen3.5 35B A3B IQ2_XXS](recipes/qwen35-35b-a3b-cpuexperts-llamacpp.md) | 1,038–1,044, fresh prompt | 40, warm decode |
 | [Flash-Next Coder 125B IQ1_M](recipes/flashnext-gsqrc-coder-iq1m-125b-strata.md) | — | 21.7–27.4 |
 
-## Latest achievement: tuning Strata for the RTX 2080
+## Latest addition: Nemotron 3.5 Bolt E4B
+
+**2026-10-24:** the Bolt row uses pinned llama.cpp **b11804**, DFlash d4,
+and a **65,536-token context allocation**. Rates are means of two measured runs
+with warmups excluded; the decode figures use short inputs, not a filled 64K
+history. [Measurement details and raw summary](experiments/bolt-64k-engines-20261024/summary.json).
+
+Earlier **b11118** runs scored **10/11 on AG-Bench v2.2 twice**, taking
+**341 and 357 seconds**. That suite has not been rerun on b11804; its speed
+results and the historical agentic score are separate evidence.
+[Agentic results and launch script](experiments/nemotron-bolt-e4b-20261023/README.md).
+
+## Strata tuning for the RTX 2080
 
 **2026-10-18:** Flash-Next 125B runs with **128K context** on this 8 GB card.
 Our tuned Strata 0.1.45 configuration improved repeated 32K prefill from
