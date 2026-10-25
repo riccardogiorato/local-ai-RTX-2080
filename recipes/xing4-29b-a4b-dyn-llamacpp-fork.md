@@ -77,7 +77,7 @@ Gemma-12B / the Qwen3.5-35B-A3B at 3/6.
 `--batch-size 4096 --ubatch-size 4096` on the serve line: **386 → 933 tok/s**
 prefill, decode unchanged (~25 warm). Cleanest monotone result of the UBBoost
 investigation — sweep in
-[evidence/ubatch-prefill-sweep.jsonl](../evidence/ubatch-prefill-sweep.jsonl).
+[experiments/evidence/ubatch-prefill-sweep.jsonl](../experiments/evidence/ubatch-prefill-sweep.jsonl).
 Serve line in the recipe block above updated to carry it.
 
 **Agent-level validation:** AG-Bench re-run at ub 4096 — same **3/6** score, but
@@ -90,4 +90,4 @@ flip outcomes.
 
 On SSD while active; rotates per the storage rule once benched.
 
-Evidence: [evidence/xing4-29b-a4b-mtp.jsonl](../evidence/xing4-29b-a4b-mtp.jsonl)
+Evidence: [experiments/evidence/xing4-29b-a4b-mtp.jsonl](../experiments/evidence/xing4-29b-a4b-mtp.jsonl)

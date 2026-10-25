@@ -36,7 +36,7 @@ The README's shoes example (late delivery + wrong size + double charge) routes t
 billing. The scoring/noul outputs are well-behaved. Treat kev as a cheap deterministic
 router/scorer that leaves nearly the whole GPU free, not as a judge.
 
-Evidence: [evidence/kev-05b-serve.jsonl](../evidence/kev-05b-serve.jsonl)
+Evidence: [experiments/evidence/kev-05b-serve.jsonl](../experiments/evidence/kev-05b-serve.jsonl)
 
 ## Reproduce
 

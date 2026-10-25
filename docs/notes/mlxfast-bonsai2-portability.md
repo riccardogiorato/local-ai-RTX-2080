@@ -4,7 +4,7 @@ Source: https://www.yukon.org/mlxfast (leaderboard) + https://github.com/Layr-La
 (the "engine" repo; every leaderboard row is a PR there by `app/yukon-autoresearch`, merged = promoted).
 Read from the PR bodies ("Submitter note" write-ups: technique, base, attribution, bitwise self-test
 gates, measurements, negative results). This note extracts what transfers to the RTX 2080 stack.
-Related: `notes/tensorfold-analysis.md` (the sibling exactness program), `notes/kernel-sm75-ptq1_0-investigation.md`
+Related: `docs/notes/tensorfold-analysis.md` (the sibling exactness program), `docs/notes/kernel-sm75-ptq1_0-investigation.md`
 (the open fork-kernel item this connects to).
 
 ## The one fact that makes this relevant
@@ -55,7 +55,7 @@ Verdict scale: ✅ COPY (logic-level, no kernels) · 🔧 PORT (needs CUDA/fork 
 | # | Technique (solver) | Verdict |
 |---|---|---|
 | 8 | **Packed 2-bit codes fed to the matrix unit, no dequant** (polymorf, +58.5% lineage) | Ours already: the fork's PTQ1_0 IMMA path *is* this on sm_75. Their transferable lesson: the **verify-width** route (≤16 rows) wins in situ on every tower projection even where isolated microbenchmarks say otherwise — polymorf's inclusion test: 1336–1350 ms excluding gate|up vs 1300–1307 with it. Feeds item 1. |
-| 9 | **Register-weight / plane-copy weight layout** (Meganpark, DPZZxlz — lane loads only its 32 bytes, ~2 ms/prompt-forward) | 🧪 their gain is simdgroup load coalescing. Our yardstick already exists: `notes/roofline_probe_sm75.cu`. If the fork's MMQ tile path streams materially below 425 GB/s, a plane-permuted PTQ1_0 tile layout is a legitimate candidate; otherwise skip. |
+| 9 | **Register-weight / plane-copy weight layout** (Meganpark, DPZZxlz — lane loads only its 32 bytes, ~2 ms/prompt-forward) | 🧪 their gain is simdgroup load coalescing. Our yardstick already exists: `docs/notes/roofline_probe_sm75.cu`. If the fork's MMQ tile path streams materially below 425 GB/s, a plane-permuted PTQ1_0 tile layout is a legitimate candidate; otherwise skip. |
 | 10 | **Row-tiled activation constants** (polymorf, −5% prefill; epilogue loads are the cost: 95 TF/s bare vs ~80 with) | 🧪 CUDA analog is a float4-coalesced constant layout; only if the profile shows epilogue loads dominating. Prefill matters least for a single-user box. |
 | 11 | **Split-K bodies + per-shape in-situ trials, adopt only on a box win** (i34-9, DPZZxlz; winglock: in-place KV trial adopted at 1419→1288 µs) | ✅ COPY as an idea; directly entangled with 1. The trial discipline is our ranges-not-best-of rule already. |
 | 12 | **Fused boundary kernel: RMSNorm + rotation + quantize in one launch** (ercumentyildirim `Qwen35FusedBoundaryQ8`) | 🔧 PORT-worthy for **decode**: single-token decode is latency-bound, launch-count reduction buys real % at 55–59 tok/s. Target the paste/pre-cast chains around the fork's MMQ call sites. |
@@ -112,7 +112,7 @@ stricter than the contest's own.
 1. sm_75 exact arithmetic lives **only** on dp4a/IMMA (measured, `mma_bitslice_probe_sm75.cu`).
 2. ptxas accepts but misdecodes sm_80 `mma.sync` forms on Turing — never trust the compile.
 3. 8 GB: DFlash2 sidecar economics falsified here (acceptance 0.92 real, 1.14 GB + explain cost
-   not paying; `evidence/dflash2-drafter-qwen38-27b.jsonl`). Depth increase of the **embedded**
+   not paying; `experiments/evidence/dflash2-drafter-qwen38-27b.jsonl`). Depth increase of the **embedded**
    graft costs ~nothing (draft KV rows + M=17 activations), but do the KV arithmetic at target
    context before starting. Their 14.2 tok/round is DFlash-on-Metal; our realistic candidate is
    the MTP graft at whatever depth its acceptance curve supports.

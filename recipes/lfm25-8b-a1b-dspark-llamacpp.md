@@ -39,7 +39,7 @@ The task6 run **escaped its work directory** and edited the master task source i
 restores task sources from git around every task (`restore_master_if_dirty` in
 `agentic-bench.sh`); recorded in `benchmarks/README.md`.
 
-Evidence: [evidence/lfm25-8b-a1b-q4km-dspark.jsonl](../evidence/lfm25-8b-a1b-q4km-dspark.jsonl),
+Evidence: [experiments/evidence/lfm25-8b-a1b-q4km-dspark.jsonl](../experiments/evidence/lfm25-8b-a1b-q4km-dspark.jsonl),
 [benchmarks/results/lfm25-8b-a1b-q4km-dspark-20260925-173454.jsonl](../benchmarks/results/lfm25-8b-a1b-q4km-dspark-20260925-173454.jsonl)
 
 ## Reproduce

@@ -79,7 +79,7 @@ def record(label,phase,name,run,payload):
  return row
 
 def decode(label):
- prompts={n:(ROOT/'prompts'/n).read_text() for n in ['code-continuation.txt','decode-isolation.txt']}
+ prompts={n:(ROOT/'benchmarks'/'prompts'/n).read_text() for n in ['code-continuation.txt','decode-isolation.txt']}
  prompts['prose-long']='Write a detailed essay of at least 900 words explaining how controlled experiments distinguish causation from correlation. Discuss confounding variables, random assignment, measurement error, replication, and a concrete gardening example. Use connected prose with no lists. Begin the essay now:\n'
  for name,p in prompts.items():
   for run in range(3):record(label,'decode',name,run,{'prompt':p,'n_predict':512 if name=='prose-long' else 256,'temperature':0,'seed':42,'cache_prompt':False,'samplers':['temperature']})

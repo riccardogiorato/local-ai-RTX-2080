@@ -83,8 +83,8 @@ The recipe settings are the best measured: ubatch 512 is slower on long states (
 1 slot cuts throughput to 69/s (from 98/s), flash attention off costs 29% on long states and 22% on
 throughput, 4 slots ~= 8. No setting moves single-call latency (14.2-14.8 ms).
 
-Evidence: [evidence/d1-3b.jsonl](../evidence/d1-3b.jsonl)
+Evidence: [experiments/evidence/d1-3b.jsonl](../experiments/evidence/d1-3b.jsonl)
 
 ## Archive (rotated 2026-10-14)
 
-Moved to `/mnt/archive/local-models/d1-3B/` and `/mnt/archive/local-models/d1-3B-gguf/` (sha256-verified against the SSD copy before deletion; see evidence/hdd-backup-rotation-2026-10-14.jsonl). Rotate back to `~/models/` before serving.
+Moved to `/mnt/archive/local-models/d1-3B/` and `/mnt/archive/local-models/d1-3B-gguf/` (sha256-verified against the SSD copy before deletion; see experiments/evidence/hdd-backup-rotation-2026-10-14.jsonl). Rotate back to `~/models/` before serving.

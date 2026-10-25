@@ -71,7 +71,7 @@ and the kn-sm75-tune branch returned clean to upstream 285542d.
 token, better than the serve-era 1.52× estimate implied; d4 (n=5) rides the tiles at
 11.1 ms/token. The d1 serving choice (graft README default) is optimal on this card.
 
-Artifacts: `notes/roofline_probe_sm75.cu` (from-scratch calibration kernel).
+Artifacts: `docs/notes/roofline_probe_sm75.cu` (from-scratch calibration kernel).
 
 ## Postscript: TC-32K KV-RAM AG-Bench (2026-09-25, experiment #2 of the backlog sprint)
 

@@ -17,8 +17,8 @@ conc = int(sys.argv[2])
 port = 8080
 url = f"http://127.0.0.1:{port}"
 
-prompts = [open(f"{REPO}/prompts/code-continuation.txt", encoding="utf-8").read(),
-           open(f"{REPO}/prompts/decode-isolation.txt", encoding="utf-8").read()]
+prompts = [open(f"{REPO}/benchmarks/prompts/code-continuation.txt", encoding="utf-8").read(),
+           open(f"{REPO}/benchmarks/prompts/decode-isolation.txt", encoding="utf-8").read()]
 
 def mval(k):
     with urllib.request.urlopen(f"{url}/metrics", timeout=3) as r:

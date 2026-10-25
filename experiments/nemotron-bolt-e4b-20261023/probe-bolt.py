@@ -8,7 +8,7 @@ import json, os, re, sys, urllib.request
 
 PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 8080
 BASE = f"http://127.0.0.1:{PORT}"
-OUT = os.environ.get("BOLT_PROBE_OUT", "/home/riccardogiorato/Desktop/github/local-ai-rtx2080/evidence/nemotron-bolt-e4b-llamacpp.jsonl")
+OUT = os.environ.get("BOLT_PROBE_OUT", "/home/riccardogiorato/Desktop/github/local-ai-rtx2080/experiments/evidence/nemotron-bolt-e4b-llamacpp.jsonl")
 
 def chat(messages, tools=None, thinking=True, max_tokens=1500):
     payload = {"model": "local-model", "messages": messages, "temperature": 0,

@@ -57,15 +57,20 @@ which also cut cold loading from roughly 389 to 39 seconds.
 ## Reproduce a result
 
 Each model recipe records the model files, checksums, runtime, launch command,
-and measurements. Raw runs live in `evidence/` and `benchmarks/results/`.
+and measurements. Raw runs live in `experiments/evidence/` and `benchmarks/results/`.
 
 | Location | Contents |
 |---|---|
-| [recipes/](recipes/) | Model setup and launch commands |
-| [benchmarks/](benchmarks/) | Agent tasks, dashboard, and results |
-| [experiments/](experiments/) | Tuning scripts, patches, and measurements |
-| [TESTED.md](TESTED.md) | Complete model test history |
-| [hardware.md](hardware.md) | Hardware and measurement method |
+| [recipes/](recipes/) | **Run a model:** setup, configurations, and launch commands |
+| [benchmarks/](benchmarks/) | **Compare models:** reusable tests, prompts, dashboard, and scores |
+| [experiments/](experiments/) | **Inspect the evidence:** tuning investigations, raw results, and older measurements |
+| [docs/](docs/) | **Understand the findings:** research notes, registry history, and archived illustrations |
+| [systemd/](systemd/) | **Manage this machine:** installed serving services and helper scripts |
+
+Start with [TESTED.md](TESTED.md) for the model inventory and
+[hardware.md](hardware.md) for the hardware and measurement method.
+Raw evidence is under `experiments/evidence/`, older measurement records under
+`experiments/measurements/`, and shared test inputs under `benchmarks/prompts/`.
 
 ## Credits
 

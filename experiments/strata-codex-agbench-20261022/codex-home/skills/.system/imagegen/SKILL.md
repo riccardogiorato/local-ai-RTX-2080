@@ -82,7 +82,7 @@ Built-in edit semantics:
 
 Execution strategy:
 - In the built-in default path, produce many assets or variants by issuing one `image_gen` call per requested asset or variant.
-- In the CLI fallback path, use the CLI `generate-batch` subcommand only when the user explicitly chose CLI mode and needs many prompts/assets.
+- In the CLI fallback path, use the CLI `generate-batch` subcommand only when the user explicitly chose CLI mode and needs many benchmarks/prompts/assets.
 - For many distinct assets, do not use `n` as a substitute for separate prompts. `n` is for variants of one prompt; distinct assets need distinct built-in calls or distinct CLI `generate-batch` jobs.
 
 Assume the user wants a new image unless they clearly ask to change an existing one.

@@ -112,7 +112,7 @@ llama-server -m ~/models/bonsai2-9b-dflash2/Ternary-Bonsai-2-9B-PQ2_0-MTP-Q8_0.g
 #   --mmproj ~/models/bonsai2-9b-dflash2/Ternary-Bonsai-2-9B-mmproj-Q8_0.gguf
 ```
 
-Evidence: [evidence/ternary-bonsai2-9b.jsonl](../evidence/ternary-bonsai2-9b.jsonl) ·
+Evidence: [experiments/evidence/ternary-bonsai2-9b.jsonl](../experiments/evidence/ternary-bonsai2-9b.jsonl) ·
 [decode](../benchmarks/results/bonsai9b-mtp-d2-20261016.jsonl) ·
 [longctx](../benchmarks/results/bonsai9b-longctx-20261016.jsonl) ·
 [AG-Bench](../benchmarks/results/bonsai9b-128k-v22-20261016-041429.jsonl) ·

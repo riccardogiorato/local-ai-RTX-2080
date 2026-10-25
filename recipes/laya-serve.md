@@ -37,7 +37,7 @@ confidence while laya was a coin-flip on one and disagreed on the other. On thes
 146 MiB model is the better router; laya's advantage is raw speed if you need sub-30 ms
 answers and have VRAM to spare.
 
-Evidence: [evidence/laya-serve.jsonl](../evidence/laya-serve.jsonl)
+Evidence: [experiments/evidence/laya-serve.jsonl](../experiments/evidence/laya-serve.jsonl)
 
 ## Reproduce
 
@@ -118,4 +118,4 @@ the same build and settings as [d1-3B](d1-3b-decision-llamacpp.md).
 
 ## Archive (rotated 2026-10-14)
 
-Moved to `/mnt/archive/local-models/laya-gguf/` (sha256-verified against the SSD copy before deletion; see evidence/hdd-backup-rotation-2026-10-14.jsonl). Rotate back to `~/models/` before serving.
+Moved to `/mnt/archive/local-models/laya-gguf/` (sha256-verified against the SSD copy before deletion; see experiments/evidence/hdd-backup-rotation-2026-10-14.jsonl). Rotate back to `~/models/` before serving.

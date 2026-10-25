@@ -63,10 +63,10 @@ recipe and raw evidence. Failures are recorded with the same care as wins.
 | [swift15-27b-iq2xs](recipes/swift15-27b-iq2xs-mtp-llamacpp.md) | docker b11118 · ngl 40 · MTP d2 | 8K | 4.4 / 4.3 tok/s | 275 tok/s | 🔬 lab-verified |
 | [lfm25-8b-a1b-dspark](recipes/lfm25-8b-a1b-dspark-llamacpp.md) | docker b11118 · DSpark d4 | 32K | **221 / 200 tok/s** | ~500 tok/s | 🔬 lab-verified |
 | [qwen35-35b-a3b-cpuexperts](recipes/qwen35-35b-a3b-cpuexperts-llamacpp.md) | docker b11118 · experts in RAM | 32K | 40 tok/s (IQ2_XXS) / 36 (Q3_K_M) | 1040 / 840 tok/s | 🔬 lab-verified |
-| [gemma12b-qat-mtp](evidence/gemma12b-qat-mtp.jsonl) | docker b11118 · ngl 45 + Q4 head | 8K | 29.4 / 43.5 tok/s | ~90 tok/s | 🔬 evidence-only |
+| [gemma12b-qat-mtp](experiments/evidence/gemma12b-qat-mtp.jsonl) | docker b11118 · ngl 45 + Q4 head | 8K | 29.4 / 43.5 tok/s | ~90 tok/s | 🔬 evidence-only |
 | [gliner25-multi-v1](recipes/gliner25-multi-v1-serve.md) | gliner2 2.0 + torch (venv) | 4K window | **21.8 ms** / extraction | — | 🔬 lab-verified |
 | [xing4-29b-a4b-dyn](recipes/xing4-29b-a4b-dyn-llamacpp-fork.md) | fork host @ 63c16fb | 8K | 25 tok/s (ub4096 warm) | **346 tok/s** | 🔬 lab-verified |
-| [qwen38-27b-udiq1s](evidence/qwen38-27b-udiq1s.jsonl) | docker b11118 · full resident | 8K | 19.7 tok/s no-draft | ~505 tok/s | 🔬 evidence-only |
+| [qwen38-27b-udiq1s](experiments/evidence/qwen38-27b-udiq1s.jsonl) | docker b11118 · full resident | 8K | 19.7 tok/s no-draft | ~505 tok/s | 🔬 evidence-only |
 | [flashnext-ultralite-125b](recipes/flashnext-ultralite-125b-llamacpp-fork.md) | patched qwen4exp @ 250b61446 | 128K claim | 12.5 tok/s | 218–233 tok/s | 🔬 boundary record |
 | [ternary-bonsai2-9b](recipes/ternary-bonsai2-9b-pq20-mtp-llamacpp-fork.md) | prism-branch fork host build · MTP d2 · vision | **128K** | **115 / 82 tok/s** | **1.1–1.7K** tok/s | 🔬 lab-verified · **11/11 v2.2** |
 

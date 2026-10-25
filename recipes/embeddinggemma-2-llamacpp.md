@@ -36,4 +36,4 @@ the middle of its chunk. Agreement columns are against BF16.
   8 concurrent requests); one 128-doc request on one slot gives 4.5 docs/s. It is the same for every
   tier, so the ceiling is server scheduling, not weights.
 
-Evidence: [evidence/embeddinggemma-2.jsonl](../evidence/embeddinggemma-2.jsonl)
+Evidence: [experiments/evidence/embeddinggemma-2.jsonl](../experiments/evidence/embeddinggemma-2.jsonl)

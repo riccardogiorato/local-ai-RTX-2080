@@ -42,8 +42,8 @@ Same 3/3 profile as Qwen3.5-9B. Whether the "agentic distill" behavior actually 
 parent on multi-step agent tasks is **not measured here** — that needs an agent-workload
 benchmark, not these probes (parked in NEXT-IDEAS until such a harness is picked).
 
-Evidence: [evidence/mimo-9b-distill-q4km-llamacpp.jsonl](../evidence/mimo-9b-distill-q4km-llamacpp.jsonl),
-[evidence/mimo-9b-distill-q4km-capabilities.jsonl](../evidence/mimo-9b-distill-q4km-capabilities.jsonl)
+Evidence: [experiments/evidence/mimo-9b-distill-q4km-llamacpp.jsonl](../experiments/evidence/mimo-9b-distill-q4km-llamacpp.jsonl),
+[experiments/evidence/mimo-9b-distill-q4km-capabilities.jsonl](../experiments/evidence/mimo-9b-distill-q4km-capabilities.jsonl)
 
 ## Reproduce
 
@@ -84,7 +84,7 @@ Serial serve is 61 tok/s at the 32K recipe config (8K/ub128 costs ~7%).
 `GGML_CUDA_BATCH_INVARIANT=1` is a no-op on upstream b11118 — exactness patch is
 fork-only). Quality impact of the drift is an open AG-Bench re-run, not inferable from bytes.
 
-Evidence: [evidence/mimo-9b-dflash-drafter.jsonl](../evidence/mimo-9b-dflash-drafter.jsonl)
+Evidence: [experiments/evidence/mimo-9b-dflash-drafter.jsonl](../experiments/evidence/mimo-9b-dflash-drafter.jsonl)
 
 ### Reproduce the drafted serve
 

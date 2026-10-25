@@ -4,7 +4,7 @@
 
 - Local recipe: [recipes/qwen35-4b-mtp-q4km-llamacpp.md](../recipes/qwen35-4b-mtp-q4km-llamacpp.md)
 - Status in [0xsero/local-ai-registry](https://github.com/0xsero/local-ai-registry): **validated, `recommended: true`** for hardware `rtx-2080-8gb`
-- Acceptance evidence: speed-sweep `qwen35-4b-…-acceptance` (decode 112.8 tok/s, TTFT 71 ms); raw JSONL in [evidence/](../evidence/) (v2 = final launch contract with batch flags)
+- Acceptance evidence: speed-sweep `qwen35-4b-…-acceptance` (decode 112.8 tok/s, TTFT 71 ms); raw JSONL in [experiments/evidence/](../evidence/) (v2 = final launch contract with batch flags)
 - Contributed on branch `rtx-2080-recipes` on fork `riccardogiorato/local-ai-registry`; PR link added here once opened.
 
 ## qwen35-9b-q4km-mtp-rtx-2080-8gb-llamacpp-tp1

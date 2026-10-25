@@ -119,7 +119,7 @@ compaction FAIL stands as an engine-stack limitation row, not a model verdict.
 - `~/.pi/agent/models.json`: new `llamacpp-local` provider (openai-completions,
   `127.0.0.1:8080/v1`), alongside the standing `strata` entry.
 - `probe-bolt.py` (this dir): capability probe harness, evidence rows appended
-  to `evidence/nemotron-bolt-e4b-llamacpp.jsonl`.
+  to `experiments/evidence/nemotron-bolt-e4b-llamacpp.jsonl`.
 
 ## Stress trio (task12-14, same serve, 2026-10-23 23:31)
 
@@ -161,7 +161,7 @@ NVIDIA's report coexist with much worse next-token fidelity per this third-party
 
 - `results-decode-nodraft.txt`, `results-decode-dflash-d4.txt`,
   `results-decode-dflash-d7.txt` — raw measurement rows (ranges, no best-of)
-- `evidence/nemotron-bolt-e4b-llamacpp.jsonl` — capability probes
+- `experiments/evidence/nemotron-bolt-e4b-llamacpp.jsonl` — capability probes
 - `benchmarks/results/nemotron-bolt-e4b-20261023-231401.jsonl` (raw, tasks 1-9
   + one garbage glob row), `nemotron-bolt-e4b-tasks1011-20261023-232016.jsonl`
   (raw, tasks 10-11), `nemotron-bolt-e4b-20261023-scored.jsonl` (audited merge)

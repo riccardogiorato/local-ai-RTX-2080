@@ -68,7 +68,7 @@ below every other 27B/35B in the ledger. **If this box grows RAM (32 GB+), this 
 the smart-slot champion the same evening; as-is, ThinkingCap Q2_K holds the slot at
 9.57 tok/s + 3/3 probes because its 10.86 GB is fully-in-RAM dense.**
 
-Evidence: [evidence/qwen35-35b-a3b-mtp.jsonl](../evidence/qwen35-35b-a3b-mtp.jsonl),
+Evidence: [experiments/evidence/qwen35-35b-a3b-mtp.jsonl](../experiments/evidence/qwen35-35b-a3b-mtp.jsonl),
 [benchmarks/results/qwen35-35b-a3b-mtp-20260925-194626.jsonl](../benchmarks/results/qwen35-35b-a3b-mtp-20260925-194626.jsonl)
 
 ## Storage
@@ -83,7 +83,7 @@ Re-fetch at the pinned revision if the slot returns.
 prefill with decode unchanged. From the UBBoost investigation (PR #23239's claim
 reproduced via the plain ubatch lever — no runtime swap needed on this card because
 the expert band is already CPU-side so activation VRAM absorbs ub 4096). Full sweep
-in [evidence/ubatch-prefill-sweep.jsonl](../evidence/ubatch-prefill-sweep.jsonl).
+in [experiments/evidence/ubatch-prefill-sweep.jsonl](../experiments/evidence/ubatch-prefill-sweep.jsonl).
 
 Also re-learned during the sweep: warm short-ctx decode on a quiet box is
 **~39 tok/s** — the 9.3 figure in the table above was measured under real memory
@@ -109,7 +109,7 @@ new variable was the pack.
 
 The failing band is capability-class, not bpw-recoverable (both packs sit above the sub-2bpw
 wall). A tie at strictly worse speed = **IQ2_XXS stays the recommended pack**; the tip's denser
-quant buys nothing on this card. Evidence: [evidence/qwen35-35b-a3b-iq3xxs.jsonl](../evidence/qwen35-35b-a3b-iq3xxs.jsonl).
+quant buys nothing on this card. Evidence: [experiments/evidence/qwen35-35b-a3b-iq3xxs.jsonl](../experiments/evidence/qwen35-35b-a3b-iq3xxs.jsonl).
 
 Ops notes from this run: a same-day reboot had broken containerized CUDA silently (stale
 `/etc/cdi/nvidia.yaml` baked nvidia-uvm major 237; kernel re-registered uvm as 238 →

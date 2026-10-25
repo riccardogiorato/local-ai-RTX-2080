@@ -61,8 +61,8 @@ MTP heads for other families) would put spec decode on this artifact; the
 maths then are RAM (the PLE shard competes with the drafter) and the
 novel-prefill wall. Watch jmarceno/agentionai/z-lab.
 
-Evidence: [evidence/flashnext-gsqrc-q20-reasoning.jsonl](../evidence/flashnext-gsqrc-q20-reasoning.jsonl) ·
-measurements/flashnext-gsq-rco-q20-2026-10-01.txt · prior boundary-fail:
+Evidence: [experiments/evidence/flashnext-gsqrc-q20-reasoning.jsonl](../experiments/evidence/flashnext-gsqrc-q20-reasoning.jsonl) ·
+experiments/measurements/flashnext-gsq-rco-q20-2026-10-01.txt · prior boundary-fail:
 [recipes/flashnext-ultralite-125b-llamacpp-fork.md](flashnext-ultralite-125b-llamacpp-fork.md)
 
 ## Storage

@@ -3,8 +3,8 @@
 Source: github.com/ashhart/TensorFold, MIT. Read in full (clone + kernel-level read of
  mlx, CUDA families, engine, drafters, docs, tests). This note is the extraction that
  matters for THIS lab plus what we measured on our own card tonight. Artifacts:
- `notes/mma_bitslice_probe_sm75.cu` (probe source, run below), `notes/spec-drift-test-llamacpp.sh`
- (the drift harness), evidence in `evidence/tensorfold-exactness-probe.jsonl`.
+ `docs/notes/mma_bitslice_probe_sm75.cu` (probe source, run below), `docs/notes/spec-drift-test-llamacpp.sh`
+ (the drift harness), evidence in `experiments/evidence/tensorfold-exactness-probe.jsonl`.
 
 ## What it is
 
@@ -72,7 +72,7 @@ That's the sauce. Not a kernel trick — a discipline.
 - **Window economics:** `_paying_drafts` sizes draft windows from *measured* per-width
   pass costs; `cheap_window=4` guard — "unguarded 32-token windows ran 17 tok/s against
   ~30 plain". (Note for us: our fork's measured tile crossover at n=5 shows the same rule
-  holds on TU104 — kn-4 in `notes/kernel-sm75-ptq1_0-investigation.md`.)
+  holds on TU104 — kn-4 in `docs/notes/kernel-sm75-ptq1_0-investigation.md`.)
 - Live A/B flips of bit-identical kernel variants (`TF_KERNEL_AB`), decided by replaying
   agent turns "to the same sha". Bizarre and excellent.
 - CUDA path notes: cuBLAS/`torch.matmul`/`F.linear` are **banned from the verify path**
@@ -143,14 +143,14 @@ on batch shape; attribution needs a fork-level kernel A/B, not argued here.
 
 ## What we can actually take, ranked by value-per-effort (status updated after the survey)
 
-1. **The drift harness — DONE and RUN** (`notes/spec-drift-test-llamacpp.sh` + the
+1. **The drift harness — DONE and RUN** (`docs/notes/spec-drift-test-llamacpp.sh` + the
    five-config survey above). Rule adopted: every spec-decode recipe carries a drift
    row (serial vs drafted bytes on a fixed prompt set) — TensorFold's `draft:false`-sha
    protocol as 100 lines of shell.
 2. **Exact keyed sampling (port `exact_sampling.py`) — module DONE, 16/16 test classes
-   green** (`notes/keyed_gumbel_sampler.h`, `notes/keyed_gumbel_sampler_test.cpp`,
+   green** (`docs/notes/keyed_gumbel_sampler.h`, `docs/notes/keyed_gumbel_sampler_test.cpp`,
    300k-draw distribution matches softmax to 4 decimals). Integration plan against the
-   local tree in `notes/keyed-gumbel-llamacpp-integration.md` (5 hunks, position
+   local tree in `docs/notes/keyed-gumbel-llamacpp-integration.md` (5 hunks, position
    bookkeeping falls out of accept ordering). OPEN: patched build + repro + drift rerun.
 3. **Bonsai/PTQ1_0 full-lane audit — DONE, the positive result of the night**:
    `GGML_CUDA_BATCH_INVARIANT=1` gives 6/6 drafted==serial at zero speed cost. OPEN:
@@ -186,7 +186,7 @@ does not, and the flag costs ≈ nothing (draft 58.8 without vs 59.2 with, withi
 ±0.4 tok/s noise band). The lone drafted-self-nondeterminism case remains E4B's
 assistant-MTP config from the previous evening — one-off, cheap to re-run with the
 same harness. All raw outputs on /tmp/drift2; script generalized in
-`notes/spec-drift-test-llamacpp.sh` lineage.
+`docs/notes/spec-drift-test-llamacpp.sh` lineage.
 
 **Operating conclusions, in force now:**
 1. Byte-exact spec-decode serving on this card exists TODAY and costs nothing:

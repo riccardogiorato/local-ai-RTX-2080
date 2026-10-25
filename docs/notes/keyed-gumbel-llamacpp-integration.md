@@ -3,7 +3,7 @@
 Grounded against the LOCAL tree `~/Desktop/github/llama.cpp-upstream` @
 `e6ab7c1a4` (`common/sampling.{h,cpp}`, `tools/server/server-schema.cpp`), built
 at `/tmp/llama-upstream-keyed` (clean clone + patch; the donor tree has pruned
-build files, see `hardware.md` ops traps). Module `notes/keyed_gumbel_sampler.h`
+build files, see `hardware.md` ops traps). Module `docs/notes/keyed_gumbel_sampler.h`
 validated 17/17 test classes (incl. min_p filter); served and measured on the
 card tonight.
 
@@ -61,7 +61,7 @@ cannot offer when a chain RNG's position depends on draw count.
 
 ## The splice (5 hunks, all in common/ + one server line)
 
-1. **`common/keyed_gumbel_sampler.h`** — copy of `notes/keyed_gumbel_sampler.h` as-is.
+1. **`common/keyed_gumbel_sampler.h`** — copy of `docs/notes/keyed_gumbel_sampler.h` as-is.
 
 2. **`common_params_sampling`** (`common/sampling.h`): add
    ```cpp
@@ -111,7 +111,7 @@ cannot offer when a chain RNG's position depends on draw count.
 2. Repro at temp>0: same prompt+seed, 3 runs, serial — 3/3 byte-identical.
 3. Cross-restart repro: restart server between runs — still identical (the RNG
    state no longer lives in the process).
-4. Drift harness (`notes/spec-drift-test-llamacpp.sh`) with `keyed_exact` + greedy
+4. Drift harness (`docs/notes/spec-drift-test-llamacpp.sh`) with `keyed_exact` + greedy
    on E4B: expectation UNCHANGED vs tonight's result (sampling equality does not
    touch greedy logits) — this run isolates "sampler layer" from "kernel layer".
 5. Kernel-invariance pairing (Bonsai e1/e0 runs, tonight) decides whether the

@@ -1,6 +1,6 @@
 # Qwen3.5-4B MTP · Q4_K_M · llama.cpp
 
-**Status: ✅ registry-validated** (`recommended` for `rtx-2080-8gb`) — promoted via `accept_recipe.py` 2026-09-23, see [registry/qwen35-4b.md](../registry/qwen35-4b.md)
+**Status: ✅ registry-validated** (`recommended` for `rtx-2080-8gb`) — promoted via `accept_recipe.py` 2026-09-23, see [registry/qwen35-4b.md](../docs/registry.md)
 
 The fast default: best throughput/capability balance for short, bounded work. Weak on multi-fact reasoning without thinking mode (see Capabilities).
 
@@ -62,7 +62,7 @@ Endpoint: `http://127.0.0.1:8080/v1`, model id `Qwen3.5-4B-MTP-Q4_K_M`.
 | 32K | q8_0 | 4.34 GB | 2.8 GB | 181.8–182.2 tok/s | — | 2,327 t/s @2.8K · 2,241 @11.7K |
 | 128K | q8_0 | 7.15 GB | 640 MiB | 181.7–181.9 tok/s | 76.7 tok/s @94K | 1,295 t/s @94K |
 
-- Short-fill decode on the fixed 1,987-token [code-continuation prompt](../prompts/code-continuation.txt); MTP draft acceptance 203/208 (97.6%).
+- Short-fill decode on the fixed 1,987-token [code-continuation prompt](../benchmarks/prompts/code-continuation.txt); MTP draft acceptance 203/208 (97.6%).
 - **128K costs nothing at short fill** on this card (181.7 vs 181.8 tok/s): context size only matters once filled.
 - Cold start: 51.6 s docker run → model loaded; first request 17 tok/s incl. graph compile (CUDA graphs reused afterwards).
 - Acceptance-harness decode (fixed "history of computing" ×32 prompt, thinking on): **112.8 tok/s**, TTFT 71 ms (3 samples). First acceptance with llama.cpp defaults: 113.7 tok/s, TTFT 100 ms — flags change TTFT, not decode (see 9B recipe note).

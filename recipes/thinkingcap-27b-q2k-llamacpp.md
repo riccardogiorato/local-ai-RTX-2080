@@ -57,7 +57,7 @@ MTP acceptance 0.995 on the repetitive prompt (d2 cap ≈ 3.0 mean) doubles it f
 ## Prefill tuning (2026-09-26) — ubatch wall + the cold-prefill profile
 
 The dense cram's story is two-part (UBBoost investigation,
-[evidence/ubatch-prefill-sweep.jsonl](../evidence/ubatch-prefill-sweep.jsonl)):
+[experiments/evidence/ubatch-prefill-sweep.jsonl](../experiments/evidence/ubatch-prefill-sweep.jsonl)):
 
 - **The 8K best config (ngl 40) cannot grow ubatch on this card**: ub 512 loads then
   dies at first request, ub 1024 fails at load. Its prefill tuning ceiling stays at
@@ -106,8 +106,8 @@ thinking-off Gemma both fail. And in its signature thinking mode it short-tracks
 problems (93 tokens) instead of padding — the verbosity finetune evidently scales with
 difficulty, wasted tokens aren't forced.
 
-Evidence: [evidence/thinkingcap-27b-q2k-llamacpp.jsonl](../evidence/thinkingcap-27b-q2k-llamacpp.jsonl),
-[evidence/thinkingcap-27b-q2k-nodraft-capabilities.jsonl](../evidence/thinkingcap-27b-q2k-nodraft-capabilities.jsonl)
+Evidence: [experiments/evidence/thinkingcap-27b-q2k-llamacpp.jsonl](../experiments/evidence/thinkingcap-27b-q2k-llamacpp.jsonl),
+[experiments/evidence/thinkingcap-27b-q2k-nodraft-capabilities.jsonl](../experiments/evidence/thinkingcap-27b-q2k-nodraft-capabilities.jsonl)
 
 ## Reproduce (best config)
 

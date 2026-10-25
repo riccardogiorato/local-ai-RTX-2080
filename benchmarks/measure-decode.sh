@@ -43,5 +43,5 @@ print(round(sd and sa/sd or 0, 3), round((sa+sv) and sp/sv or 0, 2))")
   done
 }
 
-measure "$REPO/prompts/code-continuation.txt"
-measure "$REPO/prompts/decode-isolation.txt"
+measure "$REPO/benchmarks/prompts/code-continuation.txt"
+measure "$REPO/benchmarks/prompts/decode-isolation.txt"

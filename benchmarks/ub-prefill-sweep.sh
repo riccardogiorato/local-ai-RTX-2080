@@ -11,7 +11,7 @@ REPO="$(cd "$(dirname "$0")/.." && pwd)"
 python3 - "$REPO" <<'PYEOF'
 import json, sys, time, urllib.request
 repo = sys.argv[1]
-text = open(f"{repo}/prompts/code-continuation.txt", encoding="utf-8").read()
+text = open(f"{repo}/benchmarks/prompts/code-continuation.txt", encoding="utf-8").read()
 # a LONG fresh prompt class for prefill: the 512-token llama-bench-equivalent
 # is what public tables use; server-timing gives prompt_per_second directly.
 rows = []

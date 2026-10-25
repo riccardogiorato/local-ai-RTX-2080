@@ -24,7 +24,7 @@ turned out stale:
    retries once on an empty `pi-session.jsonl` (the ~1/75 pre-header startup
    stall; root-cause hunt stays open in Tier 1), rows carry a
    `zero_byte_retry` flag, ceilings unchanged.
-2. ✓ **`notes/mlxfast-bonsai2-portability.md` amended** — ranked plan
+2. ✓ **`docs/notes/mlxfast-bonsai2-portability.md` amended** — ranked plan
    reordered to (1) prompt-span lookup, (2) drafter class, (3) split-K
    patch parked behind it, (4) fusion/census; item-1 table verdict now
    records the 2026-09-28 falsification (acceptance 0.845→0.540 by d4,
@@ -72,12 +72,12 @@ turned out stale:
    environment ≠ the AG-Bench scaffolding where all 3 strikes happened, and
    strace latency may mask a race. Operations covered by the harness
    zero-byte auto-retry (Tier 0.1). REOPEN if a bench ever double-strikes
-   inside the auto-retry. Evidence `evidence/pi-hang-hunt-2026-10-01.jsonl`.
+   inside the auto-retry. Evidence `experiments/evidence/pi-hang-hunt-2026-10-01.jsonl`.
 2. ✓ **RESOLVED 2026-10-01 — d3 CROWNS E4B.** Depth sweep: code-class
    acceptance RISES at d3 (0.818/mean 3.55, +25% decode), novel peaks at
    d1; v2.1 bench: d3 7/11 @ 270 s vs d2 @ 302 s, identical pass set —
    NEW card efficiency record 93.3 pass/h. E4B serve depth is now 3.
-   Recipe updated. Evidence `evidence/gemma4-e4b-mtp-depth.jsonl`.
+   Recipe updated. Evidence `experiments/evidence/gemma4-e4b-mtp-depth.jsonl`.
 3. ✓ **RESOLVED 2026-10-01 — pinned baselines recorded.** 5-task
    drift-stamped task matrix + fresh Bonsai pinned hard reference in
    benchmarks/README ("Drift-pinned 5-task baseline"). Side finding:
@@ -88,13 +88,13 @@ turned out stale:
    128/512/2048 bit-neutral; cache_prompt=true vs false deterministically
    perturbs identical-prompt bytes — pin it for same-prompt comparisons.
    Determinism-rules section in benchmarks/README. Evidence
-   `evidence/promptcache-ubatch-drift.jsonl`.
+   `experiments/evidence/promptcache-ubatch-drift.jsonl`.
 5. ✓ **RESOLVED 2026-10-01 — lookup-prompt IMPLEMENTED + VALIDATED.**
    Fork branch `prompt-span-lookup` @aacb5ba: byte-exact vs serial (6/6)
    at envelope-safe n_max 3, zero idle cost, task7 flip + task8 3× in the
    pinned 5-task A/B; full pinned 11-task run: **Bonsai-8K 5/11 → 7/11
    (6-7 band) @ 582 s, 43.4 pass/h**. Evidence
-   `evidence/bonsai2-lookup-prompt.jsonl`. Leaderboard row updated.
+   `experiments/evidence/bonsai2-lookup-prompt.jsonl`. Leaderboard row updated.
    Follow-up now lives in Tier 2/3 (wider-than-4 lookup windows need the
    MMQ ≥5-col invariance patch first).
 6. **35B-A3B re-bench on 48 GB, verbatim recipe** — the "smart-slot
@@ -255,7 +255,7 @@ tasks beat both pi's and claude's per-task walls, so the pairing is worth unlock
   mimo-9b 10/11 @ 1062 s, a3b-iq2xxs 10/11 @ 2078 s (its 11th = task9 hit the 32K-ctx ceiling at
   a 39,947-token request — capacity artifact, not quality). Caveat: engine + 900 s cap + band
   variance moved together vs the era pins; walls are the cleaner signal. Bonsai excluded (fork
-  PTQ1_0). Evidence `evidence/fleet-rebaseline-b11562.jsonl`.
+  PTQ1_0). Evidence `experiments/evidence/fleet-rebaseline-b11562.jsonl`.
 
 **Intake 2026-10-03 (wide scan — Reddit + GitHub + HF, 3-week window):**
 
@@ -264,7 +264,7 @@ tasks beat both pi's and claude's per-task walls, so the pairing is worth unlock
   single-variable 11-task re-baseline: **8/11 (band 8–10 held), decode
   36–41 tok/s (was 31–33), MTP acceptance 0.75 (was 0.66–0.72)** — engine
   bump kept; new config `strata-q20-gsq-0138.json`. Evidence:
-  evidence/strata-q20-sm75-port.jsonl (engine_0138_rebaseline).
+  experiments/evidence/strata-q20-sm75-port.jsonl (engine_0138_rebaseline).
 - **v0.1.38 falsification probes** (official A/B switches, all cheap):
   STRATA_TOPK_CAPACITY_GUARD, STRATA_ADAPT_NOWAIT, `--adapt-decay` sweep,
   expert_profile_save warm-start, k8v4-vs-int8 at 16K/32K.
@@ -364,7 +364,7 @@ thing to try *before* buying one.
   tok/s pp, first 125B-class on the card. Boundary learned: sub-2 bpw
   BREAKS THE REASONING CHAIN (EOS-at-reasoning-close; same wall as IQ1_S).
   Recipe `recipes/flashnext-ultralite-125b-llamacpp-fork.md`, evidence
-  `evidence/flashnext-ultralite-125b.jsonl`. Our own Flash-Next expectation
+  `experiments/evidence/flashnext-ultralite-125b.jsonl`. Our own Flash-Next expectation
   class: honest 5–15 tok/s at best.
 - **UBBoost cherry-pick — superseded 2026-09-26 via c9df0ee.** Claim
   (llama.cpp PR #23239, RTX 2080 + 35B-A3B + MTP) reproduced 2.4× with
@@ -396,13 +396,13 @@ thing to try *before* buying one.
   gate derails are stochastic always-thinking under no-params requests →
   harness WARM_BYPASS=1; **thinking-off falsified as a fix (6/11, tool
   thrash)**. Recommended profiles: 16K+Q2_K (agents, capability-neutral),
-  8K+Q4_K_M (speed). Evidence `evidence/mimo-9b-dflash-drafter.jsonl`.
+  8K+Q4_K_M (speed). Evidence `experiments/evidence/mimo-9b-dflash-drafter.jsonl`.
 - **DFlash2-sidecar economics on 8 GB — falsified at 1.14 GB, open at
   ~600 MB** (measurement preserved as Tier 2.3). Acceptance itself
   validated: 0.92/mean 3.76 on the head-less IQ1_S target; the sidecar
   class is quant-agnostic and works on this card (Supsurface
   prism-dflash2 runtime built and ran first try). Evidence
-  `evidence/dflash2-iqi-27b.jsonl`.
+  `experiments/evidence/dflash2-iqi-27b.jsonl`.
 - **TensorFold queue-opener 2026-09-27/28 — three of four done.**
   (1) Drift survey DONE: every upstream-docker MTP recipe drifts
   (qwen35-4b 3/6, qwen35-9b 1/6, g12b 2/6), while Bonsai fork +
@@ -417,9 +417,9 @@ thing to try *before* buying one.
   sm_75 (dead end for exactness); dp4a/IMMA integer lanes exact (0/1M
   mismatches); crossover economics favorable (rows_free ≈ 24–48 ideal at
   425 GB/s; tile floor flat through n=8). Harness
-  `notes/spec-drift-test-llamacpp.sh` is a standard column for every
-  spec-decode recipe. Notes `notes/tensorfold-analysis.md`, evidence
-  `evidence/tensorfold-exactness-probe.jsonl`.
+  `docs/notes/spec-drift-test-llamacpp.sh` is a standard column for every
+  spec-decode recipe. Notes `docs/notes/tensorfold-analysis.md`, evidence
+  `experiments/evidence/tensorfold-exactness-probe.jsonl`.
 - **Strata source survey 2026-09-27 — sm_80 gate is SOFT, port feasible.**
   Engine: Qwen3.8-Flash-Next on single consumer GPU (65 tok/s @128K / 95
   short-chat / 539 pp with Q2_0-GSQ-RCO on a 5070 12 GB + 64 GB DDR5-5600;
@@ -441,7 +441,7 @@ thing to try *before* buying one.
   crossover. Their strictness pattern (load-time bitwise self-tests,
   stock fallback) validated our 6/6 bar but our coverage is thin (6
   prompts × 2 repeats) → Tier 3 deepening. Notes
-  `notes/mlxfast-bonsai2-portability.md` (commits eeab971, b5d29c0,
+  `docs/notes/mlxfast-bonsai2-portability.md` (commits eeab971, b5d29c0,
   664fe75).
 - **A3B pack A/B — RESOLVED 2026-09-30** (lane-coordinated with sibling
   local-ai-rtx2080-05). Speed tier recorded 2026-09-28; the then-missing
@@ -449,7 +449,7 @@ thing to try *before* buying one.
   PASS (7–8 band) vs IQ2_XXS 8/11, at −15% decode / −10% prefill /
   +2.5 GB — zero of IQ2's three failing tasks rescued, tip falsified,
   **IQ2_XXS stays recommended**. Write-up in the recipe's "IQ3_XXS quality
-  tier" section, evidence `evidence/qwen35-35b-a3b-iq3xxs.jsonl`. The
+  tier" section, evidence `experiments/evidence/qwen35-35b-a3b-iq3xxs.jsonl`. The
   measure harness now tolerates metrics-less foreign servers.
 - **Gemma-E4B v2.1 — 7/11 @ 302 s, 83.4 pass/h** (card efficiency record,
   40e2c45). MiMo 9/11 headline survives as an 8–9 band (8/11 at 64K;

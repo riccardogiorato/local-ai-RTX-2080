@@ -36,4 +36,4 @@ llama-server -m Underdog-Saluki-27B-1.0-IQ2-mix.gguf --jinja -fa on -c 16384 -np
 
 ## Archive (rotated 2026-10-14)
 
-Moved to `/mnt/archive/local-models/saluki-27b/` (sha256-verified against the SSD copy before deletion; see evidence/hdd-backup-rotation-2026-10-14.jsonl). Rotate back to `~/models/` before serving.
+Moved to `/mnt/archive/local-models/saluki-27b/` (sha256-verified against the SSD copy before deletion; see experiments/evidence/hdd-backup-rotation-2026-10-14.jsonl). Rotate back to `~/models/` before serving.

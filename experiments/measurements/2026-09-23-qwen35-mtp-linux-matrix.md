@@ -1,6 +1,6 @@
 # 2026-09-23 — Qwen3.5 4B/9B MTP, two llama.cpp builds, context ceilings
 
-Machine: [hardware.md](../hardware.md). Engine: llama.cpp server images digest-pinned (`server-cuda12-b10481 @b2497f88…`, `server-cuda12-b11118 @bfb3264f…`). Decode/prefill are server-reported (`timings.predicted_per_second`), short-fill = fixed 1,987-token [code-continuation prompt](../prompts/code-continuation.txt); "n/a" cells were measured on other prompts and marked as such.
+Machine: [hardware.md](../../hardware.md). Engine: llama.cpp server images digest-pinned (`server-cuda12-b10481 @b2497f88…`, `server-cuda12-b11118 @bfb3264f…`). Decode/prefill are server-reported (`timings.predicted_per_second`), short-fill = fixed 1,987-token [code-continuation prompt](../../benchmarks/prompts/code-continuation.txt); "n/a" cells were measured on other prompts and marked as such.
 
 ## Decode (tok/s, ranges over 2–3 runs)
 

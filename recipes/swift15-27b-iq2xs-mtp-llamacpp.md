@@ -35,7 +35,7 @@ the deliberation the python task needs — the one AG-Bench datapoint where
 "fewer thinking tokens" and "solves the task" diverge. n=1 run; treat as observed,
 not proven.
 
-Evidence: [evidence/swift15-27b-iq2xs-mtp.jsonl](../evidence/swift15-27b-iq2xs-mtp.jsonl),
+Evidence: [experiments/evidence/swift15-27b-iq2xs-mtp.jsonl](../experiments/evidence/swift15-27b-iq2xs-mtp.jsonl),
 [benchmarks/results/swift15-27b-iq2xs-mtp-20260925-095808.jsonl](../benchmarks/results/swift15-27b-iq2xs-mtp-20260925-095808.jsonl)
 
 ## Reproduce

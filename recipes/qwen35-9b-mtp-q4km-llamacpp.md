@@ -1,6 +1,6 @@
 # Qwen3.5-9B MTP · Q4_K_M · llama.cpp
 
-**Status: ✅ registry-validated** (alternate for `rtx-2080-8gb`) — promoted via `accept_recipe.py` 2026-09-23, see [registry/qwen35-9b.md](../registry/qwen35-9b.md)
+**Status: ✅ registry-validated** (alternate for `rtx-2080-8gb`) — promoted via `accept_recipe.py` 2026-09-23, see [registry/qwen35-9b.md](../docs/registry.md)
 
 ## Identity (registry-compatible)
 
@@ -61,7 +61,7 @@ Endpoint: `http://127.0.0.1:8080/v1`, model id `Qwen3.5-9B-MTP-Q4_K_M`.
 | 64K | q4_0 | 7.27 GB | 524 MiB | **124.2–124.4 tok/s** | 78.8 tok/s @37K | 1,365 t/s @37K |
 | 64K | q8_0 | ⚠️ **OOM** | — | — | — | — |
 
-- Short-fill decode is measured on the fixed 1,987-token [code-continuation prompt](../prompts/code-continuation.txt) with `-b 512 -ub 512`; MTP draft acceptance 204/204 (100%) on that prompt.
+- Short-fill decode is measured on the fixed 1,987-token [code-continuation prompt](../benchmarks/prompts/code-continuation.txt) with `-b 512 -ub 512`; MTP draft acceptance 204/204 (100%) on that prompt.
 - **Decode speed is prompt-dominated, not flag-dominated**: on the acceptance prompt, `-b 512 -ub 512` vs llama.cpp defaults gave 112.8 vs 113.7 tok/s (same within noise); the flags trimmed TTFT from 100 → 71 ms. They are kept to match the prior-lab convention, not for decode. The large reported deltas between "fast" and "slow" runs on this card come from MTP acceptance: 100% on repetitive continuation text (~124 tok/s), ~50–75% on novel prose (~76–100 tok/s).
 - Cold start: **56.8 s** docker run → model loaded; first request decodes 17 tok/s incl. graph compile; warm steady-state after.
 - Acceptance-harness decode (fixed "history of computing" ×32 prompt, thinking on): **76.4 tok/s**, TTFT 102 ms (3 samples).

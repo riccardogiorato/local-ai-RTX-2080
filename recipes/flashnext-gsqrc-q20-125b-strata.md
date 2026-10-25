@@ -24,7 +24,7 @@ Status: **🧪 lab-tested (probe tier)**, adoption decision pending: chat stays 
 IQ3_XXS is the pick when answer quality outweighs round-trip speed. Weights: `~/models/flashnext-gsq-rco-iq3xxs/`
 (shard-1 sha `219ea929…` verified vs HF; shard-2 symlink to the Q2_0 blob, sha `316b46f3…`); pack
 `strata-port/packs/iq3_xxs-gsq`; config [strata-q3xxs-gsq-0144-tailnet.json](strata-configs/strata-q3xxs-gsq-0144-tailnet.json).
-Evidence: `iq3_xxs_probe_vs_q2_0` in [evidence/strata-q20-sm75-port.jsonl](../evidence/strata-q20-sm75-port.jsonl) ·
+Evidence: `iq3_xxs_probe_vs_q2_0` in [experiments/evidence/strata-q20-sm75-port.jsonl](../experiments/evidence/strata-q20-sm75-port.jsonl) ·
 raw rows [benchmarks/strata-multiagent/results/q3xxs-20261018-195009](../benchmarks/strata-multiagent/results/q3xxs-20261018-195009).
 
 **AG-Bench v2.2 same night (128K suite config, cap 900, 0.35/80): 11/11 passed at 1465 s, 0 suspect**
@@ -99,7 +99,7 @@ prompt grew to 16,435 tokens, past the 16K bench context. ABBA task10-only repea
 probe of the pcie knob since the RAM-3200 upgrade and the first ABBA confirm to separate cleanly: short decode
 **51.7/51.8 → 54.8/54.9 tok/s (+6%)** on a 4-boot ABBA (`benchmarks/strata-multiagent/knob-probe.py`, 18 chats per
 boot). spec-min-p 0.70 and 5 workers confirmed unchanged. Both chat configs now carry 0.35/80. Evidence:
-`strata_calibrate_0144` in `evidence/strata-q20-sm75-port.jsonl`, raw calibrate + ABBA in
+`strata_calibrate_0144` in `experiments/evidence/strata-q20-sm75-port.jsonl`, raw calibrate + ABBA in
 `benchmarks/strata-multiagent/results/`.
 
 An earlier probe the same evening read ~25% slower decode on **both** engines: an orphaned `vite dev` preview server
@@ -201,7 +201,7 @@ python3 -m serve.server --engine strata --config strata-q20-gsq-0139.json --port
 bash $THIS_REPO/benchmarks/agentic-bench.sh strata-q20-gsq-125b 600
 ```
 
-Evidence: [evidence/strata-q20-sm75-port.jsonl](../evidence/strata-q20-sm75-port.jsonl)
+Evidence: [experiments/evidence/strata-q20-sm75-port.jsonl](../experiments/evidence/strata-q20-sm75-port.jsonl)
 (18+ events: port, ctx ladder, KV types, spec sweeps, scored runs, engine
 re-baselines, A/B probe sets) · baseline history: the llama.cpp-fork path in
 [flashnext-gsqrc-q20-125b-llamacpp-fork.md](flashnext-gsqrc-q20-125b-llamacpp-fork.md)

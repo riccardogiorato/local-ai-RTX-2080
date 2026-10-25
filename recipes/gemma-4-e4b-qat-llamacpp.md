@@ -42,7 +42,7 @@ non-thinking speed costs Gemma 1.9 s total. `enable_thinking: false` works via
 `chat_template_kwargs` with `--jinja` (same kwarg as Qwen) — use it only for trivial
 churn, not reasoning.
 
-Evidence: [evidence/gemma4-e4b-qat-llamacpp.jsonl](../evidence/gemma4-e4b-qat-llamacpp.jsonl)
+Evidence: [experiments/evidence/gemma4-e4b-qat-llamacpp.jsonl](../experiments/evidence/gemma4-e4b-qat-llamacpp.jsonl)
 
 ## Reproduce (MTP d2)
 
@@ -67,7 +67,7 @@ sudo docker run --gpus all -p 8080:8080 -v ~/models/gemma-4-e4b-qat:/models:ro -
   7/11 @ 302 s (83.4) — identical pass set, new card efficiency record.
   Recommended serve depth is now **3** (`--spec-draft-n-max 3`). d4 buys nothing
   (+decode but novel-class drift down). Evidence:
-  [evidence/gemma4-e4b-mtp-depth.jsonl](../evidence/gemma4-e4b-mtp-depth.jsonl).
+  [experiments/evidence/gemma4-e4b-mtp-depth.jsonl](../experiments/evidence/gemma4-e4b-mtp-depth.jsonl).
 
 - External drafter flags: `--spec-draft-model` (`-md`) + `--spec-type draft-mtp`; the
   embedded-MTP style used for Qwen3.5 does not apply — Gemma's MTP head ships as a

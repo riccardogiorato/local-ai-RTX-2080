@@ -9,7 +9,7 @@ def get(path, payload=None):
     with urllib.request.urlopen(req,timeout=600) as r: return r.read().decode()
 def metrics():
     return {a[0]:float(a[1]) for l in get('metrics').splitlines() if not l.startswith('#') and len(a:=l.split())==2}
-prompts={n:(ROOT/'prompts'/n).read_text() for n in ['code-continuation.txt','decode-isolation.txt']}
+prompts={n:(ROOT/'benchmarks'/'prompts'/n).read_text() for n in ['code-continuation.txt','decode-isolation.txt']}
 prompts['prose-long']='Write a detailed essay of at least 900 words explaining how controlled experiments distinguish causation from correlation. Discuss confounding variables, random assignment, measurement error, replication, and a concrete gardening example. Use connected prose with no lists. Begin the essay now:\n'
 for name,prompt in prompts.items():
     for run in range(3):

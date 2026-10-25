@@ -90,4 +90,4 @@ evidence).
 Whole dir is 6.7 GB (weights 1.15 GB + py3.14/torch venv) — rotates to the archive
 per the storage rule once its slot isn't current. Rebuild is two commands (above).
 
-Evidence: [evidence/gliner25-multi-v1.jsonl](../evidence/gliner25-multi-v1.jsonl)
+Evidence: [experiments/evidence/gliner25-multi-v1.jsonl](../experiments/evidence/gliner25-multi-v1.jsonl)

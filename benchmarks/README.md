@@ -140,10 +140,10 @@ bash benchmarks/agentic-bench.sh <model-label> [seconds-cap]
 - A task failed by agent-error (crash, refusal, syntax scramble) is a failed task —
   the same judgment a human maintainer would make about the model.
 - Ranking by pass rate alone is incomplete: report wall time alongside, and remember
-  decode class matters (novel-prose speeds in `prompts/decode-isolation.txt` runs are the
+  decode class matters (novel-prose speeds in `benchmarks/prompts/decode-isolation.txt` runs are the
   realistic agent-workload class, not the repetitive best case).
 
-### Determinism rules (measured 2026-10-01, see evidence/promptcache-ubatch-drift.jsonl)
+### Determinism rules (measured 2026-10-01, see experiments/evidence/promptcache-ubatch-drift.jsonl)
 
 - **Pin `cache_prompt` for any same-prompt byte comparison** — the flag itself
   perturbs the greedy trajectory (deterministically: 331 vs 584 bytes on the same
@@ -164,7 +164,7 @@ bash benchmarks/agentic-bench.sh <model-label> [seconds-cap]
   benches must pin at REQUEST level (temp 0, consistent cache_prompt) and pass
   NO server temperature/seed flags. The 2026-10-01 upstream "pinned" rows
   (E4B d3, A3B×2, Xing official) are valid samples but NOT greedy-deterministic
-  references — see evidence/e4b-selfrepro-attribution.jsonl.
+  references — see experiments/evidence/e4b-selfrepro-attribution.jsonl.
 ## Results (2026-09-24, RTX 2080 8GB, pi 0.87.1, llama.cpp b11118)
 
 | Model | Pass | Wall s/task (passing) | Failure style |

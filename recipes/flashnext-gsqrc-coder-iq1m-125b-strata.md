@@ -61,7 +61,7 @@ python3 -m serve.server --engine strata --config strata-coder-iq1m.json --port 8
 bash ../local-ai-rtx2080/benchmarks/agentic-bench.sh strata-coder-iq1m-125b 600
 ```
 
-Evidence: [evidence/strata-q20-sm75-port.jsonl](../evidence/strata-q20-sm75-port.jsonl)
+Evidence: [experiments/evidence/strata-q20-sm75-port.jsonl](../experiments/evidence/strata-q20-sm75-port.jsonl)
 (coder_iq1m_125b_chain — verbatim probes + per-task rows) ·
 results/strata-coder-iq1m-125b-20261004-133816.jsonl · baseline: the base's
 ⁽⁶⁾ row on the same engine the same day.

@@ -25,8 +25,8 @@ Prior Windows lab numbers (real 3 MP photos): receipt-class 1.0–1.5 s, dense l
 (375–410 vs 310 tok/s) and completes the smaller synthetic images faster than the Windows
 wall-clock baseline at equivalent image sizes.
 
-Evidence: [evidence/glm-ocr-linux-docker.jsonl](../evidence/glm-ocr-linux-docker.jsonl)
-(raw timing rows; full extraction transcript in `evidence/` alongside).
+Evidence: [experiments/evidence/glm-ocr-linux-docker.jsonl](../experiments/evidence/glm-ocr-linux-docker.jsonl)
+(raw timing rows; full extraction transcript in `experiments/evidence/` alongside).
 
 ## Reproduce
 

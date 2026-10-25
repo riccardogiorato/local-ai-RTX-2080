@@ -54,7 +54,7 @@ Windows lab's own numbers prove the same machine reaches 6.5+ with `ngl 51`.
 All three pass — the profile of the card where the 4B (below) fails the reasoning probe.
 This is the slow-but-smart slot: ~5 tok/s, but the strongest reasoning measured on this card.
 
-Evidence: [evidence/qwen38-27b-iq2s-llamacpp-capabilities.jsonl](../evidence/qwen38-27b-iq2s-llamacpp-capabilities.jsonl)
+Evidence: [experiments/evidence/qwen38-27b-iq2s-llamacpp-capabilities.jsonl](../experiments/evidence/qwen38-27b-iq2s-llamacpp-capabilities.jsonl)
 
 ## Reproduce (DT profile)
 

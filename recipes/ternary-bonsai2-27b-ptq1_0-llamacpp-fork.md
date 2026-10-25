@@ -79,7 +79,7 @@ Passes JS bugfix (41 s), **date-fns upgrade** (95 s), python bugfix (14 s), pagi
 (64 s); fails the same two tasks as its dense Qwen3.8-27B siblings (React markup
 contract, JS→TS migration) — a family trait, not a ternary one.
 
-Evidence: [evidence/ternary-bonsai2-27b-ptq1_0.jsonl](../evidence/ternary-bonsai2-27b-ptq1_0.jsonl),
+Evidence: [experiments/evidence/ternary-bonsai2-27b-ptq1_0.jsonl](../experiments/evidence/ternary-bonsai2-27b-ptq1_0.jsonl),
 [benchmarks/results/ternary-bonsai2-27b-20260925-002214.jsonl](../benchmarks/results/ternary-bonsai2-27b-20260925-002214.jsonl)
 
 ## Reproduce

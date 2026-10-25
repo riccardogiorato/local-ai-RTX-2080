@@ -92,4 +92,4 @@ bash $THIS_REPO/benchmarks/agentic-bench.sh qwen36-35b-a3b-strata 900   # serve 
 ## Storage
 
 SSD: `~/models/qwen36-35b-a3b/` (23.7 GB pair + sha); archive: `/mnt/archive/local-models/qwen36-35b-a3b/`.
-Evidence: [evidence/qwen36-35b-a3b-strata.jsonl](../evidence/qwen36-35b-a3b-strata.jsonl).
+Evidence: [experiments/evidence/qwen36-35b-a3b-strata.jsonl](../experiments/evidence/qwen36-35b-a3b-strata.jsonl).
